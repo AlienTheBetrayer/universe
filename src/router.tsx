@@ -1,9 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Main } from "./features/pagemain/pages/Main";
+
+import { Home } from "./features/pagemain/pages/Home";
+import { App } from "./features/pageapp/pages/App";
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main/>
+        element: <Home/>
     },
+    {
+        path: '/home',
+        element: <Home/>
+    },
+    {
+        path: '/app',
+        element: <App/>
+    }
 ]);

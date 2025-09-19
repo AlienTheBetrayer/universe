@@ -1,6 +1,6 @@
 import { Page } from "../../layout/components/Page"
 
-export const Main = () => {
+export const Home = () => {
     return (
         <Page>
             <section>
