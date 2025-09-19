@@ -3,6 +3,7 @@ import '../../Button/components/Button.css'
 import { cssVariable } from '../../../utils/cssVariable';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
+import { ButtonVariants } from '../../Button/components/Button';
 
 interface Props {
     className?: string;
@@ -22,9 +23,10 @@ export const LinkButton = ({ className='', fillColor=cssVariable('--foreground-l
     
     return (
         <motion.a className={`button link-button ${className}`} href={to} onClick={(e) => handleNavigate(e)} {...rest}
-        initial={{ background: fillColor}}
-        whileHover={{ background: hoverColor }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+        custom={{ fillColor: fillColor, hoverColor: hoverColor }}
+        variants={ButtonVariants}
+        initial='initial'
+        whileHover='hover'>
             { children }
         </motion.a>
     )   

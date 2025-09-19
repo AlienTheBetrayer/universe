@@ -1,6 +1,20 @@
 import './Button.css';
 import { cssVariable } from '../../../utils/cssVariable';
-import { motion } from 'motion/react';
+import { motion, type Transition } from 'motion/react';
+
+
+
+export const ButtonVariants = {
+    initial: (custom: { fillColor: string, hoverColor: string }) => {
+        return { backgroundColor: custom.fillColor };
+    },
+    hover: (custom: { fillColor: string, hoverColor: string }) => {
+        return {
+            backgroundColor: custom.hoverColor,
+            transition: { type: 'spring', stiffness: 300, damping: 20 } as Transition
+        }
+    }
+}
 
 interface Props {
     className?: string;
@@ -12,9 +26,10 @@ interface Props {
 export const Button = ({ className='', fillColor=cssVariable('--foreground-last'), hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {
     return (
         <motion.button className={`button ${className}`} {...rest}
-        initial={{ background: fillColor}}
-        whileHover={{ background: hoverColor }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+        custom={{ fill: fillColor, hover: hoverColor }}
+        variants={ButtonVariants}
+        initial='initial'
+        whileHover='hover'>
             { children }
         </motion.button>
     )   

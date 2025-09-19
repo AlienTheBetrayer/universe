@@ -49,12 +49,12 @@ h2 {
 p, span, a, button {
     font-size: 0.8rem;
     color: var(--foreground);
+    font-weight: 550;
 }
 
 p, span, a, button, h1, h2 {
-    font-weight: 550;
     letter-spacing: -0.39px;
-    line-height: 13px;
+    line-height: 1em;
 }
 
 /* utilities */
