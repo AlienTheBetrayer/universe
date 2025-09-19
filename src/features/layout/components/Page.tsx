@@ -2,6 +2,7 @@ import './Page.css';
 import { Footer } from "../../footer/components/Footer";
 import { Header } from "../../header/components/Header";
 import { Content } from "./Content";
+import type React from 'react';
 
 interface PageSettings {
     header?: boolean;
@@ -19,14 +20,13 @@ const PageSettingsDefaults: PageSettings = {
     pageWidth: '1000px'
 }
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLElement> {
     settings?: PageSettings;
-    children?: React.ReactNode;
 }
 
-export const Page = ({ settings, children }: Props) => {
+export const Page = ({ settings, children, ...rest }: Props) => {
     return (
-        <main className='page'>
+        <main className='page' {...rest}>
             { (settings?.header ?? PageSettingsDefaults.header) && <Header/> }
 
             { (settings?.content ?? PageSettingsDefaults.content) && (
