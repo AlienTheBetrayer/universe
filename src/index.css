@@ -1,3 +1,104 @@
+/* root variables */
 :root {
+    --background: #080808;
+
+    --foreground: #9d9d9d;
+    --foreground-last: #fff;
+
+    --selection: #5e5e5e;
+}
+
+:root[data-theme='light'] {
+    --background: #f7f7f7;
+
+    --foreground: #626262;
+    --foreground-last: #000;
+
+    --selection: #414141;
+}
+
+/* global tags */
+* {
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+
+    color: var(--foreground);
+}
+
+::selection {
+    background-color: var(--selection);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--foreground-last);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--foreground-last);
+}
+
+p, span {
+    font-size: 0.8rem;
+    color: var(--foreground);
+}
+
+/* utilities */
+.bg {
+    background: var(--background);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap {
+    gap: 1rem;
+}
+
+.padding {
+    padding: 1rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-screen {
+    width: 100vw;
+}
+
+.h-screen {
+    height: 100vh;
+}
+
+.min-w-full {
+    min-width: 100%;
+}
+
+.min-h-full {
+    min-height: 100%;
+}
+
+.min-w-screen {
+    min-width: 100vw;
+}
+
+.min-h-screen {
+    min-height: 100vh;
 }
