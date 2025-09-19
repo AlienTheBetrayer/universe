@@ -6,11 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonVariants } from '../../Button/components/Button';
 
 interface Props extends HTMLMotionProps<'a'> {
-    className?: string;
     fillColor?: string;
     hoverColor?: string;
     to?: string;
-    children?: React.ReactNode;
 }
 
 export const LinkButton = ({ className, fillColor=cssVariable('--foreground-last'), to='/', hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {

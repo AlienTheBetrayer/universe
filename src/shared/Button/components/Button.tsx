@@ -15,10 +15,8 @@ export const ButtonVariants = {
 }
 
 interface Props extends HTMLMotionProps<'button'> {
-    className?: string;
     fillColor?: string;
     hoverColor?: string;
-    children?: React.ReactNode;
 }
 
 export const Button = ({ className, fillColor=cssVariable('--foreground-last'), hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {

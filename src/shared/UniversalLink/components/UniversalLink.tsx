@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 type RouteType = 'router' | 'url';
 
 interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-    className?: string;
     to?: string;
     type?: RouteType; 
-    children?: React.ReactNode;
 }
 
 export const UniversalLink = ({ className, to='', type='router', children, ...rest }: Props) => {
