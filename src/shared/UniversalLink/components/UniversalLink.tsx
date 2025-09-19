@@ -10,14 +10,14 @@ interface Props {
     children?: React.ReactNode;
 }
 
-export const LinkButton = ({ className = '', to = '', type = 'router', children, ...rest }: Props) => {
+export const UniversalLink = ({ className='', to='', type='router', children, ...rest }: Props) => {
     return (
         type === 'router' ? (
             <Link className={`link-button ${className}`} to={to} {...rest}>
                 { children }
             </Link>
         ) : (
-            <a className={`link-button ${className}`} href = {to} target = '_blank' rel = 'noopener noreferrer' {...rest}>
+            <a className={`link-button ${className}`} href={to} target='_blank' rel='noopener noreferrer' {...rest}>
                 { children }
             </a>
         )

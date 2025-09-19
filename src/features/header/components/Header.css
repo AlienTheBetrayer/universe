@@ -1,12 +1,13 @@
 header {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 750px;
     width: 100%;
 }
 
 header > nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
     padding: 1rem;
 }

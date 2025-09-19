@@ -1,20 +1,22 @@
 /* root variables */
 :root {
+    /* background */
     --background: #080808;
 
+    /* foreground */
     --foreground: #9d9d9d;
     --foreground-last: #fff;
 
+    /* pseudo & misc */
     --selection: #5e5e5e;
+
+    /* component specific */
+    --button-app-fill: hsla(210, 60%, 70%, 1.00);
+    --button-app-hover: hsla(210, 30%, 50%, 1.00);
 }
 
 :root[data-theme='light'] {
-    --background: #f7f7f7;
-
-    --foreground: #626262;
-    --foreground-last: #000;
-
-    --selection: #414141;
+    --a: '';
 }
 
 /* global tags */
@@ -44,9 +46,12 @@ h2 {
     color: var(--foreground-last);
 }
 
-p, span, a {
+p, span, a, button {
     font-size: 0.8rem;
     color: var(--foreground);
+}
+
+p, span, a, button, h1, h2 {
     font-weight: 550;
     letter-spacing: -0.39px;
     line-height: 13px;
@@ -68,4 +73,8 @@ p, span, a {
 
 .text-center {
     text-align: center;
+}
+
+.align-center {
+    align-items: center;
 }

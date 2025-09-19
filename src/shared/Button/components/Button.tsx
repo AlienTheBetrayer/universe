@@ -1,0 +1,22 @@
+import { cssVariable } from '../../../utils/cssVariable';
+import './Button.css';
+
+import { motion } from 'motion/react';
+
+interface Props {
+    className?: string;
+    fillColor?: string;
+    hoverColor?: string;
+    children?: React.ReactNode;
+}
+
+export const Button = ({ className='', fillColor=cssVariable('--foreground-last'), hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {
+    return (
+        <motion.button className={`button ${className}`} {...rest}
+        initial={{ background: fillColor}}
+        whileHover={{ background: hoverColor }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+            { children }
+        </motion.button>
+    )   
+}
