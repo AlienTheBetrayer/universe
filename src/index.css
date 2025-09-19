@@ -23,6 +23,7 @@
 * {
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 
     color: var(--foreground);
 }
