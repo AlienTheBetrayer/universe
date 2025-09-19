@@ -1,6 +1,6 @@
 import './Button.css';
 import { cssVariable } from '../../../utils/cssVariable';
-import { motion, type Transition } from 'motion/react';
+import { motion, type HTMLMotionProps, type Transition } from 'motion/react';
 
 export const ButtonVariants = {
     initial: (custom: { fillColor: string, hoverColor: string }) => {
@@ -14,16 +14,16 @@ export const ButtonVariants = {
     }
 }
 
-interface Props {
+interface Props extends HTMLMotionProps<'button'> {
     className?: string;
     fillColor?: string;
     hoverColor?: string;
     children?: React.ReactNode;
 }
 
-export const Button = ({ className='', fillColor=cssVariable('--foreground-last'), hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {
+export const Button = ({ className, fillColor=cssVariable('--foreground-last'), hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {
     return (
-        <motion.button className={`button ${className}`} {...rest}
+        <motion.button className={`button ${className ?? ''}`} {...rest}
         custom={{ fill: fillColor, hover: hoverColor }}
         variants={ButtonVariants}
         initial='initial'

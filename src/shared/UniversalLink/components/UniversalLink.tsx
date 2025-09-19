@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 
 type RouteType = 'router' | 'url';
 
-interface Props {
+interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     className?: string;
     to?: string;
     type?: RouteType; 
     children?: React.ReactNode;
 }
 
-export const UniversalLink = ({ className='', to='', type='router', children, ...rest }: Props) => {
+export const UniversalLink = ({ className, to='', type='router', children, ...rest }: Props) => {
     return (
         type === 'router' ? (
-            <Link className={`universal-link ${className}`} to={to} {...rest}>
+            <Link className={`universal-link ${className ?? ''}`} to={to} {...rest}>
                 { children }
             </Link>
         ) : (
-            <a className={`universal-link ${className}`} href={to} target='_blank' rel='noopener noreferrer' {...rest}>
+            <a className={`universal-link ${className ?? ''}`} href={to} target='_blank' rel='noopener noreferrer' {...rest}>
                 { children }
             </a>
         )

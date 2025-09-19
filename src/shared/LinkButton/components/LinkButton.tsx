@@ -1,11 +1,11 @@
 import './LinkButton.css';
 import '../../Button/components/Button.css'
 import { cssVariable } from '../../../utils/cssVariable';
-import { motion } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ButtonVariants } from '../../Button/components/Button';
 
-interface Props {
+interface Props extends HTMLMotionProps<'a'> {
     className?: string;
     fillColor?: string;
     hoverColor?: string;
@@ -13,7 +13,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-export const LinkButton = ({ className='', fillColor=cssVariable('--foreground-last'), to='/', hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {
+export const LinkButton = ({ className, fillColor=cssVariable('--foreground-last'), to='/', hoverColor=cssVariable('--foreground'), children, ...rest }: Props) => {
     const routerNavigate = useNavigate();
    
     const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -22,7 +22,7 @@ export const LinkButton = ({ className='', fillColor=cssVariable('--foreground-l
     }
     
     return (
-        <motion.a className={`button link-button ${className}`} href={to} onClick={(e) => handleNavigate(e)} {...rest}
+        <motion.a className={`button link-button ${className ?? ''}`} href={to} onClick={(e) => handleNavigate(e)} {...rest}
         custom={{ fillColor: fillColor, hoverColor: hoverColor }}
         variants={ButtonVariants}
         initial='initial'
