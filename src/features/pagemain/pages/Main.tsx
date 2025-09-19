@@ -4,7 +4,7 @@ export const Main = () => {
     return (
         <Page>
             <section>
-                <h1>hi</h1>
+                <h1 className='text-center'>The beginning of something great</h1>
             </section>
         </Page>
     )

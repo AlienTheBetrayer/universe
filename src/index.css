@@ -35,7 +35,7 @@ html, body {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.6rem;
     color: var(--foreground-last);
 }
 
@@ -44,16 +44,15 @@ h2 {
     color: var(--foreground-last);
 }
 
-p, span {
+p, span, a {
     font-size: 0.8rem;
     color: var(--foreground);
+    font-weight: 550;
+    letter-spacing: -0.39px;
+    line-height: 13px;
 }
 
 /* utilities */
-.bg {
-    background: var(--background);
-}
-
 .flex {
     display: flex;
 }
@@ -67,38 +66,6 @@ p, span {
     gap: 1rem;
 }
 
-.padding {
-    padding: 1rem;
-}
-
-.w-full {
-    width: 100%;
-}
-
-.h-full {
-    height: 100%;
-}
-
-.w-screen {
-    width: 100vw;
-}
-
-.h-screen {
-    height: 100vh;
-}
-
-.min-w-full {
-    min-width: 100%;
-}
-
-.min-h-full {
-    min-height: 100%;
-}
-
-.min-w-screen {
-    min-width: 100vw;
-}
-
-.min-h-screen {
-    min-height: 100vh;
+.text-center {
+    text-align: center;
 }

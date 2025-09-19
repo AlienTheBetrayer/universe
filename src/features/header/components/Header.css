@@ -1,0 +1,12 @@
+header {
+    margin: 0 auto;
+    max-width: 500px;
+    width: 100%;
+}
+
+header > nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+}

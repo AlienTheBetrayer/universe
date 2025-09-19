@@ -1,0 +1,7 @@
+.link-button {
+    text-decoration: none;
+}
+
+.link-button:hover {
+    color: var(--foreground-last);
+}
