@@ -2,7 +2,6 @@ import './Page.css';
 import { Footer } from "../../footer/components/Footer";
 import { Header } from "../../header/components/Header";
 import { Content } from "./Content";
-import type React from 'react';
 
 interface PageSettings {
     header?: boolean;
