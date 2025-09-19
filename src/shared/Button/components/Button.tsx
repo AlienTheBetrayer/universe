@@ -1,6 +1,5 @@
-import { cssVariable } from '../../../utils/cssVariable';
 import './Button.css';
-
+import { cssVariable } from '../../../utils/cssVariable';
 import { motion } from 'motion/react';
 
 interface Props {

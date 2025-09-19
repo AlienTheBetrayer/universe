@@ -1,5 +1,5 @@
-import { Button } from "../../../shared/Button/components/Button";
 import { UniversalLink } from "../../../shared/UniversalLink/components/UniversalLink";
+import { LinkButton } from "../../../shared/LinkButton/components/LinkButton";
 import { cssVariable } from "../../../utils/cssVariable";
 import './Header.css';
 
@@ -36,9 +36,9 @@ export const Header = () => {
                         </UniversalLink>
                     ))}
 
-                    <Button fillColor={cssVariable('--button-app-fill')} hoverColor={cssVariable('--button-app-hover')}>
+                    <LinkButton to='/app' fillColor={cssVariable('--button-app-fill')} hoverColor={cssVariable('--button-app-hover')}>
                         Launch App
-                    </Button>
+                    </LinkButton>
                 </div>
             </nav>
         </header>

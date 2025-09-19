@@ -1,7 +1,7 @@
-.link-button {
+.universal-link {
     text-decoration: none;
 }
 
-.link-button:hover {
+.universal-link:hover {
     color: var(--foreground-last);
 }
