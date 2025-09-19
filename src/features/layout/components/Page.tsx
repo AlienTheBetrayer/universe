@@ -7,6 +7,16 @@ interface PageSettings {
     header?: boolean;
     content?: boolean;
     footer?: boolean;
+
+    pageWidth?: string;
+}
+
+const PageSettingsDefaults: PageSettings = {
+    header: true,
+    content: true,
+    footer: true,
+
+    pageWidth: '1000px'
 }
 
 interface Props {
@@ -17,15 +27,15 @@ interface Props {
 export const Page = ({ settings, children }: Props) => {
     return (
         <main className='page'>
-            { (settings?.header ?? true) && <Header/> }
+            { (settings?.header ?? PageSettingsDefaults.header) && <Header/> }
 
-            { (settings?.content ?? true) && (
-                <Content>
+            { (settings?.content ?? PageSettingsDefaults.content) && (
+                <Content style={{ maxWidth: settings?.pageWidth ?? PageSettingsDefaults.pageWidth }}>
                     { children }
                 </Content>
             ) }
             
-            { (settings?.header ?? true) && <Footer/> }
+            { (settings?.header ?? PageSettingsDefaults.footer) && <Footer/> }
         </main>
     )
 }
