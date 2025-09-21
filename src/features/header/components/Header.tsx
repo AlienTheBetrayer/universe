@@ -1,5 +1,6 @@
 import './Header.css';
 
+import { motion } from 'motion/react';
 import { UniversalLink } from "../../../shared/UniversalLink/components/UniversalLink";
 import { LinkButton } from "../../../shared/LinkButton/components/LinkButton";
 import { cssVariable } from "../../../utils/cssVariable";
@@ -17,7 +18,10 @@ export const Header = () => {
     ];
 
     return (
-        <header>
+        <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 1, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <nav>
                 <div>
                     {/* switch this regular text to a logo */}
@@ -38,6 +42,6 @@ export const Header = () => {
                     </LinkButton>
                 </div>
             </nav>
-        </header>
+        </motion.header>
     )
 }

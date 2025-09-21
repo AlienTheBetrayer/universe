@@ -26,8 +26,8 @@ export const useParticles = (count: number = 1000) => {
         const arr = new Float32Array(count * 2);
 
         for(let i = 0; i < count; ++i) {
-            arr[i * 3] = (Math.random() - 0.5) * 0.02;
-            arr[i * 3 + 1] = (Math.random() - 0.5) * 0.02;
+            arr[i * 3] = (Math.random() - 0.5) * 0.01;
+            arr[i * 3 + 1] = (Math.random() - 0.5) * 0.01;
         }
 
         return arr;

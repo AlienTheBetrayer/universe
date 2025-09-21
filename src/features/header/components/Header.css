@@ -1,13 +1,12 @@
 header {
     position: sticky;
     top: 0;
-    margin: 1rem auto;
     max-width: 1000px;
     width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
     
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    background-color: black;
+    z-index: 1;
 }
 
 header > nav {
@@ -16,4 +15,7 @@ header > nav {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+    
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
 }
