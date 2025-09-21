@@ -1,13 +1,10 @@
 import { Page } from "../../layout/components/Page"
-import { HomeCanvas } from "../components/HomeCanvas"
+import { HeadingSection } from '../sections/HeadingSection';
 
 export const Home = () => {
     return (
         <Page>
-            <section>
-
-                <HomeCanvas/>
-            </section>
+            <HeadingSection/>
         </Page>
     )
 }

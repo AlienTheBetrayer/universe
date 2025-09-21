@@ -1,7 +1,8 @@
+import './Header.css';
+
 import { UniversalLink } from "../../../shared/UniversalLink/components/UniversalLink";
 import { LinkButton } from "../../../shared/LinkButton/components/LinkButton";
 import { cssVariable } from "../../../utils/cssVariable";
-import './Header.css';
 
 export const Header = () => {
     const informativeElements = [

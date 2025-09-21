@@ -8,7 +8,7 @@ interface PageSettings {
     content?: boolean;
     footer?: boolean;
 
-    pageWidth?: string;
+    contentWidth?: string;
 }
 
 const PageSettingsDefaults: PageSettings = {
@@ -16,20 +16,20 @@ const PageSettingsDefaults: PageSettings = {
     content: true,
     footer: true,
 
-    pageWidth: '1500px'
+    contentWidth: '1500px',
 }
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
     settings?: PageSettings;
 }
 
-export const Page = ({ settings, children, ...rest }: Props) => {
+export const Page = ({ className, settings, children, ...rest }: Props) => {
     return (
-        <main className='page' {...rest}>
+        <main className={`page ${className ?? ''}`} {...rest}>
             { (settings?.header ?? PageSettingsDefaults.header) && <Header/> }
 
             { (settings?.content ?? PageSettingsDefaults.content) && (
-                <Content style={{ maxWidth: settings?.pageWidth ?? PageSettingsDefaults.pageWidth }}>
+                <Content style={{ maxWidth: settings?.contentWidth ?? PageSettingsDefaults.contentWidth }}>
                     { children }
                 </Content>
             ) }
