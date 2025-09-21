@@ -1,0 +1,5 @@
+.background-blur {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(20px);
+}

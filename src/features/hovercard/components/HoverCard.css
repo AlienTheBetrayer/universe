@@ -1,0 +1,9 @@
+.hover-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: 250px;
+
+    border-radius: 30px;
+    background-color: var(--background-2);
+}

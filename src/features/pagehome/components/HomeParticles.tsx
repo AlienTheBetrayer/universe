@@ -1,7 +1,7 @@
 import { useParticles } from "../hooks/useParticles";
 
 export const HomeParticles = () => {
-    const particles = useParticles(1000);
+    const particles = useParticles(1250);
 
     return (
         <points ref={particles.ref}>

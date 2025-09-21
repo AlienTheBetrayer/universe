@@ -1,8 +1,8 @@
 import './HeadingSection.css';
 
 import { motion } from "motion/react"
-import { HomeCanvas } from "../components/HomeCanvas"
 import { AnimatedText } from '../../animatedtext/components/AnimatedText';
+import { HoverCard } from '../../hovercard/components/HoverCard';
 
 export const HeadingSection = () => {
     return (
@@ -25,24 +25,23 @@ export const HeadingSection = () => {
                     <h2>Showcasing:</h2>
 
                     <div className='heading-showcase-grid'>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <HoverCard/>
+                        <HoverCard/>
+                        <HoverCard/>
+                        <HoverCard/>
                     </div>
                 </div>
                 <div>
                     <h2>Showcasing:</h2>
 
                     <div className='heading-showcase-grid'>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <HoverCard/>
+                        <HoverCard/>
+                        <HoverCard/>
+                        <HoverCard/>
                     </div>
                 </div>
             </div>
-            <HomeCanvas/>
         </motion.section>
     )
 }

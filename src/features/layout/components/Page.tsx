@@ -34,7 +34,7 @@ export const Page = ({ className, settings, children, ...rest }: Props) => {
                 </Content>
             ) }
             
-            { (settings?.header ?? PageSettingsDefaults.footer) && <Footer/> }
+            { (settings?.footer ?? PageSettingsDefaults.footer) && <Footer/> }
         </main>
     )
 }
