@@ -1,7 +1,11 @@
 /* root variables */
 :root {
     /* background */
-    --background: #080808;
+    --background: rgb(8, 8, 8);
+    --background-2: rgb(26, 26, 27);
+    --background-3: rgb(35, 35, 37);
+    --background-4: rgb(39, 39, 43);
+    --background-5: rgb(54, 54, 64);
 
     /* foreground */
     --foreground: #9d9d9d;
@@ -13,6 +17,10 @@
     /* component specific */
     --button-app-fill: hsla(210, 60%, 70%, 1.00);
     --button-app-hover: hsla(210, 30%, 50%, 1.00);
+
+    --font-h1: 2.6rem;
+    --font-h2: 2rem;
+    --font-p: 0.8rem;
 }
 
 :root[data-theme='light'] {
@@ -38,17 +46,21 @@ html, body {
 }
 
 h1 {
-    font-size: 2.6rem;
+    font-size: var(--font-h1);
     color: var(--foreground-last);
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: var(--font-h2);
     color: var(--foreground-last);
 }
 
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
 p, span, a, button {
-    font-size: 0.8rem;
+    font-size: var(--font-p);
     color: var(--foreground);
     font-weight: 550;
 }

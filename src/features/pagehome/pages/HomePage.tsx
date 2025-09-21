@@ -1,9 +1,11 @@
+import './HomePage.css';
+
 import { Page } from "../../layout/components/Page"
 import { HeadingSection } from '../sections/HeadingSection';
 
-export const Home = () => {
+export const HomePage = () => {
     return (
-        <Page>
+        <Page className='home-page'>
             <HeadingSection/>
         </Page>
     )

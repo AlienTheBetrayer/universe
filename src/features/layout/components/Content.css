@@ -7,10 +7,6 @@
     margin: 0 auto;
 }
 
-.content section {
-    margin: 0 auto;
-}
-
 @media (max-width: 640px) {
     .content {
         padding: 0.5rem;
