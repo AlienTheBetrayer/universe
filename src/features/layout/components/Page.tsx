@@ -16,7 +16,7 @@ const PageSettingsDefaults: PageSettings = {
     content: true,
     footer: true,
 
-    pageWidth: '1000px'
+    pageWidth: '1500px'
 }
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
