@@ -27,7 +27,7 @@ export const Header = () => {
 
                 <div className='flex gap align-center'>
                     { informativeElements.map(element => (
-                        <UniversalLink to={element.to}>
+                        <UniversalLink to={element.to} key={element.title}>
                             {element.title}
                         </UniversalLink>
                     ))}
