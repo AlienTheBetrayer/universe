@@ -7,3 +7,9 @@
     border-radius: 30px;
     background-color: var(--background-2);
 }
+
+.popup {
+    z-index: 99;
+    position: fixed;
+    background-color: blue;
+}

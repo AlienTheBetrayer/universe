@@ -8,7 +8,7 @@ export const useBackgroundBlur = (zIndex: number) => {
     const [shown, setShown] = useState<boolean>(false);
 
     useEffect(() => {
-
+        document.body.style.overflow = shown ? 'hidden' : 'auto';
     }, [shown]);
 
     const Presence = (shown: boolean) => {
@@ -25,5 +25,5 @@ export const useBackgroundBlur = (zIndex: number) => {
         )
     }
 
-    return { show: (flag: boolean) => setShown(flag), render };
+    return { setShown, render };
 }
