@@ -1,7 +1,14 @@
 header {
-    margin: 1rem auto;
+    position: sticky;
+    top: 0;
+    margin: 0 auto;
     max-width: 1000px;
     width: 100%;
+    z-index: 1;
+    
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.24);
 }
 
 header > nav {
@@ -10,4 +17,6 @@ header > nav {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
+
+
 }
