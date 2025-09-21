@@ -4,11 +4,6 @@
     text-align: center;
 }
 
-.heading-animated-text {
-    font-size: var(--font-h1);
-}
-
-
 .heading-grid {
     display: flex;
     justify-content: space-between;
