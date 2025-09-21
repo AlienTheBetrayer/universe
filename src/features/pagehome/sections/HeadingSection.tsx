@@ -3,12 +3,11 @@ import './HeadingSection.css';
 import { motion } from "motion/react"
 import { AnimatedText } from '../../animatedtext/components/AnimatedText';
 import { HoverCard } from '../../hovercard/components/HoverCard';
+import { RevealingContainer } from '../../revealingcontainer/components/RevealingContainer';
 
 export const HeadingSection = () => {
     return (
-        <motion.section
-        transition={{ delay: 0.5, duration: 1, type: 'spring', stiffness: 200, damping: 200 }}
-        className='heading-section'>
+        <section className='heading-section'>
             <div className='heading-section-intro'>
                 <AnimatedText as='h1' delay={0.3}>
                     Redefining innovation through personal projects
@@ -20,28 +19,30 @@ export const HeadingSection = () => {
                 </AnimatedText>
             </div>
 
-            <div className='heading-grid'>
-                <div>
-                    <h2>Showcasing:</h2>
+            <RevealingContainer delay={4}>
+                <div className='heading-grid'>
+                    <div>
+                        <h2>Showcasing:</h2>
 
-                    <div className='heading-showcase-grid'>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
+                        <div className='heading-showcase-grid'>
+                            <HoverCard/>
+                            <HoverCard/>
+                            <HoverCard/>
+                            <HoverCard/>
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Showcasing:</h2>
+
+                        <div className='heading-showcase-grid'>
+                            <HoverCard/>
+                            <HoverCard/>
+                            <HoverCard/>
+                            <HoverCard/>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <h2>Showcasing:</h2>
-
-                    <div className='heading-showcase-grid'>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
-                    </div>
-                </div>
-            </div>
-        </motion.section>
+            </RevealingContainer>
+        </section>
     )
 }

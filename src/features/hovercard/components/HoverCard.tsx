@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useBackgroundBlur } from '../../backgroundblur/hooks/useBackgroundBlur';
 import './HoverCard.css';
 
-import { hover, motion, type HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 
 interface Props extends HTMLMotionProps<'article'> {
     title?: string;
@@ -24,7 +24,7 @@ export const HoverCard = ({ title, children, className, ...rest }: Props) => {
             initial={{ zIndex: 'inherit' }}
             whileHover={{ scale: 1.1, zIndex: 11 }}
             onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}>
+            onMouseLeave={() => setHovered(false)} {...rest}>
                 <h3>{title}</h3>
                 <p>{children}</p>
             </motion.article>

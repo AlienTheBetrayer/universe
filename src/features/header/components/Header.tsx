@@ -21,7 +21,7 @@ export const Header = () => {
         <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ delay: 1, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
+        transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <nav>
                 <div>
                     {/* switch this regular text to a logo */}
