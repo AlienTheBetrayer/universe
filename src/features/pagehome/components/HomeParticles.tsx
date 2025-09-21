@@ -1,35 +1,14 @@
-import { useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react"
+import { useParticles } from "../hooks/useParticles";
 
-interface Props {
-    count?: number;
-}
-
-export const HomeParticles = ({ count=2000 }: Props) => {
-    const pointsRef = useRef(null);
-
-    // 
-    const { width, height } = useThree().viewport;
-
-    // calculating the positions of each and every particle
-    const positions = useMemo(() => {
-        const arr = new Float32Array(count * 3);
-
-        for(let i = 0; i < count; ++i) {
-            arr[i * 3] = (Math.random() - 0.5) * width;
-            arr[i * 3 + 1] = (Math.random() - 0.5) * height;
-            arr[i * 3 + 2] = (Math.random() - 0.5);
-        }
-
-        return arr;
-    }, [count, width, height]);
+export const HomeParticles = () => {
+    const particles = useParticles(1000);
 
     return (
-        <points ref={pointsRef}>
+        <points ref={particles.ref}>
             <bufferGeometry>
-                <bufferAttribute args={[positions, 3]} attach='attributes-position'/>
+                <bufferAttribute args={[particles.array, 3]} attach='attributes-position'/>
             </bufferGeometry>
-            <pointsMaterial color='#fff' size={0.03}/>
+            <pointsMaterial color='#919191' size={0.02}/>
         </points>
     )
 }

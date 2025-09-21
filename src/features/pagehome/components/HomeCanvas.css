@@ -1,4 +1,15 @@
-.home-canvas canvas {
+.home-canvas-container {
+    position: relative;
+}
+
+.home-canvas-container canvas {
     width: 100%;
-    height: 400px;   
+    height: 5050px;   
+}
+
+.home-canvas-container h1 {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
 }
