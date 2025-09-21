@@ -6,17 +6,13 @@ import './Header.css';
 export const Header = () => {
     const informativeElements = [
         {
-            title: 'Wiki',
-            to: '/wiki'
-        },
-        {
-            title: 'Tutorial',
-            to: '/tutorial'
-        },
-        {
             title: 'Philosophy',
             to: '/philosophy'
-        }
+        },
+        {
+            title: 'Contact',
+            to: '/contact'
+        },
     ];
 
     return (

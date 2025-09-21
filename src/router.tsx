@@ -2,9 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { Home } from "./features/pagemain/pages/Home";
 import { App } from "./features/pageapp/pages/App";
-import { Tutorial } from "./features/pagetutorial/pages/Tutorial";
-import { Wiki } from "./features/pagewiki/pages/Wiki";
 import { Philosophy } from "./features/pagephilosophy/pages/Philosophy";
+import { Contact } from "./features/pagecontact/pages/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -20,12 +19,8 @@ export const router = createBrowserRouter([
         element: <App/>
     },
     {
-        path: '/wiki',
-        element: <Wiki/>
-    },
-    {
-        path: '/tutorial',
-        element: <Tutorial/>
+        path: '/contact',
+        element: <Contact/>
     },
     {
         path: '/philosophy',
