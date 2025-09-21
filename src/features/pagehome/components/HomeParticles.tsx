@@ -6,7 +6,8 @@ export const HomeParticles = () => {
     return (
         <points ref={particles.ref}>
             <bufferGeometry>
-                <bufferAttribute args={[particles.array, 3]} attach='attributes-position'/>
+                <bufferAttribute args={[particles.positions, 3]} attach='attributes-position'/>
+                <bufferAttribute args={[particles.colors, 3]} attach='attributes-color'/>
             </bufferGeometry>
             <pointsMaterial color='#919191' size={0.005}/>
         </points>

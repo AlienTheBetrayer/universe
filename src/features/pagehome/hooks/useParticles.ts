@@ -32,6 +32,12 @@ export const useParticles = (count: number = 1000) => {
 
         return arr;
     }, [count]);
+    
+    const colors = useMemo(() => {
+        const arr = new Float32Array(count * 3);
+
+        return arr;
+    }, [count]);
 
     // applying that velocity to our position
     useFrame(() => {
@@ -60,5 +66,5 @@ export const useParticles = (count: number = 1000) => {
         }
     });
 
-    return { ref: pointsRef, array: positions };
+    return { ref: pointsRef, positions: positions, colors: colors };
 }
