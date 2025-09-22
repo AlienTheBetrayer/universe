@@ -24,11 +24,6 @@
     }
 }
 
-@media (max-width: 640px) {
-    .heading-grid {
-    }
-}
-
 .heading-showcase-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

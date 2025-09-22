@@ -11,8 +11,6 @@ export const BackgroundBlur = ({ zIndex }: Props) => {
         <motion.div className='background-blur' style={{ zIndex: zIndex }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}>
-
-        </motion.div>
+        exit={{ opacity: 0 }}/>
     )
 }
