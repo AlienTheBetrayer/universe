@@ -2,10 +2,17 @@
 :root {
     /* background */
     --background: rgb(8, 8, 8);
-    --background-2: rgb(26, 26, 27);
-    --background-3: rgb(35, 35, 37);
-    --background-4: rgb(39, 39, 43);
-    --background-5: rgb(54, 54, 64);
+    --background-2: rgb(16, 16, 16);
+    --background-3: rgb(24, 24, 24);
+    --background-4: rgb(32, 32, 32);
+    --background-5: rgb(40, 40, 40);
+
+    /* transparent background */
+    --background-transparent: rgba(8, 8, 8, 0.5);
+    --background-2-transparent: rgba(16, 16, 16, 0.5);
+    --background-3-transparent: rgba(24, 24, 24, 0.5);
+    --background-4-transparent: rgba(32, 32, 32, 0.5);
+    --background-5-transparent: rgba(40, 40, 40, 0.5);
 
     /* foreground */
     --foreground: #9d9d9d;

@@ -62,41 +62,35 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
             const cursorY = -((pointer.current.y + window.scrollY) / size.height * viewport.height) + viewport.height / 2;
             
             for(let i = 0; i < count; ++i) {
-                // colors
+                // if distance is close to our cursor
+                // put - to repulse 
+                const dx = (pos[i * 2] - cursorX);
+                const dy = (pos[i * 2 + 1] - cursorY);
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const force = (1 - distance) * 0.1;
 
-                // positions
-                let x = pos[i * 2]; // 5.98
-                let y = pos[i * 2 + 1];
+                if (distance < 1) {
+                    pos[i * 2] += (dx / distance) * force;
+                    pos[i * 2 + 1] += (dy / distance) * force;
 
-                const dx = (x - cursorX);
-                const dy = (y - cursorY);
-
-
-                if (Math.sqrt(dx * dx + dy * dy) < 1) {
-                    x *= 1.01;
-                    y *= 1.01;
                     colors[i * 3] = 0; 
                     colors[i * 3 + 1] = 0; 
-                    colors[i * 3 + 2] = 20; 
+                    colors[i * 3 + 2] = 30; 
                 } else {
                     colors[i * 3] = 0.3; 
                     colors[i * 3 + 1] = 0.3; 
                     colors[i * 3 + 2] = 0.3; 
                 }
                 
-                
-                // velocities
-                if(x >= viewport.width / 2 || x <= -viewport.width / 2)
+                // regular idle moving velocity
+                if(pos[i * 2] >= viewport.width / 2 || pos[i * 2] <= -viewport.width / 2)
                     velocities[i * 2] *= -1;
 
-                if(y >= viewport.height / 2 || y <= -viewport.height / 2)
+                if(pos[i * 2 + 1] >= viewport.height / 2 || pos[i * 2 + 1] <= -viewport.height / 2)
                     velocities[i * 2 + 1] *= -1;
 
-                x += velocities[i * 2];
-                y += velocities[i * 2 + 1];
-
-                pos[i * 2] = x;
-                pos[i * 2 + 1] = y;
+                pos[i * 2] += velocities[i * 2];
+                pos[i * 2 + 1] += velocities[i * 2 + 1];
             }
 
             ref.current.geometry.attributes.position.needsUpdate = true;

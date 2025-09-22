@@ -5,7 +5,8 @@
     min-height: 250px;
 
     border-radius: 30px;
-    background-color: var(--background-2);
+    background-color: var(--background-3-transparent);
+    backdrop-filter: blur(4px);
 }
 
 @media (max-width: 768px) {
@@ -17,4 +18,5 @@
 .popup {
     z-index: 99;
     position: absolute;
+    background-color: var(--background-2);
 }
