@@ -6,7 +6,7 @@ import { useCursor } from "../../../hooks/useCursor";
 export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
     // how many "pixels" there are in our canvas
     const { size, viewport } = useThree();
-    const pointer = useCursor({ x: 200, y: 500 });
+    const pointer = useCursor({ x: 330, y: 120 });
 
     // calculating the positions of each and every particle
     const positions = useMemo(() => {
@@ -64,7 +64,7 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                 const dx = (pos[i * 2] - cursorX);
                 const dy = (pos[i * 2 + 1] - cursorY);
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                const force = (1 - distance) * 0.1;
+                const force = (1 - distance) * 0.05;
 
                 // cursor effect
                 if (distance < 1) {

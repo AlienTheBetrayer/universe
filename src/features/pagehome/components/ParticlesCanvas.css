@@ -1,0 +1,15 @@
+.particles-canvas-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 1150px;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .particles-canvas-container {
+        min-height: 2000px;
+    }
+}

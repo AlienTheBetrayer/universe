@@ -1,0 +1,17 @@
+.sphere-canvas-container {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    height: 1000vh;
+}
+
+.sphere-canvas-container canvas {
+    height: 500px;
+}
+
+.sphere-canvas-lock {
+    position: sticky;
+    margin-top: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+}
