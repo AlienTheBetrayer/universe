@@ -1,7 +1,12 @@
 import { useEffect, useRef } from "react"
 
-export const useCursor = () => {
-    const pos = useRef({x: 0, y: 0});
+interface Position {
+    x?: number;
+    y?: number;
+};
+
+export const useCursor = (defaultPosition?: Position) => {
+    const pos = useRef({x: defaultPosition?.x ?? 0, y: defaultPosition?.y ?? 0});
 
     useEffect(() => {
         const handle = (e: MouseEvent) => {

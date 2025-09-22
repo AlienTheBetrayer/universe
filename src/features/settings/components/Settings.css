@@ -1,0 +1,18 @@
+.settings {
+    position: fixed;
+    top: 2rem;
+    right: 1rem;
+
+    width: 80px;
+    height: 64px;
+    padding: 1rem;
+
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 640px) {
+    .settings {
+        display: none;
+    }
+}

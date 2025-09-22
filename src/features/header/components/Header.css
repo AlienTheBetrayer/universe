@@ -1,13 +1,17 @@
 header {
     position: sticky;
     top: 0;
-    max-width: 1000px;
-    width: 100%;
+    width: 70%;
     margin: 1rem auto;
     padding: 1rem;
 
     z-index: 2;
-    
+}
+
+@media (max-width: 640px) {
+    header {
+        width: 100%;
+    }
 }
 
 header > nav {
@@ -16,7 +20,8 @@ header > nav {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    
+    height: 64px;
+
     border-radius: 20px;
     backdrop-filter: blur(8px);
 }

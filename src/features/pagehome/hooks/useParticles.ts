@@ -6,7 +6,7 @@ import { useCursor } from "../../../hooks/useCursor";
 export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
     // how many "pixels" there are in our canvas
     const { size, viewport } = useThree();
-    const pointer = useCursor();
+    const pointer = useCursor({ x: 200, y: 500 });
 
     // calculating the positions of each and every particle
     const positions = useMemo(() => {

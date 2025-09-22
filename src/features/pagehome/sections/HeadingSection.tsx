@@ -2,7 +2,8 @@ import './HeadingSection.css';
 
 import { AnimatedText } from '../../animatedtext/components/AnimatedText';
 import { HoverCard } from '../../hovercard/components/HoverCard';
-import { RevealingContainer } from '../../revealingcontainer/components/RevealingContainer';
+
+import { motion } from 'motion/react';
 
 export const HeadingSection = () => {
     return (
@@ -18,7 +19,10 @@ export const HeadingSection = () => {
                 </AnimatedText>
             </div>
 
-            <RevealingContainer delay={4}>
+            <motion.div
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 4, duration: 1 }}>
                 <div className='heading-grid'>
                     <div>
                         <h2>Showcasing:</h2>
@@ -41,7 +45,7 @@ export const HeadingSection = () => {
                         </div>
                     </div>
                 </div>
-            </RevealingContainer>
+            </motion.div>
         </section>
     )
 }
