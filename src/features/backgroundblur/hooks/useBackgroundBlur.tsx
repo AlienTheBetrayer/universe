@@ -4,11 +4,12 @@ import { BackgroundBlur } from "../components/BackgroundBlur";
 
 import { AnimatePresence } from "motion/react";
 
-export const useBackgroundBlur = (zIndex: number) => {
+export const useBackgroundBlur = (zIndex: number, hideScroll: boolean = true) => {
     const [shown, setShown] = useState<boolean>(false);
 
     useEffect(() => {
-        document.body.style.overflow = shown ? 'hidden' : 'auto';
+        if(hideScroll)
+            document.body.style.overflow = shown ? 'hidden' : 'auto';
     }, [shown]);
 
     const Presence = (shown: boolean) => {
