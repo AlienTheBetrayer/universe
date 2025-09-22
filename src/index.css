@@ -22,8 +22,8 @@
     --selection: #5e5e5e;
 
     /* component specific */
-    --button-app-fill: hsla(210, 60%, 70%, 1.00);
-    --button-app-hover: hsla(210, 30%, 50%, 1.00);
+    --button-app-fill: rgb(39, 78, 220);
+    --button-app-hover: rgb(27, 57, 165);
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;

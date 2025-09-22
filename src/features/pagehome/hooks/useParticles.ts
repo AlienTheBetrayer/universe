@@ -52,9 +52,7 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
 
 
     // animating position
-    useFrame(state => {
-        const t = state.clock.getElapsedTime();
-
+    useFrame(_state => {
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
             const colors = ref.current.geometry.attributes.color.array;

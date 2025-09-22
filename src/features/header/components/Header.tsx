@@ -37,7 +37,7 @@ export const Header = () => {
                         </UniversalLink>
                     ))}
 
-                    <LinkButton to='/app' fillColor={cssVariable('--button-app-fill')} hoverColor={cssVariable('--button-app-hover')}>
+                    <LinkButton className='header-launch-app' to='/app' fillColor={cssVariable('--button-app-fill')} hoverColor={cssVariable('--button-app-hover')}>
                         Launch App
                     </LinkButton>
                 </div>

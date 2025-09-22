@@ -25,3 +25,8 @@ header > nav {
     border-radius: 20px;
     backdrop-filter: blur(8px);
 }
+
+header .header-launch-app {
+    background-color: blue;
+    color: var(--foreground-last);
+}
