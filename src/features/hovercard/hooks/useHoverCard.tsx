@@ -17,6 +17,8 @@ export const useHoverCard = (ref: React.RefObject<HTMLElement | null>, Contents:
 
             copyRef.current.style.left = `${bounds.left}px`;
             copyRef.current.style.top = `${bounds.top + window.scrollY}px`;
+            copyRef.current.style.width = `${bounds.width}px`;
+            copyRef.current.style.height = `${bounds.height}px`;
         }
         blur.setShown(hovered);
     }, [hovered, ref, copyRef]);

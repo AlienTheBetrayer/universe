@@ -1,6 +1,5 @@
 import './HeadingSection.css';
 
-import { motion } from "motion/react"
 import { AnimatedText } from '../../animatedtext/components/AnimatedText';
 import { HoverCard } from '../../hovercard/components/HoverCard';
 import { RevealingContainer } from '../../revealingcontainer/components/RevealingContainer';
