@@ -62,13 +62,13 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
             const cursorY = -((pointer.current.y + window.scrollY) / size.height * viewport.height) + viewport.height / 2;
             
             for(let i = 0; i < count; ++i) {
-                // if distance is close to our cursor
                 // put - to repulse 
                 const dx = (pos[i * 2] - cursorX);
                 const dy = (pos[i * 2 + 1] - cursorY);
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const force = (1 - distance) * 0.1;
 
+                // cursor effect
                 if (distance < 1) {
                     pos[i * 2] += (dx / distance) * force;
                     pos[i * 2 + 1] += (dy / distance) * force;
@@ -82,13 +82,14 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                     colors[i * 3 + 2] = 0.3; 
                 }
                 
-                // regular idle moving velocity
+                // bouncing off of the screen's edges
                 if(pos[i * 2] >= viewport.width / 2 || pos[i * 2] <= -viewport.width / 2)
                     velocities[i * 2] *= -1;
 
                 if(pos[i * 2 + 1] >= viewport.height / 2 || pos[i * 2 + 1] <= -viewport.height / 2)
                     velocities[i * 2 + 1] *= -1;
 
+                // idle moving w/ velocity
                 pos[i * 2] += velocities[i * 2];
                 pos[i * 2 + 1] += velocities[i * 2 + 1];
             }
