@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 
 import { Canvas } from "@react-three/fiber"
 import { HomeParticles } from "./HomeParticles"
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
 export const HomeCanvas = () => {
     return (
@@ -12,6 +13,10 @@ export const HomeCanvas = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 3, delay: 1}}>
             <Canvas>
+                <EffectComposer>
+                    <Bloom intensity={30} luminanceThreshold={0.5}/>
+                </EffectComposer>
+
                 <HomeParticles/>
             </Canvas>
         </motion.div>

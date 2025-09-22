@@ -54,7 +54,6 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
     // animating position
     useFrame(state => {
         const t = state.clock.getElapsedTime();
-        
 
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
@@ -76,9 +75,9 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                 if (Math.sqrt(dx * dx + dy * dy) < 1) {
                     x *= 1.01;
                     y *= 1.01;
-                    colors[i * 3] = 1; 
+                    colors[i * 3] = 0; 
                     colors[i * 3 + 1] = 0; 
-                    colors[i * 3 + 2] = 0; 
+                    colors[i * 3 + 2] = 20; 
                 } else {
                     colors[i * 3] = 0.3; 
                     colors[i * 3 + 1] = 0.3; 
