@@ -60,10 +60,7 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
             const pos = ref.current.geometry.attributes.position.array;
             const colors = ref.current.geometry.attributes.color.array;
             const cursorX = (pointer.current.x / size.width * viewport.width) - viewport.width / 2;
-            const cursorY = -(pointer.current.y / size.height * viewport.height) + viewport.height / 2;
-            console.log('x: ', cursorX);
-            console.log('y: ', cursorY, '\n\n');
-
+            const cursorY = -((pointer.current.y + window.scrollY) / size.height * viewport.height) + viewport.height / 2;
             
             for(let i = 0; i < count; ++i) {
                 // colors
