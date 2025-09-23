@@ -52,7 +52,9 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
 
 
     // animating position
-    useFrame(_state => {
+    useFrame(state => {
+        const t = state.clock.getElapsedTime();
+
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
             const colors = ref.current.geometry.attributes.color.array;
@@ -62,16 +64,20 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
             const radius = viewport.width < 3 ? 0.4 : 1.25;
 
             for(let i = 0; i < count; ++i) {
-                // put - to repulse 
                 const dx = (pos[i * 2] - cursorX);
                 const dy = (pos[i * 2 + 1] - cursorY);
+                
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const force = (radius - distance) * 0.05;
+                
+                const ux = dx / distance;
+                const uy = dy / distance;
+                
 
                 // cursor effect
                 if (distance < radius) {
-                    pos[i * 2] += (dx / distance) * force;
-                    pos[i * 2 + 1] += (dy / distance) * force;
+                    pos[i * 2] += ux * force;
+                    pos[i * 2 + 1] += uy * force;
 
                     colors[i * 3] = 0; 
                     colors[i * 3 + 1] = 0; 

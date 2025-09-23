@@ -4,6 +4,7 @@ import { AnimatedText } from '../../animatedtext/components/AnimatedText';
 import { HoverCard } from '../../hovercard/components/HoverCard';
 
 import { motion } from 'motion/react';
+import { ListButton } from '../../../shared/ListButton/ListButton';
 
 export const HeadingSection = () => {
     return (
@@ -13,11 +14,10 @@ export const HeadingSection = () => {
                 <AnimatedText as='h1' delay={0.3}>
                     Redefining innovation through personal projects
                 </AnimatedText>
-                <br/>
-                <br/>
                 <AnimatedText as='p' speed={8} delay={2.8}>
                     Leveraging technology and design to transform personal initiatives into sophisticated, forward-thinking solutions that exemplify creativity, technical excellence, and impactful innovation.
                 </AnimatedText>
+                <ListButton className='heading-effects' elements={['Propulsion', 'Repulsion', 'Waves', 'Tangent']}/>
             </div>
 
             <motion.div

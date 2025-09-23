@@ -1,0 +1,39 @@
+.list-button {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    min-width: 128px;
+    background-color: #0c0c67;
+    overflow: hidden;
+}
+
+.list-button button {
+    border: transparent;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.15s;
+    padding: 0.7rem;
+}
+
+.list-button button:hover {
+    background-color: #0b0b5c;
+}
+
+/* topbar */
+.list-button-top {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+/* menu */
+.list-button-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-button-menu button {
+}
+
+.list-button-menu .list-button-menu-selected {
+    background-color: #0b0b5c;
+}
