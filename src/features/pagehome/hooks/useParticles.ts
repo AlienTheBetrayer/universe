@@ -71,48 +71,53 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const force = (radius - distance) * 0.05;
                 
-                
-                let ux = 0;
-                let uy = 0;
+                let vectorX = 0;
+                let vectorY = 0;
                 let color: number[] = [0, 0, 30];
 
                 switch(vectorType) {
                     case VectorTypes.propulsion:
-                        ux = dx / distance;
-                        uy = dy / distance;
+                        vectorX = dx / distance;
+                        vectorY = dy / distance;
                         color = [0, 0, 30];
                     break;
                     case VectorTypes.repulsion:
-                        ux = -dx / distance;
-                        uy = -dy / distance;
+                        vectorX = -dx / distance;
+                        vectorY = -dy / distance;
                         color = [30, 0, 0];
                     break;
                     case VectorTypes.waves:
-                        ux = Math.sin(t);
-                        uy = Math.sin(t);
+                        vectorX = Math.sin(t);
+                        vectorY = Math.sin(t);
                         color = [12, 50, 59];
                     break;
                     case VectorTypes.nebula:
-                        ux = dy;
-                        uy = dx;
+                        vectorX = -dy * 2;
+                        vectorY = dx * 2;
                         color = [48, 13, 78];
                     break;
                     case VectorTypes.swarm:
-                        ux = distance - dx;
-                        uy = distance - dy;
+                        vectorX = Math.sin(dx*7 - dy*3 + t*4) * Math.cos(dy*5 + Math.sqrt(dx*dx+dy*dy)*3 + Math.sin(t*2)) + Math.tan(Math.sin(dx*0.5 + t*3)) * 0.02;
+                        vectorY = Math.cos(dy*6 + dx*2 + t*3.5) * Math.sin(dx*4 + Math.sqrt(dx*dx+dy*dy)*5 + Math.cos(t*1.7)) + Math.tan(Math.cos(dy*0.7 + t*2.1)) * 0.02;
+                        color= [0, 20, 10];
                     break;
                     case VectorTypes.checker:
-                        ux = Math.sin(t % 20 * dx);
-                        uy = Math.sin(t % 20 * dy);
-                        color = [5, 5, 5];
+                        vectorX = Math.sin(t % 20 * dx);
+                        vectorY = Math.sin(t % 20 * dy);
+                        color = [10, 10, 10];
+                    break;
+                    case VectorTypes.astral:
+                        vectorX = (dx/distance) * Math.sin(t + distance*5) * Math.exp(-distance*0.5) - (dy/distance) * Math.cos(t*2 + Math.log(distance+1)*3);
+                        vectorY = (dy/distance) * Math.sin(t + distance*5) * Math.exp(-distance*0.5) + (dx/distance) * Math.cos(t*2 + Math.log(distance+1)*3);
+                        color = [10, 10, 30];
                     break;
                 }
                 
 
                 // cursor effect
                 if (distance < radius) {
-                    pos[i * 2] += ux * force;
-                    pos[i * 2 + 1] += uy * force;
+                    pos[i * 2] += vectorX * force;
+                    pos[i * 2 + 1] += vectorY * force;
 
                     colors[i * 3] = color[0]; 
                     colors[i * 3 + 1] = color[1]; 

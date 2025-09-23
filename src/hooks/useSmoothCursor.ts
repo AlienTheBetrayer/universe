@@ -13,7 +13,7 @@ export const useSmoothCursor = (defaultPosition?: Position) => {
     const x = useSpring(pos.x, springSettings);
     const y = useSpring(pos.y, springSettings);
 
-    const [smoothPos, setSmoothPos] = useState<Position>({ x: 0, y: 0 });
+    const [smoothPos, setSmoothPos] = useState<Position>(defaultPosition ?? { x: 0, y : 0 });
 
     useEffect(() => {
         x.set(pos.x);

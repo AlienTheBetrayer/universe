@@ -7,6 +7,7 @@ export const VectorTypes = {
     nebula: 'Nebula',
     swarm: 'Swarm',
     checker: 'Checker',
+    astral: 'Astral'
 }
 
 export interface ParticlesDataInterface {
