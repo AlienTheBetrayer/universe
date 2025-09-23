@@ -1,5 +1,5 @@
-import { useRef } from 'react';
 import './LockSection.css';
+import { useRef } from 'react';
 import { SphereCanvas } from '../components/SphereCanvas';
 
 export const LockSection = () => {
