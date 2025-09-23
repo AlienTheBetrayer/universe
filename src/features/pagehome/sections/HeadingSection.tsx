@@ -9,7 +9,6 @@ import { ListButton } from '../../../shared/ListButton/ListButton';
 export const HeadingSection = () => {
     return (
         <section className='heading-section container'>
-            
             <div className='heading-section-intro'>
                 <AnimatedText as='h1' delay={0.3}>
                     Redefining innovation through personal projects
