@@ -22,18 +22,10 @@
 /* topbar */
 .list-button-top {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
 }
 
-/* menu */
-.list-button-menu {
-    display: flex;
-    flex-direction: column;
-}
-
-.list-button-menu button {
-}
-
-.list-button-menu .list-button-menu-selected {
-    background-color: #0b0b5c;
+.list-button-top span {
+    cursor: default;
 }

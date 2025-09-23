@@ -17,7 +17,12 @@ export const HeadingSection = () => {
                 <AnimatedText as='p' speed={8} delay={2.8}>
                     Leveraging technology and design to transform personal initiatives into sophisticated, forward-thinking solutions that exemplify creativity, technical excellence, and impactful innovation.
                 </AnimatedText>
-                <ListButton className='heading-effects' elements={['Propulsion', 'Repulsion', 'Waves', 'Tangent']}/>
+                <motion.div
+                initial={{ y: 200, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 3.5, duration: 1 }}>
+                    <ListButton className='heading-effects' elements={['Propulsion', 'Repulsion', 'Waves', 'Tangent']}/>
+                </motion.div>
             </div>
 
             <motion.div
