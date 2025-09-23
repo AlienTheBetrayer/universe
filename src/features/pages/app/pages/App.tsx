@@ -1,4 +1,4 @@
-import { Page } from "../../layout/components/Page"
+import { Page } from "../../../layout/components/Page"
 
 export const App = () => {
     return (

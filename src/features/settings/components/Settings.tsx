@@ -1,4 +1,4 @@
-import { ToggleButton } from '../../../shared/ToggleButton/ToggleButton';
+import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import './Settings.css';
 
 import { motion } from 'motion/react';

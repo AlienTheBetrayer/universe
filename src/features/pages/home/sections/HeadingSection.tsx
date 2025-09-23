@@ -1,10 +1,10 @@
 import './HeadingSection.css';
 
-import { AnimatedText } from '../../animatedtext/components/AnimatedText';
-import { HoverCard } from '../../hovercard/components/HoverCard';
+import { AnimatedText } from '../../../animatedtext/components/AnimatedText';
+import { HoverCard } from '../../../hovercard/components/HoverCard';
 
 import { motion } from 'motion/react';
-import { ListButton } from '../../../shared/ListButton/ListButton';
+import { ListButton } from '../../../ui/ListButton/ListButton';
 import { useParticlesContext, VectorTypes } from '../context/ParticlesContext';
 
 export const HeadingSection = () => {

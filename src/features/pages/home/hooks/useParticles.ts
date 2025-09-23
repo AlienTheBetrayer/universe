@@ -1,7 +1,7 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import type { Points } from "three";
-import { useSmoothCursor } from "../../../hooks/useSmoothCursor";
+import { useSmoothCursor } from "../../../../hooks/useSmoothCursor";
 import { VectorTypes } from "../context/ParticlesContext";
 
 export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {

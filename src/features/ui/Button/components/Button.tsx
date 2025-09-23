@@ -1,5 +1,5 @@
 import './Button.css';
-import { cssVariable } from '../../../utils/cssVariable';
+import { cssVariable } from '../../../../utils/cssVariable';
 import { motion, type HTMLMotionProps, type Transition } from 'motion/react';
 
 export const ButtonVariants = {

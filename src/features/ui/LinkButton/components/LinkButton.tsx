@@ -1,6 +1,6 @@
 import './LinkButton.css';
 import '../../Button/components/Button.css'
-import { cssVariable } from '../../../utils/cssVariable';
+import { cssVariable } from '../../../../utils/cssVariable';
 import { motion, type HTMLMotionProps } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ButtonVariants } from '../../Button/components/Button';

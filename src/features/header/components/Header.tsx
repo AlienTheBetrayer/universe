@@ -1,8 +1,8 @@
 import './Header.css';
 
 import { motion } from 'motion/react';
-import { UniversalLink } from "../../../shared/UniversalLink/components/UniversalLink";
-import { LinkButton } from "../../../shared/LinkButton/components/LinkButton";
+import { UniversalLink } from "../../ui/UniversalLink/components/UniversalLink";
+import { LinkButton } from "../../ui/LinkButton/components/LinkButton";
 import { cssVariable } from "../../../utils/cssVariable";
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 

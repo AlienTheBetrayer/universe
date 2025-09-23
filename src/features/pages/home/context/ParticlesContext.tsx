@@ -9,10 +9,8 @@ export const VectorTypes = {
     checker: 'Checker',
     astral: 'Astral'
 }
-
 export interface ParticlesDataInterface {
     vectorType?: string;
-    color?: number[];
 }
 
 type ParticlesContextType = [ParticlesDataInterface, React.Dispatch<React.SetStateAction<ParticlesDataInterface>>];

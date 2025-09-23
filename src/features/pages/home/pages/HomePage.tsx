@@ -1,6 +1,6 @@
 import './HomePage.css';
 
-import { Page } from "../../layout/components/Page"
+import { Page } from "../../../layout/components/Page"
 import { HeadingSection } from '../sections/HeadingSection';
 import { ParticlesCanvas } from '../components/ParticlesCanvas';
 import { LockSection } from '../sections/LockSection';
@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export const HomePage = () => {
     const particlesData = useState<ParticlesDataInterface>(
-        { color: [0, 0, 255], vectorType: VectorTypes.propulsion})
+        { vectorType: VectorTypes.propulsion})
 
     return (
         <Page className='home-page'>
