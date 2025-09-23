@@ -1,17 +1,15 @@
 import './ToggleButton.css';
-import type { HTMLMotionProps } from "motion/react"
 import { motion } from 'motion/react';
 import { useState } from 'react';
 
-interface Props extends HTMLMotionProps<'button'> {
+interface Props {
     backgroundColor?: string;
     circleColor?: string;
-    children?: string;
 
     onToggled?: (state: boolean) => void;
 }
 
-export const ToggleButton = ({ children, onToggled, circleColor='#0000ff', backgroundColor='#0c0c67' }: Props) => {
+export const ToggleButton = ({ onToggled, circleColor='#0000ff', backgroundColor='#0c0c67' }: Props) => {
     const [toggled, setToggled] = useState<boolean>(false);
 
     const handle = () => {

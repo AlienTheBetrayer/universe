@@ -1,25 +1,22 @@
-import { AnimatePresence, type HTMLMotionProps } from 'motion/react'
+import { AnimatePresence } from 'motion/react'
 import './ListButton.css'
 import { useState } from 'react';
 
 import { motion } from 'motion/react';
 
-interface Props extends HTMLMotionProps<'button'> {
+interface Props {
     elements: string[];
+    className?: string;
     onSelected?: (idx: number) => void;
 }
 
-type LastPress = 'previous' | 'next';
-
 export const ListButton = ({ onSelected, elements, className=''  }: Props) => {
     const [currentId, setCurrentId] = useState<number>(0);
-    const [lastPress, setLastPress] = useState<LastPress>('next');
     
     const handlePrevious = () => {
         let id = 0;
         id = currentId == 0 ? elements.length - 1 : currentId - 1; 
 
-        setLastPress('previous');
         onSelected?.(id); 
         setCurrentId(id);
     }
@@ -28,7 +25,6 @@ export const ListButton = ({ onSelected, elements, className=''  }: Props) => {
         let id = 0;
         id = currentId == elements.length - 1 ? 0 : currentId + 1;    
 
-        setLastPress('next');
         onSelected?.(id); 
         setCurrentId(id);
     }
