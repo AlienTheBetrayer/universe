@@ -1,5 +1,14 @@
 import React, { createContext, useContext } from "react";
 
+export const VectorTypes = {
+    propulsion: 'Propulsion',
+    repulsion: 'Repulsion',
+    waves: 'Waves',
+    nebula: 'Nebula',
+    swarm: 'Swarm',
+    checker: 'Checker',
+}
+
 export interface ParticlesDataInterface {
     vectorType?: string;
     color?: number[];

@@ -1,10 +1,12 @@
 import { useRef } from "react";
 import { useParticles } from "../hooks/useParticles";
 import { Points } from "three";
+import { useParticlesContext } from "../context/ParticlesContext";
 
 export const Particles = () => {
     const ref = useRef<Points>(null);
-    const particles = useParticles(ref, 2000);
+    const [particlesData, ] = useParticlesContext();
+    const particles = useParticles(ref, 2000, particlesData.vectorType);
 
     return (
         <points ref={ref}>

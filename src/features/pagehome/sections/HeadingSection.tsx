@@ -5,8 +5,7 @@ import { HoverCard } from '../../hovercard/components/HoverCard';
 
 import { motion } from 'motion/react';
 import { ListButton } from '../../../shared/ListButton/ListButton';
-import { useParticlesContext } from '../context/ParticlesContext';
-import { useEffect, useState } from 'react';
+import { useParticlesContext, VectorTypes } from '../context/ParticlesContext';
 
 export const HeadingSection = () => {
     return (
@@ -19,15 +18,11 @@ export const HeadingSection = () => {
 }
 
 const Intro = () => {
-    const [particlesData, setParticlesData] = useParticlesContext();
+    const [, setParticlesData] = useParticlesContext();
 
     const handleSelect =  (idx: number) => {
-        setParticlesData(prev => ({...prev, vectorType: elements[idx]}))
+        setParticlesData(prev => ({...prev, vectorType: Object.values(VectorTypes)[idx]}))
     }
-
-    const elements = [
-        'Propulsion', 'Repulsion', 'Waves', 'Tangent'
-    ];
 
     return (
         <div className='heading-section-intro'>
@@ -43,7 +38,7 @@ const Intro = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 3.5, duration: 1 }}>
-                <ListButton className='heading-effects' elements={elements} onSelected={handleSelect}/>
+                <ListButton className='heading-effects' elements={Object.values(VectorTypes)} onSelected={handleSelect}/>
             </motion.div>
         </div>
     )

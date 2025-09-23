@@ -2,8 +2,9 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import type { Points } from "three";
 import { useSmoothCursor } from "../../../hooks/useSmoothCursor";
+import { VectorTypes } from "../context/ParticlesContext";
 
-export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
+export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {
     // how many "pixels" there are in our canvas
     const { size, viewport } = useThree();
     const pointer = useSmoothCursor({ x: 330, y: 120 });
@@ -70,8 +71,42 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const force = (radius - distance) * 0.05;
                 
-                const ux = dx / distance;
-                const uy = dy / distance;
+                
+                let ux = 0;
+                let uy = 0;
+                let color: number[] = [0, 0, 30];
+
+                switch(vectorType) {
+                    case VectorTypes.propulsion:
+                        ux = dx / distance;
+                        uy = dy / distance;
+                        color = [0, 0, 30];
+                    break;
+                    case VectorTypes.repulsion:
+                        ux = -dx / distance;
+                        uy = -dy / distance;
+                        color = [30, 0, 0];
+                    break;
+                    case VectorTypes.waves:
+                        ux = Math.sin(t);
+                        uy = Math.sin(t);
+                        color = [12, 50, 59];
+                    break;
+                    case VectorTypes.nebula:
+                        ux = dy;
+                        uy = dx;
+                        color = [48, 13, 78];
+                    break;
+                    case VectorTypes.swarm:
+                        ux = distance - dx;
+                        uy = distance - dy;
+                    break;
+                    case VectorTypes.checker:
+                        ux = Math.sin(t % 20 * dx);
+                        uy = Math.sin(t % 20 * dy);
+                        color = [5, 5, 5];
+                    break;
+                }
                 
 
                 // cursor effect
@@ -79,9 +114,9 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                     pos[i * 2] += ux * force;
                     pos[i * 2 + 1] += uy * force;
 
-                    colors[i * 3] = 0; 
-                    colors[i * 3 + 1] = 0; 
-                    colors[i * 3 + 2] = 30; 
+                    colors[i * 3] = color[0]; 
+                    colors[i * 3 + 1] = color[1]; 
+                    colors[i * 3 + 2] = color[2]; 
                 } else {
                     colors[i * 3] = 0.3; 
                     colors[i * 3 + 1] = 0.3; 

@@ -9,7 +9,7 @@ interface Props {
     onToggled?: (state: boolean) => void;
 }
 
-export const ToggleButton = ({ onToggled, circleColor='#0000ff', backgroundColor='#0c0c67' }: Props) => {
+export const ToggleButton = ({ onToggled }: Props) => {
     const [toggled, setToggled] = useState<boolean>(false);
 
     const handle = () => {
@@ -20,11 +20,10 @@ export const ToggleButton = ({ onToggled, circleColor='#0000ff', backgroundColor
     return (
         <button className='toggle-button' 
         onClick={() => handle()}
-        style={{ justifyContent: toggled ? 'flex-end' : 'flex-start', backgroundColor: backgroundColor}}>
+        style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
             <motion.div className='toggle-button-circle'
             layout 
-            transition={{ type: 'spring', stiffness: 400, damping: 40 }}
-            style={{ backgroundColor: circleColor }}>
+            transition={{ type: 'spring', stiffness: 400, damping: 40 }}>
 
             </motion.div>
 

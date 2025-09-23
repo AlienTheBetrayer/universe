@@ -3,7 +3,7 @@
     flex-direction: column;
     border-radius: 20px;
     min-width: 128px;
-    background-color: #0c0c67;
+    background-color: rgba(0, 0, 255, 0.2);
     overflow: hidden;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .list-button button:hover {
-    background-color: #0b0b5c;
+    background-color: rgba(0, 0, 255, 0.2);
 }
 
 /* topbar */

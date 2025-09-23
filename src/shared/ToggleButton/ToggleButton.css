@@ -6,10 +6,13 @@
     min-width: 48px;
     min-height: 16px;
     border-radius: 20px;
+    background-color: rgba(0, 0, 255, 0.2);
 }
 
 .toggle-button-circle {
     width: 16px;
     min-height: 16px;
     border-radius: 20px;
+    background-color: rgba(0, 0, 255, 0.6);
+
 }
