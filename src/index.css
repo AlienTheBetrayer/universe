@@ -9,6 +9,7 @@
 
     /* transparent background */
     --background-transparent: rgba(8, 8, 8, 0.5);
+    --background-semitransparent: rgba(8, 8, 8, 0.75);
     --background-2-transparent: rgba(16, 16, 16, 0.5);
     --background-3-transparent: rgba(24, 24, 24, 0.5);
     --background-4-transparent: rgba(32, 32, 32, 0.5);

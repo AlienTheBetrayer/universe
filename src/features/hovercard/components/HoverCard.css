@@ -18,5 +18,5 @@
 .popup {
     z-index: 99;
     position: absolute;
-    background-color: var(--background-2);
+    background-color: var(--background-semitransparent);
 }
