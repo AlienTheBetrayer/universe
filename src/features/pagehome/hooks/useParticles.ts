@@ -1,12 +1,12 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import type { Points } from "three";
-import { useCursor } from "../../../hooks/useCursor";
+import { useSmoothCursor } from "../../../hooks/useSmoothCursor";
 
 export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
     // how many "pixels" there are in our canvas
     const { size, viewport } = useThree();
-    const pointer = useCursor({ x: 330, y: 120 });
+    const pointer = useSmoothCursor({ x: 330, y: 120 });
 
     // calculating the positions of each and every particle
     const positions = useMemo(() => {
@@ -56,10 +56,10 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
             const colors = ref.current.geometry.attributes.color.array;
-            const cursorX = (pointer.current.x / size.width * viewport.width) - viewport.width / 2;
-            const cursorY = -((pointer.current.y + window.scrollY) / size.height * viewport.height) + viewport.height / 2;
+            const cursorX = (pointer.x / size.width * viewport.width) - viewport.width / 2;
+            const cursorY = -((pointer.y + window.scrollY) / size.height * viewport.height) + viewport.height / 2;
             
-            const radius = viewport.width > 5 ? 1 : 0.4;
+            const radius = viewport.width < 3 ? 0.4 : 1.25;
 
             for(let i = 0; i < count; ++i) {
                 // put - to repulse 
