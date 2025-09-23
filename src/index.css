@@ -6,6 +6,11 @@
     --background-3: rgb(24, 24, 24);
     --background-4: rgb(32, 32, 32);
     --background-5: rgb(40, 40, 40);
+    --background-6: rgb(48, 48, 48);
+    --background-7: rgb(56, 56, 56);
+    --background-8: rgb(64, 64, 64);
+    --background-9: rgb(72, 72, 72);
+    --background-10: rgb(80, 80, 80);
 
     /* transparent background */
     --background-transparent: rgba(8, 8, 8, 0.5);

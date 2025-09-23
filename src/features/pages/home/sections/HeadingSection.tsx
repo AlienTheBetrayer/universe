@@ -1,7 +1,7 @@
 import './HeadingSection.css';
 
 import { AnimatedText } from '../../../animatedtext/components/AnimatedText';
-import { HoverCard } from '../../../hovercard/components/HoverCard';
+import { SphereCard } from '../../../spherecard/components/SphereCard';
 
 import { motion } from 'motion/react';
 import { ListButton } from '../../../ui/ListButton/ListButton';
@@ -55,20 +55,21 @@ const Grid = () => {
                     <h2>Showcasing:</h2>
 
                     <div className='heading-showcase-grid'>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
+                        <SphereCard title='hi' description='something imporatnt' hoverDescription='somethign even more importantthat you might not have even thought about'/>
+                        <SphereCard/>
+                        <SphereCard/>
+                        <SphereCard/>
                     </div>
                 </div>
                 <div>
                     <h2>Showcasing:</h2>
 
                     <div className='heading-showcase-grid'>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
-                        <HoverCard/>
+                        <SphereCard/>
+                        <SphereCard/>
+                        <SphereCard/>
+                        <SphereCard/>
+    
                     </div>
                 </div>
             </div>

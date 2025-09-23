@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useBackgroundBlur } from "../../backgroundblur/hooks/useBackgroundBlur";
 import { createPortal } from "react-dom";
 import { AnimatePresence } from "motion/react";
 import { motion } from "motion/react";
+import { HoverContents } from "../components/HoverContents";
 
-export const useHoverCard = (ref: React.RefObject<HTMLElement | null>, Contents: React.FC) => {
+export const useSphereCardPopup = (ref: React.RefObject<HTMLElement | null>, title?: string, description?: string) => {
     const [hovered, setHovered] = useState<boolean>(false);
     
     const copyRef = useRef<HTMLElement>(null);
@@ -45,11 +46,12 @@ export const useHoverCard = (ref: React.RefObject<HTMLElement | null>, Contents:
                 createPortal(
                     <AnimatePresence>
                         { hovered && (
-                            <motion.article ref={copyRef} className='hover-card popup'
+                            <motion.article ref={copyRef} className='sphere-card popup'
+                            key='hover-popup'
                             initial={{ scale: 1 }}
                             animate={{ scale: 1.1 }}
                             exit={{ scale: 1, opacity: 0 }}>
-                                <Contents/>
+                                <HoverContents title={title} description={description}/>
                             </motion.article>
                         )}
                     </AnimatePresence>, document.body)

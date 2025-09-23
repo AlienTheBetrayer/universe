@@ -5,7 +5,7 @@ export const VectorTypes = {
     repulsion: 'Repulsion',
     waves: 'Waves',
     nebula: 'Nebula',
-    swarm: 'Swarm',
+    living: 'Living',
     checker: 'Checker',
     astral: 'Astral'
 }

@@ -1,4 +1,4 @@
-.hover-card {
+.sphere-card {
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -10,7 +10,7 @@
 }
 
 @media (max-width: 768px) {
-    .hover-card {
+    .sphere-card {
         min-width: 200px;
     }
 }
