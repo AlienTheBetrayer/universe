@@ -1,4 +1,3 @@
-import { Canvas } from '@react-three/fiber';
 import './Contents.css';
 import './HoverContents.css';
 
