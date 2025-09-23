@@ -3,7 +3,7 @@ import './HomePage.css';
 import { Page } from "../../layout/components/Page"
 import { HeadingSection } from '../sections/HeadingSection';
 import { ParticlesCanvas } from '../components/ParticlesCanvas';
-import { SphereCanvas } from '../components/SphereCanvas';
+import { LockSection } from '../sections/LockSection';
 
 export const HomePage = () => {
     return (
@@ -11,7 +11,7 @@ export const HomePage = () => {
             <ParticlesCanvas/>
             
             <HeadingSection/>
-            <SphereCanvas/>
+            <LockSection/>
         </Page>
     )
 }
