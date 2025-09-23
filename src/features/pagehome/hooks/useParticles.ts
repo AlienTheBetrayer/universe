@@ -59,15 +59,17 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
             const cursorX = (pointer.current.x / size.width * viewport.width) - viewport.width / 2;
             const cursorY = -((pointer.current.y + window.scrollY) / size.height * viewport.height) + viewport.height / 2;
             
+            const radius = viewport.width > 5 ? 1 : 0.4;
+
             for(let i = 0; i < count; ++i) {
                 // put - to repulse 
                 const dx = (pos[i * 2] - cursorX);
                 const dy = (pos[i * 2 + 1] - cursorY);
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                const force = (1 - distance) * 0.05;
+                const force = (radius - distance) * 0.05;
 
                 // cursor effect
-                if (distance < 1) {
+                if (distance < radius) {
                     pos[i * 2] += (dx / distance) * force;
                     pos[i * 2 + 1] += (dy / distance) * force;
 

@@ -7,7 +7,8 @@ import { motion } from 'motion/react';
 
 export const HeadingSection = () => {
     return (
-        <section className='heading-section'>
+        <section className='heading-section container'>
+            
             <div className='heading-section-intro'>
                 <AnimatedText as='h1' delay={0.3}>
                     Redefining innovation through personal projects

@@ -6,7 +6,7 @@ export const LockSection = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     return (
-        <div ref={scrollRef} className='sphere-canvas-container'>
+        <div ref={scrollRef} className='sphere-canvas-container container'>
             <div className='sphere-canvas-lock'>
                 <SphereCanvas ref={scrollRef}/>
             </div>

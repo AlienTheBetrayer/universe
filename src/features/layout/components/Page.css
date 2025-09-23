@@ -8,3 +8,7 @@
 
     background-color: var(--background);
 }
+
+.page .container {
+    margin-top: 12rem;
+}

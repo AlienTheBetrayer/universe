@@ -18,11 +18,6 @@ export const Sphere = ({ progress }: Props) => {
         <mesh>
             <icosahedronGeometry args={[1 + scale * 7, 0]}/>
             <meshPhysicalMaterial color='#0000ff'/>
-
-            {/* <lineSegments>
-                <wireframeGeometry attach="geometry" args={[new IcosahedronGeometry(3, 5)]} />
-                <lineBasicMaterial color="#fff" />
-            </lineSegments> */}
         </mesh>
     )
 }

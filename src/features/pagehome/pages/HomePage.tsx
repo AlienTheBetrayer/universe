@@ -8,9 +8,12 @@ import { LockSection } from '../sections/LockSection';
 export const HomePage = () => {
     return (
         <Page className='home-page'>
-            <ParticlesCanvas/>
+
+            <div className='heading-wrapper'>
+                <ParticlesCanvas/>
+                <HeadingSection/>
+            </div>
             
-            <HeadingSection/>
             <LockSection/>
         </Page>
     )

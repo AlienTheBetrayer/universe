@@ -19,8 +19,8 @@ export const Header = () => {
 
     return (
         <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        initial={{ y: -100, x: '-50%' }}
+        animate={{ y: 0, x: '-50%' }}
         transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <nav>
                 <div>

@@ -78,6 +78,22 @@ p, span, a, button, h1, h2 {
 }
 
 /* utilities */
+.container {
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0.5rem;
+    }
+}
+
 .flex {
     display: flex;
 }
