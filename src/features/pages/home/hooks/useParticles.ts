@@ -54,6 +54,7 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
 
     // animating position
     useFrame(state => {
+        
         const t = state.clock.getElapsedTime();
 
         if(ref.current) {

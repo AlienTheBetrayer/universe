@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import type { MotionValue } from "motion";
 import { useSpring } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mesh, MeshPhysicalMaterial } from "three";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { Sparks } from "./Sparks";
@@ -13,10 +13,16 @@ interface Props {
 export const Icosahedron = ({ progress }: Props) => {
     const ref = useRef<Mesh>(null);
     const isMobile = useMediaQuery(640);
-
+    const [scrolled, setScrolled] = useState<boolean>(false);
     const spring = useSpring(progress, { 
         stiffness: 40, damping: 60, restDelta: 0.0001, restSpeed: 0.0001
     });
+
+    useEffect(() => {
+        const unsubscribe = progress.on('change', val => val > 0 && setScrolled(true));
+        return () => unsubscribe();
+    }, [progress]);
+
 
     useFrame(state => {
         const t = state.clock.getElapsedTime();
@@ -39,7 +45,8 @@ export const Icosahedron = ({ progress }: Props) => {
         <mesh ref={ref}>
             <icosahedronGeometry args={[isMobile ? 0.8 : 1, 0]}/>
             <meshPhysicalMaterial color='#0000ff'/>
-            <Sparks/>
+
+            { scrolled && <Sparks/> }
         </mesh>
     )
 }

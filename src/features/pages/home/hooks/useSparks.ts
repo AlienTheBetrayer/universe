@@ -41,32 +41,38 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
         return arr;
     }, [count]);
 
+    // once at least one point reaches the endPoint (meaning virtually all of them) we stop moving them
     const reached = useRef<boolean>(false);
 
     useFrame(state => {
-        if(reached.current == true)
+        if(reached.current == true) {
+            alert('stopped');
             return;
+        }
 
-        const t = state.clock.getElapsedTime();
-        
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
             
 
             for(let i = 0; i < count; ++i) {
-                const dx = endPoint[i * 3] - pos[i * 3];
-                const dy = endPoint[i * 3 + 1] - pos[i * 3 + 1];
-                const dz = endPoint[i * 3 + 2] - pos[i * 3 + 2];
+                // vector to move our point toward the edge
+                const dx = endPoint[i * 3];
+                const dy = endPoint[i * 3 + 1];
+                const dz = endPoint[i * 3 + 2];
 
+                // normalizing it
                 const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-                const speed = 0.1;
+                const speed = Math.sin(distance) * 0.1;
 
+                // moving it
                 pos[i * 3] += dx / distance * speed;
                 pos[i * 3 + 1] += dy / distance * speed;
                 pos[i * 3 + 2] += dz / distance * speed;
 
-                if(distance < 0.001)
+                if(distance < 0.1) {
+                    alert('changed');
                     reached.current = true;
+                }
             }
             
             ref.current.geometry.attributes.position.needsUpdate = true;

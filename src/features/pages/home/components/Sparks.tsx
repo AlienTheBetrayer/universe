@@ -6,7 +6,7 @@ export const Sparks = () => {
     const ref = useRef<Points>(null);
 
     const sparks = useSparks(ref, 3000);
-    console.log(sparks.positions);
+
     return (
         <points ref={ref}>
             <bufferGeometry>

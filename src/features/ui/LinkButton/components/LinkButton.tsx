@@ -15,6 +15,7 @@ export const LinkButton = ({ className, fillColor=cssVariable('--foreground-last
     const routerNavigate = useNavigate();
    
     const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         e.preventDefault();
         routerNavigate(to);
     }

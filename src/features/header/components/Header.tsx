@@ -24,7 +24,6 @@ export const Header = () => {
         animate={{ y: 0, x: '-50%' }}
         transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <nav>
-                {/* switch this regular text to a logo */}
                 <UniversalLink to='/' className='home-button'>
                     Home
                 </UniversalLink>

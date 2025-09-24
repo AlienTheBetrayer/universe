@@ -6,6 +6,7 @@ type RouteType = 'router' | 'url';
 interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     to?: string;
     type?: RouteType; 
+    onClick?: () => void;
 }
 
 export const UniversalLink = ({ className, to='', type='router', children, ...rest }: Props) => {
