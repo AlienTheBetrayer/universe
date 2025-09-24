@@ -33,18 +33,21 @@ export const Icosahedron = ({ progress }: Props) => {
 
         if(groupRef.current && mainRef.current && orbitRef.current) {
             const rotation = spring.get();
+            const progressValue = progress.get();
             const mainMaterial = mainRef.current.material as MeshPhysicalMaterial;
             const orbitMaterial = orbitRef.current.material as MeshPhysicalMaterial;
-            const progressValue = progress.get();
 
+            // rotation
             groupRef.current.rotation.x = rotation * 5 + t / 10;
             groupRef.current.rotation.y = rotation * 5 + t / 10;
             groupRef.current.rotation.z = rotation * 5 + t / 10;
             groupRef.current.scale.set(1 + rotation, 1 + rotation, 1 + rotation);
 
+            // main sphere color based on progress
             mainMaterial.color.r = progressValue * 2;
             mainMaterial.color.b = (1 - progressValue) * 2;
 
+            // orbit rotation + orbit sphere color based on progress
             orbitRef.current.position.set(Math.sin(t) * 1.25, Math.cos(t) * 1.25, Math.sin(t) * 1.25);
             orbitMaterial.color.r = progressValue * 8;
             orbitMaterial.color.b = (1 - progressValue) * 8;
