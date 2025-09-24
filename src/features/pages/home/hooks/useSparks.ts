@@ -39,13 +39,12 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
     // once at least one point reaches the endPoint (meaning virtually all of them) we stop moving them
     const reached = useRef<boolean>(false);
 
-    useFrame(state => {
+    useFrame(() => {
         if(reached.current == true)
             return;
         
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
-            const t = state.clock.getElapsedTime();
             
             // space particles
             for(let i = 0; i < count; ++i) {
