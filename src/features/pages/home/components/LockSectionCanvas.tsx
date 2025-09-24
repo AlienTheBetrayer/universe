@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { Icosahedron } from './Icosahedron';
-import { type RefObject } from 'react';
+import { useState, type RefObject } from 'react';
 import {  useScroll } from 'motion/react';
 import { ForceField } from './ForceField';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
@@ -12,6 +12,9 @@ interface Props {
 
 export const LockSectionCanvas = ({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
+    const [bloomVisible, setBloomVisible] = useState<boolean>(false);
+
+    scrollYProgress.on('change', val => setBloomVisible(val > 0 && val < 1));
 
     return (
         <Canvas>
@@ -21,9 +24,11 @@ export const LockSectionCanvas = ({ ref }: Props) => {
             <Icosahedron progress={scrollYProgress}/>
             <ForceField progress={scrollYProgress}/>
 
-            <EffectComposer>
-                <Bloom intensity={3} luminanceThreshold={0}/>
-            </EffectComposer>
+            { bloomVisible && (
+                <EffectComposer>
+                    <Bloom intensity={3} luminanceThreshold={0}/>
+                </EffectComposer>
+            )}
 
             <OrbitControls enableZoom={false} enablePan={false}/>
         </Canvas>
