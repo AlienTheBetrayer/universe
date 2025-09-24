@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
 
 export const VectorTypes = {
-    repulsion: 'Repulsion',
     propulsion: 'Propulsion',
+    repulsion: 'Repulsion',
     waves: 'Waves',
     nebula: 'Nebula',
     living: 'Living',

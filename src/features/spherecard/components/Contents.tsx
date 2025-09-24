@@ -10,18 +10,14 @@ interface Props {
 export const Contents = ({ title, description }: Props ) => {
     return (
         <div className='sphere-card-contents'>
-            <div className='sphere-card-sphere'>
-                <Canvas>
-                    <pointLight position={[0, 0, 3]} intensity={10}/>
-                    <ambientLight/>
-                    <CardFigure/>
-                </Canvas>
-            </div>
+            <Canvas>
+                <pointLight position={[0, 0, 3]} intensity={10}/>
+                <ambientLight/>
+                <CardFigure/>
+            </Canvas>
 
-            <div className='sphere-card-text'>
-                <h3>{title}</h3>
-                <p>{description}</p>
-            </div>
+            <h3>{title}</h3>
+            <p>{description}</p>
         </div>
     )
 }

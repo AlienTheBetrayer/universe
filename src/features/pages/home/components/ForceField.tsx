@@ -29,7 +29,7 @@ export const ForceField = ({ progress }: Props) => {
 
     return (
         <mesh ref={ref}>
-            <icosahedronGeometry args={[isMobile ? 1.6 : 2.7, 2]}/>
+            <icosahedronGeometry args={[isMobile ? 1.3 : 2.7, 2]}/>
             <meshPhysicalMaterial color='#6868d2' wireframe/>
         </mesh>
     )

@@ -5,15 +5,3 @@
     gap: 1rem;
     height: 100%;
 }
-
-.sphere-card-sphere {
-    display: grid;
-    place-items: center;
-}
-
-.sphere-card-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1fr;
-}
-

@@ -77,14 +77,14 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                 let color: number[] = [0, 0, 30];
 
                 switch(vectorType) {
-                    case VectorTypes.repulsion:
-                        vectorX = -dx / distance;
-                        vectorY = -dy / distance;
-                        color = [0, 0, 30];
-                    break;
                     case VectorTypes.propulsion:
                         vectorX = dx / distance;
                         vectorY = dy / distance;
+                        color = [0, 0, 30];
+                    break;
+                    case VectorTypes.repulsion:
+                        vectorX = -dx / distance;
+                        vectorY = -dy / distance;
                         color = [30, 0, 0];
                     break;
                     case VectorTypes.waves:
