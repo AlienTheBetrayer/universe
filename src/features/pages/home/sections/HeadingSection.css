@@ -27,6 +27,12 @@
     width: 100%;
 }
 
+.heading-subgrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 @media(max-width: 1340px) {
     .heading-grid {
         flex-direction: column;

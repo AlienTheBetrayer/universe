@@ -1,6 +1,6 @@
 import './LockSection.css';
 import { useRef } from 'react';
-import { SphereCanvas } from '../components/SphereCanvas';
+import { IcosahedronCanvas } from '../components/IcosahedronCanvas';
 
 export const LockSection = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -8,7 +8,7 @@ export const LockSection = () => {
     return (
         <div ref={scrollRef} className='sphere-canvas-container container'>
             <div className='sphere-canvas-lock'>
-                <SphereCanvas ref={scrollRef}/>
+                <IcosahedronCanvas ref={scrollRef}/>
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
 .sphere-card {
     display: flex;
     flex-direction: column;
+    position: relative;
     min-width: 300px;
     min-height: 250px;
 

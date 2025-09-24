@@ -9,7 +9,7 @@ interface Props {
 export const HoverContents = ({ title, description }: Props ) => {
     return (
         <div className='sphere-card-hover-contents'>
-            <h3>{title}</h3>
+            <h2>{title}</h2>
             <p>{description}</p>
         </div>
     )

@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import './Contents.css';
-import { Sphere } from './Sphere';
+import { CardFigure } from './CardFigure';
 
 interface Props {
     title?: string;
@@ -12,7 +12,9 @@ export const Contents = ({ title, description }: Props ) => {
         <div className='sphere-card-contents'>
             <div className='sphere-card-sphere'>
                 <Canvas>
-                    <Sphere/>
+                    <pointLight position={[0, 0, 3]} intensity={30}/>
+                    <ambientLight/>
+                    <CardFigure/>
                 </Canvas>
             </div>
 

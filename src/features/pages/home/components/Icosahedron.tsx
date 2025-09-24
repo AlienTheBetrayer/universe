@@ -6,7 +6,7 @@ interface Props {
     progress: MotionValue<number>;
 }
 
-export const Sphere = ({ progress }: Props) => {
+export const Icosahedron = ({ progress }: Props) => {
     const [scale, setScale] = useState<number>(0);
 
     const springed = useSpring(progress, { stiffness: 1000, damping: 40 });

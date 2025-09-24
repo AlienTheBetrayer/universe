@@ -51,7 +51,7 @@ const Grid = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 4, duration: 1 }}>
             <div className='heading-grid'>
-                <div>
+                <div className='heading-subgrid'>
                     <h2>Showcasing:</h2>
 
                     <div className='heading-showcase-grid'>
@@ -61,7 +61,7 @@ const Grid = () => {
                         <SphereCard/>
                     </div>
                 </div>
-                <div>
+                <div className='heading-subgrid'>
                     <h2>Showcasing:</h2>
 
                     <div className='heading-showcase-grid'>
