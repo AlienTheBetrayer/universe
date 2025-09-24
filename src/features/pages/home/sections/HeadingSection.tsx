@@ -102,7 +102,7 @@ const Grid = () => {
 
                     <div className='heading-showcase-grid'>
                         { hard.map(skill => (
-                            <SphereCard title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
+                            <SphereCard key={skill.title} title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
                         ))}
                     </div>
                 </div>
@@ -111,7 +111,7 @@ const Grid = () => {
 
                     <div className='heading-showcase-grid'>
                         { soft.map(skill => (
-                            <SphereCard title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
+                            <SphereCard key={skill.title} title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
                         ))}
                     </div>
                 </div>

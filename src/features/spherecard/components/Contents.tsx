@@ -12,7 +12,7 @@ export const Contents = ({ title, description }: Props ) => {
         <div className='sphere-card-contents'>
             <div className='sphere-card-sphere'>
                 <Canvas>
-                    <pointLight position={[0, 0, 3]} intensity={30}/>
+                    <pointLight position={[0, 0, 3.25]} intensity={30}/>
                     <ambientLight/>
                     <CardFigure/>
                 </Canvas>

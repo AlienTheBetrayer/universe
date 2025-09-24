@@ -4,6 +4,7 @@ import { type RefObject } from 'react';
 import {  useScroll } from 'motion/react';
 import { ForceField } from './ForceField';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { OrbitControls } from '@react-three/drei';
 
 interface Props {
     ref: RefObject<HTMLDivElement | null>;
@@ -11,6 +12,8 @@ interface Props {
 
 export const LockSectionCanvas = ({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
+
+
 
     return (
         <Canvas>
@@ -23,6 +26,8 @@ export const LockSectionCanvas = ({ ref }: Props) => {
             <EffectComposer>
                 <Bloom intensity={3} luminanceThreshold={0}/>
             </EffectComposer>
+
+            <OrbitControls enableZoom={false} enablePan={false}/>
         </Canvas>
     )
 }

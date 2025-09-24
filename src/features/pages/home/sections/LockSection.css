@@ -1,13 +1,13 @@
 .sphere-canvas-container {
     margin: 0 auto;
-    padding-top: 8rem;
+    padding-top: 20rem;
     width: 100%;
     position: relative;
     height: 1250vh;
 }
 
 .sphere-canvas-container canvas {
-    height: 100vh;
+    height: 120vh;
 }
 
 .sphere-canvas-lock {
