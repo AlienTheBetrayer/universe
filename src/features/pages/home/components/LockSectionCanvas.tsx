@@ -2,12 +2,13 @@ import { Canvas } from '@react-three/fiber';
 import { Icosahedron } from './Icosahedron';
 import { type RefObject } from 'react';
 import { useScroll } from 'motion/react';
+import { ForceField } from './ForceField';
 
 interface Props {
     ref: RefObject<HTMLDivElement | null>;
 }
 
-export const IcosahedronCanvas = ({ ref }: Props) => {
+export const LockSectionCanvas = ({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
 
     return (
@@ -16,6 +17,7 @@ export const IcosahedronCanvas = ({ ref }: Props) => {
             <pointLight position={[-10, -10, -10]} intensity={100}/>
 
             <Icosahedron progress={scrollYProgress}/>
+            <ForceField/>
         </Canvas>
     )
 }

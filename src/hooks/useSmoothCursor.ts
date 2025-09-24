@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const springSettings: SpringOptions = {
     stiffness: 300,
-    damping: 50,
+    damping: 40,
 } 
 
 export const useSmoothCursor = (defaultPosition?: Position) => {
