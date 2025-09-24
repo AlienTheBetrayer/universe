@@ -5,13 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { Mesh, MeshPhysicalMaterial } from "three";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { Sparks } from "./Sparks";
+import { Group } from "three";
+
 
 interface Props {
     progress: MotionValue<number>;
 }
 
 export const Icosahedron = ({ progress }: Props) => {
-    const ref = useRef<Mesh>(null);
+    const groupRef = useRef<Group>(null);
+    const mainRef = useRef<Mesh>(null);
+    const orbitRef = useRef<Mesh>(null);
+
     const isMobile = useMediaQuery(640);
     const [scrolled, setScrolled] = useState<boolean>(false);
     const spring = useSpring(progress, { 
@@ -26,26 +31,38 @@ export const Icosahedron = ({ progress }: Props) => {
     useFrame(state => {
         const t = state.clock.getElapsedTime();
 
-        if(ref.current) {
+        if(groupRef.current && mainRef.current && orbitRef.current) {
             const rotation = spring.get();
-            const material = ref.current.material as MeshPhysicalMaterial;
+            const mainMaterial = mainRef.current.material as MeshPhysicalMaterial;
+            const orbitMaterial = orbitRef.current.material as MeshPhysicalMaterial;
+            const progressValue = progress.get();
 
-            ref.current.rotation.x = rotation * 5 + t / 10;
-            ref.current.rotation.y = rotation * 5 + t / 10;
-            ref.current.rotation.z = rotation * 5 + t / 10;
-            ref.current.scale.set(1 + rotation, 1 + rotation, 1 + rotation);
+            groupRef.current.rotation.x = rotation * 5 + t / 10;
+            groupRef.current.rotation.y = rotation * 5 + t / 10;
+            groupRef.current.rotation.z = rotation * 5 + t / 10;
+            groupRef.current.scale.set(1 + rotation, 1 + rotation, 1 + rotation);
 
-            material.color.r = progress.get();
-            material.color.b = 1 - progress.get();
+            mainMaterial.color.r = progressValue * 2;
+            mainMaterial.color.b = (1 - progressValue) * 2;
+
+            orbitRef.current.position.set(Math.sin(t) * 1.25, Math.cos(t) * 1.25, Math.sin(t) * 1.25);
+            orbitMaterial.color.r = progressValue * 8;
+            orbitMaterial.color.b = (1 - progressValue) * 8;
         }
     });
 
     return (
-        <mesh ref={ref}>
-            <icosahedronGeometry args={[isMobile ? 0.8 : 1, 0]}/>
-            <meshPhysicalMaterial color='#0000ff'/>
+        <group ref={groupRef}>
+            <mesh ref={mainRef}>
+                <icosahedronGeometry args={[isMobile ? 0.7 : 1, 0]}/>
+                <meshPhysicalMaterial color='#0000ff'/>
 
-            { scrolled && <Sparks/> }
-        </mesh>
+                { scrolled && <Sparks/> }
+            </mesh>
+            <mesh ref={orbitRef}>
+                <icosahedronGeometry args={[isMobile ? 0.15 : 0.2, 0]}/>
+                <meshPhysicalMaterial color='#ff0000'/>
+            </mesh>
+        </group>
     )
 }

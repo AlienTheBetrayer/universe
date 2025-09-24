@@ -8,6 +8,7 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
         const positions = new Float32Array(count * 3);
         const endPoints = new Float32Array(count * 3);
 
+        // space stars particles
         for(let i = 0; i < count; ++i) {
             positions[i * 3] = 0;
             positions[i * 3 + 1] = 0;
@@ -28,23 +29,25 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
             endPoints[i * 3 + 1] = y * scale;
             endPoints[i * 3 + 2] = z * scale;
         }
-        
+
         return {
             positions: positions,
-            endPoints: endPoints
+            endPoints: endPoints,
         };
     }, [count]);
 
     // once at least one point reaches the endPoint (meaning virtually all of them) we stop moving them
     const reached = useRef<boolean>(false);
 
-    useFrame(() => {
+    useFrame(state => {
         if(reached.current == true)
             return;
         
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
+            const t = state.clock.getElapsedTime();
             
+            // space particles
             for(let i = 0; i < count; ++i) {
                 // vector to move our point toward the edge
                 const dx = data.endPoints[i * 3] - pos[i * 3];
@@ -64,7 +67,7 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
                     reached.current = true;
                 }
             }
-            
+
             ref.current.geometry.attributes.position.needsUpdate = true;
         }
     });
