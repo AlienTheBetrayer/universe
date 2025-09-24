@@ -23,19 +23,18 @@ export const Icosahedron = ({ progress }: Props) => {
         return () => unsubscribe();
     }, [progress]);
 
-
     useFrame(state => {
         const t = state.clock.getElapsedTime();
 
         if(ref.current) {
             const rotation = spring.get();
+            const material = ref.current.material as MeshPhysicalMaterial;
 
             ref.current.rotation.x = rotation * 5 + t / 10;
             ref.current.rotation.y = rotation * 5 + t / 10;
             ref.current.rotation.z = rotation * 5 + t / 10;
             ref.current.scale.set(1 + rotation, 1 + rotation, 1 + rotation);
 
-            const material = ref.current.material as MeshPhysicalMaterial;
             material.color.r = progress.get();
             material.color.b = 1 - progress.get();
         }

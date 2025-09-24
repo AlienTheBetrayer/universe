@@ -39,5 +39,9 @@ header .home-button {
 }
 
 header .header-launch-app {
-    color: var(--foreground-last);
+    background-color: var(--button-app-fill);
+}
+
+header .header-launch-app:hover {
+    background-color: var(--button-app-hover);
 }

@@ -1,0 +1,33 @@
+.heading-grid {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100%;
+    transform: translateZ(1px);
+}
+
+.heading-subgrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media(max-width: 1340px) {
+    .heading-grid {
+        flex-direction: column;
+    }
+}
+
+.heading-showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .heading-showcase-grid {
+        display: flex;
+        flex-direction: column;
+    }
+}

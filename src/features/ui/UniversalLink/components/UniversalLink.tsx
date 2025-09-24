@@ -9,14 +9,14 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     onClick?: () => void;
 }
 
-export const UniversalLink = ({ className, to='', type='router', children, ...rest }: Props) => {
+export const UniversalLink = ({ className, to='', type='router', onClick, children, ...rest }: Props) => {
     return (
         type === 'router' ? (
-            <Link className={`universal-link ${className ?? ''}`} to={to} {...rest}>
+            <Link className={`universal-link ${className ?? ''}`} to={to} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth'}); onClick?.(); }} {...rest}>
                 { children }
             </Link>
         ) : (
-            <a className={`universal-link ${className ?? ''}`} href={to} target='_blank' rel='noopener noreferrer' {...rest}>
+            <a className={`universal-link ${className ?? ''}`} href={to} target='_blank' rel='noopener noreferrer' onClick={() => onClick?.()} {...rest}>
                 { children }
             </a>
         )

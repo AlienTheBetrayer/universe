@@ -1,3 +1,9 @@
 .link-button {
+    padding: 8px;
+    border-radius: 8px;
+    border: transparent;
+    cursor: pointer;
     text-decoration: none;
+    color: var(--foreground-last);
+    transition: 0.2s ease-in-out;
 }

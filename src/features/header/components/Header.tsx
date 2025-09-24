@@ -3,7 +3,6 @@ import './Header.css';
 import { motion } from 'motion/react';
 import { UniversalLink } from "../../ui/UniversalLink/components/UniversalLink";
 import { LinkButton } from "../../ui/LinkButton/components/LinkButton";
-import { cssVariable } from "../../../utils/cssVariable";
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 
 export const Header = () => {
@@ -45,7 +44,7 @@ const AppButton = () => {
 
     return (
         <>
-            <LinkButton className='header-launch-app' to='/app' fillColor={cssVariable('--button-app-fill')} hoverColor={cssVariable('--button-app-hover')}>
+            <LinkButton className='header-launch-app' to='/app'>
                 { isMobile ? 'App' : 'Launch App' }
             </LinkButton>
         </>

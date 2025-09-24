@@ -3,25 +3,16 @@ import { useMemo, useRef } from "react";
 import { type Points } from "three";
 
 export const useSparks = (ref: React.RefObject<Points | null>, count: number) => { 
-    const positions = useMemo(() => {
-        const arr = new Float32Array(count * 3);
-
-        for(let i = 0; i < count * 3; ++i) {
-            // every point starts at 0
-            arr[i * 3] = 0;
-            arr[i * 3 + 1] = 0;
-            arr[i * 3 + 2] = 0;
-        }
-
-        return arr;
-    }, [count]);
-
-    const endPoint = useMemo(() => {
-        const arr = new Float32Array(count * 3);
+    const data = useMemo(() => {
         const scale = 6;
+        const positions = new Float32Array(count * 3);
+        const endPoints = new Float32Array(count * 3);
 
-        for(let i = 0; i < count * 3; ++i) {
-            // random vector
+        for(let i = 0; i < count; ++i) {
+            positions[i * 3] = 0;
+            positions[i * 3 + 1] = 0;
+            positions[i * 3 + 2] = 0;
+
             let x = (Math.random() - 0.5) * 2;
             let y = (Math.random() - 0.5) * 2;
             let z = (Math.random() - 0.5) * 2;
@@ -33,12 +24,15 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
             z /= magnitude;
 
             // scaling it + setting it
-            arr[i * 3] = x * scale;
-            arr[i * 3 + 1] = y * scale;
-            arr[i * 3 + 2] = z * scale;
+            endPoints[i * 3] = x * scale;
+            endPoints[i * 3 + 1] = y * scale;
+            endPoints[i * 3 + 2] = z * scale;
         }
-
-        return arr;
+        
+        return {
+            positions: positions,
+            endPoints: endPoints
+        };
     }, [count]);
 
     // once at least one point reaches the endPoint (meaning virtually all of them) we stop moving them
@@ -53,9 +47,9 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
             
             for(let i = 0; i < count; ++i) {
                 // vector to move our point toward the edge
-                const dx = endPoint[i * 3] - pos[i * 3];
-                const dy = endPoint[i * 3 + 1] - pos[i * 3 + 1];
-                const dz = endPoint[i * 3 + 2] - pos[i * 3 + 2];
+                const dx = data.endPoints[i * 3] - pos[i * 3];
+                const dy = data.endPoints[i * 3 + 1] - pos[i * 3 + 1];
+                const dz = data.endPoints[i * 3 + 2] - pos[i * 3 + 2];
 
                 // normalizing it
                 const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
@@ -75,5 +69,5 @@ export const useSparks = (ref: React.RefObject<Points | null>, count: number) =>
         }
     });
 
-    return { positions: positions };
+    return { positions: data.positions };
 }

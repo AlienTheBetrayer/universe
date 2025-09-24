@@ -7,13 +7,11 @@ import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { OrbitControls } from '@react-three/drei';
 
 interface Props {
-    ref: RefObject<HTMLDivElement | null>;
+    ref: RefObject<HTMLElement | null>;
 }
 
 export const LockSectionCanvas = ({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
-
-
 
     return (
         <Canvas>

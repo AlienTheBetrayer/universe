@@ -14,15 +14,17 @@ export const ForceField = ({ progress }: Props) => {
 
     useFrame(() => {
         if(ref.current) {
-            ref.current.rotation.x += 0.001 + progress.get() / 100;
-            ref.current.rotation.y += 0.001 + progress.get() / 100;
-            ref.current.rotation.z += 0.001 + progress.get() / 100;
-
+            const progressValue = progress.get();
             const material = ref.current.material as MeshPhysicalMaterial;
-            material.color.r = progress.get();
-            material.color.b = 1 - progress.get();
+            const scale = 1 + progressValue / 10;
 
-            const scale = 1 + progress.get() / 10;
+            ref.current.rotation.x += 0.001 + progressValue / 100;
+            ref.current.rotation.y += 0.001 + progressValue / 100;
+            ref.current.rotation.z += 0.001 + progressValue / 100;
+            
+            material.color.r = progressValue;
+            material.color.b = 1 - progressValue;
+            
             ref.current.scale.set(scale, scale, scale);
         }
     });

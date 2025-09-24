@@ -6,6 +6,7 @@ import { ParticlesCanvas } from '../components/ParticlesCanvas';
 import { LockSection } from '../sections/LockSection';
 import { ParticlesContext, VectorTypes, type ParticlesDataInterface } from '../context/ParticlesContext';
 import { useState } from 'react';
+import { GridSection } from '../sections/GridSection';
 
 export const HomePage = () => {
     const particlesData = useState<ParticlesDataInterface>(
@@ -17,6 +18,7 @@ export const HomePage = () => {
                 <div className='heading-wrapper'>
                     <ParticlesCanvas/>
                     <HeadingSection/>
+                    <GridSection/>
                 </div>
             </ParticlesContext>
             
