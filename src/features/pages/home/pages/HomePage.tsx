@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export const HomePage = () => {
     const particlesData = useState<ParticlesDataInterface>(
-        { vectorType: VectorTypes.propulsion})
+        { vectorType: VectorTypes.repulsion})
 
     return (
         <Page className='home-page'>

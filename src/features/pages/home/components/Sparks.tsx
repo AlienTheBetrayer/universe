@@ -5,7 +5,7 @@ import { Points } from "three";
 export const Sparks = () => {
     const ref = useRef<Points>(null);
 
-    const sparks = useSparks(ref, 3000);
+    const sparks = useSparks(ref, 1000);
 
     return (
         <points ref={ref}>
