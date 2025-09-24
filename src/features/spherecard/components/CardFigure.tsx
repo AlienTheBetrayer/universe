@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { Mesh } from "three"
 
 export const CardFigure = () => {

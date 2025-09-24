@@ -1,8 +1,9 @@
 .sphere-canvas-container {
     margin: 0 auto;
+    padding-top: 8rem;
     width: 100%;
     position: relative;
-    height: 1000vh;
+    height: 1250vh;
 }
 
 .sphere-canvas-container canvas {
@@ -11,7 +12,7 @@
 
 .sphere-canvas-lock {
     position: sticky;
-    margin-top: 20%;
-    top: 50%;
+    margin-top: 30%;
+    top: 55%;
     transform: translateY(-50%);
 }
