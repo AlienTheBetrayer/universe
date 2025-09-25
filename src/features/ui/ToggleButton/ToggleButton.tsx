@@ -3,9 +3,6 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 
 interface Props {
-    backgroundColor?: string;
-    circleColor?: string;
-
     onToggled?: (state: boolean) => void;
 }
 

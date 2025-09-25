@@ -51,6 +51,8 @@
     /* component specific */
     --button-app-fill: rgb(39, 78, 220);
     --button-app-hover: rgb(27, 57, 165);
+    --button-dark: rgba(0, 0, 255, 0.6);
+    --button-darker: rgba(0, 0, 255, 0.2);
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;

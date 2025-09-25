@@ -1,10 +1,11 @@
 import { Canvas } from '@react-three/fiber';
 import { Icosahedron } from './Icosahedron';
-import { useState, type RefObject } from 'react';
-import {  useScroll } from 'motion/react';
+import { type RefObject } from 'react';
+import { useScroll } from 'motion/react';
 import { ForceField } from './ForceField';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { OrbitControls } from '@react-three/drei';
+import { useScrollYWithin } from '../../../../hooks/useScrollYWithin';
 
 interface Props {
     ref: RefObject<HTMLElement | null>;
@@ -12,9 +13,7 @@ interface Props {
 
 export const LockSectionCanvas = ({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
-    const [bloomVisible, setBloomVisible] = useState<boolean>(false);
-
-    scrollYProgress.on('change', val => setBloomVisible(val > 0 && val < 1));
+    const scrolledWithin = useScrollYWithin(0, 1, scrollYProgress);
 
     return (
         <Canvas>
@@ -24,7 +23,7 @@ export const LockSectionCanvas = ({ ref }: Props) => {
             <Icosahedron progress={scrollYProgress}/>
             <ForceField progress={scrollYProgress}/>
 
-            { bloomVisible && (
+            { scrolledWithin && (
                 <EffectComposer>
                     <Bloom intensity={3} luminanceThreshold={0}/>
                 </EffectComposer>

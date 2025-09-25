@@ -1,8 +1,16 @@
 .button {
-    padding: 8px;
+    padding: 4px;
+    min-height: 32px;
+    min-width: 32px;
 
-    color: var(--background);
+    color: var(--foreground);
+    background-color: var(--background-2);
     border-radius: 8px;
     border: transparent;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: var(--background-3);
 }
