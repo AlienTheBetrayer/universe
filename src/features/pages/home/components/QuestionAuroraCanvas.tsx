@@ -2,14 +2,20 @@ import { Canvas } from "@react-three/fiber"
 import { QuestionAuroraParticles } from "./QuestionAuroraParticles"
 import { Bloom, EffectComposer } from "@react-three/postprocessing"
 
-export const QuestionAuroraCanvas = () => {
+interface Props {
+    renderBloom?: boolean;
+}
+
+export const QuestionAuroraCanvas = ({ renderBloom }: Props) => {
     return (
         <Canvas>
             <QuestionAuroraParticles/>
 
-            <EffectComposer>
-                <Bloom intensity={300} luminanceThreshold={0}/>
-            </EffectComposer>
+            { renderBloom && (
+                <EffectComposer>
+                    <Bloom intensity={300} luminanceThreshold={0}/>
+                </EffectComposer>
+            )}
         </Canvas>
     )
 }

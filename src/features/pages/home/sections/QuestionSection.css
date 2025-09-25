@@ -23,6 +23,7 @@
 .question-default-content, .question-revealed-content {
     display: flex;
     position: absolute;
+    text-align: center;
     inset: 0;
     font-size: 5rem;
 }

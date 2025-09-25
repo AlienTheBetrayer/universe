@@ -18,8 +18,10 @@ export const Header = () => {
     
     const { loaded, updateLoaded } = useSessionStore();
     
-    if(!loaded)
-        useTimeout(() => updateLoaded({ header: true }), 4100);
+    useTimeout(() => {
+        if (!loaded.header)
+            updateLoaded({ header: true })
+    }, 4100);
 
     return (    
         <motion.header

@@ -15,11 +15,7 @@ export const useSessionStore = create<SessionStore>()(
     persist(
         set => ({
         loaded: {
-            header: false,
-            homePage: false,
-            appPage: false,
-            contactPage: false,
-            philosophyPage: false
+            header: false
         },
 
         updateLoaded: (newLoaded: Partial<LoadedInterface>) => {

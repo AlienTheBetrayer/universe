@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { QuestionCanvas } from '../components/QuestionCanvas';
 import './QuestionSection.css';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, useInView } from 'motion/react';
 import { motion } from 'motion/react';
 import { QuestionAuroraCanvas } from '../components/QuestionAuroraCanvas';
 import { useQuestionContext } from '../context/QuestionContext';
 
+
 export const QuestionSection = () => {
     const [questionContextData, setQuestionContextData] = useQuestionContext();
+    const sectionRef = useRef<HTMLElement>(null);
+    const isVisible = useInView(sectionRef);
 
     return (
-
-        <section className='question-section'>
+        <section className='question-section' ref={sectionRef}>
             <AnimatePresence mode='sync'>
                 { !questionContextData.revealed ? (
                     <motion.div key='question-canvas'
@@ -22,7 +24,7 @@ export const QuestionSection = () => {
                         transition={{ delay: 1, duration: 1.5, ease: 'easeInOut' }}
                         onClick={() => setQuestionContextData(prev => ({ ...prev, revealed: true }))}
                         style={{ cursor: 'pointer' }}>
-                        <QuestionCanvas/>
+                        <QuestionCanvas renderBloom={isVisible}/>
                         <DefaultContent/>
                     </motion.div>
                 ) : (
@@ -32,7 +34,7 @@ export const QuestionSection = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ delay: 1, duration: 1.5, ease: 'easeInOut' }}>
-                        <QuestionAuroraCanvas/>
+                        <QuestionAuroraCanvas renderBloom={isVisible}/>
                         <RevealedContent/>
                     </motion.div>
                 )}
