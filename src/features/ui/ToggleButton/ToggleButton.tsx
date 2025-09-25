@@ -1,12 +1,12 @@
 import './ToggleButton.css';
-import { motion } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import { useState } from 'react';
 
-interface Props {
+interface Props extends HTMLMotionProps<'div'> {
     onToggled?: (state: boolean) => void;
 }
 
-export const ToggleButton = ({ onToggled }: Props) => {
+export const ToggleButton = ({ onToggled, key }: Props) => {
     const [toggled, setToggled] = useState<boolean>(false);
 
     const handle = () => {
@@ -20,7 +20,8 @@ export const ToggleButton = ({ onToggled }: Props) => {
         style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
             <motion.div className='toggle-button-circle'
             layout 
-            transition={{ type: 'spring', stiffness: 400, damping: 40 }}>
+            key={key}
+            transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
 
             </motion.div>
 

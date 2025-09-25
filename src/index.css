@@ -33,12 +33,12 @@
     --background-10: rgb(80, 80, 80);
 
     /* transparent background */
-    --background-transparent: rgba(8, 8, 8, 0.5);
+    --background-transparent: rgba(8, 8, 8, 0.4);
     --background-semitransparent: rgba(8, 8, 8, 0.75);
-    --background-2-transparent: rgba(16, 16, 16, 0.5);
-    --background-3-transparent: rgba(24, 24, 24, 0.5);
-    --background-4-transparent: rgba(32, 32, 32, 0.5);
-    --background-5-transparent: rgba(40, 40, 40, 0.5);
+    --background-2-transparent: rgba(16, 16, 16, 0.4);
+    --background-3-transparent: rgba(24, 24, 24, 0.4);
+    --background-4-transparent: rgba(32, 32, 32, 0.4);
+    --background-5-transparent: rgba(40, 40, 40, 0.4);
 
     /* foreground */
     --foreground: #9d9d9d;

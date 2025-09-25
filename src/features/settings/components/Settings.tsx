@@ -3,13 +3,11 @@ import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import './Settings.css';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-    
+    toggleKey?: string;
 }
 
-export const Settings = ({ className }: Props) => {
+export const Settings = ({ toggleKey }: Props) => {
     return (
-        <div className={`settings ${className}`}>
-            <ToggleButton/>
-        </div>
+        <ToggleButton key={toggleKey}/>
     )
 }

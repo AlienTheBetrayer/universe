@@ -4,7 +4,7 @@
     border: transparent;
     cursor: pointer;
     padding: 4px;
-    min-width: 48px;
+    width: 48px;
     height: 24px;
     border-radius: 20px;
     background-color: var(--button-darker);
@@ -15,5 +15,4 @@
     height: 16px;
     border-radius: 20px;
     background-color: var(--button-dark);
-
 }

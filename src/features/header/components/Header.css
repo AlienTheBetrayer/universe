@@ -64,10 +64,11 @@ header .home-button {
     }
 }
 
-header .header-launch-app {
+.header-launch-app {
     background-color: var(--button-app-fill);
+    text-align: center;
 }
 
-header .header-launch-app:hover {
+.header-launch-app:hover {
     background-color: var(--button-app-hover);
 }

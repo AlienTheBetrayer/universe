@@ -12,20 +12,13 @@ export const usePopup = (element: React.ReactNode) => {
         blur.setShown(shown);
     }, [shown]);
 
-    const Presence = () => {
-        return (
-            <AnimatePresence>
-                { shown && (
-                    element
-                )}
-            </AnimatePresence>
-        )
-    }
-
     const render = () => {
         return (
             <>
-                { createPortal(<Presence/>, document.body) }
+                { createPortal(
+                    <AnimatePresence>
+                        { shown && element }
+                    </AnimatePresence>, document.body) }
                 { blur.render() }
             </>
         )

@@ -10,20 +10,9 @@ import { usePopup } from '../../../hooks/usePopup';
 import { HeaderMenu } from '../../headermenu/components/HeaderMenu';
 
 export const Header = () => {
-    const informativeElements = [
-        {
-            title: 'Philosophy',
-            to: '/philosophy'
-        },
-        {
-            title: 'Contact',
-            to: '/contact'
-        },
-    ];
-
     const isMobile = useMediaQuery(640);
 
-    const headerMenuPopup = usePopup(<HeaderMenu/>);
+    const headerMenuPopup = usePopup(<HeaderMenu onInteract={() => headerMenuPopup.setShown(false)}/>);
 
     return (
         <motion.header
@@ -31,23 +20,16 @@ export const Header = () => {
         animate={{ y: 0, x: '-50%' }}
         transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <nav>
-                <UniversalLink to='/' className='home-button'>
-                    Home
-                </UniversalLink>
+                <UniversalLink to='/' className='home-button'>Home</UniversalLink>
 
                 { !isMobile ? (
                     <>
-                        { informativeElements.map(element => (
-                            <UniversalLink to={element.to} key={element.title}>
-                                {element.title}
-                            </UniversalLink>
-                        ))}
+                        <UniversalLink to='/philosophy'>Philosophy</UniversalLink>
+                        <UniversalLink to='/contact'>Contact</UniversalLink>
 
-                        <LinkButton className='header-launch-app' to='/app'>
-                            { isMobile ? 'App' : 'Launch App' }
-                        </LinkButton>
+                        <LinkButton className='header-launch-app' to='/app'>Launch App</LinkButton>
 
-                        <Settings className='header-settings'/>
+                        <Settings/>
                     </>
                 ) : (
                     <Button className='header-open-menu' onClick={() => headerMenuPopup.setShown(prev => !prev)}>
