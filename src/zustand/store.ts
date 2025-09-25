@@ -9,7 +9,7 @@ interface AppState {
     toggleTheme: () => void;
 };  
 
-export const appStore = create<AppState>()(
+export const useAppStore = create<AppState>()(
     persist(
         set => ({
             theme: 'dark',

@@ -3,15 +3,19 @@ import { motion, type HTMLMotionProps } from 'motion/react';
 import { useState } from 'react';
 
 interface Props extends HTMLMotionProps<'div'> {
+    value?: boolean;
     onToggled?: (state: boolean) => void;
 }
 
-export const ToggleButton = ({ onToggled, key }: Props) => {
-    const [toggled, setToggled] = useState<boolean>(false);
+export const ToggleButton = ({ value, onToggled, key }: Props) => {
+    const [internal, setInternal] = useState<boolean>(false);
+    const toggled = value ?? internal;
 
     const handle = () => {
         onToggled?.(!toggled);
-        setToggled(prev => !prev);
+
+        if(value === undefined)
+            setInternal(prev => !prev);
     }
 
     return (
