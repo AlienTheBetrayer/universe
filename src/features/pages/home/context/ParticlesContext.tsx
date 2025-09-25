@@ -1,13 +1,13 @@
 import React, { createContext, useContext } from "react";
 
 export const VectorTypes = {
+    astral: 'Astral',
     propulsion: 'Propulsion',
     repulsion: 'Repulsion',
     waves: 'Waves',
     nebula: 'Nebula',
     living: 'Living',
-    checker: 'Checker',
-    astral: 'Astral'
+    checker: 'Checker'
 }
 export interface ParticlesDataInterface {
     vectorType?: string;

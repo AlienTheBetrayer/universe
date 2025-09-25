@@ -11,7 +11,7 @@ import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
 
 export const HomePage = () => {
     const particlesData = useState<ParticlesDataInterface>(
-        { vectorType: VectorTypes.propulsion})
+        { vectorType: VectorTypes.astral})
 
     return (
         <Page className='home-page'>

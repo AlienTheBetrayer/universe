@@ -1,19 +1,18 @@
 .scroll-button-container {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 1rem;
+    right: 1rem;
     z-index: 2;
 }
 
 .scroll-button-container button {
-    border-radius: 16px;
-    min-height: 42px;
-    min-width: 42px;
-    color: var(--button-dark);
-    background-color: var(--button-darker);
+    border-radius: 20px;
+    min-height: 48px;
+    min-width: 48px;
+    color: var(--foreground);
+    background-color: var(--background-4-transparent);
 }
 
 .scroll-button-container button:hover {
-    background-color: var(--button-dark);
-    color: var(--background);
+    background-color: var(--background-5);
 }
