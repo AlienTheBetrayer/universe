@@ -1,3 +1,9 @@
 .heading-wrapper {
     position: relative;
 }
+
+.spotlight-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}

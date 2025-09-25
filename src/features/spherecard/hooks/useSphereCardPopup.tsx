@@ -49,7 +49,7 @@ export const useSphereCardPopup = (ref: React.RefObject<HTMLElement | null>, tit
                             <motion.article ref={copyRef} className='sphere-card popup'
                             key='hover-popup'
                             initial={{ scale: 1 }}
-                            animate={{ scale: 1.1 }}
+                            animate={{ scale: 1.05 }}
                             exit={{ scale: 1, opacity: 0 }}>
                                 <HoverContents title={title} description={description}/>
                             </motion.article>

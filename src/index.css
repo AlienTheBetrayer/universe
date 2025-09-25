@@ -1,3 +1,23 @@
+/* tailwind */
+@import 'tailwindcss';
+
+/* animations  */
+@theme inline {
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+
+
 /* root variables */
 :root {
     /* background */
@@ -102,7 +122,7 @@ p, span, a, button, h1, h2 {
 
 @media (max-width: 640px) {
     .container {
-        padding: 0.5rem;
+        padding: 1rem 0.5rem;
     }
 }
 
