@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useBackgroundBlur } from "../../backgroundblur/hooks/useBackgroundBlur";
 import { createPortal } from "react-dom";
 import { AnimatePresence } from "motion/react";
 import { motion } from "motion/react";
 import { HoverContents } from "../components/HoverContents";
 
-export const useSphereCardPopup = (ref: React.RefObject<HTMLElement | null>, title?: string, description?: string) => {
-    const [hovered, setHovered] = useState<boolean>(false);
+type HoveredState = [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+
+export const useSphereCardPopup = (hovered: HoveredState, ref: React.RefObject<HTMLElement | null>, title?: string, description?: string) => {
     
     const copyRef = useRef<HTMLElement>(null);
     const blur = useBackgroundBlur(false);
@@ -21,17 +22,18 @@ export const useSphereCardPopup = (ref: React.RefObject<HTMLElement | null>, tit
             copyRef.current.style.width = `${bounds.width}px`;
             copyRef.current.style.height = `${bounds.height}px`;
         }
-        blur.setShown(hovered);
+        blur.setShown(hovered[0]);
     }, [hovered, ref, copyRef]);
 
-    // handle the mouse enter / leave on individual card
+    // listener to fix laggy cards from still being hovered even though we're not
     useEffect(() => {
         const handle = (e: MouseEvent) => {
             if(ref.current) {
                 const rect = ref.current.getBoundingClientRect();
 
                 const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
-                setHovered(inside);
+                if(!inside)
+                    hovered[1](false);
             }
         }
 
@@ -45,12 +47,13 @@ export const useSphereCardPopup = (ref: React.RefObject<HTMLElement | null>, tit
                 { 
                 createPortal(
                     <AnimatePresence>
-                        { hovered && (
+                        { hovered[0] && (
                             <motion.article ref={copyRef} className='sphere-card popup'
                             key='hover-popup'
                             initial={{ scale: 1 }}
                             animate={{ scale: 1.05 }}
-                            exit={{ scale: 1, opacity: 0 }}>
+                            exit={{ scale: 1, opacity: 0 }}
+                            onPointerLeave={() => hovered[1](false)}>
                                 <HoverContents title={title} description={description}/>
                             </motion.article>
                         )}

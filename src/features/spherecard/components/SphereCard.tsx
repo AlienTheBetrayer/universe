@@ -1,6 +1,6 @@
 import './SphereCard.css';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useSphereCardPopup } from '../hooks/useSphereCardPopup';
 import { Contents } from './Contents';
 
@@ -12,13 +12,14 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 
 export const SphereCard = ({ title, description, hoverDescription, className, ...rest }: Props) => {
     const ref = useRef<HTMLElement>(null);
+    const [hovered, setHovered] = useState<boolean>(false);
     
     // hook that handles the mouse enter / leave + portal render + blur
-    const popup = useSphereCardPopup(ref, title, hoverDescription);
+    const popup = useSphereCardPopup([hovered, setHovered], ref, title, hoverDescription);
     
     return (
         <>
-            <article ref={ref} className={`sphere-card ${className ?? ''}`} {...rest}>
+            <article ref={ref} className={`sphere-card ${className ?? ''}`} onPointerOver={() => setHovered(true)} {...rest}>
                 <Contents title={title} description={description}/>
             </article>
 
