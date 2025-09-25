@@ -66,9 +66,14 @@ header .home-button {
 
 .header-launch-app {
     background-color: var(--button-app-fill);
+    color: #fff !important;
     text-align: center;
 }
 
 .header-launch-app:hover {
     background-color: var(--button-app-hover);
+}
+
+header .universal-link:hover {
+    color: var(--header-link);
 }
