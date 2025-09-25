@@ -65,6 +65,7 @@ export const GridSection = () => {
                         ))}
                     </div>
                 </div>
+
                 <div className='heading-subgrid'>
                     <h2>Qualities</h2>
 

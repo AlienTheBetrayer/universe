@@ -14,8 +14,7 @@ export const HeadingSection = () => {
 
     return (
         <section className='heading-section container'>
-
-            <AnimatedText as='h1' delay={0.3}>
+            <AnimatedText as='h1' speed={1} delay={0.3}>
                 Redefining innovation through personal projects
             </AnimatedText>
 
