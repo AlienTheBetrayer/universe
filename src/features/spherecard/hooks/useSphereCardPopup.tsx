@@ -9,7 +9,7 @@ export const useSphereCardPopup = (ref: React.RefObject<HTMLElement | null>, tit
     const [hovered, setHovered] = useState<boolean>(false);
     
     const copyRef = useRef<HTMLElement>(null);
-    const blur = useBackgroundBlur(10, false);
+    const blur = useBackgroundBlur(false);
 
     // set the hover's card position
     useEffect(() => {

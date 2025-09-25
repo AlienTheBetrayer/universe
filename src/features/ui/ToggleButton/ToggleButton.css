@@ -1,17 +1,18 @@
 .toggle-button {
     display: flex;
+    align-items: center;
     border: transparent;
     cursor: pointer;
     padding: 4px;
     min-width: 48px;
-    min-height: 16px;
+    height: 24px;
     border-radius: 20px;
     background-color: var(--button-darker);
 }
 
 .toggle-button-circle {
     width: 16px;
-    min-height: 16px;
+    height: 16px;
     border-radius: 20px;
     background-color: var(--button-dark);
 

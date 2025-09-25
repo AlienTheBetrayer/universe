@@ -1,10 +1,13 @@
 header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
     position: fixed;
     top: 0;
     left: 50%;
 
     width: 100%;
-    max-width: 1000px;
     padding: 1rem;
 
     z-index: 2;
@@ -17,6 +20,12 @@ header {
 }
 
 header > nav {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 750px;
+    width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,6 +35,23 @@ header > nav {
 
     border-radius: 20px;
     backdrop-filter: blur(8px);
+}
+
+@media (max-width: 640px) {
+    header > nav > * {
+        width: 30%;
+    }
+}
+
+header .header-open-menu {
+    background-color: transparent;
+    transition: 0s;
+    text-align: right;
+}
+
+header .header-open-menu:hover {
+    background-color: transparent;
+    color: var(--foreground-last);
 }
 
 header .home-button {

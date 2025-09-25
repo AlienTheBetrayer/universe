@@ -4,7 +4,7 @@ import { BackgroundBlur } from "../components/BackgroundBlur";
 
 import { AnimatePresence } from "motion/react";
 
-export const useBackgroundBlur = (zIndex: number, hideScroll: boolean = true) => {
+export const useBackgroundBlur = (hideScroll: boolean = true, zIndex: number = 10) => {
     const [shown, setShown] = useState<boolean>(false);
 
     useEffect(() => {

@@ -4,6 +4,8 @@ import { motion } from 'motion/react';
 import { UniversalLink } from "../../ui/UniversalLink/components/UniversalLink";
 import { LinkButton } from "../../ui/LinkButton/components/LinkButton";
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { Settings } from '../../settings/components/Settings';
+import { Button } from '../../ui/Button/components/Button';
 
 export const Header = () => {
     const informativeElements = [
@@ -17,6 +19,8 @@ export const Header = () => {
         },
     ];
 
+    const isMobile = useMediaQuery(640);
+
     return (
         <motion.header
         initial={{ y: -100, x: '-50%' }}
@@ -27,26 +31,27 @@ export const Header = () => {
                     Home
                 </UniversalLink>
 
-                { informativeElements.map(element => (
-                    <UniversalLink to={element.to} key={element.title}>
-                        {element.title}
-                    </UniversalLink>
-                ))}
+                { !isMobile ? (
+                    <>
+                        { informativeElements.map(element => (
+                            <UniversalLink to={element.to} key={element.title}>
+                                {element.title}
+                            </UniversalLink>
+                        ))}
 
-                <AppButton/>
+                        <LinkButton className='header-launch-app' to='/app'>
+                            { isMobile ? 'App' : 'Launch App' }
+                        </LinkButton>
+
+                        <Settings className='header-settings'/>
+                    </>
+                ) : (
+                    <Button className='header-open-menu'>
+                        Menu
+                    </Button>
+                )}
             </nav>
+
         </motion.header>
-    )
-}
-
-const AppButton = () => {
-    const isMobile = useMediaQuery(640);
-
-    return (
-        <>
-            <LinkButton className='header-launch-app' to='/app'>
-                { isMobile ? 'App' : 'Launch App' }
-            </LinkButton>
-        </>
     )
 }
