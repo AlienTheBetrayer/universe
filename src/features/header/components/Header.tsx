@@ -6,6 +6,8 @@ import { LinkButton } from "../../ui/LinkButton/components/LinkButton";
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { Settings } from '../../settings/components/Settings';
 import { Button } from '../../ui/Button/components/Button';
+import { usePopup } from '../../../hooks/usePopup';
+import { HeaderMenu } from '../../headermenu/components/HeaderMenu';
 
 export const Header = () => {
     const informativeElements = [
@@ -20,6 +22,8 @@ export const Header = () => {
     ];
 
     const isMobile = useMediaQuery(640);
+
+    const headerMenuPopup = usePopup(<HeaderMenu/>);
 
     return (
         <motion.header
@@ -46,12 +50,13 @@ export const Header = () => {
                         <Settings className='header-settings'/>
                     </>
                 ) : (
-                    <Button className='header-open-menu'>
+                    <Button className='header-open-menu' onClick={() => headerMenuPopup.setShown(prev => !prev)}>
                         Menu
                     </Button>
                 )}
             </nav>
-
+            
+            { headerMenuPopup.render() }
         </motion.header>
     )
 }
