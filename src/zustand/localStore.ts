@@ -1,15 +1,15 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type ThemeType = 'dark' | 'light';
 
-interface AppState {
+interface LocalStore {
     theme: ThemeType;
 
     toggleTheme: () => void;
 };  
 
-export const useAppStore = create<AppState>()(
+export const useLocalStore = create<LocalStore>()(
     persist(
         set => ({
             theme: 'dark',
@@ -19,6 +19,7 @@ export const useAppStore = create<AppState>()(
             }
         }),
         {
-            name: 'app-storage'
+            name: 'app-storage',
+            storage: createJSONStorage(() => localStorage)
         })
 )

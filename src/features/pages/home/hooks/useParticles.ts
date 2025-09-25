@@ -3,12 +3,13 @@ import { useMemo } from "react";
 import type { Points } from "three";
 import { useSmoothCursor } from "../../../../hooks/useSmoothCursor";
 import { VectorTypes } from "../context/ParticlesContext";
-import { useAppStore } from "../../../../zustand/store";
+import { useLocalStore } from "../../../../zustand/localStore";
 
 export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {
     const { size, viewport } = useThree();
     const pointer = useSmoothCursor({ x: 330, y: 120 });
-    const { theme } = useAppStore();
+
+    const { theme } = useLocalStore();
     const dotColor = theme === 'dark' ? 0.3 : 0;
 
     const data = useMemo(() => {

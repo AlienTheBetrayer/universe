@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { useSparks } from "../hooks/useSparks"
 import { Points } from "three";
-import { useAppStore } from "../../../../zustand/store";
+import { useLocalStore } from "../../../../zustand/localStore";
 
 export const Sparks = () => {
     const ref = useRef<Points>(null);
     const sparks = useSparks(ref, 1000);
 
-    const { theme } = useAppStore();
+    const { theme } = useLocalStore();
     const dotColor = theme === 'dark' ? '#fff' : '#000';
 
     return (

@@ -1,7 +1,7 @@
 import type React from 'react';
 import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import './Settings.css';
-import { useAppStore } from '../../../zustand/store';
+import { useLocalStore } from '../../../zustand/localStore';
 import { useEffect } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -9,7 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Settings = ({ toggleKey }: Props) => {
-    const { theme, toggleTheme } = useAppStore();
+    const { theme, toggleTheme } = useLocalStore();
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
