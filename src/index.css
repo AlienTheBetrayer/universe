@@ -18,7 +18,7 @@
 }
 
 
-/* root variables */
+/* root variables (dark theme) */
 :root {
     /* background */
     --background: rgb(8, 8, 8);
@@ -59,9 +59,48 @@
     --font-p: 0.8rem;
 }
 
+/* root variables (light theme) */
 :root[data-theme='light'] {
-    --a: '';
+    /* background */
+    --background: rgb(248, 248, 248);
+    --background-2: rgb(240, 240, 240);
+    --background-3: rgb(232, 232, 232);
+    --background-4: rgb(224, 224, 224);
+    --background-5: rgb(216, 216, 216);
+    --background-6: rgb(208, 208, 208);
+    --background-7: rgb(200, 200, 200);
+    --background-8: rgb(192, 192, 192);
+    --background-9: rgb(184, 184, 184);
+    --background-10: rgb(176, 176, 176);
+
+    /* transparent background */
+    --background-transparent: rgba(248, 248, 248, 0.4);
+    --background-semitransparent: rgba(248, 248, 248, 0.75);
+    --background-2-transparent: rgba(240, 240, 240, 0.4);
+    --background-3-transparent: rgba(232, 232, 232, 0.4);
+    --background-4-transparent: rgba(224, 224, 224, 0.4);
+    --background-5-transparent: rgba(216, 216, 216, 0.4);
+
+    /* foreground */
+    --foreground: #333333;
+    --foreground-prelast: #111111;
+    --foreground-last: #000000;
+
+    /* pseudo & misc */
+    --selection: #cccccc;
+
+    /* component specific */
+    --button-app-fill: rgb(39, 78, 220); /* keep accent color */
+    --button-app-hover: rgb(27, 57, 165);
+    --button-dark: rgba(0, 0, 255, 0.6);
+    --button-darker: rgba(0, 0, 255, 0.2);
+
+    /* font sizes */
+    --font-h1: 2.6rem;
+    --font-h2: 2rem;
+    --font-p: 0.8rem;
 }
+
 
 /* global tags */
 * {

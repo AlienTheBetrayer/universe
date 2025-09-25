@@ -3,10 +3,13 @@ import { useMemo } from "react";
 import type { Points } from "three";
 import { useSmoothCursor } from "../../../../hooks/useSmoothCursor";
 import { VectorTypes } from "../context/ParticlesContext";
+import { useAppStore } from "../../../../zustand/store";
 
 export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {
     const { size, viewport } = useThree();
     const pointer = useSmoothCursor({ x: 330, y: 120 });
+    const { theme } = useAppStore();
+    const dotColor = theme === 'dark' ? 0.3 : 0;
 
     const data = useMemo(() => {
         const positions = new Float32Array(count * 2);
@@ -17,9 +20,9 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
             positions[i * 2] = (Math.random() - 0.5) * viewport.width;
             positions[i * 2 + 1] = (Math.random() - 0.5) * viewport.height;
 
-            colors[i * 3] = 0.3;
-            colors[i * 3 + 1] = 0.3;
-            colors[i * 3 + 2] = 0.3;
+            colors[i * 3] = dotColor;
+            colors[i * 3 + 1] = dotColor;
+            colors[i * 3 + 2] = dotColor;
 
             const fast = Math.random() > 0.99;
             velocities[i * 2] = (Math.random() - 0.5) * (fast ? 0.1 : 0.01);
@@ -53,7 +56,7 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
 
                 let vectorX = 0;
                 let vectorY = 0;
-                let color: number[] = [0, 0, 30];
+                let color: number[] = [0, 0, 0];
 
                 // determining the cursor effect type formula based on our context
                 switch (vectorType) {
@@ -104,9 +107,9 @@ export const useParticles = (ref: React.RefObject<Points | null>, count: number 
                     colors[i * 3 + 1] = color[1];
                     colors[i * 3 + 2] = color[2];
                 } else {
-                    colors[i * 3] = 0.3;
-                    colors[i * 3 + 1] = 0.3;
-                    colors[i * 3 + 2] = 0.3;
+                    colors[i * 3] = dotColor;
+                    colors[i * 3 + 1] = dotColor;
+                    colors[i * 3 + 2] = dotColor;
                 }
 
                 // bouncing off of the screen's edges

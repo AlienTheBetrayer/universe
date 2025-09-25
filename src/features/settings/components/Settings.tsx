@@ -2,15 +2,20 @@ import type React from 'react';
 import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import './Settings.css';
 import { useAppStore } from '../../../zustand/store';
+import { useEffect } from 'react';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     toggleKey?: string;
 }
 
 export const Settings = ({ toggleKey }: Props) => {
-    const appStore = useAppStore();
+    const { theme, toggleTheme } = useAppStore();
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
 
     return (
-        <ToggleButton key={toggleKey} value={appStore.theme == 'light'} onToggled={() => appStore.toggleTheme()} />
+        <ToggleButton key={toggleKey} value={theme == 'light'} onToggled={() => toggleTheme()} />
     )
 }
