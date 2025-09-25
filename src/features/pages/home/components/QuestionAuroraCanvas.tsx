@@ -1,16 +1,15 @@
 import { Canvas } from "@react-three/fiber"
-import { QuestionParticles } from "./QuestionParticles"
+import { QuestionAuroraParticles } from "./QuestionAuroraParticles"
 import { Bloom, EffectComposer } from "@react-three/postprocessing"
 
-export const QuestionCanvas = () => {
+export const QuestionAuroraCanvas = () => {
     return (
         <Canvas>
-            <QuestionParticles/>
+            <QuestionAuroraParticles/>
 
             <EffectComposer>
-                <Bloom intensity={3} luminanceThreshold={0}/>
+                <Bloom intensity={300} luminanceThreshold={0}/>
             </EffectComposer>
         </Canvas>
     )
 }
-

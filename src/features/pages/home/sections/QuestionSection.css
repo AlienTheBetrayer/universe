@@ -1,0 +1,10 @@
+.question-section {
+    position: relative;
+    width: 100%;
+    height: 800px;
+}
+
+.question-canvas-wrapper {
+    position: absolute;
+    inset: 0;
+}

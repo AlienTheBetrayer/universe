@@ -130,5 +130,5 @@ export const useHeadingParticles = (ref: React.RefObject<Points | null>, count: 
         }
     });
 
-    return { positions: data.positions, colors: data.colors };
+    return data;
 }

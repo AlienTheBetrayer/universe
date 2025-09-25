@@ -8,6 +8,7 @@ import { ParticlesContext, VectorTypes, type ParticlesDataInterface } from '../c
 import { useState } from 'react';
 import { GridSection } from '../sections/GridSection';
 import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
+import { QuestionSection } from '../sections/QuestionSection';
 
 export const HomePage = () => {
     const particlesData = useState<ParticlesDataInterface>(
@@ -30,6 +31,7 @@ export const HomePage = () => {
             </ParticlesContext>
             
             <LockSection/>
+            <QuestionSection/>
         </Page>
     )
 }

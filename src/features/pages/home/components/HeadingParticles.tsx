@@ -9,7 +9,7 @@ export const HeadingParticles = () => {
     const [particlesData, ] = useParticlesContext();
     const isMobile = useMediaQuery(640);
     const particles = useHeadingParticles(ref, isMobile ? 1000 : 2000, particlesData.vectorType);
-
+    
     return (
         <points ref={ref}>
             <bufferGeometry>

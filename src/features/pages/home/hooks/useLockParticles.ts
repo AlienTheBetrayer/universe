@@ -71,5 +71,5 @@ export const useLockParticles = (ref: React.RefObject<Points | null>, count: num
         }
     });
 
-    return { positions: data.positions };
+    return data;
 }

@@ -1,11 +1,11 @@
-import { useRef } from "react";
-import { useQuestionParticles } from "../hooks/useQuestionParticles"
-import { Points } from "three";
+import { useRef } from "react"
+import { Points } from "three"
+import { useAuroraParticles } from "../hooks/useAuroraParticles";
 
-export const QuestionParticles = () => {
+export const QuestionAuroraParticles = () => {
     const pointsRef = useRef<Points>(null);
-    const particles = useQuestionParticles(pointsRef);
-    
+    const particles = useAuroraParticles(pointsRef);
+
     return (
         <points ref={pointsRef}>
             <bufferGeometry>
@@ -16,4 +16,3 @@ export const QuestionParticles = () => {
         </points>
     )
 }
-
