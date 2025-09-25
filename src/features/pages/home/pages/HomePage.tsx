@@ -4,15 +4,16 @@ import { Page } from "../../../layout/components/Page"
 import { HeadingSection } from '../sections/HeadingSection';
 import { HeadingCanvas } from '../components/HeadingCanvas';
 import { LockSection } from '../sections/LockSection';
-import { ParticlesContext, VectorTypes, type ParticlesDataInterface } from '../context/ParticlesContext';
+import { HeadingContext, VectorTypes, type HeadingContextData } from '../context/HeadingContext';
 import { useState } from 'react';
 import { GridSection } from '../sections/GridSection';
 import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
 import { QuestionSection } from '../sections/QuestionSection';
+import { QuestionContext, type QuestionContextData } from '../context/QuestionContext';
 
 export const HomePage = () => {
-    const particlesData = useState<ParticlesDataInterface>(
-        { vectorType: VectorTypes.astral})
+    const headingContextData = useState<HeadingContextData>({ vectorType: VectorTypes.astral});
+    const questionContextData = useState<QuestionContextData>({ revealed: false });
 
     return (
         <Page className='home-page'>
@@ -22,16 +23,19 @@ export const HomePage = () => {
             </div>
 
 
-            <ParticlesContext value={particlesData}>
+            <HeadingContext value={headingContextData}>
                 <div className='heading-wrapper'>
                     <HeadingCanvas/>
                     <HeadingSection/>
                     <GridSection/>
                 </div>
-            </ParticlesContext>
+            </HeadingContext>
             
             <LockSection/>
-            <QuestionSection/>
+
+            <QuestionContext value={questionContextData}>
+                <QuestionSection/>
+            </QuestionContext>
         </Page>
     )
 }

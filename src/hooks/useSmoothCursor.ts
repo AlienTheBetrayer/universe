@@ -1,17 +1,12 @@
-import { useSpring, type SpringOptions } from "motion/react";
+import { useSpring } from "motion/react";
 import { useCursor, type Position } from "./useCursor";
 import { useEffect, useState } from "react";
 
-const springSettings: SpringOptions = {
-    stiffness: 300,
-    damping: 40,
-} 
-
-export const useSmoothCursor = (defaultPosition?: Position) => {
+export const useSmoothCursor = (defaultPosition?: Position, damping: number = 40) => {
     const pos = useCursor(defaultPosition);
 
-    const x = useSpring(pos.x, springSettings);
-    const y = useSpring(pos.y, springSettings);
+    const x = useSpring(pos.x, { stiffness: 300, damping: damping });
+    const y = useSpring(pos.y, { stiffness: 300, damping: damping });
 
     const [smoothPos, setSmoothPos] = useState<Position>(defaultPosition ?? { x: 0, y : 0 });
 

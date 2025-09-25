@@ -4,7 +4,7 @@ import { Points } from "three";
 
 export const QuestionParticles = () => {
     const pointsRef = useRef<Points>(null);
-    const particles = useQuestionParticles(pointsRef);
+    const particles = useQuestionParticles(pointsRef, 1000);
     
     return (
         <points ref={pointsRef}>
