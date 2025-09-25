@@ -1,14 +1,14 @@
 import { useRef } from "react";
-import { useParticles } from "../hooks/useParticles";
+import { useHeadingParticles } from "../hooks/useHeadingParticles";
 import { Points } from "three";
 import { useParticlesContext } from "../context/ParticlesContext";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 
-export const Particles = () => {
+export const HeadingParticles = () => {
     const ref = useRef<Points>(null);
     const [particlesData, ] = useParticlesContext();
     const isMobile = useMediaQuery(640);
-    const particles = useParticles(ref, isMobile ? 1000 : 2000, particlesData.vectorType);
+    const particles = useHeadingParticles(ref, isMobile ? 1000 : 2000, particlesData.vectorType);
 
     return (
         <points ref={ref}>

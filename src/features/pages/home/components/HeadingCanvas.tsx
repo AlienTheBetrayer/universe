@@ -1,12 +1,12 @@
-import './ParticlesCanvas.css';
+import './HeadingCanvas.css';
 
 import { motion } from 'motion/react';
 
 import { Canvas } from "@react-three/fiber"
-import { Particles } from "./Particles"
+import { HeadingParticles } from "./HeadingParticles"
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 
-export const ParticlesCanvas = () => {
+export const HeadingCanvas = () => {
     return (
         <motion.div className='particles-canvas-container'
         initial={{ opacity: 0 }}
@@ -17,7 +17,7 @@ export const ParticlesCanvas = () => {
                     <Bloom intensity={30} luminanceThreshold={0.5}/>
                 </EffectComposer>
 
-                <Particles/>
+                <HeadingParticles/>
             </Canvas>
         </motion.div>
     )

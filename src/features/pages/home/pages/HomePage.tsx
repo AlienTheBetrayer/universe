@@ -2,7 +2,7 @@ import './HomePage.css';
 
 import { Page } from "../../../layout/components/Page"
 import { HeadingSection } from '../sections/HeadingSection';
-import { ParticlesCanvas } from '../components/ParticlesCanvas';
+import { HeadingCanvas } from '../components/HeadingCanvas';
 import { LockSection } from '../sections/LockSection';
 import { ParticlesContext, VectorTypes, type ParticlesDataInterface } from '../context/ParticlesContext';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ export const HomePage = () => {
 
             <ParticlesContext value={particlesData}>
                 <div className='heading-wrapper'>
-                    <ParticlesCanvas/>
+                    <HeadingCanvas/>
                     <HeadingSection/>
                     <GridSection/>
                 </div>

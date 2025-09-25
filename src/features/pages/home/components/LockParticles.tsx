@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { useSparks } from "../hooks/useSparks"
+import { useLockParticles } from "../hooks/useLockParticles";
 import { Points } from "three";
 import { useLocalStore } from "../../../../zustand/localStore";
 
-export const Sparks = () => {
+export const LockParticles = () => {
     const ref = useRef<Points>(null);
-    const sparks = useSparks(ref, 1000);
+    const sparks = useLockParticles(ref, 1000);
 
     const { theme } = useLocalStore();
     const dotColor = theme === 'dark' ? '#fff' : '#000';

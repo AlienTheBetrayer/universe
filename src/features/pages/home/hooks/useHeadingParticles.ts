@@ -5,7 +5,7 @@ import { useSmoothCursor } from "../../../../hooks/useSmoothCursor";
 import { VectorTypes } from "../context/ParticlesContext";
 import { useLocalStore } from "../../../../zustand/localStore";
 
-export const useParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {
+export const useHeadingParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {
     const { size, viewport } = useThree();
     const pointer = useSmoothCursor({ x: 330, y: 120 });
 

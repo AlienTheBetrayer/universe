@@ -2,7 +2,7 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { type Points } from "three";
 
-export const useSparks = (ref: React.RefObject<Points | null>, count: number) => { 
+export const useLockParticles = (ref: React.RefObject<Points | null>, count: number) => { 
     const data = useMemo(() => {
         const scale = 6;
         const positions = new Float32Array(count * 3);

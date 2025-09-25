@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { Icosahedron } from './Icosahedron';
+import { LockFigure } from './LockFigure';
 import { type RefObject } from 'react';
 import { useScroll } from 'motion/react';
 import { ForceField } from './ForceField';
@@ -11,7 +11,7 @@ interface Props {
     ref: RefObject<HTMLElement | null>;
 }
 
-export const LockSectionCanvas = ({ ref }: Props) => {
+export const LockCanvas = ({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
     const scrolledWithin = useScrollYWithin(0, 1, scrollYProgress);
 
@@ -20,7 +20,7 @@ export const LockSectionCanvas = ({ ref }: Props) => {
             <pointLight position={[10, 10, 10]} intensity={100}/>
             <pointLight position={[-10, -10, -10]} intensity={100}/>
 
-            <Icosahedron progress={scrollYProgress}/>
+            <LockFigure progress={scrollYProgress}/>
             <ForceField progress={scrollYProgress}/>
 
             { scrolledWithin && (

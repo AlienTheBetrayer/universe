@@ -4,7 +4,7 @@ import { useSpring } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Mesh, MeshPhysicalMaterial } from "three";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
-import { Sparks } from "./Sparks";
+import { LockParticles } from "./LockParticles";
 import { Group } from "three";
 
 
@@ -12,7 +12,7 @@ interface Props {
     progress: MotionValue<number>;
 }
 
-export const Icosahedron = ({ progress }: Props) => {
+export const LockFigure = ({ progress }: Props) => {
     const groupRef = useRef<Group>(null);
     const mainRef = useRef<Mesh>(null);
     const orbitRef = useRef<Mesh>(null);
@@ -60,7 +60,7 @@ export const Icosahedron = ({ progress }: Props) => {
                 <icosahedronGeometry args={[isMobile ? 0.7 : 1, 0]}/>
                 <meshPhysicalMaterial color='#0000ff'/>
 
-                { scrolled && <Sparks/> }
+                { scrolled && <LockParticles/> }
             </mesh>
             <mesh ref={orbitRef}>
                 <icosahedronGeometry args={[isMobile ? 0.15 : 0.2, 0]}/>
