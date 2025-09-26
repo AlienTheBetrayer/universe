@@ -11,6 +11,8 @@ import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
 import { QuestionSection } from '../sections/QuestionSection';
 import { QuestionContext, type QuestionContextData } from '../context/QuestionContext';
 
+import { motion } from 'motion/react';
+
 export const HomePage = () => {
     const headingContextData = useState<HeadingContextData>({ vectorType: VectorTypes.astral});
     const questionContextData = useState<QuestionContextData>({ revealed: false });
@@ -22,7 +24,15 @@ export const HomePage = () => {
                 <Spotlight className='right-0 top-0 lg:-right-60 lg:top-0 h-300 w-300 rotate-90' fill='#8888f5ff'/>
             </div>
 
-
+            <motion.div className='heading-section-bgtext'
+            initial={{ opacity: 0, filter: 'blur(40px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            transition={{ delay: 5, duration: 5 }}>
+                <h1>
+                    FUTURE
+                </h1>
+            </motion.div>
+            
             <HeadingContext value={headingContextData}>
                 <div className='heading-wrapper'>
                     <HeadingCanvas/>
