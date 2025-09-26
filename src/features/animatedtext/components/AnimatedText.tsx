@@ -45,8 +45,8 @@ export const AnimatedText = ({ delay, as, text, ...rest }: Props) => {
                     {
                         Array.from(segment.text).map((letter) => (
                             <MotionTag className='animated-letter' {...rest} key={`animated-letter-${idx}`}
-                            initial={{ opacity: 0, filter: 'blur(40px)' }}
-                            animate={{ opacity: 1, filter: 'blur(0px)' }}
+                            initial={{ opacity: 0, filter: 'blur(40px)'  }}
+                            animate={{ opacity: 1, filter: 'blur(0px)'  }}
                             transition={{ delay: (delay ?? 0 ) + idx++ / 20, duration: 0.6, type: 'spring', damping: 8, stiffness: 40 }}>
                                 <WrapText text={letter} type={segment.type}/>
                             </MotionTag>
