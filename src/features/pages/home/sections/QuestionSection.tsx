@@ -5,7 +5,6 @@ import { AnimatePresence, useInView } from 'motion/react';
 import { motion } from 'motion/react';
 import { QuestionAuroraCanvas } from '../components/QuestionAuroraCanvas';
 import { useQuestionContext } from '../context/QuestionContext';
-import { Button } from '../../../ui/Button/components/Button';
 import { LinkButton } from '../../../ui/LinkButton/components/LinkButton';
 
 
