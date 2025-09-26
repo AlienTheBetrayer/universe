@@ -1,32 +1,18 @@
 import './ArrayTypewriter.css';
-import { useEffect, useState } from "react"
 import type { TypewriterTags } from "../../animatedtext/components/AnimatedText";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, MotionValue } from "motion/react";
+import { useArrayTypewriter } from '../hooks/useArrayTypewriter';
 
 interface Props {
+    scrollProgress: MotionValue<number>
     words: string[];
-    as: TypewriterTags;
-    wordIdx: number;
-    letterIdx: number;
+    as?: TypewriterTags;
 }
 
-export const ArrayTypewriter = ({ words, as, wordIdx, letterIdx } : Props) => {
+export const ArrayTypewriter = ({ scrollProgress, words, as='h1' } : Props) => {
+    const word = useArrayTypewriter(words, scrollProgress);
+    
     const MotionTag = motion[as];
-    const [word, setWord] = useState<string>(() => {
-        let ret = '';
-        if(words.length == 0)
-            ret = 'words[] is empty';
-
-        return ret;
-    });
-
-    useEffect(() => {
-        if(wordIdx >= 0 && wordIdx < words.length && letterIdx >= 0 && letterIdx < words[wordIdx].length)
-            setWord(words[wordIdx].slice(0, letterIdx + 1));
-
-        if(letterIdx == -1)
-            setWord('');
-    }, [wordIdx, letterIdx]);
 
     return (
         <AnimatePresence>

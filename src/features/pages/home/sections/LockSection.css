@@ -7,6 +7,7 @@
 
 .sphere-canvas-container canvas {
     height: 120vh;
+    cursor: move;
 }
 
 .sphere-canvas-lock {
@@ -14,4 +15,18 @@
     margin-top: 30%;
     top: 55%;
     transform: translateY(-50%);
+}
+
+.sphere-canvas-text-left, .sphere-canvas-text-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sphere-canvas-text-left {
+    left: 1rem;
+}
+
+.sphere-canvas-text-right {
+    right: 10rem;
 }
