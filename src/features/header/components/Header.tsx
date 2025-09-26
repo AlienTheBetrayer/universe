@@ -30,7 +30,7 @@ export const Header = () => {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setJustified(loaded.header);
-        }, 500);
+        }, 1500);
 
         return () => clearTimeout(timeout);
     }, [loaded.header]);
@@ -41,14 +41,14 @@ export const Header = () => {
         animate={{ y: 0, x: '-50%' }}
         transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <motion.nav
-            style={{ justifyContent: justified ? 'space-between' : 'flex-start'}}>
+            style={{ justifyContent: (justified || loaded.header) ? 'space-between' : 'flex-start'}}>
                 <UniversalLink to='/' className='home-button'>Home</UniversalLink>
 
                 { !isMobile ? (
                     <motion.div className='flex align-center p-1 h-full'
                     layout
-                    initial={{ gap: '0.1rem' }}
-                    animate={{ gap: '2rem', transition: { delay: loaded.header ? 1.5 : 5, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
+                    initial={{ gap: loaded.header ? '2rem' : '0.1rem' }}
+                    animate={{ gap: '2rem', transition: { delay: 5.5, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
                     transition={{ type: 'spring', duration: 0.6, stiffness: 200, damping: 50 }}>
                         <UniversalLink to='/philosophy'>Philosophy</UniversalLink>
                         <UniversalLink to='/contact'>Contact</UniversalLink>
