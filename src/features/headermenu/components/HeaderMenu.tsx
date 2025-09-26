@@ -5,6 +5,8 @@ import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 import { Settings } from '../../settings/components/Settings';
 import { LinkButton } from '../../ui/LinkButton/components/LinkButton';
 
+import launchImg from '../../header/assets/launch.svg';
+
 interface Props extends HTMLMotionProps<'nav'> {
     onInteract?: () => void;
 }
@@ -23,7 +25,10 @@ export const HeaderMenu = ({ onInteract, className }: Props) => {
             
             <div>
                 <Settings/>
-                <LinkButton className='header-launch-app' to='/app'>Launch App</LinkButton>
+                <LinkButton className='header-launch-app' to='/app'>
+                    Launch App
+                    <img src={launchImg} alt=''/>
+                </LinkButton>
                 <Button className='header-close-menu' onClick={() => onInteract?.()} >Close Menu</Button>
             </div>
         </motion.nav>

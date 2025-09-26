@@ -10,6 +10,15 @@
     justify-content: space-between;
 }
 
+.header-menu * {
+    font-size: 1rem;
+}
+
+.header-menu .header-launch-app img {
+    width: 32px;
+    height: 32px;
+}
+
 .header-menu > div {
     display: flex;
     flex-direction: column;
