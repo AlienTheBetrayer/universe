@@ -10,7 +10,7 @@ export const HoverContents = ({ title, description }: Props ) => {
     return (
         <div className='sphere-card-hover-contents'>
             <h2>{title}</h2>
-            <p>{description}</p>
+            <p dangerouslySetInnerHTML={{ __html: description ?? '' }}/>
         </div>
     )
 }

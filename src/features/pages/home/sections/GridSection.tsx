@@ -6,46 +6,46 @@ export const GridSection = () => {
     const hard = [
     {
         title: 'React Architecture',
-        description: 'Design complete front-end architectures with React, including reusable components, state management, and performance tuning.',
-        hoverDescription: 'Design complete front-end architectures with React. From custom hooks to reusable component libraries, state management, and performance tuning, ensuring scalable and maintainable applications.'
+        description: '<b><mark>Single-handedly</mark></b> built front-end architectures with <b>React</b>, including reusable components, state management, and performance tuning.',
+        hoverDescription: 'Design <b>complete front-end architectures</b> with <i>React</i>. From custom hooks to reusable component libraries, state management, and performance tuning, ensuring <i>scalable and maintainable</i> applications.'
     },
     {
         title: 'TypeScript Mastery',
-        description: 'Use advanced TypeScript to enforce type safety, reduce errors, and build reliable front-end applications.',
-        hoverDescription: 'Leverage TypeScript to enforce type safety, reduce bugs, and create highly predictable code. Build complex types, generics, and utility functions for professional-grade reliability.'
+        description: 'Use <b>advanced <mark>TypeScript</mark></b> to enforce <b>type safety</b>, reduce <u>errors</u>, and build reliable front-end applications.',
+        hoverDescription: '<b>Leverage TypeScript</b> to enforce <mark>type safety</mark>, reduce <u>bugs</u>, and create highly predictable code. Build complex types, generics, and utility functions for professional-grade reliability.'
     },
     {
         title: 'Motion & 3D',
-        description: 'Build interactive experiences with Framer Motion and Three.js, combining smooth UI transitions with 3D visuals.',
-        hoverDescription: 'Create immersive interactive experiences using Framer Motion for smooth UI transitions and Three.js for advanced 3D rendering, particle systems, and real-time visual effects.'
+        description: 'Build interactive experiences with <b>Framer Motion and <mark>Three.js</mark></b>, combining <i>smooth</i> UI transitions with 3D visuals.',
+        hoverDescription: 'Create <b>immersive interactive experiences</b> using Framer Motion for smooth UI transitions and Three.js for <b>advanced 3D rendering</b>, particle systems, and real-time visual effects.'
     },
     {
         title: 'Scalable Code Practices',
-        description: 'Write modular, maintainable, and scalable code that balances readability, performance, and stability.',
-        hoverDescription: 'Follow best practices like SOLID principles, modular design, and consistent coding standards. Write code that’s easy to scale, easy to read, and built for long-term maintainability.'
+        description: 'Write modular, maintainable, and scalable code that <mark>balances</mark> readability, performance, and stability.',
+        hoverDescription: 'Follow best practices like SOLID principles, modular design, and consistent coding standards. Write code that\'s easy to scale, easy to read, and <b>built for long-term maintainability.</b>'
     }
     ];
 
     const soft = [
     {
-        title: 'Adaptive Problem Solving',
-        description: 'Adjust quickly to new challenges and frameworks while finding practical solutions.',
-        hoverDescription: 'Quickly adapt to new technologies, frameworks, and challenges. Approach obstacles with creativity, persistence, and a methodical problem-solving mindset.'
+        title: 'English Fluency',
+        description: 'Communicate clearly and effectively in English across <b>written and spoken</b> formats, ensuring precise <mark>understanding</mark> in professional contexts.',
+        hoverDescription: 'Demonstrate advanced English proficiency, enabling smooth <b>collaboration</b>, presentations, and documentation. Articulate complex ideas clearly to <i>international teams</i> and stakeholders, minimizing <mark>misunderstandings</mark>.'
     },
     {
-        title: 'Creative Systems Thinking',
-        description: 'Connect design, features, and architecture into cohesive solutions.',
-        hoverDescription: 'Think beyond individual features. Design cohesive, integrated systems that bring UI, architecture, and user experience together seamlessly.'
+        title: 'Independent Execution',
+        description: 'Take full ownership of projects, from concept to deployment, handling all aspects of <b>development autonomously</b>.',
+        hoverDescription: 'Plan, design, and implement entire projects <i>solo</i> with minimal supervision. Manage architecture, coding, testing, and deployment efficiently while maintaining <mark>high-quality standards</mark>.'
     },
     {
-        title: 'Focused Persistence',
-        description: 'Stay consistent and focused through demanding projects and complex problems.',
-        hoverDescription: 'Maintain sharp focus and resilience through long coding sessions or tough problem-solving situations, delivering results no matter the pressure.'
+        title: 'Clean Code Mindset',
+        description: 'Write <b>readable</b>, maintainable, and scalable code that reduces technical debt and supports <mark>long-term</mark> project stability.',
+        hoverDescription: 'Prioritize <b>clarity, modularity, and maintainability</b> in all development work. Apply best practices and design patterns consistently to ensure code is easy to <i>extend</i>, debug, and review.'
     },
     {
-        title: 'User-Centered Innovation',
-        description: 'Keep user experience central while balancing design, functionality, and accessibility.',
-        hoverDescription: 'Prioritize the end-user experience in every decision. Balance aesthetics, performance, and accessibility to create apps that are both powerful and delightful to use.'
+        title: 'Professional Collaboration',
+        description: 'Work <b>seamlessly</b> with <i>cross-functional</i> teams, fostering a <u>respectful</u>, productive, and solution-oriented environment.',
+        hoverDescription: 'Engage effectively with <b>designers, engineers, and stakeholders</b>. Facilitate constructive feedback, transparent communication, and team alignment to achieve <mark>project goals</mark> efficiently.'
     }
     ];
 

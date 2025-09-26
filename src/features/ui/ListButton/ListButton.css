@@ -3,7 +3,7 @@
     flex-direction: column;
     border-radius: 20px;
     min-width: 128px;
-    background-color: var(--background-5-transparent);
+    background-color: var(--background-4-transparent);
     overflow: hidden;
     backdrop-filter: blur(8px);
 }
@@ -17,7 +17,7 @@
 }
 
 .list-button button:hover {
-    background-color: var(--background-5-transparent);
+    background-color: var(--background-4-transparent);
 }
 
 /* topbar */

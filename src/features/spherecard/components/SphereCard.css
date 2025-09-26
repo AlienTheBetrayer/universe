@@ -4,10 +4,10 @@
     position: relative;
     width: 100%;
     max-width: 300px;
-    min-height: 250px;
+    height: 300px;
 
     border-radius: 30px;
-    background-color: var(--background-3-transparent);
+    background-color: var(--background-2-transparent);
     backdrop-filter: blur(4px);
 }
 
