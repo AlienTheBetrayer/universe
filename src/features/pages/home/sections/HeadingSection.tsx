@@ -15,31 +15,59 @@ export const HeadingSection = () => {
 
     const h1: AnimatedText[] = [
         {
-            text: 'Redefining ',
-            type: 'default'
+            text: 'Driving ',
+            type: 'regular'
         },
         {
             text: 'innovation',
-            type: 'error',
+            type: 'mark' 
         },
         {
-            text: ' through personal projects',
-            type: 'default'
+            text: ' through strategic projects',
+            type: 'regular'
         }
-    ]
+    ];
 
     const p: AnimatedText[] = [
         {
-            text: 'Leveraging technology and design to transform personal initiatives into sophisticated, ',
-            type: 'default'
+            text: 'Applying ',
+            type: 'regular'
         },
         {
-            text: 'forward-thinking solutions',
-            type: 'underline'
+            text: 'advanced',
+            type: 'highlight'
         },
         {
-            text: ', that exemplify creativity, technical excellence, and impactful innovation.',
-            type: 'default'
+            text: ' design principles and technology ',
+            type: 'regular'
+        },
+        {
+            text: 'to deliver ',
+            type: 'regular' 
+        },
+        {
+            text: 'high-impact solutions, ',
+            type: 'mark' 
+        },
+        {
+            text: 'while carefully minimizing ',
+            type: 'regular'
+        },
+        {
+            text: 'operational risks',
+            type: 'error' 
+        },
+        {
+            text: ', and consistently creating outcomes that creativity, ',
+            type: 'regular'
+        },
+        {
+            text: 'technical mastery',
+            type: 'highlight'
+        },
+        {
+            text: ', and measurable impact.',
+            type: 'regular'
         }
     ];
 

@@ -1,4 +1,7 @@
-.animated-text {
-    display: inline-block;
-    white-space: pre;
+.animated-word {
+    display: inline;
+}
+
+.animated-letter {
+    display: inline;
 }
