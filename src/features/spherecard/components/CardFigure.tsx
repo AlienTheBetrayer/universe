@@ -27,7 +27,7 @@ export const CardFigure = () => {
     return (
         <mesh ref={ref}>
             <icosahedronGeometry args={[2.5, 0]}/>
-            <meshPhysicalMaterial color='#4040f2' metalness={1} roughness={1}/>
+            <meshPhysicalMaterial color='#7474bc' metalness={1} roughness={1}/>
         </mesh>
     )
 }
