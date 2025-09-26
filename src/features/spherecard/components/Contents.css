@@ -16,3 +16,15 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.sphere-card-hover {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.sphere-card-hover img {
+    width: 16px;
+    height: 16px;
+    filter: invert(0.75);
+}
