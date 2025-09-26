@@ -35,6 +35,7 @@ header > nav {
 
     border-radius: 20px;
     backdrop-filter: blur(8px);
+    background: var(--background-fulltransparent);
 }
 
 @media (max-width: 640px) {
@@ -72,4 +73,10 @@ header .home-button {
 
 header .universal-link:hover {
     color: var(--header-link);
+}
+
+header a {
+    height: 100%;
+    display: grid;
+    place-items: center;
 }

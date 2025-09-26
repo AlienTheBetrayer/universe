@@ -8,9 +8,10 @@ interface Props {
     elements: string[];
     className?: string;
     onSelected?: (idx: number) => void;
+    title?: string;
 }
 
-export const ListButton = ({ onSelected, elements, className=''  }: Props) => {
+export const ListButton = ({ onSelected, elements, className='', title='Selected:'}: Props) => {
     const [currentId, setCurrentId] = useState<number>(0);
     
     const handlePrevious = () => {
@@ -34,15 +35,18 @@ export const ListButton = ({ onSelected, elements, className=''  }: Props) => {
             <div className='list-button-top'>
                 <button className='list-button-top-previous' onClick={() => handlePrevious()}>↓</button>
 
-                <AnimatePresence mode='wait'>
-                    <motion.span
-                    key={currentId}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}>
-                        { elements[currentId] }
-                    </motion.span>
-                </AnimatePresence>
+                <div className='list-button-top-element'>
+                    <span>{title}</span>
+                    <AnimatePresence mode='wait'>
+                        <motion.h4
+                        key={currentId}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}>
+                            { elements[currentId] }
+                        </motion.h4>
+                    </AnimatePresence>
+                </div>
 
                 <button className='list-button-top-next' onClick={() => handleNext()}>↑</button>
             </div>

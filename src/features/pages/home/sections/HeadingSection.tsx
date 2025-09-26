@@ -80,7 +80,7 @@ export const HeadingSection = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 3.5, duration: 1 }}>
-                <ListButton className='heading-effects' elements={Object.values(VectorTypes)} onSelected={handleSelect}/>
+                <ListButton title='Formula:' className='heading-effects' elements={Object.values(VectorTypes)} onSelected={handleSelect}/>
             </motion.div>
         </section>
     )
