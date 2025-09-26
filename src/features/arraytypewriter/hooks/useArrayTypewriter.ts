@@ -6,6 +6,7 @@ export const useArrayTypewriter = (words: string[], scrollProgress: MotionValue<
     const [letterIdx, setLetterIdx] = useState<number>(-1);
     
     const [word, setWord] = useState<string>('');
+    const [cursorVisible, setCursorVisible] = useState<boolean>(true);
 
     useEffect(() => {
         const handle = (progress: number) => {
@@ -26,14 +27,14 @@ export const useArrayTypewriter = (words: string[], scrollProgress: MotionValue<
         return () => unsub();
     }, [scrollProgress]);
     
-    
     useEffect(() => {
         if(wordIdx >= 0 && wordIdx < words.length && letterIdx >= 0 && letterIdx < words[wordIdx].length)
             setWord(words[wordIdx].slice(0, letterIdx + 1));
         
         if(letterIdx == -1)
             setWord('');
+        setCursorVisible(letterIdx != words[wordIdx].length - 1)
     }, [wordIdx, letterIdx]);
 
-    return word;
+    return { word: word, isCursorVisible: cursorVisible}
 }
