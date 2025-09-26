@@ -25,9 +25,9 @@ export const Header = () => {
 
     return (    
         <motion.header
-        initial={{ y: -100, x: '-50%' }}
+        initial={{ y: loaded.header ? 0 : -100, x: '-50%' }}
         animate={{ y: 0, x: '-50%' }}
-        transition={{ delay: loaded.header ? 0 : 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
+        transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <nav>
                 <UniversalLink to='/' className='home-button'>Home</UniversalLink>
 
