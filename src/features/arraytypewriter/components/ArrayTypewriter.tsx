@@ -27,12 +27,10 @@ export const ArrayTypewriter = ({ scrollProgress, words, as='h1', style, ...rest
                 </MotionTag>
             ))}
 
-            { typewriter.isCursorVisible && (
-                <motion.div className='array-typewriter-progress'
-                style={{...style }}>
-                    |
-                </motion.div>
-            )}
+            <motion.div className='array-typewriter-progress'
+            style={{...style }}>
+                |
+            </motion.div>
         </AnimatePresence>
     )
 }
