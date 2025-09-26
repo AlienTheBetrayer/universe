@@ -14,11 +14,11 @@ export const HeadingSection = () => {
 
     return (
         <section className='heading-section container'>
-            <AnimatedText as='h1' speed={1} delay={0.3}>
+            <AnimatedText as='h1' delay={0.3}>
                 Redefining innovation through personal projects
             </AnimatedText>
 
-            <AnimatedText as='p' speed={8} delay={2.8}>
+            <AnimatedText as='p' delay={2.8}>
                 Leveraging technology and design to transform personal initiatives into sophisticated, forward-thinking solutions that exemplify creativity, technical excellence, and impactful innovation.
             </AnimatedText>
 
