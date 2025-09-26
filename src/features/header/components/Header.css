@@ -65,13 +65,9 @@ header .home-button {
 }
 
 .header-launch-app {
-    background-color: var(--button-app-fill);
+    background: linear-gradient(193deg, rgb(2, 2, 158), rgb(39, 39, 240));
     color: #fff !important;
     text-align: center;
-}
-
-.header-launch-app:hover {
-    background-color: var(--button-app-hover);
 }
 
 header .universal-link:hover {

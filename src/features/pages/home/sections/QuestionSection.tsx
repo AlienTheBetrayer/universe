@@ -5,6 +5,8 @@ import { AnimatePresence, useInView } from 'motion/react';
 import { motion } from 'motion/react';
 import { QuestionAuroraCanvas } from '../components/QuestionAuroraCanvas';
 import { useQuestionContext } from '../context/QuestionContext';
+import { Button } from '../../../ui/Button/components/Button';
+import { LinkButton } from '../../../ui/LinkButton/components/LinkButton';
 
 
 export const QuestionSection = () => {
@@ -46,16 +48,16 @@ export const QuestionSection = () => {
 
 const DefaultContent = () => {
     return (
-        <div className='question-default-content'>
-            Are you ready to dive in?
-        </div>
+        <div className='question-default-content'/>
     )
 }
 
 const RevealedContent = () => {
     return (
         <div className='question-revealed-content'>
-            Proceed to contact.
+            <LinkButton className='question-revealed-contact-link' to='/contact'>
+                Proceed to contact.
+            </LinkButton>
         </div>
     )
 }

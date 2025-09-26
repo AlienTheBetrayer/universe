@@ -36,8 +36,14 @@ export const Header = () => {
                         <UniversalLink to='/philosophy'>Philosophy</UniversalLink>
                         <UniversalLink to='/contact'>Contact</UniversalLink>
 
-                        <LinkButton className='header-launch-app' to='/app'>Launch App</LinkButton>
 
+                        <motion.div
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.15 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 20 }}>
+
+                        <LinkButton className='header-launch-app' to='/app'>Launch App</LinkButton>
+                        </motion.div>
                         <Settings/>
                     </>
                 ) : (

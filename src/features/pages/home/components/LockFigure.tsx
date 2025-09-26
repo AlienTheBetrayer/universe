@@ -38,9 +38,9 @@ export const LockFigure = ({ progress }: Props) => {
             const orbitMaterial = orbitRef.current.material as MeshPhysicalMaterial;
 
             // rotation
-            groupRef.current.rotation.x = rotation * 5 + t / 10;
-            groupRef.current.rotation.y = rotation * 5 + t / 10;
-            groupRef.current.rotation.z = rotation * 5 + t / 10;
+            groupRef.current.rotation.x = rotation * 5 + t / 30;
+            groupRef.current.rotation.y = rotation * 5 + t / 30;
+            groupRef.current.rotation.z = rotation * 5 + t / 30;
             groupRef.current.scale.set(1 + rotation, 1 + rotation, 1 + rotation);
 
             // main sphere color based on progress

@@ -46,11 +46,9 @@
     --foreground-last: #fff;
 
     /* pseudo & misc */
-    --selection: rgb(34, 78, 237);
+    --selection: rgb(112, 112, 112);
 
     /* component specific */
-    --button-app-fill: rgb(39, 78, 220);
-    --button-app-hover: rgb(27, 57, 165);
     --button-dark: rgba(0, 0, 255, 0.6);
     --button-darker: rgba(0, 0, 255, 0.2);
     --header-link: #fff;
@@ -88,7 +86,7 @@
     --foreground-last: #000000;
 
     /* pseudo & misc */
-    --selection: rgb(115, 140, 231);
+    --selection: rgb(112, 112, 112);
 
     /* component specific */
     --button-app-fill: rgb(39, 78, 220); /* keep accent color */

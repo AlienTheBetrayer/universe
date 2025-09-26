@@ -3,6 +3,7 @@ import { Footer } from "../../footer/components/Footer";
 import { Header } from "../../header/components/Header";
 import { Content } from "./Content";
 import { ScrollButton } from '../../scrollbutton/components/ScrollButton';
+import { ProgressBar } from '../../progressbar/components/ProgressBar';
 
 interface PageSettings {
     header?: boolean;
@@ -10,6 +11,7 @@ interface PageSettings {
     footer?: boolean;
     
     scrollButton?: boolean;
+    progressBar?: boolean;
 }
 
 const Defaults: PageSettings = {
@@ -18,6 +20,7 @@ const Defaults: PageSettings = {
     footer: true,
     
     scrollButton: true,
+    progressBar: true
 }
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -36,6 +39,7 @@ export const Page = ({ className, settings, children, ...rest }: Props) => {
             ) }
 
             { (settings?.scrollButton ?? Defaults.scrollButton) && <ScrollButton/>}
+            { (settings?.progressBar ?? Defaults.progressBar) && <ProgressBar/>}
             
             { (settings?.footer ?? Defaults.footer) && <Footer/> }
         </main>
