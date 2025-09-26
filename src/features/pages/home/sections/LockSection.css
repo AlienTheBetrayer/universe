@@ -17,16 +17,9 @@
     transform: translateY(-50%);
 }
 
-.sphere-canvas-text-left, .sphere-canvas-text-right {
+.sphere-canvas-text-left {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-}
-
-.sphere-canvas-text-left {
     left: 2rem;
-}
-
-.sphere-canvas-text-right {
-    right: 10rem;
 }

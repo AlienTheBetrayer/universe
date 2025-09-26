@@ -16,11 +16,6 @@ export const LockSection = () => {
         'Done!'
     ];
 
-    const rightWords = [
-        'Are you ready?',
-        'To see?'
-    ];
-
     const { scrollYProgress } = useScroll({ target: scrollRef }); 
     const scrollSpringed = useSpring(scrollYProgress, { stiffness: 40, damping: 20 });
     const progressValue = useValueMotion(scrollSpringed);
@@ -34,12 +29,6 @@ export const LockSection = () => {
                 <LockCanvas ref={scrollRef}/>
                 <div className='sphere-canvas-text-left'>
                     <ArrayTypewriter scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}>
-
-                    </ArrayTypewriter>
-                </div>
-
-                <div className='sphere-canvas-text-right'>
-                    <ArrayTypewriter scrollProgress={scrollSpringed} words={rightWords} style={letterStyle}>
 
                     </ArrayTypewriter>
                 </div>

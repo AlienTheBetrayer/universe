@@ -17,11 +17,12 @@ export const ArrayTypewriter = ({ scrollProgress, words, as='h1', style, ...rest
     return (
         <AnimatePresence>
             { Array.from(typewriter.word).map((letter, idx) => (
-                <MotionTag className='array-typewriter-letter' key={`arraytypewriter-${idx}`} style={style} {...rest}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1  }}
-                exit={{ opacity: 0, x: 10 }}
-                transition= {{ duration: 0.3 }}>
+                <MotionTag className='array-typewriter-letter' key={`arraytypewriter-${idx}`}
+                style={style} {...rest}
+                initial={{ opacity: 0, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                exit={{ filter: 'blur(40px)' }}
+                transition= {{ duration: 0.5 }}>
                     { letter }
                 </MotionTag>
             ))}
