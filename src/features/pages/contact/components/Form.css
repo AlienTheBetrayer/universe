@@ -76,8 +76,8 @@
 
 /* invalid / valid animations */
 .contact-form input:invalid, .contact-form textarea:invalid {
-    outline: 1px solid rgb(158, 78, 78);
-    text-decoration: underline wavy rgb(158, 78, 78);
+    outline: 1px solid hsl(0, 24%, 46%);
+    text-decoration: underline wavy hsl(0, 24%, 46%);
 }
 
 .contact-form input:valid, .contact-form textarea:valid {
