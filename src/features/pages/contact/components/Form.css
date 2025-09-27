@@ -1,7 +1,102 @@
+/* actual form */
 .contact-form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+
     border-radius: 50px;
-    min-height: 400px;
+    min-height: 450px;
     width: 100%;
     background: linear-gradient(179deg, var(--background-2-transparent), var(--background-transparent));
     backdrop-filter: blur(4px);
+}
+
+@media (max-width: 640px) {
+    .contact-form {
+        min-height: 600px;
+    }
+}
+
+/* all elements */
+.contact-form * {
+    padding: 1rem;
+    border-radius: 20px;
+}
+
+.contact-form button, .contact-form input, .contact-form textarea {
+    background: linear-gradient(179deg, var(--background-2-transparent), var(--background-transparent));
+}
+
+.contact-form > div {
+    padding: 0rem;
+    display: flex;
+    position: relative;
+}
+
+.contact-form > div > button {
+    position: absolute;
+    right: 0.5rem;  
+    height: 100%;
+    background: transparent;
+}
+
+.contact-form-message-container {
+    flex: 1;
+}
+
+/* clear the default border */
+.contact-form *:focus {
+    border: transparent;
+    outline: transparent;
+}
+
+/* all inputs animations */
+.contact-form input, .contact-form textarea {
+    transition: 0.3s;
+    text-decoration-skip-ink: none;
+    width: 100%;
+}
+
+/* placeholder */
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: var(--background-9);
+    transition: 0.3s;
+    padding: 0.2rem 0;
+}
+
+/* focused (placeholder + regular) */
+.contact-form input:focus::placeholder, .contact-form textarea:focus::placeholder {
+    color: var(--selection);
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    color: white;
+}
+
+/* invalid / valid animations */
+.contact-form input:invalid, .contact-form textarea:invalid {
+    outline: 1px solid rgb(158, 78, 78);
+    text-decoration: underline wavy rgb(158, 78, 78);
+}
+
+.contact-form input:valid, .contact-form textarea:valid {
+    outline: 1px solid transparent;
+    text-decoration: none;
+}
+
+
+/* textarea (main message) */
+.contact-form textarea {
+    resize: none;
+    flex: 1;
+}
+
+/* button */
+.contact-form button {
+    border: 2px dashed var(--background-7-transparent);
+}
+
+.contact-form button:hover {
+    color: #fff;
 }

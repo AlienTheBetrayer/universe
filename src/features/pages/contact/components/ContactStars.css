@@ -30,3 +30,17 @@
     top: 2rem;
     left: 0;
 }
+
+@media (max-width: 640px) {
+    .contact-star-left {
+        left: 1rem;
+    }
+
+    .contact-star-right {
+        right: 1rem;
+    }
+
+    .contact-star-middle {
+        top: 1rem;
+    }   
+}

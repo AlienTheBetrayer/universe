@@ -7,5 +7,6 @@
 @media (max-width: 640px) {
     .form-section {
         margin-top: 18rem !important;
+        max-width: 90%;
     }
 }

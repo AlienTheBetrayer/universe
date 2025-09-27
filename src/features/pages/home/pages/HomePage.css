@@ -23,7 +23,8 @@
     font-size: 22vw;
     opacity: 0.075;
     font-weight: 900;
-    mask-image: linear-gradient(-193deg, #fff, transparent 80%);
+    background-color: var(--background);
+    mask-image: linear-gradient(-193deg, #fff, transparent 100%);
 }
 
 
