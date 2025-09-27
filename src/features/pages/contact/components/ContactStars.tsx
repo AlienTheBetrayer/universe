@@ -4,7 +4,6 @@ import { motion } from 'motion/react';
 
 export const ContactStars = () => {
     const color = useContactContext()[0].color.map(n => n * 255);
-    console.log(color);
 
     return (
         <>

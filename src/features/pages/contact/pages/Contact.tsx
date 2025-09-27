@@ -13,13 +13,13 @@ export const Contact = () => {
     return (
         <Page settings={{ progressBar: false }}>
             <ContactContext value={contactContextValue}>
+                <ContactStars/>
+
                 <div className='contact-wrapper'>
                     <ContactCanvas/>
-                    <IntroSection/>
                     <FormSection/>
+                    <IntroSection/>
                 </div>
-
-                <ContactStars/>
             </ContactContext>
         </Page>
     )

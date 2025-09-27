@@ -32,8 +32,8 @@ export const ContactText = () => {
     });
     
     return (
-        <Center position={[0, viewport.innerWidth > 640 ? 1 : 2, 0]}>
-            <Text3D font='/fonts/inter-typeface.json' size={ viewport.innerWidth / 100 * 0.075 } curveSegments={10}  height={viewport.innerWidth > 640 ? 1 : 0.3} bevelEnabled ref={ref}>
+        <Center position={[0, viewport.innerWidth > 640 ? 1.5 : 2, 0]}>
+            <Text3D font='/fonts/inter-typeface.json' size={ viewport.innerWidth / 100 * 0.1 } curveSegments={10}  height={viewport.innerWidth > 640 ? 1 : 0.3} bevelEnabled ref={ref}>
                 CONTACT
                 <meshPhongMaterial shininess={10} specular='#fff'/>
             </Text3D>

@@ -1,0 +1,11 @@
+.form-section {
+    transform: translateZ(1px);
+    margin-top: 24rem !important;
+    max-width: 80%;
+}
+
+@media (max-width: 640px) {
+    .form-section {
+        margin-top: 18rem !important;
+    }
+}
