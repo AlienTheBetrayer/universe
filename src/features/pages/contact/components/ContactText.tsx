@@ -1,17 +1,12 @@
-import { Text3D } from "@react-three/drei";
+import { Center, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useLayoutEffect, useRef } from "react"
+import { useRef } from "react"
 import { Mesh, MeshPhongMaterial } from "three"
+import { useViewport } from "../../../../hooks/useViewport";
 
 export const ContactText = () => {
     const ref = useRef<Mesh>(null);
-
-    useLayoutEffect(() => {
-        if(ref.current) {
-            ref.current.geometry.center();
-            ref.current.position.y = 1;
-        }
-    }, [ref]);
+    const viewport = useViewport();
 
     useFrame(state => {
         const t = state.clock.getElapsedTime();
@@ -30,10 +25,11 @@ export const ContactText = () => {
     });
     
     return (
-        <Text3D font='/fonts/inter-typeface.json'
-        size={1} curveSegments={10}  height={1} bevelEnabled ref={ref}>
-            CONTACT
-            <meshPhongMaterial shininess={10} specular='#fff'/>
-        </Text3D>
+        <Center position={[0, viewport.innerWidth > 640 ? 1 : 2, 0]}>
+            <Text3D font='/fonts/inter-typeface.json' size={ viewport.innerWidth / 100 * 0.075 } curveSegments={10}  height={viewport.innerWidth > 640 ? 1 : 0.3} bevelEnabled ref={ref}>
+                CONTACT
+                <meshPhongMaterial shininess={10} specular='#fff'/>
+            </Text3D>
+        </Center>
     )
 }

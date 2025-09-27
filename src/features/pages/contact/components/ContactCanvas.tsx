@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber"
 import { motion } from "motion/react"
 import { ContactText } from './ContactText';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { ContactParticles } from './ContactParticles';
 
 export const ContactCanvas = () => {
 
@@ -15,6 +16,7 @@ export const ContactCanvas = () => {
                 <pointLight position={[ 1, 2, 3]} intensity={2}/>
 
                 <ContactText/>
+                <ContactParticles/>
 
                 <EffectComposer>
                     <Bloom intensity={10} luminanceThreshold={0}/>
