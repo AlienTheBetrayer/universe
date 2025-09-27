@@ -1,7 +1,7 @@
 import { Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useLayoutEffect, useRef } from "react"
-import { Mesh, MeshPhysicalMaterial } from "three"
+import { Mesh, MeshPhongMaterial } from "three"
 
 export const ContactText = () => {
     const ref = useRef<Mesh>(null);
@@ -18,7 +18,7 @@ export const ContactText = () => {
         const t = state.clock.getElapsedTime();
         if(ref.current) {
             // color shift
-            const material = ref.current.material as MeshPhysicalMaterial;
+            const material = ref.current.material as MeshPhongMaterial;
             const progress = Math.abs(Math.sin(t / 4));
             material.color.r = (1 - progress) * 3
             material.color.g = 0;
@@ -34,7 +34,7 @@ export const ContactText = () => {
         size={1} curveSegments={10}  height={1} bevelEnabled
         ref={ref}>
             CONTACT
-            <meshPhysicalMaterial color='#fff' metalness={0} roughness={1}/>
+            <meshPhongMaterial shininess={10} specular='#fff'/>
         </Text3D>
     )
 }
