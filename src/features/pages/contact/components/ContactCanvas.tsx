@@ -12,7 +12,7 @@ export const ContactCanvas = () => {
         initial={{ opacity: 0, filter: 'blur(40px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ delay: 1, duration: 3 }}>
-            <Canvas>
+            <Canvas style={{ width: '100%', height: '100%'}}>
                 <pointLight position={[ 1, 2, 3]} intensity={2}/>
 
                 <ContactText/>
