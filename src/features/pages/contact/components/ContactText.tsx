@@ -10,7 +10,6 @@ export const ContactText = () => {
         if(ref.current) {
             ref.current.geometry.center();
             ref.current.position.y = 1;
-            
         }
     }, [ref]);
 
@@ -24,6 +23,7 @@ export const ContactText = () => {
             material.color.g = 0;
             material.color.b = progress * 3;
 
+            // rotation
             ref.current.rotation.x = Math.sin(t) / 10;
             ref.current.rotation.y = Math.sin(t) / 10;
         }
@@ -31,8 +31,7 @@ export const ContactText = () => {
     
     return (
         <Text3D font='/fonts/inter-typeface.json'
-        size={1} curveSegments={10}  height={1} bevelEnabled
-        ref={ref}>
+        size={1} curveSegments={10}  height={1} bevelEnabled ref={ref}>
             CONTACT
             <meshPhongMaterial shininess={10} specular='#fff'/>
         </Text3D>
