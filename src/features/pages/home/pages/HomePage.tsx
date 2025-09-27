@@ -18,7 +18,7 @@ export const HomePage = () => {
     const questionContextData = useState<QuestionContextData>({ revealed: false });
 
     return (
-        <Page className='home-page'>
+        <Page>
             <div className='spotlight-container'>
                 <Spotlight className='-left-30 top-0 h-600 w-300 lg:h-300' fill='#9393ffff'/>
                 <Spotlight className='right-0 top-0 lg:-right-60 lg:top-0 h-300 w-300 rotate-90' fill='#8888f5ff'/>
