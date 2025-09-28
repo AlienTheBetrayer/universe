@@ -1,7 +1,7 @@
 .form-section {
     transform: translateZ(1px);
-    margin-top: 26rem !important;
-    max-width: 80%;
+    margin-top: 30rem !important;
+    max-width: 75%;
 }
 
 @media (max-width: 640px) {

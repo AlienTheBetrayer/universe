@@ -19,7 +19,7 @@ export const ContactCanvas = () => {
                 <ContactParticles/>
 
                 <EffectComposer>
-                    <Bloom intensity={10} luminanceThreshold={0}/>
+                    <Bloom intensity={4} luminanceThreshold={0}/>
                 </EffectComposer>
             </Canvas>
         </motion.div>

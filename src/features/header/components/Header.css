@@ -35,6 +35,7 @@ header > nav {
     border-radius: 20px;
     backdrop-filter: blur(8px);
     background: var(--background-fulltransparent);
+
 }
 
 @media (max-width: 640px) {

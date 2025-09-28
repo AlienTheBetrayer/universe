@@ -20,7 +20,7 @@
 .question-default-content::after {
     content: '?';
     opacity: 0.1;
-    font-size: 35rem;
+    font-size: 30rem;
     line-height: 1;
 }
 
@@ -45,6 +45,7 @@
     .question-revealed-contact-link {
         font-size: 2rem;
         padding: 2rem;
+        margin: 1rem;
     }
 }
 
@@ -62,11 +63,4 @@
     .question-revealed-content {
         font-size: 3rem;
     }
-}
-
-.question-divein {
-    font-size: 5rem;
-    padding: 4rem;
-    background-color: transparent;
-    border-radius: 1000px;
 }

@@ -6,7 +6,7 @@
     gap: 1rem;
 
     border-radius: 50px;
-    min-height: 450px;
+    min-height: 500px;
     width: 100%;
     background: linear-gradient(179deg, var(--background-2-transparent), var(--background-transparent));
     backdrop-filter: blur(4px);
@@ -24,19 +24,21 @@
     border-radius: 20px;
 }
 
-.contact-form button, .contact-form input, .contact-form textarea {
+.contact-form button,
+.contact-form input,
+.contact-form textarea {
     background: linear-gradient(179deg, var(--background-2-transparent), var(--background-transparent));
 }
 
-.contact-form > div {
+.contact-form>div {
     padding: 0rem;
     display: flex;
     position: relative;
 }
 
-.contact-form > div > button {
+.contact-form>div>button {
     position: absolute;
-    right: 0.5rem;  
+    right: 0.5rem;
     height: 100%;
     background: transparent;
 }
@@ -52,35 +54,43 @@
 }
 
 /* all inputs animations */
-.contact-form input, .contact-form textarea {
+.contact-form input,
+.contact-form textarea {
     transition: 0.3s;
     text-decoration-skip-ink: none;
     width: 100%;
 }
 
 /* placeholder */
-.contact-form input::placeholder, .contact-form textarea::placeholder {
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
     color: var(--background-9);
     transition: 0.3s;
     padding: 0.2rem 0;
 }
 
 /* focused (placeholder + regular) */
-.contact-form input:focus::placeholder, .contact-form textarea:focus::placeholder {
+.contact-form input:focus::placeholder,
+.contact-form textarea:focus::placeholder {
     color: var(--selection);
 }
 
-.contact-form input:focus, .contact-form textarea:focus {
-    color: white;
+.contact-form input:focus,
+.contact-form textarea:focus {
+    color: var(--foreground-last);
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
 }
 
 /* invalid / valid animations */
-.contact-form input:invalid, .contact-form textarea:invalid {
-    outline: 1px solid hsl(0, 24%, 46%);
-    text-decoration: underline wavy hsl(0, 24%, 46%);
+.contact-form input:invalid,
+.contact-form textarea:invalid {
+    outline: 1px solid hsl(240, 8%, 30%);
+    text-decoration: underline wavy hsl(240, 8%, 30%);
 }
 
-.contact-form input:valid, .contact-form textarea:valid {
+.contact-form input:valid,
+.contact-form textarea:valid {
     outline: 1px solid transparent;
     text-decoration: none;
 }
