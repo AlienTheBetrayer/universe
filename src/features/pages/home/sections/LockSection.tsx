@@ -20,14 +20,14 @@ export const LockSection = () => {
     const scrollSpringed = useSpring(scrollYProgress, { stiffness: 40, damping: 20 });
     const progressValue = useValueMotion(scrollSpringed);
     
-    const letterStyle = { color: `rgb(${progressValue * 255}, 0, ${(1 - progressValue) * 255})`, fontSize: '3rem' };
+    const letterStyle = { color: `rgb(${progressValue * 255}, 0, ${(1 - progressValue) * 255})`, fontSize: '2.5rem' };
 
 
     return (
         <section ref={scrollRef} className='sphere-canvas-container'>
             <div className='sphere-canvas-lock'>
                 <LockCanvas ref={scrollRef}/>
-                <div className='sphere-canvas-text-left'>
+                <div className='sphere-canvas-typewriter'>
                     <ArrayTypewriter scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}>
 
                     </ArrayTypewriter>

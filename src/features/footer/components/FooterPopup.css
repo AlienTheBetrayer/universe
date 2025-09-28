@@ -2,10 +2,13 @@
     display: grid;
     place-items: center;
     position: absolute;
-    height: 48px;
+    min-height: 48px;
     min-width: 48px;
+    padding: 0.5rem;
+
     border-radius: 20px;
     background: var(--background-4-transparent);
     color: var(--foreground-prelast);
-    padding: 0.5rem 1rem;
+    backdrop-filter: blur(4px);
+    text-align: center;
 }

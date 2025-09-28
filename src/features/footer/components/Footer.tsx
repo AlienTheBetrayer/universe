@@ -8,7 +8,7 @@ import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 
 import { motion } from 'motion/react';
 import { useRef } from 'react';
-import { useFooterPopup } from '../hooks/useFooterPopup';
+import { useFooterPopups } from '../hooks/useFooterPopups';
 
 export const Footer = () => {
     const buttons = [
@@ -16,7 +16,7 @@ export const Footer = () => {
             src: githubImg,
             alt: 'Github',
             to: 'https://github.com/AlienTheBetrayer/theuniverse',
-            text: 'Github Repository'
+            text: 'This Github Repository'
         },
         {
             src: linkedinImg,
@@ -33,7 +33,7 @@ export const Footer = () => {
     ];
 
     const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const footerPopups = useFooterPopup(buttonRefs);
+    const footerPopups = useFooterPopups(buttonRefs);
 
     return (
         <footer>    

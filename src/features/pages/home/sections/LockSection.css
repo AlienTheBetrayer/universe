@@ -17,7 +17,7 @@
     transform: translateY(-50%);
 }
 
-.sphere-canvas-text-left {
+.sphere-canvas-typewriter {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -25,7 +25,7 @@
 }
 
 @media (max-width: 768px) {
-    .sphere-canvas-text-left {
+    .sphere-canvas-typewriter {
         display: flex;
         justify-content: center;
         align-items: center;

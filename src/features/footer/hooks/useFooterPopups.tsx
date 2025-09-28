@@ -16,7 +16,7 @@ export interface FooterPopupOffset {
     width: number;
 }
 
-export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>) => {
+export const useFooterPopups = (refs: React.RefObject<(HTMLDivElement | null)[]>) => {
     const [popupsShown, setPopupsShown] = useState<FooterPopup[]>([]);
     const [offsets, setOffsets] = useState<FooterPopupOffset[]>([]);
 
