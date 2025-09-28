@@ -36,10 +36,10 @@
     position: relative;
 }
 
-.contact-form>div>button {
+.contact-form > div > button {
     position: absolute;
-    right: 0.5rem;
     height: 100%;
+    right: 0.5rem;
     background: transparent;
 }
 
