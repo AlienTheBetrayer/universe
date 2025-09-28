@@ -54,6 +54,7 @@
     --button-darker: rgba(0, 0, 255, 0.2);
     --header-link: #fff;
     --b: 1.3;
+    --footer-invert: 1;
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;
@@ -98,6 +99,7 @@
     --button-darker: rgba(0, 0, 255, 0.2);
     --header-link: #0000ff;
     --b: 0.7;
+    --footer-invert: 0;
 
     /* font sizes */
     --font-h1: 2.6rem;

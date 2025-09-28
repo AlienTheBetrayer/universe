@@ -55,10 +55,6 @@ header .header-open-menu:hover {
     color: var(--foreground-last);
 }
 
-header .home-button {
-    /* margin-right: auto; */
-}
-
 @media (max-width: 640px) {
     header .home-button {
         margin-right: 0;
