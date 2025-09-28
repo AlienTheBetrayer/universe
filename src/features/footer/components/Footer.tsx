@@ -15,17 +15,20 @@ export const Footer = () => {
         {
             src: githubImg,
             alt: 'Github',
-            to: 'https://github.com/AlienTheBetrayer/theuniverse'
+            to: 'https://github.com/AlienTheBetrayer/theuniverse',
+            text: 'Github Repository'
         },
         {
             src: linkedinImg,
             alt: 'Linkedin',
-            to: 'https://linkedin.com/in/gleb-pichkurov-14662a385/'
+            to: 'https://linkedin.com/in/gleb-pichkurov-14662a385/',
+            text: 'Linkedin Page'
         },
         {
             src: prevPortfolioImg,
             alt: 'Prev. Proj.',
-            to: 'https://glebpichkurov.vercel.app/'
+            to: 'https://glebpichkurov.vercel.app/',
+            text: 'My previous portfolio'
         }   
     ];
 
@@ -41,7 +44,7 @@ export const Footer = () => {
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 40 }}
                     key={idx} ref={el => { buttonRefs.current[idx] = el }}
-                    onPointerEnter={() => footerPopups.update(idx, true)}
+                    onPointerEnter={() => footerPopups.update(idx, true, button.text)}
                     onPointerLeave={() => footerPopups.update(idx, false)}>
                         <UniversalLink to={button.to} type='url'>
                             <img src={button.src} alt={button.alt}/>

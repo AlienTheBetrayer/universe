@@ -6,12 +6,14 @@ import { AnimatePresence } from "motion/react";
 interface FooterPopup {
     idx: number;
     shown: boolean;
+    text: string;
 }
 
-interface FooterPopupOffset {
+export interface FooterPopupOffset {
     idx: number;
     left: number;
     top: number;
+    width: number;
 }
 
 export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>) => {
@@ -22,7 +24,7 @@ export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>)
     useLayoutEffect(() => {
         const arr: FooterPopup[] = [];
         for(let i = 0; i < refs.current.length; ++i)
-            arr.push({ idx: i, shown: false });
+            arr.push({ idx: i, shown: false, text: '' });
         setPopupsShown(arr);
     }, [refs]);
 
@@ -34,7 +36,7 @@ export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>)
             refs.current.forEach((ref, idx) => {
                 const rect = ref?.getBoundingClientRect();
                 if(rect)
-                newOffsets.push({ idx: idx, left: rect.left, top: rect.top + window.scrollY});
+                newOffsets.push({ idx: idx, left: rect.left, top: rect.top + window.scrollY, width: rect.width });
             });
 
             setOffsets(newOffsets);
@@ -55,7 +57,7 @@ export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>)
                     {
                         popupsShown.map((popup, idx) => (
                             popup.shown && (
-                                <FooterPopup key={idx} idx={idx} left={offsets[popup.idx].left} top={offsets[popup.idx].top}/>
+                                <FooterPopup key={idx} offset={offsets[idx]} text={popup.text}/>
                             )
                         ))
                     }
@@ -65,8 +67,8 @@ export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>)
     }
 
     // function to update the visibility of a given popup
-    const update = (idx: number, shown: boolean) => {
-        setPopupsShown(prev => prev.map(val => val.idx === idx ? { idx: val.idx, shown: shown } : val));
+    const update = (idx: number, shown: boolean, text?: string) => {
+        setPopupsShown(prev => prev.map(val => val.idx === idx ? { idx: val.idx, shown: shown, text: text ?? '' } : val));
     }
 
     return { update, render };
