@@ -33,7 +33,7 @@ export const Footer = () => {
                 { buttons.map(button => (
                         <motion.div
                         initial={{ scale: 1 }}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.2 }}
                         transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
 
                             <UniversalLink to={button.to} type='url'>

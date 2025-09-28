@@ -14,15 +14,15 @@ footer nav {
     max-width: 550px;
     margin: 0 auto;
     padding: 1rem;
-    
+
     background: linear-gradient(35deg, var(--background-5-transparent), var(--background-transparent));
     border-radius: 20px;
     backdrop-filter: blur(4px);
 }
 
 footer img {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     filter: invert(var(--footer-invert)) grayscale(1);
 }
 
