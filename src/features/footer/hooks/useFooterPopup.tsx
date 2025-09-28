@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from "react"
 import { createPortal } from "react-dom";
 import { FooterPopup } from "../components/FooterPopup";
+import { AnimatePresence } from "motion/react";
 
 interface FooterPopup {
     idx: number;
@@ -49,11 +50,17 @@ export const useFooterPopup = (refs: React.RefObject<(HTMLDivElement | null)[]>)
     // actual rendering of all the popups
     const render = () => {
         return (
-            popupsShown.map(popup => (
-                popup.shown && (
-                    createPortal(<FooterPopup left={offsets[popup.idx].left} top={offsets[popup.idx].top}/>, document.body)
-                )
-            ))
+            createPortal(
+                <AnimatePresence>
+                    {
+                        popupsShown.map((popup, idx) => (
+                            popup.shown && (
+                                <FooterPopup key={idx} idx={idx} left={offsets[popup.idx].left} top={offsets[popup.idx].top}/>
+                            )
+                        ))
+                    }
+                </AnimatePresence>
+                , document.body)
         )
     }
 
