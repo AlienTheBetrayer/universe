@@ -7,6 +7,8 @@ import prevPortfolioImg from '../assets/prev-portfolio.svg';
 import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 
 import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { useFooterPopup } from '../hooks/useFooterPopup';
 
 export const Footer = () => {
     const buttons = [
@@ -27,20 +29,27 @@ export const Footer = () => {
         }   
     ];
 
+    const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const footerPopups = useFooterPopup(buttonRefs);
+
     return (
         <footer>    
             <nav>
-                { buttons.map(button => (
-                        <motion.div
-                        initial={{ scale: 1 }}
-                        whileHover={{ scale: 1.2 }}
-                        transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
-
-                            <UniversalLink to={button.to} type='url'>
-                                <img src={button.src} alt={button.alt}/>
-                            </UniversalLink>
-                        </motion.div>
+                { buttons.map((button, idx) => (
+                    <motion.div
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.2 }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 40 }}
+                    key={idx} ref={el => { buttonRefs.current[idx] = el }}
+                    onPointerEnter={() => footerPopups.update(idx, true)}
+                    onPointerLeave={() => footerPopups.update(idx, false)}>
+                        <UniversalLink to={button.to} type='url'>
+                            <img src={button.src} alt={button.alt}/>
+                        </UniversalLink>
+                    </motion.div>
                 ))}
+
+                { footerPopups.render() }
             </nav>
         </footer>
     )
