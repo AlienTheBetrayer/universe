@@ -1,7 +1,10 @@
 .footer-popup {
+    display: grid;
+    place-items: center;
     position: absolute;
-    height: 32px;
-    width: 32px;
-    background-color: white;
-    color: black;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 20px;
+    background: var(--background-5-transparent);
+    padding: 0.5rem;
 }
