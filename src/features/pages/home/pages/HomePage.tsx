@@ -16,7 +16,7 @@ import { motion } from 'motion/react';
 export const HomePage = () => {
     const headingContextData = useState<HeadingContextData>({ vectorType: VectorTypes.astral});
     const questionContextData = useState<QuestionContextData>({ revealed: false });
-
+    
     return (
         <Page>
             <div className='spotlight-container'>

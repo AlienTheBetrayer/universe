@@ -31,7 +31,6 @@ export const Header = () => {
         const timeout = setTimeout(() => {
             setJustified(loaded.header);
         }, 1500);
-
         return () => clearTimeout(timeout);
     }, [loaded.header]);
 

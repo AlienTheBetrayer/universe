@@ -38,12 +38,6 @@ header > nav {
 
 }
 
-@media (max-width: 640px) {
-    header > nav > * {
-        width: 30%;
-    }
-}
-
 header .header-open-menu {
     background-color: transparent;
     transition: 0s;

@@ -3,10 +3,8 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react"
 import { Mesh, MeshPhongMaterial } from "three"
 import { useViewport } from "../../../../hooks/useViewport";
-import { useContactContext } from "../context/ContactContext";
 
 export const ContactText = () => {
-    const [, setContactContextData] = useContactContext();
     const ref = useRef<Mesh>(null);
     const viewport = useViewport();
 
@@ -17,12 +15,9 @@ export const ContactText = () => {
             const material = ref.current.material as MeshPhongMaterial;
             const progress = Math.abs(Math.sin(t / 4));
             
-            const rgb = [(1 - progress) * 3, 0, progress * 3];
-            material.color.r = rgb[0];
-            material.color.g = rgb[1];
-            material.color.b = rgb[2];
-
-            setContactContextData(prev => ({...prev, color: rgb}));
+            material.color.r = (1 - progress) * 3;
+            material.color.g = 0;
+            material.color.b = progress * 3;
 
             // rotation
             ref.current.rotation.x = Math.cos(t) / 30;
