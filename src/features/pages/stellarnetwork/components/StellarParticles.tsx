@@ -10,15 +10,17 @@ export const StellarParticles = () => {
     const { camera } = useThree();
 
     const handle = (object: Object3D<Object3DEventMap>, idx: number) => {
-        setSelected(idx);
-        gsap.timeline().to(camera.position, { x: object.position.x, y: object.position.y, z: 0.12, duration: 2, ease: 'circ.out' })
+        const position = selected !== idx ? [object.position.x, object.position.y, 0.12] : [0, 0, 5];
+        setSelected(prev => prev === idx ? -1 : idx);
+        
+        gsap.timeline().to(camera.position, { x: position[0], y: position[1], z: position[2], duration: 2, ease: 'circ.inOut' })
         
     }
 
     return (
         data.stellars.map((stellar, idx) => (
             <mesh key={idx} position={[stellar.x, stellar.y, 0]} onClick={(e) => handle(e.object, idx)}>
-                <sphereGeometry args={[0.03]}/>
+                <sphereGeometry args={[0.05]}/>
                 <meshPhysicalMaterial color={`${selected !== idx ? '#fff' : '#66a'}`} wireframe/>
             </mesh>
         ))
