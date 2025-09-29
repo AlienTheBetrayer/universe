@@ -3,19 +3,16 @@ import { QuestionParticles } from "./QuestionParticles"
 import { Bloom, EffectComposer } from "@react-three/postprocessing"
 
 interface Props {
-    renderBloom?: boolean;
 }
 
-export const QuestionCanvas = ({ renderBloom }: Props) => {
+export const QuestionCanvas = ({ }: Props) => {
     return (
         <Canvas>
             <QuestionParticles/>
 
-            { renderBloom && (
-                <EffectComposer>
-                    <Bloom intensity={3} luminanceThreshold={0}/>
-                </EffectComposer>
-            )}
+            <EffectComposer>
+                <Bloom intensity={3} luminanceThreshold={0}/>
+            </EffectComposer>
         </Canvas>
     )
 }

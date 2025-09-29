@@ -5,18 +5,21 @@ import { HeadingSection } from '../sections/HeadingSection';
 import { HeadingCanvas } from '../components/HeadingCanvas';
 import { LockSection } from '../sections/LockSection';
 import { HeadingContext, VectorTypes, type HeadingContextData } from '../context/HeadingContext';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { GridSection } from '../sections/GridSection';
 import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
 import { QuestionSection } from '../sections/QuestionSection';
 import { QuestionContext, type QuestionContextData } from '../context/QuestionContext';
 
-import { motion } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 
 export const HomePage = () => {
     const headingContextData = useState<HeadingContextData>({ vectorType: VectorTypes.astral});
     const questionContextData = useState<QuestionContextData>({ revealed: false });
-    
+    const headingRef = useRef<HTMLDivElement>(null);
+    const isHeadingVisible = useInView(headingRef);
+
+
     return (
         <Page>
             <div className='spotlight-container'>
@@ -34,8 +37,10 @@ export const HomePage = () => {
             </motion.div>
             
             <HeadingContext value={headingContextData}>
-                <div className='heading-wrapper'>
-                    <HeadingCanvas/>
+                <div className='heading-wrapper' ref={headingRef}>
+                    { isHeadingVisible && (
+                        <HeadingCanvas/>
+                    )}
                     <HeadingSection/>
                     <GridSection/>
                 </div>

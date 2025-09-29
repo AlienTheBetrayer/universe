@@ -22,7 +22,6 @@ export const LockSection = () => {
     
     const letterStyle = { color: `rgb(${progressValue * 255}, 0, ${(1 - progressValue) * 255})`, fontSize: '2.5rem' };
 
-
     return (
         <section ref={scrollRef} className='sphere-canvas-container'>
             <div className='sphere-canvas-lock'>

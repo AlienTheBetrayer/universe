@@ -25,7 +25,9 @@ export const QuestionSection = () => {
                         transition={{ delay: 1, duration: 1.5, ease: 'easeInOut' }}
                         onClick={() => setQuestionContextData(prev => ({ ...prev, revealed: true }))}
                         style={{ cursor: 'pointer' }}>
-                        <QuestionCanvas renderBloom={isVisible}/>
+                        { isVisible && (
+                            <QuestionCanvas/>
+                        )}
                         <DefaultContent/>
                     </motion.div>
                 ) : (
@@ -35,7 +37,9 @@ export const QuestionSection = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ delay: 1, duration: 1.5, ease: 'easeInOut' }}>
-                        <QuestionAuroraCanvas renderBloom={isVisible}/>
+                        { isVisible && (
+                            <QuestionAuroraCanvas/>
+                        )}
                         <RevealedContent/>
                     </motion.div>
                 )}
