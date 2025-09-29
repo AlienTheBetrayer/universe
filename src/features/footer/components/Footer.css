@@ -4,7 +4,7 @@ footer {
     padding: 1rem;
     z-index: 2;
 
-    background: linear-gradient(305deg, var(--background-3-transparent), var(--background));
+    background: var(--background);
 }
 
 footer nav {
@@ -15,7 +15,7 @@ footer nav {
     margin: 0 auto;
     padding: 1rem;
 
-    background: linear-gradient(35deg, var(--background-5-transparent), var(--background-transparent));
+    background: linear-gradient(35deg, var(--background-2-transparent), var(--background-transparent));
     border-radius: 20px;
     backdrop-filter: blur(4px);
 }

@@ -15,7 +15,7 @@ export const FooterPopup = ({ offset, text }: Props) => {
         <motion.div className='footer-popup'
         style={{ left: offset.left > 50 ? offset.left : 0, top: offset.top }}
         initial={{ opacity: 0, y: `calc(-50%)`, x: left, scale: 0.9 }}
-        animate={{ opacity: 1, y: `calc(-150%)`, scale: 1 }}
+        animate={{ opacity: 1, y: `calc(-175%)`, scale: 1 }}
         exit={{ opacity: 0, y: `calc(-50%)` }}
         transition={{ 
             opacity: { type: 'spring', stiffness: 300, damping: 40 },

@@ -22,7 +22,6 @@ export const ContactText = () => {
             // rotation
             ref.current.rotation.x = Math.cos(t * 1.2) / 50 + Math.sin(t * 1.7) / 120;
             ref.current.rotation.y = -Math.sin(t * 1.1) / 50 + Math.cos(t * 1.5) / 120;
-
         }
     });
     return (
