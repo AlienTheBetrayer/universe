@@ -49,7 +49,7 @@ export const Header = () => {
                     initial={{ gap: loaded.header ? '2rem' : '0.1rem' }}
                     animate={{ gap: '2rem', transition: { delay: 5.5, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
                     transition={{ type: 'spring', duration: 0.6, stiffness: 200, damping: 50 }}>
-                        <UniversalLink to='/philosophy'>Philosophy</UniversalLink>
+                        <UniversalLink to='/stellarnetwork'>Stellar Network</UniversalLink>
                         <UniversalLink to='/contact'>Contact</UniversalLink>
 
                         <motion.div

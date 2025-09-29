@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { HomePage } from "./features/pages/home/pages/HomePage";
 import { App } from "./features/pages/app/pages/App";
-import { Philosophy } from "./features/pages/philosophy/pages/Philosophy";
+import { StellarNetwork } from "./features/pages/stellarnetwork/pages/StellarNetwork";
 import { Contact } from "./features/pages/contact/pages/Contact";
 
 export const router = createBrowserRouter([
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
         element: <Contact/>
     },
     {
-        path: '/philosophy',
-        element: <Philosophy/>
+        path: '/stellarnetwork',
+        element: <StellarNetwork/>
     }
 ]);

@@ -19,7 +19,7 @@ export const HeaderMenu = ({ onInteract, className }: Props) => {
         exit={{ opacity: 0 }}>
             <div>
                 <UniversalLink to='/' className='home-button'>Home</UniversalLink>
-                <UniversalLink to='/philosophy'>Philosophy</UniversalLink>
+                <UniversalLink to='/stellarnetwork'>Stellar Network</UniversalLink>
                 <UniversalLink to='/contact'>Contact</UniversalLink>
             </div>
             

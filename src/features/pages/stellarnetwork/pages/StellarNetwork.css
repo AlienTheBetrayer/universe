@@ -1,0 +1,7 @@
+.stellar-wrapper {
+    position: relative;
+}
+
+.stellar-wrapper canvas {
+    height: 100vh;
+}
