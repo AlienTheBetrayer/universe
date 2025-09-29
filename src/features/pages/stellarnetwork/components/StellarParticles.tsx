@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { useStars } from "../hooks/useStars"
+import { useStarParticles } from "../hooks/useStarParticles"
 import { Points } from "three";
 
 export const StellarParticles = () => {
     const ref = useRef<Points>(null);
-    const particles = useStars(ref);
+    const particles = useStarParticles(ref);
 
     return (
         <points ref={ref}>

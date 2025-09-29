@@ -1,8 +1,8 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, } from "react"
+import { useMemo, } from "react"
 import type { Points } from "three";
 
-export const useStars = (ref: React.RefObject<Points | null>, count: number = 1000) => {
+export const useStarParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
     const { viewport } = useThree();
     
     const data = useMemo(() => {

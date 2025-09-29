@@ -3,6 +3,7 @@ import { Stellars } from "./Stellars"
 import { Bloom, EffectComposer } from "@react-three/postprocessing"
 import { StellarParticles } from "./StellarParticles"
 
+// CREATE CONTEXT FOR STELLARS + SRP
 export const StellarCanvas = () => {
 
     return (

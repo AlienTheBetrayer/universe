@@ -25,7 +25,7 @@ export const LockCanvas = ({ ref }: Props) => {
 
             { scrolledWithin && (
                 <EffectComposer>
-                    <Bloom intensity={3} luminanceThreshold={0}/>
+                    <Bloom intensity={5} luminanceThreshold={0}/>
                 </EffectComposer>
             )}
 
