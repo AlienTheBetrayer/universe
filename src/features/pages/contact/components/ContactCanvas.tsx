@@ -5,6 +5,7 @@ import { ContactText } from './ContactText';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { ContactParticles } from './ContactParticles';
 import { ContactLight } from './ContactLight';
+import { OrbitControls } from '@react-three/drei';
 
 export const ContactCanvas = () => {
 
