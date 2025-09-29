@@ -13,6 +13,10 @@
     gap: 2rem;
 }
 
+.heading-subgrid > h2 {
+    mask-image: linear-gradient(137deg, black, transparent var(--mask-stop, 0%));
+}
+
 @media(max-width: 1340px) {
     .heading-grid {
         flex-direction: column;

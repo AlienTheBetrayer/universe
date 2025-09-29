@@ -1,6 +1,8 @@
 import './GridSection.css';
 import { motion } from "motion/react";
 import { SphereCard } from "../../../spherecard/components/SphereCard";
+import { useEffect } from 'react';
+import gsap from 'gsap';
 
 export const GridSection = () => {
     const hard = [
@@ -48,6 +50,18 @@ export const GridSection = () => {
         hoverDescription: 'Engage effectively with <b>designers, engineers, and stakeholders</b>. Facilitate constructive feedback, transparent communication, and team alignment to achieve <mark>project goals</mark> efficiently.'
     }
     ];
+
+    useEffect(() => {
+        const headings = document.querySelectorAll('.heading-subgrid > h2');
+
+        headings.forEach(h => {
+            gsap.to(h, {
+                '--mask-stop': '80%',
+                duration: 4,
+                delay: 4
+            });
+        });
+    }, []); 
 
     return (
         <motion.section

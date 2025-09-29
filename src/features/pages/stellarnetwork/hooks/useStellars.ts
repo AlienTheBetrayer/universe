@@ -16,7 +16,7 @@ export const useStellars = (count: number = 30) => {
             arr.push({ x: (Math.random() - 0.5) * viewport.width, y: (Math.random() - 0.5) * viewport.width});
         setStellars(arr);
     }, [count]);
+    
 
-
-    return { stellars }
+    return stellars;
 }
