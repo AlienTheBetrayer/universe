@@ -4,17 +4,17 @@ import { motion } from "motion/react"
 import { ContactText } from './ContactText';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { ContactParticles } from './ContactParticles';
+import { ContactLight } from './ContactLight';
 
 export const ContactCanvas = () => {
 
     return (
         <motion.div className='contact-canvas-container'
-        initial={{ opacity: 0, filter: 'blur(40px)' }}
+        initial={{ opacity: 0, filter: 'blur(20px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
-        transition={{ delay: 1, duration: 3 }}>
+        transition={{ delay: 1, duration: 1 }}>
             <Canvas style={{ width: '100%', height: '100%'}}>
-                <pointLight position={[ 1, 2, 3]} intensity={2}/>
-
+                <ContactLight/>
                 <ContactText/>
                 <ContactParticles/>
 

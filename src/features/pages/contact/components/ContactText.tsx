@@ -15,21 +15,19 @@ export const ContactText = () => {
             const material = ref.current.material as MeshPhongMaterial;
             const progress = Math.abs(Math.sin(t / 4));
             
-            material.color.r = (1 - progress) * 3;
+            material.color.r = 1 - progress;
             material.color.g = 0;
-            material.color.b = progress * 3;
+            material.color.b = progress;
 
             // rotation
             ref.current.rotation.x = Math.cos(t) / 30;
             ref.current.rotation.y = -Math.sin(t) / 30;
         }
     });
-    
     return (
         <Center position={[0, viewport.innerWidth > 640 ? 1.5 : 2, 0]}>
-            <Text3D font='/fonts/inter-typeface.json' size={ viewport.innerWidth / 100 * 0.09 } curveSegments={1}  height={viewport.innerWidth > 640 ? 1 : 0.3} bevelEnabled ref={ref}>
+            <Text3D font='/fonts/inter-typeface-fat.json' size={ Math.max(0.35, Math.min(viewport.innerWidth / 1000, 0.9))} curveSegments={4}  height={viewport.innerWidth > 640 ? 1 : 0.3} bevelEnabled ref={ref}>
                 CONTACT
-                
                 <meshPhongMaterial shininess={16} specular='#fff'/>
             </Text3D>
         </Center>

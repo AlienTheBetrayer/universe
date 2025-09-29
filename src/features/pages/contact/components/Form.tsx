@@ -12,6 +12,7 @@ export const Form = () => {
 
     return (
         <form className='contact-form' action='mailto:alienthebusinessman@gmail.com' method='post' encType='text/plain'>
+            <h2>Get in touch</h2>
             <div>
                 <input type='text' name='name' required placeholder='Name' value={inputs.name} onChange={(e) => setInputs(prev => ({...prev, name: e.target.value}))} />
                 <button type='button' onClick={() => setInputs(prev => ({...prev, name: ''}))}>✕</button>
@@ -27,7 +28,7 @@ export const Form = () => {
                 <button type='button' onClick={() => setInputs(prev => ({...prev, message: ''}))}>✕</button>
             </div>
 
-            <button type='submit'>Send</button>
+            <button type='submit' className='contact-form-submit-button'>Send</button>
         </form>
     )
 }
