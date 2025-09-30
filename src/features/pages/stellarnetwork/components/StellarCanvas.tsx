@@ -33,6 +33,6 @@ const StellarLighting = () => {
     });
 
     return (
-        <pointLight ref={lightRef} position={[0, 0, 1]} intensity={20}/>
+        <pointLight ref={lightRef} position={[0, 0, 1]} intensity={10}/>
     )
 }

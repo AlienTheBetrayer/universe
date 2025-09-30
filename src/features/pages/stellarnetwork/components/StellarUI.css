@@ -9,6 +9,12 @@
     cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    .stellar-button {
+        padding: 1rem;
+    }
+}
+
 .stellar-button-deactivated {
     color: var(--background-8) !important;
     pointer-events: none;
