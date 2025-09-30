@@ -15,7 +15,7 @@ export const HeaderMenu = ({ onInteract, className }: Props) => {
     return (
         <motion.nav className={`header-menu ${className}`}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1}}
+        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}>
             <div>
                 <UniversalLink to='/' className='home-button'>Home</UniversalLink>

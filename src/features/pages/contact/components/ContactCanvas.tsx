@@ -11,7 +11,7 @@ export const ContactCanvas = () => {
 
     return (
         <motion.div className='contact-canvas-container'
-        initial={{ opacity: 0, filter: 'blur(20px)' }}
+        initial={{ opacity: 0, filter: 'blur(0px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ delay: 1, duration: 1 }}>
             <Canvas style={{ width: '100%', height: '100%'}}>
@@ -22,6 +22,8 @@ export const ContactCanvas = () => {
                 <EffectComposer>
                     <Bloom intensity={4} luminanceThreshold={0}/>
                 </EffectComposer>
+
+                <OrbitControls dampingFactor={0.01} enablePan={false} enableZoom={false}/>
             </Canvas>
         </motion.div>
 

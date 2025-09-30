@@ -55,6 +55,21 @@ header .header-open-menu:hover {
     }
 }
 
+header .home-button {
+    display: flex;
+    align-items: center;
+}
+
+header .home-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(0.5);
+}
+
+header .home-button:hover img {
+    filter: invert(var(--header-invert));
+}
+
 .header-launch-app {
     display: flex;
     gap: 4px;

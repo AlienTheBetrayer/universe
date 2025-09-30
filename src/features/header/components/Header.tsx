@@ -8,31 +8,16 @@ import { Settings } from '../../settings/components/Settings';
 import { Button } from '../../ui/Button/components/Button';
 import { usePopup } from '../../../hooks/usePopup';
 import { HeaderMenu } from '../../headermenu/components/HeaderMenu';
-import { useSessionStore } from '../../../zustand/sessionStore';
-import { useTimeout } from '../../../hooks/useTimeout';
+import { useHeaderAnimation } from '../hooks/useHeaderAnimation';
 
 import launchImg from '../assets/launch.svg';
-import { useEffect, useState } from 'react';
+import starImg from '../assets/star.svg';
 
 export const Header = () => {
     const isMobile = useMediaQuery(640);
-
+    const { loaded, justified } = useHeaderAnimation();
+    
     const headerMenuPopup = usePopup(<HeaderMenu onInteract={() => headerMenuPopup.setShown(false)}/>);
-    
-    const { loaded, updateLoaded } = useSessionStore();
-    const [justified, setJustified] = useState<boolean>(false);
-    
-    useTimeout(() => {
-        if (!loaded.header)
-            updateLoaded({ header: true });
-    }, 4100);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setJustified(loaded.header);
-        }, 1500);
-        return () => clearTimeout(timeout);
-    }, [loaded.header]);
 
     return (    
         <motion.header
@@ -41,7 +26,10 @@ export const Header = () => {
         transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             <motion.nav
             style={{ justifyContent: (justified || loaded.header) ? 'space-between' : 'flex-start'}}>
-                <UniversalLink to='/' className='home-button'>Home</UniversalLink>
+                <UniversalLink to='/' className='home-button'>
+                    Home
+                    <img src={starImg} alt=''/>
+                </UniversalLink>
 
                 { !isMobile ? (
                     <motion.div className='flex align-center p-1 h-full'

@@ -8,6 +8,7 @@
     height: 24px;
     border-radius: 20px;
     background-color: var(--button-darker);
+    position: relative;
 }
 
 .toggle-button-circle {
