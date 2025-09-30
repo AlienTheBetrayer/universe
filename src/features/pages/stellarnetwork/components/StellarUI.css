@@ -6,11 +6,11 @@
     min-height: 400px;
     width: 300px;
     
-    position: fixed;
+    position: absolute;
     top: 50%;
     
     border-radius: 20px;
-    background-color: var(--background-4-transparent);
+    background-color: var(--background-3-transparent);
 }
 
 .stellar-ui-left {

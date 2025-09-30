@@ -1,5 +1,6 @@
 .stellar-wrapper {
     position: relative;
+    overflow: hidden;
 }
 
 .stellar-wrapper canvas {
