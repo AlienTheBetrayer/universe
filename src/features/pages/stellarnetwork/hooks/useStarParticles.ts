@@ -10,7 +10,7 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
 
         for(let i = 0; i < count; ++i) {
             positions[i * 2] = (Math.random() - 0.5) * viewport.width;
-            positions[i * 2 + 1] = (Math.random() - 0.5) * viewport.width;
+            positions[i * 2 + 1] = (Math.random() - 0.5) * viewport.height;
         }
 
         return { positions }

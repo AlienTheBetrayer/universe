@@ -12,7 +12,7 @@ export const StellarParticles = () => {
                 <bufferAttribute attach='attributes-position' args={[particles.positions, 2]}/>
             </bufferGeometry>
 
-            <pointsMaterial size={0.01} color='#333'/>;
+            <pointsMaterial size={0.01} color='#444'/>;
         </points>
     )
 }
