@@ -1,4 +1,4 @@
-.stellar-ui-left, .stellar-ui-right {
+.selected-stellar-ui-left, .selected-stellar-ui-right {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -13,10 +13,10 @@
     background-color: var(--background-3-transparent);
 }
 
-.stellar-ui-left {
+.selected-stellar-ui-left {
     left: 2rem;
 }
 
-.stellar-ui-right {
+.selected-stellar-ui-right {
     right: 2rem;
 }

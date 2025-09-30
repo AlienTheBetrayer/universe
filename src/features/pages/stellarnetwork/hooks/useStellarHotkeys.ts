@@ -6,17 +6,21 @@ export const useStellarHotkeys = () => {
 
     useEffect(() => {
         const handle = (ev: KeyboardEvent) => {
-            const code = ev.key;
+            const code = ev.key.toLowerCase();
             switch(code) {
-                case 'Escape':
-                    dispatch({ type: 'select', idx: -1 });
+                case 'escape':
+                    dispatch({ type: 'unselect' });
                 break;
 
-                case 'ArrowRight':
+                case 'arrowright':
+                case 'a':
+                case 's':
                     dispatch({ type: 'select_next' });
                 break;
 
-                case 'ArrowLeft':
+                case 'arrowleft':
+                case 'd':
+                case 'w':
                     dispatch({ type: 'select_previous' });
                 break;
             }

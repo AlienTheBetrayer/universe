@@ -2,9 +2,10 @@ import './StellarNetwork.css';
 import { Page } from "../../../layout/components/Page"
 import { StellarCanvas } from '../components/StellarCanvas';
 import { useReducer } from 'react';
-import { StellarUI } from '../components/StellarUI';
+import { SelectedStellarUI } from '../components/SelectedStellarUI';
 import { AnimatePresence } from 'motion/react';
 import { StellarContext, StellarReducer, type StellarState } from '../context/StellarContext';
+import { StellarUIButtons } from '../components/StellarUIButtons';
 
 // 4. if context's selected id !== -1 (selected from ^) => show UI on this page
 // 5. UI on the page will be able to modify the context specific stellar's title / description  
@@ -44,9 +45,11 @@ export const StellarNetwork = () => {
 
                     <AnimatePresence>
                         { state.selected !== -1 && (
-                            <StellarUI object={state.stellars[state.selected]}/>
+                            <SelectedStellarUI object={state.stellars[state.selected]}/>
                         )}
                     </AnimatePresence>
+                    
+                    <StellarUIButtons/>
                 </div>
             </StellarContext.Provider>
         </Page>
