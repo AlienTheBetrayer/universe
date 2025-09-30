@@ -22,7 +22,7 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
             const t = state.clock.getElapsedTime();
 
             for(let i = 0; i < count; ++i) {
-
+                
             }
 
             ref.current.geometry.attributes.position.needsUpdate = true;

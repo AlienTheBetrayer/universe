@@ -30,11 +30,41 @@ export const StellarNetwork = () => {
         },
         {
             idx: 2,
+            title: 'second title',
+            description: 'an even crazier exo-planet'
+        },
+        {
+            idx: 3,
+            title: 'second title',
+            description: 'an even crazier exo-planet'
+        },
+        {
+            idx: 4,
+            title: 'second title',
+            description: 'an even crazier exo-planet'
+        },
+        {
+            idx: 5,
+            title: 'second title',
+            description: 'an even crazier exo-planet'
+        },
+        {
+            idx: 6,
+            title: 'second title',
+            description: 'an even crazier exo-planet'
+        },
+        {
+            idx: 7,
+            title: 'second title',
+            description: 'an even crazier exo-planet'
+        },
+        {
+            idx: 8,
             title: 'regular one',
             description: 'just an ordinary planet'
         }],
         selected: -1,
-        a: 10
+        hovered: -1
     });
 
     const [state, dispatch] = useReducer(StellarReducer, initial);    

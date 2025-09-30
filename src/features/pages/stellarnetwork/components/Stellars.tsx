@@ -19,6 +19,13 @@ export const Stellars = () => {
 
     // hotkeys handling
     useStellarHotkeys();
+
+    useFrame(state => {
+        const t = state.clock.getElapsedTime();
+        three.camera.rotation.x = Math.sin(t) / 150;
+        three.camera.rotation.y = Math.sin(t) / 150;
+        three.camera.rotation.z = Math.sin(t) / 150;
+    });
     
     // rotating the currently selected stellar
     const refs = useRef<Mesh[]>([]);

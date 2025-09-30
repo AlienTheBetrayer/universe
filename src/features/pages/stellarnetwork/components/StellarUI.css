@@ -1,9 +1,9 @@
 .stellar-button {
     padding: 1.5rem;
-    
+
     font-size: 1rem;
-    
-    border-radius: 200px;
+
+    border-radius: 2000px;
     background-color: var(--background-3-transparent);
     transition: 0.15s;
     cursor: pointer;
@@ -41,16 +41,16 @@
     border-radius: 2000px;
 }
 
-@media (max-width: 640px) {
-    .stellar-ui-previous {
+@media (max-width: 768px) {
+    .stellar-ui-previous-button {
         left: 0.5rem;
     }
 
-    .stellar-ui-next {
+    .stellar-ui-next-button {
         right: 0.5rem;
     }
 
-    .stellar-ui-back {
+    .stellar-ui-bottom-bar {
         bottom: 0.5rem;
     }
 }

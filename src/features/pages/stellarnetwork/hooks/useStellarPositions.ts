@@ -12,7 +12,7 @@ export const useStellarPositions = (viewport: Viewport) => {
 
         xy.forEach((obj, idx) => {
             gsap.to(obj, { x: (Math.random() - 0.5) * viewport.width * 0.9, y: (Math.random() - 0.5) * viewport.height * 0.7, 
-                duration: 4 * (1 + Math.random() / 2), ease: 'back.inOut', 
+                duration: 4 * (1 + Math.random()), ease: 'back.inOut', 
                 onUpdate: () => dispatch({ type: 'move', idx: idx, x: xy[idx].x, y: xy[idx].y })
             });
         }); 

@@ -15,7 +15,7 @@ export interface Stellar {
 export interface StellarState {
     stellars: Stellar[];
     selected: number;
-    a: number;
+    hovered: number;
 };
 
 export type StellarAction =
