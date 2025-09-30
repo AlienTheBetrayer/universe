@@ -64,6 +64,11 @@ header .home-button img {
     width: 24px;
     height: 24px;
     filter: invert(0.5);
+    transition: 1s;
+}
+
+header .home-button img:hover {
+    transform: rotate(180deg);
 }
 
 header .home-button:hover img {
