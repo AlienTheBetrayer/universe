@@ -10,7 +10,7 @@ export const useStellarPositions = (data: StellarContextData, setData: React.Dis
 
         xy.forEach(obj => {
             gsap.to(obj, { x: (Math.random() - 0.5) * viewport.width * 0.9, y: (Math.random() - 0.5) * viewport.height * 0.7, 
-                duration: 4 * (1 + Math.random() / 2), ease: 'expo.inOut', 
+                duration: 4 * (1 + Math.random() / 2), ease: 'back.inOut', 
                 onUpdate: () => setData(prev => ({ ...prev, stellars: 
                     prev.stellars.map((stellar, idx) => ({ ...stellar, x: xy[idx].x, y: xy[idx].y }))
                 })) });
