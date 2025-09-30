@@ -1,0 +1,56 @@
+.stellar-button {
+    padding: 1.5rem;
+    
+    font-size: 1rem;
+    
+    border-radius: 200px;
+    background-color: var(--background-3-transparent);
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+.stellar-button-deactivated {
+    color: var(--background-8) !important;
+    pointer-events: none;
+}
+
+.stellar-button:hover {
+    color: var(--foreground-last);
+}
+
+.stellar-ui-previous-button {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+}
+
+.stellar-ui-next-button {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+}
+
+.stellar-ui-bottom-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    border-radius: 2000px;
+}
+
+@media (max-width: 640px) {
+    .stellar-ui-previous {
+        left: 0.5rem;
+    }
+
+    .stellar-ui-next {
+        right: 0.5rem;
+    }
+
+    .stellar-ui-back {
+        bottom: 0.5rem;
+    }
+}

@@ -5,7 +5,9 @@ import { useReducer } from 'react';
 import { SelectedStellarUI } from '../components/SelectedStellarUI';
 import { AnimatePresence } from 'motion/react';
 import { StellarContext, StellarReducer, type StellarState } from '../context/StellarContext';
-import { StellarUIButtons } from '../components/StellarUIButtons';
+import { StellarUI } from '../components/StellarUI';
+
+import { motion } from 'motion/react';
 
 // 4. if context's selected id !== -1 (selected from ^) => show UI on this page
 // 5. UI on the page will be able to modify the context specific stellar's title / description  
@@ -40,7 +42,10 @@ export const StellarNetwork = () => {
     return (
         <Page>
             <StellarContext.Provider value={[state, dispatch]}>
-                <div className='stellar-wrapper'>
+                <motion.div className='stellar-wrapper'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5, ease: 'backInOut'}}>
                     <StellarCanvas/>
 
                     <AnimatePresence>
@@ -48,9 +53,9 @@ export const StellarNetwork = () => {
                             <SelectedStellarUI object={state.stellars[state.selected]}/>
                         )}
                     </AnimatePresence>
-                    
-                    <StellarUIButtons/>
-                </div>
+
+                    <StellarUI/>
+                </motion.div>
             </StellarContext.Provider>
         </Page>
     )
