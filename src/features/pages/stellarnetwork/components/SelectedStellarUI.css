@@ -1,8 +1,8 @@
 .selected-stellar-ui-left {
     top: 50%;
-    left: 2rem;
-    height: 400px;
-    width: 300px;
+    left: 8%;
+    height: 200px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -14,9 +14,9 @@
 
 .selected-stellar-ui-right {
     top: 50%;
-    right: 2rem;
-    height: 400px;
-    width: 300px;
+    right: 8%;
+    height: 200px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -26,55 +26,64 @@
     background-color: var(--background-3-transparent);
 }
 
+.selected-stellar-ui-left h3, .selected-stellar-ui-right h3 {
+    font-size: var(--font-h2);
+}
+
+/* responsive styling */
 @media (max-width: 1024px) {
     .selected-stellar-ui-left {
-        left: 1rem;
+        left: 4%;
     }
     
     .selected-stellar-ui-right {
-        right: 1rem;
+        right: 4%;
     }
 }
 
 @media (max-width: 768px) {
-    .selected-stellar-ui-left, .selected-stellar-ui-right {
-        display: none;
+    .selected-stellar-ui-left {
+        top: 4rem;
+        left: 2%;
+        right: 2%;
+        width: 70%;
+        height: 150px;
+        margin: 0 auto;
+    } 
+    
+    .selected-stellar-ui-right {
+        bottom: 4rem;
+        top: unset;
+        left: 4%;
+        right: 4%;
+        width: 70%;
+        height: 150px;
+        margin: 0 auto;
+    }
+
+    .selected-stellar-ui-left h3, .selected-stellar-ui-right h3 {
+        font-size: var(--font-h3);
     }
 }
 
-.selected-stellar-ui-mobile {
-    display: none;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: 1rem;
-
-    position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
-    top: 4rem;
-
-    border-radius: 20px;
-    background-color: var(--background-3-transparent);
+@media (max-width: 640px) {
+    .selected-stellar-ui-left, .selected-stellar-ui-right {
+        width: 90%;
+    }
 }
 
-.selected-stellar-ui-left > div, .selected-stellar-ui-mobile > div, .selected-stellar-ui-right > div {
+/* content styling */
+.selected-stellar-ui-left > div, .selected-stellar-ui-right > div {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
     gap: 0.3rem;
 }
 
-@media (max-width: 768px) {
-    .selected-stellar-ui-mobile {
-        display: grid;
-    }
-}
-
-.selected-stellar-ui-mobile > div {
+/* p array styling */
+.selected-stellar-ui-left > div > div, .selected-stellar-ui-right > div > div {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
-
-    border-radius: 20px;
-    background-color: var(--background-3-transparent);
+    gap: 0.5rem;
 }

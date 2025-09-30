@@ -60,6 +60,7 @@
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;
+    --font-h3: 1.1rem;
     --font-p: 0.8rem;
 }
 
@@ -107,6 +108,7 @@
     /* font sizes */
     --font-h1: 2.6rem;
     --font-h2: 2rem;
+    --font-h3: 1.1rem;
     --font-p: 0.8rem;
 }
 
@@ -140,7 +142,12 @@ h2 {
     color: var(--foreground-last);
 }
 
-h3, h4 {
+h3 {
+    font-size: var(--font-h3);
+    color: var(--foreground-prelast);
+}
+
+h4 {
     color: var(--foreground-prelast);
 }
 
