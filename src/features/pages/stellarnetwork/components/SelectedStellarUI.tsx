@@ -24,8 +24,10 @@ export const SelectedStellarUI = ({ object }: Props) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     key={object.idx}>
-                        <h2>{object.title}</h2>
-                        <p>{object.description}</p>
+                        <h2>{object.content.first.title}</h2>
+                        { object.content.first.description.map((p, idx) => (
+                            <p key={`${object.idx}-${idx}`}>{p}</p>
+                        ))}
                     </motion.div>
                 </AnimatePresence>
             </motion.div>
@@ -41,24 +43,28 @@ export const SelectedStellarUI = ({ object }: Props) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     key={object.idx}>
-                        <h2>{object.title.toUpperCase()}</h2>
-                        <p>{object.description.toUpperCase()}</p>
+                        <h2>{object.content.second.title}</h2>
+                        { object.content.second.description.map((p, idx) => (
+                            <p key={`${object.idx}-${idx}`}>{p}</p>
+                        ))}
                     </motion.div>
                 </AnimatePresence>
             </motion.div>
 
             <motion.div className='selected-stellar-ui-mobile'
-            initial={{ y: 300, opacity: 0 }}
+            initial={{ y: -300, opacity: 0 }}
             animate={{ y: 0, opacity: 1, transition: { delay: 1, duration: 1.5, ease: 'backOut' }  }}
-            exit={{ y: 300, opacity: 0, transition: { duration: 1.5, ease: 'circIn' } }}>
+            exit={{ y: -300, opacity: 0, transition: { duration: 1.5, ease: 'circIn' } }}>
                 <AnimatePresence mode='wait'>
                     <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     key={object.idx}>
-                        <h3>{object.title}</h3>
-                        <p>{object.description}</p>
+                        <h2>{object.content.first.title}</h2>
+                        { object.content.first.description.map((p, idx) => (
+                            <p key={`${object.idx}-${idx}`}>{p}</p>
+                        ))}
                     </motion.div>
                 </AnimatePresence>
 
@@ -68,8 +74,10 @@ export const SelectedStellarUI = ({ object }: Props) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     key={`${object.idx}-2`}>
-                        <h3>{object.title.toUpperCase()}</h3>
-                        <p>{object.description.toUpperCase()}</p>
+                        <h2>{object.content.second.title}</h2>
+                        { object.content.second.description.map((p, idx) => (
+                            <p key={`${object.idx}-${idx}`}>{p}</p>
+                        ))}
                     </motion.div>
                 </AnimatePresence>
 

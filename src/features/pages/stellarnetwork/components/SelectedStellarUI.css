@@ -57,6 +57,12 @@
     background-color: var(--background-3-transparent);
 }
 
+.selected-stellar-ui-left > div, .selected-stellar-ui-mobile > div, .selected-stellar-ui-right > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
 @media (max-width: 768px) {
     .selected-stellar-ui-mobile {
         display: grid;

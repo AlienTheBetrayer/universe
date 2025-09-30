@@ -1,5 +1,15 @@
 import React, { createContext, useContext } from "react";
 
+interface StellarContentEntry {
+    title: string;
+    description: string[];
+}
+
+interface StellarContent {
+    first: StellarContentEntry;
+    second: StellarContentEntry;
+}
+
 // stellar types
 export interface Stellar {
     idx: number;
@@ -7,8 +17,7 @@ export interface Stellar {
     x?: number;
     y?: number;
 
-    title: string;
-    description: string;
+    content: StellarContent;
 };
 
 // reducer logic
