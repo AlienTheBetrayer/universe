@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'motion/react'
 import './ListButton.css'
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { motion } from 'motion/react';
 
@@ -8,10 +8,10 @@ interface Props {
     elements: string[];
     className?: string;
     onSelected?: (idx: number) => void;
-    title?: string;
+    children?: React.ReactNode;
 }
 
-export const ListButton = ({ onSelected, elements, className='', title='Selected:'}: Props) => {
+export const ListButton = ({ onSelected, elements, className='', children='Selected:'}: Props) => {
     const [currentId, setCurrentId] = useState<number>(0);
     
     const handlePrevious = () => {
@@ -36,7 +36,9 @@ export const ListButton = ({ onSelected, elements, className='', title='Selected
                 <button className='list-button-top-previous' onClick={() => handlePrevious()}>↓</button>
 
                 <div className='list-button-top-element'>
-                    <span>{title}</span>
+                    <span>
+                        { children }
+                    </span>
                     <AnimatePresence mode='wait'>
                         <motion.h4
                         key={currentId}

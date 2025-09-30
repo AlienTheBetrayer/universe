@@ -5,7 +5,6 @@ import { motion } from 'motion/react';
 import { ListButton } from '../../../ui/ListButton/ListButton';
 import { useHeadingContext, VectorTypes } from '../context/HeadingContext';
 
-
 export const HeadingSection = () => {
     const [, setParticlesData] = useHeadingContext();
 
@@ -80,7 +79,9 @@ export const HeadingSection = () => {
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 3.5, duration: 1 }}>
-                <ListButton title='Formula:' className='heading-effects' elements={Object.values(VectorTypes)} onSelected={handleSelect}/>
+                <ListButton className='heading-effects' elements={Object.values(VectorTypes)} onSelected={handleSelect}>
+                    Formula: 
+                </ListButton>
             </motion.div>
         </section>
     )
