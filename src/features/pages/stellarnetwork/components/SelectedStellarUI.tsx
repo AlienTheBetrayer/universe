@@ -57,7 +57,7 @@ export const SelectedStellarUI = ({ object }: Props) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     key={object.idx}>
-                        <h2>{object.title}</h2>
+                        <h3>{object.title}</h3>
                         <p>{object.description}</p>
                     </motion.div>
                 </AnimatePresence>
@@ -68,7 +68,7 @@ export const SelectedStellarUI = ({ object }: Props) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     key={`${object.idx}-2`}>
-                        <h2>{object.title.toUpperCase()}</h2>
+                        <h3>{object.title.toUpperCase()}</h3>
                         <p>{object.description.toUpperCase()}</p>
                     </motion.div>
                 </AnimatePresence>

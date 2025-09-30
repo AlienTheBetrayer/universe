@@ -40,8 +40,9 @@
     display: flex;
     gap: 1rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: absolute;
+    width: 100%;
     left: 50%;
     bottom: 1rem;
     border-radius: 2000px;

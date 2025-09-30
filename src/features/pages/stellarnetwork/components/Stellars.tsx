@@ -2,8 +2,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarPositions } from "../hooks/useStellarPositions";
 import { useStellarCamera } from "../hooks/useStellarCamera";
-import { useRef } from "react";
-import { Mesh } from "three";
+import { useEffect, useRef } from "react";
+import { Mesh, MeshPhysicalMaterial } from "three";
 import { Edges, type EdgesRef } from "@react-three/drei";
 import { useStellarHotkeys } from "../hooks/useStellarHotkeys";
 import { useStellarHover } from "../hooks/useStellarHover";
@@ -32,49 +32,34 @@ export const Stellars = () => {
     });
     
     // rotating the currently selected stellar
-    const refs = useRef<Mesh[]>([]);
+    const stellarRefs = useRef<Mesh[]>([]);
+
     useFrame(() => {
-        if(state.selected !== -1) {
-            refs.current[state.selected].rotation.x += 0.01;
-            refs.current[state.selected].rotation.y += 0.01;
-            refs.current[state.selected].rotation.z += 0.01;
+        if(state.selected !== -1) { // something is selected
+            stellarRefs.current[state.selected].rotation.x += 0.01;
+            stellarRefs.current[state.selected].rotation.y += 0.01;
+            stellarRefs.current[state.selected].rotation.z += 0.01;
         }
     });
 
     return (
         state.stellars.map((stellar, idx) => (
-            <mesh ref={(el) => (refs.current[idx] = el!)} key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]} 
+            <group key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
             onClick={() => dispatch({ type: 'select', idx: idx }) }
             onPointerOver={() => dispatch({ type: 'hover', idx: idx })}
             onPointerOut={() => dispatch({ type: 'unhover' })}>
-                <sphereGeometry args={[0.06]}/>
-                <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
-
-                <mesh>
-                    <sphereGeometry args={[0.7]}/>
-                    <meshBasicMaterial visible={false}/>
+                <mesh 
+                ref={(el) => (stellarRefs.current[idx] = el!)}>
+                    <sphereGeometry args={[0.06]}/>
+                    <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
                 </mesh>
 
-                { (state.hovered === idx && state.selected === -1) && <StellarSelectionEdge/>}
-            </mesh>
+                <mesh
+                >
+                    <sphereGeometry args={[0.4]}/>
+                    <meshPhysicalMaterial visible={false}/>
+                </mesh>
+            </group>
         ))
-    )
-}
-
-const StellarSelectionEdge = () => {
-    const ref = useRef<EdgesRef | null>(null);
-
-    useFrame(state => {
-        if(ref.current) {
-            const t = state.clock.getElapsedTime();
-
-            ref.current.rotation.x += 0.01;
-            ref.current.rotation.y += 0.01;
-            ref.current.rotation.z += 0.01;
-        }
-    });
-
-    return (
-        <Edges ref={ref} scale={12} color='#1c1c1c' threshold={5}/>
     )
 }
