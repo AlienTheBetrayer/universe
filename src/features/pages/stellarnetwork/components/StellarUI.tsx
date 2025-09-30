@@ -1,28 +1,32 @@
+import type { Stellar } from '../context/StellarContext';
 import './StellarUI.css';
 
-export interface StellarUIObject {
-    title1?: string;
-    description1?: string;
-    title2?: string;
-    description2?: string;
-}
+import { motion } from 'motion/react';
 
 interface Props {
-    object: StellarUIObject;
+    object: Stellar;
 }
 
 export const StellarUI = ({ object }: Props) => {
     return (
         <>
-            <div className='stellar-ui-left'>
-                <h2>{object.title1}</h2>
-                <p>{object.description1}</p>
-            </div>
+            <motion.div className='stellar-ui-left'
+            style={{ y: '-50%' }}
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { delay: 1, duration: 1.5 }  }}
+            exit={{ x: -300, opacity: 0, transition: { duration: 1.5 } }}>
+                <h2>{object.title}</h2>
+                <p>{object.description}</p>
+            </motion.div>
 
-            <div className='stellar-ui-right'>
-                <h2>{object.title2}</h2>
-                <p>{object.description2}</p>
-            </div>
+            <motion.div className='stellar-ui-right'
+            style={{ y: '-50%' }}
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { delay: 1, duration: 1.5 }  }}
+            exit={{ x: 300, opacity: 0, transition: { duration: 1.5 } }}>
+                <h2>{object.title.toUpperCase()}</h2>
+                <p>{object.description.toUpperCase()}</p>
+            </motion.div>
         </>
     )
 }

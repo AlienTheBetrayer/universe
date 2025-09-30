@@ -2,16 +2,15 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
-    min-height: 300px;
-    min-width: 200px;
+    padding: 2rem;
+    min-height: 400px;
+    width: 300px;
     
     position: fixed;
     top: 50%;
-    transform: translateY(-50%);
     
     border-radius: 20px;
-    background-color: var(--background-2-transparent);
+    background-color: var(--background-4-transparent);
 }
 
 .stellar-ui-left {
