@@ -11,7 +11,7 @@ export const StellarLighting = () => {
             const t = state.clock.getElapsedTime();
             const pointer = three.pointer;
 
-            lightRef.current.position.set(pointer.x * three.viewport.width / 2, pointer.y * three.viewport.height / 2, 1 + Math.sin(t));
+            lightRef.current.position.set(pointer.x * three.viewport.width / 2, pointer.y * three.viewport.height / 2, 1 + Math.sin(t) / 3);
         }
     });
 

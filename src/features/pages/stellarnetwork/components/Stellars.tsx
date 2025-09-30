@@ -2,9 +2,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarPositions } from "../hooks/useStellarPositions";
 import { useStellarCamera } from "../hooks/useStellarCamera";
-import { useEffect, useRef } from "react";
-import { Mesh, MeshPhysicalMaterial } from "three";
-import { Edges, type EdgesRef } from "@react-three/drei";
+import { useRef } from "react";
+import { Mesh } from "three";
 import { useStellarHotkeys } from "../hooks/useStellarHotkeys";
 import { useStellarHover } from "../hooks/useStellarHover";
 
@@ -55,7 +54,7 @@ export const Stellars = () => {
                 </mesh>
 
                 <mesh onClick={() => dispatch({ type: 'select', idx: idx })}>
-                    <sphereGeometry args={[0.4]}/>
+                    <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>
             </group>
