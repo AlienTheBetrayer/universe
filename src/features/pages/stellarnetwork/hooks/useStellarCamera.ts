@@ -1,11 +1,16 @@
 import gsap from "gsap";
 import { useEffect } from "react"
-import type { StellarContextData } from "../context/StellarContext";
+import { useStellarContext } from "../context/StellarContext";
 import type { Camera } from "@react-three/fiber";
 
-export const useStellarCamera = (data: StellarContextData, camera: Camera) => {
+export const useStellarCamera = (camera: Camera) => {
+    const [state, ] = useStellarContext();
+
     useEffect(() => {
-        const position = data.selected !== -1 ? [data.stellars[data.selected].x, data.stellars[data.selected].y, 0.12] : [0, 0, 5];
+        const position = state.selected !== -1 ? [state.stellars[state.selected].x, state.stellars[state.selected].y, 0.12] : [0, 0, 5];
+        console.log(position);
+        console.log(state.selected);
+        console.log(state.stellars);
         gsap.to(camera.position, { x: position[0], y: position[1], z: position[2], duration: 2, ease: 'circ.inOut' })
-    }, [data.selected]);
+    }, [state.selected]);
 }

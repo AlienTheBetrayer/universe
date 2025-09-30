@@ -1,10 +1,10 @@
 import './StellarNetwork.css';
 import { Page } from "../../../layout/components/Page"
 import { StellarCanvas } from '../components/StellarCanvas';
-import { StellarContext, type StellarContextData } from '../context/StellarContext';
-import { useState } from 'react';
+import { useReducer } from 'react';
 import { StellarUI } from '../components/StellarUI';
 import { AnimatePresence } from 'motion/react';
+import { StellarContext, StellarReducer, type StellarState } from '../context/StellarContext';
 
 // 4. if context's selected id !== -1 (selected from ^) => show UI on this page
 // 5. UI on the page will be able to modify the context specific stellar's title / description  
@@ -13,8 +13,7 @@ import { AnimatePresence } from 'motion/react';
 // ADDITIONAL: hook to zustand local storage
 
 export const StellarNetwork = () => {
-    // initial context data
-    const [data, setData] = useState<StellarContextData>({ 
+    const initial: StellarState = ({ 
         stellars: [
         {
             idx: 0,
@@ -31,22 +30,25 @@ export const StellarNetwork = () => {
             title: 'regular one',
             description: 'just an ordinary planet'
         }],
-        selected: -1
+        selected: -1,
+        a: 10
     });
+
+    const [state, dispatch] = useReducer(StellarReducer, initial);    
 
     return (
         <Page>
-            <StellarContext value={[data, setData]}>
+            <StellarContext.Provider value={[state, dispatch]}>
                 <div className='stellar-wrapper'>
                     <StellarCanvas/>
 
                     <AnimatePresence>
-                        { data.selected !== -1 && (
-                            <StellarUI object={data.stellars[data.selected]}/>
+                        { state.selected !== -1 && (
+                            <StellarUI object={state.stellars[state.selected]}/>
                         )}
                     </AnimatePresence>
                 </div>
-            </StellarContext>
+            </StellarContext.Provider>
         </Page>
     )
 }
