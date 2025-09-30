@@ -22,9 +22,9 @@ export const Stellars = () => {
 
     useFrame(state => {
         const t = state.clock.getElapsedTime();
-        three.camera.rotation.x = Math.sin(t) / 150;
-        three.camera.rotation.y = Math.sin(t) / 150;
-        three.camera.rotation.z = Math.sin(t) / 150;
+        three.camera.rotation.x = Math.sin(t) / 300;
+        three.camera.rotation.y = Math.sin(t) / 300;
+        three.camera.rotation.z = Math.sin(t) / 300;
     });
     
     // rotating the currently selected stellar
