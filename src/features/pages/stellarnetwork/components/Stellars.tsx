@@ -46,8 +46,7 @@ export const Stellars = () => {
         state.stellars.map((stellar, idx) => (
             <group key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
             onPointerOver={() => dispatch({ type: 'hover', idx: idx })}
-            onPointerOut={() => dispatch({ type: 'unhover' })}
-            >
+            onPointerOut={() => dispatch({ type: 'unhover' })}>
                 <mesh
                 onClick={() => { if(state.selected !== -1) dispatch({ type: 'select', idx: idx })} } 
                 ref={(el) => (stellarRefs.current[idx] = el!)}>
@@ -55,9 +54,7 @@ export const Stellars = () => {
                     <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
                 </mesh>
 
-                <mesh
-                onClick={() => dispatch({ type: 'select', idx: idx })}
-            >
+                <mesh onClick={() => dispatch({ type: 'select', idx: idx })}>
                     <sphereGeometry args={[0.4]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>
