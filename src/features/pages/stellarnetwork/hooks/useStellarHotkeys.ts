@@ -7,7 +7,6 @@ export const useStellarHotkeys = () => {
     useEffect(() => {
         const handle = (ev: KeyboardEvent) => {
             const code = ev.key;
-            console.log(code);
             switch(code) {
                 case 'Escape':
                     dispatch({ type: 'select', idx: -1 });

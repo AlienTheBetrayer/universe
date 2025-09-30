@@ -15,7 +15,6 @@ export const useStellarPositions = (viewport: Viewport) => {
                 duration: 4 * (1 + Math.random() / 2), ease: 'back.inOut', 
                 onUpdate: () => dispatch({ type: 'move', idx: idx, x: xy[idx].x, y: xy[idx].y })
             });
-            console.log('updating', idx);
         }); 
     }, []);
 }

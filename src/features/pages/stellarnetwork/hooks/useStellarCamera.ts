@@ -8,9 +8,6 @@ export const useStellarCamera = (camera: Camera) => {
 
     useEffect(() => {
         const position = state.selected !== -1 ? [state.stellars[state.selected].x, state.stellars[state.selected].y, 0.12] : [0, 0, 5];
-        console.log(position);
-        console.log(state.selected);
-        console.log(state.stellars);
         gsap.to(camera.position, { x: position[0], y: position[1], z: position[2], duration: 2, ease: 'circ.inOut' })
     }, [state.selected]);
 }
