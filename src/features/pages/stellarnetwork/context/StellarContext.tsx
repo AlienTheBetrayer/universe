@@ -20,6 +20,8 @@ export interface StellarState {
 
 export type StellarAction =
 { type: 'unselect' } |
+{ type: 'unhover' } |
+{ type: 'hover', idx: number } | 
 { type: 'select', idx: number } |
 { type: 'move', idx: number, x: number, y: number } |
 { type: 'select_previous' } |
@@ -29,6 +31,10 @@ export const StellarReducer = (state: StellarState, action: StellarAction) => {
     switch(action.type) {
         case 'unselect':
             return { ...state, selected: -1 };
+        case 'unhover':
+            return { ...state, hovered: -1 };
+        case 'hover':
+            return { ...state, hovered: action.idx }
         case 'select':
             return { ...state, selected: state.selected === action.idx ? -1 : action.idx };
         case 'move':

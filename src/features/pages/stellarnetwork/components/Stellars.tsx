@@ -4,8 +4,9 @@ import { useStellarPositions } from "../hooks/useStellarPositions";
 import { useStellarCamera } from "../hooks/useStellarCamera";
 import { useRef } from "react";
 import { Mesh } from "three";
-import { Edges } from "@react-three/drei";
+import { Edges, type EdgesRef } from "@react-three/drei";
 import { useStellarHotkeys } from "../hooks/useStellarHotkeys";
+import { useStellarHover } from "../hooks/useStellarHover";
 
 export const Stellars = () => {
     const [state, dispatch] = useStellarContext();
@@ -19,6 +20,9 @@ export const Stellars = () => {
 
     // hotkeys handling
     useStellarHotkeys();
+
+    // hover handling
+    useStellarHover();
 
     useFrame(state => {
         const t = state.clock.getElapsedTime();
@@ -41,13 +45,36 @@ export const Stellars = () => {
         state.stellars.map((stellar, idx) => (
             <mesh ref={(el) => (refs.current[idx] = el!)} key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]} 
             onClick={() => dispatch({ type: 'select', idx: idx }) }
-            onPointerOver={() => document.body.style.cursor = 'pointer'}
-            onPointerOut={() => document.body.style.cursor = 'auto'}>
+            onPointerOver={() => dispatch({ type: 'hover', idx: idx })}
+            onPointerOut={() => dispatch({ type: 'unhover' })}>
                 <sphereGeometry args={[0.06]}/>
                 <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
 
-                <Edges scale={1.1} color='#f00'/>
+                <mesh>
+                    <sphereGeometry args={[0.7]}/>
+                    <meshBasicMaterial visible={false}/>
+                </mesh>
+
+                { (state.hovered === idx && state.selected === -1) && <StellarSelectionEdge/>}
             </mesh>
         ))
+    )
+}
+
+const StellarSelectionEdge = () => {
+    const ref = useRef<EdgesRef | null>(null);
+
+    useFrame(state => {
+        if(ref.current) {
+            const t = state.clock.getElapsedTime();
+
+            ref.current.rotation.x += 0.01;
+            ref.current.rotation.y += 0.01;
+            ref.current.rotation.z += 0.01;
+        }
+    });
+
+    return (
+        <Edges ref={ref} scale={12} color='#1c1c1c' threshold={5}/>
     )
 }
