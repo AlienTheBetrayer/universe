@@ -1,12 +1,11 @@
 import { useRef } from 'react';
-import { QuestionCanvas } from '../components/QuestionCanvas';
 import './QuestionSection.css';
 import { AnimatePresence, useInView } from 'motion/react';
 import { motion } from 'motion/react';
-import { QuestionAuroraCanvas } from '../components/QuestionAuroraCanvas';
-import { useQuestionContext } from '../context/QuestionContext';
+import { QuestionAuroraCanvas } from '../../../questionparticles/components/QuestionAuroraCanvas';
 import { LinkButton } from '../../../ui/LinkButton/components/LinkButton';
-
+import { QuestionCanvas } from '../../../questionparticles/components/QuestionCanvas';
+import { useQuestionContext } from '../../../questionparticles/context/QuestionContext';
 
 export const QuestionSection = () => {
     const [questionContextData, setQuestionContextData] = useQuestionContext();

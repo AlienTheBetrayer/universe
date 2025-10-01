@@ -1,9 +1,9 @@
 import './LockSection.css';
 import { useRef } from 'react';
-import { LockCanvas } from '../components/LockCanvas';
 import { ArrayTypewriter } from '../../../arraytypewriter/components/ArrayTypewriter';
 import { useScroll, useSpring } from 'motion/react';
 import { useValueMotion } from '../../../../hooks/useValueMotion';
+import { LockCanvas } from '../../../locksphere/components/LockCanvas';
 
 export const LockSection = () => {
     const scrollRef = useRef<HTMLElement>(null);

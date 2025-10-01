@@ -1,0 +1,10 @@
+.interactive-particles-canvas-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.interactive-particles-canvas-container canvas {
+    width: 100%;
+    height: 100%;
+}

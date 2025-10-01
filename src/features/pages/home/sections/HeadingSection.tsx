@@ -3,10 +3,10 @@ import './HeadingSection.css';
 import { AnimatedText } from '../../../animatedtext/components/AnimatedText';
 import { motion } from 'motion/react';
 import { ListButton } from '../../../ui/ListButton/ListButton';
-import { useHeadingContext, VectorTypes } from '../context/HeadingContext';
+import { useInteractiveParticlesContext, VectorTypes } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 
 export const HeadingSection = () => {
-    const [, setParticlesData] = useHeadingContext();
+    const [, setParticlesData] = useInteractiveParticlesContext();
 
     const handleSelect =  (idx: number) => {
         setParticlesData(prev => ({...prev, vectorType: Object.values(VectorTypes)[idx]}))

@@ -1,19 +1,12 @@
 import './StellarNetwork.css';
 import { Page } from "../../../layout/components/Page"
-import { StellarCanvas } from '../components/StellarCanvas';
+import { StellarCanvas } from '../../../stellars/components/StellarCanvas';
 import { useReducer } from 'react';
-import { SelectedStellarUI } from '../components/SelectedStellarUI';
 import { AnimatePresence } from 'motion/react';
-import { StellarContext, StellarReducer, type StellarState } from '../context/StellarContext';
-import { StellarUI } from '../components/StellarUI';
-
+import { StellarContext, StellarReducer, type StellarState } from '../../../stellars/context/StellarContext';
+import { SelectedStellarUI } from '../../../stellars/components/SelectedStellarUI';
+import { StellarUI } from '../../../stellars/components/StellarUI';
 import { motion } from 'motion/react';
-
-// 4. if context's selected id !== -1 (selected from ^) => show UI on this page
-// 5. UI on the page will be able to modify the context specific stellar's title / description  
-// 6.
-// 
-// ADDITIONAL: hook to zustand local storage
 
 export const StellarNetwork = () => {
     const initial: StellarState = { 
