@@ -15,7 +15,7 @@ export const LockParticles = () => {
             <bufferGeometry>
                 <bufferAttribute args={[sparks.positions, 3]} attach='attributes-position'/>
             </bufferGeometry>
-            <pointsMaterial size={0.01} color={dotColor}/>
+            <pointsMaterial size={theme == 'dark' ? 0.01 : 0.1} color={dotColor}/>
         </points>
     )
 }
