@@ -8,14 +8,13 @@ export const LockParticles = () => {
     const sparks = useLockParticles(ref, 1000);
 
     const { theme } = useLocalStore();
-    const dotColor = theme === 'dark' ? '#fff' : '#000';
 
     return (
         <points ref={ref}>
             <bufferGeometry>
                 <bufferAttribute args={[sparks.positions, 3]} attach='attributes-position'/>
             </bufferGeometry>
-            <pointsMaterial size={theme == 'dark' ? 0.01 : 0.1} color={dotColor}/>
+            <pointsMaterial size={theme == 'dark' ? 0.01 : 0.1} color={theme === 'dark' ? '#fff' : '#000'}/>
         </points>
     )
 }

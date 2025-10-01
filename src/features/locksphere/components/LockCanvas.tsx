@@ -6,7 +6,6 @@ import { OrbitControls } from '@react-three/drei';
 import { useScrollYWithin } from '../../../hooks/useScrollYWithin';
 import { LockFigure } from './LockFigure';
 import { ForceField } from './ForceField';
-import { useLocalStore } from '../../../zustand/localStore';
 
 interface Props {
     ref: RefObject<HTMLElement | null>;
