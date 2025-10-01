@@ -19,7 +19,7 @@ export const InteractiveParticles = () => {
                 <bufferAttribute args={[particles.colors, 3]} attach='attributes-color'/>
             </bufferGeometry>
             
-            <pointsMaterial size={theme == 'dark' ? 0.005 : 0.025} vertexColors={true}/>
+            <pointsMaterial size={theme == 'dark' ? 0.005 : 0.02} vertexColors={true}/>
         </points>
     )
 }
