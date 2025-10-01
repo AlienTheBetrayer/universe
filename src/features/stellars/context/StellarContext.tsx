@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 
-interface StellarContentEntry {
+export interface StellarContentEntry {
     title: string;
     description: string[];
 }
@@ -25,9 +25,13 @@ export interface StellarState {
     stellars: Stellar[];
     selected: number;
     hovered: number;
+    editing: boolean;
 };
 
 export type StellarAction =
+{ type: 'go_back' } |
+{ type: 'set_editing', flag: boolean } |
+{ type: 'change_content', idx: number, part: 'first' | 'second', title: string, description: string[] } | 
 { type: 'unselect' } |
 { type: 'unhover' } |
 { type: 'hover', idx: number } | 
@@ -38,6 +42,25 @@ export type StellarAction =
 
 export const StellarReducer = (state: StellarState, action: StellarAction) => {
     switch(action.type) {
+        case 'change_content':
+            return { ...state, stellars: state.stellars.map((stellar, idx) => {
+                if(idx !== action.idx)
+                    return stellar;
+
+                return {
+                    ...stellar, content: {
+                        ...stellar.content,
+                        [action.part]: {
+                            title: action.title,
+                            description: action.description
+                        }
+                    }
+                }
+            })};
+        case 'go_back':
+            return { ...state, selected: -1, editing: false };
+        case 'set_editing':
+            return { ...state, editing: action.flag };
         case 'unselect':
             return { ...state, selected: -1 };
         case 'unhover':

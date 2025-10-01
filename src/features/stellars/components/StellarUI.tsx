@@ -43,7 +43,9 @@ export const StellarUI = () => {
                         </motion.p>
                     }
                 </AnimatePresence>
-                <motion.button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} onClick={() => dispatch({ type: 'unselect' })}>
+                
+                <motion.button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} 
+                onClick={() => dispatch({ type: 'go_back' })}>
                     Go back
                 </motion.button>
             </motion.div>

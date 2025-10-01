@@ -213,7 +213,8 @@ export const StellarNetwork = () => {
             }
         ],
         selected: -1,
-        hovered: -1
+        hovered: -1,
+        editing: false
     };
 
     const [state, dispatch] = useReducer(StellarReducer, initial);    
@@ -229,7 +230,7 @@ export const StellarNetwork = () => {
 
                     <AnimatePresence>
                         { state.selected !== -1 && (
-                            <SelectedStellarUI object={state.stellars[state.selected]}/>
+                            <SelectedStellarUI idx={state.selected}/>
                         )}
                     </AnimatePresence>
 
