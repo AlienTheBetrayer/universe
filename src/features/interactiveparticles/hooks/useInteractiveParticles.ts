@@ -64,37 +64,44 @@ export const useInteractiveParticles = (ref: React.RefObject<Points | null>, cou
                     case VectorTypes.propulsion:
                         vectorX = dx / distance;
                         vectorY = dy / distance;
-                        color = [0, 0, 30];
+                        if(theme == 'dark')
+                            color = [0, 0, 30];
                         break;
                     case VectorTypes.repulsion:
                         vectorX = -dx / distance;
                         vectorY = -dy / distance;
-                        color = [30, 0, 0];
+                        if(theme == 'dark')
+                            color = [30, 0, 0];
                         break;
                     case VectorTypes.waves:
                         vectorX = Math.sin(t);
                         vectorY = Math.sin(t);
-                        color = [12, 50, 59];
+                        if(theme == 'dark')
+                            color = [12, 50, 59];
                         break;
                     case VectorTypes.nebula:
                         vectorX = -dy * 2;
                         vectorY = dx * 2;
-                        color = [48, 13, 78];
+                        if(theme == 'dark')
+                            color = [48, 13, 78];
                         break;
                     case VectorTypes.living:
                         vectorX = Math.sin(dx * 7 - dy * 3 + t * 4) * Math.cos(dy * 5 + Math.sqrt(dx * dx + dy * dy) * 3 + Math.sin(t * 2)) + Math.tan(Math.sin(dx * 0.5 + t * 3)) * 0.02;
                         vectorY = Math.cos(dy * 6 + dx * 2 + t * 3.5) * Math.sin(dx * 4 + Math.sqrt(dx * dx + dy * dy) * 5 + Math.cos(t * 1.7)) + Math.tan(Math.cos(dy * 0.7 + t * 2.1)) * 0.02;
-                        color = [0, 20, 10];
+                        if(theme == 'dark')
+                            color = [0, 20, 10];
                         break;
                     case VectorTypes.checker:
-                        vectorX = Math.sin(t % 20 * dx);
-                        vectorY = Math.sin(t % 20 * dy);
-                        color = [10, 10, 10];
+                        vectorX = Math.sin(t % 50 * dx);
+                        vectorY = Math.sin(t % 50 * dy);
+                        if(theme == 'dark')
+                            color = [10, 10, 10];
                         break;
                     case VectorTypes.astral:
                         vectorX = (dx / distance) * Math.sin(t + distance * 5) * Math.exp(-distance * 0.5) - (dy / distance) * Math.cos(t * 2 + Math.log(distance + 1) * 3);
                         vectorY = (dy / distance) * Math.sin(t + distance * 5) * Math.exp(-distance * 0.5) + (dx / distance) * Math.cos(t * 2 + Math.log(distance + 1) * 3);
-                        color = [10, 10, 30];
+                        if(theme == 'dark')
+                            color = [10, 10, 30];
                         break;
                 }
 
