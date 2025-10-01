@@ -63,8 +63,8 @@ header .home-button {
 header .home-button img {
     width: 24px;
     height: 24px;
+    transition: transform 1s;
     filter: invert(0.5);
-    transition: 1s;
 }
 
 header .home-button img:hover {
