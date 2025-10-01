@@ -19,14 +19,14 @@ export const CardFigure = () => {
             ref.current.rotation.y += 0.01;
             ref.current.rotation.z += 0.01;
 
-            const scale = Math.sin(t) / 300;
-            ref.current.scale.set(ref.current.scale.x + scale, ref.current.scale.y + scale,ref.current.scale.z + scale)
+            const scale = Math.sin(t) / 10;
+            ref.current.scale.set(1.15 + scale, 1.15 + scale,1.15 + scale)
         }
     });
 
     return (
         <mesh ref={ref}>
-            <icosahedronGeometry args={[2.5, 0]}/>
+            <icosahedronGeometry args={[2, 0]}/>
             <meshPhysicalMaterial color='#7474bc' metalness={1} roughness={1}/>
         </mesh>
     )
