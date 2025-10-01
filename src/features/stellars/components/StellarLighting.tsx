@@ -1,10 +1,12 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import type { PointLight } from "three";
+import { useLocalStore } from "../../../zustand/localStore";
 
 export const StellarLighting = () => {
     const three = useThree();
     const lightRef = useRef<PointLight | null>(null);
+    const { theme } = useLocalStore();
 
     useFrame(state => {
         if(lightRef.current) {
@@ -16,6 +18,6 @@ export const StellarLighting = () => {
     });
 
     return (
-        <pointLight ref={lightRef} position={[0, 0, 1]} intensity={10}/>
+        <pointLight ref={lightRef} position={[0, 0, 1]} intensity={ theme === 'dark' ? 10 : 1 }/>
     )
 }
