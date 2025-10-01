@@ -2,6 +2,8 @@ import './ToggleButton.css';
 import { motion, type HTMLMotionProps } from 'motion/react';
 import { useState } from 'react';
 
+import checkmarkImg from './assets/checkmark.svg';
+
 interface Props extends HTMLMotionProps<'div'> {
     value?: boolean;
     onToggled?: (state: boolean) => void;
@@ -29,6 +31,10 @@ export const ToggleButton = ({ value, onToggled, key }: Props) => {
 
             </motion.div>
 
+            <motion.img className='toggle-button-image' src={checkmarkImg} alt=''
+            animate={{ opacity: toggled ? 1 : 0 }}>
+
+            </motion.img>
         </button>
     )
 }

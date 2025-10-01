@@ -17,3 +17,11 @@
     border-radius: 20px;
     background-color: var(--button-dark);
 }
+
+.toggle-button-image {
+    position: absolute;
+    left: 6px;
+    width: 12px;
+    height: 12px;
+    filter: invert(0.3);
+}
