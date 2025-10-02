@@ -25,7 +25,7 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
             const pos = ref.current.geometry.attributes.position.array;
             
             for(let i = 0; i < count; ++i) {
-                const chance = Math.random() > 0.999;
+                const chance = Math.random() > 0.9995;
                 if(chance) {
                     data.velocities[i * 2] = (Math.random() - 0.5) / 30;
                     data.velocities[i * 2 + 1] = (Math.random() - 0.5) / 30;
