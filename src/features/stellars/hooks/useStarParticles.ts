@@ -28,6 +28,12 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
             
             for(let i = 0; i < count; ++i) {
                 const chance = Math.random() > 0.9995;
+                const dx = cursorX - pos[i * 2];
+                const dy = cursorY - pos[i * 2 + 1];
+                const m = Math.sqrt(dx * dx + dy * dy);
+                const ux = dx / m;
+                const uy = dy / m;
+
                 if(chance) {
                     data.velocities[i * 2] = (Math.random() - 0.5) / 30;
                     data.velocities[i * 2 + 1] = (Math.random() - 0.5) / 30;
@@ -56,6 +62,12 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
                 if(data.velocities[i * 2 + 1] != 0) {
                     pos[i * 2 + 1] += data.velocities[i * 2 + 1];
                     data.velocities[i * 2 + 1] *= 0.99;
+                }
+
+                if(m > 2 && m < 3) {
+                    const strength = (1 - m) * 0.005;
+                    pos[i * 2] -= ux * strength;
+                    pos[i * 2 + 1] -= uy * strength;
                 }
             }
 
