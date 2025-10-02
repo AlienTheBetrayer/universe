@@ -7,8 +7,6 @@ import { motion } from 'motion/react';
 import { StellarProvider } from '../../../stellars/context/StellarContext';
 
 export const StellarNetwork = () => {
-
-
     return (
         <Page>
             <StellarProvider>

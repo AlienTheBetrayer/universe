@@ -4,7 +4,7 @@
     font-size: 1rem;
 
     border-radius: 2000px;
-    background-color: var(--background-3-transparent);
+    background-color: var(--background-4-transparent);
     transition: 0.15s;
     cursor: pointer;
 }
