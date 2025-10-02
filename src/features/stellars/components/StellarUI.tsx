@@ -15,6 +15,10 @@ export const StellarUI = () => {
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
             onClick={() => dispatch({ type: 'select_previous' })}>
                 ←
+                <div className='stellar-tooltip'>
+                    <span>←</span>
+                    <span>A</span>
+                </div>
             </motion.button>
 
             <motion.button className='stellar-button stellar-ui-next-button'
@@ -24,6 +28,10 @@ export const StellarUI = () => {
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
             onClick={() => dispatch({ type: 'select_next' })}>
                 →
+                <div className='stellar-tooltip'>
+                    <span>D</span>
+                    <span>→</span>
+                </div>
             </motion.button>
 
             <motion.div
@@ -47,6 +55,9 @@ export const StellarUI = () => {
                 <motion.button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} 
                 onClick={() => dispatch({ type: 'go_back' })}>
                     Go back
+                    <div className='stellar-tooltip'>
+                        <span>Esc</span>
+                    </div>
                 </motion.button>
             </motion.div>
         </>
