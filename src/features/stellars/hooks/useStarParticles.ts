@@ -20,8 +20,9 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
         return { positions, velocities }
     }, [count]);
 
-    useFrame(() => {
+    useFrame(state => {
         if(ref.current) {
+            const t = state.clock.getElapsedTime();
             const pos = ref.current.geometry.attributes.position.array;
             const cursorX = pointer.x * viewport.width / 2;
             const cursorY = pointer.y * viewport.height / 2;
@@ -64,8 +65,9 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
                     data.velocities[i * 2 + 1] *= 0.99;
                 }
 
-                if(m > 2 && m < 3) {
-                    const strength = (1 - m) * 0.005;
+                const radius = 1.5 + Math.abs(Math.sin(t));
+                if(m > radius && m < radius * 2) {
+                    const strength = -(3 - m) * 0.005;
                     pos[i * 2] -= ux * strength;
                     pos[i * 2 + 1] -= uy * strength;
                 }
