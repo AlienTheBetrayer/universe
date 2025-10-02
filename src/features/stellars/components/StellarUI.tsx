@@ -11,12 +11,14 @@ export const StellarUI = () => {
     const isSelected = state.selected !== -1;
     const positions = useStellarPositions(state.viewport);
     const isGenerating = useRef<boolean>(false);
-
+    
     const handleRegenerate = () => {
         if(isGenerating.current)
             return;
 
+        dispatch({ type: 'go_back' });
         positions.generate();
+        console.log(state.viewport);
         isGenerating.current = true;
         setTimeout(() => { isGenerating.current = false }, 5000);
     }

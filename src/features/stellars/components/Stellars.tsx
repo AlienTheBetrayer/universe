@@ -23,14 +23,20 @@ export const Stellars = () => {
     // hover handling
     useStellarHover();
 
-    useEffect(() => {
-        dispatch({ type: 'set_viewport', viewport: three.viewport });
-    }, [three.viewport]);
-    
+    // position setting / animating + state changing
     useEffect(() => {
         positions.generate();
     }, []);
-    
+
+    useEffect(() => {
+        const handle = () => {
+            dispatch({ type: 'set_viewport', viewport: { width: three.viewport.width, height: three.viewport.height } });
+        }
+        handle();
+
+        window.addEventListener('resize', handle);
+        return () => window.removeEventListener('resize', handle);
+    }, [three.viewport.width, three.viewport.height]);
 
     // rotating the currently selected stellar
     const stellarRefs = useRef<Mesh[]>([]);

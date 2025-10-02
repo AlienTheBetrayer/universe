@@ -3,7 +3,7 @@ import { useMemo } from "react"
 import type { Points } from "three";
 
 export const useStarParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
-    const { viewport } = useThree();
+    const { viewport, pointer } = useThree();
     
     const data = useMemo(() => {
         const positions = new Float32Array(count * 2);
@@ -23,6 +23,8 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
     useFrame(() => {
         if(ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
+            const cursorX = pointer.x * viewport.width / 2;
+            const cursorY = pointer.y * viewport.height / 2;
             
             for(let i = 0; i < count; ++i) {
                 const chance = Math.random() > 0.9995;

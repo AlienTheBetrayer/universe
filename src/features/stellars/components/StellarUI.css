@@ -26,6 +26,7 @@
 .stellar-button-deactivated {
     color: var(--background-8) !important;
     pointer-events: none;
+    user-select: none;
 }
 
 
