@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useReducer } from "react";
 
+export interface StellarViewport {
+    width: number;
+    height: number;
+}
+
 export interface StellarContentEntry {
     title: string;
     description: string[];
@@ -26,9 +31,11 @@ export interface StellarState {
     selected: number;
     hovered: number;
     editing: boolean;
+    viewport: StellarViewport;
 };
 
 export type StellarAction =
+{ type: 'set_viewport', viewport: StellarViewport } |
 { type: 'go_back' } |
 { type: 'set_editing', flag: boolean } |
 { type: 'change_content', idx: number, part: 'first' | 'second', title: string, description: string[] } | 
@@ -42,6 +49,8 @@ export type StellarAction =
 
 export const StellarReducer = (state: StellarState, action: StellarAction) => {
     switch(action.type) {
+        case 'set_viewport':
+            return { ...state, viewport: action.viewport };
         case 'change_content':
             return { ...state, stellars: state.stellars.map((stellar, idx) => {
                 if(idx !== action.idx)
@@ -94,6 +103,10 @@ interface Props {
 
 export const StellarProvider = ({ children }: Props) => {
         const initial: StellarState = { 
+        selected: -1,
+        hovered: -1,
+        editing: false,
+        viewport: { width: 0, height: 0},
         stellars: [
             {
                 idx: 0,
@@ -296,9 +309,7 @@ export const StellarProvider = ({ children }: Props) => {
                 }
             }
         ],
-        selected: -1,
-        hovered: -1,
-        editing: false
+
     };
 
     const [state, dispatch] = useReducer(StellarReducer, initial);

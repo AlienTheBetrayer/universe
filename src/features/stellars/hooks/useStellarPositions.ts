@@ -1,12 +1,10 @@
-import { useEffect } from "react";
 import gsap from "gsap";
-import type { Viewport } from "@react-three/fiber";
-import { useStellarContext } from "../context/StellarContext";
+import { useStellarContext, type StellarViewport } from "../context/StellarContext";
 
-export const useStellarPositions = (viewport: Viewport) => {
+export const useStellarPositions = (viewport: StellarViewport) => {
     const [state, dispatch] = useStellarContext();
 
-    useEffect(() => {
+    const generate = () => {
         const xy: { x: number, y: number }[] = [];
         state.stellars.forEach(() => xy.push({ x: 0, y: 0 }));
 
@@ -17,5 +15,7 @@ export const useStellarPositions = (viewport: Viewport) => {
                 onUpdate: () => dispatch({ type: 'move', idx: idx, x: xy[idx].x, y: xy[idx].y })
             });
         });
-    }, []);
+    }
+
+    return { generate };
 }

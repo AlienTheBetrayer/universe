@@ -1,10 +1,25 @@
-import { useStellarContext } from '../context/StellarContext';
 import './StellarUI.css';
+import { useStellarContext } from '../context/StellarContext';
 import { AnimatePresence, motion } from 'motion/react';
+
+import regenerateImg from '../assets/regenerate.svg';
+import { useStellarPositions } from '../hooks/useStellarPositions';
+import { useRef } from 'react';
 
 export const StellarUI = () => {
     const [state, dispatch] = useStellarContext();
     const isSelected = state.selected !== -1;
+    const positions = useStellarPositions(state.viewport);
+    const isGenerating = useRef<boolean>(false);
+
+    const handleRegenerate = () => {
+        if(isGenerating.current)
+            return;
+
+        positions.generate();
+        isGenerating.current = true;
+        setTimeout(() => { isGenerating.current = false }, 5000);
+    }
 
     return (
         <>
@@ -35,30 +50,44 @@ export const StellarUI = () => {
             </motion.button>
 
             <motion.div
-            className={`stellar-ui-bottom-bar ${!isSelected ? 'stellar-button-deactivated' : ''}`}
-            style={{ x: '-50%' }}
+            className='stellar-ui-bottom-bar'
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
-                <AnimatePresence>
-                    { isSelected && 
-                        <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5, ease: 'easeInOut' }}>
-                             Selected: {state.selected}
-                        </motion.p>
-                    }
-                </AnimatePresence>
-                
-                <motion.button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} 
-                onClick={() => dispatch({ type: 'go_back' })}>
-                    Go back
-                    <div className='stellar-tooltip'>
-                        <span>Esc</span>
-                    </div>
-                </motion.button>
+                <div className='stellar-ui-bottom-bar-buttons-container'>
+                    <button className='stellar-button stellar-button-regenerate'>
+                        <img src={regenerateImg} alt='regen'/>
+                    </button>
+                </div>
+
+                <div className='stellar-ui-bottom-bar-buttons-container'>
+                    <AnimatePresence>
+                        { isSelected && 
+                            <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5, ease: 'easeInOut' }}>
+                                Selected: {state.selected}
+                            </motion.p>
+                        }
+                    </AnimatePresence>
+                    
+                    <button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} 
+                    onClick={() => dispatch({ type: 'go_back' })}>
+                        Go back
+                        <div className='stellar-tooltip'>
+                            <span>Esc</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div className='stellar-ui-bottom-bar-buttons-container'>
+                    <button className='stellar-button stellar-button-regenerate'
+                    onClick={handleRegenerate}>
+                        <img src={regenerateImg} alt='regen'/>
+                    </button>
+                </div>
             </motion.div>
         </>
     )

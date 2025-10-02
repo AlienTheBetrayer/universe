@@ -1,7 +1,8 @@
+/* general styles */
 .stellar-button {
     position: relative;
     padding: 1.5rem;
-
+    
     font-size: 1rem;
 
     border-radius: 2000px;
@@ -16,15 +17,19 @@
     }
 }
 
+.stellar-button:hover {
+    color: var(--foreground-last);
+    background-color: var(--background-3);
+}
+
+
 .stellar-button-deactivated {
     color: var(--background-8) !important;
     pointer-events: none;
 }
 
-.stellar-button:hover {
-    color: var(--foreground-last);
-}
 
+/* nav buttons */
 .stellar-ui-previous-button {
     position: absolute;
     left: 1rem;
@@ -37,15 +42,18 @@
     top: 50%;
 }
 
+/* bottom bar */
 .stellar-ui-bottom-bar {
     display: flex;
     gap: 1rem;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+
     position: absolute;
-    width: 100%;
-    left: 50%;
+    left: 1rem;
+    right: 1rem;
     bottom: 1rem;
+
     border-radius: 2000px;
 }
 
@@ -59,10 +67,21 @@
     }
 
     .stellar-ui-bottom-bar {
+        left: 0.5rem;
+        right: 0.5rem;
         bottom: 0.5rem;
     }
 }
 
+.stellar-ui-bottom-bar-buttons-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+
+/* button hotkey tooltip */
 .stellar-tooltip {
     display: flex;
     gap: 0.3rem;
@@ -89,4 +108,15 @@
     .stellar-tooltip {
         display: none;
     }
+}
+
+/* misc buttons */
+.stellar-button-regenerate {
+    padding: 0.5rem;
+}
+
+.stellar-button-regenerate img {
+    width: 16px;
+    height: 16px;
+    filter: invert(0.5);
 }

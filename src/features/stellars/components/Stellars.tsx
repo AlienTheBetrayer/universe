@@ -1,5 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Mesh } from "three";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarPositions } from "../hooks/useStellarPositions";
@@ -12,7 +12,7 @@ export const Stellars = () => {
     const three = useThree();
     
     // generating random xy
-    useStellarPositions(three.viewport);
+    const positions = useStellarPositions(three.viewport);
 
     // onclick camera focus handling
     useStellarCamera(three.camera);
@@ -23,17 +23,23 @@ export const Stellars = () => {
     // hover handling
     useStellarHover();
 
-    useFrame(state => {
-        const t = state.clock.getElapsedTime();
+    useEffect(() => {
+        dispatch({ type: 'set_viewport', viewport: three.viewport });
+    }, [three.viewport]);
+    
+    useEffect(() => {
+        positions.generate();
+    }, []);
+    
+
+    // rotating the currently selected stellar
+    const stellarRefs = useRef<Mesh[]>([]);
+    useFrame(s => {
+        const t = s.clock.getElapsedTime();
         three.camera.rotation.x = Math.sin(t) / 300;
         three.camera.rotation.y = Math.sin(t) / 300;
         three.camera.rotation.z = Math.sin(t) / 300;
-    });
-    
-    // rotating the currently selected stellar
-    const stellarRefs = useRef<Mesh[]>([]);
 
-    useFrame(() => {
         if(state.selected !== -1) { // something is selected
             stellarRefs.current[state.selected].rotation.x += 0.01;
             stellarRefs.current[state.selected].rotation.y += 0.01;
