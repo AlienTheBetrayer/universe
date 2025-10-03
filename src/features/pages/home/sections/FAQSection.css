@@ -14,6 +14,7 @@
 @media (max-width: 768px) {
     .faq-grid {
         flex-direction: column-reverse;
+        top: 6rem;
     }
 }
 
@@ -27,7 +28,7 @@
 
 @media (max-width: 768px) {
     .faq-progress-bar {
-        margin: 2rem 0;
+        margin: 1rem 0;
         transform-origin: left;
         width: 100%;
         height: 2px;
@@ -63,9 +64,14 @@
 }
 
 @media (max-width: 768px) {
+    .faq-questions {
+        min-height: 420px;
+    }
+
     .faq-lock-rectangle {
+        min-height: 420px;
         flex-direction: row;
-        flex: 20%;
+        flex: 10%;
         min-height: unset;
     }
 }
