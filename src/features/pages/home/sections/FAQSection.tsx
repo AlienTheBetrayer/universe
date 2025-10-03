@@ -44,10 +44,15 @@ export const FAQSection = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setActiveIdx(prev => (prev + 1) % (selected + 1));
+            setActiveIdx(prev => (prev + 1) % ((selected === -1 ? 0 : selected) + 1));
         }, 1500);
+
         return () => clearInterval(interval);
     }, [selected]);
+
+    useEffect(() => {
+        console.log('active: ', activeIdx, 'selected: ', selected);
+    }, [activeIdx, selected]);
 
     return (
         <section ref={sectionRef} className='faq-section container'>
@@ -62,7 +67,7 @@ export const FAQSection = () => {
 
                         <div className='faq-questions-animation'>
                             <AnimatePresence>
-                                { Array.from({ length: selected + 1  }).map((_, idx) => (
+                                { Array.from({ length: (selected === -1 ? 0 : selected) + 1  }).map((_, idx) => (
                                     <motion.div 
                                     onClick={() => setActiveIdx(idx)}
                                     className='faq-questions-animation-item'
