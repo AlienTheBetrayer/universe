@@ -84,25 +84,11 @@
 
 /* button hotkey tooltip */
 .stellar-tooltip {
-    display: flex;
-    gap: 0.3rem;
     position: absolute;
-    justify-content: center;
     bottom: 0.3rem;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
-}
-
-.stellar-tooltip span {
-    color: var(--foreground);
-    background-color: var(--background-7);
-    min-width: 16px;
-    min-height: 16px;
-    border-radius: 5px;
-    padding: 2px;
-    font-size: 0.7rem;
-    opacity: 0.4;
+    transform: translateX(-50%);
+    left: 50%;
 }
 
 @media (max-width: 640px) {

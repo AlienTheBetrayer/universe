@@ -1,0 +1,17 @@
+.hotkey-tooltip {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: center;
+
+}
+
+.hotkey-tooltip span {
+    color: var(--foreground);
+    background-color: var(--background-7);
+    min-width: 16px;
+    min-height: 16px;
+    border-radius: 5px;
+    padding: 2px;
+    font-size: 0.7rem;
+    opacity: 0.4;
+}

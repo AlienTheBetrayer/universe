@@ -35,8 +35,10 @@
 }
 
 
-.accordion-item-open:hover {
+.accordion-item-open:hover, .accordion-item-open:active {
     background-color: var(--background-4-transparent);
+    border: transparent;
+    outline: transparent;
 }
 
 .accordion-item-dropdown {
