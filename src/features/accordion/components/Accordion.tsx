@@ -17,22 +17,26 @@ export const Accordion = ({ items }: Props) => {
     return (
         <div className='accordion'>
             { items.map((item, idx) => (
-                <div key={idx} className='accordion-item'>
-                    <button className='accordion-item-open' onClick={() => setSelected(prev => prev === idx ? -1 : idx)}>
+                <motion.div key={idx} className='accordion-item'>
+                    <button className={`accordion-item-open ${idx === selected ? 'accordion-item-open-toggled' : ''}`} onClick={() => setSelected(prev => prev === idx ? -1 : idx)}>
+                        <span>{ idx !== selected ? '+' : '-' }</span>
                         { item.item }
                     </button>
-                    <AnimatePresence>
+
+                    <AnimatePresence initial={false}>
                         { selected === idx && (
-                            <motion.div key='content'
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            style={{ overflow: "hidden" }}>
-                                { item.dropdown } 
+                            <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}>
+                                <p className='accordion-item-dropdown'>
+                                    { item.dropdown } 
+                                </p>
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </div>
+
+                </motion.div>
             ))}
         </div>
     )

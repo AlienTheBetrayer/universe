@@ -2,12 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    border-radius: 20px;
+    background-color: var(--background-transparent);
 }
 
 .accordion-item {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    overflow: hidden;
 }
 
 /* internal elements */
@@ -15,9 +17,24 @@
     cursor: pointer;
     text-align: left;
     font-size: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+}
+
+.accordion-item-open-toggled {
+    background-color: var(--background-3-transparent);
+}
+
+.accordion-item-open span {
+    display: inline-block;
+    width: 12px;
+}
+
+.accordion-item-open:hover {
+    background-color: var(--background-4-transparent);
 }
 
 .accordion-item-dropdown {
-    font-size: 0.7rem;
-    color: var(--background-10);
+    padding: 1rem;
+    opacity: 0.6;
 }
