@@ -66,6 +66,7 @@ export const Accordion = ({ items, onSelect }: Props) => {
                     <AnimatePresence initial={false}>
                         { selected === idx && (
                             <motion.div
+                            key='dropdown'
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}>

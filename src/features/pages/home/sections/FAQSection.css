@@ -56,7 +56,7 @@
 .faq-questions-X {
     flex: 30%;
     border-radius: 32px;
-    background-color: var(--background-transparent);
+    background-color: var(--background);
 }
 
 /* lock section */

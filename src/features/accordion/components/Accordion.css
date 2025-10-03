@@ -5,7 +5,7 @@
     position: relative;
     
     border-radius: 32px;
-    background-color: var(--background-transparent);
+    background-color: var(--background);
 }
 
 .accordion-item {
@@ -45,11 +45,11 @@
 }
 
 .accordion-item-open-toggled {
-    background-color: var(--background-3-transparent);
+    background-color: var(--background-2);
 }
 
 .accordion-item-open:hover, .accordion-item-open:active {
-    background-color: var(--background-4-transparent);
+    background-color: var(--background-2);
     border: transparent;
     outline: transparent;
 }
