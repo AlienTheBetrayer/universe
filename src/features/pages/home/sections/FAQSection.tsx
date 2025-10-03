@@ -43,13 +43,15 @@ export const FAQSection = () => {
         <section ref={sectionRef} className='faq-section container'>
             <div className='faq-grid'>
                 <div className='faq-questions'>
-                    <div className='faq-questions-accordion'>
-                        <h3>Key Strengths</h3>
-                        <Accordion items={questions} onSelect={(idx) => setSelected(idx)}/>
-                    </div>
+                    <h3>Key Strengths</h3>
+                    <div className='faq-questions-content'>
+                        <div className='faq-questions-accordion'>
+                            <Accordion items={questions} onSelect={(idx) => setSelected(idx)}/>
+                        </div>
 
-                    <div className='faq-questions-X'>
+                        <div className='faq-questions-X'>
 
+                        </div>
                     </div>
                 </div>
 

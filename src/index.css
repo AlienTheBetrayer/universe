@@ -126,6 +126,28 @@
     color: var(--foreground);
 }
 
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    background: var(--background-3);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--background-4);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--background-5);
+}
+
+/* selection */
 ::selection {
     background-color: var(--selection-background);
     color: var(--selection-color);
