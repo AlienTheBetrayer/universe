@@ -44,6 +44,7 @@ export const FAQSection = () => {
             <div className='faq-grid'>
                 <div className='faq-questions'>
                     <div className='faq-questions-accordion'>
+                        <h3>Key Strengths</h3>
                         <Accordion items={questions} onSelect={(idx) => setSelected(idx)}/>
                     </div>
 

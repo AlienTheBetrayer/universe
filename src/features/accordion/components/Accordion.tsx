@@ -47,7 +47,7 @@ export const Accordion = ({ items, onSelect }: Props) => {
         <div className='accordion' 
         tabIndex={0}
         onPointerOver={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onBlur={() => { setFocused(false); setSelected(-1) } }
         onClick={() => setFocused(true)}>
             <HotkeyTooltip className='accordion-tooltip' hotkeys={['→', '←', 'Esc']}/>
 

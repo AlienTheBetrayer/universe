@@ -28,6 +28,8 @@ export const useInteractiveParticles = (ref: React.RefObject<Points | null>, cou
             const fast = Math.random() > 0.99;
             velocities[i * 2] = (Math.random() - 0.5) * (fast ? 0.1 : 0.01);
             velocities[i * 2 + 1] = (Math.random() - 0.5) * (fast ? 0.1 : 0.01);
+
+
         }
 
         return {
