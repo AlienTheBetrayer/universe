@@ -7,7 +7,3 @@
 
     background-color: var(--background);
 }
-
-.page .container:first-of-type {
-    margin-top: 12rem;
-}

@@ -12,6 +12,7 @@ import { motion, useInView } from 'motion/react';
 import { InteractiveParticlesContext, VectorTypes, type InteractiveParticlesContextData } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import { InteractiveParticlesCanvas } from '../../../interactiveparticles/components/InteractiveParticlesCanvas';
 import { QuestionContext, type QuestionContextData } from '../../../questionparticles/context/QuestionContext';
+import { FAQSection } from '../sections/FAQSection';
 
 export const HomePage = () => {
     const headingContextData = useState<InteractiveParticlesContextData>({ vectorType: VectorTypes.astral});
@@ -46,6 +47,7 @@ export const HomePage = () => {
                 </div>
             </InteractiveParticlesContext>
             
+            <FAQSection/>
             <LockSection/>
 
             <QuestionContext value={questionContextData}>

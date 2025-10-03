@@ -1,0 +1,42 @@
+/* general things */
+.faq-section {
+    height: 400vh;
+}
+
+.faq-grid {
+    display: flex;
+    gap: 4rem;
+    padding: 1rem;
+    
+    position: sticky;
+    top: 8rem;
+}
+
+.faq-grid > div {
+    background-color: var(--background-4);
+    min-height: 500px;
+    border-radius: 64px;
+}
+
+/* questions section */
+.faq-questions {
+    display: flex;
+    flex-direction: column;
+    flex: 70%;
+    gap: 2rem;
+}
+
+/* lock section */
+.faq-lock-rectangle {
+    display: flex;
+    flex-direction: column;
+    flex: 30%;
+    position: relative;
+}
+
+.faq-lock-wrapper {
+}
+
+.faq-lock-rectangle canvas {
+    background-color: red;
+}

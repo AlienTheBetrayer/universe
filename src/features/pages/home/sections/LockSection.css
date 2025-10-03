@@ -3,6 +3,7 @@
     width: 100%;
     position: relative;
     height: 1250vh;
+    margin-top: 12rem;
 }
 
 .sphere-canvas-container canvas {
