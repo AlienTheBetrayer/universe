@@ -22,7 +22,7 @@ export const ArrayTypewriter = ({ scrollProgress, words, as='h1', style, ...rest
                 initial={{ opacity: 0, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
                 exit={{ filter: 'blur(40px)' }}
-                transition= {{ duration: 0.5 }}>
+                transition= {{ duration: 0.3 }}>
                     { letter }
                 </MotionTag>
             ))}

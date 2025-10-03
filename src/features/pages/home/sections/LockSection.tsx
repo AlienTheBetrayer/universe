@@ -17,7 +17,7 @@ export const LockSection = () => {
     ];
 
     const { scrollYProgress } = useScroll({ target: scrollRef }); 
-    const scrollSpringed = useSpring(scrollYProgress, { stiffness: 40, damping: 20 });
+    const scrollSpringed = useSpring(scrollYProgress, { stiffness: 100, damping: 10 });
     const progressValue = useValueMotion(scrollSpringed);
     
     const letterStyle = { color: `rgb(${progressValue * 255}, 0, ${(1 - progressValue) * 255})`, fontSize: '2.5rem' };
