@@ -1,0 +1,23 @@
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accordion-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+/* internal elements */
+.accordion-item-open {
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.accordion-item-dropdown {
+    font-size: 0.7rem;
+    color: var(--background-10);
+}

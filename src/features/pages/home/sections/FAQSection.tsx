@@ -6,6 +6,7 @@ import { motion } from 'motion/react';
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 
 import hoverImg from '../../../../assets/cursor.svg';
+import { Accordion, type AccordionItem } from '../../../accordion/components/Accordion';
 
 export const FAQSection = () => {
     const isMobile = useMediaQuery(768);
@@ -17,11 +18,24 @@ export const FAQSection = () => {
         damping: 40
     });
 
+    const questions: AccordionItem[] = [
+        {
+            item: 'hi',
+            dropdown: 'oh yes'
+        },
+        {
+            item: 'bye',
+            dropdown: 'why??'
+        }
+    ];
+
     return (
         <section ref={sectionRef} className='faq-section container'>
             <div className='faq-grid'>
                 <div className='faq-questions'>
-                    
+                    <Accordion items={questions}>
+                        
+                    </Accordion>
                 </div>
 
                 <motion.div style={ isMobile ? { scaleX: smoothProgress } : { scaleY: smoothProgress }} className='faq-progress-bar'/>
