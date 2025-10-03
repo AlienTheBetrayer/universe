@@ -55,6 +55,8 @@
     flex: 30%;
     min-height: 500px;
     overflow: hidden;
+
+    position: relative;
     
     border-radius: 64px;
     background-color: var(--background-2);
@@ -66,4 +68,13 @@
         flex: 20%;
         min-height: unset;
     }
+}
+
+.faq-lock-hover-img {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    width: 16px;
+    height: 16px;
+    filter: invert(0.5);
 }

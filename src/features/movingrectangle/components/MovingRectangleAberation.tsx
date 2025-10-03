@@ -20,12 +20,9 @@ export const _MovingRectangleAberation = ({ shown }: Props) => {
     useFrame(() => {
         const targetOffset = shown.current ? 0.5 : 0;
         if(effectRef.current) {
-            // smooth lerp each frame toward target
-            effectRef.current.offset.x += (targetOffset - effectRef.current.offset.x) * 0.15;
-            effectRef.current.offset.y += (targetOffset - effectRef.current.offset.y) * 0.15;
-
+            effectRef.current.offset.x += (targetOffset - effectRef.current.offset.x) * 0.1;
+            effectRef.current.offset.y += (targetOffset - effectRef.current.offset.y) * 0.1;
         }
-
     });
 
     return (

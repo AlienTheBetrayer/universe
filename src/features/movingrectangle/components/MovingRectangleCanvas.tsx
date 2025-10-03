@@ -3,7 +3,7 @@ import { MovingRectangle } from "./MovingRectangle"
 import type { MotionValue } from "motion"
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { MovingRectangleAberation } from './MovingRectangleAberation';
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 interface Props {
     progress: MotionValue<number>;

@@ -26,5 +26,5 @@
 .sphere-card-hover img {
     width: 16px;
     height: 16px;
-    filter: invert(0.75);
+    filter: invert(0.5);
 }

@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import './Contents.css';
 import { CardFigure } from './CardFigure';
 
-import cursorImg from '../assets/cursor.svg';
+import cursorImg from '../../../assets/cursor.svg';
 import { useLocalStore } from '../../../zustand/localStore';
 
 interface Props {

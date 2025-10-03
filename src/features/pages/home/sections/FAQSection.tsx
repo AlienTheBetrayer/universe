@@ -5,6 +5,8 @@ import { useScroll, useSpring } from 'motion/react';
 import { motion } from 'motion/react';
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 
+import hoverImg from '../../../../assets/cursor.svg';
+
 export const FAQSection = () => {
     const isMobile = useMediaQuery(768);
     // scroll progress into smooth 0% -> 100%
@@ -26,6 +28,7 @@ export const FAQSection = () => {
 
                 <div className='faq-lock-rectangle'>
                     <MovingRectangleCanvas progress={smoothProgress}/>
+                    <img className='faq-lock-hover-img' src={hoverImg} alt='hover'/>
                 </div>
             </div>
         </section>
