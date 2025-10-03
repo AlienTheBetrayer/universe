@@ -5,10 +5,16 @@
 
 .faq-grid {
     display: flex;
-    padding: 1rem;
     
     position: sticky;
     top: 8rem;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .faq-grid {
+        flex-direction: column-reverse;
+    }
 }
 
 .faq-progress-bar {
@@ -27,43 +33,37 @@
         height: 2px;
         background: linear-gradient(to right, hsl(240, 30%, 50%) 70%, hsl(240, 70%, 50%));
     }
-
-    .faq-grid {
-        gap: 1rem;
-        flex-direction: column-reverse;
-    }
 }
 
 /* questions section */
 .faq-questions {
-    border-radius: 64px;
-    background-color: var(--background-2);
     display: flex;
     flex-direction: column;
     flex: 70%;
-    gap: 2rem;
+    padding: 1rem;
     min-height: 500px;
+    gap: 1rem;
+    
+    border-radius: 64px;
+    background-color: var(--background-2);
 }
 
 /* lock section */
 .faq-lock-rectangle {
-    background-color: var(--background-2);
-    border-radius: 64px;
     display: flex;
     flex-direction: column;
     flex: 30%;
-    position: relative;
-    overflow: hidden;
-    height: 500px;
+    padding: 1rem;
+    min-height: 500px;
+    
+    border-radius: 64px;
+    background-color: var(--background-2);
 }
 
 @media (max-width: 768px) {
     .faq-lock-rectangle {
-        height: 64px;
-        flex: 10%;
         flex-direction: row;
+        flex: 20%;
+        min-height: unset;
     }
-}
-
-.faq-lock-wrapper {
 }
