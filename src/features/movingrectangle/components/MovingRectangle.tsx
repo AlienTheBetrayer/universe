@@ -22,15 +22,21 @@ export const MovingRectangle = ({ progress }: Props) => {
                 meshRef.current.rotation.x = progress.get() * 4;
             }
 
-            const scale = 1 + Math.sin(t) / 10;
+            const scale = 1 + Math.sin(t) / 30;
             meshRef.current.scale.set(scale, scale, scale);
         }
     });
     
     return (
         <mesh ref={meshRef}>
-            <boxGeometry args={ isMobile ? [3, 6, 3] : [10, 4, 3]}/>
-            <meshPhysicalMaterial wireframe/>
+            <boxGeometry args={ isMobile ? [2, 6, 1] : [10, 4, 3]}/>
+            <meshPhysicalMaterial
+            color='#fff'
+            roughness={0.5}   // lower = shinier
+            metalness={0.8}     // higher = more reflective
+            clearcoat={1}     // adds car-paint style layer
+            clearcoatRoughness={0}
+            />
         </mesh>
     )
 }

@@ -10,8 +10,9 @@ interface Props {
 export const MovingRectangleCanvas = ({ progress }: Props) => {
     return (
         <Canvas>
-            <Bounds fit clip observe margin={0.9}>
-                <pointLight position={[0, 0, 12]} intensity={40}/>
+            <Bounds fit clip observe margin={0.7}>
+                <pointLight position={[-12, 5, 3]} intensity={40}/>
+                <pointLight position={[12, 3, 6]} intensity={40}/>
                 <MovingRectangle progress={progress}/>
             </Bounds>
         </Canvas>
