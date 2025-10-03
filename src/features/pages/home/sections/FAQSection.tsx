@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MovingRectangleCanvas } from '../../../movingrectangle/components/MovingRectangleCanvas';
 import './FAQSection.css';
 import { useScroll, useSpring } from 'motion/react';
@@ -7,6 +7,8 @@ import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 
 import hoverImg from '../../../../assets/cursor.svg';
 import { Accordion, type AccordionItem } from '../../../accordion/components/Accordion';
+import { AnimatePresence } from 'motion/react';
+import { cssVariable } from '../../../../utils/cssVariable';
 
 export const FAQSection = () => {
     const isMobile = useMediaQuery(768);
@@ -37,20 +39,47 @@ export const FAQSection = () => {
         }
     ];
 
-    const [selected, setSelected] = useState<number>(-1);
+    const [selected, setSelected] = useState<number>(0);
+    const [activeIdx, setActiveIdx] = useState<number>(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveIdx(prev => (prev + 1) % (selected + 1));
+        }, 1500);
+        return () => clearInterval(interval);
+    }, [selected]);
 
     return (
         <section ref={sectionRef} className='faq-section container'>
             <div className='faq-grid'>
                 <div className='faq-questions'>
                     <h3>Key Strengths</h3>
+
                     <div className='faq-questions-content'>
                         <div className='faq-questions-accordion'>
                             <Accordion items={questions} onSelect={(idx) => setSelected(idx)}/>
                         </div>
 
-                        <div className='faq-questions-X'>
+                        <div className='faq-questions-animation'>
+                            <AnimatePresence>
+                                { Array.from({ length: selected + 1  }).map((_, idx) => (
+                                    <motion.div 
+                                    onClick={() => setActiveIdx(idx)}
+                                    className='faq-questions-animation-item'
+                                    key={idx}
+                                    style={{ flex: 1 }}
+                                    layout
+                                    whileHover={{ scale: 1.1, filter: 'brightness(2)'  }}
+                                    animate={{
+                                        scale: idx === activeIdx ? 1.1 : 1,
+                                        filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',
+                                        backgroundColor: idx === activeIdx ? '#0f0f57' : cssVariable('--background-2')
+                                    }}
+                                    transition={{ type: "spring", stiffness: 75 * (idx + 1), damping: 20 }}>
 
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
                         </div>
                     </div>
                 </div>
