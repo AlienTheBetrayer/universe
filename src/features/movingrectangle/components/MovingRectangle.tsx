@@ -13,24 +13,30 @@ export const MovingRectangle = ({ progress }: Props) => {
     const meshRef = useRef<Mesh>(null);
     const isMobile = useMediaQuery(768);
     const three = useThree();
-    const progressViewport = useTransform(progress, [0, 1], [three.viewport.height / 2, -three.viewport.height / 2]);
+    const progressViewport = useTransform(progress, 
+        [0, 1], 
+        isMobile ? [-three.viewport.width / 2, three.viewport.width / 2] : [three.viewport.height / 2, -three.viewport.height / 2]);
     
     useFrame(state => {
         if(meshRef.current) {
             const t = state.clock.getElapsedTime();
             
-            isMobile ? meshRef.current.rotation.y = progress.get() * 8 : meshRef.current.rotation.x = progress.get() * 8;
-            
-            
-            const scale = isMobile ? 2 : 0.9 + Math.sin(t) / 30;
-            meshRef.current.position.y = progressViewport.get();
+            const scale: number = 0.9 + Math.sin(t) / 30;
+            if(isMobile) {
+                meshRef.current.position.x = progressViewport.get();
+                meshRef.current.rotation.y = progress.get() * 8
+            } else {
+                meshRef.current.rotation.x = progress.get() * 8;
+                meshRef.current.position.y = progressViewport.get();
+            }
+
             meshRef.current.scale.set(scale, scale, scale);
         }
     });
     
     return (
         <mesh ref={meshRef}>
-            <boxGeometry args={[4, 2, 2]}/>
+            <boxGeometry args={isMobile ? [2, 4, 2] : [4, 2, 2]}/>
             <meshPhysicalMaterial color='#fff' roughness={0.5} metalness={0.8} clearcoat={1} clearcoatRoughness={0}/>
         </mesh>
     )

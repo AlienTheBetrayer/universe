@@ -7,8 +7,10 @@ interface Props {
     shown: React.RefObject<boolean>;
 }
 
+// don't rerender! will crash
 export const _MovingRectangleAberation = ({ shown }: Props) => {
-    const effectRef = useRef<ChromaticAberrationEffect>(null)
+    const effectRef = useRef<ChromaticAberrationEffect>(null);
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
     
     useEffect(() => {
         if(effectRef.current) {
@@ -18,7 +20,7 @@ export const _MovingRectangleAberation = ({ shown }: Props) => {
     }, []);
 
     useFrame(() => {
-        const targetOffset = shown.current ? 0.5 : 0;
+        const targetOffset = shown.current ? (isMobile ? 0.1 : 0.3) : 0;
         if(effectRef.current) {
             effectRef.current.offset.x += (targetOffset - effectRef.current.offset.x) * 0.1;
             effectRef.current.offset.y += (targetOffset - effectRef.current.offset.y) * 0.1;
