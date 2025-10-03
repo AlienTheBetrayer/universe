@@ -1,20 +1,29 @@
 import { Canvas } from "@react-three/fiber"
 import { MovingRectangle } from "./MovingRectangle"
 import type { MotionValue } from "motion"
-import { Bounds } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { MovingRectangleAberation } from './MovingRectangleAberation';
+import { useRef, useState } from "react";
 
 interface Props {
     progress: MotionValue<number>;
 }
 
 export const MovingRectangleCanvas = ({ progress }: Props) => {
+    const hovered = useRef<boolean>(false);
+
     return (
-        <Canvas>
-            <Bounds fit clip observe margin={0.7}>
-                <pointLight position={[-12, 5, 3]} intensity={40}/>
-                <pointLight position={[12, 3, 6]} intensity={40}/>
-                <MovingRectangle progress={progress}/>
-            </Bounds>
+        <Canvas
+        onPointerOver={() => hovered.current = true}
+        onPointerLeave={() => hovered.current = false}>
+            <EffectComposer>
+                <Bloom luminanceThreshold={0.5} intensity={2}/>
+                <MovingRectangleAberation shown={hovered}/>
+            </EffectComposer>
+
+            <pointLight position={[-2, 1, 1]} intensity={8}/>
+            <pointLight position={[4, 1, 0]} intensity={8}/>
+            <MovingRectangle progress={progress}/>
         </Canvas>
     )
 }
