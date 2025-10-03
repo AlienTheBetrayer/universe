@@ -8,8 +8,8 @@ interface Props {
 export const HotkeyTooltip = ({ className, hotkeys }: Props) => {
     return (
         <div className={`hotkey-tooltip ${className ?? ''}`}>
-            { hotkeys?.map(hotkey => (
-                    <span>{ hotkey }</span>
+            { hotkeys?.map((hotkey, idx) => (
+                    <span key={idx}>{ hotkey }</span>
             ))}
         </div>
     )

@@ -2,7 +2,8 @@
     display: flex;
     gap: 0.3rem;
     justify-content: center;
-
+    user-select: none;
+    pointer-events: none;
 }
 
 .hotkey-tooltip span {

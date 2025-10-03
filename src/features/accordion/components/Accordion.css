@@ -2,17 +2,32 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: relative;
+    
     border-radius: 32px;
     background-color: var(--background-transparent);
+    background-color: red;
 }
 
 .accordion-item {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
-/* internal elements */
+/* tooltip */
+.accordion-tooltip {
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .accordion .accordion-tooltip {
+        display: none;
+    }
+}
+
+/* button */
 .accordion-item-open {
     cursor: pointer;
     font-size: 1rem;
@@ -34,13 +49,13 @@
     background-color: var(--background-3-transparent);
 }
 
-
 .accordion-item-open:hover, .accordion-item-open:active {
     background-color: var(--background-4-transparent);
     border: transparent;
     outline: transparent;
 }
 
+/* dropdown */
 .accordion-item-dropdown {
     padding: 1rem;
     color: var(--background-11);

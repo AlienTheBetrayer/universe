@@ -1,6 +1,7 @@
 import './Accordion.css';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 
 export interface AccordionItem {
     item: string;
@@ -21,11 +22,15 @@ export const Accordion = ({ items, onSelect }: Props) => {
         onSelect?.(idx);
     }
 
-    // unselect the current selected element on escape
+    // accessibility / usability hotkeys
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
+            if(!focused)
+                return;
+
             switch(e.key) {
                 case 'Escape':
+                    setFocused(false);
                     return setSelected(-1);
                 case 'ArrowRight':
                     return setSelected(prev => prev < items.length - 1 ? prev + 1 : 0);
@@ -36,14 +41,15 @@ export const Accordion = ({ items, onSelect }: Props) => {
 
         window.addEventListener('keydown', handle);
         return () => window.removeEventListener('keydown', handle);
-    }, []);
-
-    useEffect(() => {
-        console.log(focused);
     }, [focused]);
 
     return (
-        <div className='accordion' onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}>
+        <div className='accordion' 
+        tabIndex={0}
+        onPointerOver={() => setFocused(true)}
+        onBlur={() => setFocused(false)}>
+            <HotkeyTooltip className='accordion-tooltip' hotkeys={['→', '←', 'Esc', focused.toString()]}/>
+
             { items.map((item, idx) => (
                 <motion.div key={idx} className='accordion-item'>
                     <button className={`accordion-item-open ${idx === selected ? 'accordion-item-open-toggled' : ''}`}
