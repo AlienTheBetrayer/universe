@@ -9,16 +9,23 @@ export interface AccordionItem {
 
 interface Props {
     items: AccordionItem[];
+    onSelect?: (idx: number) => void;
 }
 
-export const Accordion = ({ items }: Props) => {
+export const Accordion = ({ items, onSelect }: Props) => {
     const [selected, setSelected] = useState<number>(-1);
+
+    const handleSelect = (idx: number) => {
+        setSelected(prev => prev === idx ? -1 : idx);
+        onSelect?.(idx);
+    }
 
     return (
         <div className='accordion'>
             { items.map((item, idx) => (
                 <motion.div key={idx} className='accordion-item'>
-                    <button className={`accordion-item-open ${idx === selected ? 'accordion-item-open-toggled' : ''}`} onClick={() => setSelected(prev => prev === idx ? -1 : idx)}>
+                    <button className={`accordion-item-open ${idx === selected ? 'accordion-item-open-toggled' : ''}`}
+                    onClick={() => handleSelect(idx)}>
                         <span>{ idx !== selected ? '+' : '-' }</span>
                         { item.item }
                     </button>

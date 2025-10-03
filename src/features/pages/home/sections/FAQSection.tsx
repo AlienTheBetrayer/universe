@@ -20,22 +20,38 @@ export const FAQSection = () => {
 
     const questions: AccordionItem[] = [
         {
-            item: 'hi',
-            dropdown: 'oh yes'
+            item: "Approach to Design",
+            dropdown: "Clarity first, then motion. I build interfaces that are simple to use and feel responsive through subtle interaction."
         },
         {
-            item: 'bye',
-            dropdown: 'why??'
+            item: "Development Process",
+            dropdown: "Plan, prototype, iterate. I keep workflows efficient with quick feedback loops and a strong focus on performance."
+        },
+        {
+            item: "Focus Areas",
+            dropdown: "Interactive UIs, 3D visuals, and motion-driven experiences that blend creativity with functionality."
+        },
+        {
+            item: "Collaboration",
+            dropdown: "Clear communication, adaptability, and consistent delivery are my priorities when working with teams or clients."
         }
     ];
+
+    const [selected, setSelected] = useState<number>(-1);
 
     return (
         <section ref={sectionRef} className='faq-section container'>
             <div className='faq-grid'>
                 <div className='faq-questions'>
-                    <Accordion items={questions}>
-                        
-                    </Accordion>
+                    <div className='faq-questions-accordion'>
+                        <Accordion items={questions} onSelect={(idx) => setSelected(idx)}>
+                            
+                        </Accordion>
+                    </div>
+
+                    <div className='faq-questions-X'>
+
+                    </div>
                 </div>
 
                 <motion.div style={ isMobile ? { scaleX: smoothProgress } : { scaleY: smoothProgress }} className='faq-progress-bar'/>

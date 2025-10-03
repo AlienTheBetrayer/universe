@@ -39,7 +39,6 @@
 /* questions section */
 .faq-questions {
     display: flex;
-    flex-direction: column;
     flex: 70%;
     padding: 2rem;
     min-height: 500px;
@@ -47,6 +46,17 @@
     
     border-radius: 64px;
     background-color: var(--background-2);
+}
+
+.faq-questions-accordion {
+    flex: 70%;
+
+}
+
+.faq-questions-X {
+    flex: 30%;
+    border-radius: 32px;
+    background-color: var(--background-transparent);
 }
 
 /* lock section */
@@ -66,6 +76,7 @@
 @media (max-width: 768px) {
     .faq-questions {
         min-height: 420px;
+        flex-direction: column;
     }
 
     .faq-lock-rectangle {
