@@ -80,7 +80,14 @@
     position: absolute;
     right: 1.5rem;
     bottom: 1.5rem;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     filter: invert(0.5);
+}
+
+@media (max-width: 768px) {
+    .faq-lock-hover-img {
+        width: 16px;
+        height: 16px;
+    }
 }
