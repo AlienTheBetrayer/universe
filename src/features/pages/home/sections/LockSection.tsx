@@ -27,9 +27,7 @@ export const LockSection = () => {
             <div className='sphere-canvas-lock'>
                 <LockCanvas ref={scrollRef}/>
                 <div className='sphere-canvas-typewriter'>
-                    <ArrayTypewriter scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}>
-
-                    </ArrayTypewriter>
+                    <ArrayTypewriter scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}/>
                 </div>
             </div>
         </section>

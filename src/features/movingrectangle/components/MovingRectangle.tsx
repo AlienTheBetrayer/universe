@@ -2,6 +2,7 @@ import { useFrame } from "@react-three/fiber";
 import type { MotionValue } from "motion"
 import { useRef } from "react";
 import { Mesh } from "three";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 interface Props {
     progress: MotionValue<number>;
@@ -9,16 +10,26 @@ interface Props {
 
 export const MovingRectangle = ({ progress }: Props) => {
     const meshRef = useRef<Mesh>(null);
+    const isMobile = useMediaQuery(768);
     
-    useFrame(() => {
+    useFrame(state => {
         if(meshRef.current) {
-            meshRef.current.rotation.x = progress.get() * 4;
+            const t = state.clock.getElapsedTime();
+
+            if(isMobile) {
+                meshRef.current.rotation.y = progress.get() * 8;
+            } else {
+                meshRef.current.rotation.x = progress.get() * 4;
+            }
+
+            const scale = 1 + Math.sin(t) / 10;
+            meshRef.current.scale.set(scale, scale, scale);
         }
     });
     
     return (
         <mesh ref={meshRef}>
-            <boxGeometry args={[6, 3, 3]}/>
+            <boxGeometry args={ isMobile ? [3, 6, 3] : [10, 4, 3]}/>
             <meshPhysicalMaterial wireframe/>
         </mesh>
     )
