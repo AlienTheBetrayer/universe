@@ -15,20 +15,25 @@
 /* internal elements */
 .accordion-item-open {
     cursor: pointer;
-    text-align: left;
     font-size: 1rem;
     padding: 1rem;
     border-radius: 32px;
+}
+
+.accordion-item-open-title {
+    display: flex;
+    text-align: left;
+}
+
+.accordion-item-open-sign {
+    display: inline-block;
+    width: 16px;
 }
 
 .accordion-item-open-toggled {
     background-color: var(--background-3-transparent);
 }
 
-.accordion-item-open span {
-    display: inline-block;
-    width: 12px;
-}
 
 .accordion-item-open:hover {
     background-color: var(--background-4-transparent);
@@ -36,5 +41,5 @@
 
 .accordion-item-dropdown {
     padding: 1rem;
-    opacity: 0.6;
+    color: var(--background-11);
 }

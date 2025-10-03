@@ -20,20 +20,20 @@ export const FAQSection = () => {
 
     const questions: AccordionItem[] = [
         {
-            item: "Approach to Design",
-            dropdown: "Clarity first, then motion. I build interfaces that are simple to use and feel responsive through subtle interaction."
+            item: "Code <mark>Quality</mark>",
+            dropdown: "I focus on writing <b>clean, modular, and maintainable code</b> that teams can easily build upon. Every solution is designed with scalability, <u>readability</u>, and <mark>long-term stability</mark> in mind."
         },
         {
-            item: "Development Process",
-            dropdown: "Plan, prototype, iterate. I keep workflows efficient with quick feedback loops and a strong focus on performance."
+            item: "Fast Learning",
+            dropdown: "I quickly pick up new tools, frameworks, and concepts, then <mark>apply them effectively in real projects.</mark> This adaptability allows me to <b>stay ahead of trends</b> and deliver value without long ramp-up times."
         },
         {
-            item: "Focus Areas",
-            dropdown: "Interactive UIs, 3D visuals, and motion-driven experiences that blend creativity with functionality."
+            item: "<mark>3D</mark> & Motion Abilities",
+            dropdown: "I create <mark>immersive 3D experiences and fluid motion</mark> that bring interfaces to life. From subtle transitions to complex interactions, I make sure visuals feel purposeful, engaging, and technically smooth."
         },
         {
-            item: "Collaboration",
-            dropdown: "Clear communication, adaptability, and consistent delivery are my priorities when working with teams or clients."
+            item: "Strong Technical Skillset",
+            dropdown: "With a solid foundation in modern web technologies, I build solutions that are <b>robust, secure, and performant.</b> My expertise spans from low-level details to <mark>high-level architecture and design patterns.</mark>"
         }
     ];
 

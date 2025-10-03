@@ -26,8 +26,12 @@ export const Accordion = ({ items, onSelect }: Props) => {
                 <motion.div key={idx} className='accordion-item'>
                     <button className={`accordion-item-open ${idx === selected ? 'accordion-item-open-toggled' : ''}`}
                     onClick={() => handleSelect(idx)}>
-                        <span>{ idx !== selected ? '+' : '-' }</span>
-                        { item.item }
+                        <div className='accordion-item-open-title'>
+                            <h4 className='accordion-item-open-sign'>
+                                { idx !== selected ? '+' : '-' }
+                            </h4>
+                            <h4 dangerouslySetInnerHTML={{ __html: item.item }}/>
+                        </div>
                     </button>
 
                     <AnimatePresence initial={false}>
@@ -36,9 +40,7 @@ export const Accordion = ({ items, onSelect }: Props) => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}>
-                                <p className='accordion-item-dropdown'>
-                                    { item.dropdown } 
-                                </p>
+                                <p className='accordion-item-dropdown' dangerouslySetInnerHTML={{ __html: item.dropdown }}/>
                             </motion.div>
                         )}
                     </AnimatePresence>
