@@ -23,6 +23,7 @@ export const MovingRectangleCanvas = ({ progress }: Props) => {
 
             <pointLight position={[-2, 1, 1]} intensity={8}/>
             <pointLight position={[4, 1, 0]} intensity={8}/>
+            <pointLight position={[-4, -1, 4]} intensity={2}/>
             <MovingRectangle progress={progress}/>
         </Canvas>
     )
