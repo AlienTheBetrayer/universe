@@ -8,7 +8,7 @@
 
     border-radius: 30px;
     background-color: var(--background-2-transparent);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
 }
 
 @media (max-width: 1340px) {
@@ -20,5 +20,5 @@
 .popup {
     z-index: 99;
     position: absolute;
-    background-color: var(--background-semitransparent);
+    background-color: var(--background-transparent);
 }
