@@ -13,7 +13,6 @@ interface Props {
 export const CircleGrid = ({ controller=true }: Props) => {
     const grid = useCircleGrid();
     const hotkeys = useCircleGridHotkeys(grid);
-
     return (
         <div className='circle-grid'
         tabIndex={0}
@@ -27,13 +26,13 @@ export const CircleGrid = ({ controller=true }: Props) => {
                 layout
                 style={{ 
                     gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1),
+                    borderWidth: idx === grid.coloredIdx ? 0 : 2,
+                    borderColor: idx === grid.coloredIdx ? '#00000000' : cssVariable('--background-6'),
                 }}
                 animate={{
-                    background: `linear-gradient(${Math.floor(Math.random() * 360)}deg, 
-                        ${idx === grid.coloredIdx ? '#0b0b41ac' : '#00000000'}, 
-                        ${idx === grid.coloredIdx ? '#4141c9ac' : '#00000000'}`,
-                    borderColor: idx === grid.coloredIdx ? '#00000000' : cssVariable('--background-6'),
-                    borderWidth: idx === grid.coloredIdx ? 0 : 2
+                    background: `linear-gradient(317deg, 
+                        ${idx === grid.coloredIdx ? '#0b0b41' : '#00000000'}, 
+                        ${idx === grid.coloredIdx ? '#4141c9' : '#00000000'}`,
                 }}
                 transition={{ 
                     layout: { ease: 'backInOut', duration: (1 + idx / 5) },
