@@ -72,15 +72,16 @@ export const FAQSection = () => {
                                     key={idx}
                                     style={{ flex: 1 }}
                                     layout
+                                    initial={{ scale: 1.0, filter: 'brightness(1) '}}
                                     whileHover={{ scale: 1.1, filter: 'brightness(2)'  }}
                                     animate={{
                                         scale: (idx === activeIdx && selected > 0) ? 1.1 : 1,
                                         filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',
-                                        backgroundColor: idx === activeIdx ? '#0f0f57' : cssVariable('--background-2')
+                                        background: `linear-gradient(${Math.floor(Math.random() * 360)}deg, 
+                                        ${idx === activeIdx ? '#0b0b41ff' : cssVariable('--background-2')}, 
+                                        ${idx === activeIdx ? '#4141c9ff' : cssVariable('--background-2')}`
                                     }}
-                                    transition={{ type: "spring", stiffness: 75 * (idx + 1), damping: 20 }}>
-
-                                    </motion.div>
+                                    transition={{ type: "spring", stiffness: 75 * (idx + 1), damping: 20 }}/>
                                 ))}
                             </AnimatePresence>
                         </div>

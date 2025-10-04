@@ -9,7 +9,7 @@ export const usePopup = (element: React.ReactNode) => {
 
     useEffect(() => {
         document.body.style.overflow = shown ? 'hidden' : 'auto';
-        blur.setShown(shown);
+        blur.setShown(shown);   
     }, [shown]);
 
     const render = () => {

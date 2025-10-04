@@ -25,6 +25,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                 key={idx}
                 layout
                 style={{ gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1)}}
+                initial={{ scale: 1.0, filter: 'brightness(1) '}}
                 whileHover={{ scale: 1.1, filter: 'brightness(3)', transition: { type: 'spring', stiffness: 64, damping: 4 } }}
                 transition={{ layout: { ease: 'backInOut', duration: (1 + idx / 5) } }}>
                     { idx + 1 }
