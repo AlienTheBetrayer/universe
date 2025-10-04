@@ -4,7 +4,6 @@ import { motion } from "motion/react"
 import { useCircleGridHotkeys } from '../hooks/useCircleGridHotkeys';
 import { CircleGridController } from './CircleGridController';
 import { CircleGridNavigation } from './CircleGridNavigation';
-import { cssVariable } from '../../../utils/cssVariable';
 
 interface Props {
     controller?: boolean;
@@ -35,11 +34,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                         { idx + 1 }
                     </button>
 
-                    <div className='circle-grid-dots' 
-                    style={{
-                        backgroundImage: idx === grid.coloredIdx ? `radial-gradient(#fff 1px, transparent 0)` :
-                        `radial-gradient(${cssVariable('--background-5')} 1px, transparent 0)`
-                     }}/>
+                    <div className={`circle-grid-dots ${idx === grid.coloredIdx ? 'circle-grid-dots-selected' : ''}`}/>
                 </motion.div>   
             ))}
 

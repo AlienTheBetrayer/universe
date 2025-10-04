@@ -45,6 +45,10 @@
     opacity: 0.5;
 }
 
+.circle-grid .circle-grid-dots-selected {
+    background-image: radial-gradient(#fff 1px, transparent 0);
+}
+
 
 /* tooltips / controller */
 .circle-grid-controller {
