@@ -76,7 +76,7 @@ export const FAQSection = () => {
                                     layout
                                     whileHover={{ scale: 1.1, filter: 'brightness(2)'  }}
                                     animate={{
-                                        scale: idx === activeIdx ? 1.1 : 1,
+                                        scale: (idx === activeIdx && selected !== 0) ? 1.1 : 1,
                                         filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',
                                         backgroundColor: idx === activeIdx ? '#0f0f57' : cssVariable('--background-2')
                                     }}
