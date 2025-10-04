@@ -29,6 +29,12 @@
     will-change: transform;
 }
 
+.circle-grid .circle-grid-element-selected {
+    background: linear-gradient(317deg, #0b0b41, #4141c9);
+    border-width: 0;
+    border-color: transparent;
+}
+
 .circle-grid-dots {
     position: absolute;
     inset: 0;
