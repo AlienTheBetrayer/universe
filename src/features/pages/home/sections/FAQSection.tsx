@@ -50,12 +50,10 @@ export const FAQSection = () => {
         return () => clearInterval(interval);
     }, [selected]);
 
-    useEffect(() => {
-        console.log('active: ', activeIdx, 'selected: ', selected);
-    }, [activeIdx, selected]);
-
     return (
         <section ref={sectionRef} className='faq-section container'>
+            <h2>Important topics</h2>
+            
             <div className='faq-grid'>
                 <div className='faq-questions'>
                     <h3>Key Strengths</h3>
@@ -76,7 +74,7 @@ export const FAQSection = () => {
                                     layout
                                     whileHover={{ scale: 1.1, filter: 'brightness(2)'  }}
                                     animate={{
-                                        scale: (idx === activeIdx && selected !== 0) ? 1.1 : 1,
+                                        scale: (idx === activeIdx && selected > 0) ? 1.1 : 1,
                                         filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',
                                         backgroundColor: idx === activeIdx ? '#0f0f57' : cssVariable('--background-2')
                                     }}
