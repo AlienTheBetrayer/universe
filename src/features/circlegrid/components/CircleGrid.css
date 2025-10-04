@@ -1,0 +1,22 @@
+/* actual grid */
+.circle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .circle-grid {
+        gap: 0.7rem;
+    }
+}
+
+/* grid element */
+.circle-grid > div {
+    display: flex;
+    aspect-ratio: 1/1;
+
+    border-radius: 32px;
+    border: 2px dashed var(--background-6);
+}
