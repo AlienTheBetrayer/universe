@@ -46,9 +46,8 @@ export const CircleGrid = ({ controller=true }: Props) => {
                         →
                     </button>
 
-                    <div className='circle-grid-bottom-bar'
-                    onClick={() => grid.reverse()}>
-                        <button>
+                    <div className='circle-grid-bottom-bar'>
+                        <button onClick={() => grid.reverse()}>
                             <img src={reverseImg} alt=''/>
                             { !isMobile && (
                                 <span>
@@ -57,7 +56,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                             )}
                         </button>
 
-                        <button>
+                        <button onClick={() => grid.random()}>
                             <img src={randomImg} alt=''/>
                             { !isMobile && (
                                 <span>

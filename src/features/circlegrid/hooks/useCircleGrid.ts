@@ -86,22 +86,18 @@ export const useCircleGrid = () => {
             setGridData(prev => [...prev.slice(1), prev[0]])
     }
 
-    const rotate90 = () => {
-
-    }
-
-    const rotate180 = () => {
-
-    }
-
     const reverse = () => {
         setGridData(prev => [...prev].reverse());
+    }
+
+    const random = () => {
+        setGridData(prev => [...prev].sort(() => Math.random() - 0.5));
     }
 
     return {
         gridData,
         indexOf, row, column,
-        shift, unshift, rotate90, rotate180, reverse,
+        shift, unshift, reverse, random,
         focused, setFocused
     };
 }
