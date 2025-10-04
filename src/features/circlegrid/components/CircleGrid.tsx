@@ -13,6 +13,7 @@ interface Props {
 export const CircleGrid = ({ controller=true }: Props) => {
     const grid = useCircleGrid();
     const hotkeys = useCircleGridHotkeys(grid);
+
     return (
         <div className='circle-grid'
         tabIndex={0}
@@ -40,13 +41,12 @@ export const CircleGrid = ({ controller=true }: Props) => {
                     <button onClick={() => grid.setColoredIdx(idx)}>
                         { idx + 1 }
                     </button>
+
                     <div className='circle-grid-dots' 
                     style={{
                         backgroundImage: idx === grid.coloredIdx ? `radial-gradient(#fff 1px, transparent 0)` :
                         `radial-gradient(${cssVariable('--background-5')} 1px, transparent 0)`
-                     }}>
-
-                    </div>
+                     }}/>
                 </motion.div>   
             ))}
 
