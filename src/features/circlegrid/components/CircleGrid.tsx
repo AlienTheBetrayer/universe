@@ -12,7 +12,8 @@ export const CircleGrid = () => {
                 { Array.from({ length: 8 }).map((_ ,idx) => (
                     <motion.div
                     layout
-                    style={{ gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1)}}>
+                    style={{ gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1)}}
+                    transition={{ ease: 'backInOut', duration: 1 }}>
                         { idx + 1 }
                     </motion.div>                    
                 ))}
