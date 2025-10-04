@@ -9,7 +9,6 @@ export const useListButton = (elements: string[], onSelected?: (idx: number) => 
     }, [currentId]);
 
     useEffect(() => {
-        console.log(focused);
         const handle = (e: KeyboardEvent) => {
             if(!focused)
                 return;
