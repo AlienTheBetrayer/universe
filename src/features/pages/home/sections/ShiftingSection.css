@@ -1,5 +1,6 @@
 .shifting-section {
     gap: 2rem;
+    overflow: hidden;
 }
 
 .shifting-section-grid {

@@ -51,7 +51,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                             <img src={reverseImg} alt=''/>
                             { !isMobile && (
                                 <span>
-                                    Reverse
+                                    Flip
                                 </span>
                             )}
                         </button>
@@ -66,7 +66,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                         </button>
                     </div>
 
-                    <HotkeyTooltip className='circle-grid-hotkeys' hotkeys={['→', '←', 'R']}/>
+                    <HotkeyTooltip className='circle-grid-hotkeys' hotkeys={['→', '←', 'F', 'R']}/>
                 </div>
             )}
         </div>

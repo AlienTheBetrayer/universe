@@ -28,7 +28,6 @@ export const useCircleGrid = () => {
     const [focused, setFocused] = useState<boolean>(false);
     
     useEffect(() => {
-        console.log(focused);
         const handle = (e: KeyboardEvent) => {
             if(!focused)
                 return;
@@ -40,8 +39,11 @@ export const useCircleGrid = () => {
                 case 'arrowright':
                     shift();
                 break;
-                case 'r':
+                case 'f':
                     reverse();
+                break;
+                case 'r':
+                    random();
                 break;
             }
         }
