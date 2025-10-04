@@ -11,15 +11,45 @@ const toMatrix = (arr: number[]): number[][] => {
 }
 
 export const useCircleGrid = () => {
+    // underlying raw data array
     const [gridData, setGridData] = useState<number[]>(
         [1, 2, 3, 4, 5, 6, 7, 8]
     );
 
+    // matrix updating
     const [matrix, setMatrix] = useState<number[][]>([]);
 
     useEffect(() => {
         setMatrix(toMatrix(gridData));
     }, [gridData]);
+
+
+    // hotkeys
+    const [focused, setFocused] = useState<boolean>(false);
+    
+    useEffect(() => {
+        const handle = (e: KeyboardEvent) => {
+            if(!focused)
+                return;
+
+            switch(e.key.toLowerCase()) {
+                case 'arrowleft':
+                    unshift();
+                break;
+                case 'arrowright':
+                    shift();
+                break;
+                case 'r':
+                    reverse();
+                break;
+            }
+        }
+
+        window.addEventListener('keydown', handle);
+        return () => window.removeEventListener('keydown', handle);
+    }, [focused]);
+
+
 
     // index functions
     const indexOf = (value: number) => {
@@ -41,6 +71,7 @@ export const useCircleGrid = () => {
     const column = (value: number) => {
         return indexOf(value).column;
     }
+
 
     // rotation functions
     const shift = (amount: number = 1) => {
@@ -68,6 +99,7 @@ export const useCircleGrid = () => {
     return {
         gridData,
         indexOf, row, column,
-        shift, unshift, rotate90, rotate180, reverse
+        shift, unshift, rotate90, rotate180, reverse,
+        focused, setFocused
     };
 }

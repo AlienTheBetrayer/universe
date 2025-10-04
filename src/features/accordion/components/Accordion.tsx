@@ -16,9 +16,7 @@ interface Props {
 
 export const Accordion = ({ items, onSelect }: Props) => {
     const accordion = useAccordion(items, onSelect);
-
-
-
+    
     return (
         <div className='accordion' 
         tabIndex={0}

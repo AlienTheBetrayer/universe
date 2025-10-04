@@ -9,6 +9,7 @@
 .hotkey-tooltip span {
     color: var(--foreground);
     background-color: var(--background-7);
+    text-align: center;
     min-width: 16px;
     min-height: 16px;
     border-radius: 5px;

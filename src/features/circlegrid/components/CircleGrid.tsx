@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useCircleGrid } from '../hooks/useCircleGrid';
 import './CircleGrid.css';
 import { motion } from "motion/react"
@@ -10,18 +9,13 @@ interface Props {
 
 export const CircleGrid = ({ controller=true }: Props) => {
     const grid = useCircleGrid();
-    const [focused, setFocused] = useState<boolean>(false);
-
-    useEffect(() => {
-        
-    }, [focused]);
 
     return (
         <div className='circle-grid'
         tabIndex={0}
-        onPointerOver={() => setFocused(true)}
-        onBlur={() => { setFocused(false) } }
-        onClick={() => setFocused(true)}>
+        onPointerOver={() => grid.setFocused(true)}
+        onBlur={() => { grid.setFocused(false) } }
+        onClick={() => grid.setFocused(true)}>
             { Array.from({ length: 8 }).map((_ ,idx) => (
                 <motion.div
                 layout
