@@ -6,7 +6,6 @@ import { useInView } from 'motion/react';
 export const ShiftingSection = () => {
     const ref = useRef<HTMLElement>(null);
     const isVisible = useInView(ref, { once: true });
-
     return (
         <section ref={ref} className='shifting-section container'>
             <h2>Shifting capabilities</h2>

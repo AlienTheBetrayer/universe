@@ -21,7 +21,6 @@ export const HomePage = () => {
     const headingRef = useRef<HTMLDivElement>(null);
     const isHeadingVisible = useInView(headingRef);
 
-
     return (
         <Page>
             <div className='spotlight-container'>

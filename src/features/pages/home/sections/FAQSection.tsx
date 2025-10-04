@@ -49,7 +49,6 @@ export const FAQSection = () => {
 
         return () => clearInterval(interval);
     }, [selected]);
-
     return (
         <section ref={sectionRef} className='faq-section container'>
             <h2>Important topics</h2>
