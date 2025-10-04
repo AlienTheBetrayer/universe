@@ -52,8 +52,6 @@
     --selection-color: rgb(0, 0, 0);
 
     /* component specific */
-    --button-dark: rgba(0, 0, 255, 0.6);
-    --button-darker: rgba(0, 0, 255, 0.2);
     --header-link: #fff;
     --b: 1.3;
     --footer-invert: 0.7;
@@ -103,8 +101,6 @@
     /* component specific */
     --button-app-fill: rgb(39, 78, 220); /* keep accent color */
     --button-app-hover: rgb(27, 57, 165);
-    --button-dark: rgba(0, 0, 255, 0.6);
-    --button-darker: rgba(0, 0, 255, 0.2);
     --header-link: #0000ff;
     --b: 0.7;
     --footer-invert: 0;

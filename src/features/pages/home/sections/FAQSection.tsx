@@ -72,7 +72,8 @@ export const FAQSection = () => {
                                     style={{ flex: 1 }}
                                     layout
                                     initial={{ scale: 1.0, filter: 'brightness(1) '}}
-                                    whileHover={{ scale: 1.1, filter: 'brightness(2)'  }}
+                                    whileHover={{ scale: 1.1, filter: 'brightness(2)' }}
+                                    whileTap={{ scale: 1.1, filter: 'brightness(3)' }}
                                     animate={{
                                         scale: (idx === activeIdx && selected > 0) ? 1.1 : 1,
                                         filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',

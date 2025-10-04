@@ -7,15 +7,23 @@
     width: 48px;
     height: 24px;
     border-radius: 20px;
-    background-color: var(--button-darker);
+    background-color: rgba(0, 0, 255, 0.2);
     position: relative;
+}
+
+.toggle-button:hover {
+    background-color: rgba(0, 0, 255, 0.25);
+}
+
+.toggle-button:active {
+    background-color: rgba(0, 0, 255, 0.4);
 }
 
 .toggle-button-circle {
     width: 16px;
     height: 16px;
     border-radius: 20px;
-    background-color: var(--button-dark);
+    background-color: rgba(0, 0, 255, 0.6);
 }
 
 .toggle-button-image {

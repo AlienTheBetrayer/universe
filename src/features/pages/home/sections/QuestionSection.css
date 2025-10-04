@@ -41,6 +41,10 @@
     background: linear-gradient(17deg, var(--background-transparent), var(--background-3));
 }
 
+.question-revealed-contact-link:active {
+    background: linear-gradient(317deg, var(--background-transparent), var(--background-5));
+}
+
 @media (max-width: 640px) {
     .question-revealed-contact-link {
         font-size: 2rem;

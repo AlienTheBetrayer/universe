@@ -14,3 +14,7 @@
 .button:hover {
     background-color: var(--background-3);
 }
+
+.button:active {
+    background-color: var(--background-4);
+}

@@ -51,9 +51,12 @@
 
 .accordion-item-open:hover, .accordion-item-open:active {
     background-color: var(--background-2);
-    border: transparent;
-    outline: transparent;
 }
+
+.accordion-item-open:active {
+    background-color: var(--background-3);
+}
+
 
 /* dropdown */
 .accordion-item-dropdown {

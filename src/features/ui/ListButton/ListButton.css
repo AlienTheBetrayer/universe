@@ -22,6 +22,11 @@
     background-color: var(--background-4-transparent);
 }
 
+.list-button button:active {
+    background-color: var(--background-5-transparent);
+    color: var(--foreground-last);
+}
+
 /* topbar */
 .list-button-top {
     display: grid;

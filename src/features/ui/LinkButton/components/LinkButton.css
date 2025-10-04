@@ -5,5 +5,13 @@
     cursor: pointer;
     text-decoration: none;
     color: var(--foreground-last);
-    transition: 0.2s ease-in-out;
+    transition: 0.15s ease-in-out;
+}
+
+.link-button:hover {
+    filter: brightness(1.05);
+}
+
+.link-button:active {
+    filter: brightness(1.2);
 }

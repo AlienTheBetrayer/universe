@@ -22,6 +22,10 @@
     background-color: var(--background-3);
 }
 
+.stellar-button:active {
+    background-color: var(--background-5);
+}
+
 
 .stellar-button-deactivated {
     color: var(--background-8) !important;

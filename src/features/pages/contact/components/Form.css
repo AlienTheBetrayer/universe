@@ -39,7 +39,6 @@
 
 .contact-form > div > button {
     position: absolute;
-    height: 100%;
     right: 0.5rem;
     color: var(--form);
 }
@@ -108,5 +107,9 @@
 }
 
 .contact-form button:hover {
-    color: #fff;
+    color: var(--foreground-last);
+}
+
+.contact-form button:active {
+    background-color: var(--background-3-transparent);
 }
