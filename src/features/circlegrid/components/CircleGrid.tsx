@@ -36,7 +36,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                         ${idx === grid.coloredIdx ? '#4141c9' : '#00000000'}`,
                 }}
                 transition={{ 
-                    layout: { ease: 'backInOut', duration: (2 + idx / 5) },
+                    layout: { ease: 'backInOut', duration: (1 + idx / 5) },
                 }}>
                     <button onClick={() => grid.setColoredIdx(idx)}>
                         { idx + 1 }
