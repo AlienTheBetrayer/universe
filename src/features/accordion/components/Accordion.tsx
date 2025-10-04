@@ -1,5 +1,4 @@
 import './Accordion.css';
-import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { useAccordion } from '../hooks/useAccordion';

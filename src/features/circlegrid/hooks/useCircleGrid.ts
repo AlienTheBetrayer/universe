@@ -28,6 +28,7 @@ export const useCircleGrid = () => {
     const [focused, setFocused] = useState<boolean>(false);
     
     useEffect(() => {
+        console.log(focused);
         const handle = (e: KeyboardEvent) => {
             if(!focused)
                 return;
@@ -48,6 +49,7 @@ export const useCircleGrid = () => {
         window.addEventListener('keydown', handle);
         return () => window.removeEventListener('keydown', handle);
     }, [focused]);
+
 
 
 

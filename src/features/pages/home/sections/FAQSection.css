@@ -125,7 +125,6 @@
 }
 
 @media (max-width: 768px) {
-
     .faq-lock-rectangle {
         min-height: 420px;
         flex-direction: row;
@@ -141,6 +140,7 @@
     width: 24px;
     height: 24px;
     filter: invert(0.5);
+    pointer-events: none;
 }
 
 @media (max-width: 768px) {
