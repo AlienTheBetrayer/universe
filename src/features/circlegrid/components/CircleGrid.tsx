@@ -6,6 +6,7 @@ import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import randomImg from '../assets/random.svg';
 import reverseImg from '../assets/reverse.svg';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useCircleGridHotkeys } from '../hooks/useCircleGridHotkeys';
 
 interface Props {
     controller?: boolean;
@@ -13,14 +14,15 @@ interface Props {
 
 export const CircleGrid = ({ controller=true }: Props) => {
     const grid = useCircleGrid();
+    const hotkeys = useCircleGridHotkeys(grid);
     const isMobile = useMediaQuery(768);
 
     return (
         <div className='circle-grid'
         tabIndex={0}
-        onPointerOver={() => grid.setFocused(true)}
-        onBlur={() => { grid.setFocused(false) } }
-        onClick={() => grid.setFocused(true)}>
+        onPointerOver={() => hotkeys.setFocused(true)}
+        onBlur={() => { hotkeys.setFocused(false) } }
+        onClick={() => hotkeys.setFocused(true)}>
             { Array.from({ length: 8 }).map((_ ,idx) => (
                 <motion.div
                 className='circle-grid-element'

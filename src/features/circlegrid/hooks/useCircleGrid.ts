@@ -24,37 +24,6 @@ export const useCircleGrid = () => {
     }, [gridData]);
 
 
-    // hotkeys
-    const [focused, setFocused] = useState<boolean>(false);
-    
-    useEffect(() => {
-        const handle = (e: KeyboardEvent) => {
-            if(!focused)
-                return;
-
-            switch(e.key.toLowerCase()) {
-                case 'arrowleft':
-                    unshift();
-                break;
-                case 'arrowright':
-                    shift();
-                break;
-                case 'f':
-                    reverse();
-                break;
-                case 'r':
-                    random();
-                break;
-            }
-        }
-
-        window.addEventListener('keydown', handle);
-        return () => window.removeEventListener('keydown', handle);
-    }, [focused]);
-
-
-
-
     // index functions
     const indexOf = (value: number) => {
         for (let i = 0; i < matrix.length; ++i) { // row
@@ -100,6 +69,5 @@ export const useCircleGrid = () => {
         gridData,
         indexOf, row, column,
         shift, unshift, reverse, random,
-        focused, setFocused
     };
 }
