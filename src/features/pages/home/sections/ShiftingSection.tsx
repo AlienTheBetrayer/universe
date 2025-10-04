@@ -8,7 +8,7 @@ export const ShiftingSection = () => {
     const isVisible = useInView(ref, { once: true });
     return (
         <section ref={ref} className='shifting-section container'>
-            <h2>Shifting capabilities</h2>
+            <h2>Shifting <mark>capabilities</mark></h2>
 
             { isVisible && (
                 <div className='shifting-section-grid'>

@@ -46,10 +46,14 @@ export const HomePage = () => {
                     <GridSection/>
                 </div>
             </InteractiveParticlesContext>
-            
+            <hr/>
             <FAQSection/>
+            <hr/>
             <ShiftingSection/>
+            <hr/>
             <LockSection/>
+            <hr/>
+
 
             <QuestionContext value={questionContextData}>
                 <QuestionSection/>

@@ -38,7 +38,7 @@ export const CircleGrid = ({ controller=true }: Props) => {
                 transition={{ 
                     layout: { ease: 'backInOut', duration: (1 + idx / 5) },
                 }}>
-                    <button onClick={() => grid.setColoredIdx(idx)}>
+                    <button className={`circle-grid-main-button ${idx === grid.coloredIdx ? 'circle-grid-main-button-selected' : ''}`} onClick={() => grid.setColoredIdx(idx)}>
                         { idx + 1 }
                     </button>
 

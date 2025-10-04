@@ -14,7 +14,7 @@
 }
 
 /* grid element */
-.circle-grid > div {
+.circle-grid>div {
     border-radius: 32px;
     border: 2px dashed var(--background-6);
     aspect-ratio: 1/1;
@@ -61,7 +61,6 @@
     border-radius: 32px;
 }
 
-
 .circle-grid button:hover {
     background-color: var(--background-3);
 }
@@ -76,4 +75,13 @@
     height: 16px;
     pointer-events: none;
     flex-shrink: 0;
+}
+
+.circle-grid .circle-grid-main-button {
+    min-height: 48px;
+    min-width: 48px;
+}
+
+.circle-grid .circle-grid-main-button-selected {
+    background-color: transparent;
 }

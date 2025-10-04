@@ -55,7 +55,7 @@ export const FAQSection = () => {
             
             <div className='faq-grid'>
                 <div className='faq-questions'>
-                    <h3>Key Strengths</h3>
+                    <h3>Key <mark>Strengths</mark></h3>
 
                     <div className='faq-questions-content'>
                         <div className='faq-questions-accordion'>
