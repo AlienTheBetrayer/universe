@@ -1,18 +1,22 @@
+import { useCircleGrid } from '../hooks/useCircleGrid';
 import './CircleGrid.css';
 import { motion } from "motion/react"
 
 export const CircleGrid = () => {
+    const grid = useCircleGrid();
+
     return (
-        <div className='circle-grid'>
-                <motion.div layout style={{  }}>1</motion.div>
-                <motion.div layout style={{}} >2</motion.div>
-                <motion.div layout>3</motion.div>
-                <motion.div layout>4</motion.div>
-                <motion.div layout>5</motion.div>
-                <motion.div layout>6</motion.div>
-                <motion.div layout>7</motion.div>
-                <motion.div layout>8</motion.div>
-                <motion.div layout>9</motion.div>
-        </div>
+        <>
+            <button onClick={() => grid.shift()}>shift me</button>
+            <div className='circle-grid'>
+                { Array.from({ length: 8 }).map((_ ,idx) => (
+                    <motion.div
+                    layout
+                    style={{ gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1)}}>
+                        { idx + 1 }
+                    </motion.div>                    
+                ))}
+            </div>
+        </>
     )
 }
