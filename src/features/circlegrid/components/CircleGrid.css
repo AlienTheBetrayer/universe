@@ -24,13 +24,14 @@
     place-items: center;
 }
 
+
 /* tooltips / controller */
 .circle-grid-controller {
     position: relative;
     padding: 0.5rem;
 }
 
-.circle-grid-controller button {
+.circle-grid button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,15 +47,15 @@
 }
 
 
-.circle-grid-controller button:hover {
+.circle-grid button:hover {
     background-color: var(--background-3);
 }
 
-.circle-grid-controller button:active {
+.circle-grid button:active {
     background-color: var(--background-4);
 }
 
-.circle-grid-controller button img {
+.circle-grid button img {
     filter: invert(0.5);
     width: 16px;
     height: 16px;
@@ -101,7 +102,7 @@
     gap: 0.5rem;
 }
 
-.circle-grid-controller button span {
+.circle-grid button span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

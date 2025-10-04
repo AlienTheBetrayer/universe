@@ -23,7 +23,6 @@ export const useCircleGrid = () => {
         setMatrix(toMatrix(gridData));
     }, [gridData]);
 
-
     // index functions
     const indexOf = (value: number) => {
         for (let i = 0; i < matrix.length; ++i) { // row
@@ -65,9 +64,22 @@ export const useCircleGrid = () => {
         setGridData(prev => [...prev].sort(() => Math.random() - 0.5));
     }
 
+    const swap = (idx0: number, idx1: number) => {
+        setGridData(prev => {
+            let arr = [...prev];
+            const i = idx0 < 0 ? arr.length + idx0 : idx0;
+            const j = idx1 < 0 ? arr.length + idx1 : idx1;
+
+            if(i >= 0 && j >= 0 && i < arr.length && j < arr.length)
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+
+            return arr;
+        });
+    }
+
     return {
         gridData,
         indexOf, row, column,
-        shift, unshift, reverse, random,
+        shift, unshift, reverse, random, swap
     };
 }

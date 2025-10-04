@@ -1,0 +1,12 @@
+.circle-grid-nav {
+    position: relative;
+    border: transparent !important;
+}
+
+.circle-grid-nav button {
+    position: absolute;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 0.6rem;
+    color: var(--background-11);
+}
