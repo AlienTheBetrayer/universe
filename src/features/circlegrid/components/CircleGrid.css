@@ -4,6 +4,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     width: 100%;
+    will-change: transform;
 }
 
 @media (max-width: 640px) {
@@ -18,15 +19,14 @@
     border: 2px dashed var(--background-6);
     aspect-ratio: 1/1;
     overflow: hidden;
-
-
+    will-change: transform;
 }
 
 .circle-grid-element {
     display: grid;
     place-items: center;
     position: relative;
-    will-change: background;
+    will-change: transform;
 }
 
 .circle-grid-dots {
