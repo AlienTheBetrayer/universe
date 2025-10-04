@@ -21,3 +21,15 @@
     border-radius: 32px;
     border: 2px dashed var(--background-6);
 }
+
+/* tooltips / controller */
+.circle-grid-controller {
+    position: relative;
+}
+
+.circle-grid-hotkeys {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}

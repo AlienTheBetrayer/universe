@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useCircleGrid } from '../hooks/useCircleGrid';
 import './CircleGrid.css';
 import { motion } from "motion/react"
+import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 
 interface Props {
     controller?: boolean;
@@ -8,9 +10,18 @@ interface Props {
 
 export const CircleGrid = ({ controller=true }: Props) => {
     const grid = useCircleGrid();
+    const [focused, setFocused] = useState<boolean>(false);
+
+    useEffect(() => {
+        
+    }, [focused]);
 
     return (
-        <div className='circle-grid'>
+        <div className='circle-grid'
+        tabIndex={0}
+        onPointerOver={() => setFocused(true)}
+        onBlur={() => { setFocused(false) } }
+        onClick={() => setFocused(true)}>
             { Array.from({ length: 8 }).map((_ ,idx) => (
                 <motion.div
                 layout
@@ -21,9 +32,10 @@ export const CircleGrid = ({ controller=true }: Props) => {
                 </motion.div>                    
             ))}
             { controller && (
-                <div style={{ gridRow: 2, gridColumn: 2 }}>
+                <div style={{ gridRow: 2, gridColumn: 2 }} className='circle-grid-controller'>
                     <button onClick={() => grid.shift()}>shift me</button>
                     <button onClick={() => grid.reverse()}>reverse</button>
+                    <HotkeyTooltip className='circle-grid-hotkeys' hotkeys={['→', '←', 'R']}/>
                 </div>
             )}
         </div>
