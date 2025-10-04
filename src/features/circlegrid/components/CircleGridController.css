@@ -18,9 +18,11 @@
 
     position: absolute;
     bottom: 2rem;
-    left: 1rem;
-    right: 1rem;
+    left: 0.5rem;
+    right: 0.5rem;
     gap: 0.5rem;
+        justify-content: space-between;
+
 }
 
 .circle-grid button span {

@@ -23,6 +23,7 @@
     display: grid;
     place-items: center;
     position: relative;
+    will-change: background;
 }
 
 
