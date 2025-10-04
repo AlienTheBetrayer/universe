@@ -17,6 +17,9 @@
     border-radius: 32px;
     border: 2px dashed var(--background-6);
     aspect-ratio: 1/1;
+    overflow: hidden;
+
+
 }
 
 .circle-grid-element {
@@ -24,6 +27,16 @@
     place-items: center;
     position: relative;
     will-change: background;
+}
+
+.circle-grid-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--background-5) 1px, transparent 0);
+    background-size: 16px 16px;
+    background-position: -64px -64px;
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 
