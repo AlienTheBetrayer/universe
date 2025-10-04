@@ -18,6 +18,12 @@
     transform: translateY(-50%);
 }
 
+@media (max-width: 768px) {
+    .sphere-canvas-lock {
+        margin-top: 70%;
+    }
+}
+
 .sphere-canvas-typewriter {
     position: absolute;
     top: 50%;
