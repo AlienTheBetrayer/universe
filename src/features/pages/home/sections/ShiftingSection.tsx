@@ -1,14 +1,21 @@
+import { useRef } from 'react';
 import { CircleGrid } from '../../../circlegrid/components/CircleGrid';
 import './ShiftingSection.css';
+import { useInView } from 'motion/react';
 
 export const ShiftingSection = () => {
+    const ref = useRef<HTMLElement>(null);
+    const isVisible = useInView(ref, { once: true });
+
     return (
-        <section className='shifting-section container'>
+        <section ref={ref} className='shifting-section container'>
             <h2>Shifting capabilities</h2>
-            
-            <div className='shifting-section-grid'>
-                <CircleGrid/>
-            </div>
+
+            { isVisible && (
+                <div className='shifting-section-grid'>
+                    <CircleGrid/>
+                </div>
+            )}
         </section>
     )
 }

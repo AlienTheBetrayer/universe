@@ -44,18 +44,13 @@ export const useCircleGrid = () => {
 
     // rotation functions
     const shift = (amount: number = 1) => {
-        for (let i = 0; i < amount; ++i) {
-            setGridData(prev => {
-                let arr: number[] = [...prev];
-                arr.unshift(arr.at(-1)!);
-                arr.pop();
-                return arr;
-            })
-        }
+        for(let i = 0; i < amount; ++i)
+            setGridData(prev => [prev.at(-1)!, ...prev.slice(0, -1)]);
     }
 
     const unshift = (amount: number = 1) => {
-
+        for(let i = 0; i < amount; ++i)
+            setGridData(prev => [...prev.slice(1), prev[0]])
     }
 
     const rotate90 = () => {
@@ -67,7 +62,7 @@ export const useCircleGrid = () => {
     }
 
     const reverse = () => {
-
+        setGridData(prev => [...prev].reverse());
     }
 
     return {

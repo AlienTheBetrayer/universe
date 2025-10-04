@@ -14,7 +14,8 @@
 
 /* grid element */
 .circle-grid > div {
-    display: flex;
+    display: grid;
+    place-items: center;
     aspect-ratio: 1/1;
 
     border-radius: 32px;
