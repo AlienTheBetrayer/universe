@@ -21,27 +21,27 @@ export const CircleGrid = ({ controller=true }: Props) => {
         onBlur={() => { hotkeys.setFocused(false) } }
         onClick={() => hotkeys.setFocused(true)}>
             { Array.from({ length: 8 }).map((_ ,idx) => (
-                <>
-                    <motion.div
-                    className='circle-grid-element'
-                    key={idx}
-                    layout
-                    style={{ 
-                        gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1),
-                    }}
-                    animate={{
-                        borderColor: grid.coloredIdx === idx ? '#00f' : cssVariable('--background-6'),
-                    }}
-                    transition={{ 
-                        layout: { ease: 'backInOut', duration: (1 + idx / 5) },
-                        borderColor: { duration: 2, repeat: idx === grid.coloredIdx ? Infinity : 0, repeatType: 'mirror' },
-                    }}>
-                        <button onClick={() => grid.setColoredIdx(idx)}>
-                            { idx + 1 }
-                        </button>
-
-                    </motion.div>   
-                </>
+                <motion.div
+                className='circle-grid-element'
+                key={idx}
+                layout
+                style={{ 
+                    gridRow: grid.row(idx + 1), gridColumn: grid.column(idx + 1),
+                }}
+                animate={{
+                    background: `linear-gradient(${Math.floor(Math.random() * 360)}deg, 
+                        ${idx === grid.coloredIdx ? '#0b0b41ac' : '#00000000'}, 
+                        ${idx === grid.coloredIdx ? '#4141c9ac' : '#00000000'}`,
+                    borderColor: idx === grid.coloredIdx ? '#00000000' : cssVariable('--background-6'),
+                    borderWidth: idx === grid.coloredIdx ? 0 : 2
+                }}
+                transition={{ 
+                    layout: { ease: 'backInOut', duration: (1 + idx / 5) },
+                }}>
+                    <button onClick={() => grid.setColoredIdx(idx)}>
+                        { idx + 1 }
+                    </button>
+                </motion.div>   
             ))}
 
             <CircleGridNavigation data={grid}/>
