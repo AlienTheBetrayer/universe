@@ -23,6 +23,9 @@ export const useCircleGrid = () => {
         setMatrix(toMatrix(gridData));
     }, [gridData]);
 
+    // color
+    const [coloredIdx, setColoredIdx] = useState<number>(-1);
+
     // index functions
     const indexOf = (value: number) => {
         for (let i = 0; i < matrix.length; ++i) { // row
@@ -79,7 +82,8 @@ export const useCircleGrid = () => {
 
     return {
         gridData,
+        coloredIdx, setColoredIdx,
         indexOf, row, column,
-        shift, unshift, reverse, random, swap
+        shift, unshift, reverse, random, swap,
     };
 }

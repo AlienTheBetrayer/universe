@@ -1,6 +1,7 @@
 .circle-grid-nav {
     position: relative;
     border: transparent !important;
+    pointer-events: none;
 }
 
 .circle-grid-nav button {
@@ -9,4 +10,5 @@
     min-height: 24px;
     font-size: 0.6rem;
     color: var(--background-11);
+    pointer-events: all;
 }
