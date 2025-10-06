@@ -28,6 +28,7 @@ export const HorizontalCatalogueItem = ({ item, onPurchase }: Props) => {
                     exit={{ opacity: 0 }}>
                         <h3>{item.title}</h3>
                         <p>{item.content}</p>
+                        <span className='horizontal-catalogue-item-idx'>{item.idx}</span>
                         <button onClick={() => handleOrder()} className='horizontal-catalogue-item-order-button'>Order</button>
                 </motion.div>
             </AnimatePresence>

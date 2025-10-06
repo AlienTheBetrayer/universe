@@ -1,4 +1,3 @@
-
 .horizontal-catalogue-item {
     display: flex;
     flex-direction: column;
@@ -12,6 +11,8 @@
     border: 2px dashed var(--background-10);
     border-radius: 32px;
     transition: 0.15s;
+
+    position: relative;
 }
 
 .horizontal-catalogue-item h3 {
@@ -39,4 +40,14 @@
 .horizontal-catalogue-item-order-button:active {
     background-color: var(--background-4);
     color: var(--foreground-last);
+}
+
+.horizontal-catalogue-item-idx {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 12rem;
+    opacity: 0.1;
+    pointer-events: none;
 }
