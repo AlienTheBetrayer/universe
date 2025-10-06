@@ -1,0 +1,33 @@
+/* parent of the actual scrollable part */
+.horizontal-content {
+    border: 2px dashed var(--background-8);
+    border-radius: 64px;
+    padding: 4rem;
+}
+
+.horizontal-content-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+.horizontal-content h2 {
+    text-align: left;
+}
+
+/* scrollable part */
+.horizontal-scroll {
+    gap: 4rem;
+    display: flex;
+    width: 400vw;
+}
+
+.horizontal-scroll > div {
+    display: grid;
+    place-items: center;
+    height: 200px;
+    width: 200px;
+    border: 2px dashed var(--foreground);
+    border-radius: 32px;
+}

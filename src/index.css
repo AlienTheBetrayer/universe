@@ -219,7 +219,8 @@ mark {
 }
 
 hr {
-    width: 90%;
+    width: 100%;
+    max-width: 1400px;
     margin: 2rem auto;
     border-color: var(--hr);
 }

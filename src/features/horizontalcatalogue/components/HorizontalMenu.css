@@ -1,0 +1,8 @@
+/* menu below */
+.horizontal-menu {
+    border: 2px dashed var(--background-8);
+    border-radius: 64px;
+    display: flex;
+    padding: 4rem;
+    height: 30vh;
+}

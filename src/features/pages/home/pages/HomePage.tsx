@@ -14,6 +14,7 @@ import { InteractiveParticlesCanvas } from '../../../interactiveparticles/compon
 import { QuestionContext, type QuestionContextData } from '../../../questionparticles/context/QuestionContext';
 import { FAQSection } from '../sections/FAQSection';
 import { ShiftingSection } from '../sections/ShiftingSection';
+import { HorizontalSection } from '../sections/HorizontalSection';
 
 export const HomePage = () => {
     const headingContextData = useState<InteractiveParticlesContextData>({ vectorType: VectorTypes.astral});
@@ -47,13 +48,18 @@ export const HomePage = () => {
                 </div>
             </InteractiveParticlesContext>
             <hr/>
+            
             <FAQSection/>
             <hr/>
+
             <ShiftingSection/>
             <hr/>
-            <LockSection/>
+            
+            <HorizontalSection/>
             <hr/>
 
+            <LockSection/>
+            <hr/>
 
             <QuestionContext value={questionContextData}>
                 <QuestionSection/>

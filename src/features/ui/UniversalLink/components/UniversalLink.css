@@ -2,6 +2,6 @@
     text-decoration: none;
 }
 
-.universal-link:hover {
+.universal-link:hover, .universal-link:active {
     color: var(--foreground-last);
 }

@@ -90,7 +90,7 @@ header .home-button:hover img {
     filter: invert(1);
 }
 
-header .universal-link:hover {
+header .universal-link:hover, header .universal-link:active {
     color: var(--header-link);
 }
 

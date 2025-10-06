@@ -1,0 +1,14 @@
+.horizontal-section {
+    height: 400vh;
+    gap: 4rem;
+}
+
+/* global parent */
+.horizontal-lock {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;  
+    position: sticky;
+    top: 6rem;
+    overflow-x: hidden;
+}
