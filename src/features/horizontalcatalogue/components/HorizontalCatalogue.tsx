@@ -2,6 +2,9 @@ import './HorizontalCatalogue.css';
 import { motion, useScroll, useSpring, useTransform } from "motion/react"
 import type React from "react";
 import { HorizontalCatalogueItem } from './HorizontalCatalogueItem';
+import { useEffect, useState } from 'react';
+import { usePopup } from '../../../hooks/usePopup';
+import { HorizontalOrderPopup } from './HorizontalOrderPopup';
 
 export interface CatalogueItem {
     idx: number;
@@ -17,13 +20,32 @@ interface Props {
 }
 
 export const HorizontalCatalogue = ({ className='', items, containerRef }: Props) => {
+    // scroll logic
     const { scrollYProgress } = useScroll({ target: containerRef });
     const scrollYSpring = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
     const clampedY = useTransform(scrollYSpring, 
-        [0, 0.3, 1],
-        [0, 0, 1]);
-    const scrollYPercentage = useTransform(clampedY, val => `${-val * 50}%`);
+        [0, 0.2, 0.8, 1],
+        [0, 0, 1, 1]);
+    const scrollYPercentage = useTransform(clampedY, val => `${-val * 100}%`);
 
+    // items ordering + popup logic
+    const [orderedItems, setOrderedItems] = useState<CatalogueItem[]>([]);
+    
+    useEffect(() => {
+        if(orderedItems.length == 0)
+            return;
+
+        orderedPopup.setShown(true);
+
+        const timeout = setTimeout(() => {
+            orderedPopup.setShown(false);
+            setOrderedItems([]);
+        }, 5000);
+        return () => clearTimeout(timeout);
+    }, [orderedItems]);
+
+    const orderedPopup = usePopup(<HorizontalOrderPopup items={orderedItems}/>, false);
+    
     return (
         <div className={`horizontal-content-container ${className}`}>
             <div className='horizontal-content'>
@@ -32,8 +54,8 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
                 <div className='horizontal-scroll-container'>
                     <motion.div className='horizontal-scroll'
                     style={{ x: scrollYPercentage }}>
-                        { items.map(item => (
-                            <HorizontalCatalogueItem item={item}/>
+                        { items.map((item, idx) => (
+                            <HorizontalCatalogueItem key={idx} item={item} onPurchase={item => setOrderedItems(prev => [...prev, item])}/>
                         ))}
                     </motion.div>
                 </div>
@@ -43,6 +65,8 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
 
                 <p className='catalogue-scroll-tooltip'>Scroll down to see more</p>
             </div>
+
+            { orderedPopup.render() }
         </div>
     )
 }
