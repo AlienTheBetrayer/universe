@@ -29,6 +29,7 @@
     display: flex;
     width: fit-content;
     gap: 2rem;
+    padding-left: 1rem;
 }
 
 .horizontal-scroll-container {

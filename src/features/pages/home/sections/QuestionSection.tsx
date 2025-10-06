@@ -14,6 +14,7 @@ export const QuestionSection = () => {
 
     return (
         <section className='question-section' ref={sectionRef}>
+            <h2>Something <mark>unknown</mark> and <mark>mysterious...</mark></h2>
             <AnimatePresence mode='sync'>
                 { !questionContextData.revealed ? (
                     <motion.div key='question-canvas'

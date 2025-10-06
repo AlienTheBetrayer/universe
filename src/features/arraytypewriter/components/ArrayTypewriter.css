@@ -11,5 +11,6 @@
 .array-typewriter-progress {
     display: inline-block;      
     animation: blink 1.5s step-start infinite;
+    font-size: 2rem;
 }
 

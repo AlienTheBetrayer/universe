@@ -71,9 +71,10 @@ export const HorizontalSection = () => {
     
     return (
         <section ref={sectionRef} className='horizontal-section container'>
-            <h2>Horizontal <mark>catalogue</mark></h2>
 
             <div className='horizontal-lock'>
+                <h2>Horizontal <mark>catalogue</mark></h2>
+                
                 <HorizontalCatalogue className='lock-catalogue' containerRef={sectionRef} items={content}/>
                 <HorizontalMenu className='lock-menu' items={[content, setContent]}/>
             </div>

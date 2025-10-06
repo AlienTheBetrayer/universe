@@ -4,6 +4,10 @@
     height: 100vh;
 }
 
+.question-section h2 {
+    margin-top: 2rem;
+}
+
 .question-canvas-wrapper {
     position: absolute;
     inset: 0;

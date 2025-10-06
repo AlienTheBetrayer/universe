@@ -45,7 +45,7 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
     }, [orderedItems]);
 
     const orderedPopup = usePopup(<HorizontalOrderPopup items={orderedItems}/>, false);
-    
+
     return (
         <div className={`horizontal-content-container ${className}`}>
             <div className='horizontal-content'>
@@ -57,6 +57,7 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
                         { items.map((item, idx) => (
                             <HorizontalCatalogueItem key={idx} item={item} onPurchase={item => setOrderedItems(prev => [...prev, item])}/>
                         ))}
+
                         <p className='horizontal-scroll-and-more'>MORE...</p>
                     </motion.div>
                 </div>

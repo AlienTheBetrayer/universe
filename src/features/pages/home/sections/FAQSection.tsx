@@ -51,49 +51,53 @@ export const FAQSection = () => {
     }, [selected]);
     return (
         <section ref={sectionRef} className='faq-section container'>
-            <h2>Important topics</h2>
-            
             <div className='faq-grid'>
-                <div className='faq-questions'>
-                    <h3>Key <mark>Strengths</mark></h3>
+                <h2><mark>Vital</mark> aspects</h2>
 
-                    <div className='faq-questions-content'>
-                        <div className='faq-questions-accordion'>
-                            <Accordion items={questions} onSelect={(idx) => setSelected(idx)}/>
-                        </div>
+                <div className='faq-content'>
+                    <div className='faq-questions'>
+                        <h3>Key <mark>Strengths</mark></h3>
 
-                        <div className='faq-questions-animation'>
-                            <AnimatePresence>
-                                { Array.from({ length: (selected === -1 ? 0 : selected) + 1  }).map((_, idx) => (
-                                    <motion.div 
-                                    onClick={() => setActiveIdx(idx)}
-                                    className='faq-questions-animation-item'
-                                    key={idx}
-                                    style={{ flex: 1 }}
-                                    layout
-                                    initial={{ scale: 1.0, filter: 'brightness(1) '}}
-                                    whileHover={{ scale: 1.1, filter: 'brightness(2)' }}
-                                    whileTap={{ scale: 1.1, filter: 'brightness(3)' }}
-                                    animate={{
-                                        scale: (idx === activeIdx && selected > 0) ? 1.1 : 1,
-                                        filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',
-                                        background: `linear-gradient(${Math.floor(Math.random() * 360)}deg, 
-                                        ${idx === activeIdx ? '#0b0b41ff' : cssVariable('--background-2')}, 
-                                        ${idx === activeIdx ? '#4141c9ff' : cssVariable('--background-2')}`
-                                    }}
-                                    transition={{ type: "spring", stiffness: 75 * (idx + 1), damping: 20 }}/>
-                                ))}
-                            </AnimatePresence>
+                        <div className='faq-questions-content'>
+                            <div className='faq-questions-accordion'>
+                                <Accordion items={questions} onSelect={(idx) => setSelected(idx)}/>
+                            </div>
+
+                            <div className='faq-questions-animation'>
+                                <AnimatePresence>
+                                    { Array.from({ length: (selected === -1 ? 0 : selected) + 1  }).map((_, idx) => (
+                                        <motion.div 
+                                        onClick={() => setActiveIdx(idx)}
+                                        className='faq-questions-animation-item'
+                                        key={idx}
+                                        style={{ flex: 1 }}
+                                        layout
+                                        initial={{ scale: 1.0, filter: 'brightness(1) '}}
+                                        whileHover={{ scale: 1.1, filter: 'brightness(2)' }}
+                                        whileTap={{ scale: 1.1, filter: 'brightness(3)' }}
+                                        animate={{
+                                            scale: (idx === activeIdx && selected > 0) ? 1.1 : 1,
+                                            filter: idx === activeIdx ? 'brightness(1.3)' : 'brightness(1)',
+                                            background: `linear-gradient(${Math.floor(Math.random() * 360)}deg, 
+                                            ${idx === activeIdx ? '#0b0b41ff' : cssVariable('--background-2')}, 
+                                            ${idx === activeIdx ? '#4141c9ff' : cssVariable('--background-2')}`
+                                        }}
+                                        transition={{ type: "spring", stiffness: 75 * (idx + 1), damping: 20 }}/>
+                                    ))}
+                                </AnimatePresence>
+                            </div>
                         </div>
                     </div>
+
+                    <motion.div style={ isMobile ? { scaleX: smoothProgress } : { scaleY: smoothProgress }} className='faq-progress-bar'/>
+
+                    <div className='faq-lock-rectangle'>
+                        <MovingRectangleCanvas progress={smoothProgress}/>
+                        <img className='faq-lock-hover-img' src={hoverImg} alt='hover'/>
+                    </div>
+
                 </div>
 
-                <motion.div style={ isMobile ? { scaleX: smoothProgress } : { scaleY: smoothProgress }} className='faq-progress-bar'/>
-
-                <div className='faq-lock-rectangle'>
-                    <MovingRectangleCanvas progress={smoothProgress}/>
-                    <img className='faq-lock-hover-img' src={hoverImg} alt='hover'/>
-                </div>
             </div>
         </section>
     )
