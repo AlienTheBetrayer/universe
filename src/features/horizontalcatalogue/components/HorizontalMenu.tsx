@@ -1,3 +1,4 @@
+import { Search } from '../../ui/Search/Search';
 import type { CatalogueItem } from './HorizontalCatalogue';
 import './HorizontalMenu.css';
 import React, { useEffect, useState } from "react";
@@ -22,7 +23,7 @@ export const HorizontalMenu = ({ items }: Props) => {
     
     return (
         <div className='horizontal-menu'>
-            <input value={search} onChange={(e) => setSearch(e.target.value)}/>
+            <Search value={search} onChange={val => setSearch(val)}/>
         </div>
     )
 }

@@ -20,20 +20,20 @@ export const HorizontalCatalogue = ({ items, containerRef }: Props) => {
 
     return (
         <div className='horizontal-content'>
-                <div className='horizontal-content-items'>
-                    <h2>Items</h2>
-                    <motion.div className='horizontal-scroll'
-                    style={{ x: scrollYPercentage }}>
-                        { items.map(item => (
-                            <motion.div
-                            whileHover={{ }}
-                            style={{ display: item.visible ? 'flex' : 'none' }}>
-                                <h3>{item.title}</h3>
-                                <p>{item.content}</p>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                </div>
+            <div className='horizontal-content-items'>
+                <h2>Items</h2>
+                <motion.div className='horizontal-scroll'
+                style={{ x: scrollYPercentage }}>
+                    { items.map(item => (
+                        <motion.div
+                        whileHover={{ }}
+                        style={{ display: item.visible ? 'flex' : 'none' }}>
+                            <h3>{item.title}</h3>
+                            <p>{item.content}</p>
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
+        </div>
     )
 }
