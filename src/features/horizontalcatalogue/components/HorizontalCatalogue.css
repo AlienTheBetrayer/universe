@@ -54,7 +54,16 @@
     position: absolute;
     right: 1.5rem;
     bottom: 1rem;
-    color: var(--background-6);
+    opacity: 0.3;
     pointer-events: none;
     font-size: 0.7rem;
+}
+
+.horizontal-scroll-and-more {
+    font-size: 12rem;
+    pointer-events: none;
+    opacity: 0.3;
+    background: linear-gradient(to right, var(--foreground), blue);
+    background-clip: text;
+    color: transparent;
 }
