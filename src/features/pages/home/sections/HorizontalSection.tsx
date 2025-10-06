@@ -29,8 +29,8 @@ export const HorizontalSection = () => {
             <h2>Horizontal <mark>catalogue</mark></h2>
 
             <div className='horizontal-lock'>
-                <HorizontalCatalogue containerRef={sectionRef} items={content}/>
-                <HorizontalMenu items={[content, setContent]}/>
+                <HorizontalCatalogue className='lock-catalogue' containerRef={sectionRef} items={content}/>
+                <HorizontalMenu className='lock-menu' items={[content, setContent]}/>
             </div>
         </section>
     )

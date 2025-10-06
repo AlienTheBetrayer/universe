@@ -1,8 +1,25 @@
 /* menu below */
 .horizontal-menu {
+    padding: 2rem;
+    
     border: 2px dashed var(--background-8);
-    border-radius: 64px;
-    display: flex;
-    padding: 4rem;
-    height: 30vh;
+    border-radius: 48px;
 }
+
+.horizontal-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 300px;
+}
+
+@media (max-width: 640px) {
+    .horizontal-menu-content {
+        width: 100%;
+    }
+}
+
+.horizontal-menu h3 {
+    text-align: left;
+}
+

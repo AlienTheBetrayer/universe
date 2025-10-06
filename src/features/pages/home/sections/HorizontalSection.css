@@ -7,8 +7,18 @@
 .horizontal-lock {
     display: flex;
     flex-direction: column;
-    gap: 2rem;  
+    gap: 1rem;  
+    height: 500px;
+
     position: sticky;
     top: 6rem;
     overflow-x: hidden;
+}
+
+.lock-catalogue {
+    flex: 70%;
+}
+
+.lock-menu {
+    flex: 30%;
 }

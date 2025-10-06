@@ -1,8 +1,8 @@
 /* parent of the actual scrollable part */
 .horizontal-content {
     border: 2px dashed var(--background-8);
-    border-radius: 64px;
-    padding: 4rem;
+    border-radius: 48px;
+    padding: 2rem;
 }
 
 .horizontal-content-items {
@@ -12,7 +12,7 @@
     overflow: hidden;
 }
 
-.horizontal-content h2 {
+.horizontal-content h3 {
     text-align: left;
 }
 
@@ -23,11 +23,16 @@
     width: 400vw;
 }
 
-.horizontal-scroll > div {
+.horizontal-catalogue-item {
     display: grid;
     place-items: center;
     height: 200px;
     width: 200px;
-    border: 2px dashed var(--foreground);
+    border: 2px dashed var(--background-10);
     border-radius: 32px;
+    transition: 0.15s;
+}
+
+.horizontal-catalogue-item:hover {
+    border: 2px dashed var(--foreground);
 }
