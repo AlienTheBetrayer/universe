@@ -17,8 +17,12 @@ interface Props {
 export const HorizontalCatalogue = ({ className='', items, containerRef }: Props) => {
     const { scrollYProgress } = useScroll({ target: containerRef });
     const scrollYSpring = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
-    const scrollYPercentage = useTransform(scrollYSpring, val => `-${val * 60}%`);
+    const clampedY = useTransform(scrollYSpring, 
+        [0, 0.3, 1],
+        [0, 0, 1]);
+    const scrollYPercentage = useTransform(clampedY, val => `${-val * 60}%`);
 
+    scrollYPercentage.on('change', val => console.log(val));
     return (
         <div className={`horizontal-content ${className}`}>
             <div className='horizontal-content-items'>
@@ -37,6 +41,11 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
                         </motion.div>
                     ))}
                 </motion.div>
+
+                <motion.div className='horizontal-scroll-progress'
+                style={{ scaleX: clampedY }}/>
+
+                <p className='catalogue-scroll-tooltip'>Scroll down to see more</p>
             </div>
         </div>
     )
