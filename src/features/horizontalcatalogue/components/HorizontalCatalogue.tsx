@@ -60,8 +60,7 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
                     </motion.div>
                 </div>
 
-                <motion.div className='horizontal-scroll-progress'
-                style={{ scaleX: clampedY }}/>
+                <motion.div className='horizontal-scroll-progress' style={{ scaleX: clampedY }}/>
 
                 <p className='catalogue-scroll-tooltip'>Scroll down to see more</p>
             </div>

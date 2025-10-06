@@ -17,8 +17,26 @@
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
+    position: relative;
 
+    min-height: 96px;
+    width: 200px;
     border-radius: 16px;
     background-color: var(--background-2);
     pointer-events: auto;
+}
+
+.horizontal-order-popup:hover .horizontal-order-popup-idx, 
+.horizontal-order-popup:active .horizontal-order-popup-idx {
+    opacity: 0.2;
+}
+
+.horizontal-order-popup-idx {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0.1;
+    font-size: 5rem;
+    transition: 0.15s;
 }
