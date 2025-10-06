@@ -1,8 +1,10 @@
 import './HorizontalCatalogue.css';
 import { motion, useScroll, useSpring, useTransform } from "motion/react"
 import type React from "react";
+import { HorizontalCatalogueItem } from './HorizontalCatalogueItem';
 
 export interface CatalogueItem {
+    idx: number;
     title: string;
     content: string;
     visible: boolean;
@@ -20,25 +22,17 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
     const clampedY = useTransform(scrollYSpring, 
         [0, 0.3, 1],
         [0, 0, 1]);
-    const scrollYPercentage = useTransform(clampedY, val => `${-val * 60}%`);
+    const scrollYPercentage = useTransform(clampedY, val => `${-val * 80}%`);
 
-    scrollYPercentage.on('change', val => console.log(val));
     return (
         <div className={`horizontal-content ${className}`}>
             <div className='horizontal-content-items'>
-                <h3>Catalogue items:</h3>
+                <h3>Catalogue items: ({items.length} available)</h3>
 
                 <motion.div className='horizontal-scroll'
                 style={{ x: scrollYPercentage }}>
                     { items.map(item => (
-                        <motion.div
-                        key={item.title}
-                        className='horizontal-catalogue-item'
-                        whileHover={{  }}
-                        style={{ display: item.visible ? 'flex' : 'none' }}>
-                            <h3>{item.title}</h3>
-                            <p>{item.content}</p>
-                        </motion.div>
+                        <HorizontalCatalogueItem item={item}/>
                     ))}
                 </motion.div>
 

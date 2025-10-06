@@ -1,0 +1,42 @@
+
+.horizontal-catalogue-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+
+    height: 200px;
+    width: 200px;
+    flex-shrink: 0;
+    
+    border: 2px dashed var(--background-10);
+    border-radius: 32px;
+    transition: 0.15s;
+}
+
+.horizontal-catalogue-item h3 {
+    text-align: center;
+}
+
+.horizontal-catalogue-item:hover {
+    border: 2px dashed var(--foreground);
+}
+
+.horizontal-catalogue-item-order-button {
+    border-radius: 12px;
+    padding: 0.5rem;
+    background-color: var(--background-2);
+    margin-top: auto;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.horizontal-catalogue-item-order-button:hover {
+    background-color: var(--background-3);
+
+}
+
+.horizontal-catalogue-item-order-button:active {
+    background-color: var(--background-4);
+    color: var(--foreground-last);
+}

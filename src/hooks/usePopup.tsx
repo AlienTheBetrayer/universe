@@ -3,13 +3,15 @@ import { useBackgroundBlur } from "../features/backgroundblur/hooks/useBackgroun
 import { createPortal } from "react-dom";
 import { AnimatePresence } from "motion/react";
 
-export const usePopup = (element: React.ReactNode) => {
+export const usePopup = (element: React.ReactNode, bg: boolean = true) => {
     const [shown, setShown] = useState<boolean>(false);
     const blur = useBackgroundBlur();
 
     useEffect(() => {
-        document.body.style.overflow = shown ? 'hidden' : 'auto';
-        blur.setShown(shown);   
+        if(bg) {
+            document.body.style.overflow = shown ? 'hidden' : 'auto';
+            blur.setShown(shown);   
+        }
     }, [shown]);
 
     const render = () => {
@@ -19,7 +21,7 @@ export const usePopup = (element: React.ReactNode) => {
                     <AnimatePresence>
                         { shown && element }
                     </AnimatePresence>, document.body) }
-                { blur.render() }
+                { bg && blur.render() }
             </>
         )
     }

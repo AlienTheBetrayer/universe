@@ -1,0 +1,15 @@
+.horizontal-order-popup {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+
+    border-radius: 16px;
+    background-color: var(--background-2);
+
+    z-index: 12;
+}

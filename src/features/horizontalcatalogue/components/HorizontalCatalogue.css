@@ -20,24 +20,16 @@
 
 /* scrollable part */
 .horizontal-scroll {
-    gap: 4rem;
+    gap: 2rem;
     display: flex;
-    width: 200vw;
 }
 
-.horizontal-catalogue-item {
-    display: grid;
-    place-items: center;
-    height: 200px;
-    width: 200px;
-    border: 2px dashed var(--background-10);
-    border-radius: 32px;
-    transition: 0.15s;
+@media (max-width: 768px) {
+    .horizontal-scroll {
+        gap: 1rem;
+    }
 }
 
-.horizontal-catalogue-item:hover {
-    border: 2px dashed var(--foreground);
-}
 
 .horizontal-scroll-progress {
     width: 100%;
