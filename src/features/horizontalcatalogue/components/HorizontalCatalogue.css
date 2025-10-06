@@ -1,13 +1,13 @@
 /* parent of the actual scrollable part */
-.horizontal-content {
+.horizontal-content-container {
     position: relative;
+    padding: 2rem;
 
     border: 2px dashed var(--background-8);
     border-radius: 48px;
-    padding: 2rem;
 }
 
-.horizontal-content-items {
+.horizontal-content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -20,8 +20,14 @@
 
 /* scrollable part */
 .horizontal-scroll {
-    gap: 2rem;
     display: flex;
+    width: fit-content;
+    gap: 2rem;
+}
+
+.horizontal-scroll-container {
+    mask-image: linear-gradient(to right, transparent, black 6%), linear-gradient(to left, transparent, black 6%);
+    mask-composite: intersect;
 }
 
 @media (max-width: 768px) {

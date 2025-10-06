@@ -22,19 +22,21 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
     const clampedY = useTransform(scrollYSpring, 
         [0, 0.3, 1],
         [0, 0, 1]);
-    const scrollYPercentage = useTransform(clampedY, val => `${-val * 80}%`);
+    const scrollYPercentage = useTransform(clampedY, val => `${-val * 50}%`);
 
     return (
-        <div className={`horizontal-content ${className}`}>
-            <div className='horizontal-content-items'>
+        <div className={`horizontal-content-container ${className}`}>
+            <div className='horizontal-content'>
                 <h3>Catalogue items: ({items.length} available)</h3>
 
-                <motion.div className='horizontal-scroll'
-                style={{ x: scrollYPercentage }}>
-                    { items.map(item => (
-                        <HorizontalCatalogueItem item={item}/>
-                    ))}
-                </motion.div>
+                <div className='horizontal-scroll-container'>
+                    <motion.div className='horizontal-scroll'
+                    style={{ x: scrollYPercentage }}>
+                        { items.map(item => (
+                            <HorizontalCatalogueItem item={item}/>
+                        ))}
+                    </motion.div>
+                </div>
 
                 <motion.div className='horizontal-scroll-progress'
                 style={{ scaleX: clampedY }}/>
