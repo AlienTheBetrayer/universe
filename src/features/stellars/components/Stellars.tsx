@@ -5,7 +5,6 @@ import { useStellarContext } from "../context/StellarContext";
 import { useStellarPositions } from "../hooks/useStellarPositions";
 import { useStellarCamera } from "../hooks/useStellarCamera";
 import { useStellarHotkeys } from "../hooks/useStellarHotkeys";
-import { useStellarHover } from "../hooks/useStellarHover";
 
 export const Stellars = () => {
     const [state, dispatch] = useStellarContext();
@@ -19,9 +18,6 @@ export const Stellars = () => {
 
     // hotkeys handling
     useStellarHotkeys();
-
-    // hover handling
-    useStellarHover();
 
     // position setting / animating + state changing
     useEffect(() => {
@@ -40,6 +36,7 @@ export const Stellars = () => {
 
     // rotating the currently selected stellar
     const stellarRefs = useRef<Mesh[]>([]);
+
     useFrame(s => {
         const t = s.clock.getElapsedTime();
         three.camera.rotation.x = Math.sin(t) / 300;
@@ -55,7 +52,8 @@ export const Stellars = () => {
 
     return (
         state.stellars.map((stellar, idx) => (
-            <group key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
+            <group
+            key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
             onPointerOver={() => dispatch({ type: 'hover', idx: idx })}
             onPointerOut={() => dispatch({ type: 'unhover' })}>
                 <mesh
@@ -65,7 +63,8 @@ export const Stellars = () => {
                     <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
                 </mesh>
 
-                <mesh onClick={() => dispatch({ type: 'select', idx: idx })}>
+                <mesh
+                onClick={() => dispatch({ type: 'select', idx: idx })}>
                     <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>

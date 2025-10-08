@@ -5,7 +5,6 @@ import { StellarParticles } from "./StellarParticles"
 import { Stellars } from "./Stellars"
 
 export const StellarCanvas = () => {
-
     return (
         <Canvas style={{ width: '100%', height: '100%'}} camera={{ near: 0.001 }}>
             <StellarLighting/>

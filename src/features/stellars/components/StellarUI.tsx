@@ -6,10 +6,13 @@ import regenerateImg from '../assets/regenerate.svg';
 import { useStellarPositions } from '../hooks/useStellarPositions';
 import { useRef } from 'react';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
+import { useStellarHover } from '../hooks/useStellarHover';
 
 export const StellarUI = () => {
     const [state, dispatch] = useStellarContext();
     const isSelected = state.selected !== -1;
+    
+    // regenerating functionality
     const positions = useStellarPositions(state.viewport);
     const isGenerating = useRef<boolean>(false);
     
@@ -19,13 +22,17 @@ export const StellarUI = () => {
 
         dispatch({ type: 'go_back' });
         positions.generate();
-        console.log(state.viewport);
         isGenerating.current = true;
         setTimeout(() => { isGenerating.current = false }, 5000);
     }
 
+    // hover functionality
+    const hover = useStellarHover();
+
     return (
         <>
+            { hover.render() }
+            
             <motion.button className='stellar-button stellar-ui-previous-button'
             style={{ y: '-50%'}}
             initial={{ x: -100, opacity: 0 }}
