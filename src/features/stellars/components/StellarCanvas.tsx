@@ -3,17 +3,31 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing"
 import { StellarLighting } from "./StellarLighting"
 import { StellarParticles } from "./StellarParticles"
 import { Stellars } from "./Stellars"
+import { useStellarContextMenu } from "../hooks/useStellarContextMenu"
 
 export const StellarCanvas = () => {
-    return (
-        <Canvas style={{ width: '100%', height: '100%'}} camera={{ near: 0.001 }}>
-            <StellarLighting/>
-            <StellarParticles/>
-            <Stellars/>
+    const contextMenu = useStellarContextMenu();
 
-            <EffectComposer>
-                <Bloom intensity={20} luminanceThreshold={0}/>
-            </EffectComposer>
-        </Canvas>
+    const handle = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        contextMenu.popup.setShown(prev => !prev);
+    }
+
+    return (
+        <>
+            <Canvas style={{ width: '100%', height: '100%'}} camera={{ near: 0.001 }}
+            onContextMenu={handle}
+            onClick={() => contextMenu.popup.setShown(false)}>
+                <StellarLighting/>
+                <StellarParticles/>
+                <Stellars/>
+
+                <EffectComposer>
+                    <Bloom intensity={20} luminanceThreshold={0}/>
+                </EffectComposer>
+            </Canvas>
+
+            { contextMenu.popup.render() }
+        </>
     )
 }
