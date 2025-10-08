@@ -1,21 +1,22 @@
 import type React from 'react';
 import './StellarHoverPopup.css';
 import { motion } from "motion/react"
-import type { StellarContentEntry } from '../context/StellarContext';
+import type { Stellar } from '../context/StellarContext';
 
 interface Props {
-    content?: StellarContentEntry;
+    stellar: Stellar;
     ref: React.RefObject<HTMLDivElement | null>;
 }
 
-export const StellarHoverPopup = ({ content, ref }: Props) => {
+export const StellarHoverPopup = ({ stellar, ref }: Props) => {
     return (
         <motion.div className='stellar-hover-popup' ref={ref}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}>
-            <h2>{content?.title}</h2>
-            <p>{content?.description[0]}</p>
+            <h2>{stellar?.content.first.title ?? ''}</h2>
+            <p>{stellar?.content.first.description[0] ?? ''}</p>
+            <span className='stellar-hover-popup-idx'>{stellar?.idx ?? ''}</span>
         </motion.div>
     )
 }

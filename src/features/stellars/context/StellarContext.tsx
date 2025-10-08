@@ -35,6 +35,7 @@ export interface StellarState {
 };
 
 export type StellarAction =
+{ type: 'create', stellar: Stellar } |
 { type: 'set_viewport', viewport: StellarViewport } |
 { type: 'go_back' } |
 { type: 'set_editing', flag: boolean } |
@@ -49,6 +50,8 @@ export type StellarAction =
 
 export const StellarReducer = (state: StellarState, action: StellarAction) => {
     switch(action.type) {
+        case 'create':
+            return { ...state, stellars: [...state.stellars, action.stellar]};
         case 'set_viewport':
             return { ...state, viewport: action.viewport };
         case 'change_content':

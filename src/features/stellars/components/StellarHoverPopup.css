@@ -10,4 +10,14 @@
 
     background-color: var(--background-4-transparent);
     border-radius: 32px;
+    pointer-events: none;
+}
+
+.stellar-hover-popup-idx {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0.1;
+    font-size: 6rem;
 }

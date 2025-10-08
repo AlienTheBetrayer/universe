@@ -11,3 +11,19 @@
     background-color: var(--background-4-transparent);
     border-radius: 32px;
 }
+
+.stellar-create-stellar-button {
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--foreground-prelast);
+}
+
+.stellar-create-stellar-button:hover {
+    color: var(--foreground-prelast);
+    background-color: var(--background-4-transparent);
+}
+
+.stellar-create-stellar-button:active {
+    color: var(--foreground-prelast);
+    background-color: var(--background-5-transparent);
+}

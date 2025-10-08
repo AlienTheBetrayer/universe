@@ -55,7 +55,8 @@ export const Stellars = () => {
             <group
             key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
             onPointerOver={() => dispatch({ type: 'hover', idx: idx })}
-            onPointerOut={() => dispatch({ type: 'unhover' })}>
+            onPointerOut={() => dispatch({ type: 'unhover' })}
+            >
                 <mesh
                 onClick={() => { if(state.selected !== -1) dispatch({ type: 'select', idx: idx })} } 
                 ref={(el) => (stellarRefs.current[idx] = el!)}>

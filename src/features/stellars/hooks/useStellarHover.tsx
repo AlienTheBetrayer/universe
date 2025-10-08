@@ -15,7 +15,7 @@ export const useStellarHover = () => {
     // popup handling
     const cursor = useCursorRef();
     const ref = useRef<HTMLDivElement>(null);
-    const popup = usePopup(<StellarHoverPopup content={state.stellars[state.hovered]?.content.first} ref={ref}/>, false);
+    const popup = usePopup(<StellarHoverPopup stellar={state.stellars[state.hovered]} ref={ref}/>, false);
 
     useEffect(() => {
         if(ref.current && popup.shown && state.selected === -1) {
