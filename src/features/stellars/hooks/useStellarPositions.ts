@@ -12,7 +12,6 @@ export const useStellarPositions = () => {
         tweensRef.current = [];
 
         const xy: { x: number, y: number }[] = [];
-        console.log(state.stellars.length);
         state.stellars.forEach(() => xy.push({ x: 0, y: 0 }));
 
         xy.forEach((obj, idx) => {
