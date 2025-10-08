@@ -15,16 +15,18 @@ export const useStellarHover = () => {
     // popup handling
     const cursor = useCursorRef();
     const ref = useRef<HTMLDivElement>(null);
-    const popup = usePopup(
-    <StellarHoverPopup content={state.stellars[state.hovered]?.content.first} ref={ref}/>
-    , false);
+    const popup = usePopup(<StellarHoverPopup content={state.stellars[state.hovered]?.content.first} ref={ref}/>, false);
 
     useEffect(() => {
-        if(ref.current) {
+        if(ref.current && popup.shown && state.selected === -1) {
+            ref.current.style.display = 'flex';
             ref.current.style.left = `${cursor.current.x}px`;
             ref.current.style.top = `${cursor.current.y}px`;
         }
-    }, [popup.shown]);
+
+        if(state.selected !== -1)
+            popup.setShown(false);
+    }, [popup.shown, state.selected]);
 
     return { render: popup.render };
 }

@@ -10,7 +10,9 @@ export const StellarCanvas = () => {
 
     const handle = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
-        contextMenu.popup.setShown(prev => !prev);
+        
+        contextMenu.popup.setShown(false);
+        setTimeout(() => contextMenu.popup.setShown(true), 10);
     }
 
     return (
