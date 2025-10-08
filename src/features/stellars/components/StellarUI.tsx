@@ -2,66 +2,25 @@ import './StellarUI.css';
 import { useStellarContext } from '../context/StellarContext';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { useStellarPositions } from '../hooks/useStellarPositions';
-import { useEffect, useRef, useState } from 'react';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
-import { useStellarHover } from '../hooks/useStellarHover';
 
 import regenerateImg from '../assets/regenerate.svg';
 import tutorialImg from '../assets/tutorial.svg';
 import clearImg from '../assets/clear.svg';
-import { usePopup } from '../../../hooks/usePopup';
-import { MessageBox } from '../../messagebox/components/MessageBox';
+import refillImg from '../assets/refill.svg';
+import { useStellarActions } from '../hooks/useStellarActions';
 
 export const StellarUI = () => {
     const [state, dispatch] = useStellarContext();
     const isSelected = state.selected !== -1;
     
-    // hover functionality
-    const hover = useStellarHover();
-
-    // regenerating functionality
-    const positions = useStellarPositions(state.viewport);
-    const isGenerating = useRef<boolean>(false);
-    
-    const handleRegenerate = () => {
-        if(isGenerating.current)
-            return;
-
-        dispatch({ type: 'go_back' });
-        positions.generate();
-        isGenerating.current = true;
-        setTimeout(() => { isGenerating.current = false }, 5000);
-    }
-
-    const [messageBoxResult, setMessageBoxResult] = useState<boolean>(false);
-
-    // clearing functionality
-    const clearMessageBox = usePopup(
-    <MessageBox
-            title='Are you sure?'
-            description={`You're about to <b><u>delete all stellars</u></b> (it will <mark>save</mark> after that)`}
-            onInteract={f => { setMessageBoxResult(f); clearMessageBox.setShown(false) }}/>);
-
-    const handleClear = () => {
-        clearMessageBox.setShown(true);
-    }
-
-    useEffect(() => {
-        if(messageBoxResult)
-            dispatch({ type: 'clear' });
-    }, [messageBoxResult]);
-
-    // tutorial functionality
-    const handleTutorial = () => {
-        
-    }
-
+    const actions = useStellarActions();
 
     return (
         <>
-            { hover.render() }
-            { clearMessageBox.render() }
+            { actions.hover.render() }
+            { actions.clearMessageBox.render() }
+            { actions.refillMessageBox.render() }
             
             <motion.button className='stellar-button stellar-ui-previous-button'
             style={{ y: '-50%'}}
@@ -89,13 +48,18 @@ export const StellarUI = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
                 <div className='stellar-ui-bottom-bar-buttons-container'>
-                    <button className='stellar-button stellar-button-regenerate'
-                    onClick={() => handleClear()}>
+                    <button className='stellar-button stellar-button-action'
+                    onClick={() => actions.clearMessageBox.setShown(true)}>
                         <img src={clearImg} alt='clear'/>
                     </button>
 
-                    <button className='stellar-button stellar-button-regenerate'
-                    onClick={() => handleTutorial()}>
+                    <button className='stellar-button stellar-button-action'
+                    onClick={() => actions.refillMessageBox.setShown(true)}>
+                        <img src={refillImg} alt='refill'/>
+                    </button>
+
+                    <button className='stellar-button stellar-button-action'
+                    onClick={() => {}}>
                         <img src={tutorialImg} alt='tutorial'/>
                     </button>
                 </div>
@@ -121,8 +85,8 @@ export const StellarUI = () => {
                 </div>
 
                 <div className='stellar-ui-bottom-bar-buttons-container'>
-                    <button className='stellar-button stellar-button-regenerate'
-                    onClick={handleRegenerate}>
+                    <button className='stellar-button stellar-button-action'
+                    onClick={() => actions.regenPositions()}>
                         <img src={regenerateImg} alt='regen'/>
                     </button>
                 </div>

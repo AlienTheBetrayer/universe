@@ -13,11 +13,11 @@ interface Props {
 export const MessageBox = ({ title, description, onInteract }: Props) => {
     useHotkeys([
         {
-            hotkey: 'y',
+            hotkey: 'enter',
             action: () => onInteract?.(true)
         },
         {
-            hotkey: 'n',
+            hotkey: 'esc',
             action: () => onInteract?.(false)
         }
     ]);
@@ -34,11 +34,11 @@ export const MessageBox = ({ title, description, onInteract }: Props) => {
             <div className='message-box-buttons'>
                 <Button onClick={() => onInteract?.(true)}>
                     Yes
-                    <HotkeyTooltip className='message-box-yes-tooltip' hotkeys={['Y']}/>
+                    <HotkeyTooltip className='message-box-yes-tooltip' hotkeys={['Enter']}/>
                 </Button>
                 <Button onClick={() => onInteract?.(false)}>
                     No
-                    <HotkeyTooltip className='message-box-no-tooltip' hotkeys={['N']}/>
+                    <HotkeyTooltip className='message-box-no-tooltip' hotkeys={['Esc']}/>
                 </Button>
             </div>
         </motion.div>

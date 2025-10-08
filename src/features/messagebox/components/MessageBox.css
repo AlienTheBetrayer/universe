@@ -29,7 +29,7 @@
 
 .message-box-yes-tooltip {
     position: absolute;
-    right: 1rem;
+    left: 0.4rem;
     top: 50%;
     transform: translateY(-50%);
 }

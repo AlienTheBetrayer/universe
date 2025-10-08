@@ -102,11 +102,11 @@
 }
 
 /* misc buttons */
-.stellar-button-regenerate {
+.stellar-button-action {
     padding: 0.5rem;
 }
 
-.stellar-button-regenerate img {
+.stellar-button-action img {
     width: 16px;
     height: 16px;
     filter: invert(0.5);
