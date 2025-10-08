@@ -1,0 +1,42 @@
+.message-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: var(--background-3-transparent);
+    
+    width: 240px;
+    min-height: 100px;
+    border-radius: 16px;
+    z-index: 20;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.message-box-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.message-box-buttons * {
+    flex: 1;
+    position: relative;
+}
+
+.message-box-yes-tooltip {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.message-box-no-tooltip {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}

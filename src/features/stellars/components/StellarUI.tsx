@@ -2,16 +2,24 @@ import './StellarUI.css';
 import { useStellarContext } from '../context/StellarContext';
 import { AnimatePresence, motion } from 'motion/react';
 
-import regenerateImg from '../assets/regenerate.svg';
 import { useStellarPositions } from '../hooks/useStellarPositions';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { useStellarHover } from '../hooks/useStellarHover';
+
+import regenerateImg from '../assets/regenerate.svg';
+import tutorialImg from '../assets/tutorial.svg';
+import clearImg from '../assets/clear.svg';
+import { usePopup } from '../../../hooks/usePopup';
+import { MessageBox } from '../../messagebox/components/MessageBox';
 
 export const StellarUI = () => {
     const [state, dispatch] = useStellarContext();
     const isSelected = state.selected !== -1;
     
+    // hover functionality
+    const hover = useStellarHover();
+
     // regenerating functionality
     const positions = useStellarPositions(state.viewport);
     const isGenerating = useRef<boolean>(false);
@@ -26,12 +34,34 @@ export const StellarUI = () => {
         setTimeout(() => { isGenerating.current = false }, 5000);
     }
 
-    // hover functionality
-    const hover = useStellarHover();
+    const [messageBoxResult, setMessageBoxResult] = useState<boolean>(false);
+
+    // clearing functionality
+    const clearMessageBox = usePopup(
+    <MessageBox
+            title='Are you sure?'
+            description={`You're about to <b><u>delete all stellars</u></b> (it will <mark>save</mark> after that)`}
+            onInteract={f => { setMessageBoxResult(f); clearMessageBox.setShown(false) }}/>);
+
+    const handleClear = () => {
+        clearMessageBox.setShown(true);
+    }
+
+    useEffect(() => {
+        if(messageBoxResult)
+            dispatch({ type: 'clear' });
+    }, [messageBoxResult]);
+
+    // tutorial functionality
+    const handleTutorial = () => {
+        
+    }
+
 
     return (
         <>
             { hover.render() }
+            { clearMessageBox.render() }
             
             <motion.button className='stellar-button stellar-ui-previous-button'
             style={{ y: '-50%'}}
@@ -59,8 +89,14 @@ export const StellarUI = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
                 <div className='stellar-ui-bottom-bar-buttons-container'>
-                    <button className='stellar-button stellar-button-regenerate'>
-                        <img src={regenerateImg} alt='regen'/>
+                    <button className='stellar-button stellar-button-regenerate'
+                    onClick={() => handleClear()}>
+                        <img src={clearImg} alt='clear'/>
+                    </button>
+
+                    <button className='stellar-button stellar-button-regenerate'
+                    onClick={() => handleTutorial()}>
+                        <img src={tutorialImg} alt='tutorial'/>
                     </button>
                 </div>
 

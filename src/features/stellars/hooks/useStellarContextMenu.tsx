@@ -18,15 +18,5 @@ export const useStellarContextMenu = () => {
         }
     }, [menuPopup.shown]);
 
-    useEffect(() => {
-        const handle = (e: KeyboardEvent) => {
-            if(e.key == 'Escape')
-                menuPopup.setShown(false);
-        }
-
-        window.addEventListener('keydown', handle);
-        return () => window.removeEventListener('keydown', handle);
-    }, []);
-
     return { popup: menuPopup };
 }

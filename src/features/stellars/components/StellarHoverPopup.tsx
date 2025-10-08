@@ -14,7 +14,7 @@ export const StellarHoverPopup = ({ stellar, ref }: Props) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}>
-            <h2>{stellar?.content.first.title ?? ''}</h2>
+            <h3>{stellar?.content.first.title ?? ''}</h3>
             <p>{stellar?.content.first.description[0] ?? ''}</p>
             <span className='stellar-hover-popup-idx'>{stellar?.idx ?? ''}</span>
         </motion.div>

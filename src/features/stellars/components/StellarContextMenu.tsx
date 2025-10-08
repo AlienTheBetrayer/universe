@@ -4,6 +4,8 @@ import './StellarContextMenu.css';
 import { motion } from "motion/react"
 import { useCursorRef } from '../../../hooks/useCursorRef';
 
+import createImg from '../assets/create.svg';
+
 interface Props {
     ref: React.RefObject<HTMLDivElement | null>;
 }
@@ -13,14 +15,17 @@ export const StellarContextMenu = ({ ref }: Props) => {
     const cursor = useCursorRef();
 
     const findMax = () => {
+        if(state.stellars.length === 0)
+            return -1;
+
         return state.stellars.reduce((acc, val) => {
             return val.idx > acc.idx ? val : acc;
-        });
+        }).idx;
     }
 
     const handleCreate = () => {
         const stellar: Stellar = {
-            idx: findMax().idx + 1,
+            idx: findMax() + 1,
             x: (cursor.current.x / window.innerWidth) * state.viewport.width - state.viewport.width / 2,
             y: -(cursor.current.y / window.innerHeight) * state.viewport.height + state.viewport.height / 2,
             content: {
@@ -46,6 +51,7 @@ export const StellarContextMenu = ({ ref }: Props) => {
             <h3>Context menu!</h3>
             <button className='stellar-create-stellar-button'
             onClick={handleCreate}>
+                <img src={createImg} alt=''/>
                 Create
             </button>
         </motion.div>

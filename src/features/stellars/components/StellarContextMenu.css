@@ -13,9 +13,18 @@
 }
 
 .stellar-create-stellar-button {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    align-items: center;
     border-radius: 12px;
-    padding: 1rem;
     color: var(--foreground-prelast);
+}
+
+.stellar-create-stellar-button img {
+    width: 24px;
+    height: 24px;
+    filter: invert(0.5);
 }
 
 .stellar-create-stellar-button:hover {

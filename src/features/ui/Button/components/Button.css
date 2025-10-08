@@ -1,20 +1,25 @@
 .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+
     padding: 4px;
     min-height: 32px;
     min-width: 32px;
 
     color: var(--foreground);
-    background-color: var(--background-2);
-    border-radius: 8px;
+    background-color: var(--background-4-transparent);
+    border-radius: 16px;
     border: transparent;
     cursor: pointer;
-    transition: 0.2s ease-in-out;
+    transition: 0.15s;
 }
 
 .button:hover {
-    background-color: var(--background-3);
+    background-color: var(--background-5-transparent);
 }
 
 .button:active {
-    background-color: var(--background-4);
+    color: var(--foreground-last);
 }
