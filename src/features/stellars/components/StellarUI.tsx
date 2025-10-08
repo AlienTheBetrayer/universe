@@ -9,20 +9,25 @@ import tutorialImg from '../assets/tutorial.svg';
 import clearImg from '../assets/clear.svg';
 import refillImg from '../assets/refill.svg';
 import { useStellarActions } from '../hooks/useStellarActions';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 export const StellarUI = () => {
     const [state, dispatch] = useStellarContext();
     const isSelected = state.selected !== -1;
-    
     const actions = useStellarActions();
+
+    const tooltips = useTooltips();
 
     return (
         <>
+            { tooltips.render() }
+
             { actions.hover.render() }
             { actions.clearMessageBox.render() }
             { actions.refillMessageBox.render() }
             
             <motion.button className='stellar-button stellar-ui-previous-button'
+            ref={el => { tooltips.set(0, 'Previous orb', el, 'right') }}
             style={{ y: '-50%'}}
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -33,6 +38,7 @@ export const StellarUI = () => {
             </motion.button>
 
             <motion.button className='stellar-button stellar-ui-next-button'
+            ref={el => { tooltips.set(1, 'Next orb', el, 'left') }}
             style={{ y: '-50%'}}
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -49,16 +55,22 @@ export const StellarUI = () => {
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
                 <div className='stellar-ui-bottom-bar-buttons-container'>
                     <button className='stellar-button stellar-button-action'
+                    ref={el => { tooltips.set(2, 'Wipe all orbs', el, 'right') }}
+
                     onClick={() => actions.clearMessageBox.setShown(true)}>
                         <img src={clearImg} alt='clear'/>
                     </button>
 
                     <button className='stellar-button stellar-button-action'
+                    ref={el => { tooltips.set(3, 'Restore all orbs', el, 'right') }}
+
                     onClick={() => actions.refillMessageBox.setShown(true)}>
                         <img src={refillImg} alt='refill'/>
                     </button>
 
                     <button className='stellar-button stellar-button-action'
+                    ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
+
                     onClick={() => {}}>
                         <img src={tutorialImg} alt='tutorial'/>
                     </button>
@@ -84,8 +96,10 @@ export const StellarUI = () => {
                     </button>
                 </div>
 
+                {/* question the existence of this button */}
                 <div className='stellar-ui-bottom-bar-buttons-container'>
                     <button className='stellar-button stellar-button-action'
+                    ref={el => { tooltips.set(5, 'Regenerate positions', el, 'left') }}
                     onClick={() => actions.regenPositions()}>
                         <img src={regenerateImg} alt='regen'/>
                     </button>

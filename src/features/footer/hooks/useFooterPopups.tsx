@@ -36,7 +36,7 @@ export const useFooterPopups = (refs: React.RefObject<(HTMLDivElement | null)[]>
             refs.current.forEach((ref, idx) => {
                 const rect = ref?.getBoundingClientRect();
                 if(rect)
-                newOffsets.push({ idx: idx, left: rect.left, top: rect.top + window.scrollY, width: rect.width });
+                    newOffsets.push({ idx: idx, left: rect.left, top: rect.top + window.scrollY, width: rect.width });
             });
 
             setOffsets(newOffsets);

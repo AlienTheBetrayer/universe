@@ -21,7 +21,7 @@ export const useStellarHover = () => {
         if(ref.current && popup.shown && state.selected === -1) {
             ref.current.style.display = 'flex';
             ref.current.style.left = `${cursor.current.x}px`;
-            ref.current.style.top = `${cursor.current.y}px`;
+            ref.current.style.top = `${cursor.current.y + window.scrollY}px`;
         }
 
         if(state.selected !== -1)

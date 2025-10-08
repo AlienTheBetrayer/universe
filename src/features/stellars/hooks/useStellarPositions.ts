@@ -16,11 +16,11 @@ export const useStellarPositions = () => {
 
         xy.forEach((obj, idx) => {
             const tween = gsap.to(obj, {
-                x: (Math.random() - 0.5) * state.viewport.width * 0.9, 
+                x: (Math.random() - 0.5) * state.viewport.width * 0.9,
                 y: (Math.random() - 0.5) * state.viewport.height * 0.7,
-                duration: 4 * (1 + Math.random()), 
+                duration: 4 * (1 + Math.random()),
                 ease: 'back.inOut',
-                onUpdate: () => 
+                onUpdate: () =>
                     dispatch({ type: 'move', idx: idx, x: xy[idx].x, y: xy[idx].y }),
             });
 
@@ -35,7 +35,7 @@ export const useStellarPositions = () => {
     }
 
     useEffect(() => {
-        if(state.stellars.length == 0)
+        if (state.stellars.length == 0)
             clear();
     }, [state.stellars]);
 
@@ -45,7 +45,7 @@ export const useStellarPositions = () => {
         }
     }, []);
 
-    return { 
+    return {
         generate, clear
     };
 }
