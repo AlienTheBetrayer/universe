@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarHover } from "./useStellarHover";
 import { useStellarPositions } from "./useStellarPositions";
@@ -12,7 +12,7 @@ export const useStellarActions = () => {
     const hover = useStellarHover();
 
     // regenerating 
-    const positions = useStellarPositions(state.viewport);
+    const positions = useStellarPositions();
     const isGenerating = useRef<boolean>(false);
     
     const regenPositions = () => {
@@ -30,16 +30,36 @@ export const useStellarActions = () => {
     <MessageBox
             title='Are you sure?'
             description={`You're about to <b><u>delete all stellars</u></b> (it will <mark>save</mark> after that)`}
-            onInteract={f => { if(f) dispatch({ type: 'clear' }); clearMessageBox.setShown(false) }}/>);
+            onInteract={f => { 
+                if(f) {
+                    dispatch({ type: 'clear' }); 
+                } 
+                clearMessageBox.setShown(false);
+            }}/>);
+
+    const refillRef = useRef<boolean>(false);
 
     // refilling
     const refillMessageBox = usePopup(
     <MessageBox
             title='Are you sure?'
             description={`You're about to <mark>restore</mark> all stellars to their initial data (it will <mark>save</mark> after that)`}
-            onInteract={f => { if(f) dispatch({ type: 'refill' }); refillMessageBox.setShown(false); positions.generate() }}/>);
+            onInteract={f => {
+                if(f) {
+                    dispatch({ type: 'refill' }); 
+                    refillRef.current = true;
+                }
+                refillMessageBox.setShown(false);
+            }}/>);
 
     // tutorial 
+    useEffect(() => {
+        if(!refillRef.current)
+            return;
+
+        positions.generate();
+        refillRef.current = false;
+    }, [state.stellars]);
 
     return {
         regenPositions,

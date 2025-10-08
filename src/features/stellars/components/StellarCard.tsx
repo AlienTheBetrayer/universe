@@ -20,7 +20,7 @@ export const StellarCard = ({ idx, side, className='' }: CardProps) => {
     const object = state.stellars[idx];
     
     // actual card content & updating it
-    const content = side === 'first' ? object.content.first : object.content.second;
+    const content = side === 'first' ? object?.content.first : object?.content.second;
     const [heading, setHeading] = useState<string>(content.title);
     const [descriptions, setDescriptions] = useState<string[]>(content.description);
 

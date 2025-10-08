@@ -262,7 +262,7 @@ const initialState: StellarState = {
 export const StellarReducer = (state: StellarState, action: StellarAction) => {
     switch(action.type) {
         case 'refill':
-            return initialState;
+            return { ...initialState, viewport: state.viewport };
         case 'clear':
             return { ...state, stellars: [] };
         case 'create':

@@ -11,7 +11,7 @@ export const Stellars = () => {
     const three = useThree();
     
     // generating random xy
-    const positions = useStellarPositions(three.viewport);
+    const positions = useStellarPositions();
 
     // onclick camera focus handling
     useStellarCamera(three.camera);
@@ -22,17 +22,11 @@ export const Stellars = () => {
     // position setting / animating + state changing
     useEffect(() => {
         positions.generate();
-    }, []);
+    }, [state.viewport]);
 
     useEffect(() => {
-        const handle = () => {
-            dispatch({ type: 'set_viewport', viewport: { width: three.viewport.width, height: three.viewport.height } });
-        }
-        handle();
-
-        window.addEventListener('resize', handle);
-        return () => window.removeEventListener('resize', handle);
-    }, [three.viewport.width, three.viewport.height]);
+        dispatch({ type: 'set_viewport', viewport: { width: three.viewport.width, height: three.viewport.height } });
+    }, []);
 
     // rotating the currently selected stellar
     const stellarRefs = useRef<Mesh[]>([]);
