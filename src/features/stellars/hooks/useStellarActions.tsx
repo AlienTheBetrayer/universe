@@ -52,15 +52,16 @@ export const useStellarActions = () => {
                 refillMessageBox.setShown(false);
             }}/>);
 
+            useEffect(() => {
+                if(!refillRef.current)
+                    return;
+                
+                positions.generate();
+                refillRef.current = false;
+            }, [state.stellars]);
+            
     // tutorial 
-    useEffect(() => {
-        if(!refillRef.current)
-            return;
-
-        positions.generate();
-        refillRef.current = false;
-    }, [state.stellars]);
-
+            
     return {
         regenPositions,
         hover,

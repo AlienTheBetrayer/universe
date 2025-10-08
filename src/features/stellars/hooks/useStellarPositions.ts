@@ -1,11 +1,12 @@
 import gsap from "gsap";
-import { useStellarContext, type StellarViewport } from "../context/StellarContext";
+import { useStellarContext } from "../context/StellarContext";
 import { useEffect, useRef } from "react";
 
 export const useStellarPositions = () => {
     const [state, dispatch] = useStellarContext();
     const tweensRef = useRef<gsap.core.Tween[]>([]);
 
+    // random positioning of stellars + animating toward them
     const generate = () => {
         tweensRef.current.forEach(t => t.kill());
         tweensRef.current = [];
@@ -28,6 +29,7 @@ export const useStellarPositions = () => {
         });
     }
 
+    // animation cleanup to prevent updating values that aren't mounted anymore (memory leak fix)
     const clear = () => {
         tweensRef.current.forEach(t => t.kill());
         tweensRef.current = [];

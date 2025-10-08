@@ -30,12 +30,12 @@ export const StellarContextMenu = ({ ref }: Props) => {
             y: -(cursor.current.y / window.innerHeight) * state.viewport.height + state.viewport.height / 2,
             content: {
                 first: {
-                    title: 'hi',
-                    description: []
+                    title: 'Planet',
+                    description: ['-', '-']
                 },
                 second: {
-                    title: 'properties',
-                    description: []
+                    title: 'Properties',
+                    description: ['-', '-', '-']
                 }
             }
         };

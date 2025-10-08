@@ -9,7 +9,7 @@ export const useStellarContextMenu = () => {
     
     const ref = useRef<HTMLDivElement | null>(null);
     const menuPopup = usePopup(<StellarContextMenu ref={ref}/>, false);
-    const cursor =  useCursorRef();
+    const cursor = useCursorRef();
 
     useEffect(() => {
         if(ref.current && menuPopup.shown) {
