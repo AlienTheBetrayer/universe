@@ -70,7 +70,7 @@ export const StellarUI = () => {
 
                     <button className='stellar-button stellar-button-action'
                     ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
-                    onClick={() => {}}>
+                    onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
                         <img src={tutorialImg} alt='tutorial'/>
                     </button>
                 </div>

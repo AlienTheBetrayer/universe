@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './StellarTutorial.css';
 import { AnimatePresence, motion } from "motion/react"
 import { useHotkeys } from '../../../hooks/useHotkeys';
@@ -17,6 +17,7 @@ export const StellarTutorial = () => {
     const [selected, setSelected] = useState<number>(0);
     const [shown, setShown] = useState<boolean>(true);
     const [state, setState] = useStellarContext();
+    const shownOnce = useRef<boolean>(false);
 
     const pages: TutorialPage[] = [
         {
@@ -46,6 +47,8 @@ export const StellarTutorial = () => {
     ]);
 
     useEffect(() => {
+        if(shown)
+            shownOnce.current = true;
         setState(prev => ({ ...prev, tutorialVisible: shown }));
     }, [shown]);
 
@@ -61,9 +64,9 @@ export const StellarTutorial = () => {
                 <motion.div
                 className='stellar-tutorial-container'
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 3 } }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}>
+                transition={{ duration: 1, delay: shownOnce.current ? 0 : 3 }}>
                     { tooltips.render() }
                     <motion.span
                     className='stellar-tutorial-idx'
@@ -73,6 +76,12 @@ export const StellarTutorial = () => {
                         { selected } 
                     </motion.span>
 
+                    <Button className='stellar-tutorial-skip-button'
+                    ref={el => tooltips.set(0, 'Proceed to the game', el, 'right')}
+                    onClick={() => setShown(false)}>   
+                        Skip
+                    </Button>
+
                     <motion.div
                     className='stellar-tutorial-main'
                     initial={{ opacity: 0 }}
@@ -80,10 +89,12 @@ export const StellarTutorial = () => {
                     exit={{ opacity: 0 }}>
                         <Button
                         onClick={() => previous()}
-                        ref={el => tooltips.set(0, 'Previous tutorial page', el, 'up')}>
+                        ref={el => tooltips.set(1, 'Previous tutorial page', el, 'up')}>
                             ←
                             <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['←']}/>
                         </Button>
+
+
 
                         <div className='stellar-tutorial-card'>
                             <div className='stellar-tutorial-card-image'>
@@ -98,7 +109,7 @@ export const StellarTutorial = () => {
 
                         <Button
                         onClick={() => next()}
-                        ref={el => tooltips.set(1, 'Next tutorial page', el, 'up')}>
+                        ref={el => tooltips.set(2, 'Next tutorial page', el, 'up')}>
                             →
                             <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['→']}/>
                         </Button>

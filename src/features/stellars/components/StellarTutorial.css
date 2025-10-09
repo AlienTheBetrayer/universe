@@ -61,7 +61,7 @@
 }
 
 /* buttons */
-.stellar-tutorial-main button {
+.stellar-tutorial-container button {
     position: relative;
     padding: 1.5rem;
     border-radius: 200px;
@@ -71,6 +71,13 @@
     .stellar-tutorial-main button {
         padding: 0.7rem;
     }
+}
+
+.stellar-tutorial-container .stellar-tutorial-skip-button {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 1rem 2rem;
 }
 
 /* hotkey tooltips */
