@@ -17,6 +17,12 @@
     }
 }
 
+@media (max-width: 640px) {
+    .stellar-button {
+        padding: 0.5rem;
+    }
+}
+
 .stellar-button:hover {
     color: var(--foreground-last);
     background-color: var(--background-3);
@@ -78,10 +84,31 @@
     }
 }
 
+@media (max-width: 640px) {
+    .stellar-ui-bottom-bar {
+        gap: 0.3rem;
+    }
+}
+
 .stellar-ui-bottom-bar-buttons-container {
     display: flex;
     gap: 1rem;
     align-items: center;
+    flex: 1;
+}
+
+@media (max-width: 640px) {
+    .stellar-ui-bottom-bar-buttons-container {
+        gap: 0.3rem;
+    }
+}
+
+.stellar-ui-bottom-bar-centered-container {
+    justify-content: center;
+}
+
+.stellar-ui-bottom-bar-right-container {
+    justify-content: flex-end;
 }
 
 

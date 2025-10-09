@@ -76,7 +76,7 @@ export const StellarUI = () => {
                     </button>
                 </div>
 
-                <div className='stellar-ui-bottom-bar-buttons-container'>
+                <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-centered-container'>
                     <AnimatePresence>
                         { isSelected && 
                             <motion.p
@@ -97,7 +97,7 @@ export const StellarUI = () => {
                 </div>
 
                 {/* question the existence of this button */}
-                <div className='stellar-ui-bottom-bar-buttons-container'>
+                <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-right-container'>
                     <button className='stellar-button stellar-button-action'
                     ref={el => { tooltips.set(5, 'Regenerate positions', el, 'left') }}
                     onClick={() => actions.regenPositions()}>

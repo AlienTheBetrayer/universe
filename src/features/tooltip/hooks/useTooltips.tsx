@@ -51,22 +51,29 @@ export const useTooltips = () => {
                 let top = '';
                 
                 switch(refs.current[selected].direction) {
-                    case 'up':
-                        left = `${bounds.left + window.scrollX}px`;
-                        top = `${bounds.top - bounds.height - 8 + window.scrollY}px`;
-                    break;
-                    case 'down':
-                        left = `${bounds.left + window.scrollX}px`;
-                        top = `${bounds.top + bounds.height + 8 + window.scrollY}px`;
-                    break;
-                    case 'left':
-                        left = `${bounds.left - bounds.width - 8 + window.scrollX}px`;
-                        top = `${bounds.top + window.scrollY}px`;
-                    break;
-                    case 'right':
-                        left = `${bounds.left + bounds.width + 8 + window.scrollX}px`;
-                        top = `${bounds.top + window.scrollY}px`;
-                    break;
+                case 'up':
+                    left = `${bounds.left + bounds.width / 2 + window.scrollX}px`;
+                    top = `${bounds.top + window.scrollY - 8}px`;
+                    tooltipRef.current.style.transform = 'translate(-50%, -100%)';
+                break;
+
+                case 'down':
+                    left = `${bounds.left + bounds.width / 2 + window.scrollX}px`;
+                    top = `${bounds.top + bounds.height + 8 + window.scrollY}px`;
+                    tooltipRef.current.style.transform = 'translate(-50%, 0)';
+                break;
+
+                case 'left':
+                    left = `${bounds.left + window.scrollX - 8}px`;
+                    top = `${bounds.top + bounds.height / 2 + window.scrollY}px`;
+                    tooltipRef.current.style.transform = 'translate(-100%, -50%)';
+                break;
+
+                case 'right':
+                    left = `${bounds.left + bounds.width + 8 + window.scrollX}px`;
+                    top = `${bounds.top + bounds.height / 2 + window.scrollY}px`;
+                    tooltipRef.current.style.transform = 'translate(0, -50%)';
+                break;
                 }
 
                 tooltipRef.current.style.left = left;

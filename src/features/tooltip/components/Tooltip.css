@@ -1,9 +1,14 @@
 .tooltip {
     display: none;
     min-width: 64px;
-    height: 64px;
-    background-color: blue;
+    height: 32px;
     padding: 1rem;
+    align-items: center;
+
     position: absolute;
     pointer-events: none;
+    
+    background-color: var(--background-2-transparent);
+    backdrop-filter: blur(16px);
+    border-radius: 32px;
 }
