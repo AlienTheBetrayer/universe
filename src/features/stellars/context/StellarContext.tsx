@@ -18,10 +18,8 @@ interface StellarContent {
 // stellar types
 export interface Stellar {
     idx: number;
-    
     x?: number;
     y?: number;
-
     content: StellarContent;
 };
 
@@ -31,6 +29,7 @@ export interface StellarState {
     selected: number;
     hovered: number;
     editing: boolean;
+    tutorialVisible: boolean;
     viewport: StellarViewport;
 };
 
@@ -55,6 +54,7 @@ const initialState: StellarState = {
     hovered: -1,
     editing: false,
     viewport: { width: 0, height: 0},
+    tutorialVisible: false,
     stellars: [
         {
             idx: 0,

@@ -1,0 +1,28 @@
+.stellar-tutorial-container {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.stellar-tutorial-card {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 32px;
+    background-color: var(--background-4-transparent);
+    outline: 2px solid var(--background-5-transparent);
+    overflow: hidden;
+}
+
+.stellar-tutorial-card-image {
+    flex: 0 0 50%;
+}
+
+.stellar-tutorial-card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+}

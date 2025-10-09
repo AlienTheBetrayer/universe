@@ -5,6 +5,7 @@ import { SelectedStellarUI } from '../../../stellars/components/SelectedStellarU
 import { StellarUI } from '../../../stellars/components/StellarUI';
 import { motion } from 'motion/react';
 import { StellarProvider } from '../../../stellars/context/StellarContext';
+import { StellarTutorial } from '../../../stellars/components/StellarTutorial';
 
 export const StellarNetwork = () => {
     return (
@@ -19,6 +20,7 @@ export const StellarNetwork = () => {
                     <SelectedStellarUI/>
 
                     <StellarUI/>
+                    <StellarTutorial/>
                 </motion.div>
             </StellarProvider>
         </Page>

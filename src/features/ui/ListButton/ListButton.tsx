@@ -4,6 +4,7 @@ import './ListButton.css'
 import { motion } from 'motion/react';
 import { useListButton } from './hooks/useListButton';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 interface Props {
     elements: string[];
@@ -14,6 +15,7 @@ interface Props {
 
 export const ListButton = ({ onSelected, elements, className='', children='Selected:'}: Props) => {
     const listButton = useListButton(elements, onSelected);
+    const tooltips = useTooltips();
 
     return (
         <motion.div className={`list-button ${className}`} layout
@@ -22,7 +24,8 @@ export const ListButton = ({ onSelected, elements, className='', children='Selec
         onBlur={() => { listButton.setFocused(false) } }
         onClick={() => listButton.setFocused(true)}>
             <div className='list-button-top'>
-                <button className='list-button-top-previous' onClick={() => listButton.previous()}>
+                <button className='list-button-top-previous' onClick={() => listButton.previous()}
+                ref={el => tooltips.set(0, 'Previous element', el, 'down')}>
                     ↓
                     <HotkeyTooltip className='list-button-hotkey' hotkeys={['←']}/>
                 </button>
@@ -43,13 +46,15 @@ export const ListButton = ({ onSelected, elements, className='', children='Selec
                     </AnimatePresence>
                 </div>
 
-                <button className='list-button-top-next' onClick={() => listButton.next()}>
+                <button className='list-button-top-next' onClick={() => listButton.next()}
+                ref={el => tooltips.set(1, 'Next element', el, 'down')}>
                     ↑
                     <HotkeyTooltip className='list-button-hotkey' hotkeys={['→']}/>
                 </button>
                 
             </div>
 
+            { tooltips.render() }
         </motion.div>
     )
 }

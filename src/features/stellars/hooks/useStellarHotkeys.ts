@@ -6,6 +6,9 @@ export const useStellarHotkeys = () => {
 
     useEffect(() => {
         const handle = (ev: KeyboardEvent) => {
+            if(state.tutorialVisible)
+                return;
+            
             const code = ev.key.toLowerCase();
             switch (code) {
                 case 'escape':
