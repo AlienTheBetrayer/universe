@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { InitialStellarState, useStellarContext } from "../context/StellarContext";
+import { useRef } from "react";
+import { useStellarContext } from "../context/StellarContext";
 import { useStellarHover } from "./useStellarHover";
 import { useStellarPositions } from "./useStellarPositions";
 import { usePopup } from "../../../hooks/usePopup";
@@ -44,32 +44,10 @@ export const useStellarActions = (contextSelected?: number, onAction?: () => voi
                 clearMessageBox.setShown(false);
             }}/>);
 
-    const refillRef = useRef<boolean>(false);
-
-    // refilling
-    const refillMessageBox = usePopup(
-<MessageBox
-        title='Are you sure?'
-        description={`You're about to <mark>restore</mark> all stellars to their initial data`}
-        onInteract={f => {
-            if(f) {
-                setState(prev => ({ ...prev, ...InitialStellarState}));
-                refillRef.current = true;
-            }
-            refillMessageBox.setShown(false);
-    }}/>);
-
-    useEffect(() => {
-        if(!refillRef.current)
-            return;
-        
-        positions.generate();
-        refillRef.current = false;
-    }, [state.stellars]);
             
     return {
         regenPositions,
         hover,
-        clearMessageBox, refillMessageBox
+        clearMessageBox
     };
 }

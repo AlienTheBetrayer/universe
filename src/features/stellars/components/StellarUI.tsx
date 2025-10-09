@@ -7,7 +7,6 @@ import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import regenerateImg from '../assets/regenerate.svg';
 import tutorialImg from '../assets/tutorial.svg';
 import clearImg from '../assets/clear.svg';
-import refillImg from '../assets/refill.svg';
 import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
@@ -24,7 +23,6 @@ export const StellarUI = () => {
 
             { actions.hover.render() }
             { actions.clearMessageBox.render() }
-            { actions.refillMessageBox.render() }
             
             <motion.button className='stellar-button stellar-ui-previous-button'
             ref={el => { tooltips.set(0, 'Previous orb', el, 'right') }}
@@ -65,23 +63,11 @@ export const StellarUI = () => {
                     </button>
 
                     { !isSelected && (
-                        <>
-                            <button className='stellar-button stellar-button-action'
-                            ref={el => { tooltips.set(3, 'Restore all orbs', el, 'right') }}
-
-                            onClick={() => { 
-                                actions.refillMessageBox.setShown(true);
-                                setState(prev => ({ ...prev, messageBoxVisible: true }))
-                             }}>
-                                <img src={refillImg} alt='refill'/>
-                            </button>
-
-                            <button className='stellar-button stellar-button-action'
-                            ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
-                            onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
-                                <img src={tutorialImg} alt='tutorial'/>
-                            </button>
-                        </>
+                        <button className='stellar-button stellar-button-action'
+                        ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
+                        onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
+                            <img src={tutorialImg} alt='tutorial'/>
+                        </button>
                     )}
                 </div>
 

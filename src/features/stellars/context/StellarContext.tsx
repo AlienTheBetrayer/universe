@@ -35,35 +35,38 @@ interface Props {
 }
 
 export const InitialStellarState = {
-    stellars: [
-        {
-            idx: 0,
-            x: 0,
-            y: 0,
-            content: { firstTitle: 'Earth', secondTitle: 'We are here', firstDescription: 'Hello there?', secondDescription: 'Are we gonna succeed?'}
-        },
-        {
-            idx: 1,
-            x: 0,
-            y: 0,
-            content: { firstTitle: 'Mars', secondTitle: 'Eat me', firstDescription: 'Do not eat me please', secondDescription: 'It is scary...'}
-        },
-        {
-            idx: 2,
-            x: 0,
-            y: 0,
-            content: { firstTitle: 'Pluto', secondTitle: 'Dwarf planet', firstDescription: 'I am small!', secondDescription: 'No, I am big!!'}
-        },
-    ],
-    selected: false as (number | false),
-    hovered: false as (number | false),
-    editing: false,
-    messageBoxVisible: false,
-    viewport: { width: 0, height: 0 }
+
 }
 
 export const StellarProvider = ({ children }: Props) => {
-    const state = useState<StellarState>({ ...InitialStellarState, tutorialVisible: true });
+    const state = useState<StellarState>({
+        stellars: [
+            {
+                idx: 0,
+                x: 0,
+                y: 0,
+                content: { firstTitle: 'Earth', secondTitle: 'We are here', firstDescription: 'Hello there?', secondDescription: 'Are we gonna succeed?'}
+            },
+            {
+                idx: 1,
+                x: 0,
+                y: 0,
+                content: { firstTitle: 'Mars', secondTitle: 'Eat me', firstDescription: 'Do not eat me please', secondDescription: 'It is scary...'}
+            },
+            {
+                idx: 2,
+                x: 0,
+                y: 0,
+                content: { firstTitle: 'Pluto', secondTitle: 'Dwarf planet', firstDescription: 'I am small!', secondDescription: 'No, I am big!!'}
+            },
+        ],
+        selected: false as (number | false),
+        hovered: false as (number | false),
+        editing: false,
+        messageBoxVisible: false,
+        viewport: { width: 0, height: 0 },
+        tutorialVisible: true });
+        
     const localStore = useLocalStore();
 
     useEffect(() => {
