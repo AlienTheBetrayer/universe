@@ -2,7 +2,14 @@
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    z-index: 2;
+    z-index: 20;
+}
+
+@media (max-width: 768px) {
+    .scroll-button-container {
+        bottom: 4rem;
+        right: 2rem;
+    }
 }
 
 .scroll-button-container button {
