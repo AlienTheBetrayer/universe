@@ -54,7 +54,7 @@ export const Stellars = () => {
                 <mesh
                 onClick={() => { 
                     if(state.selected !== false)
-                        setState(prev => ({ ...prev, hovered: false }));
+                        setState(prev => ({ ...prev, selected: false }));
                 }} 
                 ref={(el) => (stellarRefs.current[idx] = el!)}>
                     <sphereGeometry args={[0.06]}/>
