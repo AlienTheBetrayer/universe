@@ -29,10 +29,18 @@ export const useStellarActions = () => {
     const clearMessageBox = usePopup(
     <MessageBox
             title='Are you sure?'
-            description={`You're about to <b><u>delete all stellars</u></b>`}
+            description={`You're about to <u>delete ${state.selected === false ? '<b>all</b> stellars' : '<b>this</b> stellar'}</u>`}
             onInteract={f => { 
-                if(f)
-                    setState(prev => ({ ...prev, stellars: [] }));
+                if(f) {
+                    if(state.selected === false) {
+                        setState(prev => ({ ...prev, stellars: [] }));
+                    } else {
+                        setState(prev => ({ ...prev, 
+                            stellars: prev.stellars.filter(stellar => stellar.idx !== state.selected),
+                            selected: false
+                        }))
+                    }
+                }
                 clearMessageBox.setShown(false);
             }}/>);
 

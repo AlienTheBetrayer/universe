@@ -55,24 +55,28 @@ export const StellarUI = () => {
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
                 <div className='stellar-ui-bottom-bar-buttons-container'>
                     <button className='stellar-button stellar-button-action'
-                    ref={el => { tooltips.set(2, 'Wipe all orbs', el, 'right') }}
+                    ref={el => { tooltips.set(2, isSelected ? 'Wipe this orb' : 'Wipe all orbs', el, 'right') }}
 
                     onClick={() => actions.clearMessageBox.setShown(true)}>
                         <img src={clearImg} alt='clear'/>
                     </button>
 
-                    <button className='stellar-button stellar-button-action'
-                    ref={el => { tooltips.set(3, 'Restore all orbs', el, 'right') }}
+                    { !isSelected && (
+                        <>
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(3, 'Restore all orbs', el, 'right') }}
 
-                    onClick={() => actions.refillMessageBox.setShown(true)}>
-                        <img src={refillImg} alt='refill'/>
-                    </button>
+                            onClick={() => actions.refillMessageBox.setShown(true)}>
+                                <img src={refillImg} alt='refill'/>
+                            </button>
 
-                    <button className='stellar-button stellar-button-action'
-                    ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
-                    onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
-                        <img src={tutorialImg} alt='tutorial'/>
-                    </button>
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
+                            onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
+                                <img src={tutorialImg} alt='tutorial'/>
+                            </button>
+                        </>
+                    )}
                 </div>
 
                 <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-centered-container'>
@@ -97,11 +101,13 @@ export const StellarUI = () => {
 
                 {/* question the existence of this button */}
                 <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-right-container'>
-                    <button className='stellar-button stellar-button-action'
-                    ref={el => { tooltips.set(5, 'Regenerate positions', el, 'left') }}
-                    onClick={() => actions.regenPositions()}>
-                        <img src={regenerateImg} alt='regen'/>
-                    </button>
+                    { !isSelected && (
+                        <button className='stellar-button stellar-button-action'
+                        ref={el => { tooltips.set(5, 'Regenerate positions', el, 'left') }}
+                        onClick={() => actions.regenPositions()}>
+                            <img src={regenerateImg} alt='regen'/>
+                        </button>
+                    )}
                 </div>
             </motion.div>
         </>
