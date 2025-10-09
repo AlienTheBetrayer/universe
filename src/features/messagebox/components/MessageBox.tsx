@@ -17,7 +17,7 @@ export const MessageBox = ({ title, description, onInteract }: Props) => {
             action: () => onInteract?.(true)
         },
         {
-            hotkey: 'esc',
+            hotkey: 'escape',
             action: () => onInteract?.(false)
         }
     ]);
@@ -36,6 +36,7 @@ export const MessageBox = ({ title, description, onInteract }: Props) => {
                     Yes
                     <HotkeyTooltip className='message-box-yes-tooltip' hotkeys={['Enter']}/>
                 </Button>
+                
                 <Button onClick={() => onInteract?.(false)}>
                     No
                     <HotkeyTooltip className='message-box-no-tooltip' hotkeys={['Esc']}/>

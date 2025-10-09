@@ -21,6 +21,7 @@ export interface StellarState {
     hovered: number | false;
     editing: boolean;
     tutorialVisible: boolean;
+    messageBoxVisible: boolean;
     viewport: { width: number, height: number };
 };
 
@@ -33,7 +34,7 @@ interface Props {
     children?: React.ReactNode;
 }
 
-export const InitialStellarState: StellarState = {
+export const InitialStellarState = {
     stellars: [
         {
             idx: 0,
@@ -54,15 +55,15 @@ export const InitialStellarState: StellarState = {
             content: { firstTitle: 'Pluto', secondTitle: 'Dwarf planet', firstDescription: 'I am small!', secondDescription: 'No, I am big!!'}
         },
     ],
-    selected: false,
-    hovered: false,
+    selected: false as (number | false),
+    hovered: false as (number | false),
     editing: false,
-    tutorialVisible: true,
+    messageBoxVisible: false,
     viewport: { width: 0, height: 0 }
 }
 
 export const StellarProvider = ({ children }: Props) => {
-    const state = useState<StellarState>(InitialStellarState);
+    const state = useState<StellarState>({ ...InitialStellarState, tutorialVisible: true });
     const localStore = useLocalStore();
 
     useEffect(() => {

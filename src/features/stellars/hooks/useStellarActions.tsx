@@ -5,7 +5,7 @@ import { useStellarPositions } from "./useStellarPositions";
 import { usePopup } from "../../../hooks/usePopup";
 import { MessageBox } from "../../messagebox/components/MessageBox";
 
-export const useStellarActions = () => {
+export const useStellarActions = (contextSelected?: number, onAction?: () => void) => {
     const [state, setState] = useStellarContext();
     
     // stellar hover
@@ -19,7 +19,6 @@ export const useStellarActions = () => {
         if(isGenerating.current)
             return;
 
-        setState(prev => ({ ...prev, selected: false }));
         positions.generate();
         isGenerating.current = true;
         setTimeout(() => { isGenerating.current = false }, 5000);
@@ -29,17 +28,18 @@ export const useStellarActions = () => {
     const clearMessageBox = usePopup(
     <MessageBox
             title='Are you sure?'
-            description={`You're about to <u>delete ${state.selected === false ? '<b>all</b> stellars' : '<b>this</b> stellar'}</u>`}
+            description={`You're about to <u>delete ${state.selected === false && contextSelected === undefined ? '<b>all</b> stellars' : '<b>this</b> stellar'}</u>`}
             onInteract={f => { 
                 if(f) {
-                    if(state.selected === false) {
+                    if(state.selected === false && contextSelected === undefined) {
                         setState(prev => ({ ...prev, stellars: [] }));
                     } else {
                         setState(prev => ({ ...prev, 
-                            stellars: prev.stellars.filter(stellar => stellar.idx !== state.selected),
+                            stellars: prev.stellars.filter(stellar => stellar.idx !== (contextSelected ?? state.selected)),
                             selected: false
                         }))
                     }
+                    onAction?.();
                 }
                 clearMessageBox.setShown(false);
             }}/>);
@@ -48,26 +48,24 @@ export const useStellarActions = () => {
 
     // refilling
     const refillMessageBox = usePopup(
-    <MessageBox
-            title='Are you sure?'
-            description={`You're about to <mark>restore</mark> all stellars to their initial data`}
-            onInteract={f => {
-                if(f) {
-                    setState(InitialStellarState);
-                    refillRef.current = true;
-                }
-                refillMessageBox.setShown(false);
-            }}/>);
+<MessageBox
+        title='Are you sure?'
+        description={`You're about to <mark>restore</mark> all stellars to their initial data`}
+        onInteract={f => {
+            if(f) {
+                setState(prev => ({ ...prev, ...InitialStellarState}));
+                refillRef.current = true;
+            }
+            refillMessageBox.setShown(false);
+    }}/>);
 
-            useEffect(() => {
-                if(!refillRef.current)
-                    return;
-                
-                positions.generate();
-                refillRef.current = false;
-            }, [state.stellars]);
-            
-    // tutorial 
+    useEffect(() => {
+        if(!refillRef.current)
+            return;
+        
+        positions.generate();
+        refillRef.current = false;
+    }, [state.stellars]);
             
     return {
         regenPositions,

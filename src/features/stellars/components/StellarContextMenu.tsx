@@ -5,14 +5,20 @@ import { motion } from "motion/react"
 import { useCursorRef } from '../../../hooks/useCursorRef';
 
 import createImg from '../assets/create.svg';
+import clearImg from '../assets/clear.svg';
+import { useStellarActions } from '../hooks/useStellarActions';
+import { useRef } from 'react';
 
 interface Props {
     ref: React.RefObject<HTMLDivElement | null>;
+    onInteract?: () => void;
 }
 
-export const StellarContextMenu = ({ ref }: Props) => {
+export const StellarContextMenu = ({ ref, onInteract }: Props) => {
     const [state, setState] = useStellarContext();
     const cursor = useCursorRef();
+    const isHovered = useRef<number | false>(state.hovered);
+    console.log(isHovered.current);
 
     const findMax = () => {
         if(state.stellars.length === 0)
@@ -22,6 +28,8 @@ export const StellarContextMenu = ({ ref }: Props) => {
             return val.idx > acc.idx ? val : acc;
         }).idx;
     }
+
+    const actions = useStellarActions(isHovered.current || 0, () => onInteract?.());
 
     const handleCreate = () => {
         const stellar: Stellar = {
@@ -44,12 +52,22 @@ export const StellarContextMenu = ({ ref }: Props) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}>
+            { actions.clearMessageBox.render() }
             <h3>Context menu!</h3>
-            <button className='stellar-create-stellar-button'
+
+            <button className='stellar-context-button'
             onClick={handleCreate}>
                 <img src={createImg} alt=''/>
                 Create
             </button>
+
+            { isHovered.current !== false && (
+                <button className='stellar-context-button'
+                onClick={() => actions.clearMessageBox.setShown(true) }>
+                    <img src={clearImg} alt=''/>
+                    Wipe hovered
+                </button>
+            )}
         </motion.div>
     )
 }

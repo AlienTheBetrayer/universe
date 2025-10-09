@@ -10,6 +10,7 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
         const handle = (e: KeyboardEvent) => {
             const match = hotkeys.find(h => h.hotkey.toLowerCase() === e.key.toLowerCase());
             if(match) {
+                e.preventDefault();
                 match?.action();
             }
         }

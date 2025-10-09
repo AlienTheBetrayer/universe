@@ -12,7 +12,7 @@
     border-radius: 32px;
 }
 
-.stellar-create-stellar-button {
+.stellar-context-button {
     display: flex;
     gap: 0.5rem;
     padding: 0.5rem;
@@ -21,18 +21,18 @@
     color: var(--foreground-prelast);
 }
 
-.stellar-create-stellar-button img {
+.stellar-context-button img {
     width: 24px;
     height: 24px;
     filter: invert(0.5);
 }
 
-.stellar-create-stellar-button:hover {
+.stellar-context-button:hover {
     color: var(--foreground-prelast);
     background-color: var(--background-4-transparent);
 }
 
-.stellar-create-stellar-button:active {
+.stellar-context-button:active {
     color: var(--foreground-prelast);
     background-color: var(--background-5-transparent);
 }

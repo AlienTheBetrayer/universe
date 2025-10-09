@@ -57,7 +57,10 @@ export const StellarUI = () => {
                     <button className='stellar-button stellar-button-action'
                     ref={el => { tooltips.set(2, isSelected ? 'Wipe this orb' : 'Wipe all orbs', el, 'right') }}
 
-                    onClick={() => actions.clearMessageBox.setShown(true)}>
+                    onClick={() => {
+                        actions.clearMessageBox.setShown(true);
+                        setState(prev => ({ ...prev, messageBoxVisible: true }))
+                    }}>
                         <img src={clearImg} alt='clear'/>
                     </button>
 
@@ -66,7 +69,10 @@ export const StellarUI = () => {
                             <button className='stellar-button stellar-button-action'
                             ref={el => { tooltips.set(3, 'Restore all orbs', el, 'right') }}
 
-                            onClick={() => actions.refillMessageBox.setShown(true)}>
+                            onClick={() => { 
+                                actions.refillMessageBox.setShown(true);
+                                setState(prev => ({ ...prev, messageBoxVisible: true }))
+                             }}>
                                 <img src={refillImg} alt='refill'/>
                             </button>
 

@@ -6,7 +6,7 @@ export const useStellarHotkeys = () => {
 
     useEffect(() => {
         const handle = (ev: KeyboardEvent) => {
-            if(state.tutorialVisible)
+            if(state.tutorialVisible || state.messageBoxVisible)
                 return;
             
             const code = ev.key.toLowerCase();
@@ -33,5 +33,5 @@ export const useStellarHotkeys = () => {
 
         document.addEventListener('keydown', handle);
         return () => document.removeEventListener('keydown', handle);
-    }, [state.editing, state.tutorialVisible]);
+    }, [state.editing, state.tutorialVisible, state.messageBoxVisible]);
 }
