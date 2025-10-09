@@ -27,13 +27,13 @@ export const StellarTutorial = () => {
 
     return (
         <AnimatePresence>
-            shown && 
+            { shown && 
             <motion.div
             className='stellar-tutorial-container'
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, transition: { delay: 3 } }}
             exit={{ opacity: 0 }}
-            transition={{ delay: 3, duration: 1 }}>
+            transition={{ duration: 1 }}>
                 { pages.map((page, idx) => (
                     <motion.div
                     key={idx}
@@ -51,7 +51,7 @@ export const StellarTutorial = () => {
                         </div>
                     </motion.div>
                 ))}
-            </motion.div>
+            </motion.div> }
         </AnimatePresence>
     )
 }
