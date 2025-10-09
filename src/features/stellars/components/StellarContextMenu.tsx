@@ -18,7 +18,6 @@ export const StellarContextMenu = ({ ref, onInteract }: Props) => {
     const [state, setState] = useStellarContext();
     const cursor = useCursorRef();
     const isHovered = useRef<number | false>(state.hovered);
-    console.log(isHovered.current);
 
     const findMax = () => {
         if(state.stellars.length === 0)
