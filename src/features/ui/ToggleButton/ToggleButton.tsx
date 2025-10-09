@@ -3,6 +3,7 @@ import { motion, type HTMLMotionProps } from 'motion/react';
 import { useState } from 'react';
 
 import checkmarkImg from './assets/checkmark.svg';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 interface Props extends HTMLMotionProps<'div'> {
     value?: boolean;
@@ -20,21 +21,27 @@ export const ToggleButton = ({ value, onToggled, key }: Props) => {
             setInternal(prev => !prev);
     }
 
+    const tooltip = useTooltips();
+
     return (
-        <button className='toggle-button' 
-        onClick={() => handle()}
-        style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
-            <motion.div className='toggle-button-circle'
-            layout 
-            key={key}
-            transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
+        <>
+            { tooltip.render() }
+            <button className='toggle-button' 
+            ref={el => tooltip.set(0, 'Dark / Light theme', el, 'down', 16)}
+            onClick={() => handle()}
+            style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
+                <motion.div className='toggle-button-circle'
+                layout 
+                key={key}
+                transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
 
-            </motion.div>
+                </motion.div>
 
-            <motion.img className='toggle-button-image' src={checkmarkImg} alt=''
-            animate={{ opacity: toggled ? 1 : 0 }}>
+                <motion.img className='toggle-button-image' src={checkmarkImg} alt=''
+                animate={{ opacity: toggled ? 1 : 0 }}>
 
-            </motion.img>
-        </button>
+                </motion.img>
+            </button>
+        </>
     )
 }

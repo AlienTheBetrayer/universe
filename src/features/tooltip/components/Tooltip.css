@@ -7,7 +7,7 @@
 
     position: absolute;
     pointer-events: none;
-    
+
     background-color: var(--background-2-transparent);
     backdrop-filter: blur(16px);
     border-radius: 32px;

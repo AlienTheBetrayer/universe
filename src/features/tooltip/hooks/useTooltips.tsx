@@ -10,6 +10,7 @@ interface TooltipElement {
     tooltip: string;
     element: HTMLElement | null;
     direction: TooltipDirection;
+    offset: number;
 }
 
 export const useTooltips = () => {
@@ -53,24 +54,24 @@ export const useTooltips = () => {
                 switch(refs.current[selected].direction) {
                 case 'up':
                     left = `${bounds.left + bounds.width / 2 + window.scrollX}px`;
-                    top = `${bounds.top + window.scrollY - 8}px`;
+                    top = `${bounds.top - refs.current[selected].offset + window.scrollY}px`;
                     tooltipRef.current.style.transform = 'translate(-50%, -100%)';
                 break;
 
                 case 'down':
                     left = `${bounds.left + bounds.width / 2 + window.scrollX}px`;
-                    top = `${bounds.top + bounds.height + 8 + window.scrollY}px`;
-                    tooltipRef.current.style.transform = 'translate(-50%, 0)';
+                    top = `${bounds.top + bounds.height + refs.current[selected].offset + window.scrollY}px`;
+                    tooltipRef.current.style.transform = 'translate(-50%)';
                 break;
 
                 case 'left':
-                    left = `${bounds.left + window.scrollX - 8}px`;
+                    left = `${bounds.left - refs.current[selected].offset + window.scrollX}px`;
                     top = `${bounds.top + bounds.height / 2 + window.scrollY}px`;
                     tooltipRef.current.style.transform = 'translate(-100%, -50%)';
                 break;
 
                 case 'right':
-                    left = `${bounds.left + bounds.width + 8 + window.scrollX}px`;
+                    left = `${bounds.left + bounds.width + refs.current[selected].offset + window.scrollX}px`;
                     top = `${bounds.top + bounds.height / 2 + window.scrollY}px`;
                     tooltipRef.current.style.transform = 'translate(0, -50%)';
                 break;
@@ -84,9 +85,9 @@ export const useTooltips = () => {
     }, [selected]);
 
     // user functions
-    const set = (idx: number, tooltip: string, element: HTMLElement | null, direction: TooltipDirection = 'up') => {
+    const set = (idx: number, tooltip: string, element: HTMLElement | null, direction: TooltipDirection = 'up', offset: number = 8) => {
         refs.current[idx] = {
-            idx, element, tooltip, direction
+            idx, element, tooltip, direction, offset
         };
     }
 

@@ -7,8 +7,7 @@ import prevPortfolioImg from '../assets/prev-portfolio.svg';
 import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 
 import { motion } from 'motion/react';
-import { useRef } from 'react';
-import { useFooterPopups } from '../hooks/useFooterPopups';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 export const Footer = () => {
     const buttons = [
@@ -32,8 +31,7 @@ export const Footer = () => {
         }   
     ];
 
-    const buttonRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const footerPopups = useFooterPopups(buttonRefs);
+    const tooltips = useTooltips();
 
     return (
         <footer>    
@@ -43,16 +41,15 @@ export const Footer = () => {
                     initial={{ scale: 1 }}
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 40 }}
-                    key={idx} ref={el => { buttonRefs.current[idx] = el }}
-                    onPointerEnter={() => footerPopups.update(idx, true, button.text)}
-                    onPointerLeave={() => footerPopups.update(idx, false)}>
+                    key={idx}
+                    ref={el => tooltips.set(idx, button.text, el, 'up', 36)}>
                         <UniversalLink to={button.to} type='url'>
                             <img src={button.src} alt={button.alt}/>
                         </UniversalLink>
                     </motion.div>
                 ))}
 
-                { footerPopups.render() }
+                { tooltips.render() }
             </nav>
         </footer>
     )

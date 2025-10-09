@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import './UniversalLink.css';
 import { Link } from 'react-router-dom';
 
@@ -9,16 +10,16 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     onClick?: () => void;
 }
 
-export const UniversalLink = ({ className, to='', type='router', onClick, children, ...rest }: Props) => {
+export const UniversalLink = forwardRef<HTMLAnchorElement, Props>(({ className, to='', type='router', onClick, children, ...rest }, ref) => {
     return (
         type === 'router' ? (
-            <Link className={`universal-link ${className ?? ''}`} to={to} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth'}); onClick?.(); }} {...rest}>
+            <Link ref={ref} className={`universal-link ${className ?? ''}`} to={to} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth'}); onClick?.(); }} {...rest}>
                 { children }
             </Link>
         ) : (
-            <a className={`universal-link ${className ?? ''}`} href={to} target='_blank' rel='noopener noreferrer' onClick={() => onClick?.()} {...rest}>
+            <a ref={ref} className={`universal-link ${className ?? ''}`} href={to} target='_blank' rel='noopener noreferrer' onClick={() => onClick?.()} {...rest}>
                 { children }
             </a>
         )
     )
-}
+});
