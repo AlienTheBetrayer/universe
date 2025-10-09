@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useStellarContext } from "../context/StellarContext";
 
 export const useStellarHotkeys = () => {
-    const [state, dispatch] = useStellarContext();
+    const [state, setState] = useStellarContext();
 
     useEffect(() => {
         const handle = (ev: KeyboardEvent) => {
@@ -12,26 +12,26 @@ export const useStellarHotkeys = () => {
             const code = ev.key.toLowerCase();
             switch (code) {
                 case 'escape':
-                    dispatch({ type: 'go_back' });
+                    setState(prev => ({ ...prev, selected: false }));
                     break;
 
                 case 'arrowright':
                 case 'a':
                 case 's':
                     if(!state.editing)
-                        dispatch({ type: 'select_next' });
+                        setState(prev => ({ ... prev, selected: prev.selected === false ? prev.stellars.length - 1 : ( prev.selected < prev.stellars.length - 1 ? prev.selected + 1 : 0)}));
                     break;
 
                 case 'arrowleft':
                 case 'd':
                 case 'w':
                     if(!state.editing)
-                        dispatch({ type: 'select_previous' });
+                        setState(prev => ({ ...prev, selected: prev.selected === false ? 0 : (prev.selected > 0 ? prev.selected - 1 : prev.stellars.length - 1)}));
                     break;
             }
         };
 
-        window.addEventListener('keydown', handle);
-        return () => window.removeEventListener('keydown', handle);
-    }, [state.editing]);
+        document.addEventListener('keydown', handle);
+        return () => document.removeEventListener('keydown', handle);
+    }, [state.editing, state.tutorialVisible]);
 }

@@ -7,7 +7,7 @@ import { useStellarCamera } from "../hooks/useStellarCamera";
 import { useStellarHotkeys } from "../hooks/useStellarHotkeys";
 
 export const Stellars = () => {
-    const [state, dispatch] = useStellarContext();
+    const [state, setState] = useStellarContext();
     const three = useThree();
     
     // generating random xy
@@ -25,19 +25,20 @@ export const Stellars = () => {
     }, [state.viewport]);
 
     useEffect(() => {
-        dispatch({ type: 'set_viewport', viewport: { width: three.viewport.width, height: three.viewport.height } });
+        setState(prev => ({ ...prev, viewport: { width: three.viewport.width, height: three.viewport.height }}));
     }, []);
 
-    // rotating the currently selected stellar
     const stellarRefs = useRef<Mesh[]>([]);
 
     useFrame(s => {
+        // slight idle warping of the camera (particle effect)
         const t = s.clock.getElapsedTime();
         three.camera.rotation.x = Math.sin(t) / 300;
         three.camera.rotation.y = Math.sin(t) / 300;
         three.camera.rotation.z = Math.sin(t) / 300;
 
-        if(state.selected !== -1) { // something is selected
+        // animating the currently selected orb
+        if(state.selected !== false) { 
             stellarRefs.current[state.selected].rotation.x += 0.01;
             stellarRefs.current[state.selected].rotation.y += 0.01;
             stellarRefs.current[state.selected].rotation.z += 0.01;
@@ -48,18 +49,20 @@ export const Stellars = () => {
         state.stellars.map((stellar, idx) => (
             <group
             key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
-            onPointerOver={() => dispatch({ type: 'hover', idx: idx })}
-            onPointerOut={() => dispatch({ type: 'unhover' })}
-            >
+            onPointerOver={() => setState(prev => ({ ...prev, hovered: prev.hovered === idx ? false : idx }))}
+            onPointerOut={() => setState(prev => ({ ...prev, hovered: false }))}>
                 <mesh
-                onClick={() => { if(state.selected !== -1) dispatch({ type: 'select', idx: idx })} } 
+                onClick={() => { 
+                    if(state.selected !== false)
+                        setState(prev => ({ ...prev, hovered: false }));
+                }} 
                 ref={(el) => (stellarRefs.current[idx] = el!)}>
                     <sphereGeometry args={[0.06]}/>
                     <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
                 </mesh>
 
                 <mesh
-                onClick={() => dispatch({ type: 'select', idx: idx })}>
+                onClick={() => setState(prev => ({ ...prev, selected: prev.selected === idx ? false : idx }))}>
                     <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>

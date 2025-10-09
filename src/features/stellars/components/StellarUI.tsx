@@ -12,8 +12,8 @@ import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 export const StellarUI = () => {
-    const [state, dispatch] = useStellarContext();
-    const isSelected = state.selected !== -1;
+    const [state, setState] = useStellarContext();
+    const isSelected = state.selected !== false;
     const actions = useStellarActions();
 
     const tooltips = useTooltips();
@@ -32,7 +32,7 @@ export const StellarUI = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
-            onClick={() => dispatch({ type: 'select_previous' })}>
+            onClick={() => setState(prev => ({ ...prev, selected: prev.selected === false ? 0 : (prev.selected > 0 ? prev.selected - 1 : prev.stellars.length - 1)}))}>
                 ←
                 <HotkeyTooltip className='stellar-tooltip' hotkeys={['←', 'A']}/>
             </motion.button>
@@ -43,7 +43,7 @@ export const StellarUI = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
-            onClick={() => dispatch({ type: 'select_next' })}>
+            onClick={() => setState(prev => ({ ... prev, selected: prev.selected === false ? prev.stellars.length - 1 : ( prev.selected < prev.stellars.length - 1 ? prev.selected + 1 : 0)}))}>
                 →
                 <HotkeyTooltip className='stellar-tooltip' hotkeys={['D', '→']}/>
             </motion.button>
@@ -70,7 +70,6 @@ export const StellarUI = () => {
 
                     <button className='stellar-button stellar-button-action'
                     ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
-
                     onClick={() => {}}>
                         <img src={tutorialImg} alt='tutorial'/>
                     </button>
@@ -90,7 +89,7 @@ export const StellarUI = () => {
                     </AnimatePresence>
                     
                     <button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} 
-                    onClick={() => dispatch({ type: 'go_back' })}>
+                    onClick={() => setState(prev => ({ ...prev, selected: false }))}>
                         Go back
                         <HotkeyTooltip className='stellar-tooltip' hotkeys={['Esc']}/>
                     </button>

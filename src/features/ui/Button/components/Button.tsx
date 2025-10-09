@@ -1,13 +1,14 @@
+import { forwardRef } from 'react';
 import './Button.css';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 }
 
-export const Button = ({ className, children, ...rest }: Props) => {
+export const Button = forwardRef<HTMLButtonElement, Props>(({ className, children, ...rest }, ref) => {
     return (
-        <button className={`button ${className ?? ''}`} {...rest}>
+        <button ref={ref} className={`button ${className ?? ''}`} {...rest}>
             { children }
         </button>
     )   
-}
+});

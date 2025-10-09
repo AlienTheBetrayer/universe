@@ -3,7 +3,7 @@ import { useStellarContext } from "../context/StellarContext";
 import { useEffect, useRef } from "react";
 
 export const useStellarPositions = () => {
-    const [state, dispatch] = useStellarContext();
+    const [state, setState] = useStellarContext();
     const tweensRef = useRef<gsap.core.Tween[]>([]);
 
     // random positioning of stellars + animating toward them
@@ -20,8 +20,9 @@ export const useStellarPositions = () => {
                 y: (Math.random() - 0.5) * state.viewport.height * 0.7,
                 duration: 4 * (1 + Math.random()),
                 ease: 'back.inOut',
-                onUpdate: () =>
-                    dispatch({ type: 'move', idx: idx, x: xy[idx].x, y: xy[idx].y }),
+                onUpdate: () => setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
+                    stellar.idx === idx ? { ...stellar, x: xy[idx].x, y: xy[idx].y } : stellar
+                )}))
             });
 
             tweensRef.current.push(tween);

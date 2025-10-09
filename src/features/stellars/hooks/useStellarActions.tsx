@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
-import { useStellarContext } from "../context/StellarContext";
+import { InitialStellarState, useStellarContext } from "../context/StellarContext";
 import { useStellarHover } from "./useStellarHover";
 import { useStellarPositions } from "./useStellarPositions";
 import { usePopup } from "../../../hooks/usePopup";
 import { MessageBox } from "../../messagebox/components/MessageBox";
 
 export const useStellarActions = () => {
-    const [state, dispatch] = useStellarContext();
+    const [state, setState] = useStellarContext();
     
     // stellar hover
     const hover = useStellarHover();
@@ -19,7 +19,7 @@ export const useStellarActions = () => {
         if(isGenerating.current)
             return;
 
-        dispatch({ type: 'go_back' });
+        setState(prev => ({ ...prev, selected: false }));
         positions.generate();
         isGenerating.current = true;
         setTimeout(() => { isGenerating.current = false }, 5000);
@@ -31,9 +31,8 @@ export const useStellarActions = () => {
             title='Are you sure?'
             description={`You're about to <b><u>delete all stellars</u></b> (it will <mark>save</mark> after that)`}
             onInteract={f => { 
-                if(f) {
-                    dispatch({ type: 'clear' }); 
-                } 
+                if(f)
+                    setState(prev => ({ ...prev, stellars: [] }));
                 clearMessageBox.setShown(false);
             }}/>);
 
@@ -46,7 +45,7 @@ export const useStellarActions = () => {
             description={`You're about to <mark>restore</mark> all stellars to their initial data (it will <mark>save</mark> after that)`}
             onInteract={f => {
                 if(f) {
-                    dispatch({ type: 'refill' }); 
+                    setState(InitialStellarState);
                     refillRef.current = true;
                 }
                 refillMessageBox.setShown(false);

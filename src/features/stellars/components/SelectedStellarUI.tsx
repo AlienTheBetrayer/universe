@@ -8,7 +8,7 @@ export const SelectedStellarUI = () => {
 
     return (
         <AnimatePresence>
-            { state.selected !== -1 && (
+            { state.selected !== false && (
                 <>
                     <StellarCard idx={state.selected} side='second' className='selected-stellar-ui-right'/>
                     <StellarCard idx={state.selected} side='first' className='selected-stellar-ui-left'/>

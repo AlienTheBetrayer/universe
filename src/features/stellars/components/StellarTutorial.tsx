@@ -3,55 +3,108 @@ import './StellarTutorial.css';
 import { AnimatePresence, motion } from "motion/react"
 import { useHotkeys } from '../../../hooks/useHotkeys';
 import { useStellarContext } from '../context/StellarContext';
+import { Button } from '../../ui/Button/components/Button';
+import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
+
+interface TutorialPage {
+    title: string;
+    description: string;
+    image: string;
+}
 
 export const StellarTutorial = () => {
     const [selected, setSelected] = useState<number>(0);
     const [shown, setShown] = useState<boolean>(true);
-    const [state, dispatch] = useStellarContext();
+    const [state, setState] = useStellarContext();
 
-    const pages = [
+    const pages: TutorialPage[] = [
         {
-            title: '',
-            description: '',
+            title: 'titl1',
+            description: 'descrip',
             image: '',
+        },
+        {
+            title: 'hi',
+            description: 'desasdf',
+            image: ''
+        },
+        {
+            title: 'hih',
+            description: '33sdfsd',
+            image: ''
         }
-    ]
+    ];
 
+    const previous = () => setSelected(prev => prev > 0 ? prev - 1 : pages.length - 1);
+    const next = () => setSelected(prev => prev < pages.length - 1 ? prev + 1 : 0);
+   
     useHotkeys([
-        { hotkey: 'Escape', action: () => setShown(false) }
+        { hotkey: 'Escape', action: () => setShown(false) },
+        { hotkey: 'ArrowLeft', action: () => previous()},
+        { hotkey: 'ArrowRight', action: () => next()}
     ]);
 
     useEffect(() => {
-        console.log(shown);
+        setState(prev => ({ ...prev, tutorialVisible: shown }));
     }, [shown]);
+
+    useEffect(() => {
+        setShown(state.tutorialVisible);
+    }, [state.tutorialVisible]);
+
+    const tooltips = useTooltips();
 
     return (
         <AnimatePresence>
-            { shown && 
-            <motion.div
-            className='stellar-tutorial-container'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { delay: 3 } }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}>
-                { pages.map((page, idx) => (
+            { shown && (
+                <motion.div
+                className='stellar-tutorial-container'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { delay: 3 } }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}>
+                    { tooltips.render() }
+                    <motion.span
+                    className='stellar-tutorial-idx'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.2 }}
+                    exit={{ opacity: 0 }}>
+                        { selected } 
+                    </motion.span>
+
                     <motion.div
-                    key={idx}
-                    className='stellar-tutorial-card'
+                    className='stellar-tutorial-main'
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}>
-                        <div className='stellar-tutorial-card-image'>
+                        <Button
+                        onClick={() => previous()}
+                        ref={el => tooltips.set(0, 'Previous tutorial page', el, 'up')}>
+                            ←
+                            <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['←']}/>
+                        </Button>
 
+                        <div className='stellar-tutorial-card'>
+                            <div className='stellar-tutorial-card-image'>
+
+                            </div>
+
+                            <div className='stellar-tutorial-card-content'>
+                                <h3>{pages[selected].title}</h3>
+                                <p>{pages[selected].description}</p>
+                            </div>
                         </div>
 
-                        <div className='stellar-tutorial-card-content'>
-                            <h3>{page.title}</h3>
-                            <p>{page.description}</p>
-                        </div>
+                        <Button
+                        onClick={() => next()}
+                        ref={el => tooltips.set(1, 'Next tutorial page', el, 'up')}>
+                            →
+                            <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['→']}/>
+                        </Button>
                     </motion.div>
-                ))}
-            </motion.div> }
+                </motion.div>
+            )}
         </AnimatePresence>
     )
 }

@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const StellarContextMenu = ({ ref }: Props) => {
-    const [state, dispatch] = useStellarContext();
+    const [state, setState] = useStellarContext();
     const cursor = useCursorRef();
 
     const findMax = () => {
@@ -29,18 +29,14 @@ export const StellarContextMenu = ({ ref }: Props) => {
             x: (cursor.current.x / window.innerWidth) * state.viewport.width - state.viewport.width / 2,
             y: -(cursor.current.y / window.innerHeight) * state.viewport.height + state.viewport.height / 2,
             content: {
-                first: {
-                    title: 'Planet',
-                    description: ['-', '-']
-                },
-                second: {
-                    title: 'Properties',
-                    description: ['-', '-', '-']
-                }
+                firstTitle: 'Planet',
+                firstDescription: '',
+                secondTitle: 'Properties',
+                secondDescription: '',
             }
         };
 
-        dispatch({ type: 'create', stellar: stellar });
+        setState(prev => ({ ...prev, stellars: [ ...prev.stellars, stellar ]}));
     }
 
     return (

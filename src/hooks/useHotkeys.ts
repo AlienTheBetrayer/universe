@@ -12,7 +12,6 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
             if(match) {
                 e.preventDefault();
                 match?.action();
-                console.log('dfsdfsdf');
             }
         }
 
