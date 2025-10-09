@@ -98,12 +98,12 @@ export const StellarTutorial = () => {
 
                         <div className='stellar-tutorial-card'>
                             <div className='stellar-tutorial-card-image'>
-
+                                Loading...
                             </div>
 
                             <div className='stellar-tutorial-card-content'>
-                                <h3>{pages[selected].title}</h3>
-                                <p>{pages[selected].description}</p>
+                                <h3 dangerouslySetInnerHTML={{ __html: pages[selected].title}}/>
+                                <p dangerouslySetInnerHTML={{ __html: pages[selected].description}}/>
                             </div>
                         </div>
 
