@@ -15,18 +15,26 @@ export const useStellarHotkeys = () => {
                     setState(prev => ({ ...prev, selected: false, editing: false }));
                     break;
 
-                case 'arrowright':
+                case 'arrowleft':
                 case 'a':
-                case 's':
-                    if(!state.editing)
-                        setState(prev => ({ ... prev, selected: prev.selected === false ? prev.stellars.length - 1 : ( prev.selected < prev.stellars.length - 1 ? prev.selected + 1 : 0)}));
+                    if(!state.editing) {
+                        setState(prev => {
+                            const indexes = prev.stellars.map(s => s.idx);
+                            indexes.sort();
+                            return { ...prev, selected: prev.selected === false ? indexes[0] : (prev.selected === indexes[0] ? indexes.at(-1)! : indexes[indexes.indexOf(prev.selected) - 1]) };
+                        });
+                    }
                     break;
 
-                case 'arrowleft':
+                case 'arrowright':
                 case 'd':
-                case 'w':
-                    if(!state.editing)
-                        setState(prev => ({ ...prev, selected: prev.selected === false ? 0 : (prev.selected > 0 ? prev.selected - 1 : prev.stellars.length - 1)}));
+                    if(!state.editing) {
+                        setState(prev => {
+                            const indexes = prev.stellars.map(s => s.idx);
+                            indexes.sort();
+                            return { ...prev, selected: prev.selected === false ? indexes.at(-1)! : (prev.selected === indexes.at(-1)! ? indexes[0] : indexes[indexes.indexOf(prev.selected) + 1]) };
+                        });
+                    }
                     break;
             }
         };

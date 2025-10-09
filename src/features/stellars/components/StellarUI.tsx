@@ -30,7 +30,12 @@ export const StellarUI = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
-            onClick={() => setState(prev => ({ ...prev, selected: prev.selected === false ? 0 : (prev.selected > 0 ? prev.selected - 1 : prev.stellars.length - 1)}))}>
+            onClick={() => 
+                setState(prev => {
+                        const indexes = prev.stellars.map(s => s.idx);
+                        indexes.sort();
+                        return { ...prev, selected: prev.selected === false ? indexes[0] : (prev.selected === indexes[0] ? indexes.at(-1)! : indexes[indexes.indexOf(prev.selected) - 1]) };
+                    })}>
                 ←
                 <HotkeyTooltip className='stellar-tooltip' hotkeys={['←', 'A']}/>
             </motion.button>
@@ -41,7 +46,12 @@ export const StellarUI = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
-            onClick={() => setState(prev => ({ ... prev, selected: prev.selected === false ? prev.stellars.length - 1 : ( prev.selected < prev.stellars.length - 1 ? prev.selected + 1 : 0)}))}>
+            onClick={() =>                        
+                 setState(prev => {
+                        const indexes = prev.stellars.map(s => s.idx);
+                        indexes.sort();
+                        return { ...prev, selected: prev.selected === false ? indexes.at(-1)! : (prev.selected === indexes.at(-1)! ? indexes[0] : indexes[indexes.indexOf(prev.selected) + 1]) };
+                    })}>
                 →
                 <HotkeyTooltip className='stellar-tooltip' hotkeys={['D', '→']}/>
             </motion.button>

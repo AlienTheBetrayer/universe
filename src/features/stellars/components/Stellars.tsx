@@ -45,24 +45,28 @@ export const Stellars = () => {
         }
     });
 
+    useEffect(() => {
+        console.log(state.hovered);
+    }, [state.hovered]);
+
     return (
-        state.stellars.map((stellar, idx) => (
+        state.stellars.map((stellar) => (
             <group
-            key={idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
-            onPointerOver={() => setState(prev => ({ ...prev, hovered: prev.hovered === idx ? false : idx }))}
+            key={stellar.idx} position={[stellar.x ?? 0, stellar.y ?? 0, 0]}
+            onPointerOver={() => setState(prev => ({ ...prev, hovered: prev.hovered === stellar.idx ? false : stellar.idx }))}
             onPointerOut={() => setState(prev => ({ ...prev, hovered: false }))}>
                 <mesh
                 onClick={() => { 
                     if(state.selected !== false)
                         setState(prev => ({ ...prev, selected: false }));
                 }} 
-                ref={(el) => (stellarRefs.current[idx] = el!)}>
+                ref={(el) => (stellarRefs.current[stellar.idx] = el!)}>
                     <sphereGeometry args={[0.06]}/>
-                    <meshPhysicalMaterial color={`${state.selected === idx ? '#66a' : '#fff'}`} wireframe/>
+                    <meshPhysicalMaterial color={`${state.selected === stellar.idx ? '#66a' : '#fff'}`} wireframe/>
                 </mesh>
 
                 <mesh
-                onClick={() => setState(prev => ({ ...prev, selected: prev.selected === idx ? false : idx }))}>
+                onClick={() => setState(prev => ({ ...prev, selected: prev.selected === stellar.idx ? false : stellar.idx }))}>
                     <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>

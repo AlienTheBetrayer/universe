@@ -8,7 +8,7 @@ export const useStellarHover = () => {
 
     // popup handling
     const ref = useRef<HTMLDivElement>(null);
-    const popup = usePopup(<StellarHoverPopup stellar={state.stellars[state.hovered as number]} ref={ref}/>, false);
+    const popup = usePopup(<StellarHoverPopup stellar={state.stellars.find(s => s.idx === state.hovered)!} ref={ref}/>, false);
 
     useEffect(() => {
         document.body.style.cursor = state.hovered === false ? 'auto' : 'pointer';

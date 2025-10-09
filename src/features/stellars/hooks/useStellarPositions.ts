@@ -8,20 +8,23 @@ export const useStellarPositions = () => {
 
     // random positioning of stellars + animating toward them
     const generate = () => {
+        if(state.stellars.length === 0)
+            return;
+
         tweensRef.current.forEach(t => t.kill());
         tweensRef.current = [];
 
-        const xy: { x: number, y: number }[] = [];
-        state.stellars.forEach(() => xy.push({ x: 0, y: 0 }));
+        const xy: { x: number, y: number, idx: number }[] = [];
+        state.stellars.forEach(stellar => xy.push({ x: 0, y: 0, idx: stellar.idx}));
 
-        xy.forEach((obj, idx) => {
+        xy.forEach(obj => {
             const tween = gsap.to(obj, {
                 x: (Math.random() - 0.5) * state.viewport.width * 0.9,
                 y: (Math.random() - 0.5) * state.viewport.height * 0.7,
                 duration: 4 * (1 + Math.random()),
                 ease: 'back.inOut',
                 onUpdate: () => setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
-                    stellar.idx === idx ? { ...stellar, x: xy[idx].x, y: xy[idx].y } : stellar
+                    stellar.idx === obj.idx ? { ...stellar, x: xy.find(e => e.idx === obj.idx)!.x, y: xy.find(e => e.idx === obj.idx)!.y } : stellar
                 )}))
             });
 
