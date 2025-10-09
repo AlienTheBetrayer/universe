@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useLocalStore } from "../../../zustand/localStore";
 
 interface StellarContent {
     firstTitle: string;
@@ -62,7 +63,12 @@ export const InitialStellarState: StellarState = {
 
 export const StellarProvider = ({ children }: Props) => {
     const state = useState<StellarState>(InitialStellarState);
-    
+    const localStore = useLocalStore();
+
+    useEffect(() => {
+        state[1](prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen }));
+    }, []);
+
     return (
         <StellarContext.Provider value={state}>
             { children }

@@ -6,6 +6,7 @@ import { useStellarContext } from '../context/StellarContext';
 import { Button } from '../../ui/Button/components/Button';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
+import { useLocalStore } from '../../../zustand/localStore';
 
 interface TutorialPage {
     title: string;
@@ -18,6 +19,7 @@ export const StellarTutorial = () => {
     const [shown, setShown] = useState<boolean>(true);
     const [state, setState] = useStellarContext();
     const shownOnce = useRef<boolean>(false);
+    const localStore = useLocalStore();
 
     const pages: TutorialPage[] = [
         {
@@ -45,6 +47,11 @@ export const StellarTutorial = () => {
         { hotkey: 'ArrowLeft', action: () => previous()},
         { hotkey: 'ArrowRight', action: () => next()}
     ]);
+
+    useEffect(() => {
+        if(selected > 0)
+            localStore.toggleTutorialSeen(true);
+    }, [selected]);
 
     useEffect(() => {
         if(shown)

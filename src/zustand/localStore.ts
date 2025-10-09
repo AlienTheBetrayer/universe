@@ -5,17 +5,23 @@ type ThemeType = 'dark' | 'light';
 
 interface LocalStore {
     theme: ThemeType;
+    tutorialSeen: boolean;
 
     toggleTheme: () => void;
+    toggleTutorialSeen: (flag: boolean) => void;
 };  
 
 export const useLocalStore = create<LocalStore>()(
     persist(
         set => ({
             theme: 'dark',
+            tutorialSeen: false,
 
             toggleTheme: () => {
-                set(state => ({ theme: state.theme === 'dark' ? 'light' : 'dark'}));
+                set(state => ({ ...state, theme: state.theme === 'dark' ? 'light' : 'dark'}));
+            },
+            toggleTutorialSeen: (flag: boolean) => {
+                set(state => ({ ...state, tutorialSeen: flag}))
             }
         }),
         {

@@ -29,7 +29,7 @@ export const useStellarActions = () => {
     const clearMessageBox = usePopup(
     <MessageBox
             title='Are you sure?'
-            description={`You're about to <b><u>delete all stellars</u></b> (it will <mark>save</mark> after that)`}
+            description={`You're about to <b><u>delete all stellars</u></b>`}
             onInteract={f => { 
                 if(f)
                     setState(prev => ({ ...prev, stellars: [] }));
@@ -42,7 +42,7 @@ export const useStellarActions = () => {
     const refillMessageBox = usePopup(
     <MessageBox
             title='Are you sure?'
-            description={`You're about to <mark>restore</mark> all stellars to their initial data (it will <mark>save</mark> after that)`}
+            description={`You're about to <mark>restore</mark> all stellars to their initial data`}
             onInteract={f => {
                 if(f) {
                     setState(InitialStellarState);

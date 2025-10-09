@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useLocalStore } from "./localStore";
 
 export const StoreWatcher = () => {
-    const { theme } = useLocalStore();
+    const localStore = useLocalStore();
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-    }, [theme]);
+        document.documentElement.setAttribute('data-theme', localStore.theme);
+    }, [localStore.theme]);
     
     return null;
 }
