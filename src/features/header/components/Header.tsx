@@ -34,7 +34,8 @@ export const Header = () => {
             style={{ justifyContent: (justified || loaded.header) ? 'space-between' : 'flex-start'}}>
                 <UniversalLink to='/' className='home-button'>
                     Home
-                    <img src={starImg} alt=''/>
+                    <img src={starImg} alt=''
+                    ref={el => tooltips.set(1, 'Stellar', el, 'down', 24)}/>
                 </UniversalLink>
 
                 {/* display none on mobile */}
