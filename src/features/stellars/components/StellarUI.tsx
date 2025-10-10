@@ -93,23 +93,15 @@ export const StellarUI = () => {
                     </button>
 
                     { !isSelected && (
-                        <>
-                            <button className='stellar-button stellar-button-action'
-                            ref={el => { tooltips.set(3, 'Show tutorial', el, 'right') }}
-                            onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
-                                <img src={tutorialImg} alt='tutorial'/>
-                            </button>
-
-                            <button className='stellar-button stellar-button-action'
-                            ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
-                            onClick={() => {
-                                actions.waitingPopup.setShown(prev => !prev);
-                                setState(prev => ({ ...prev, isMoveWaiting: !prev.isMoveWaiting }));
-                                actions.setWaitingPopupText(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there']);
-                            }}>
-                                <img src={moveImg} alt='move'/>
-                            </button>
-                        </>
+                        <button className='stellar-button stellar-button-action'
+                        ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
+                        onClick={() => {
+                            actions.waitingPopup.setShown(prev => !prev);
+                            setState(prev => ({ ...prev, isMoveWaiting: !prev.isMoveWaiting }));
+                            actions.setWaitingPopupText(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there']);
+                        }}>
+                            <img src={moveImg} alt='move'/>
+                        </button>
                     )}
                 </div>
 
@@ -136,11 +128,19 @@ export const StellarUI = () => {
                 {/* question the existence of this button */}
                 <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-right-container'>
                     { !isSelected && (
-                        <button className='stellar-button stellar-button-action'
-                        ref={el => { tooltips.set(6, 'Regenerate positions', el, 'left') }}
-                        onClick={() => actions.regenPositions()}>
-                            <img src={regenerateImg} alt='regen'/>
-                        </button>
+                        <>
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(3, 'Show tutorial', el, 'left') }}
+                            onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
+                                <img src={tutorialImg} alt='tutorial'/>
+                            </button>
+
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(6, 'Regenerate positions', el, 'left') }}
+                            onClick={() => actions.regenPositions()}>
+                                <img src={regenerateImg} alt='regen'/>
+                            </button>
+                        </>
                     )}
                 </div>
             </motion.div>

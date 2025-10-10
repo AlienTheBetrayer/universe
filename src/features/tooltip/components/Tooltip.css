@@ -4,6 +4,7 @@
     height: 32px;
     padding: 1rem;
     align-items: center;
+    white-space: nowrap;
 
     position: absolute;
     pointer-events: none;

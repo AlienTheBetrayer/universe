@@ -10,8 +10,17 @@ export const Stellars = () => {
     const [state, setState] = useStellarContext();
     const three = useThree();
     
+    // viewport setting
+    useEffect(() => {
+        setState(prev => ({ ...prev, viewport: { width: three.viewport.width, height: three.viewport.height }}));
+    }, []);
+
     // generating random xy
     const positions = useStellarPositions();
+
+    useEffect(() => {
+        positions.generate();
+    }, [state.viewport]);
 
     // onclick camera focus handling
     useStellarCamera(three.camera);
@@ -19,15 +28,10 @@ export const Stellars = () => {
     // hotkeys handling
     useStellarHotkeys();
 
-    // position setting / animating + state changing
-    useEffect(() => {
-        positions.generate();
-    }, [state.viewport]);
 
-    useEffect(() => {
-        setState(prev => ({ ...prev, viewport: { width: three.viewport.width, height: three.viewport.height }}));
-    }, []);
 
+
+    // refs of [stellar_id: mesh]
     const stellarRefs = useRef<Mesh[]>([]);
 
     useFrame(s => {
@@ -44,6 +48,7 @@ export const Stellars = () => {
             stellarRefs.current[state.selected].rotation.z += 0.01;
         }
 
+        // move the selected orb when it's moving mode
         if(state.moving !== false) {
             const pointer = three.pointer;
             const newX = pointer.x * three.viewport.width / 2;

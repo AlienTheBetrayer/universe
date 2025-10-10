@@ -1,16 +1,15 @@
 import './ToggleButton.css';
 import { motion, type HTMLMotionProps } from 'motion/react';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import checkmarkImg from './assets/checkmark.svg';
-import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 interface Props extends HTMLMotionProps<'div'> {
     value?: boolean;
     onToggled?: (state: boolean) => void;
 }
 
-export const ToggleButton = ({ value, onToggled, key }: Props) => {
+export const ToggleButton = forwardRef<HTMLButtonElement, Props>(({ value, onToggled }, ref) => {
     const [internal, setInternal] = useState<boolean>(false);
     const toggled = value ?? internal;
 
@@ -21,27 +20,21 @@ export const ToggleButton = ({ value, onToggled, key }: Props) => {
             setInternal(prev => !prev);
     }
 
-    const tooltip = useTooltips();
-
     return (
-        <>
-            { tooltip.render() }
-            <button className='toggle-button' 
-            ref={el => tooltip.set(0, 'Dark / Light theme', el, 'down', 16)}
-            onClick={() => handle()}
-            style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
-                <motion.div className='toggle-button-circle'
-                layout 
-                key={key}
-                transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
+        <button className='toggle-button' 
+        ref={ref}
+        onClick={() => handle()}
+        style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
+            <motion.div className='toggle-button-circle'
+            layout 
+            transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
 
-                </motion.div>
+            </motion.div>
 
-                <motion.img className='toggle-button-image' src={checkmarkImg} alt=''
-                animate={{ opacity: toggled ? 1 : 0 }}>
+            <motion.img className='toggle-button-image' src={checkmarkImg} alt=''
+            animate={{ opacity: toggled ? 1 : 0 }}>
 
-                </motion.img>
-            </button>
-        </>
+            </motion.img>
+        </button>
     )
-}
+});

@@ -1,3 +1,4 @@
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import type { CatalogueItem } from './HorizontalCatalogue';
 import './HorizontalOrderPopup.css';
 import { motion } from "motion/react"
@@ -7,10 +8,14 @@ interface Props {
 }
 
 export const HorizontalOrderPopup = ({ items }: Props) => {
+    const tooltips = useTooltips();
+
     return (
         <div className='horizontal-order-popup-container'>
-            { items?.map(item => (
+            { tooltips.render() }
+            { items?.map((item, idx) => (
                 <motion.div className='horizontal-order-popup'
+                ref={el => tooltips.set(idx, item.content, el, 'left')}
                 key={item.title}
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}

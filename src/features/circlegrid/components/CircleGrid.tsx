@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import { useCircleGridHotkeys } from '../hooks/useCircleGridHotkeys';
 import { CircleGridController } from './CircleGridController';
 import { CircleGridNavigation } from './CircleGridNavigation';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 interface Props {
     controller?: boolean;
@@ -12,6 +13,8 @@ interface Props {
 export const CircleGrid = ({ controller=true }: Props) => {
     const grid = useCircleGrid();
     const hotkeys = useCircleGridHotkeys(grid);
+
+    const tooltips = useTooltips();
 
     return (
         <div className='circle-grid'
@@ -30,7 +33,9 @@ export const CircleGrid = ({ controller=true }: Props) => {
                 transition={{ 
                     layout: { ease: 'backInOut', duration: (1 + idx / 5) },
                 }}>
-                    <button className={`circle-grid-main-button ${idx === grid.coloredIdx ? 'circle-grid-main-button-selected' : ''}`} onClick={() => grid.setColoredIdx(idx)}>
+                    <button className={`circle-grid-main-button ${idx === grid.coloredIdx ? 'circle-grid-main-button-selected' : ''}`}
+                    ref={el => tooltips.set(idx, 'Paint / Select this element', el, 'up')}
+                    onClick={() => grid.setColoredIdx(idx)}>
                         { idx + 1 }
                     </button>
 
@@ -41,6 +46,8 @@ export const CircleGrid = ({ controller=true }: Props) => {
             <CircleGridNavigation data={grid}/>
             
             { controller && <CircleGridController data={grid}/>}
+
+            { tooltips.render() }
         </div>
     )
 }
