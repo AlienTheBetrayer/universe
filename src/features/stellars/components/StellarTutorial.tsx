@@ -27,18 +27,18 @@ export const StellarTutorial = () => {
 
     const pages: TutorialPage[] = [
         {
-            title: 'titl1',
-            description: 'descrip',
+            title: 'Movement',
+            description: 'Move <mark>through</mark> orbs with arrows on the sides (you can also use <b>hotkeys</b>)',
             image: tutorialImg1,
         },
         {
-            title: 'hi',
-            description: 'desasdf',
+            title: 'Zooming in',
+            description: '<mark>Hover</mark> on an orb to see the details about it. <mark>Click</mark> on it to zoom in.',
             image: tutorialImg2
         },
         {
-            title: 'hih',
-            description: '33sdfsd',
+            title: 'Editing',
+            description: '<b>Click</b> on any text property to edit it. (It will be visible <mark>from space</mark> while hovering)',
             image: tutorialImg3
         }
     ];
@@ -48,7 +48,7 @@ export const StellarTutorial = () => {
     const next = () => setSelected(prev => prev < pages.length - 1 ? prev + 1 : prev);
    
     useHotkeys([
-        { hotkey: 'Escape', action: () => setShown(false) },
+        { hotkey: 'Escape', action: () => setShown(false)},
         { hotkey: 'ArrowLeft', action: () => previous()},
         { hotkey: 'ArrowRight', action: () => next()}
     ]);
@@ -61,6 +61,7 @@ export const StellarTutorial = () => {
 
     // sync context and our state
     useEffect(() => {
+        setSelected(0);
         if(shown)
             shownOnce.current = true;
         setState(prev => ({ ...prev, tutorialVisible: shown }));
