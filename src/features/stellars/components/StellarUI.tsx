@@ -28,7 +28,7 @@ export const StellarUI = () => {
 
     // escape hotkey to quit the waiting on action mode
     useHotkeys([
-        { hotkey: 'Escape', action: () => { actions.waitingPopup.setShown(false); setState(prev => ({ ...prev, isMoveWaiting: false })); }}
+        { hotkey: 'Escape', action: () => { actions.waitingPopup.setShown(false); setState(prev => ({ ...prev, isMoveWaiting: false, moving: false })); }}
     ]);
 
     // update internal state (hence the visibility of the on action popup and state) 
