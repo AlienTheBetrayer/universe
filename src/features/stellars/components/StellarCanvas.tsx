@@ -4,8 +4,10 @@ import { StellarLighting } from "./StellarLighting"
 import { StellarParticles } from "./StellarParticles"
 import { Stellars } from "./Stellars"
 import { useStellarContextMenu } from "../hooks/useStellarContextMenu"
+import { useStellarContext } from "../context/StellarContext"
 
 export const StellarCanvas = () => {
+    const [state, setState] = useStellarContext();
     const contextMenu = useStellarContextMenu();
 
     const handle = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -19,7 +21,8 @@ export const StellarCanvas = () => {
         <>
             <Canvas style={{ width: '100%', height: '100%'}} camera={{ near: 0.001 }}
             onContextMenu={handle}
-            onClick={() => contextMenu.popup.setShown(false)}>
+            onPointerDown={(e) => { if(e.button === 1) e.preventDefault(); }}
+            onClick={() => { contextMenu.popup.setShown(false); setState(prev => ({ ...prev, moving: false })) } }>
                 <StellarLighting/>
                 <StellarParticles/>
                 <Stellars/>

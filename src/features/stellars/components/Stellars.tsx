@@ -1,6 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { Mesh } from "three";
+import { Mesh, MeshPhysicalMaterial, Vector3 } from "three";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarPositions } from "../hooks/useStellarPositions";
 import { useStellarCamera } from "../hooks/useStellarCamera";
@@ -43,11 +43,17 @@ export const Stellars = () => {
             stellarRefs.current[state.selected].rotation.y += 0.01;
             stellarRefs.current[state.selected].rotation.z += 0.01;
         }
-    });
 
-    useEffect(() => {
-        console.log(state.hovered);
-    }, [state.hovered]);
+        if(state.moving !== false) {
+            const pointer = three.pointer;
+            const newX = pointer.x * three.viewport.width / 2;
+            const newY = pointer.y * three.viewport.height / 2;
+
+            setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
+                stellar.idx === state.moving ? { ...stellar, x: newX, y: newY } : stellar
+            )}))
+        }
+    });
 
     return (
         state.stellars.map((stellar) => (
@@ -66,7 +72,8 @@ export const Stellars = () => {
                 </mesh>
 
                 <mesh
-                onClick={() => setState(prev => ({ ...prev, selected: prev.selected === stellar.idx ? false : stellar.idx }))}>
+                onClick={() => setState(prev => ({ ...prev, selected: prev.selected === stellar.idx ? false : stellar.idx }))}
+                onPointerDown={(e) => { if(e.button === 1 && state.selected === false) setState(prev => ({ ...prev, moving: prev.moving === stellar.idx ? false : stellar.idx })) }}>
                     <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>

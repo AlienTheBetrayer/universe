@@ -19,6 +19,7 @@ export interface StellarState {
     stellars: Stellar[];
     selected: number | false;
     hovered: number | false;
+    moving: number | false;
     editing: boolean;
     tutorialVisible: boolean;
     messageBoxVisible: boolean;
@@ -60,8 +61,9 @@ export const StellarProvider = ({ children }: Props) => {
                 content: { firstTitle: 'Pluto', secondTitle: 'Dwarf planet', firstDescription: 'I am small!', secondDescription: 'No, I am big!!'}
             },
         ],
-        selected: false as (number | false),
-        hovered: false as (number | false),
+        selected: false,
+        hovered: false,
+        moving: false,
         editing: false,
         messageBoxVisible: false,
         viewport: { width: 0, height: 0 },
