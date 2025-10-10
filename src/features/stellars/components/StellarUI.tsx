@@ -12,7 +12,6 @@ import moveImg from '../assets/move.svg';
 import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { useEffect } from 'react';
-import { useHotkeys } from '../../../hooks/useHotkeys';
 import { Button } from '../../ui/Button/components/Button';
 
 export const StellarUI = () => {
@@ -26,22 +25,17 @@ export const StellarUI = () => {
         setState(prev => ({ ...prev, messageBoxVisible: actions.clearMessageBox.shown }));
     }, [actions.clearMessageBox.shown]);
 
-    // escape hotkey to quit the waiting on action mode
-    useHotkeys([
-        { hotkey: 'Escape', action: () => { 
-            actions.waitingPopup.setShown(false); 
-            setState(prev => prev.isMoveWaiting ? ({ ...prev, isMoveWaiting: false, moving: false }) : prev); 
-        }}
-    ]);
-
-    // update internal state (hence the visibility of the on action popup and state) 
-    // as soon as we click again(meaning the movement has finished)
+    // as soon movement stops in the state
+    // we hide the popup
     useEffect(() => {
-        if(state.moving === false) {
-            actions.waitingPopup.setShown(false);
+        if(state.moving === false)
             setState(prev => ({ ...prev, isMoveWaiting: false }));
-        }
     }, [state.moving]);
+
+    // popup state sync with state (so we can call it from other components)
+    useEffect(() => {
+        actions.waitingPopup.setShown(state.isMoveWaiting);
+    }, [state.isMoveWaiting]);
 
     return (
         <>
@@ -51,37 +45,50 @@ export const StellarUI = () => {
             { actions.hover.render() }
             { actions.clearMessageBox.render() }
             
-            <motion.button className='stellar-button stellar-ui-previous-button'
-            ref={el => { tooltips.set(0, 'Previous orb', el, 'right') }}
+            <motion.div 
+            className='stellar-ui-previous-button'
             style={{ y: '-50%'}}
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
-            onClick={() => 
-                setState(prev => {
+            transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
+                {/* previous orb nav button */}
+                <Button
+                ref={el => { tooltips.set(0, 'Previous orb', el, 'right') }}
+                enabled={!state.isMoveWaiting}
+                className='stellar-button'
+                onClick={() => 
+                    setState(prev => {
                         const indexes = prev.stellars.map(s => s.idx);
                         indexes.sort();
                         return { ...prev, selected: prev.selected === false ? indexes[0] : (prev.selected === indexes[0] ? indexes.at(-1)! : indexes[indexes.indexOf(prev.selected) - 1]) };
                     })}>
-                ←
-                <HotkeyTooltip className='stellar-tooltip' hotkeys={['←', 'A']}/>
-            </motion.button>
+                    ←
+                </Button>
 
-            <motion.button className='stellar-button stellar-ui-next-button'
-            ref={el => { tooltips.set(1, 'Next orb', el, 'left') }}
+                <HotkeyTooltip className='stellar-tooltip' hotkeys={['←', 'A']}/>
+            </motion.div>
+
+            <motion.div 
+            className='stellar-ui-next-button'
             style={{ y: '-50%'}}
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
-            onClick={() =>                        
-                 setState(prev => {
+            transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
+                {/* next orb nav button */}
+                <Button
+                ref={el => { tooltips.set(1, 'Next orb', el, 'left') }}
+                enabled={!state.isMoveWaiting}
+                className='stellar-button'
+                onClick={() =>                        
+                    setState(prev => {
                         const indexes = prev.stellars.map(s => s.idx);
                         indexes.sort();
                         return { ...prev, selected: prev.selected === false ? indexes.at(-1)! : (prev.selected === indexes.at(-1)! ? indexes[0] : indexes[indexes.indexOf(prev.selected) + 1]) };
                     })}>
-                →
+                        →
+                    </Button>
                 <HotkeyTooltip className='stellar-tooltip' hotkeys={['D', '→']}/>
-            </motion.button>
+            </motion.div>
 
             <motion.div
             className='stellar-ui-bottom-bar'
@@ -89,22 +96,23 @@ export const StellarUI = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}>
                 <div className='stellar-ui-bottom-bar-buttons-container'>
-                    <button className='stellar-button stellar-button-action'
+                    {/* wipe an orb button */}
+                    <Button className='stellar-button stellar-button-action'
+                    enabled={!state.isMoveWaiting}
                     ref={el => { tooltips.set(2, isSelected ? 'Wipe this orb' : 'Wipe all orbs', el, 'right') }}
                     onClick={() => actions.clearMessageBox.setShown(true)}>
                         <img src={clearImg} alt='clear'/>
-                    </button>
+                    </Button>
 
+                    {/* move an orb button */}
                     { !isSelected && (
-                        <button className='stellar-button stellar-button-action'
+                        <Button className='stellar-button stellar-button-action'
                         ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
                         onClick={() => {
-                            actions.waitingPopup.setShown(prev => !prev);
                             setState(prev => ({ ...prev, isMoveWaiting: !prev.isMoveWaiting }));
-                            actions.setWaitingPopupText(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there']);
                         }}>
                             <img src={moveImg} alt='move'/>
-                        </button>
+                        </Button>
                     )}
                 </div>
 
@@ -121,6 +129,7 @@ export const StellarUI = () => {
                         }
                     </AnimatePresence>
                     
+                    {/* back button */}
                     <Button className={`stellar-button`}
                     enabled={isSelected} 
                     onClick={() => setState(prev => ({ ...prev, selected: false }))}>
@@ -133,17 +142,21 @@ export const StellarUI = () => {
                 <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-right-container'>
                     { !isSelected && (
                         <>
-                            <button className='stellar-button stellar-button-action'
+                            {/* show tutorial button */}
+                            <Button className='stellar-button stellar-button-action'
+                            enabled={!state.isMoveWaiting}
                             ref={el => { tooltips.set(3, 'Show tutorial', el, 'left') }}
                             onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
                                 <img src={tutorialImg} alt='tutorial'/>
-                            </button>
+                            </Button>
 
-                            <button className='stellar-button stellar-button-action'
+                            {/* regenerate positions button */}
+                            <Button className='stellar-button stellar-button-action'
+                            enabled={!state.isMoveWaiting}
                             ref={el => { tooltips.set(6, 'Regenerate positions', el, 'left') }}
                             onClick={() => actions.regenPositions()}>
                                 <img src={regenerateImg} alt='regen'/>
-                            </button>
+                            </Button>
                         </>
                     )}
                 </div>

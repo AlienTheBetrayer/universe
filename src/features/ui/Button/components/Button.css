@@ -8,12 +8,16 @@
     min-height: 32px;
     min-width: 32px;
 
+    position: relative;
+
     color: var(--foreground);
     background-color: var(--background-4-transparent);
     border-radius: 16px;
     border: transparent;
     cursor: pointer;
     transition: 0.15s;
+
+    overflow: hidden;
 }
 
 .button:hover {
@@ -25,8 +29,7 @@
 }
 
 .button-disabled {
-    transition: 0.15s;
-    color: var(--background-6) !important;
-    background-color: var(--background-3-transparent) !important;
     pointer-events: none;
+    transition: 0.3s;
+    opacity: 0.4;
 }

@@ -23,62 +23,60 @@ interface TutorialPage {
     image: string;
 }
 
+const pages: TutorialPage[] = [
+    {
+        title: 'Movement',
+        description: 'Move <mark>through</mark> orbs with arrows on the sides (you can also use <b>hotkeys</b>)',
+        image: tutorialImg1,
+    },
+    {
+        title: 'Cursor',
+        description: 'Move around your cursor <mark>everywhere!</mark> In the zoom-in mode — reflect on the edges, in the space — move the <b>internal Sun</b>, <mark>black hole effect, and background stars move along!</mark>',
+        image: tutorialImg2
+    },
+    {
+        title: 'Hovering',
+        description: '<mark>Hover</mark> on an orb to see the details about it. <mark>Click</mark> on it to zoom in. In the zoomed-in mode, <b>click on it again</b> to go out of it.',
+        image: tutorialImg3,
+    },
+    {
+        title: 'Creating / Deleting',
+        description: '<b>Right click</b>(or <b>pinch tap</b> on mobile) to open up the <mark>context menu</mark>, by default you will only able to <mark>create</mark>, if you click on an orb, you will be able to <u>delete</u> it.',
+        image: tutorialImg4
+    },
+    {
+        title: 'Moving orbs',
+        description: '<b>Scroll wheel click</b> on an orb to start <b>moving</b> it(click again to finish). There is also a button that will trigger <mark>action mode.</mark> (good for mobile)',
+        image: tutorialImg5
+    },
+    {
+        title: 'Regenerating',
+        description: 'If you somehow <u>screw</u> orbs up, you can fix them by clicking this button, it will <mark>fix</mark> all positions.',
+        image: tutorialImg6
+    },
+    {
+        title: 'Zoomed in deletion',
+        description: 'By default, <u>X</u> button will <u>wipe all orbs</u>, however in the zoomed-in mode it will only delete the <b>currently selected one.</b>',
+        image: tutorialImg7
+    },
+    {
+        title: 'Editing',
+        description: '<b>Click</b> on any text property to edit it. (Afterwards it will be visible <mark>from space</mark> while hovering).',
+        image: tutorialImg8
+    }
+];
+
 export const StellarTutorial = () => {
     const [selected, setSelected] = useState<number>(0);
-    const [shown, setShown] = useState<boolean>(true);
     const [state, setState] = useStellarContext();
     const shownOnce = useRef<boolean>(false);
     const localStore = useLocalStore();
-
-    const pages: TutorialPage[] = [
-        {
-            title: 'Movement',
-            description: 'Move <mark>through</mark> orbs with arrows on the sides (you can also use <b>hotkeys</b>)',
-            image: tutorialImg1,
-        },
-        {
-            title: 'Cursor',
-            description: 'Move around your cursor <mark>everywhere!</mark> In the zoom-in mode — reflect on the edges, in the space — move the <b>internal Sun</b>, <mark>black hole effect, and background stars move along!</mark>',
-            image: tutorialImg2
-        },
-        {
-            title: 'Hovering',
-            description: '<mark>Hover</mark> on an orb to see the details about it. <mark>Click</mark> on it to zoom in. In the zoomed-in mode, <b>click on it again</b> to go out of it.',
-            image: tutorialImg3,
-        },
-        {
-            title: 'Creating / Deleting',
-            description: '<b>Right click</b>(or <b>pinch tap</b> on mobile) to open up the <mark>context menu</mark>, by default you will only able to <mark>create</mark>, if you click on an orb, you will be able to <u>delete</u> it.',
-            image: tutorialImg4
-        },
-        {
-            title: 'Moving orbs',
-            description: '<b>Scroll wheel click</b> on an orb to start <b>moving</b> it(click again to finish). There is also a button that will trigger <mark>action mode.</mark> (good for mobile)',
-            image: tutorialImg5
-        },
-        {
-            title: 'Regenerating',
-            description: 'If you somehow <u>screw</u> orbs up, you can fix them by clicking this button, it will <mark>fix</mark> all positions.',
-            image: tutorialImg6
-        },
-        {
-            title: 'Zoomed in deletion',
-            description: 'By default, <u>X</u> button will <u>wipe all orbs</u>, however in the zoomed-in mode it will only delete the <b>currently selected one.</b>',
-            image: tutorialImg7
-        },
-        {
-            title: 'Editing',
-            description: '<b>Click</b> on any text property to edit it. (Afterwards it will be visible <mark>from space</mark> while hovering).',
-            image: tutorialImg8
-        }
-    ];
 
     // hotkeys to go back and forth between the pages
     const previous = () => setSelected(prev => prev > 0 ? prev - 1 : prev);
     const next = () => setSelected(prev => prev < pages.length - 1 ? prev + 1 : prev);
    
     useHotkeys([
-        { hotkey: 'Escape', action: () => setShown(false)},
         { hotkey: 'ArrowLeft', action: () => previous()},
         { hotkey: 'ArrowRight', action: () => next()}
     ]);
@@ -92,13 +90,8 @@ export const StellarTutorial = () => {
     // sync context and our state
     useEffect(() => {
         setSelected(0);
-        if(shown)
+        if(state.tutorialVisible)
             shownOnce.current = true;
-        setState(prev => ({ ...prev, tutorialVisible: shown }));
-    }, [shown]);
-
-    useEffect(() => {
-        setShown(prev => state.tutorialVisible !== prev ? state.tutorialVisible : prev);
     }, [state.tutorialVisible]);
 
     const tooltips = useTooltips();
@@ -108,7 +101,7 @@ export const StellarTutorial = () => {
             { tooltips.render() }
 
             <AnimatePresence>
-                { shown && (
+                { state.tutorialVisible && (
                     <motion.div
                     className='stellar-tutorial-container'
                     initial={{ opacity: 0 }}
@@ -125,7 +118,7 @@ export const StellarTutorial = () => {
 
                         <Button className='stellar-tutorial-skip-button'
                         ref={el => tooltips.set(0, 'Proceed to the game', el, 'right')}
-                        onClick={() => setShown(false)}>   
+                        onClick={() => setState(prev => ({ ...prev, tutorialVisible: !prev.tutorialVisible}))}>   
                             Skip
                         </Button>
 

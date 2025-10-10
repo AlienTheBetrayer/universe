@@ -45,7 +45,7 @@ export const useStellarActions = (contextSelected?: number, onAction?: () => voi
                 clearMessageBox.setShown(false);
             }}/>);
 
-    const [waitingPopupText, setWaitingPopupText] = useState<string[]>([]);
+    const [waitingPopupText, setWaitingPopupText] = useState<string[]>(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there (or <u>Esc</u>)']);
     const waitingPopup = usePopup(<StellarWaitingPopup text={waitingPopupText}/>, false);
             
     return {

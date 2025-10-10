@@ -20,7 +20,7 @@ export interface StellarState {
     selected: number | false;
     hovered: number | false;
     moving: number | false;
-    editing: boolean;
+    isEditing: boolean;
     isMoveWaiting: boolean,
     tutorialVisible: boolean;
     messageBoxVisible: boolean;
@@ -62,13 +62,14 @@ export const StellarProvider = ({ children }: Props) => {
         hovered: false,
         moving: false,
         isMoveWaiting: false,
-        editing: false,
+        isEditing: false,
         messageBoxVisible: false,
         viewport: { width: 0, height: 0 },
         tutorialVisible: true });
         
     const localStore = useLocalStore();
 
+    // if we hadn't seen the tutorial ever before, show it 
     useEffect(() => {
         state[1](prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen }));
     }, []);

@@ -28,9 +28,6 @@ export const Stellars = () => {
     // hotkeys handling
     useStellarHotkeys();
 
-
-
-
     // refs of [stellar_id: mesh]
     const stellarRefs = useRef<Mesh[]>([]);
 
@@ -87,7 +84,11 @@ export const Stellars = () => {
                     }
 
                 }}
-                onPointerDown={(e) => { if(e.button === 1 && state.selected === false) setState(prev => ({ ...prev, moving: prev.moving === stellar.idx ? false : stellar.idx })) }}>
+                onPointerDown={(e) => { 
+                    if(e.button === 1 && state.selected === false && state.isMoveWaiting === false) {
+                        setState(prev => ({ ...prev, moving: prev.moving === stellar.idx ? false : stellar.idx, isMoveWaiting: !prev.isMoveWaiting }));
+                    }
+                    }}>
                     <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
                 </mesh>

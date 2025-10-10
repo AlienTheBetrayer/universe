@@ -6,18 +6,18 @@ export const useStellarHotkeys = () => {
 
     useEffect(() => {
         const handle = (ev: KeyboardEvent) => {
-            if(state.tutorialVisible || state.messageBoxVisible || state.moving)
+            const code = ev.key.toLowerCase();
+            if(code === 'escape') {
+                setState(prev => ({ ...prev, selected: false, isEditing: false, moving: false, isMoveWaiting: false, tutorialVisible: false, messageBoxVisible: false }));
+            }
+
+            if(state.tutorialVisible || state.messageBoxVisible || state.moving || state.isMoveWaiting)
                 return;
             
-            const code = ev.key.toLowerCase();
             switch (code) {
-                case 'escape':
-                    setState(prev => ({ ...prev, selected: false, editing: false, moving: false }));
-                    break;
-
                 case 'arrowleft':
                 case 'a':
-                    if(!state.editing) {
+                    if(!state.isEditing) {
                         setState(prev => {
                             const indexes = prev.stellars.map(s => s.idx);
                             indexes.sort();
@@ -28,7 +28,7 @@ export const useStellarHotkeys = () => {
 
                 case 'arrowright':
                 case 'd':
-                    if(!state.editing) {
+                    if(!state.isEditing) {
                         setState(prev => {
                             const indexes = prev.stellars.map(s => s.idx);
                             indexes.sort();
@@ -41,5 +41,5 @@ export const useStellarHotkeys = () => {
 
         document.addEventListener('keydown', handle);
         return () => document.removeEventListener('keydown', handle);
-    }, [state.editing, state.tutorialVisible, state.messageBoxVisible, state.moving]);
+    }, [state.isEditing, state.tutorialVisible, state.messageBoxVisible, state.moving, state.isMoveWaiting]);
 }

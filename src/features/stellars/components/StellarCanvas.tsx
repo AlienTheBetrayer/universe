@@ -7,7 +7,7 @@ import { useStellarContextMenu } from "../hooks/useStellarContextMenu"
 import { useStellarContext } from "../context/StellarContext"
 
 export const StellarCanvas = () => {
-    const [, setState] = useStellarContext();
+    const [state, setState] = useStellarContext();
     const contextMenu = useStellarContextMenu();
 
     const showMenu = () => {
@@ -29,7 +29,8 @@ export const StellarCanvas = () => {
              }}
             onClick={() => {
                     contextMenu.popup.setShown(false); 
-                    setState(prev => ({ ...prev, moving: false }));
+                    if(state.isMoveWaiting)
+                        setState(prev => ({ ...prev, moving: false }));
                 }}>
                 <StellarLighting/>
                 <StellarParticles/>
