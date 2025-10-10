@@ -49,9 +49,11 @@ export const Stellars = () => {
             const newX = pointer.x * three.viewport.width / 2;
             const newY = pointer.y * three.viewport.height / 2;
 
-            setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
-                stellar.idx === state.moving ? { ...stellar, x: newX, y: newY } : stellar
-            )}));
+            if(state.stellars[state.moving].x !== newX || state.stellars[state.moving].y !== newY) {
+                setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
+                    stellar.idx === state.moving ? { ...stellar, x: newX, y: newY } : stellar
+                )}));
+            }
         }
     });
 
