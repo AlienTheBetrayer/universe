@@ -103,8 +103,6 @@ export const StellarTutorial = () => {
                                 <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['←']}/>
                             </Button>
 
-
-
                             <div className='stellar-tutorial-card'>
                                 <div className='stellar-tutorial-card-image'>
                                     Loading...

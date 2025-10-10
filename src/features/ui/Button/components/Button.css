@@ -28,5 +28,5 @@
     transition: 0.15s;
     color: var(--background-6) !important;
     background-color: var(--background-3-transparent) !important;
-    cursor: not-allowed !important;
+    pointer-events: none;
 }
