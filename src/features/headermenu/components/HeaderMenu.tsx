@@ -5,6 +5,7 @@ import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 import { LinkButton } from '../../ui/LinkButton/components/LinkButton';
 
 import launchImg from '../../header/assets/launch.svg';
+import stellarImg from '../../header/assets/stellar.svg';
 import { useLocalStore } from '../../../zustand/localStore';
 import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 
@@ -22,15 +23,18 @@ export const HeaderMenu = ({ onInteract, className }: Props) => {
         exit={{ opacity: 0 }}>
             <div>
                 <UniversalLink to='/' className='home-button'>Home</UniversalLink>
-                <UniversalLink to='/stellarnetwork'>Stellar Network</UniversalLink>
                 <UniversalLink to='/contact'>Contact</UniversalLink>
             </div>
             
             <div>
                 <ToggleButton value={theme == 'light'} onToggled={() => toggleTheme()} />
-                <LinkButton className='header-launch-app' to='/app'>
-                    Launch App
+                <LinkButton className='header-stellar-button' to='/app'>
+                    <img src={stellarImg} alt=''/>
+                    Stellar Network
+                </LinkButton>
+                <LinkButton className='header-forge-button' to='/app'>
                     <img src={launchImg} alt=''/>
+                    Forge
                 </LinkButton>
                 <Button className='header-close-menu' onClick={() => onInteract?.()} >Close Menu</Button>
             </div>

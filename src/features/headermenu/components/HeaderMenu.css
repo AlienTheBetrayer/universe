@@ -14,9 +14,11 @@
     font-size: 1rem;
 }
 
-.header-menu .header-launch-app img {
+.header-menu .header-forge-button img, 
+.header-menu .header-stellar-button img {
     width: 32px;
     height: 32px;
+    filter: invert(1);
 }
 
 .header-menu > div {

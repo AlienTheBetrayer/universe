@@ -1,3 +1,4 @@
+/* header container */
 header {
     display: flex;
     align-items: center;
@@ -19,6 +20,7 @@ header {
     }
 }
 
+/* nav with all the content */
 header > nav {
     position: relative;
     left: 50%;
@@ -36,8 +38,10 @@ header > nav {
     backdrop-filter: blur(8px);
     background: var(--background-fulltransparent);
 
+
 }
 
+/* mobile button to show the menu */
 header .header-open-menu {
     background-color: transparent;
     transition: 0s;
@@ -49,15 +53,16 @@ header .header-open-menu:hover {
     color: var(--foreground-last);
 }
 
+/* home button + img */
+header .home-button {
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 640px) {
     header .home-button {
         margin-right: 0;
     }
-}
-
-header .home-button {
-    display: flex;
-    align-items: center;
 }
 
 header .home-button img {
@@ -75,7 +80,28 @@ header .home-button:hover img {
     filter: invert(var(--header-invert));
 }
 
-.header-launch-app {
+/* launch app fat button */
+.header-forge-button {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    background: linear-gradient(193deg, rgb(2, 2, 158), rgb(39, 39, 240));
+    color: #fff !important;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+.header-forge-button:hover {
+    transform: scale(1.05);
+}
+
+header .header-forge-button img {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}
+
+.header-stellar-button {
     display: flex;
     gap: 4px;
     align-items: center;
@@ -84,12 +110,17 @@ header .home-button:hover img {
     text-align: center;
 }
 
-.header-launch-app img {
+.header-stellar-button:hover {
+    transform: scale(1.05);
+}
+
+header .header-stellar-button img {
     width: 20px;
     height: 20px;
     filter: invert(1);
 }
 
+/* styles */
 header .universal-link:hover, header .universal-link:active {
     color: var(--header-link);
 }

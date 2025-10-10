@@ -11,6 +11,8 @@ import { useHeaderAnimation } from '../hooks/useHeaderAnimation';
 
 import launchImg from '../assets/launch.svg';
 import starImg from '../assets/star.svg';
+import stellarImg from '../assets/stellar.svg';
+
 import { useLocalStore } from '../../../zustand/localStore';
 import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
@@ -39,31 +41,29 @@ export const Header = () => {
                 </UniversalLink>
 
                 {/* display none on mobile */}
-                <motion.div className='flex align-center p-1 h-full'
+                <motion.div className='flex align-center h-full'
                 style={{ display: !isMobile ? 'flex' : 'none' }}
                 layout
-                initial={{ gap: loaded.header ? '2rem' : '0.1rem' }}
-                animate={{ gap: '2rem', transition: { delay: 5.5, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
+                initial={{ gap: loaded.header ? '1rem' : '0.1rem' }}
+                animate={{ gap: '1rem', transition: { delay: 5.5, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
                 transition={{ type: 'spring', duration: 0.6, stiffness: 200, damping: 50 }}>
-                    <UniversalLink 
-                    to='/stellarnetwork'>
-                    Stellar Network</UniversalLink>
-
                     <UniversalLink 
                     to='/contact'>
                     Contact</UniversalLink>
 
-                    <motion.div
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 20 }}>
-                        <LinkButton 
-                        className='header-launch-app'
-                        to='/app'>
-                            <img src={launchImg} alt=''/>
-                            Launch App
-                        </LinkButton>
-                    </motion.div>
+                    <LinkButton
+                    className='header-stellar-button'
+                    to='/stellarnetwork'>
+                        <img src={stellarImg} alt=''/>
+                        Stellar Network
+                    </LinkButton>
+
+                    <LinkButton 
+                    className='header-forge-button'
+                    to='/app'>
+                        <img src={launchImg} alt=''/>
+                        Forge
+                    </LinkButton>
 
                     <ToggleButton 
                     ref={el => tooltips.set(0, `${ theme === 'dark' ? '<mark>Dark</mark> / Light' : 'Dark / <mark>Light</mark>'} theme`, el, 'down', 24)}
