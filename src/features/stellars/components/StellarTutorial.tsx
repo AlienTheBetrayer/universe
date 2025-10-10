@@ -8,6 +8,10 @@ import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { useLocalStore } from '../../../zustand/localStore';
 
+import tutorialImg1 from '../assets/tutorial/tutorial-1.png';
+import tutorialImg2 from '../assets/tutorial/tutorial-2.png';
+import tutorialImg3 from '../assets/tutorial/tutorial-3.png';
+
 interface TutorialPage {
     title: string;
     description: string;
@@ -25,17 +29,17 @@ export const StellarTutorial = () => {
         {
             title: 'titl1',
             description: 'descrip',
-            image: '',
+            image: tutorialImg1,
         },
         {
             title: 'hi',
             description: 'desasdf',
-            image: ''
+            image: tutorialImg2
         },
         {
             title: 'hih',
             description: '33sdfsd',
-            image: ''
+            image: tutorialImg3
         }
     ];
 
@@ -109,7 +113,7 @@ export const StellarTutorial = () => {
 
                             <div className='stellar-tutorial-card'>
                                 <div className='stellar-tutorial-card-image'>
-                                    Loading...
+                                    <img src={pages[selected].image} alt='tutorial image'/>
                                 </div>
 
                                 <div className='stellar-tutorial-card-content'>

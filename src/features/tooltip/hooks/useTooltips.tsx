@@ -19,6 +19,8 @@ export const useTooltips = () => {
 
     const [selected, setSelected] = useState<number | false>(false);
     
+    const elements = refs.current.map(r => r.element);
+
     // filling the array with given elements + event handling
     useLayoutEffect(() => {
         const handleLeave = () => {
@@ -27,11 +29,11 @@ export const useTooltips = () => {
 
         const handlers: (() => void)[] = [];
 
-        refs.current.forEach((ref, idx) => {
+        elements.forEach((el, idx) => {
             const handleEnter = () => setSelected(idx); 
 
-            ref.element?.addEventListener('pointerenter', handleEnter);
-            ref.element?.addEventListener('pointerleave', handleLeave);
+            el?.addEventListener('pointerenter', handleEnter);
+            el?.addEventListener('pointerleave', handleLeave);
 
             handlers.push(handleEnter);
         });
@@ -42,7 +44,7 @@ export const useTooltips = () => {
                 ref.element?.removeEventListener('pointerleave', handleLeave);
             })
         }
-    }, [refs.current]);
+    }, [elements]);
     
     // upon tooltip appearance change its position based on the current selected index
     useEffect(() => {
