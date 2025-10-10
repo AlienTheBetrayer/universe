@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { SphereCard } from "../../../spherecard/components/SphereCard";
 import { useEffect } from 'react';
 import gsap from 'gsap';
+import { RevealingContainer } from '../../../revealingcontainer/components/RevealingContainer';
 
 export const GridSection = () => {
     const hard = [
@@ -64,32 +65,34 @@ export const GridSection = () => {
     }, []); 
 
     return (
-        <motion.section
-        initial={{ y: 200, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 4, duration: 1 }}
-        className='container'>
-            <div className='heading-grid'>
-                <div className='heading-subgrid'>
-                    <h2>Stack</h2>
+        <RevealingContainer>
+            <motion.section
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 4, duration: 1 }}
+            className='container'>
+                <div className='heading-grid'>
+                    <div className='heading-subgrid'>
+                        <h2>Stack</h2>
 
-                    <div className='heading-showcase-grid'>
-                        { hard.map(skill => (
-                            <SphereCard key={skill.title} title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
-                        ))}
+                        <div className='heading-showcase-grid'>
+                            { hard.map(skill => (
+                                <SphereCard key={skill.title} title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className='heading-subgrid'>
+                        <h2>Qualities</h2>
+
+                        <div className='heading-showcase-grid'>
+                            { soft.map(skill => (
+                                <SphereCard key={skill.title} title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
+                            ))}
+                        </div>
                     </div>
                 </div>
-
-                <div className='heading-subgrid'>
-                    <h2>Qualities</h2>
-
-                    <div className='heading-showcase-grid'>
-                        { soft.map(skill => (
-                            <SphereCard key={skill.title} title={skill.title} description={skill.description} hoverDescription={skill.hoverDescription}/>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </motion.section>
+            </motion.section>
+        </RevealingContainer>
     )
 }

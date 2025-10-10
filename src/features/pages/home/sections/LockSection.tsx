@@ -5,6 +5,7 @@ import { useScroll, useSpring } from 'motion/react';
 import { useValueMotion } from '../../../../hooks/useValueMotion';
 import { LockCanvas } from '../../../locksphere/components/LockCanvas';
 import { Color, type HSL } from 'three';
+import { RevealingContainer } from '../../../revealingcontainer/components/RevealingContainer';
 
 export const LockSection = () => {
     const scrollRef = useRef<HTMLElement>(null);
@@ -30,6 +31,8 @@ export const LockSection = () => {
     const letterStyle = { color: `#${color.getHexString()}` };
 
     return (
+        <RevealingContainer>
+
         <section ref={scrollRef} className='sphere-canvas-container'>
             <div className='sphere-canvas-lock'>
                 <LockCanvas ref={scrollRef}/>
@@ -43,5 +46,7 @@ export const LockSection = () => {
                 </div>
             </div>
         </section>
+        </RevealingContainer>
+
     )
 }

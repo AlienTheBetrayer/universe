@@ -2,6 +2,7 @@ import './HorizontalSection.css';
 import { useRef, useState } from 'react';
 import { type CatalogueItem, HorizontalCatalogue } from '../../../horizontalcatalogue/components/HorizontalCatalogue';
 import { HorizontalMenu } from '../../../horizontalcatalogue/components/HorizontalMenu';
+import { RevealingContainer } from '../../../revealingcontainer/components/RevealingContainer';
 
 export const HorizontalSection = () => {
     const sectionRef = useRef<HTMLElement>(null);
@@ -70,14 +71,16 @@ export const HorizontalSection = () => {
     ]);
     
     return (
-        <section ref={sectionRef} className='horizontal-section container'>
+        <RevealingContainer>
+            <section ref={sectionRef} className='horizontal-section container'>
 
-            <div className='horizontal-lock'>
-                <h2>Horizontal <mark>catalogue</mark></h2>
-                
-                <HorizontalCatalogue className='lock-catalogue' containerRef={sectionRef} items={content}/>
-                <HorizontalMenu className='lock-menu' items={[content, setContent]}/>
-            </div>
-        </section>
+                <div className='horizontal-lock'>
+                    <h2>Horizontal <mark>catalogue</mark></h2>
+                    
+                    <HorizontalCatalogue className='lock-catalogue' containerRef={sectionRef} items={content}/>
+                    <HorizontalMenu className='lock-menu' items={[content, setContent]}/>
+                </div>
+            </section>
+        </RevealingContainer>
     )
 }
