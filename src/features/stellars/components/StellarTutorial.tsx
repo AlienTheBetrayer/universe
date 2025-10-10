@@ -44,7 +44,7 @@ export const StellarTutorial = () => {
     const next = () => setSelected(prev => prev < pages.length - 1 ? prev + 1 : prev);
    
     useHotkeys([
-        { hotkey: 'Escape', action: () => { setShown(false); console.log('cha')} },
+        { hotkey: 'Escape', action: () => setShown(false) },
         { hotkey: 'ArrowLeft', action: () => previous()},
         { hotkey: 'ArrowRight', action: () => next()}
     ]);
@@ -57,7 +57,6 @@ export const StellarTutorial = () => {
 
     // sync context and our state
     useEffect(() => {
-        console.log(shown);
         if(shown)
             shownOnce.current = true;
         setState(prev => ({ ...prev, tutorialVisible: shown }));
