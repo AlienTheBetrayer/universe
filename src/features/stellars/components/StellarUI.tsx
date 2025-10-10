@@ -13,6 +13,7 @@ import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { useEffect } from 'react';
 import { useHotkeys } from '../../../hooks/useHotkeys';
+import { Button } from '../../ui/Button/components/Button';
 
 export const StellarUI = () => {
     const [state, setState] = useStellarContext();
@@ -117,11 +118,12 @@ export const StellarUI = () => {
                         }
                     </AnimatePresence>
                     
-                    <button className={`stellar-button ${!isSelected ? 'stellar-button-deactivated' : ''}`} 
+                    <Button className={`stellar-button`}
+                    enabled={isSelected} 
                     onClick={() => setState(prev => ({ ...prev, selected: false }))}>
                         Go back
                         <HotkeyTooltip className='stellar-tooltip' hotkeys={['Esc']}/>
-                    </button>
+                    </Button>
                 </div>
 
                 {/* question the existence of this button */}
