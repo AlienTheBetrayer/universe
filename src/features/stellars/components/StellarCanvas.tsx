@@ -22,7 +22,10 @@ export const StellarCanvas = () => {
             <Canvas style={{ width: '100%', height: '100%'}} camera={{ near: 0.001 }}
             onContextMenu={handle}
             onPointerDown={(e) => { if(e.button === 1) e.preventDefault(); }}
-            onClick={() => { contextMenu.popup.setShown(false); setState(prev => ({ ...prev, moving: false })) } }>
+            onClick={() => {
+                    contextMenu.popup.setShown(false); 
+                    setState(prev => ({ ...prev, moving: false }));
+                }}>
                 <StellarLighting/>
                 <StellarParticles/>
                 <Stellars/>

@@ -36,10 +36,6 @@ interface Props {
     children?: React.ReactNode;
 }
 
-export const InitialStellarState = {
-
-}
-
 export const StellarProvider = ({ children }: Props) => {
     const state = useState<StellarState>({
         stellars: [

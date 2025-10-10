@@ -75,8 +75,8 @@ export const Stellars = () => {
                 onClick={() => {
                     if(state.isMoveWaiting === false) {
                         setState(prev => ({ ...prev, selected: prev.selected === stellar.idx ? false : stellar.idx }));
-                    } else {
-                        setState(prev => ({ ...prev, moving: prev.moving === stellar.idx ? false : stellar.idx }))
+                    } else if(state.moving === false) {
+                        requestAnimationFrame(() => setState(prev => ({ ...prev, moving: stellar.idx })));
                     }
 
                 }}

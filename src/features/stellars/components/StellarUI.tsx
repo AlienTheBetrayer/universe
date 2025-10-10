@@ -1,6 +1,6 @@
 import './StellarUI.css';
 import { useStellarContext } from '../context/StellarContext';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useElementScroll } from 'motion/react';
 
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 
@@ -35,6 +35,11 @@ export const StellarUI = () => {
         actions.waitingPopup.setShown(isWaiting);
         setState(prev => ({ ...prev, isMoveWaiting: isWaiting }));
     }, [isWaiting]);
+
+    useEffect(() => {
+        if(state.moving === false)
+            setIsWaiting(false);
+    }, [state.moving]);
 
     return (
         <>
