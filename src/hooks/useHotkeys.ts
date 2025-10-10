@@ -15,7 +15,7 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
             }
         }
 
-        document.addEventListener('keydown', handle);
-        return () => document.removeEventListener('keydown', handle);
+        window.addEventListener('keydown', handle);
+        return () => window.removeEventListener('keydown', handle);
     }, [hotkeys]);
 }

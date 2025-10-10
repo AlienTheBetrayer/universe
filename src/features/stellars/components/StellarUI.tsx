@@ -20,7 +20,6 @@ export const StellarUI = () => {
     const actions = useStellarActions();
     const tooltips = useTooltips();
 
-    console.log('rerender');
     // state syncing with the visibility of the clear message box to prevent hotkeys
     useEffect(() => {
         setState(prev => ({ ...prev, messageBoxVisible: actions.clearMessageBox.shown }));
