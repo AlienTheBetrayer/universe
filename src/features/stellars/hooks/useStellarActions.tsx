@@ -4,6 +4,7 @@ import { useStellarHover } from "./useStellarHover";
 import { useStellarPositions } from "./useStellarPositions";
 import { usePopup } from "../../../hooks/usePopup";
 import { MessageBox } from "../../messagebox/components/MessageBox";
+import { StellarWaitingPopup } from "../components/StellarWaitingPopup";
 
 export const useStellarActions = (contextSelected?: number, onAction?: () => void) => {
     const [state, setState] = useStellarContext();
@@ -44,10 +45,12 @@ export const useStellarActions = (contextSelected?: number, onAction?: () => voi
                 clearMessageBox.setShown(false);
             }}/>);
 
+    const waitingPopup = usePopup(<StellarWaitingPopup/>, false);
             
     return {
         regenPositions,
         hover,
-        clearMessageBox
+        clearMessageBox,
+        waitingPopup
     };
 }

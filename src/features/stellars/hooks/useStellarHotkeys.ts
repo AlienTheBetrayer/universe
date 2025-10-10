@@ -12,7 +12,7 @@ export const useStellarHotkeys = () => {
             const code = ev.key.toLowerCase();
             switch (code) {
                 case 'escape':
-                    setState(prev => ({ ...prev, selected: false, editing: false }));
+                    setState(prev => ({ ...prev, selected: false, editing: false, moving: false }));
                     break;
 
                 case 'arrowleft':

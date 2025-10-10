@@ -7,25 +7,38 @@ import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import regenerateImg from '../assets/regenerate.svg';
 import tutorialImg from '../assets/tutorial.svg';
 import clearImg from '../assets/clear.svg';
+import createImg from '../assets/create.svg';
+import moveImg from '../assets/move.svg';
+
 import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useHotkeys } from '../../../hooks/useHotkeys';
 
 export const StellarUI = () => {
     const [state, setState] = useStellarContext();
     const isSelected = state.selected !== false;
     const actions = useStellarActions();
-
     const tooltips = useTooltips();
+    const [isWaiting, setIsWaiting] = useState<boolean>(false);
 
     useEffect(() => {
         setState(prev => ({ ...prev, messageBoxVisible: actions.clearMessageBox.shown }));
     }, [actions.clearMessageBox.shown]);
 
+    useHotkeys([
+        { hotkey: 'Escape', action: () => setIsWaiting(false) }
+    ]);
+
+    useEffect(() => {
+        actions.waitingPopup.setShown(isWaiting);
+    }, [isWaiting]);
+
     return (
         <>
             { tooltips.render() }
-
+        
+            { actions.waitingPopup.render() }
             { actions.hover.render() }
             { actions.clearMessageBox.render() }
             
@@ -69,17 +82,34 @@ export const StellarUI = () => {
                 <div className='stellar-ui-bottom-bar-buttons-container'>
                     <button className='stellar-button stellar-button-action'
                     ref={el => { tooltips.set(2, isSelected ? 'Wipe this orb' : 'Wipe all orbs', el, 'right') }}
-
                     onClick={() => actions.clearMessageBox.setShown(true)}>
                         <img src={clearImg} alt='clear'/>
                     </button>
 
                     { !isSelected && (
-                        <button className='stellar-button stellar-button-action'
-                        ref={el => { tooltips.set(4, 'Show tutorial', el, 'right') }}
-                        onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
-                            <img src={tutorialImg} alt='tutorial'/>
-                        </button>
+                        <>
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(3, 'Show tutorial', el, 'right') }}
+                            onClick={() => setState(prev => ({ ...prev, tutorialVisible: true }))}>
+                                <img src={tutorialImg} alt='tutorial'/>
+                            </button>
+
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
+                            onClick={() => {
+                                setIsWaiting(prev => !prev);
+                            }}>
+                                <img src={moveImg} alt='move'/>
+                            </button>
+
+                            <button className='stellar-button stellar-button-action'
+                            ref={el => { tooltips.set(5, 'Create an orb', el, 'right') }}
+                            onClick={() => {
+                                setIsWaiting(prev => !prev);
+                            }}>
+                                <img src={createImg} alt='create'/>
+                            </button>
+                        </>
                     )}
                 </div>
 
@@ -107,7 +137,7 @@ export const StellarUI = () => {
                 <div className='stellar-ui-bottom-bar-buttons-container stellar-ui-bottom-bar-right-container'>
                     { !isSelected && (
                         <button className='stellar-button stellar-button-action'
-                        ref={el => { tooltips.set(5, 'Regenerate positions', el, 'left') }}
+                        ref={el => { tooltips.set(6, 'Regenerate positions', el, 'left') }}
                         onClick={() => actions.regenPositions()}>
                             <img src={regenerateImg} alt='regen'/>
                         </button>

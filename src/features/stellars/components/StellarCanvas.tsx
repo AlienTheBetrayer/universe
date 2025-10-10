@@ -7,7 +7,7 @@ import { useStellarContextMenu } from "../hooks/useStellarContextMenu"
 import { useStellarContext } from "../context/StellarContext"
 
 export const StellarCanvas = () => {
-    const [state, setState] = useStellarContext();
+    const [, setState] = useStellarContext();
     const contextMenu = useStellarContextMenu();
 
     const handle = (e: React.MouseEvent<HTMLDivElement>) => {

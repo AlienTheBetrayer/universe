@@ -1,6 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { Mesh, MeshPhysicalMaterial, Vector3 } from "three";
+import { Mesh } from "three";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarPositions } from "../hooks/useStellarPositions";
 import { useStellarCamera } from "../hooks/useStellarCamera";
