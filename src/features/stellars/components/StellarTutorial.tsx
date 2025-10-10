@@ -39,28 +39,32 @@ export const StellarTutorial = () => {
         }
     ];
 
+    // hotkeys to go back and forth between the pages
     const previous = () => setSelected(prev => prev > 0 ? prev - 1 : prev);
     const next = () => setSelected(prev => prev < pages.length - 1 ? prev + 1 : prev);
    
     useHotkeys([
-        { hotkey: 'Escape', action: () => setShown(false) },
+        { hotkey: 'Escape', action: () => { setShown(false); console.log('cha')} },
         { hotkey: 'ArrowLeft', action: () => previous()},
         { hotkey: 'ArrowRight', action: () => next()}
     ]);
 
+    // if we had never seen the tutorial = show it when we flip at least one page
     useEffect(() => {
-        if(selected > 0)
+        if(selected > 0 && localStore.tutorialSeen === false)
             localStore.toggleTutorialSeen(true);
     }, [selected]);
 
+    // sync context and our state
     useEffect(() => {
+        console.log(shown);
         if(shown)
             shownOnce.current = true;
         setState(prev => ({ ...prev, tutorialVisible: shown }));
     }, [shown]);
 
     useEffect(() => {
-        setShown(state.tutorialVisible);
+        setShown(prev => state.tutorialVisible !== prev ? state.tutorialVisible : prev);
     }, [state.tutorialVisible]);
 
     const tooltips = useTooltips();
@@ -68,6 +72,7 @@ export const StellarTutorial = () => {
     return (
         <>
             { tooltips.render() }
+
             <AnimatePresence>
                 { shown && (
                     <motion.div
