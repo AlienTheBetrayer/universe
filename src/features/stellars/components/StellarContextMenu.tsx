@@ -52,7 +52,7 @@ export const StellarContextMenu = ({ ref, onInteract }: Props) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}>
             { actions.clearMessageBox.render() }
-            <h3>Context menu!</h3>
+            <h3>Planet menu</h3>
 
             <button className='stellar-context-button'
             onClick={handleCreate}>

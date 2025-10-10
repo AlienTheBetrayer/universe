@@ -19,6 +19,7 @@
 @media (max-width: 640px) {
     .stellar-tutorial-main {
         gap: 1rem;
+        margin-bottom: 8rem;
     }
 }
 
@@ -34,16 +35,6 @@
     overflow: hidden;
 }
 
-@media (max-width: 640px) {
-    .stellar-tutorial-card {
-        width: 200px;
-        min-height: 400px;
-    }
-}
-
-.stellar-tutorial-card-image {
-}
-
 .stellar-tutorial-card-image img {
     width: 100%;
     height: 100%;
@@ -55,27 +46,22 @@
     flex-direction: column;
     padding: 1rem;
     gap: 0.5rem;
+    text-align: center;
 }
 
 /* selected idx on top */
 .stellar-tutorial-idx {
     font-size: 12rem;
     position: absolute;
-    bottom: 2rem;
+    bottom: 0rem;
     pointer-events: none;
 }
 
-/* buttons */
+/* general buttons */
 .stellar-tutorial-container button {
     position: relative;
     padding: 1.5rem;
     border-radius: 200px;
-}
-
-@media (max-width: 640px) {
-    .stellar-tutorial-main button {
-        padding: 0.7rem;
-    }
 }
 
 .stellar-tutorial-container .stellar-tutorial-skip-button {
@@ -85,16 +71,38 @@
     padding: 1rem 2rem;
 }
 
+/* mobile buttons */
+.stellar-tutorial-container .stellar-tutorial-mobile-button {
+    position: absolute;
+    display: none;
+    bottom: 7rem;
+    padding: 2rem;
+    font-size: 2rem;
+}
+
+.stellar-tutorial-container .stellar-tutorial-left {
+    left: 1rem;
+}
+
+.stellar-tutorial-container .stellar-tutorial-right {
+    right: 1rem;
+}
+
+@media (max-width: 640px) {
+    .stellar-tutorial-pc-button {
+        display: none;   
+    }
+
+    .stellar-tutorial-container .stellar-tutorial-mobile-button {
+        display: flex;
+    }
+}
+
+
 /* hotkey tooltips */
 .stellar-tutorial-tooltip {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     bottom: 0.2rem;
-}
-
-@media (max-width: 640px) {
-    .stellar-tutorial-tooltip {
-        display: none;
-    }
 }
