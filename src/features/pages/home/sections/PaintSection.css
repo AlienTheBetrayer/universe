@@ -1,8 +1,0 @@
-.paint-container {
-    position: relative;
-    border-radius: 64px;
-    overflow: hidden;
-    background-color: var(--background-2-transparent);
-    width: 100%;
-    min-height: 600px;
-}
