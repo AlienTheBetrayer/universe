@@ -1,13 +1,12 @@
 import './StellarUI.css';
 import { useStellarContext } from '../context/StellarContext';
-import { AnimatePresence, motion, useElementScroll } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 
 import regenerateImg from '../assets/regenerate.svg';
 import tutorialImg from '../assets/tutorial.svg';
 import clearImg from '../assets/clear.svg';
-import createImg from '../assets/create.svg';
 import moveImg from '../assets/move.svg';
 
 import { useStellarActions } from '../hooks/useStellarActions';
@@ -105,18 +104,9 @@ export const StellarUI = () => {
                             ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
                             onClick={() => {
                                 setIsWaiting(prev => !prev);
-                                actions.setWaitingPopupText('Click on an orb you want to move.');
+                                actions.setWaitingPopupText(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there']);
                             }}>
                                 <img src={moveImg} alt='move'/>
-                            </button>
-
-                            <button className='stellar-button stellar-button-action'
-                            ref={el => { tooltips.set(5, 'Create an orb', el, 'right') }}
-                            onClick={() => {
-                                setIsWaiting(prev => !prev);
-                                actions.setWaitingPopupText('Click on empty space to create an orb there.');
-                            }}>
-                                <img src={createImg} alt='create'/>
                             </button>
                         </>
                     )}

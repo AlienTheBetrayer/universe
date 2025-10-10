@@ -2,10 +2,10 @@ import './StellarWaitingPopup.css';
 import { motion } from 'motion/react';
 
 interface Props {
-    text?: string;
+    text?: string[];
 }
 
-export const StellarWaitingPopup = ({ text='' }: Props) => {
+export const StellarWaitingPopup = ({ text }: Props) => {
     return (
         <>
             <div className='stellar-waiting-border'/>
@@ -15,7 +15,9 @@ export const StellarWaitingPopup = ({ text='' }: Props) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
                 <h3>Waiting for the <mark>action...</mark></h3>
-                <p>{text}</p>
+                { text?.map((t, idx) => (
+                    <p key={idx} dangerouslySetInnerHTML={{ __html: t}}/>
+                ))}
             </motion.div>
         </>
     )

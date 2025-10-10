@@ -10,18 +10,23 @@ export const StellarCanvas = () => {
     const [, setState] = useStellarContext();
     const contextMenu = useStellarContextMenu();
 
-    const handle = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        
+    const showMenu = () => {
         contextMenu.popup.setShown(false);
         setTimeout(() => contextMenu.popup.setShown(true), 10);
     }
-
+    
     return (
         <>
-            <Canvas style={{ width: '100%', height: '100%'}} camera={{ near: 0.001 }}
-            onContextMenu={handle}
-            onPointerDown={(e) => { if(e.button === 1) e.preventDefault(); }}
+            <Canvas style={{ width: '100%', height: '100%', touchAction: 'none' }} camera={{ near: 0.001 }}
+            onTouchStart={e => {
+                if(e.touches.length >= 2)
+                    showMenu();
+            }}
+            onContextMenu={(e) => { e.preventDefault(); showMenu(); }}
+            onPointerDown={(e) => { 
+                if(e.button === 1)
+                    e.preventDefault();
+             }}
             onClick={() => {
                     contextMenu.popup.setShown(false); 
                     setState(prev => ({ ...prev, moving: false }));

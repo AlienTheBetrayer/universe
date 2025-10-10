@@ -45,7 +45,7 @@ export const useStellarActions = (contextSelected?: number, onAction?: () => voi
                 clearMessageBox.setShown(false);
             }}/>);
 
-    const [waitingPopupText, setWaitingPopupText] = useState<string>('');
+    const [waitingPopupText, setWaitingPopupText] = useState<string[]>([]);
     const waitingPopup = usePopup(<StellarWaitingPopup text={waitingPopupText}/>, false);
             
     return {
