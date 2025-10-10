@@ -2,10 +2,11 @@ import { useFrame } from "@react-three/fiber";
 import type { MotionValue } from "motion";
 import { useSpring } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { Mesh, MeshPhysicalMaterial } from "three";
+import { Color, Mesh, MeshPhysicalMaterial, type HSL } from "three";
 import { LockParticles } from "./LockParticles";
 import { Group } from "three";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { mx_bilerp_0 } from "three/src/nodes/materialx/lib/mx_noise.js";
 
 
 interface Props {
@@ -43,14 +44,20 @@ export const LockFigure = ({ progress }: Props) => {
             groupRef.current.rotation.z = rotation * 5 + t / 30;
             groupRef.current.scale.set(1 + rotation, 1 + rotation, 1 + rotation);
 
+            const color = new Color(progressValue, 0, (1 - progressValue));
+            const hsl: HSL = { h: 0, s: 0, l: 0};
+            color.getHSL(hsl);
+            hsl.s *= 0.7;
+            color.setHSL(hsl.h, hsl.s, hsl.l);
+            
             // main sphere color based on progress
-            mainMaterial.color.r = progressValue * 2;
-            mainMaterial.color.b = (1 - progressValue) * 2;
+
+    
+            mainMaterial.color.copy(color);
 
             // orbit rotation + orbit sphere color based on progress
             orbitRef.current.position.set(Math.sin(t) * 1.25, Math.cos(t) * 1.25, Math.sin(t) * 1.25);
-            orbitMaterial.color.r = progressValue * 8;
-            orbitMaterial.color.b = (1 - progressValue) * 8;
+            orbitMaterial.color.copy(color);
         }
     });
 

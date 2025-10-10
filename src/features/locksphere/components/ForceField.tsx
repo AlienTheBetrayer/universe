@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import type { MotionValue } from "motion";
 import { useRef } from "react"
-import { Mesh, MeshPhysicalMaterial } from "three"
+import { Color, Mesh, MeshPhysicalMaterial, type HSL } from "three"
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 interface Props {
@@ -22,8 +22,14 @@ export const ForceField = ({ progress }: Props) => {
             ref.current.rotation.y += 0.001 + progressValue / 100;
             ref.current.rotation.z += 0.001 + progressValue / 100;
             
-            material.color.r = progressValue;
-            material.color.b = 1 - progressValue;
+            const color = new Color(progressValue, 0, (1 - progressValue));
+            const hsl: HSL = { h: 0, s: 0, l: 0};
+            color.getHSL(hsl);
+            hsl.s *= 0.7;
+            color.setHSL(hsl.h, hsl.s, hsl.l);
+
+            material.color.copy(color);
+
             
             ref.current.scale.set(scale, scale, scale);
         }
