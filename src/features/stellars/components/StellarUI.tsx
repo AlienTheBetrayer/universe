@@ -20,6 +20,7 @@ export const StellarUI = () => {
     const isSelected = state.selected !== false;
     const actions = useStellarActions();
     const tooltips = useTooltips();
+
     const [isWaiting, setIsWaiting] = useState<boolean>(false);
 
     useEffect(() => {
@@ -32,6 +33,7 @@ export const StellarUI = () => {
 
     useEffect(() => {
         actions.waitingPopup.setShown(isWaiting);
+        setState(prev => ({ ...prev, isMoveWaiting: isWaiting }));
     }, [isWaiting]);
 
     return (
@@ -98,6 +100,7 @@ export const StellarUI = () => {
                             ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
                             onClick={() => {
                                 setIsWaiting(prev => !prev);
+                                actions.setWaitingPopupText('Click on an orb you want to move.');
                             }}>
                                 <img src={moveImg} alt='move'/>
                             </button>
@@ -106,6 +109,7 @@ export const StellarUI = () => {
                             ref={el => { tooltips.set(5, 'Create an orb', el, 'right') }}
                             onClick={() => {
                                 setIsWaiting(prev => !prev);
+                                actions.setWaitingPopupText('Click on empty space to create an orb there.');
                             }}>
                                 <img src={createImg} alt='create'/>
                             </button>

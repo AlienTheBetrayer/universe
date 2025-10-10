@@ -21,6 +21,7 @@ export interface StellarState {
     hovered: number | false;
     moving: number | false;
     editing: boolean;
+    isMoveWaiting: boolean,
     tutorialVisible: boolean;
     messageBoxVisible: boolean;
     viewport: { width: number, height: number };
@@ -64,6 +65,7 @@ export const StellarProvider = ({ children }: Props) => {
         selected: false,
         hovered: false,
         moving: false,
+        isMoveWaiting: false,
         editing: false,
         messageBoxVisible: false,
         viewport: { width: 0, height: 0 },

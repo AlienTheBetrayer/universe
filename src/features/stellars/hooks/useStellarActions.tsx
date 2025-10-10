@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useStellarContext } from "../context/StellarContext";
 import { useStellarHover } from "./useStellarHover";
 import { useStellarPositions } from "./useStellarPositions";
@@ -45,12 +45,13 @@ export const useStellarActions = (contextSelected?: number, onAction?: () => voi
                 clearMessageBox.setShown(false);
             }}/>);
 
-    const waitingPopup = usePopup(<StellarWaitingPopup/>, false);
+    const [waitingPopupText, setWaitingPopupText] = useState<string>('');
+    const waitingPopup = usePopup(<StellarWaitingPopup text={waitingPopupText}/>, false);
             
     return {
         regenPositions,
         hover,
         clearMessageBox,
-        waitingPopup
+        waitingPopup, setWaitingPopupText
     };
 }

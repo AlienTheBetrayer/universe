@@ -4,17 +4,23 @@
     100% { opacity: 0 }
 }
 
-.stellar-waiting-container {
+.stellar-waiting-border {
     position: absolute;
     inset: 0;
     border: 3px solid var(--foreground);
     pointer-events: none;
-    animation: 2s ease-in-out infinite waiting;
+    animation: 1s ease-in-out infinite waiting;
 }
 
-.stellar-waiting-text {
+.stellar-waiting-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 6rem;
+    
+    text-align: center;
 }

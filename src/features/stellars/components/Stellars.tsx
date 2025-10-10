@@ -72,7 +72,14 @@ export const Stellars = () => {
                 </mesh>
 
                 <mesh
-                onClick={() => setState(prev => ({ ...prev, selected: prev.selected === stellar.idx ? false : stellar.idx }))}
+                onClick={() => {
+                    if(state.isMoveWaiting === false) {
+                        setState(prev => ({ ...prev, selected: prev.selected === stellar.idx ? false : stellar.idx }));
+                    } else {
+                        setState(prev => ({ ...prev, moving: prev.moving === stellar.idx ? false : stellar.idx }))
+                    }
+
+                }}
                 onPointerDown={(e) => { if(e.button === 1 && state.selected === false) setState(prev => ({ ...prev, moving: prev.moving === stellar.idx ? false : stellar.idx })) }}>
                     <sphereGeometry args={[0.2]}/>
                     <meshPhysicalMaterial visible={false}/>
