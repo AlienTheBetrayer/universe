@@ -11,7 +11,7 @@ import moveImg from '../assets/move.svg';
 
 import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useHotkeys } from '../../../hooks/useHotkeys';
 
 export const StellarUI = () => {
@@ -20,24 +20,24 @@ export const StellarUI = () => {
     const actions = useStellarActions();
     const tooltips = useTooltips();
 
-    const [isWaiting, setIsWaiting] = useState<boolean>(false);
-
+    console.log('rerender');
+    // state syncing with the visibility of the clear message box to prevent hotkeys
     useEffect(() => {
         setState(prev => ({ ...prev, messageBoxVisible: actions.clearMessageBox.shown }));
     }, [actions.clearMessageBox.shown]);
 
+    // escape hotkey to quit the waiting on action mode
     useHotkeys([
-        { hotkey: 'Escape', action: () => setIsWaiting(false) }
+        { hotkey: 'Escape', action: () => { actions.waitingPopup.setShown(false); setState(prev => ({ ...prev, isMoveWaiting: false })); }}
     ]);
 
+    // update internal state (hence the visibility of the on action popup and state) 
+    // as soon as we click again(meaning the movement has finished)
     useEffect(() => {
-        actions.waitingPopup.setShown(isWaiting);
-        setState(prev => ({ ...prev, isMoveWaiting: isWaiting }));
-    }, [isWaiting]);
-
-    useEffect(() => {
-        if(state.moving === false)
-            setIsWaiting(false);
+        if(state.moving === false) {
+            actions.waitingPopup.setShown(false);
+            setState(prev => ({ ...prev, isMoveWaiting: false }));
+        }
     }, [state.moving]);
 
     return (
@@ -103,7 +103,8 @@ export const StellarUI = () => {
                             <button className='stellar-button stellar-button-action'
                             ref={el => { tooltips.set(4, 'Move an orb', el, 'right') }}
                             onClick={() => {
-                                setIsWaiting(prev => !prev);
+                                actions.waitingPopup.setShown(prev => !prev);
+                                setState(prev => ({ ...prev, isMoveWaiting: !prev.isMoveWaiting }));
                                 actions.setWaitingPopupText(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there']);
                             }}>
                                 <img src={moveImg} alt='move'/>

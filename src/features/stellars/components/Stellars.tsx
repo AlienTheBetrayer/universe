@@ -51,7 +51,7 @@ export const Stellars = () => {
 
             setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
                 stellar.idx === state.moving ? { ...stellar, x: newX, y: newY } : stellar
-            )}))
+            )}));
         }
     });
 
