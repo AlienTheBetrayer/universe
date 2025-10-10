@@ -19,16 +19,14 @@ export const StellarCard = ({ idx, side, className='' }: CardProps) => {
     const isMobile = useMediaQuery(768);
     
     const stellar = state.stellars.find(s => s.idx === idx);
-    if(stellar === undefined)
-        return null;
     
     // actual card content & updating it
     const [heading, setHeading] = useState<string>((side === 'first' ? stellar?.content?.firstTitle : stellar?.content?.secondTitle) ?? '');
     const [description, setDescription] = useState<string>((side === 'first' ? stellar?.content?.firstDescription : stellar?.content?.secondDescription) ?? '');
 
     useEffect(() => {
-        setHeading(side === 'first' ? stellar?.content?.firstTitle : stellar?.content.secondTitle);
-        setDescription(side === 'first' ? stellar?.content?.firstDescription : stellar?.content.secondDescription);
+        setHeading((side === 'first' ? stellar?.content?.firstTitle : stellar?.content.secondTitle) ?? '');
+        setDescription((side === 'first' ? stellar?.content?.firstDescription : stellar?.content.secondDescription) ?? '');
     }, [idx]);
 
     // hotkey interruption prevention & context update content

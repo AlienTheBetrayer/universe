@@ -9,6 +9,7 @@ import tutorialImg from '../assets/tutorial.svg';
 import clearImg from '../assets/clear.svg';
 import { useStellarActions } from '../hooks/useStellarActions';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
+import { useEffect } from 'react';
 
 export const StellarUI = () => {
     const [state, setState] = useStellarContext();
@@ -16,6 +17,10 @@ export const StellarUI = () => {
     const actions = useStellarActions();
 
     const tooltips = useTooltips();
+
+    useEffect(() => {
+        setState(prev => ({ ...prev, messageBoxVisible: actions.clearMessageBox.shown }));
+    }, [actions.clearMessageBox.shown]);
 
     return (
         <>
@@ -65,10 +70,7 @@ export const StellarUI = () => {
                     <button className='stellar-button stellar-button-action'
                     ref={el => { tooltips.set(2, isSelected ? 'Wipe this orb' : 'Wipe all orbs', el, 'right') }}
 
-                    onClick={() => {
-                        actions.clearMessageBox.setShown(true);
-                        setState(prev => ({ ...prev, messageBoxVisible: true }))
-                    }}>
+                    onClick={() => actions.clearMessageBox.setShown(true)}>
                         <img src={clearImg} alt='clear'/>
                     </button>
 

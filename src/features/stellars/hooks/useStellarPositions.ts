@@ -21,7 +21,7 @@ export const useStellarPositions = () => {
             const tween = gsap.to(obj, {
                 x: (Math.random() - 0.5) * state.viewport.width * 0.9,
                 y: (Math.random() - 0.5) * state.viewport.height * 0.7,
-                duration: 4 * (1 + Math.random()),
+                duration: 2 * (1 + Math.random()),
                 ease: 'back.inOut',
                 onUpdate: () => setState(prev => ({ ...prev, stellars: prev.stellars.map(stellar => 
                     stellar.idx === obj.idx ? { ...stellar, x: xy.find(e => e.idx === obj.idx)!.x, y: xy.find(e => e.idx === obj.idx)!.y } : stellar
