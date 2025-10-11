@@ -1,0 +1,19 @@
+.paint-ui-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.paint-ui-bottom-bar {
+    display: flex;
+    gap: 0.5rem;
+    
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.paint-ui-container button {
+    pointer-events: all;
+}

@@ -18,7 +18,7 @@
     transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .sphere-canvas-lock {
         margin-top: 70%;
     }

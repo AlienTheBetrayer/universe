@@ -1,8 +1,18 @@
 .paint-container {
+    display: grid;
+    place-items: center;
+
     position: relative;
-    border-radius: 64px;
-    overflow: hidden;
-    background-color: var(--background-2-transparent);
     width: 100%;
     min-height: 600px;
+    
+    border-radius: 64px;
+    overflow: hidden;
+    background-color: var(--background-3-transparent);
+}
+
+.paint-container canvas {
+    touch-action: none;
+    height: 100%;
+    width: 100%;
 }

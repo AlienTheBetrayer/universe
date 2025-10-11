@@ -32,21 +32,19 @@ export const LockSection = () => {
 
     return (
         <RevealingContainer>
+            <section ref={scrollRef} className='sphere-canvas-container'>
+                <div className='sphere-canvas-lock'>
+                    <LockCanvas ref={scrollRef}/>
 
-        <section ref={scrollRef} className='sphere-canvas-container'>
-            <div className='sphere-canvas-lock'>
-                <LockCanvas ref={scrollRef}/>
+                    <div className='sphere-canvas-typewriter'>
+                        <ArrayTypewriter as='h2' scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}/>
+                    </div>
 
-                <div className='sphere-canvas-typewriter'>
-                    <ArrayTypewriter as='h2' scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}/>
+                    <div className='sphere-canvas-heading'>
+                        <h2>Moving in <mark>space</mark></h2>
+                    </div>
                 </div>
-
-                <div className='sphere-canvas-heading'>
-                    <h2>Moving in <mark>space</mark></h2>
-                </div>
-            </div>
-        </section>
+            </section>
         </RevealingContainer>
-
     )
 }
