@@ -235,6 +235,7 @@ hr {
     margin: 0 auto;
     margin-top: 4rem;
     padding: 1rem;
+    gap: 2rem;
 }
 
 @media (max-width: 640px) {

@@ -73,7 +73,6 @@ export const HorizontalSection = () => {
     return (
         <RevealingContainer>
             <section ref={sectionRef} className='horizontal-section container'>
-
                 <div className='horizontal-lock'>
                     <h2>Horizontal <mark>catalogue</mark></h2>
                     

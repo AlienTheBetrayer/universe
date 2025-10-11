@@ -1,11 +1,23 @@
-import React, { useEffect, useState, type RefObject } from "react";
+import React, { useEffect, useRef, useState, type RefObject } from "react";
 import { cssVariable } from "../../../utils/cssVariable";
 import { useLocalStore } from "../../../zustand/localStore";
 
-interface Pos {
+interface Vector2 {
     x: number;
     y: number;
 }
+
+interface Brush {
+    lineCap: CanvasLineCap;
+    lineColor: string;
+    lineWidth: number;
+}
+
+interface Path { 
+    lines: Vector2[]; 
+    brush: Brush;
+}
+
 
 type EventType = React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>;
 
@@ -20,10 +32,13 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         return { x, y };
     };
 
-    const [isDrawing, setIsDrawing] = useState<boolean>(false);
-    const [currentPath, setCurrentPath] = useState<Pos[]>([]);
-    const [paths, setPaths] = useState<Pos[][]>([]);
     const localStore = useLocalStore();
+    const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+
+    // drawing states
+    const [isDrawing, setIsDrawing] = useState<boolean>(false);
+    const [currentPath, setCurrentPath] = useState<Path | null>(null);
+    const [paths, setPaths] = useState<Path[]>([]);
 
     // theme syncing
     useEffect(() => {
@@ -36,6 +51,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
             if(canvasRef.current && containerRef.current) {
                 canvasRef.current.width = containerRef.current.clientWidth;
                 canvasRef.current.height = containerRef.current.clientHeight;
+                ctxRef.current = canvasRef.current.getContext('2d');
             }
             redraw();
         }
@@ -49,31 +65,33 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     // user functions
     const start = (e: EventType) => {
         setIsDrawing(true);
-        const pos = getPos(e);
-        setCurrentPath([pos]);
+        setCurrentPath({
+            lines: [getPos(e)],
+            brush: { // get this from ui settings
+                lineCap: 'round',
+                lineWidth: 1,
+                lineColor: 'theme'
+            }
+        });
     }
 
     const proceed = (e: EventType) => {
         if (!isDrawing)
             return;
 
-        if(canvasRef.current) {
+        if(canvasRef.current && ctxRef.current) {
             const pos = getPos(e);
-            setCurrentPath(prev => [...prev, pos]);
+            setCurrentPath(prev => ({ ...prev!, lines: [...prev!.lines, pos] }));
+            ctxRef.current.lineWidth = currentPath?.brush.lineWidth!;
+            ctxRef.current.lineCap = currentPath?.brush.lineCap!;
+            ctxRef.current.strokeStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
 
-            const ctx = canvasRef.current.getContext("2d");
-            if(ctx) {
-                ctx.lineWidth = 1;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = cssVariable('--foreground-last');
-
-                const last = currentPath.at(-1);
-                if(last) {
-                    ctx.beginPath();
-                    ctx.moveTo(last.x, last.y);
-                    ctx.lineTo(pos.x, pos.y);
-                    ctx.stroke();
-                }
+            const last = currentPath?.lines.at(-1);
+            if(last) {
+                ctxRef.current.beginPath();
+                ctxRef.current.moveTo(last.x, last.y);
+                ctxRef.current.lineTo(pos.x, pos.y);
+                ctxRef.current.stroke();
             }
         }
     }
@@ -83,39 +101,35 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         if(!isDrawing)
             return;
 
-        setCurrentPath([]);
-        setPaths(prev => [...prev, currentPath]);
+        setCurrentPath(null);
+        setPaths(prev => [...prev, currentPath!]);
         setIsDrawing(false);
     }
 
     const clear = () => {
-        if(canvasRef.current) {
-            const ctx = canvasRef.current.getContext('2d');
-            if(ctx)
-                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-        }
+        if(canvasRef.current && ctxRef.current)
+            ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     }
 
     const redraw = () => {
-        if(canvasRef.current) {
-            const ctx = canvasRef.current.getContext("2d");
-            if(ctx) {
-                ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-                ctx.lineWidth = 1;
-                ctx.lineCap = 'round';
-                ctx.strokeStyle = cssVariable('--foreground-last');
+        if(canvasRef.current && ctxRef.current) {
+            ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-                paths.forEach(path => {
-                    ctx.beginPath();
-                    for(let i = 1; i < path.length; ++i) {
-                        ctx.moveTo(path[i - 1].x, path[i - 1].y);
-                        ctx.lineTo(path[i].x, path[i].y);
-                    }
-                    ctx.stroke();
-                });
-            }
+            paths.forEach(path => {
+                if(ctxRef.current) {
+                    ctxRef.current.lineWidth = path.brush.lineWidth;
+                    ctxRef.current.lineCap = path.brush.lineCap;
+                    ctxRef.current.strokeStyle = path.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : path.brush.lineColor!;
+
+                    ctxRef.current.beginPath();
+                        for(let i = 1; i < path.lines.length; ++i) {
+                            ctxRef.current.moveTo(path.lines[i - 1].x, path.lines[i - 1].y);
+                            ctxRef.current.lineTo(path.lines[i].x, path.lines[i].y);
+                        }
+                    ctxRef.current.stroke();
+                }
+            });
         }
-
     }
 
     return {

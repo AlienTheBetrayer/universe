@@ -6,6 +6,7 @@ export const PaintSection = () => {
     return (
         <RevealingContainer>
             <section className='container'>
+                <h2><mark>Painting & Drawing</mark> abilities</h2>
                 <Paint/>
             </section>
         </RevealingContainer>
