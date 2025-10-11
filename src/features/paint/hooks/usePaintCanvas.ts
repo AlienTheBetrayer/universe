@@ -69,6 +69,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
             ctxRef.current.lineWidth = currentPath?.brush.lineWidth!;
             ctxRef.current.lineCap = currentPath?.brush.lineCap!;
             ctxRef.current.strokeStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
+            ctxRef.current.fillStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
         }
     }, [currentPath?.brush]);
     
@@ -146,6 +147,6 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         start,
         proceed,
         stop,
-        clear, redraw
+        clear
     };
 }

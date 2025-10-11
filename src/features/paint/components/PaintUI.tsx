@@ -48,24 +48,23 @@ export const PaintUI = ({ controller }: Props) => {
                         <>
                             <Button
                             key={idx}
-                            ref={el => tooltips.set(idx, button.tooltip, el, 'right')}
+                            ref={el => tooltips.set(idx + 1, button.tooltip, el, 'right')}
                             style={{ backgroundColor: button.color}}
                             className={`${selectedColor === idx ? 'paint-ui-selected-color-button' : ''} ${button.color === 'theme' ? 'paint-ui-color-button-theme' : ''}`}
                             onClick={() => setSelectedColor(prev => prev !== idx ? idx : prev)}/>
 
-                            <hr className={`${selectedColor === idx ? 'paint-ui-selected-hr' : ''}`}/>
+                            <hr key={`${idx}-hr`} className={`${selectedColor === idx ? 'paint-ui-selected-hr' : ''}`}/>
                         </>
                     ))}
                 </div>
 
                 <div className='paint-ui-bottom-bar'>
-                    <Button onClick={() => controller.redraw()}>
-                        Redraw
-                    </Button>
                     <hr className='paint-ui-vertical-hr'/>
-                    <Button onClick={() => controller.clear()}>
+                    <Button onClick={() => controller.clear()}
+                        ref={el => tooltips.set(0, 'Wipe all your drawings', el, 'up')}>
                         Clear
                     </Button>
+                    <hr className='paint-ui-vertical-hr'/>
                 </div>
             </div>
         </>
