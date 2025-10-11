@@ -4,8 +4,6 @@ import type { usePaintCanvas } from '../hooks/usePaintCanvas';
 import './PaintUI.css';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { usePaintContext } from '../context/PaintContext';
-import { cssVariable } from '../../../utils/cssVariable';
-import { useLocalStore } from '../../../zustand/localStore';
 
 interface Props {
     controller: ReturnType<typeof usePaintCanvas>;
@@ -33,8 +31,7 @@ export const PaintUI = ({ controller }: Props) => {
 
     const [selectedColor, setSelectedColor] = useState<number>(0);
     const tooltips = useTooltips();
-    const [context, setContext] = usePaintContext();
-    const { theme } = useLocalStore();
+    const [, setContext] = usePaintContext();
 
     useEffect(() => {
         setContext(prev => ({ ...prev, selectedColor: buttons[selectedColor].color }));

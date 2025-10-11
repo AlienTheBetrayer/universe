@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import './Paint.css';
 import { usePaintCanvas } from '../hooks/usePaintCanvas';
 import { PaintUI } from './PaintUI';
-import { PaintProvider } from '../context/PaintContext';
 
 export const Paint = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
