@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, type RefObject } from "react";
 import { cssVariable } from "../../../utils/cssVariable";
 import { useLocalStore } from "../../../zustand/localStore";
+import { usePaintContext } from "../context/PaintContext";
 
 interface Vector2 {
     x: number;
@@ -34,10 +35,11 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
 
     const localStore = useLocalStore();
     const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+    const [context, ] = usePaintContext();
 
     // drawing states
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
-    const [currentPath, setCurrentPath] = useState<Path | null>(null);
+    const [currentPath, setCurrentPath] = useState<Path | null>(null); // causing lots of rerenders
     const [paths, setPaths] = useState<Path[]>([]);
 
     // theme syncing
@@ -61,6 +63,14 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         window.addEventListener('resize', handle);
         return () => window.removeEventListener('resize', handle);
     }, [paths]); 
+
+    useEffect(() => {
+       if(ctxRef.current) {
+            ctxRef.current.lineWidth = currentPath?.brush.lineWidth!;
+            ctxRef.current.lineCap = currentPath?.brush.lineCap!;
+            ctxRef.current.strokeStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
+        }
+    }, [currentPath?.brush]);
     
     // user functions
     const start = (e: EventType) => {
@@ -70,7 +80,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
             brush: { // get this from ui settings
                 lineCap: 'round',
                 lineWidth: 1,
-                lineColor: 'theme'
+                lineColor: context.selectedColor
             }
         });
     }
@@ -82,9 +92,6 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         if(canvasRef.current && ctxRef.current) {
             const pos = getPos(e);
             setCurrentPath(prev => ({ ...prev!, lines: [...prev!.lines, pos] }));
-            ctxRef.current.lineWidth = currentPath?.brush.lineWidth!;
-            ctxRef.current.lineCap = currentPath?.brush.lineCap!;
-            ctxRef.current.strokeStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
 
             const last = currentPath?.lines.at(-1);
             if(last) {
@@ -107,8 +114,11 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     }
 
     const clear = () => {
-        if(canvasRef.current && ctxRef.current)
+        if(canvasRef.current && ctxRef.current) {
             ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+            setPaths([]);
+            setCurrentPath(null);
+        }
     }
 
     const redraw = () => {

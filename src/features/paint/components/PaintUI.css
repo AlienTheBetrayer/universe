@@ -1,19 +1,67 @@
+/* ui wrapper container  */
 .paint-ui-container {
     position: absolute;
     inset: 0;
     pointer-events: none;
 }
 
+/* left bar */
+.paint-ui-left-bar {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0.5rem;
+    border-radius: 32px;
+
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background-color: var(--background-3-transparent);
+}
+
+/* bottom bar */
 .paint-ui-bottom-bar {
     display: flex;
     gap: 0.5rem;
+    padding: 0.5rem 2rem;
+    border-radius: 32px;
+    height: 48px;
     
     position: absolute;
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
+
+    background-color: var(--background-3-transparent);
 }
 
+/* global styles */
 .paint-ui-container button {
     pointer-events: all;
+    transition: 0s;
+}
+
+.paint-ui-color-button-theme {
+    background-color: var(--foreground-last) !important;
+}
+
+.paint-ui-left-bar hr {
+    border: 1px solid var(--background-7);
+    margin: 0.5rem 0;
+    transition: 0.75s;
+    border-radius: 640px;
+}
+
+.paint-ui-selected-hr {
+    border: 1px solid var(--foreground-last) !important;
+}
+
+.paint-ui-vertical-hr {
+    margin: 0 !important;
+    width: 1px;
+    height: 100%;
+    border: none;
+    background-color: var(--background-7);
+    border-radius: 640px;
 }
