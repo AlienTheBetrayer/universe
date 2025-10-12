@@ -65,7 +65,7 @@ export const PaintUI = ({ controller }: Props) => {
             <div className='paint-ui-container' ref={containerRef}>
 
                 <div className='paint-ui-left-bar'>
-                    <HotkeyTooltip className='paint-ui-left-bar-previous-hotkey' hotkeys={['←']}/>
+                    <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['←']}/>
                     { buttons.map((button, idx) => (
                         <>
                             <Button
@@ -75,10 +75,7 @@ export const PaintUI = ({ controller }: Props) => {
                             onClick={() => setSelectedColor(prev => prev !== idx ? idx : prev)}>
                                 <div
                                 style={{ backgroundColor: button.color}}
-                                className={`${button.color === 'theme' ? 'paint-ui-color-button-theme' : ''}`}
-                                >
-
-                                </div>
+                                className={`${button.color === 'theme' ? 'paint-ui-color-button-theme' : ''}`}/>
 
                             </Button>
 
@@ -88,7 +85,7 @@ export const PaintUI = ({ controller }: Props) => {
                         </>
                     ))}
 
-                    <HotkeyTooltip className='paint-ui-left-bar-next-hotkey' hotkeys={['→']}/>
+                    <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['→']}/>
                 </div>
 
                 <div className='paint-ui-bottom-bar'>

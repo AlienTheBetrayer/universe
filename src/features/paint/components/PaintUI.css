@@ -45,19 +45,11 @@
 }
 
 /* hotkeys */
-/* .paint-ui-left-bar-previous-hotkey {
-    position: absolute;
-    bottom: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+@media (max-width: 768px) {
+    .paint-ui-hotkey {
+        display: none;
+    }
 }
-
-.paint-ui-left-bar-next-hotkey {
-    position: absolute;
-    top: 0.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-} */
 
 /* all buttons */
 .paint-ui-container button {

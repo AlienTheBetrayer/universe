@@ -24,6 +24,12 @@
     }
 }
 
+@media (max-width: 640px) {
+    .sphere-canvas-lock {
+        margin-top: 100%;
+    }
+}
+
 .sphere-canvas-typewriter {
     position: absolute;
     top: 50%;

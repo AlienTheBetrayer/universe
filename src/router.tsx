@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { HomePage } from "./features/pages/home/pages/HomePage";
-import { App } from "./features/pages/app/pages/App";
+import { Forge } from "./features/pages/forge/pages/Forge";
 import { StellarNetwork } from "./features/pages/stellarnetwork/pages/StellarNetwork";
 import { Contact } from "./features/pages/contact/pages/Contact";
 
@@ -15,8 +15,8 @@ export const router = createBrowserRouter([
         element: <HomePage/>
     },
     {
-        path: '/app',
-        element: <App/>
+        path: '/forge',
+        element: <Forge/>
     },
     {
         path: '/contact',

@@ -28,11 +28,11 @@ export const HeaderMenu = ({ onInteract, className }: Props) => {
             
             <div>
                 <ToggleButton value={theme == 'light'} onToggled={() => toggleTheme()} />
-                <LinkButton className='header-stellar-button' to='/app'>
+                <LinkButton className='header-stellar-button' to='/stellarnetwork'>
                     <img src={stellarImg} alt=''/>
                     Stellar Network
                 </LinkButton>
-                <LinkButton className='header-forge-button' to='/app'>
+                <LinkButton className='header-forge-button' to='/forge'>
                     <img src={launchImg} alt=''/>
                     Forge
                 </LinkButton>
