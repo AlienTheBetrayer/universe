@@ -9,7 +9,7 @@ type HoveredState = [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 
 export const useSphereCardPopup = (hovered: HoveredState, ref: React.RefObject<HTMLElement | null>, title?: string, description?: string) => {
     const copyRef = useRef<HTMLElement>(null);
-    const blur = useBackgroundBlur(false);
+    const blur = useBackgroundBlur(() => {}, false);
 
     // set the hover's card position
     useEffect(() => {

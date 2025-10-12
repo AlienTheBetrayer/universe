@@ -8,7 +8,6 @@
 
 .sphere-canvas-container canvas {
     height: 120vh;
-    cursor: move;
 }
 
 .sphere-canvas-lock {

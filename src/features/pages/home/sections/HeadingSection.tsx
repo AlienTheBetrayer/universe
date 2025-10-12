@@ -14,58 +14,58 @@ export const HeadingSection = () => {
 
     const h1: AnimatedText[] = [
         {
-            text: 'Driving ',
+            text: 'Shaping ',
             type: 'regular'
         },
         {
-            text: 'innovation',
-            type: 'mark' 
+            text: 'vision into reality',
+            type: 'mark'
         },
         {
-            text: ' through strategic projects',
+            text: ' through a decade of craft.',
             type: 'regular'
         }
     ];
 
     const p: AnimatedText[] = [
         {
-            text: 'Applying ',
+            text: 'Translating complex ideas into ',
             type: 'regular'
         },
         {
-            text: 'advanced',
+            text: 'coherent systems',
             type: 'highlight'
         },
         {
-            text: ' design principles and technology ',
+            text: ' that balance design integrity and technical depth, ',
             type: 'regular'
         },
         {
-            text: 'to deliver ',
-            type: 'regular' 
-        },
-        {
-            text: 'high-impact solutions, ',
-            type: 'mark' 
-        },
-        {
-            text: 'while carefully minimizing ',
+            text: 'crafting ',
             type: 'regular'
         },
         {
-            text: 'operational risks',
-            type: 'error' 
+            text: 'meaningful digital experiences ',
+            type: 'mark'
         },
         {
-            text: ', and consistently creating outcomes that creativity, ',
+            text: 'that evolve with purpose — minimizing noise, mitigating ',
             type: 'regular'
         },
         {
-            text: 'technical mastery',
+            text: 'fragile execution',
+            type: 'error'
+        },
+        {
+            text: ', and driving outcomes rooted in clarity, ',
+            type: 'regular'
+        },
+        {
+            text: 'precision',
             type: 'highlight'
         },
         {
-            text: ', and measurable impact.',
+            text: ', and measurable value.',
             type: 'regular'
         }
     ];

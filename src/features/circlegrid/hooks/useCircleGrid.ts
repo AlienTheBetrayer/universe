@@ -1,3 +1,4 @@
+import { useInView } from "motion/react";
 import { useEffect, useState } from "react"
 
 const toMatrix = (arr: number[]): number[][] => {
@@ -10,7 +11,9 @@ const toMatrix = (arr: number[]): number[][] => {
     return matrix;
 }
 
-export const useCircleGrid = () => {
+export const useCircleGrid = (containerRef: React.RefObject<HTMLElement | null>) => {
+    const isVisible = useInView(containerRef);
+    
     // underlying raw data array
     const [gridData, setGridData] = useState<number[]>(
         [1, 2, 3, 4, 5, 6, 7, 8]
@@ -26,6 +29,34 @@ export const useCircleGrid = () => {
 
     // color
     const [coloredIdx, setColoredIdx] = useState<number>(-1);
+
+    // hotkeys
+    useEffect(() => {
+    const handle = (e: KeyboardEvent) => {
+        if(!isVisible)
+            return;
+
+        switch(e.key.toLowerCase()) {
+            case 'arrowleft':
+                unshift();
+            break;
+            case 'arrowright':
+                shift();
+            break;
+            case 'f':
+                reverse();
+            break;
+            case 'r':
+                random();
+            break;
+        }
+    }
+
+    window.addEventListener('keydown', handle);
+    return () => window.removeEventListener('keydown', handle);
+}, [isVisible]);
+
+
 
     // index functions
     const indexOf = (value: number) => {

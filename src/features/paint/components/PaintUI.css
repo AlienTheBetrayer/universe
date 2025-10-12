@@ -22,7 +22,7 @@
 }
 
 .paint-ui-left-bar hr {
-    border: 1px solid var(--background-7);
+    border: 1px solid var(--background-4);
     margin: 0;
     transition: 0.75s;
     border-radius: 640px;
@@ -54,7 +54,7 @@
 /* all buttons */
 .paint-ui-container button {
     pointer-events: all;
-    transition: 0s;
+    transition: 0.3s;
 }
 
 /* color button */
@@ -87,6 +87,6 @@
     width: 1px;
     height: 100%;
     border: none;
-    background-color: var(--background-7);
+    background-color: var(--background-4);
     border-radius: 640px;
 }

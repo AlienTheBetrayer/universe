@@ -1,27 +1,23 @@
 import { useCircleGrid } from '../hooks/useCircleGrid';
 import './CircleGrid.css';
 import { motion } from "motion/react"
-import { useCircleGridHotkeys } from '../hooks/useCircleGridHotkeys';
 import { CircleGridController } from './CircleGridController';
 import { CircleGridNavigation } from './CircleGridNavigation';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
+import { useRef } from 'react';
 
 interface Props {
     controller?: boolean;
 }
 
 export const CircleGrid = ({ controller=true }: Props) => {
-    const grid = useCircleGrid();
-    const hotkeys = useCircleGridHotkeys(grid);
-
+    const containerRef = useRef<HTMLDivElement>(null);
+    const grid = useCircleGrid(containerRef);
     const tooltips = useTooltips();
 
     return (
         <div className='circle-grid'
-        tabIndex={0}
-        onPointerOver={() => hotkeys.setFocused(true)}
-        onBlur={() => { hotkeys.setFocused(false) } }
-        onClick={() => hotkeys.setFocused(true)}>
+        ref={containerRef}>
             { Array.from({ length: 8 }).map((_ ,idx) => (
                 <motion.div
                 className={`circle-grid-element ${idx === grid.coloredIdx ? 'circle-grid-element-selected' : ''}`}

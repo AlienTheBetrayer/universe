@@ -2,6 +2,7 @@ import './Accordion.css';
 import { AnimatePresence, motion } from 'motion/react';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { useAccordion } from '../hooks/useAccordion';
+import { useRef } from 'react';
 
 export interface AccordionItem {
     item: string;
@@ -14,14 +15,14 @@ interface Props {
 }
 
 export const Accordion = ({ items, onSelect }: Props) => {
-    const accordion = useAccordion(items, onSelect);
-    
+    const containerRef = useRef<HTMLDivElement>(null);
+    const accordion = useAccordion(containerRef, items, onSelect);
+
     return (
-        <div className='accordion' 
-        tabIndex={0}
-        onPointerOver={() => accordion.setFocused(true)}
-        onBlur={() => { accordion.setFocused(false) } }
-        onClick={() => accordion.setFocused(true)}>
+        <div 
+        ref={containerRef}
+        className='accordion' 
+        tabIndex={0}>
             <HotkeyTooltip className='accordion-tooltip' hotkeys={['→', '←', 'Esc']}/>
 
             { items.map((item, idx) => (

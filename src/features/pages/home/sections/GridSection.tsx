@@ -7,50 +7,52 @@ import { RevealingContainer } from '../../../revealingcontainer/components/Revea
 
 export const GridSection = () => {
     const hard = [
-    {
-        title: 'React Architecture',
-        description: '<b><mark>Single-handedly</mark></b> built front-end architectures with <b>React</b>, including reusable components, state management, and performance tuning.',
-        hoverDescription: 'Design <b>complete front-end architectures</b> with <i>React</i>. From custom hooks to reusable component libraries, state management, and performance tuning, ensuring <i>scalable and maintainable</i> applications.'
-    },
-    {
-        title: 'TypeScript Mastery',
-        description: 'Use <b>advanced <mark>TypeScript</mark></b> to enforce <b>type safety</b>, reduce <u>errors</u>, and build reliable front-end applications.',
-        hoverDescription: '<b>Leverage TypeScript</b> to enforce <mark>type safety</mark>, reduce <u>bugs</u>, and create highly predictable code. Build complex types, generics, and utility functions for professional-grade reliability.'
-    },
-    {
-        title: 'Motion & 3D',
-        description: 'Build interactive experiences with <b>Framer Motion and <mark>Three.js</mark></b>, combining <i>smooth</i> UI transitions with 3D visuals.',
-        hoverDescription: 'Create <b>immersive interactive experiences</b> using Framer Motion for smooth UI transitions and Three.js for <b>advanced 3D rendering</b>, particle systems, and real-time visual effects.'
-    },
-    {
-        title: 'Scalable Code Practices',
-        description: 'Write modular, maintainable, and scalable code that <mark>balances</mark> readability, performance, and stability.',
-        hoverDescription: 'Follow best practices like SOLID principles, modular design, and consistent coding standards. Write code that\'s easy to scale, easy to read, and <b>built for long-term maintainability.</b>'
-    }
+        {
+            title: 'Advanced React Patterns',
+            description: 'Build <b><mark>scalable UIs</mark></b> with React using reusable <b>hooks, Context, Redux, and Zustand</b>. Focus on performance, <u>accessibility</u>, and <b>maintainable architecture.</b>',
+            hoverDescription: 'Go beyond fundamentals with <b>advanced component patterns</b>, <i>memoization</i> for <mark>rendering efficiency</mark>, and fine-grained <b>state separation</b>. Design <b><u>modular architectures</u></b> that scale with project complexity. Leverage <mark>lazy loading</mark>, <b>dynamic imports</b>, and <i>custom hooks</i> to streamline performance while maintaining clarity and stability.'
+        },
+        {
+            title: 'TypeScript Proficiency',
+            description: 'Use <b><mark>TypeScript</mark></b> for <u>strict types</u>, generics, and unions to <b>ensure</b> predictable, error-free, large-scale code.',
+            hoverDescription: 'Apply <b><mark>type-driven architecture</mark></b> to prevent <u>runtime errors</u> and ensure consistency across layers. Extend logic with <b>custom utility types</b>, <mark>mapped types</mark>, and <i>advanced generics</i> for reusable abstractions. Integrate seamlessly with React and APIs to achieve <b>strong type safety</b> and <i>predictable scalability</i>.'
+        },
+        {
+            title: 'Responsive Design & CSS',
+            description: 'Create <b><mark>adaptive layouts</mark></b> with <b>Grid, Flexbox</b>, and component-driven styling. Fully responsive across all screen sizes.',
+            hoverDescription: 'Adopt a <b><mark>mobile-first strategy</mark></b> using Grid and Flexbox for <i>seamless adaptability</i>. Implement <b>CSS variables</b>, <i>mixins</i>, and <u>design tokens</u> to unify themes across components. Combine tools like <mark>Tailwind</mark>, CSS Modules, and styled-components to deliver <b>clean, consistent, and accessible</b> front-end systems.'
+        },
+        {
+            title: 'Animations, 3D & UX',
+            description: 'Develop <b>motion-rich UIs</b> using <mark>Framer Motion, GSAP, and Three.js.</mark> Blend animation with UX to <b>enhance</b> flow and feedback.',
+            hoverDescription: 'Create <b><mark>immersive interfaces</mark></b> by blending <i>micro-interactions</i> with meaningful motion. Use <b>Framer Motion</b> for declarative animation flow, <mark>GSAP</mark> for timeline precision, and <b>Three.js</b> for <u>real-time 3D experiences</u>. Integrate motion as a <i>functional layer</i> of UX that enhances clarity, storytelling, and emotional engagement.'
+        }
     ];
 
     const soft = [
-    {
-        title: 'English Fluency',
-        description: 'Communicate clearly and effectively in English across <b>written and spoken</b> formats, ensuring precise <mark>understanding</mark> in professional contexts.',
-        hoverDescription: 'Demonstrate advanced English proficiency, enabling smooth <b>collaboration</b>, presentations, and documentation. Articulate complex ideas clearly to <i>international teams</i> and stakeholders, minimizing <mark>misunderstandings</mark>.'
-    },
-    {
-        title: 'Independent Execution',
-        description: 'Take full ownership of projects, from concept to deployment, handling all aspects of <b>development autonomously</b>.',
-        hoverDescription: 'Plan, design, and implement entire projects <i>solo</i> with minimal supervision. Manage architecture, coding, testing, and deployment efficiently while maintaining <mark>high-quality standards</mark>.'
-    },
-    {
-        title: 'Clean Code Mindset',
-        description: 'Write <b>readable</b>, maintainable, and scalable code that reduces technical debt and supports <mark>long-term</mark> project stability.',
-        hoverDescription: 'Prioritize <b>clarity, modularity, and maintainability</b> in all development work. Apply best practices and design patterns consistently to ensure code is easy to <i>extend</i>, debug, and review.'
-    },
-    {
-        title: 'Professional Collaboration',
-        description: 'Work <b>seamlessly</b> with <i>cross-functional</i> teams, fostering a <u>respectful</u>, productive, and solution-oriented environment.',
-        hoverDescription: 'Engage effectively with <b>designers, engineers, and stakeholders</b>. Facilitate constructive feedback, transparent communication, and team alignment to achieve <mark>project goals</mark> efficiently.'
-    }
+        {
+            title: 'Technical Leadership',
+            description: 'Lead with <b><mark>clarity</mark></b>, aligning design, code, and business. Mentor peers and guide architecture for stable delivery.',
+            hoverDescription: 'Blend <b><mark>strategic vision</mark></b> with hands-on guidance to bridge <i>technical</i> and <i>creative</i> disciplines. Establish <b>best practices</b>, enforce <u>standards</u>, and maintain <mark>detailed documentation</mark>. Mentor teammates, encourage <b>knowledge-sharing</b>, and ensure <i>architectural consistency</i> for sustainable scalability.'
+        },
+        {
+            title: 'Autonomous Execution',
+            description: 'Own <b><mark>end-to-end builds</mark></b>. Have single-handedly delivered full applications with complete architecture and deployment.',
+            hoverDescription: 'Deliver <b><mark>full-scale applications</mark></b> independently—from concept to deployment. Manage architecture, <i>infrastructure</i>, testing, and CI/CD pipelines with <b>precision</b>. Maintain <mark>high-quality standards</mark> under pressure, balancing <i>speed</i> and <u>technical depth</u> while executing autonomously with measurable results.'
+        },
+        {
+            title: 'Design-Driven Thinking',
+            description: 'Code with <b><mark>design intent</mark></b>, turning layout and motion into clear, functional UX.',
+            hoverDescription: 'Collaborate with designers to <b><mark>translate visual language</mark></b> into interactive, intuitive products. Prototype quickly to validate flow and <i>interaction logic</i>. Apply <b>UX heuristics</b> and maintain a <u>consistent visual rhythm</u> that merges design craft with engineering precision for a truly unified user experience.'
+        },
+        {
+            title: 'Professional Collaboration',
+            description: 'Work with <b><mark>transparency</mark></b> across teams, keeping communication and accountability consistent.',
+            hoverDescription: 'Engage <b><mark>cross-functionally</mark></b> with designers, engineers, and stakeholders to maintain <i>clear communication</i> and aligned goals. Encourage <u>open feedback loops</u> and build trust through documentation and clarity. Cultivate <b>team synergy</b> where ownership is shared and delivery is <mark>predictable, consistent, and professional</mark>.'
+        }
     ];
+
+
 
     useEffect(() => {
         const headings = document.querySelectorAll('.heading-subgrid > h2');

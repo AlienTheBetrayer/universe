@@ -9,7 +9,7 @@
 .heading-subgrid {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem;
 }
 
 .heading-subgrid > h2 {

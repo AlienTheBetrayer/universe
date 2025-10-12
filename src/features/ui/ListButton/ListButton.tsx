@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { useListButton } from './hooks/useListButton';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
+import { useRef } from 'react';
 
 interface Props {
     elements: string[];
@@ -14,15 +15,16 @@ interface Props {
 }
 
 export const ListButton = ({ onSelected, elements, className='', children='Selected:'}: Props) => {
-    const listButton = useListButton(elements, onSelected);
     const tooltips = useTooltips();
+    const containerRef = useRef<HTMLDivElement>(null);
+    const listButton = useListButton(containerRef, elements, onSelected);
 
     return (
-        <motion.div className={`list-button ${className}`} layout
-        tabIndex={0}
-        onPointerOver={() => listButton.setFocused(true)}
-        onBlur={() => { listButton.setFocused(false) } }
-        onClick={() => listButton.setFocused(true)}>
+        <motion.div 
+        ref={containerRef}
+        className={`list-button ${className}`}
+        layout
+        tabIndex={0}>
             <div className='list-button-top'>
                 <button className='list-button-top-previous' onClick={() => listButton.previous()}
                 ref={el => tooltips.set(0, 'Previous element', el, 'down')}>

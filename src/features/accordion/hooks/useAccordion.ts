@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import type { AccordionItem } from "../components/Accordion";
+import { useInView } from "motion/react";
 
-export const useAccordion = (items: AccordionItem[], onSelect?: (idx: number) => void) => {
+export const useAccordion = (containerRef: React.RefObject<HTMLElement | null>, items: AccordionItem[], onSelect?: (idx: number) => void) => {
     const [selected, setSelected] = useState<number>(-1);
-    const [focused, setFocused] = useState<boolean>(false);
+    const isVisible = useInView(containerRef);
 
     // accessibility / usability hotkeys
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
-            if(!focused)
+            if(!isVisible)
                 return;
 
             switch(e.key) {
                 case 'Escape':
-                    setFocused(false);
                     setSelected(-1);
                     break;
                 case 'ArrowRight':
@@ -27,11 +27,11 @@ export const useAccordion = (items: AccordionItem[], onSelect?: (idx: number) =>
         
         window.addEventListener('keydown', handle);
         return () => window.removeEventListener('keydown', handle);
-    }, [focused]);
+    }, [isVisible]);
 
     useEffect(() => {
         onSelect?.(selected);
     }, [selected]);
 
-    return { selected, setSelected, focused, setFocused};
+    return { selected, setSelected };
 }

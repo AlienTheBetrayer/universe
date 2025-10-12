@@ -7,6 +7,7 @@ import { RevealingContainer } from '../../../revealingcontainer/components/Revea
 export const ShiftingSection = () => {
     const ref = useRef<HTMLElement>(null);
     const isVisible = useInView(ref, { once: true });
+    
     return (
         <RevealingContainer>
             <section ref={ref} className='shifting-section container'>

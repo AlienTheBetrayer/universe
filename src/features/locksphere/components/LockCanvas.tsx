@@ -2,7 +2,6 @@ import { Canvas } from '@react-three/fiber';
 import { type RefObject } from 'react';
 import { useScroll } from 'motion/react';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
-import { OrbitControls } from '@react-three/drei';
 import { useScrollYWithin } from '../../../hooks/useScrollYWithin';
 import { LockFigure } from './LockFigure';
 import { ForceField } from './ForceField';
@@ -29,7 +28,6 @@ export const LockCanvas = ({ ref }: Props) => {
                 </EffectComposer>
             )}
 
-            <OrbitControls enableZoom={false} enablePan={false}/>
         </Canvas>
     )
 }

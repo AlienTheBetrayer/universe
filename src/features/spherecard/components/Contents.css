@@ -1,14 +1,13 @@
 .sphere-card-contents {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: 100%;
     padding: 1rem;
 
 }
 
 .sphere-card-canvas {
-    flex: 1;
+    flex: 0 0 70%;
 }
 
 .sphere-card-text {

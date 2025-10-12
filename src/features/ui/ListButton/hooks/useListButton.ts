@@ -1,8 +1,9 @@
+import { useInView } from "motion/react";
 import { useEffect, useState } from "react";
     
-export const useListButton = (elements: string[], onSelected?: (idx: number) => void) => { 
+export const useListButton = (containerRef: React.RefObject<HTMLElement | null>, elements: string[], onSelected?: (idx: number) => void) => { 
     const [currentId, setCurrentId] = useState<number>(0);
-    const [focused, setFocused] = useState<boolean>(false);
+    const isVisible = useInView(containerRef);
 
     useEffect(() => {
         onSelected?.(currentId);
@@ -10,9 +11,9 @@ export const useListButton = (elements: string[], onSelected?: (idx: number) => 
 
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
-            if(!focused)
+            if(!isVisible)
                 return;
-            
+
             switch(e.key) {
                 case 'ArrowRight':
                     next();
@@ -25,7 +26,7 @@ export const useListButton = (elements: string[], onSelected?: (idx: number) => 
 
         window.addEventListener('keydown', handle);
         return () => window.removeEventListener('keydown', handle);
-    }, [currentId, focused]);
+    }, [currentId, isVisible]);
 
     const previous = () => {
         setCurrentId(currentId == 0 ? elements.length - 1 : currentId - 1);
@@ -38,7 +39,6 @@ export const useListButton = (elements: string[], onSelected?: (idx: number) => 
 
     return {
         currentId, setCurrentId,
-        focused, setFocused,
         previous, next
     };
 }
