@@ -29,7 +29,7 @@ export const Header = () => {
         <motion.header
         initial={{ y: loaded.header ? 0 : -100, x: '-50%' }}
         animate={{ y: 0, x: '-50%' }}
-        transition={{ delay: 3.5, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
+        transition={{ delay: 4, duration: 0.6, type: 'spring', stiffness: 200, damping: 50 }}>
             { tooltips.render() }
 
             <motion.nav
@@ -45,8 +45,8 @@ export const Header = () => {
                 style={{ display: !isMobile ? 'flex' : 'none' }}
                 layout
                 initial={{ gap: loaded.header ? '1rem' : '0.1rem' }}
-                animate={{ gap: '1rem', transition: { delay: 5.5, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
-                transition={{ type: 'spring', duration: 0.6, stiffness: 200, damping: 50 }}>
+                animate={{ gap: '1rem', transition: { delay: 6, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
+                transition={{ type: 'spring', delay: 1, duration: 0.6, stiffness: 200, damping: 50 }}>
                     <UniversalLink 
                     to='/contact'>
                     Contact</UniversalLink>
@@ -71,8 +71,10 @@ export const Header = () => {
                     onToggled={() => toggleTheme()}/>
                 </motion.div>
 
-                {/* mobile menu open button */}
-                <Button 
+                {/* mobile menu open button (display none not on mobile) */}
+                <Button
+                layout 
+                transition={{ delay: 1, type: 'spring', stiffness: 150, damping: 50 }}
                 style={{ display: isMobile ? 'flex' : 'none' }}
                 className='header-open-menu' 
                 onClick={() => headerMenuPopup.setShown(prev => !prev)}>
