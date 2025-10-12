@@ -9,6 +9,7 @@ import { useHotkeys } from '../../../hooks/useHotkeys';
 import { useInView } from 'motion/react';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
+import React from 'react';
 
 interface Props {
     controller: ReturnType<typeof usePaintCanvas>;
@@ -67,22 +68,20 @@ export const PaintUI = ({ controller }: Props) => {
                 <div className='paint-ui-left-bar'>
                     <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['←']}/>
                     { buttons.map((button, idx) => (
-                        <>
+                        <React.Fragment key={idx}>
                             <Button
                             className={`paint-ui-color-button ${selectedColor === idx ? 'paint-ui-selected-color-button' : ''}`}
-                            key={idx}
                             ref={el => tooltips.set(idx + 1, button.tooltip, el, 'right')}
                             onClick={() => setSelectedColor(prev => prev !== idx ? idx : prev)}>
                                 <div
                                 style={{ backgroundColor: button.color}}
                                 className={`${button.color === 'theme' ? 'paint-ui-color-button-theme' : ''}`}/>
-
                             </Button>
 
                             { idx < buttons.length - 1 && (
-                                <hr key={`${idx}-hr`}/>
+                                <hr/>
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
 
                     <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['→']}/>

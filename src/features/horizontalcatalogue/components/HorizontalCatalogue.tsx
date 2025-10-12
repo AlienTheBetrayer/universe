@@ -41,6 +41,7 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
             orderedPopup.setShown(false);
             setOrderedItems([]);
         }, 5000);
+
         return () => clearTimeout(timeout);
     }, [orderedItems]);
 
