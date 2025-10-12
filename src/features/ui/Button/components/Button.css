@@ -25,6 +25,7 @@
 }
 
 .button:active {
+    background-color: var(--background-6-transparent);
     color: var(--foreground-last);
 }
 

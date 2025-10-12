@@ -9,8 +9,10 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
             const match = hotkeys.find(h => h.hotkey.toLowerCase() === e.key.toLowerCase());
-            if(match)
+            if(match) {
+                e.preventDefault();
                 match.action();
+            }
         }
 
         window.addEventListener('keydown', handle);
