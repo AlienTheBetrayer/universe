@@ -1,3 +1,4 @@
+import { useDebounced } from '../../../hooks/useDebounced';
 import { Search } from '../../ui/Search/Search';
 import type { CatalogueItem } from './HorizontalCatalogue';
 import './HorizontalMenu.css';
@@ -10,23 +11,27 @@ interface Props {
 
 export const HorizontalMenu = ({ className, items }: Props) => {
     // search functionality with display: none (optimized)
-    const [search, setSearch] = useState<string>('');
+    const [searchValue, setSearchValue] = useState<string>('');
+    const debouncedSearch = useDebounced<string>(searchValue);
 
     useEffect(() => {
+        if(debouncedSearch === undefined)
+            return;
+        
         items[1](prev => prev.map(c => ({ 
             ...c,
             visible: 
-            c.content.toLowerCase().includes(search.toLowerCase()) ||
-            c.title.toLowerCase().includes(search.toLowerCase()) ||
-            search.trim().length === 0
+            c.content.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+            c.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+            debouncedSearch.trim().length === 0
         })));
-    }, [search]);
+    }, [debouncedSearch]);
     
     return (
         <div className={`horizontal-menu ${className}`}>
             <div className='horizontal-menu-content'>
-                <h3>{ search === '' ? <u>Filter</u> : 'Filter' } items</h3>
-                <Search value={search} onChange={val => setSearch(val)}/>
+                <h3>{ debouncedSearch === '' ? <u>Filter</u> : 'Filter' } items</h3>
+                <Search value={searchValue} onChange={val => setSearchValue(val)}/>
             </div>
         </div>
     )
