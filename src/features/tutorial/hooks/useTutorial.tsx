@@ -1,30 +1,19 @@
-import { useState } from "react";
 import { Tutorial, type TutorialPage } from "../components/Tutorial";
-import { AnimatePresence } from "motion/react";
+import { usePopup } from "../../../hooks/usePopup";
 
 export const useTutorial = (pages: TutorialPage[], onSkipCallback?: () => void, onSelectCallback?: (page: number) => void) => {
-    const [isShown, setIsShown] = useState<boolean>(false);
-    
-    const render = () => {
-        return (
-            <AnimatePresence>
-                { isShown && (
-                    <Tutorial 
-                    pages={pages} 
-                    onSkip={() => { 
-                        setIsShown(false);
-                        onSkipCallback?.();
-                    }}
-                    onSelect={page => {
-                        onSelectCallback?.(page);
-                    }}/>
-                )}
-            </AnimatePresence>
-        )
-    }
+    const popup = usePopup(
+    <Tutorial pages={pages} 
+            onSkip={() => { 
+                popup.setShown(false);
+                onSkipCallback?.();
+            }}
+            onSelect={page => {
+                onSelectCallback?.(page);
+            }}/>);
     
     return {
-        isShown, setIsShown,
-        render
+        render: popup.render,
+        shown: popup.shown, setShown: popup.setShown
     }
 }

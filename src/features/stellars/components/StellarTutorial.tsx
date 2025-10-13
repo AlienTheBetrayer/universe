@@ -65,13 +65,14 @@ const pages: TutorialPage[] = [
 export const StellarTutorial = () => {
     const [state, setState] = useStellarContext();
     const localStore = useLocalStore();
+    
     const tutorial = useTutorial(pages, 
         () => setState(prev => ({ ...prev, tutorialVisible: false })),
-        (page => { if(page > 0 && localStore.tutorialSeen === false) localStore.toggleTutorialSeen(true) }));
+        (page => { if(page > 0 && !localStore.tutorialSeen.stellar) localStore.toggleTutorialSeen(true, 'stellar') }));
 
     // sync context and the visibility of tutorial
     useEffect(() => {
-        tutorial.setIsShown(state.tutorialVisible);
+        tutorial.setShown(state.tutorialVisible);
     }, [state.tutorialVisible]);
 
     return (

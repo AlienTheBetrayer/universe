@@ -71,7 +71,7 @@ export const StellarProvider = ({ children }: Props) => {
 
     // if we hadn't seen the tutorial ever before, show it 
     useEffect(() => {
-        setState(prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen }));
+        setState(prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen.stellar }));
     }, []);
 
     return (

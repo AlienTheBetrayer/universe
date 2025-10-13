@@ -62,13 +62,13 @@ export const Tutorial = ({ pages, onSkip, onSelect }: Props) => {
                 </Button>
 
                 {/* mobile buttons */}
-                <Button className='tutorial-mobile-button stellar-tutorial-left'
+                <Button className='tutorial-mobile-button tutorial-left'
                 enabled={selected > 0}
                 onClick={() => previous()}>
                     ←
                 </Button>
 
-                <Button className='tutorial-mobile-button stellar-tutorial-right'
+                <Button className='tutorial-mobile-button tutorial-right'
                 enabled={selected < pages.length - 1}
                 onClick={() => next()}>
                     →
