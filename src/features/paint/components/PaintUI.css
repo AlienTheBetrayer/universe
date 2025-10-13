@@ -52,6 +52,12 @@
     }
 }
 
+/* labels */
+.paint-ui-container label {
+    font-size: 0.7rem;
+    text-align: center;
+}
+
 /* all buttons */
 .paint-ui-container button,
 .paint-ui-container input {

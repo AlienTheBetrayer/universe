@@ -183,13 +183,13 @@ h1, h2, h3, h4 {
     margin: 0;
 }
 
-p, span, a, button, input, textarea {
+p, span, a, button, input, textarea, label {
     font-size: var(--font-p);
     color: var(--foreground);
     font-weight: 550;
 }
 
-p, span, a, button, input, h1, h2 {
+p, span, a, button, input, h1, h2, label {
     letter-spacing: -0.39px;
     line-height: 1em;
 }

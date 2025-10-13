@@ -23,6 +23,26 @@ interface Path {
 type EventType = React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>;
 
 export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, containerRef: RefObject<HTMLDivElement | null>) => {
+    const localStore = useLocalStore();
+    const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+    const [context, ] = usePaintContext();
+
+    // drawing states
+    const [isDrawing, setIsDrawing] = useState<boolean>(false);
+    const [currentPath, setCurrentPath] = useState<Path | null>(null);
+    const [paths, setPaths] = useState<Path[]>([]);
+    const [brushes, setBrushes] = useState(new Map<string, string>());
+
+    // helper functions
+    const applyBrush = (brush: Brush) => {
+        if(ctxRef.current) {
+            ctxRef.current.lineWidth = brush.lineWidth;
+            ctxRef.current.lineCap = brush.lineCap;
+            const brushColor = brushes.get(brush.lineColor);
+            ctxRef.current.strokeStyle = brushColor ? brushColor : brush.lineColor;
+        }
+    }
+
     const getPos = (e: EventType) => {
         if(!canvasRef.current)
             return { x: -1, y: -1 };
@@ -33,18 +53,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         return { x, y };
     };
 
-    const localStore = useLocalStore();
-    const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
-    const [context, ] = usePaintContext();
-
-    // drawing states
-    const [isDrawing, setIsDrawing] = useState<boolean>(false);
-    const [currentPath, setCurrentPath] = useState<Path | null>(null); // causing lots of rerenders
-    const [paths, setPaths] = useState<Path[]>([]);
-
-    const [brushes, setBrushes] = useState(new Map<string, string>());
-
-    // theme syncing
+    // theme handling
     useEffect(() => {
         setBrushes(new Map<string, string>([
             ['theme', cssVariable('--foreground-last')],
@@ -55,6 +64,12 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     useEffect(() => {
         redraw();
     }, [brushes]);
+
+    // brush handling
+    useEffect(() => {
+       if(ctxRef.current && currentPath?.brush)
+            applyBrush(currentPath?.brush);
+    }, [currentPath?.brush]);
 
     // resize handling
     useEffect(() => {
@@ -73,14 +88,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         return () => window.removeEventListener('resize', handle);
     }, [paths]); 
 
-    useEffect(() => {
-       if(ctxRef.current && currentPath?.brush) {
-            ctxRef.current.lineWidth = currentPath?.brush.lineWidth!;
-            ctxRef.current.lineCap = currentPath?.brush.lineCap!;
-            const brush = brushes.get(currentPath?.brush.lineColor!);
-            ctxRef.current.strokeStyle = brush ? brush : currentPath?.brush.lineColor!;
-        }
-    }, [currentPath?.brush]);
+
     
     // user functions
     const start = (e: EventType) => {
@@ -137,10 +145,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
 
             paths.forEach(path => {
                 if(ctxRef.current) {
-                    ctxRef.current.lineWidth = path.brush.lineWidth;
-                    ctxRef.current.lineCap = path.brush.lineCap;
-                    const brush = brushes.get(path.brush.lineColor!);
-                    ctxRef.current.strokeStyle = brush ? brush : path.brush.lineColor!;
+                    applyBrush(path.brush);
 
                     ctxRef.current.beginPath();
                         for(let i = 1; i < path.lines.length; ++i) {

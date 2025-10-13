@@ -77,6 +77,7 @@ export const PaintUI = ({ controller }: Props) => {
 
             <div className='paint-ui-container' ref={containerRef}>
                 <div className='paint-ui-left-bar'>
+                    <label> Thickness</label>
                     <input type='range' min={1} max={43} step={3} 
                     value={brushSize} onChange={e => setBrushSize(Number(e.target.value))}/>
 
