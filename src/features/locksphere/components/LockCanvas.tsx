@@ -15,7 +15,7 @@ export const LockCanvas = ({ ref }: Props) => {
     const scrolledWithin = useScrollYWithin(0, 1, scrollYProgress);
 
     return (
-        <Canvas>
+        <Canvas style={{ pointerEvents: 'none'}}>
             <pointLight position={[10, 10, 10]} intensity={100}/>
             <pointLight position={[-10, -10, -10]} intensity={100}/>
 

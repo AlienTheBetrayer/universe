@@ -16,38 +16,47 @@ interface Props {
 }
 
 export const PaintUI = ({ controller }: Props) => {
+    // all the brushes and colors
     const buttons = [
         {
-            tooltip: 'Theme (auto-invert)',
+            tooltip: 'Brush',
             color: 'theme',
         },
         {
+            tooltip: 'Eraser',
+            color: 'eraser'
+        },
+        {
             tooltip: 'Azure Rift',
-            color: '#0000ff',
+            color: 'hsla(240, 37%, 50%, 1.00)',
         },
         {
             tooltip: 'Crimson Ember',
-            color: '#ff0000',
+            color: 'hsla(0, 37%, 50%, 1.00)',
         },
         {
             tooltip: 'Verdant Grove',
-            color: '#00ff00',
+            color: 'hsla(120, 37%, 50%, 1.00)',
         },
-        {
-            tooltip: 'Mystical Shroom',
-            color: '#63418dff'
-        }
     ];
 
+    // visibility for the hotkeys
     const containerRef = useRef<HTMLDivElement>(null);
     const isVisible = useInView(containerRef);
+
+    // paint context states / syncing
     const [selectedColor, setSelectedColor] = useState<number>(0);
-    const tooltips = useTooltips();
+    const [brushSize, setBrushSize] = useState<number>(1);
     const [, setContext] = usePaintContext();
 
     useEffect(() => {
         setContext(prev => ({ ...prev, selectedColor: buttons[selectedColor].color }));
     }, [selectedColor]);
+
+    useEffect(() => {
+        setContext(prev => ({ ...prev, brushSize: brushSize }));
+    }, [brushSize]);
+
 
     useHotkeys([
         { hotkey: 'ArrowRight', action: () => { if(isVisible) setSelectedColor(prev => (prev + 1) % (buttons.length)) }},
@@ -55,18 +64,26 @@ export const PaintUI = ({ controller }: Props) => {
     ]);
     
     
+    // messageboxes / popups / tooltips
     const clearMessageBox = usePopup(<MessageBox title='Are you sure?' description='You are about to <u>wipe</u> all your <mark>drawings</mark>'
     onInteract={f => { clearMessageBox.setShown(false); if(f) controller.clear() }}/>)
 
+    const tooltips = useTooltips();
+    
     return (
         <>
             { tooltips.render() }
             { clearMessageBox.render() }
 
             <div className='paint-ui-container' ref={containerRef}>
-
                 <div className='paint-ui-left-bar'>
+                    <input type='range' min={1} max={43} step={3} 
+                    value={brushSize} onChange={e => setBrushSize(Number(e.target.value))}/>
+
+                    <hr/>
+
                     <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['←']}/>
+
                     { buttons.map((button, idx) => (
                         <React.Fragment key={idx}>
                             <Button
@@ -75,7 +92,10 @@ export const PaintUI = ({ controller }: Props) => {
                             onClick={() => setSelectedColor(prev => prev !== idx ? idx : prev)}>
                                 <div
                                 style={{ backgroundColor: button.color}}
-                                className={`${button.color === 'theme' ? 'paint-ui-color-button-theme' : ''}`}/>
+                                className={
+                                    `${button.color === 'theme' ? 'paint-ui-color-button-theme' : ''}
+                                    ${button.color === 'eraser' ? 'paint-ui-color-button-eraser' : ''}`
+                                }/>
                             </Button>
 
                             { idx < buttons.length - 1 && (

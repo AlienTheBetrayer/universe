@@ -42,10 +42,19 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     const [currentPath, setCurrentPath] = useState<Path | null>(null); // causing lots of rerenders
     const [paths, setPaths] = useState<Path[]>([]);
 
+    const [brushes, setBrushes] = useState(new Map<string, string>());
+
     // theme syncing
     useEffect(() => {
-        redraw();
+        setBrushes(new Map<string, string>([
+            ['theme', cssVariable('--foreground-last')],
+            ['eraser', cssVariable('--background-2')],
+        ]));
     }, [localStore.theme]);
+
+    useEffect(() => {
+        redraw();
+    }, [brushes]);
 
     // resize handling
     useEffect(() => {
@@ -65,11 +74,11 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     }, [paths]); 
 
     useEffect(() => {
-       if(ctxRef.current) {
+       if(ctxRef.current && currentPath?.brush) {
             ctxRef.current.lineWidth = currentPath?.brush.lineWidth!;
             ctxRef.current.lineCap = currentPath?.brush.lineCap!;
-            ctxRef.current.strokeStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
-            ctxRef.current.fillStyle = currentPath?.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : currentPath?.brush.lineColor!;
+            const brush = brushes.get(currentPath?.brush.lineColor!);
+            ctxRef.current.strokeStyle = brush ? brush : currentPath?.brush.lineColor!;
         }
     }, [currentPath?.brush]);
     
@@ -78,9 +87,9 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         setIsDrawing(true);
         setCurrentPath({
             lines: [getPos(e)],
-            brush: { // get this from ui settings
+            brush: { 
                 lineCap: 'round',
-                lineWidth: 1,
+                lineWidth: context.brushSize,
                 lineColor: context.selectedColor
             }
         });
@@ -109,8 +118,8 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         if(!isDrawing)
             return;
 
-        setCurrentPath(null);
         setPaths(prev => [...prev, currentPath!]);
+        setCurrentPath(null);
         setIsDrawing(false);
     }
 
@@ -130,7 +139,8 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
                 if(ctxRef.current) {
                     ctxRef.current.lineWidth = path.brush.lineWidth;
                     ctxRef.current.lineCap = path.brush.lineCap;
-                    ctxRef.current.strokeStyle = path.brush.lineColor === 'theme' ? cssVariable('--foreground-last') : path.brush.lineColor!;
+                    const brush = brushes.get(path.brush.lineColor!);
+                    ctxRef.current.strokeStyle = brush ? brush : path.brush.lineColor!;
 
                     ctxRef.current.beginPath();
                         for(let i = 1; i < path.lines.length; ++i) {

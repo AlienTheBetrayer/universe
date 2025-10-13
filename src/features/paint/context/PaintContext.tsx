@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 
 interface PaintContextData {
     selectedColor: string;
+    brushSize: number;
 }
 
 type PaintContextType = [PaintContextData, React.Dispatch<React.SetStateAction<PaintContextData>>];
@@ -14,7 +15,8 @@ interface Props {
 
 export const PaintProvider = ({ children }: Props) => {
     const [data, setData] = useState<PaintContextData>({
-        selectedColor: 'theme'
+        selectedColor: 'theme',
+        brushSize: 1
     });
     
     return (

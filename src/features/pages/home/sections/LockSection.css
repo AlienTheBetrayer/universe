@@ -4,6 +4,7 @@
     position: relative;
     height: 1250vh;
     margin-top: 12rem;
+    pointer-events: none;
 }
 
 .sphere-canvas-container canvas {
@@ -39,6 +40,7 @@
     background-color: var(--background-transparent);
     backdrop-filter: blur(4px);
     border-radius: 2000px;
+    pointer-events: all;
 }
 
 .sphere-canvas-heading {
@@ -46,6 +48,7 @@
     right: 3rem;
     top: 50%;
     transform: translateY(-50%);
+    pointer-events: all;
 }
 
 @media (max-width: 768px) {
