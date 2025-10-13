@@ -1,7 +1,7 @@
 import './Contact.css';
 import { Page } from "../../../layout/components/Page"
 
-import { FormSection } from '../sections/FormSection';
+import { GitSection } from '../sections/GitSection';
 import { Text3DCanvas } from '../../../text3d/components/Text3DCanvas';
 
 export const Contact = () => {
@@ -11,7 +11,8 @@ export const Contact = () => {
                 <Text3DCanvas>
                     CONTACT
                 </Text3DCanvas>
-                <FormSection/>
+                
+                <GitSection/>
             </div>
         </Page>
     )

@@ -1,11 +1,11 @@
-.form-section {
+.git-section {
     transform: translateZ(1px);
     margin-top: 30rem !important;
     width: 75%;
 }
 
 @media (max-width: 640px) {
-    .form-section {
+    .git-section {
         margin-top: 18rem !important;
         width: 100%;
     }
