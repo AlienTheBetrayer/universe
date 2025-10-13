@@ -6,7 +6,11 @@ export const GitSection = () => {
     return (
         <RevealingContainer>
             <section className='git-section container'>
-                <GithubEmulation/>
+                <h2><mark>Github</mark> emulation w/ forms</h2>
+
+                <div className='github-container'>
+                    <GithubEmulation/>
+                </div>
             </section>
         </RevealingContainer>        
     )

@@ -1,12 +1,16 @@
 .git-section {
     transform: translateZ(1px);
     margin-top: 30rem !important;
-    width: 75%;
 }
 
 @media (max-width: 640px) {
     .git-section {
         margin-top: 18rem !important;
-        width: 100%;
     }
+}
+
+.github-container {
+    width: 100%;
+    background-color: var(--background-2);
+    border-radius: 16px;
 }

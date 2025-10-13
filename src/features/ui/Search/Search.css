@@ -4,7 +4,7 @@
     border: 2px solid var(--background-7);
     border-radius: 32px;
     position: relative;
-    height: 48px;
+    height: 36px;
 }
 
 .search-input-container:focus-within {

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './Search.css';
-import { motion } from "motion/react"
 import searchImg from './assets/search.svg';
 
 interface Props {
@@ -22,7 +21,7 @@ export const Search = ({ className, placeholder, value, onChange }: Props) => {
     }
 
     return (
-        <div className='search-input-container'>
+        <div className={`search-input-container ${className ?? ''}`}>
             <img src={searchImg} alt=''/>
             <input className='search-input'
             value={inputValue}
