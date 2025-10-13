@@ -1,5 +1,5 @@
 /* centered popup-like container */
-.stellar-tutorial-container {
+.tutorial-container {
     position: absolute;
     inset: 0;
     display: grid;
@@ -8,7 +8,7 @@
 }
 
 /* main centered sub-container */
-.stellar-tutorial-main {
+.tutorial-main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,14 +17,14 @@
 }
 
 @media (max-width: 640px) {
-    .stellar-tutorial-main {
+    .tutorial-main {
         gap: 1rem;
         margin-bottom: 8rem;
     }
 }
 
 /* card */
-.stellar-tutorial-card {
+.tutorial-card {
     display: grid;
     grid-template-rows: 7fr 3fr;
 
@@ -35,13 +35,13 @@
     overflow: hidden;
 }
 
-.stellar-tutorial-card-image img {
+.tutorial-card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.stellar-tutorial-card-content {
+.tutorial-card-content {
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -50,7 +50,7 @@
 }
 
 /* selected idx on top */
-.stellar-tutorial-idx {
+.tutorial-idx {
     font-size: 12rem;
     position: absolute;
     bottom: 0rem;
@@ -58,13 +58,13 @@
 }
 
 /* general buttons */
-.stellar-tutorial-container button {
+.tutorial-container button {
     position: relative;
     padding: 1.5rem;
     border-radius: 200px;
 }
 
-.stellar-tutorial-container .stellar-tutorial-skip-button {
+.tutorial-container .tutorial-skip-button {
     position: absolute;
     left: 1rem;
     bottom: 1rem;
@@ -72,7 +72,7 @@
 }
 
 /* mobile buttons */
-.stellar-tutorial-container .stellar-tutorial-mobile-button {
+.tutorial-container .tutorial-mobile-button {
     position: absolute;
     display: none;
     bottom: 7rem;
@@ -80,27 +80,27 @@
     font-size: 2rem;
 }
 
-.stellar-tutorial-container .stellar-tutorial-left {
+.tutorial-container .tutorial-left {
     left: 1rem;
 }
 
-.stellar-tutorial-container .stellar-tutorial-right {
+.tutorial-container .tutorial-right {
     right: 1rem;
 }
 
 @media (max-width: 640px) {
-    .stellar-tutorial-pc-button {
+    .tutorial-pc-button {
         display: none;   
     }
 
-    .stellar-tutorial-container .stellar-tutorial-mobile-button {
+    .tutorial-container .tutorial-mobile-button {
         display: flex;
     }
 }
 
 
 /* hotkey tooltips */
-.stellar-tutorial-tooltip {
+.tutorial-tooltip {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

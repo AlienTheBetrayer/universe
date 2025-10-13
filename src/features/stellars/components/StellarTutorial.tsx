@@ -1,13 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-import './StellarTutorial.css';
-import { AnimatePresence, motion } from "motion/react"
-import { useHotkeys } from '../../../hooks/useHotkeys';
+import { useEffect } from 'react';
 import { useStellarContext } from '../context/StellarContext';
-import { Button } from '../../ui/Button/components/Button';
-import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
-import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { useLocalStore } from '../../../zustand/localStore';
 
+import type { TutorialPage } from '../../tutorial/components/Tutorial';
+import { useTutorial } from '../../tutorial/hooks/useTutorial';
+
+// tutorial images
 import tutorialImg1 from '../assets/tutorial/tutorial-1.png';
 import tutorialImg2 from '../assets/tutorial/tutorial-2.png';
 import tutorialImg3 from '../assets/tutorial/tutorial-3.png';
@@ -17,11 +14,9 @@ import tutorialImg6 from '../assets/tutorial/tutorial-6.png';
 import tutorialImg7 from '../assets/tutorial/tutorial-7.png';
 import tutorialImg8 from '../assets/tutorial/tutorial-8.png';
 
-interface TutorialPage {
-    title: string;
-    description: string;
-    image: string;
-}
+
+
+
 
 const pages: TutorialPage[] = [
     {
@@ -67,111 +62,22 @@ const pages: TutorialPage[] = [
 ];
 
 export const StellarTutorial = () => {
-    const [selected, setSelected] = useState<number>(0);
     const [state, setState] = useStellarContext();
-    const shownOnce = useRef<boolean>(false);
-    const localStore = useLocalStore();
-
-    // hotkeys to go back and forth between the pages
-    const previous = () => setSelected(prev => prev > 0 ? prev - 1 : prev);
-    const next = () => setSelected(prev => prev < pages.length - 1 ? prev + 1 : prev);
-   
-    useHotkeys([
-        { hotkey: 'ArrowLeft', action: () => previous()},
-        { hotkey: 'ArrowRight', action: () => next()}
-    ]);
+    const tutorial = useTutorial(pages, () => setState(prev => ({ ...prev, tutorialVisible: false })));
 
     // if we had never seen the tutorial = show it when we flip at least one page
-    useEffect(() => {
-        if(selected > 0 && localStore.tutorialSeen === false)
-            localStore.toggleTutorialSeen(true);
-    }, [selected]);
+    // useEffect(() => {
+    //     if(selected > 0 && localStore.tutorialSeen === false)
+    //         localStore.toggleTutorialSeen(true);
+    // }, [selected]);
 
-    // sync context and our state
+    // sync context and the visibility of tutorial
     useEffect(() => {
-        setSelected(0);
-        if(state.tutorialVisible)
-            shownOnce.current = true;
+        tutorial.setIsShown(state.tutorialVisible);
+        console.log(state.tutorialVisible);
     }, [state.tutorialVisible]);
 
-    const tooltips = useTooltips();
-
     return (
-        <>
-            { tooltips.render() }
-
-            <AnimatePresence>
-                { state.tutorialVisible && (
-                    <motion.div
-                    className='stellar-tutorial-container'
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1, delay: shownOnce.current ? 0 : 3 }}>
-                        <motion.span
-                        className='stellar-tutorial-idx'
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 0.2 }}
-                        exit={{ opacity: 0 }}>
-                            { selected + 1 } 
-                        </motion.span>
-
-                        <Button className='stellar-tutorial-skip-button'
-                        ref={el => tooltips.set(0, 'Proceed to the game', el, 'right')}
-                        onClick={() => setState(prev => ({ ...prev, tutorialVisible: !prev.tutorialVisible}))}>   
-                            Skip
-                        </Button>
-
-                        {/* mobile buttons */}
-                        <Button className='stellar-tutorial-mobile-button stellar-tutorial-left'
-                        enabled={selected > 0}
-                        onClick={() => previous()}>
-                            ←
-                        </Button>
-
-                        <Button className='stellar-tutorial-mobile-button stellar-tutorial-right'
-                        enabled={selected < pages.length - 1}
-                        onClick={() => next()}>
-                            →
-                        </Button>
-
-                        <motion.div
-                        className='stellar-tutorial-main'
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}>
-                            <Button
-                            className='stellar-tutorial-pc-button'
-                            enabled={selected > 0}
-                            onClick={() => previous()}
-                            ref={el => tooltips.set(1, 'Previous tutorial page', el, 'up')}>
-                                ←
-                                <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['←']}/>
-                            </Button>
-
-                            <div className='stellar-tutorial-card'>
-                                <div className='stellar-tutorial-card-image'>
-                                    <img src={pages[selected].image} alt='tutorial image'/>
-                                </div>
-
-                                <div className='stellar-tutorial-card-content'>
-                                    <h3 dangerouslySetInnerHTML={{ __html: pages[selected].title}}/>
-                                    <p dangerouslySetInnerHTML={{ __html: pages[selected].description}}/>
-                                </div>
-                            </div>
-
-                            <Button
-                            className='stellar-tutorial-pc-button'
-                            enabled={selected < pages.length - 1}
-                            onClick={() => next()}
-                            ref={el => tooltips.set(2, 'Next tutorial page', el, 'up')}>
-                                →
-                                <HotkeyTooltip className='stellar-tutorial-tooltip' hotkeys={['→']}/>
-                            </Button>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+        tutorial.render()
     )
 }
