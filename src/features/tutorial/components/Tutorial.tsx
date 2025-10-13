@@ -1,7 +1,7 @@
 import './Tutorial.css';
 import { motion } from 'motion/react';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHotkeys } from '../../../hooks/useHotkeys';
 import { Button } from '../../ui/Button/components/Button';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
@@ -15,9 +15,10 @@ export interface TutorialPage {
 interface Props {
     pages: TutorialPage[];
     onSkip?: () => void;
+    onSelect?: (page: number) => void;
 }
 
-export const Tutorial = ({ pages, onSkip }: Props) => {
+export const Tutorial = ({ pages, onSkip, onSelect }: Props) => {
     const [selected, setSelected] = useState<number>(0);
 
     // hotkeys to go back and forth between the pages
@@ -29,6 +30,10 @@ export const Tutorial = ({ pages, onSkip }: Props) => {
         { hotkey: 'ArrowLeft', action: () => previous() },
         { hotkey: 'ArrowRight', action: () => next() }
     ]);
+
+    useEffect(() => {
+        onSelect?.(selected);
+    }, [selected]);
 
     const tooltips = useTooltips();
 

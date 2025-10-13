@@ -13,6 +13,7 @@ import tutorialImg5 from '../assets/tutorial/tutorial-5.png';
 import tutorialImg6 from '../assets/tutorial/tutorial-6.png';
 import tutorialImg7 from '../assets/tutorial/tutorial-7.png';
 import tutorialImg8 from '../assets/tutorial/tutorial-8.png';
+import { useLocalStore } from '../../../zustand/localStore';
 
 
 
@@ -63,18 +64,14 @@ const pages: TutorialPage[] = [
 
 export const StellarTutorial = () => {
     const [state, setState] = useStellarContext();
-    const tutorial = useTutorial(pages, () => setState(prev => ({ ...prev, tutorialVisible: false })));
-
-    // if we had never seen the tutorial = show it when we flip at least one page
-    // useEffect(() => {
-    //     if(selected > 0 && localStore.tutorialSeen === false)
-    //         localStore.toggleTutorialSeen(true);
-    // }, [selected]);
+    const localStore = useLocalStore();
+    const tutorial = useTutorial(pages, 
+        () => setState(prev => ({ ...prev, tutorialVisible: false })),
+        (page => { if(page > 0 && localStore.tutorialSeen === false) localStore.toggleTutorialSeen(true) }));
 
     // sync context and the visibility of tutorial
     useEffect(() => {
         tutorial.setIsShown(state.tutorialVisible);
-        console.log(state.tutorialVisible);
     }, [state.tutorialVisible]);
 
     return (

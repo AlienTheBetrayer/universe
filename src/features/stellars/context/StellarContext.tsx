@@ -37,7 +37,7 @@ interface Props {
 }
 
 export const StellarProvider = ({ children }: Props) => {
-    const state = useState<StellarState>({
+    const [state, setState] = useState<StellarState>({
         stellars: [
             {
                 idx: 0,
@@ -71,11 +71,11 @@ export const StellarProvider = ({ children }: Props) => {
 
     // if we hadn't seen the tutorial ever before, show it 
     useEffect(() => {
-        state[1](prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen }));
+        setState(prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen }));
     }, []);
 
     return (
-        <StellarContext.Provider value={state}>
+        <StellarContext.Provider value={[state, setState]}>
             { children }
         </StellarContext.Provider>   
     )
