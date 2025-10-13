@@ -29,7 +29,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
 
     // drawing states
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
-    const [currentPath, setCurrentPath] = useState<Path | null>(null);
+    const currentPath = useRef<Path | null>(null);
     const [paths, setPaths] = useState<Path[]>([]);
     const [brushes, setBrushes] = useState(new Map<string, string>());
 
@@ -65,12 +65,6 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         redraw();
     }, [brushes]);
 
-    // brush handling
-    useEffect(() => {
-       if(ctxRef.current && currentPath?.brush)
-            applyBrush(currentPath?.brush);
-    }, [currentPath?.brush]);
-
     // resize handling
     useEffect(() => {
         const handle = () => {
@@ -86,48 +80,51 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
 
         window.addEventListener('resize', handle);
         return () => window.removeEventListener('resize', handle);
-    }, [paths]); 
-
-
+    }, []); 
     
     // user functions
     const start = (e: EventType) => {
+        const brush: Brush = {
+            lineCap: 'round',
+            lineWidth: context.brushSize,
+            lineColor: context.selectedColor
+        };
+
+        applyBrush(brush);
         setIsDrawing(true);
-        setCurrentPath({
+
+        currentPath.current = {
             lines: [getPos(e)],
-            brush: { 
-                lineCap: 'round',
-                lineWidth: context.brushSize,
-                lineColor: context.selectedColor
-            }
-        });
+            brush: brush
+        };
     }
 
     const proceed = (e: EventType) => {
         if (!isDrawing)
             return;
 
-        if(canvasRef.current && ctxRef.current) {
+        if(ctxRef.current && currentPath.current) {
             const pos = getPos(e);
-            setCurrentPath(prev => ({ ...prev!, lines: [...prev!.lines, pos] }));
+            const last = currentPath.current.lines.at(-1);
 
-            const last = currentPath?.lines.at(-1);
             if(last) {
                 ctxRef.current.beginPath();
                 ctxRef.current.moveTo(last.x, last.y);
                 ctxRef.current.lineTo(pos.x, pos.y);
                 ctxRef.current.stroke();
             }
+
+            currentPath.current.lines.push(pos);
         }
     }
 
-
     const stop = () => {
-        if(!isDrawing)
+        if(!isDrawing || !currentPath.current)
             return;
 
-        setPaths(prev => [...prev, currentPath!]);
-        setCurrentPath(null);
+        const path = currentPath.current;
+        setPaths(prev => [...prev, path]);
+        currentPath.current = null;
         setIsDrawing(false);
     }
 
@@ -135,7 +132,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         if(canvasRef.current && ctxRef.current) {
             ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
             setPaths([]);
-            setCurrentPath(null);
+            currentPath.current = null;
         }
     }
 

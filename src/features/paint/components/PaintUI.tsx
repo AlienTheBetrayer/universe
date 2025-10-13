@@ -46,7 +46,7 @@ export const PaintUI = ({ controller }: Props) => {
 
     // paint context states / syncing
     const [selectedColor, setSelectedColor] = useState<number>(0);
-    const [brushSize, setBrushSize] = useState<number>(1);
+    const [brushSize, setBrushSize] = useState<number>(5);
     const [, setContext] = usePaintContext();
 
     useEffect(() => {
@@ -77,8 +77,8 @@ export const PaintUI = ({ controller }: Props) => {
 
             <div className='paint-ui-container' ref={containerRef}>
                 <div className='paint-ui-left-bar'>
-                    <label> Thickness</label>
-                    <input type='range' min={1} max={43} step={3} 
+                    <label htmlFor='paint-brush-thickness'> Thickness</label>
+                    <input id='paint-brush-thickness' type='range' min={1} max={43} step={3} 
                     value={brushSize} onChange={e => setBrushSize(Number(e.target.value))}/>
 
                     <hr/>
