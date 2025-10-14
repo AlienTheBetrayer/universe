@@ -26,12 +26,13 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     const localStore = useLocalStore();
     const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
     const [context, ] = usePaintContext();
-
+    
     // drawing states
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
     const currentPath = useRef<Path | null>(null);
     const [paths, setPaths] = useState<Path[]>([]);
     const [brushes, setBrushes] = useState(new Map<string, string>());
+    const [needsUpdate, setNeedsUpdate] = useState<boolean>(false);
 
     // helper functions
     const applyBrush = (brush: Brush) => {
@@ -81,6 +82,14 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         window.addEventListener('resize', handle);
         return () => window.removeEventListener('resize', handle);
     }, []); 
+
+    // update handling
+    useEffect(() => {
+        if(needsUpdate) {
+            redraw();
+            setNeedsUpdate(false);
+        }
+    }, [needsUpdate]);
     
     // user functions
     const start = (e: EventType) => {
@@ -136,6 +145,11 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
         }
     }
 
+    const undo = () => {
+        setPaths(prev => prev.slice(0, -1));
+        setNeedsUpdate(true);
+    }
+
     const redraw = () => {
         if(canvasRef.current && ctxRef.current) {
             ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
@@ -158,7 +172,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
     return {
         start,
         proceed,
-        stop,
-        clear
+        stop, undo,
+        clear,
     };
 }

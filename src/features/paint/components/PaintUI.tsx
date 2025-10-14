@@ -60,7 +60,8 @@ export const PaintUI = ({ controller }: Props) => {
 
     useHotkeys([
         { hotkey: 'ArrowRight', action: () => { if(isVisible) setSelectedColor(prev => (prev + 1) % (buttons.length)) }},
-        { hotkey: 'ArrowLeft', action: () => { if(isVisible) setSelectedColor(prev => (prev - 1 + buttons.length) % (buttons.length))}}
+        { hotkey: 'ArrowLeft', action: () => { if(isVisible) setSelectedColor(prev => (prev - 1 + buttons.length) % (buttons.length))}},
+        { hotkey: 'Z', action: () => { if(isVisible) controller.undo() }, ctrl: true },
     ]);
     
     
@@ -106,6 +107,7 @@ export const PaintUI = ({ controller }: Props) => {
                     ))}
 
                     <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['→']}/>
+                    <HotkeyTooltip className='paint-ui-hotkey' hotkeys={['Ctrl + Z']}/>
                 </div>
 
                 <div className='paint-ui-bottom-bar'>

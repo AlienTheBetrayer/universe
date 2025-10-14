@@ -9,10 +9,11 @@
 .paint-ui-left-bar {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 1rem 0.5rem;
     gap: 0.5rem;
-    border-radius: 32px;
-    width: 80px;
+    border-radius: 16px;
+    width: 72px;
 
     position: absolute;
     left: 1rem;
@@ -34,7 +35,7 @@
     display: flex;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    border-radius: 32px;
+    border-radius: 16px;
     height: 48px;
     
     position: absolute;
@@ -59,16 +60,22 @@
 }
 
 /* all buttons */
-.paint-ui-container button,
-.paint-ui-container input {
+.paint-ui-container button {
     pointer-events: all;
     transition: 0.3s;
+    border-radius: 10px;
+}
+
+.paint-ui-container input {
+    width: 100%;
+    pointer-events: all;
 }
 
 /* color button */
 .paint-ui-color-button {
     padding: 0.3rem;
-    border-radius: 1000px;
+    width: 32px;
+    height: 32px;
 }
 
 .paint-ui-selected-color-button {

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 interface HotkeyAction {
     hotkey: string;
     action: () => void;
+    ctrl?: boolean;
 }
 
 export const useHotkeys = (hotkeys: HotkeyAction[]) => {
@@ -10,8 +11,15 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
         const handle = (e: KeyboardEvent) => {
             const match = hotkeys.find(h => h.hotkey.toLowerCase() === e.key.toLowerCase());
             if(match) {
-                e.preventDefault();
-                match.action();
+                if(match.ctrl === true) {
+                    if(e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
+                        match.action();
+                    }
+                } else {
+                    e.preventDefault();
+                    match.action();
+                }
             }
         }
 
