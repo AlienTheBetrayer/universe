@@ -1,0 +1,23 @@
+/* description */
+.github-description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 300px;
+}
+
+@media (max-width: 1024px) {
+    .github-description {
+        width: 100%;
+    }
+}
+
+.github-description-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.github-description * {
+    text-align: left;
+}

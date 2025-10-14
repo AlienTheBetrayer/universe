@@ -12,6 +12,7 @@ header {
     padding: 1rem;
 
     z-index: 2;
+    pointer-events: none;
 }
 
 @media (max-width: 640px) {
@@ -37,7 +38,7 @@ header > nav {
     border-radius: 20px;
     backdrop-filter: blur(8px);
     background: var(--background-fulltransparent);
-
+    pointer-events: all;
 
 }
 

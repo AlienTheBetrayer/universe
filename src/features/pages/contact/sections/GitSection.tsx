@@ -1,16 +1,14 @@
 import './GitSection.css';
-import { GithubEmulation } from '../../../githubemulation/components/GithubEmulation';
-import { GithubTutorial } from '../../../githubemulation/components/GithubTutorial';
+import { Github } from '../../../github/components/Github';
+import { GithubTutorial } from '../../../github/components/GithubTutorial';
 import { Button } from '../../../ui/Button/components/Button';
-import { useGithubContext } from '../../../githubemulation/context/GithubContext';
+import { useGithubContext } from '../../../github/context/GithubContext';
 
 export const GitSection = () => { 
     const [, setContext] = useGithubContext();
 
     return (
         <section className='git-section container'>
-            <GithubTutorial/>
-
             <h2>
                 <mark>Github</mark> emulation w/ forms
                 <Button className='contact-show-tutorial-button'
@@ -18,9 +16,11 @@ export const GitSection = () => {
                     Show tutorial
                 </Button>
             </h2>
+        
+            <GithubTutorial/>
 
             <div className='github-container'>
-                <GithubEmulation/>
+                <Github/>
             </div>
         </section>
     )

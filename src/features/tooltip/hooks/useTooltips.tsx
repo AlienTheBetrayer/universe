@@ -1,5 +1,5 @@
 import { AnimatePresence } from "motion/react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Tooltip } from "../components/Tooltip";
 
@@ -19,10 +19,10 @@ export const useTooltips = () => {
 
     const [selected, setSelected] = useState<number | false>(false);
     
-    const elements = refs.current.map(r => r.element);
+    const elements = refs.current.map(r => r);
 
     // filling the array with given elements + event handling
-    useLayoutEffect(() => {
+    useEffect(() => {
         const handleLeave = () => {
             setSelected(false);
         }
@@ -30,10 +30,11 @@ export const useTooltips = () => {
         const handlers: (() => void)[] = [];
 
         elements.forEach((el, idx) => {
+            console.log(el.tooltip, idx);
             const handleEnter = () => setSelected(idx); 
 
-            el?.addEventListener('pointerenter', handleEnter);
-            el?.addEventListener('pointerleave', handleLeave);
+            el.element?.addEventListener('pointerenter', handleEnter);
+            el.element?.addEventListener('pointerleave', handleLeave);
 
             handlers.push(handleEnter);
         });
@@ -99,7 +100,7 @@ export const useTooltips = () => {
         return createPortal(<AnimatePresence>
             { selected !== false && (
                 <Tooltip ref={tooltipRef}>
-                    { refs.current[selected].tooltip }
+                    { elements[selected].tooltip }
                 </Tooltip>
             )}
         </AnimatePresence>, document.body);

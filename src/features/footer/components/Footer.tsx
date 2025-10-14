@@ -34,23 +34,25 @@ export const Footer = () => {
     const tooltips = useTooltips();
 
     return (
-        <footer>    
-            <nav>
-                { buttons.map((button, idx) => (
-                    <motion.div
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 40 }}
-                    key={idx}
-                    ref={el => tooltips.set(idx, button.text, el, 'up', 36)}>
-                        <UniversalLink to={button.to} type='url'>
-                            <img src={button.src} alt={button.alt}/>
-                        </UniversalLink>
-                    </motion.div>
-                ))}
+        <>
+            { tooltips.render() }
 
-                { tooltips.render() }
-            </nav>
-        </footer>
+            <footer>    
+                <nav>
+                    { buttons.map((button, idx) => (
+                        <motion.div
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.2 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 40 }}
+                        key={idx}
+                        ref={el => tooltips.set(idx, button.text, el, 'up', 36)}>
+                            <UniversalLink to={button.to} type='url'>
+                                <img src={button.src} alt={button.alt}/>
+                            </UniversalLink>
+                        </motion.div>
+                    ))}
+                </nav>
+            </footer>
+        </>
     )
 }

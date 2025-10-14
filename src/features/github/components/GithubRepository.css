@@ -1,0 +1,42 @@
+.github-repository {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+
+/* actual repository */
+.github-forms {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 400px;
+    border: 1px solid var(--background-7);
+    border-radius: 8px;
+}
+
+.github-forms > * {
+    border-bottom: 1px solid var(--background-7);
+}
+
+.github-forms .github-heading-avatar {
+    width: 24px;
+    height: 24px;
+}
+
+.github-forms-info {
+    padding: 0.5rem;
+    min-height: 36px;
+}
+
+.github-form {
+    height: 36px;
+}
+
+.github-form-edit {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    border: 1px solid var(--background-7);
+    border-radius: 8px;
+}

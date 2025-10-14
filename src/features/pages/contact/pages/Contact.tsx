@@ -3,7 +3,7 @@ import { Page } from "../../../layout/components/Page"
 
 import { GitSection } from '../sections/GitSection';
 import { Text3DCanvas } from '../../../text3d/components/Text3DCanvas';
-import { GithubProvider } from '../../../githubemulation/context/GithubContext';
+import { GithubProvider } from '../../../github/context/GithubContext';
 
 export const Contact = () => {
     return (

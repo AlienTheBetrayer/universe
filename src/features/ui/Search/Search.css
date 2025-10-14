@@ -40,3 +40,19 @@
     height: 24px;
     pointer-events: none;
 }   
+
+/* hotkeys */
+.search-hotkey {
+    position: absolute;
+    right: 0.6rem;
+}
+
+.search-input-container .search-clear {
+    position: absolute;
+    right: 0.4rem;
+    height: 20px;
+    width: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 8px;
+}

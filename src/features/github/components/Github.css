@@ -1,0 +1,53 @@
+.github {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;   
+
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 500px;
+    padding: 1rem;
+}
+
+/* global styles */
+.github hr {
+    width: 100%;
+    margin: 0;
+}
+
+.github button {
+    border-radius: 8px;
+    border: 1px solid var(--background-7);
+}
+
+.github button img {
+    width: 20px;
+    height: 20px;
+    filter: invert(0.5);
+}
+
+.github-flex {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.github-flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* repository */
+.github-main {
+    display: flex;
+    flex: 1;
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .github-main {
+        flex-direction: column-reverse;
+        gap: 4rem;
+    }
+}
