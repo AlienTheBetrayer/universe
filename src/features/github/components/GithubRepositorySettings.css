@@ -1,0 +1,65 @@
+.github-repository-settings {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    min-height: 300px;
+
+    background-color: var(--background-2);
+    border: 1px solid var(--background-7);
+    border-radius: 16px;
+
+    z-index: 100;
+}
+
+/* topline */
+.github-repository-settings-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    border-bottom: 1px solid var(--background-7);
+}
+
+/* content */
+.github-repository-settings-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.github-repository-settings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* bottom */
+.github-repository-settings-bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+
+    border-top: 1px solid var(--background-7);
+}
+
+.github-repository-settings-save-button {
+    background-color: hsl(132, 59%, 33%);
+    color: var(--foreground-last);
+}
+
+.github-repository-settings-save-button:hover {
+    background-color: hsl(132, 59%, 40%)
+}
+
+.github-repository-settings-save-button:active {
+    background-color: hsl(132, 59%, 47%);
+}

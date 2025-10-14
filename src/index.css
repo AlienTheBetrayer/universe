@@ -177,9 +177,11 @@ h3 {
 h4 {
     font-size: var(--font-h4);
     color: var(--foreground-prelast);
+    margin: 0;
+    text-align: left;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     text-align: center;
     margin: 0;
 }
@@ -219,6 +221,11 @@ mark {
     text-decoration-color: rgb(56, 66, 255);
     text-decoration-thickness: 2px;
     text-decoration-skip-ink: none;
+}
+
+small {
+    opacity: 0.5;
+    font-size: inherit;
 }
 
 hr {

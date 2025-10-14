@@ -30,6 +30,7 @@ interface FormDescription {
     stars: number;
     watching: number;
     forks: number;
+    topics: string[];
 }
 
 
@@ -60,7 +61,8 @@ export const GithubContextInitialData: GithubData = {
         about: '',
         forks: 0,
         stars: 0,
-        watching: 0
+        watching: 0,
+        topics: [],
     },
     branches: [
         {

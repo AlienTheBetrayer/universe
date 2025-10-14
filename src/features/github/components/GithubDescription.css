@@ -25,6 +25,17 @@
     gap: 1rem;
 }
 
-.github-description * {
-    text-align: left;
+.github-description-section-topics {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.github-description-section-topics > div {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--background-7);
+    text-align: center;
 }

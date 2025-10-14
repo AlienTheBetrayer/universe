@@ -1,6 +1,9 @@
-import { useRef, useState } from 'react';
 import './Search.css';
+import '../Input/components/Input.css';
+
 import searchImg from './assets/search.svg';
+
+import { useRef, useState } from 'react';
 import { useHotkeys } from '../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { Button } from '../Button/components/Button';
@@ -26,7 +29,7 @@ export const Search = ({ className, placeholder, value, onChange, onClear }: Pro
     ]);
 
     return (
-        <div className={`search-input-container ${className ?? ''}`}>
+        <div className={`ui-input search-input-container ${className ?? ''}`}>
             <img src={searchImg} alt=''/>
             
             <input 
