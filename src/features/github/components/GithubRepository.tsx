@@ -47,6 +47,7 @@ export const GithubRepository = () => {
                     <Search placeholder='Open a form'
                     value={searchValue}
                     onChange={val => setSearchValue(val)}
+                    onClear={() => setSearchValue('')}
                     />
                     <Button><img src={addImg} alt=''/>Add form</Button>
                     <Button>Code</Button>
