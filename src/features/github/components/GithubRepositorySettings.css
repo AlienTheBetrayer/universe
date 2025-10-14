@@ -6,7 +6,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
 
-    width: 400px;
+    width: 95%;
+    max-width: 500px;
     min-height: 300px;
 
     background-color: var(--background-2);
@@ -14,6 +15,7 @@
     border-radius: 16px;
 
     z-index: 100;
+    overflow: hidden;
 }
 
 /* topline */
@@ -24,6 +26,7 @@
     padding: 1rem;
 
     border-bottom: 1px solid var(--background-7);
+    background-color: var(--background-3);
 }
 
 /* content */
@@ -38,8 +41,10 @@
 .github-repository-settings-field {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 0.5rem;
 }
+
 
 /* bottom */
 .github-repository-settings-bottom {

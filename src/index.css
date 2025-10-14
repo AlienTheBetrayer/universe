@@ -197,6 +197,13 @@ p, span, a, button, input, h1, h2, label {
     line-height: 1em;
 }
 
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color-scheme: dark;
+}
+
 b, i, u, mark {
     all: unset;
     pointer-events: none;

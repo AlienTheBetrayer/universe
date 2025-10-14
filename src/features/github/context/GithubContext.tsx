@@ -33,10 +33,17 @@ interface FormDescription {
     topics: string[];
 }
 
+interface FormElementsVisibility {
+    releases: boolean;
+    packages: boolean;
+    languages: boolean;
+}
+
 
 interface GithubData {
     commits?: Commit[],
     description: FormDescription;
+    visibility: FormElementsVisibility;
     branches: Branch[];
 }
 
@@ -63,6 +70,11 @@ export const GithubContextInitialData: GithubData = {
         stars: 0,
         watching: 0,
         topics: [],
+    },
+    visibility: {
+        languages: true,
+        packages: true,
+        releases: true,
     },
     branches: [
         {

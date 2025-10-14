@@ -25,17 +25,28 @@
     gap: 1rem;
 }
 
-.github-description-section-topics {
+.github-description-topics {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
 }
 
-.github-description-section-topics > div {
+.github-description-topics > div {
     flex: 1;
     padding: 0.5rem;
     border-radius: 12px;
     border: 1px solid var(--background-7);
     text-align: center;
+}
+
+.github-description-numbers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.github-description-numbers button {
+    min-width: 24px;
+    min-height: 24px;
 }

@@ -17,9 +17,24 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
 
     const [description, setDescription] = useState<string>(context.data.description.about);
     const [topics, setTopics] = useState<string>(context.data.description.topics.join(' '));
+    const [languagesChecked, setLanguagesChecked] = useState<boolean>(context.data.visibility.languages);
+    const [packagesChecked, setPackagesChecked] = useState<boolean>(context.data.visibility.packages);
+    const [releasesChecked, setReleasesChecked] = useState<boolean>(context.data.visibility.releases);
 
     const handleSave = () => {
-        setContext(prev => ({ ...prev, data: { ...prev.data, description: { ...prev.data.description, about: description, topics: topics.split(' ') } }}));
+        setContext(prev => ({ ...prev,
+            data: { 
+                ...prev.data, 
+                description: { 
+                    ...prev.data.description, 
+                    about: description, 
+                    topics: topics.trim().length === 0 ? [] : topics.split(' ')
+                }, visibility: {
+                    languages: languagesChecked,
+                    packages: packagesChecked,
+                    releases: releasesChecked
+                },
+        }}));
         onInteract?.();
     }
 
@@ -37,6 +52,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
+                {/* top */}
                 <div className='github-repository-settings-topline'>
                     <h4>Edit repository details</h4>
                     <Button 
@@ -45,7 +61,8 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                         ✕
                     </Button>
                 </div>
-    
+
+                {/* content */}
                 <div className='github-repository-settings-content'>
                     <div className='github-repository-settings-field'>
                         <h4>Description</h4>
@@ -60,8 +77,34 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                         value={topics}
                         onChange={val => setTopics(val)}/>
                     </div>
+
+                    <div className='github-repository-settings-field'>
+                        <h4>Include in the form description </h4>
+
+                        <label>
+                            <input type='checkbox'
+                            checked={languagesChecked}
+                            onChange={e => setLanguagesChecked(e.target.checked)}/>
+                            Languages
+                        </label>
+
+                        <label>
+                            <input type='checkbox'
+                            checked={packagesChecked}
+                            onChange={e => setPackagesChecked(e.target.checked)}/>
+                            Packages
+                        </label>
+
+                        <label>
+                            <input type='checkbox'
+                            checked={releasesChecked}
+                            onChange={e => setReleasesChecked(e.target.checked)}/>
+                            Releases
+                        </label>
+                    </div>
                 </div>
 
+                {/* bottom */}
                 <div className='github-repository-settings-bottom'>
                     <Button 
                     ref={el => tooltips.set(1, 'Cancel', el, 'down', 16)}

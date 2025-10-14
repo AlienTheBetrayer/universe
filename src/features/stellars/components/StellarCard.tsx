@@ -29,14 +29,8 @@ export const StellarCard = ({ idx, side, className='' }: CardProps) => {
         setDescription((side === 'first' ? stellar?.content?.firstDescription : stellar?.content.secondDescription) ?? '');
     }, [idx]);
 
-    // hotkey interruption prevention & context update content
-    const [isEditing, setIsEditing] = useState<boolean>(false);
-
     useEffect(() => {
-        setState(prev => ({ ...prev, editing: isEditing }));
-
-        if(!isEditing) {
-            setState(prev => ({ ...prev, }))
+        if(!state.isEditing) {
             if(side === 'first') {
                 setState(prev => ({ ...prev, stellars: prev.stellars?.map(stellar =>
                     stellar.idx === idx ? { ...stellar, content: { ...stellar.content, firstTitle: heading, firstDescription: description } } : stellar
@@ -47,8 +41,8 @@ export const StellarCard = ({ idx, side, className='' }: CardProps) => {
                 )}));
             }
         }
-    }, [isEditing]);
-    
+    }, [state.isEditing]);
+
     return (
         <motion.div className={`stellar-card ${className}`}
             style={{ y: isMobile ? '0' : '-50%' }}
@@ -64,12 +58,12 @@ export const StellarCard = ({ idx, side, className='' }: CardProps) => {
                     className='stellar-content-container'>
                         <input className='input-h3' value={heading} 
                         onChange={(e) => setHeading(e.target.value)}
-                        onFocus={() => setIsEditing(true)} 
-                        onBlur={() => setIsEditing(false)}/>
+                        onFocus={() => setState(prev => ({ ...prev, isEditing: true }))} 
+                        onBlur={() => setState(prev => ({ ...prev, isEditing: false }))}/>
 
                         <input className='input-p' value={description}
-                        onFocus={() => setIsEditing(true)} 
-                        onBlur={() => setIsEditing(false)}
+                        onFocus={() => setState(prev => ({ ...prev, isEditing: true }))} 
+                        onBlur={() => setState(prev => ({ ...prev, isEditing: false }))}
                         onChange={(e) => setDescription(e.target.value)}/>
 
                         <img className='stellar-card-edit-image' src={editImg} alt='editable'/>

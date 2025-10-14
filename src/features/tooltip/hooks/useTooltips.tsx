@@ -30,7 +30,6 @@ export const useTooltips = () => {
         const handlers: (() => void)[] = [];
 
         elements.forEach((el, idx) => {
-            console.log(el.tooltip, idx);
             const handleEnter = () => setSelected(idx); 
 
             el.element?.addEventListener('pointerenter', handleEnter);

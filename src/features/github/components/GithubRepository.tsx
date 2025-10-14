@@ -100,17 +100,17 @@ export const GithubRepository = () => {
 
                 </div>
 
-                { forms?.map(form => (
+                { forms?.map((form, idx) => (
                     form.visible && (
-                        <div className='github-form'>
+                        <div className='github-form' key={idx}>
                             <div className='github-flex'>
                                 <Button className='github-flex'>
                                     <img className='github-img' src={fileImg} alt=''/>
                                     <p className='github-form-p-name'>{ form.obj.name }</p>
                                 </Button>
 
-                                { form.obj.tags.map(tag => (
-                                    <div className='github-form-tag'>   
+                                { form.obj.tags.map((tag, idx2) => (
+                                    <div className='github-form-tag' key={`${idx}${idx2}`}>   
                                         <p>
                                             { tag }
                                         </p>
