@@ -55,10 +55,19 @@ export const Tutorial = ({ pages, onSkip, onSelect }: Props) => {
                     { selected + 1 } 
                 </motion.span>
 
+                {/* skip button */}
                 <Button className='tutorial-skip-button'
                 ref={el => tooltips.set(0, 'Skip tutorial', el, 'right')}
                 onClick={() => onSkip?.()}>   
                     Skip
+                </Button>
+
+                {/* finish button */}
+                <Button className='tutorial-finish-button'
+                enabled={ selected === pages.length - 1}
+                ref={el => tooltips.set(1, 'Finish tutorial', el, 'left')}
+                onClick={() => onSkip?.()}>   
+                    Finish
                 </Button>
 
                 {/* mobile buttons */}
@@ -83,7 +92,7 @@ export const Tutorial = ({ pages, onSkip, onSelect }: Props) => {
                     className='tutorial-pc-button'
                     enabled={selected > 0}
                     onClick={() => previous()}
-                    ref={el => tooltips.set(1, 'Previous tutorial page', el, 'up')}>
+                    ref={el => tooltips.set(2, 'Previous tutorial page', el, 'up')}>
                         ←
                         <HotkeyTooltip className='tutorial-tooltip' hotkeys={['←']}/>
                     </Button>
@@ -103,7 +112,7 @@ export const Tutorial = ({ pages, onSkip, onSelect }: Props) => {
                     className='tutorial-pc-button'
                     enabled={selected < pages.length - 1}
                     onClick={() => next()}
-                    ref={el => tooltips.set(2, 'Next tutorial page', el, 'up')}>
+                    ref={el => tooltips.set(3, 'Next tutorial page', el, 'up')}>
                         →
                         <HotkeyTooltip className='tutorial-tooltip' hotkeys={['→']}/>
                     </Button>

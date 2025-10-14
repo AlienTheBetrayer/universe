@@ -71,6 +71,13 @@
     padding: 1rem 2rem;
 }
 
+.tutorial-container .tutorial-finish-button {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 1rem 2rem;
+}
+
 /* mobile buttons */
 .tutorial-container .tutorial-mobile-button {
     position: absolute;
