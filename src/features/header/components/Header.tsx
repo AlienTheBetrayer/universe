@@ -60,7 +60,7 @@ export const Header = () => {
 
                     <LinkButton 
                     className='header-forge-button'
-                    to='/app'>
+                    to='/forge'>
                         <img src={launchImg} alt=''/>
                         Forge
                     </LinkButton>
