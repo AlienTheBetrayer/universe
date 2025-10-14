@@ -10,9 +10,15 @@ interface Form {
     idx: number;
     name: string;
     tags: string[];
-    lastUpdatedDate?: string;
 }
 
+
+interface Commit {
+    name: string;
+    description: string;
+    date: string;
+    difference: string,
+}
 
 interface Branch {
     name: string;
@@ -28,6 +34,7 @@ interface FormDescription {
 
 
 interface GithubData {
+    commits?: Commit[],
     description: FormDescription;
     branches: Branch[];
 }

@@ -13,9 +13,9 @@ export const Contact = () => {
                     <Text3DCanvas>
                         CONTACT
                     </Text3DCanvas>
-                    
-                    <GitSection/>
                 </div>
+
+                <GitSection/>
             </Page>
         </GithubProvider>
     )

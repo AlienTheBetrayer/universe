@@ -4,6 +4,23 @@
     justify-content: space-between;
 }
 
+@media (max-width: 640px) {
+    .github-heading {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .github-heading-buttons {
+        justify-content: space-between;
+    }
+
+    .github-heading-buttons > button {
+        width: 100%;
+    }
+}
+
+    
+
 .github-heading-avatar {
     border-radius: 1000px;
     border: 1px solid var(--background-7);

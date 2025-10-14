@@ -32,7 +32,7 @@ export const GithubHeading = () => {
                     </div>
                 </div>
 
-                <div className='github-flex'>
+                <div className='github-heading-buttons github-flex'>
                     <Button>Pin</Button>
                     <Button>Watch</Button>
                     <Button>Fork</Button>

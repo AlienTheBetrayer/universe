@@ -29,8 +29,11 @@ export const Text3DContent = ({ text }: Props) => {
         }
     });
     return (
-        <Center position={[0, viewport.innerWidth > 640 ? 1.5 : 2, 0]}>
-            <Text3D font='/fonts/inter-typeface-fat.json' size={ Math.max(0.35, Math.min(viewport.innerWidth / 1000, 0.9))} curveSegments={4}  height={viewport.innerWidth > 640 ? 1 : 0.3} bevelEnabled ref={ref}>
+        <Center>
+            <Text3D font='/fonts/inter-typeface-fat.json'
+            size={viewport.innerWidth / 100 / 7}
+            curveSegments={4}
+            height={1} bevelEnabled ref={ref}>
                 { text }
                 <meshPhongMaterial shininess={16} specular='#fff'/>
             </Text3D>

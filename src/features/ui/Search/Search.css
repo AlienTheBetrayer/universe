@@ -33,12 +33,12 @@
 
 .search-input-container img {
     position: absolute;
-    left: 0.3rem;
+    left: 0.25rem;
     top: 50%;
     transform: translateY(-50%);
     filter: invert(0.5);
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     pointer-events: none;
 }   
 

@@ -19,6 +19,7 @@ export const GithubRepository = () => {
 
     // state variables
     const thisBranch = context.data.branches.find(b => b.name === currentBranch);
+    // fix this \/
     const [forms, setForms] = useState(thisBranch?.forms?.map(form => ({ obj: form, visible: true })));
 
     const tags = thisBranch?.forms?.reduce((acc, form) => acc + form.tags.length, 0) ?? 0;
@@ -39,8 +40,8 @@ export const GithubRepository = () => {
             <div className='github-flex-between'>
                 <div className='github-flex'>
                     <Button>Branch</Button>
-                    <p>{context.data.branches.length} Branch{context.data.branches.length > 1 ? 'es' : ''}</p>
-                    <p>{tags} Tag{tags > 1 ? 's' : ''}</p>
+                    <p>{context.data.branches.length} Branch{context.data.branches.length !== 1 ? 'es' : ''}</p>
+                    <p>{tags} Tag{tags !== 1 ? 's' : ''}</p>
                 </div>
 
                 <div className='github-flex'>
@@ -64,7 +65,10 @@ export const GithubRepository = () => {
 
                     <div className='github-flex'>
                         <p>Last commit date</p>
-                        <Button><img src={commitImg} alt=''/>X commits</Button>
+                        <Button>
+                            <img src={commitImg} alt=''/>
+                            { context.data.commits?.length ?? 0 } commit{ (context.data.commits?.length ?? 0) !== 1 ? 's' : ''}
+                        </Button>
                     </div>
 
                 </div>
@@ -87,7 +91,7 @@ export const GithubRepository = () => {
                                 ))}
                             </div>
 
-                            <p>{ form.obj.lastUpdatedDate ?? 'unknown' }</p>
+                            <p>{ context.data.commits?.at(-1)?.date ?? 'unknown' }</p>
                         </div>
                     )
                 ))}

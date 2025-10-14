@@ -28,6 +28,7 @@ export const Search = ({ className, placeholder, value, onChange, onClear }: Pro
     return (
         <div className={`search-input-container ${className ?? ''}`}>
             <img src={searchImg} alt=''/>
+            
             <input 
             ref={ref}
             className='search-input'

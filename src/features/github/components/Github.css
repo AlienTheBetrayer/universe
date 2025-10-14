@@ -10,11 +10,17 @@
     padding: 1.2rem;
 }
 
+.github-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
 /* mac buttons */
 .github-mac-buttons {
     display: flex;
     gap: 0.7rem;
-    margin-bottom: 2rem;
 }
 
 .github-mac-buttons > div {
@@ -37,7 +43,7 @@
     border: 1px solid var(--background-7);
 }
 
-.github img {
+.github button img {
     width: 20px;
     height: 20px;
     filter: invert(0.5);
