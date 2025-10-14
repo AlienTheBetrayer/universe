@@ -4,15 +4,8 @@ import { Search } from "../../ui/Search/Search";
 
 import addImg from '../assets/add.svg';
 import commitImg from '../assets/commit.svg';
-import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
-import { useRef } from 'react';
-import { useHotkeys } from '../../../hooks/useHotkeys';
 
 export const GithubRepository = () => {
-    const searchRef = useRef<HTMLInputElement>(null);
-
-
-
     return (
         <div className='github-repository'>
             <div className='github-flex-between'>
