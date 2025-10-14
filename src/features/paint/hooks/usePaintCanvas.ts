@@ -81,7 +81,7 @@ export const usePaintCanvas = (canvasRef: RefObject<HTMLCanvasElement | null>, c
 
         window.addEventListener('resize', handle);
         return () => window.removeEventListener('resize', handle);
-    }, []); 
+    }, [paths]); 
 
     // update handling
     useEffect(() => {

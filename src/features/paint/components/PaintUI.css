@@ -23,6 +23,13 @@
     background-color: var(--background-3-transparent);
 }
 
+@media (max-width: 768px) {
+    .paint-ui-left-bar {
+        left: 0;
+        width: 64px;
+    }
+}
+
 .paint-ui-left-bar hr {
     border: 1px solid var(--background-4);
     margin: 0;
@@ -44,6 +51,12 @@
     transform: translateX(-50%);
 
     background-color: var(--background-3-transparent);
+}
+
+@media (max-width: 768px) {
+    .paint-ui-bottom-bar {
+        bottom: 0rem;
+    }
 }
 
 /* hotkeys */

@@ -90,7 +90,7 @@ export const PaintUI = ({ controller }: Props) => {
                         <React.Fragment key={idx}>
                             <Button
                             className={`paint-ui-color-button ${selectedColor === idx ? 'paint-ui-selected-color-button' : ''}`}
-                            ref={el => tooltips.set(idx + 1, button.tooltip, el, 'right')}
+                            ref={el => tooltips.set(idx + 2, button.tooltip, el, 'right')}
                             onClick={() => setSelectedColor(prev => prev !== idx ? idx : prev)}>
                                 <div
                                 style={{ backgroundColor: button.color}}
@@ -111,12 +111,19 @@ export const PaintUI = ({ controller }: Props) => {
                 </div>
 
                 <div className='paint-ui-bottom-bar'>
+                    <Button
+                    onClick={() => controller.undo()}
+                    ref={el => tooltips.set(1, 'Undo the last drawing', el, 'up')}>
+                        ← Undo
+                    </Button>
+
                     <hr className='paint-ui-vertical-hr'/>
-                    <Button onClick={() => clearMessageBox.setShown(true)}
-                        ref={el => tooltips.set(0, 'Wipe all your drawings', el, 'up')}>
+
+                    <Button
+                    onClick={() => clearMessageBox.setShown(true)}
+                    ref={el => tooltips.set(0, 'Wipe all your drawings', el, 'up')}>
                         Clear
                     </Button>
-                    <hr className='paint-ui-vertical-hr'/>
                 </div>
             </div>
         </>
