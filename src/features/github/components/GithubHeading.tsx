@@ -22,13 +22,12 @@ export const GithubHeading = () => {
 
             <div className='github-heading'>
                 <div className='github-flex'>
-                    <div className='github-heading-avatar'>
+                    <div className='github-heading-avatar'/>
 
-                    </div>
                     <h3>theuniverse</h3>
+
                     <div className='github-heading-forms-type'>
-                        {/* depends on actual space */}
-                        <p>has space</p>
+                        <p>Public</p>
                     </div>
                 </div>
 

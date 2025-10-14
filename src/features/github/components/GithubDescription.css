@@ -12,6 +12,13 @@
     }
 }
 
+.github-description-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* section inside description */
 .github-description-section {
     display: flex;
     flex-direction: column;

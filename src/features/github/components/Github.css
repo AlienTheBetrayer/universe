@@ -10,6 +10,7 @@
     padding: 1.2rem;
 }
 
+/* topline with mac buttons and tutorial button */
 .github-topline {
     display: flex;
     justify-content: space-between;
@@ -44,12 +45,13 @@
     min-width: 64px;
 }
 
-.github button img {
+.github-img {
     width: 20px;
     height: 20px;
     filter: invert(0.5);
 }
 
+/* styles */
 .github-flex {
     display: flex;
     gap: 0.5rem;
@@ -61,7 +63,7 @@
     justify-content: space-between;
 }
 
-/* repository */
+/* repository main container */
 .github-main {
     display: flex;
     flex: 1;

@@ -9,9 +9,11 @@ export const GithubDescription = () => {
 
     return (
         <div className='github-description'>
-            <div className='github-flex-between'>
+            <div className='github-description-topline'>
                 <h4>About</h4>
-                <Button><img src={gearImg} alt='settings'/></Button>
+                <Button>
+                    <img className='github-img' src={gearImg} alt='settings'/>
+                </Button>
             </div>
 
             <div className='github-description-section'>

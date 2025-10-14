@@ -5,6 +5,9 @@ import { Search } from "../../ui/Search/Search";
 import addImg from '../assets/add.svg';
 import commitImg from '../assets/commit.svg';
 import fileImg from '../assets/file.svg';
+import branchImg from '../assets/branch.svg';
+import dropdownImg from '../assets/dropdown.svg';
+import tagsImg from '../assets/tags.svg';
 
 import { GithubDefaultBranch, useGithubContext } from '../context/GithubContext';
 import { useEffect, useState } from 'react';
@@ -40,12 +43,25 @@ export const GithubRepository = () => {
             <div className='github-repository-topline'>
                 <div className='github-repository-topline-info'>
                     <div>
-                        <Button>Branch</Button>
+                        <Button>
+                            <img className='github-img' src={branchImg} alt='branch'/>
+                            {currentBranch}
+                            <img className='github-img' src={dropdownImg} alt='branch'/>
+                        </Button>
                     </div>
 
                     <div className='flex gap-3'>
-                        <p>{context.data.branches.length} Branch{context.data.branches.length !== 1 ? 'es' : ''}</p>
-                        <p>{tags} Tag{tags !== 1 ? 's' : ''}</p>
+                        <div className='flex gap-1 items-center'>
+                            <img className='github-img' src={branchImg} alt='branch'/>
+                            <p>
+                                {context.data.branches.length} Branch{context.data.branches.length !== 1 ? 'es' : ''}
+                            </p>
+                        </div>
+
+                        <div className='flex gap-1 items-center'>
+                            <img className='github-img' src={tagsImg} alt='tags'/>
+                            <p>{tags} Tag{tags !== 1 ? 's' : ''}</p>
+                        </div>
                     </div>
                 </div>
 
@@ -55,7 +71,11 @@ export const GithubRepository = () => {
                     onChange={val => setSearchValue(val)}
                     onClear={() => setSearchValue('')}/>
 
-                    <Button><img src={addImg} alt=''/>Add form</Button>
+                    <Button>
+                        <img className='github-img' src={addImg} alt=''/>
+                        Add form
+                    </Button>
+
                     <Button>Code</Button>
                 </div>
             </div>
@@ -73,7 +93,7 @@ export const GithubRepository = () => {
                     <div className='github-flex'>
                         <p>Last commit date</p>
                         <Button>
-                            <img src={commitImg} alt=''/>
+                            <img className='github-img' src={commitImg} alt=''/>
                             { context.data.commits?.length ?? 0 } commit{ (context.data.commits?.length ?? 0) !== 1 ? 's' : ''}
                         </Button>
                     </div>
@@ -85,7 +105,7 @@ export const GithubRepository = () => {
                         <div className='github-form'>
                             <div className='github-flex'>
                                 <Button className='github-flex'>
-                                    <img src={fileImg} alt=''/>
+                                    <img className='github-img' src={fileImg} alt=''/>
                                     <p className='github-form-p-name'>{ form.obj.name }</p>
                                 </Button>
 
