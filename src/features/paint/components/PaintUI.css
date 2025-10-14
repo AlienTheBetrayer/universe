@@ -21,6 +21,7 @@
     transform: translateY(-50%);
     
     background-color: var(--background-3-transparent);
+    backdrop-filter: blur(2px);
 }
 
 @media (max-width: 768px) {
@@ -51,6 +52,7 @@
     transform: translateX(-50%);
 
     background-color: var(--background-3-transparent);
+    backdrop-filter: blur(2px);
 }
 
 @media (max-width: 768px) {
