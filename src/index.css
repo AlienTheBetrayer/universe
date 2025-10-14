@@ -102,8 +102,6 @@
     --selection-color: rgb(255, 255, 255);
 
     /* component specific */
-    --button-app-fill: rgb(39, 78, 220);
-    --button-app-hover: rgb(27, 57, 165);
     --header-link: #0033cc;
     --b: 0.7;
     --footer-invert: 0;

@@ -1,17 +1,22 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocalStore } from "../../../zustand/localStore";
 
+// constant default values
+export const GithubDefaultBranch = 'main';
+
+
 // github data
 interface Form {
+    idx: number;
     name: string;
     tags: string[];
-    lastUpdatedDate: string;
+    lastUpdatedDate?: string;
 }
 
 
 interface Branch {
     name: string;
-    forms: Form[];
+    forms?: Form[];
 }
 
 interface FormDescription {
@@ -42,14 +47,34 @@ interface Props {
     children?: React.ReactNode;
 }
 
+
+export const GithubContextInitialData: GithubData = {
+    description: {
+        about: '',
+        forks: 0,
+        stars: 0,
+        watching: 0
+    },
+    branches: [
+        {
+            name: GithubDefaultBranch,
+            forms: [{
+                idx: 0,
+                name: 'hi',
+                tags: ['bye', 'whatever']
+            }]
+        },
+    ]
+};
+
 // provider + localstorage zustand handling
 export const GithubProvider = ({ children }: Props)  => {
-    const [state, setState] = useState<GithubContextData>({
-        tutorialVisible: true,
-        data: {
-
+    const [state, setState] = useState<GithubContextData>(
+        {
+            tutorialVisible: true,
+            data: GithubContextInitialData
         }
-    });
+    );
 
     const localStore = useLocalStore();
 

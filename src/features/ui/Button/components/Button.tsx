@@ -8,7 +8,7 @@ interface Props extends HTMLMotionProps<'button'> {
 
 export const Button = forwardRef<HTMLButtonElement, Props>(({ className, children, enabled=true, ...rest }, ref) => {
     return (
-        <motion.button ref={ref} className={`button ${className ?? ''} ${!enabled && 'button-disabled' }`} {...rest}>
+        <motion.button ref={ref} className={`button ${className ?? ''} ${!enabled ? 'button-disabled' : ''}`} {...rest}>
             { children }
         </motion.button>
     )   

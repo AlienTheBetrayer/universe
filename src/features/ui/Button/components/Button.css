@@ -11,7 +11,7 @@
     position: relative;
 
     color: var(--foreground);
-    background-color: var(--background-4-transparent);
+    background-color: var(--background-4);
     border-radius: 16px;
     border: transparent;
     cursor: pointer;
@@ -21,11 +21,11 @@
 }
 
 .button:hover {
-    background-color: var(--background-5-transparent);
+    background-color: var(--background-6);
 }
 
 .button:active {
-    background-color: var(--background-6-transparent);
+    background-color: var(--background-7);
     color: var(--foreground-last);
 }
 

@@ -12,12 +12,9 @@ interface Props {
 export const HorizontalMenu = ({ className, items }: Props) => {
     // search functionality with display: none (optimized)
     const [searchValue, setSearchValue] = useState<string>('');
-    const debouncedSearch = useDebounced<string>(searchValue);
+    const debouncedSearch = useDebounced<string>(searchValue, '');
 
     useEffect(() => {
-        if(debouncedSearch === undefined)
-            return;
-        
         items[1](prev => prev.map(c => ({ 
             ...c,
             visible: 

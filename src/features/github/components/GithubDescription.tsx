@@ -2,8 +2,11 @@ import './GithubDescription.css';
 import { Button } from "../../ui/Button/components/Button"
 
 import gearImg from '../assets/gear.svg';
+import { useGithubContext } from '../context/GithubContext';
 
 export const GithubDescription = () => {
+    const [context, ] = useGithubContext();
+
     return (
         <div className='github-description'>
             <div className='github-flex-between'>
@@ -12,12 +15,12 @@ export const GithubDescription = () => {
             </div>
 
             <div className='github-description-section'>
-                <h4>An upcoming project of mine</h4>
+                <h4>{context.data.description.about}</h4>
                 <p>Readme</p>
                 <p>Activity</p>
-                <p>0 stars</p>
-                <p>0 watching</p>
-                <p>0 forks</p>
+                <p>{context.data.description.stars} stars</p>
+                <p>{context.data.description.watching} watching</p>
+                <p>{context.data.description.forks} forks</p>
                 <hr/>
             </div>
 

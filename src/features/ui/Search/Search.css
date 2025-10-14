@@ -2,13 +2,13 @@
     display: flex;
     align-items: center;
     border: 2px solid var(--background-7);
-    border-radius: 32px;
+    border-radius: 12px;
     position: relative;
     height: 36px;
 }
 
 .search-input-container:focus-within {
-    border: 2px solid var(--background-10);
+    border: 2px solid hsl(240, 70%, 60%);
 }
 
 .search-input-container:hover .search-input {
@@ -16,6 +16,7 @@
 }
 
 .search-input:focus {
+    border: transparent;
     outline: transparent;
 }
 

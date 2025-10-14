@@ -4,6 +4,7 @@ import searchImg from './assets/search.svg';
 import { useHotkeys } from '../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
 import { Button } from '../Button/components/Button';
+import { useInView } from 'motion/react';
 
 interface Props {
     className?: string;
@@ -17,10 +18,11 @@ export const Search = ({ className, placeholder, value, onChange, onClear }: Pro
     const [internal, setInternal] = useState<string>('');
     const inputValue = value ?? internal;
     const ref = useRef<HTMLInputElement>(null);
+    const isVisible = useInView(ref);
     
     useHotkeys([
-        { hotkey: 'T', action: () => ref.current?.focus() },
-        { hotkey: 'Escape', action: () => ref.current?.blur() }
+        { hotkey: 'T', action: () => { if(isVisible) ref.current?.focus() } },
+        { hotkey: 'Escape', action: () => { if(isVisible) ref.current?.blur() } }
     ]);
 
     return (

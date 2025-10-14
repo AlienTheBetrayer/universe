@@ -1,6 +1,6 @@
 .background-blur {
     position: fixed;
     inset: 0;
-    backdrop-filter: blur(12px);
-    background-color: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(16px);
+    background-color: rgba(0, 0, 0, 0.5);
 }
