@@ -21,6 +21,7 @@ interface Commit {
 }
 
 interface Branch {
+    idx: number;
     name: string;
     forms?: Form[];
 }
@@ -45,6 +46,9 @@ interface GithubData {
     description: FormDescription;
     visibility: FormElementsVisibility;
     branches: Branch[];
+
+    currentBranch: number;
+    repositoryName: string;
 }
 
 
@@ -76,8 +80,11 @@ export const GithubContextInitialData: GithubData = {
         packages: true,
         releases: true,
     },
+    currentBranch: 0,
+    repositoryName: 'The Universe',
     branches: [
         {
+            idx: 0,
             name: GithubDefaultBranch,
             forms: [{
                 idx: 0,

@@ -16,6 +16,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
     const [context, setContext] = useGithubContext();
 
     const [description, setDescription] = useState<string>(context.data.description.about);
+    const [repoName, setRepoName] = useState<string>(context.data.repositoryName);
     const [topics, setTopics] = useState<string>(context.data.description.topics.join(' '));
     const [languagesChecked, setLanguagesChecked] = useState<boolean>(context.data.visibility.languages);
     const [packagesChecked, setPackagesChecked] = useState<boolean>(context.data.visibility.packages);
@@ -34,6 +35,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                     packages: packagesChecked,
                     releases: releasesChecked
                 },
+                repositoryName: repoName
         }}));
         onInteract?.();
     }
@@ -56,6 +58,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                 <div className='github-repository-settings-topline'>
                     <h4>Edit repository details</h4>
                     <Button 
+                    className='github-cancel-button'
                     ref={el => tooltips.set(0, 'Cancel', el, 'up', 16)}
                     onClick={() => onInteract?.()}>
                         ✕
@@ -65,8 +68,17 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                 {/* content */}
                 <div className='github-repository-settings-content'>
                     <div className='github-repository-settings-field'>
+                        <h4>Repository name</h4>
+                        <Input
+                        placeholder='Repository name'
+                        value={repoName}
+                        onChange={val => setRepoName(val)}/>
+                    </div>
+
+                    <div className='github-repository-settings-field'>
                         <h4>Description</h4>
-                        <Input 
+                        <Input
+                        placeholder='Description'
                         value={description}
                         onChange={val => setDescription(val)}/>
                     </div>
@@ -74,6 +86,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                     <div className='github-repository-settings-field'>
                         <h4>Topics <small>(separate with spaces)</small></h4>
                         <Input 
+                        placeholder='Topics'
                         value={topics}
                         onChange={val => setTopics(val)}/>
                     </div>

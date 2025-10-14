@@ -33,13 +33,3 @@
     height: 30px;
     width: 30px;
 }
-
-.github-heading-forms-type {
-    display: grid;
-    place-items: center;
-    padding: 0.2rem 0.4rem;
-    
-    border: 1px solid var(--background-7);
-    border-radius: 32px;
-    align-self: flex-start;
-}

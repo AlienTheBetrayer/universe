@@ -16,8 +16,6 @@
     border: transparent;
     cursor: pointer;
     transition: 0.15s;
-
-    overflow: hidden;
 }
 
 .button:hover {

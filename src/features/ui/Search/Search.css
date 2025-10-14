@@ -1,5 +1,5 @@
 .search-input-container:focus-within {
-    border: 2px solid hsl(240, 70%, 60%);
+    border: 2px solid hsl(225, 82%, 56%);
 }
 
 .search-input-container:hover .search-input {

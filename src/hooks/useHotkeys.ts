@@ -18,9 +18,11 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
             if(match) {
                 if(match.ctrl === true) {
                     if(e.ctrlKey || e.metaKey) {
+                        e.preventDefault();
                         match.action();
                     }
                 } else {
+                    e.preventDefault();
                     match.action();
                 }
             }

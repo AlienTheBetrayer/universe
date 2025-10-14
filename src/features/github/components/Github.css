@@ -45,6 +45,22 @@
     min-width: 64px;
 }
 
+.github-cancel-button {
+    min-width: 28px;
+    min-height: 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.github-tiny-info-container {
+    display: grid;
+    place-items: center;
+    padding: 0.2rem 0.4rem;
+    
+    border: 1px solid var(--background-7);
+    border-radius: 32px;
+}
+
 .github-img {
     width: 20px;
     height: 20px;

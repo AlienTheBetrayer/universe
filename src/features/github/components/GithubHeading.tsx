@@ -5,7 +5,7 @@ import { GithubContextInitialData, useGithubContext } from '../context/GithubCon
 import './GithubHeading.css';
 
 export const GithubHeading = () => {
-    const [, setContext] = useGithubContext();
+    const [context, setContext] = useGithubContext();
 
     const wipeMessageBox = usePopup(<MessageBox 
         title='Are you sure?'
@@ -24,9 +24,9 @@ export const GithubHeading = () => {
                 <div className='github-flex'>
                     <div className='github-heading-avatar'/>
 
-                    <h3>theuniverse</h3>
+                    <h3><mark>{context.data.repositoryName}</mark></h3>
 
-                    <div className='github-heading-forms-type'>
+                    <div className='github-tiny-info-container'>
                         <p>Public</p>
                     </div>
                 </div>

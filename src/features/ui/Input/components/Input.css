@@ -10,7 +10,7 @@
 }
 
 .ui-input:focus {
-    border: 2px solid hsl(240, 70%, 60%) !important;
+    border: 2px solid hsl(225, 82%, 56%);
     outline: transparent;
 }
 

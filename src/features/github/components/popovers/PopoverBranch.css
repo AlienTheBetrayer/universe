@@ -1,0 +1,42 @@
+.github-popover-branch {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.5rem;
+
+    width: 300px;
+    min-height: 200px;
+
+    background-color: var(--background);
+    border: 1px solid var(--background-7);
+    border-radius: 12px;
+}
+
+.github-popover-branch-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popover-branch-branches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.popover-branch-branches-list button {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: flex-start;
+    background-color: transparent;
+}
+
+.popover-branch-branches-list-button {
+    justify-content: space-between;
+}
+
+.popover-branch-branches-list-button img {
+    width: 12px;
+    height: 12px;
+    filter: invert(0.5);
+}
