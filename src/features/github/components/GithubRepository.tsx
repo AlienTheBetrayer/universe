@@ -37,29 +37,36 @@ export const GithubRepository = () => {
 
     return (
         <div className='github-repository'>
-            <div className='github-flex-between'>
-                <div className='github-flex'>
-                    <Button>Branch</Button>
-                    <p>{context.data.branches.length} Branch{context.data.branches.length !== 1 ? 'es' : ''}</p>
-                    <p>{tags} Tag{tags !== 1 ? 's' : ''}</p>
+            <div className='github-repository-topline'>
+                <div className='github-repository-topline-info'>
+                    <div>
+                        <Button>Branch</Button>
+                    </div>
+
+                    <div className='flex gap-3'>
+                        <p>{context.data.branches.length} Branch{context.data.branches.length !== 1 ? 'es' : ''}</p>
+                        <p>{tags} Tag{tags !== 1 ? 's' : ''}</p>
+                    </div>
                 </div>
 
-                <div className='github-flex'>
+                <div className='github-repository-topline-info-2'>
                     <Search placeholder='Open a form'
                     value={searchValue}
                     onChange={val => setSearchValue(val)}
-                    onClear={() => setSearchValue('')}
-                    />
+                    onClear={() => setSearchValue('')}/>
+
                     <Button><img src={addImg} alt=''/>Add form</Button>
                     <Button>Code</Button>
                 </div>
             </div>
             
             <div className='github-forms'>
-                <div className='github-forms-info github-flex-between'>
+                <div className='github-forms-info'>
                     <div className='github-flex'>
-                        <div className='github-heading-avatar'/>
-                        <p>Your name</p>
+                        <div className='github-flex'>
+                            <div className='github-heading-avatar'/>
+                            <p>Your name</p>
+                        </div>
                         <p>Last commit description</p>
                     </div>
 

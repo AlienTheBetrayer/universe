@@ -41,6 +41,7 @@
 .github button {
     border-radius: 8px;
     border: 1px solid var(--background-7);
+    min-width: 64px;
 }
 
 .github button img {

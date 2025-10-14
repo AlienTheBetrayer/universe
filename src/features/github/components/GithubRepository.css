@@ -5,6 +5,45 @@
     gap: 1rem;
 }
 
+.github-repository-topline {
+    display: flex;
+    justify-content: space-between;
+}
+
+.github-repository-topline-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.github-repository-topline-info-2 {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+@media (max-width: 640px) {
+    .github-repository-topline {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .github-repository-topline-info {
+        justify-content: space-between;
+    }
+
+    .github-repository-topline-info-2 {
+        justify-content: space-between;
+    }
+
+    .github-repository-topline-info-2 > button {
+        flex: 1;
+    }
+}
+
+
+
+
 /* actual repository */
 .github-forms {
     display: flex;
@@ -25,8 +64,20 @@
 }
 
 .github-forms-info {
-    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
     min-height: 36px;
+}
+
+@media (max-width: 640px) {
+    .github-forms-info {
+        flex-direction: column;
+    }
+
+    .github-forms-info > div {
+        justify-content: space-between;
+    }
 }
 
 .github-form {

@@ -4,6 +4,12 @@
     justify-content: space-between;
 }
 
+.github-heading-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 @media (max-width: 640px) {
     .github-heading {
         flex-direction: column;
