@@ -14,6 +14,9 @@ import { Input } from '../../../ui/Input/components/Input';
 
 // helper functions
 const findMax = (branches: Branch[]) => {
+    if(branches.length === 0)
+        return 0;
+
     return branches.reduce((acc, val) => {
         return val.idx > acc.idx ? val : acc;
     }).idx;
@@ -87,6 +90,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                         className='popover-branch-branches-list-button'
                         onClick={() => {
                             setContext(prev => ({ ...prev, data: ({ ...prev.data, currentBranch: branch.idx })}))
+                            onCancel?.();
                         }}>
                             <div className='flex gap-2 items-center'>
                                 <div style={{ width: '20px', height: '20px', display: 'grid', placeItems: 'center'}}>
@@ -123,6 +127,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                     className='popover-branch-branches-create-button'
                     onClick={() => {
                         createBranch(debouncedSearch);
+                        onCancel?.();
                     }}>
                         <img
                         className='github-img'
