@@ -68,6 +68,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                     { branches.map(branch => (
                         found.indexOf(branch.idx) !== -1 && (
                             <Button
+                            key={branch.idx}
                             className='popover-branch-branches-list-button'
                             onClick={() => {
                                 setContext(prev => ({ ...prev, data: ({ ...prev.data, currentBranch: branch.idx })}))
@@ -103,28 +104,29 @@ export const PopoverBranch = ({ onCancel }: Props) => {
 
                     {/* branch not found - propose to create one */}
                     { found.length === 0 && (
-                        <Button className='popover-branch-branches-create-button'
-                            onClick={() => {
-                                setContext(prev => {
-                                    const idx = findMax(prev.data.branches) + 1;
+                        <Button 
+                        className='popover-branch-branches-create-button'
+                        onClick={() => {
+                            setContext(prev => {
+                                const idx = findMax(prev.data.branches) + 1;
 
-                                    return ({ ...prev, data: ({ ...prev.data, 
-                                        branches: [ ...prev.data.branches, {
-                                            idx: idx,
-                                            name: debouncedSearch,
-                                        }],
-                                        currentBranch: idx,
-                                    }) });
-                                })
+                                return ({ ...prev, data: ({ ...prev.data, 
+                                    branches: [ ...prev.data.branches, {
+                                        idx: idx,
+                                        name: debouncedSearch,
+                                    }],
+                                    currentBranch: idx,
+                                }) });
+                            })
 
-                                setSearch('');
-                                
-                            }}>
-                                <img
-                                className='github-img'
-                                src={branchImg}
-                                alt=''/>
-                                <mark>Create</mark> branch <b>{debouncedSearch}</b>
+                            setSearch('');
+                        }}>
+                            <img
+                            className='github-img'
+                            src={branchImg}
+                            alt=''/>
+
+                            <mark>Create</mark> branch <b>{debouncedSearch}</b>
                         </Button>
                     )}
                 </div>

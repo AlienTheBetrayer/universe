@@ -9,7 +9,7 @@ import branchImg from '../assets/branch.svg';
 import dropdownImg from '../assets/dropdown.svg';
 import tagsImg from '../assets/tags.svg';
 
-import { GithubDefaultBranch, useGithubContext } from '../context/GithubContext';
+import { useGithubContext } from '../context/GithubContext';
 import { useEffect, useState } from 'react';
 import { useDebounced } from '../../../hooks/useDebounced';
 import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
@@ -18,7 +18,7 @@ import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 export const GithubRepository = () => {
     // context
-    const [context, setContext] = useGithubContext();
+    const [context, ] = useGithubContext();
 
     // state variables
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
@@ -35,7 +35,7 @@ export const GithubRepository = () => {
             .filter(form => (form.name.toLowerCase().includes(debouncedSearch.toLowerCase()) || debouncedSearch.trim().length === 0))
             .map(form => form.idx)
         );
-    }, [debouncedSearch]);
+    }, [debouncedSearch, thisBranch?.idx]);
 
     const tooltips = useTooltips();
 
