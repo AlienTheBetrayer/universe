@@ -4,6 +4,8 @@ import { useGithubContext } from '../context/GithubContext';
 
 import formImg from '../assets/file.svg';
 import branchImg from '../assets/branch.svg';
+import sendImg from '../assets/send.svg';
+
 import { Button } from '../../ui/Button/components/Button';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
@@ -151,10 +153,35 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     <Button 
                     type='submit'
                     form='github-form'
-                    ref={el => tooltips.set(4, 'Apply and update changes', el, 'up', 16)}
-                    onClick={() => {}}
+                    ref={el => tooltips.set(4, 'Send the form via E-mail', el, 'up', 16)}
                     className='github-repository-settings-save-button'>
-                        Save changes
+                        <img 
+                        src={sendImg} 
+                        alt='' 
+                        className='github-img'
+                        style={{ filter: 'invert(1)'}}/>
+                        Send
+                    </Button>
+                    
+                    <Button 
+                    ref={el => tooltips.set(5, 'Apply and update changes', el, 'up', 16)}
+                    className='github-repository-settings-save-button'
+                    onClick={() => { setContext(prev => {
+                        const newData = {...prev};
+                        newData.data.currentForm = false;
+                        const content = newData.data.branches
+                        .find(b => b.idx === branch?.idx)
+                        ?.forms?.find(f => f.idx === form?.idx)?.content;
+
+                        if(content) {
+                            content.author = author;
+                            content.email = email;
+                            content.message = message;
+                        }
+
+                        return newData;
+                    })}}>
+                        Apply changes
                     </Button>
                 </div>
             </motion.div>
