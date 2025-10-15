@@ -7,6 +7,7 @@ import { Button } from "../../../ui/Button/components/Button";
 import formImg from '../../assets/file.svg';
 import { useGithubContext, type Form } from '../../context/GithubContext';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
+import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 
 const findMax = (forms: Form[]) => {
     return forms.reduce((acc, val) => {
@@ -30,12 +31,14 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
 
     useEffect(() => {
         const found = branch?.forms?.some(f => f.name === inputValue);
-        setIsValid(!(found ?? true));
-    }, [inputValue]);
+        setIsValid(!(found ?? true) && inputValue.trim().length > 0);
+    }, [inputValue, branch]);
 
     // hotkeys
     const createForm = (name: string) => {
-        console.log('ran');
+        if(!isValid)
+            return;
+
         setContext(prev => {
             const newForm: Form = {
                 idx: findMax(prev.data.branches.find(b => b.idx === prev.data.currentBranch)!.forms) + 1,
@@ -74,7 +77,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
             onChange={val => setInputValue(val)}
             onClear={() => setInputValue('')}/>
 
-            { inputValue.length > 0 && (
+            { inputValue.trim().length > 0 && (
                 <Button 
                 enabled={isValid}
                 className='popover-create-button'
@@ -88,10 +91,14 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
                     className='github-img'/>
                     <mark>Create</mark> form <b>{inputValue}</b>
 
-                    { !isValid && (
+                    { !isValid ? (
                         <p style={{ marginLeft: 'auto'}}>
                             <u>Already exists!</u>
                         </p>
+                    ) : (
+                        <HotkeyTooltip
+                        className='popover-create-button-hotkey'
+                        hotkeys={['Enter']}/>
                     )}
                 </Button>
             )}

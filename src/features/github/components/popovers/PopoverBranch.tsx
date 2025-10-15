@@ -118,7 +118,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                 ))}
 
                 {/* branch not found - propose to create one */}
-                { (found.length === 0 && search.length > 0) && (
+                { (found.length === 0 && search.trim().length > 0) && (
                     <Button 
                     className='popover-branch-branches-create-button'
                     onClick={() => {
@@ -131,7 +131,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
 
                         <mark>Create</mark> branch <b>{debouncedSearch}</b>
                         <HotkeyTooltip 
-                        className='popover-branch-branches-create-button-hotkey'
+                        className='popover-create-button-hotkey'
                         hotkeys={['Enter']}/>
                     </Button>
                 )}
