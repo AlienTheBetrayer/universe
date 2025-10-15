@@ -10,6 +10,12 @@
     padding: 1.2rem;
 }
 
+@media (max-width: 640px) {
+    .github {
+        padding: 0.5rem;
+    }
+}
+
 /* topline with mac buttons and tutorial button */
 .github-topline {
     display: flex;

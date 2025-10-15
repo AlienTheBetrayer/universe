@@ -125,7 +125,9 @@ export const GithubRepository = () => {
 
                     { thisBranch?.forms?.map(form => (
                         found.indexOf(form.idx) !== -1 && (
-                            <div className='github-form' key={form.idx}>
+                            <div
+                            className='github-form' 
+                            key={form.idx}>
                                 <div className='github-flex'>
                                     <Button
                                     className='github-flex'
@@ -137,7 +139,7 @@ export const GithubRepository = () => {
                                     </Button>
 
                                     { form.tags.map((tag, idx) => (
-                                        <div className='github-form-tag' key={`${form.idx}${idx}`}>   
+                                        <div className='github-tiny-info-container' key={`${form.idx}${idx}`}>   
                                             <p>
                                                 { tag }
                                             </p>
