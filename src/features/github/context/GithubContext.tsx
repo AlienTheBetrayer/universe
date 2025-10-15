@@ -5,13 +5,19 @@ import { useLocalStore } from "../../../zustand/localStore";
 export const GithubDefaultBranch = 'main';
 
 
-// github data
+interface FormContent {
+    author: string;
+    email: string;
+    message: string;
+}
+
+
 interface Form {
     idx: number;
     name: string;
     tags: string[];
+    content?: FormContent;
 }
-
 
 interface Commit {
     name: string;
@@ -26,7 +32,8 @@ export interface Branch {
     forms?: Form[];
 }
 
-interface FormDescription {
+
+interface Description {
     about: string;
     stars: number;
     watching: number;
@@ -34,17 +41,18 @@ interface FormDescription {
     topics: string[];
 }
 
-interface FormElementsVisibility {
+interface ElementsVisibility {
     releases: boolean;
     packages: boolean;
     languages: boolean;
 }
 
 
+// main data interface
 interface GithubData {
     commits?: Commit[],
-    description: FormDescription;
-    visibility: FormElementsVisibility;
+    description: Description;
+    visibility: ElementsVisibility;
     branches: Branch[];
 
     currentBranch: number;
@@ -91,7 +99,12 @@ export const GithubContextInitialData: GithubData = {
             forms: [{
                 idx: 0,
                 name: 'hi',
-                tags: ['bye', 'whatever']
+                tags: ['bye', 'whatever'],
+                content: {
+                    author: 'Gleb',
+                    email: 'alienthebusinessman@gmail.com',
+                    message: 'hello there?'
+                }
             }]
         },
     ]

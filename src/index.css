@@ -25,13 +25,14 @@
     --background-2: rgb(14, 15, 18);
     --background-3: rgb(20, 21, 24);
     --background-4: rgb(26, 27, 30);
-    --background-5: rgb(32, 33, 36);
-    --background-6: rgb(38, 39, 42);
-    --background-7: rgb(44, 45, 48);
-    --background-8: rgb(50, 51, 54);
-    --background-9: rgb(56, 57, 60);
-    --background-10: rgb(64, 65, 68);
-    --background-11: rgb(84, 85, 88); 
+    --background-5: rgb(32, 33, 37);
+    --background-6: rgb(38, 40, 44);
+    --background-7: rgb(44, 46, 51);
+    --background-8: rgb(50, 52, 57);
+    --background-9: rgb(56, 58, 63);
+    --background-10: rgb(63, 65, 70);
+    --background-11: rgb(82, 85, 91);
+    --background-12: rgb(98, 102, 110);
 
     /* transparent background */
     --background-transparent: rgba(8, 9, 12, 0.4);
@@ -44,9 +45,9 @@
     --background-6-transparent: rgba(38, 39, 42, 0.4);
 
     /* foreground */
-    --foreground: #a0a4aa;
-    --foreground-prelast: #d5d8dc;
-    --foreground-last: #ffffff;
+    --foreground: #9aa0a8;
+    --foreground-prelast: #d2d6db;
+    --foreground-last: #f9fbff;
 
     /* pseudo & misc */
     --selection-background: rgb(255, 255, 255);
@@ -81,6 +82,7 @@
     --background-9: rgb(182, 200, 220);
     --background-10: rgb(174, 194, 216);
     --background-11: rgb(140, 164, 190);
+    --background-12: rgb(110, 134, 162);
 
     /* transparent background */
     --background-transparent: rgba(246, 248, 252, 0.4);
@@ -102,7 +104,7 @@
     --selection-color: rgb(255, 255, 255);
 
     /* component specific */
-    --header-link: #0033cc;
+    --header-link: #0040ff;
     --b: 0.7;
     --footer-invert: 0;
     --header-invert: 0;

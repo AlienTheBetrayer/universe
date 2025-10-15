@@ -1,10 +1,14 @@
 .github-form-edit {
     display: flex;
     flex-direction: column;
-    min-height: 400px;
+    min-height: 600px;
     border: 1px solid var(--background-7);
     border-radius: 8px;
     overflow: hidden;
+}
+
+.github-form-edit > div {
+    padding: 0.5rem 1rem;
 }
 
 /* topline */
@@ -12,7 +16,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
     min-height: 48px;
 
     border-bottom: 1px solid var(--background-7);
@@ -37,4 +40,51 @@
     .github-form-edit-topline-tags {
         justify-content: flex-end;
     }
+}
+
+/* main */
+.github-form-edit-main {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    flex: 1;
+}
+
+.github-form-edit-main-field {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--background-7);
+}
+
+.github-form-edit-main textarea {
+    color: var(--background-12);
+    min-height: 24px;
+    max-height: 300px;
+}
+
+.github-form-edit-main textarea:focus {
+    border: transparent;
+    outline: transparent;
+}
+
+.github-form-edit-main-message-field {
+    flex: 1;
+}
+
+.github-form-edit-main-message-field textarea {
+    min-height: 300px;
+    max-height: 600px;
+}
+
+/* bottom */
+.github-form-edit-bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    min-height: 48px;
+
+    border-top: 1px solid var(--background-7);
 }

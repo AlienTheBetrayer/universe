@@ -23,7 +23,7 @@
 }
 
 .button:active {
-    background-color: var(--background-7);
+    background-color: var(--background-8);
     color: var(--foreground-last);
 }
 
