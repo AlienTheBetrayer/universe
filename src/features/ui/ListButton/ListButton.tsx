@@ -39,6 +39,7 @@ export const ListButton = ({ onSelected, elements, className='', children='Selec
 
                     <AnimatePresence mode='wait'>
                         <motion.h4
+                        style={{ textAlign: 'center' }}
                         key={listButton.currentId}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
