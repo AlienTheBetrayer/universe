@@ -21,9 +21,17 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     
     const branch = context.data.branches.find(b => b.idx === context.data.currentBranch);
     const form = branch?.forms?.find(f => f.idx === context.data.currentForm);
+    
+    // 
     const [author, setAuthor] = useState<string>(form?.content?.author ?? '');
     const [email, setEmail] = useState<string>(form?.content?.email ?? '');
     const [message, setMessage] = useState<string>(form?.content?.message ?? '');
+
+    useEffect(() => {
+        setAuthor(form?.content?.author ?? '');
+        setEmail(form?.content?.email ?? '');
+        setMessage(form?.content?.message ?? '');
+    }, [form]);
 
     const formRef = useRef<HTMLFormElement>(null);
 
