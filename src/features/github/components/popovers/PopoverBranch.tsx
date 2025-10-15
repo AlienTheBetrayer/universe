@@ -9,6 +9,8 @@ import branchImg from '../../assets/branch.svg';
 
 import { useEffect, useState } from 'react';
 import { useDebounced } from '../../../../hooks/useDebounced';
+import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
+import { useHotkeys } from '../../../../hooks/useHotkeys';
 
 // helper functions
 const findMax = (branches: Branch[]) => {
@@ -38,6 +40,29 @@ export const PopoverBranch = ({ onCancel }: Props) => {
             .map(b => b.idx)
         );
     }, [debouncedSearch]);
+
+    const createBranch = (name: string) => {
+        if(found.length !== 0 || name === '')
+            return;
+
+        setContext(prev => {
+            const idx = findMax(prev.data.branches) + 1;
+
+            return ({ ...prev, data: ({ ...prev.data, 
+                branches: [ ...prev.data.branches, {
+                    idx: idx,
+                    name: name
+                }],
+                currentBranch: idx,
+            })});
+        })
+
+        setSearch('');
+    }
+
+    useHotkeys([
+        { hotkey: 'Enter', action: () => createBranch(debouncedSearch), ignoreFocus: true }
+    ]);
     
     const tooltips = useTooltips();
 
@@ -103,23 +128,11 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                     ))}
 
                     {/* branch not found - propose to create one */}
-                    { found.length === 0 && (
+                    { (found.length === 0 && search.length > 0) && (
                         <Button 
                         className='popover-branch-branches-create-button'
                         onClick={() => {
-                            setContext(prev => {
-                                const idx = findMax(prev.data.branches) + 1;
-
-                                return ({ ...prev, data: ({ ...prev.data, 
-                                    branches: [ ...prev.data.branches, {
-                                        idx: idx,
-                                        name: debouncedSearch,
-                                    }],
-                                    currentBranch: idx,
-                                }) });
-                            })
-
-                            setSearch('');
+                            createBranch(debouncedSearch);
                         }}>
                             <img
                             className='github-img'
@@ -127,6 +140,9 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                             alt=''/>
 
                             <mark>Create</mark> branch <b>{debouncedSearch}</b>
+                            <HotkeyTooltip 
+                            className='popover-branch-branches-create-button-hotkey'
+                            hotkeys={['Enter']}/>
                         </Button>
                     )}
                 </div>

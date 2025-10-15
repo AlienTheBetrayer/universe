@@ -4,17 +4,19 @@ interface HotkeyAction {
     hotkey: string;
     action: () => void;
     ctrl?: boolean;
+    ignoreFocus?: boolean;
 }
 
 export const useHotkeys = (hotkeys: HotkeyAction[]) => {
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
+            const match = hotkeys.find(h => h.hotkey.toLowerCase() === e.key.toLowerCase());
+            
             const active = document.activeElement as HTMLElement | null;
-            if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable)) {
+            if ((match?.ignoreFocus ?? false) === false && active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable)) {
                 return;
             }
 
-            const match = hotkeys.find(h => h.hotkey.toLowerCase() === e.key.toLowerCase());
             if(match) {
                 if(match.ctrl === true) {
                     if(e.ctrlKey || e.metaKey) {
