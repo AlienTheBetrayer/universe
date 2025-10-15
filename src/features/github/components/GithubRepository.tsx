@@ -1,6 +1,5 @@
 import './GithubRepository.css';
 import { Button } from "../../ui/Button/components/Button"
-import { Search } from "../../ui/Search/Search";
 
 import addImg from '../assets/add.svg';
 import commitImg from '../assets/commit.svg';
@@ -17,6 +16,8 @@ import { PopoverBranch } from './popovers/PopoverBranch';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { GithubFormEdit } from './GithubFormEdit';
 import { AnimatePresence } from 'motion/react';
+import { PopoverCreateForm } from './popovers/PopoverCreateForm';
+import { Input } from '../../ui/Input/components/Input';
 
 export const GithubRepository = () => {
     // context
@@ -79,9 +80,18 @@ export const GithubRepository = () => {
                             <PopoverButton
                             element={<PopoverBranch/>}
                             ref={el => tooltips.set(0, 'Switch branch', el, 'up')}>
-                                <img className='github-img' src={branchImg} alt='branch'/>
+                                <img 
+                                className='github-img' 
+                                src={branchImg} 
+                                alt='branch'/>
+                                
                                 { thisBranch?.name }
-                                <img className='github-img' src={dropdownImg} alt='branch'/>
+                                
+                                <img 
+                                className='github-img' 
+                                src={dropdownImg} 
+                                alt='branch'
+                                style={{ width: '12px', height: '12px'}}/>
                             </PopoverButton>
                         </div>
 
@@ -101,17 +111,28 @@ export const GithubRepository = () => {
                     </div>
 
                     <div className='github-repository-topline-info-2'>
-                        <Search placeholder='Open a form'
+                        <Input 
+                        type='search'
+                        placeholder='Open a form'
                         value={searchValue}
                         onChange={val => setSearchValue(val)}
                         onClear={() => setSearchValue('')}/>
 
                         <PopoverButton 
                         ref={el => tooltips.set(1, 'Create a new form', el, 'up')}
-                        element={<PopoverBranch/>}
+                        element={<PopoverCreateForm/>}
                         direction='right'>
-                            <img className='github-img' src={addImg} alt=''/>
+                            <img 
+                            className='github-img' 
+                            src={addImg} 
+                            alt=''/>
                             Add form
+
+                            <img 
+                            className='github-img' 
+                            src={dropdownImg} 
+                            alt='branch'
+                            style={{ width: '12px', height: '12px'}}/>
                         </PopoverButton>
 
                         <Button>Code</Button>

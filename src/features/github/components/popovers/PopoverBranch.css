@@ -1,24 +1,3 @@
-.github-popover-branch {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    gap: 0.5rem;
-
-    width: 300px;
-    min-height: 200px;
-
-    background-color: var(--background);
-    border: 1px solid var(--background-7);
-    border-radius: 12px;
-}
-
-/* top of the modal */
-.github-popover-branch-topline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 /* branches searched list */
 .popover-branch-branches-list {
     display: flex;

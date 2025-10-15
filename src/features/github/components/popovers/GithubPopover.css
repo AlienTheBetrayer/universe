@@ -1,0 +1,29 @@
+.github-popover {
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    min-height: 200px;
+
+    background-color: var(--background);
+    border: 1px solid var(--background-7);
+    border-radius: 12px;
+}
+
+/* top of the modal */
+.github-popover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+
+    border-bottom: 1px solid var(--background-7);
+}
+
+/* main part of the modal */
+.github-popover-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+}

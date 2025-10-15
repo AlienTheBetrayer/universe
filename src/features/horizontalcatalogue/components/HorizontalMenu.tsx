@@ -1,5 +1,5 @@
 import { useDebounced } from '../../../hooks/useDebounced';
-import { Search } from '../../ui/Search/Search';
+import { Input } from '../../ui/Input/components/Input';
 import type { CatalogueItem } from './HorizontalCatalogue';
 import './HorizontalMenu.css';
 import React, { useEffect, useState } from "react";
@@ -28,7 +28,10 @@ export const HorizontalMenu = ({ className, items }: Props) => {
         <div className={`horizontal-menu ${className}`}>
             <div className='horizontal-menu-content'>
                 <h3>{ debouncedSearch === '' ? <u>Filter</u> : 'Filter' } items</h3>
-                <Search value={searchValue} onChange={val => setSearchValue(val)}/>
+                <Input
+                type='search' 
+                value={searchValue} 
+                onChange={val => setSearchValue(val)}/>
             </div>
         </div>
     )

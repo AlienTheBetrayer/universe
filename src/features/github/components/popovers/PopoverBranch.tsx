@@ -1,7 +1,5 @@
 import './PopoverBranch.css';
-import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 import { Button } from '../../../ui/Button/components/Button';
-import { Search } from '../../../ui/Search/Search';
 import { GithubDefaultBranch, useGithubContext, type Branch } from '../../context/GithubContext';
 
 import checkmarkImg from '../../assets/checkmark.svg';
@@ -11,6 +9,8 @@ import { useEffect, useState } from 'react';
 import { useDebounced } from '../../../../hooks/useDebounced';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
+import { GithubPopover } from './GithubPopover';
+import { Input } from '../../../ui/Input/components/Input';
 
 // helper functions
 const findMax = (branches: Branch[]) => {
@@ -55,8 +55,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                 }],
                 currentBranch: idx,
             })});
-        })
-
+        });
         setSearch('');
     }
 
@@ -64,89 +63,77 @@ export const PopoverBranch = ({ onCancel }: Props) => {
         { hotkey: 'Enter', action: () => createBranch(debouncedSearch), ignoreFocus: true }
     ]);
     
-    const tooltips = useTooltips();
-
     return (
-        <>
-            { tooltips.render() }
+        <GithubPopover 
+        title='Switch branches' 
+        onCancel={() => onCancel?.()}>
+            <Input
+            type='search'
+            placeholder='Search / Create a branch'
+            value={search}
+            onChange={val => setSearch(val)}
+            onClear={() => setSearch('')}/>
 
-            <div className='github-popover-branch'>
-                <div className='github-popover-branch-topline'>
-                    <h4>Switch branches</h4>
-                    <Button
-                    className='github-cancel-button'
-                    ref={el => tooltips.set(0, 'Cancel', el, 'left')}
-                    onClick={() => onCancel?.()}>
-                    ✕
-                    </Button>
-                </div>
+            <h4>Branches:</h4>
 
-                <Search placeholder='Search / Create a branch'
-                value={search}
-                onChange={val => setSearch(val)}
-                onClear={() => setSearch('')}/>
-
-                <h4>Branches:</h4>
-
-                <div className='popover-branch-branches-list'>
-                    {/* list all branches filtered by search */}
-                    { branches.map(branch => (
-                        found.indexOf(branch.idx) !== -1 && (
-                            <Button
-                            key={branch.idx}
-                            className='popover-branch-branches-list-button'
-                            onClick={() => {
-                                setContext(prev => ({ ...prev, data: ({ ...prev.data, currentBranch: branch.idx })}))
-                            }}>
-                                <div className='flex gap-2 items-center'>
-                                    <div style={{ width: '20px', height: '20px', display: 'grid', placeItems: 'center'}}>
-                                        { context.data.currentBranch === branch.idx ? (
-                                            <img 
-                                            src={checkmarkImg}
-                                            alt='selected'
-                                            className='github-img'
-                                            style={{ width: '12px', height: '12px' }}/>
-                                        ) : (
-                                            <img 
-                                            src={branchImg}
-                                            alt='branch'
-                                            className='github-img'/>
-                                        )}
-                                    </div>
-
-                                    { branch.name }
+            <div className='popover-branch-branches-list'>
+                {/* list all branches filtered by search */}
+                { branches.map(branch => (
+                    found.indexOf(branch.idx) !== -1 && (
+                        <Button
+                        key={branch.idx}
+                        className='popover-branch-branches-list-button'
+                        onClick={() => {
+                            setContext(prev => ({ ...prev, data: ({ ...prev.data, currentBranch: branch.idx })}))
+                        }}>
+                            <div className='flex gap-2 items-center'>
+                                <div style={{ width: '20px', height: '20px', display: 'grid', placeItems: 'center'}}>
+                                    { context.data.currentBranch === branch.idx ? (
+                                        <img 
+                                        src={checkmarkImg}
+                                        alt='selected'
+                                        className='github-img'
+                                        style={{ width: '12px', height: '12px' }}/>
+                                    ) : (
+                                        <img 
+                                        src={branchImg}
+                                        alt='branch'
+                                        className='github-img'/>
+                                    )}
                                 </div>
 
-                                { branch.name === GithubDefaultBranch && (
-                                    <div className='github-tiny-info-container'>
-                                        <p>default</p>
-                                    </div>
-                                )} 
-                            </Button>
-                        ) 
-                        
-                    ))}
+                                { branch.name }
+                            </div>
 
-                    {/* branch not found - propose to create one */}
-                    { (found.length === 0 && search.length > 0) && (
-                        <Button 
-                        className='popover-branch-branches-create-button'
-                        onClick={() => {
-                            createBranch(debouncedSearch);
-                        }}>
-                            <img
-                            className='github-img'
-                            src={branchImg}
-                            alt=''/>
-
-                            <mark>Create</mark> branch <b>{debouncedSearch}</b>
-                            <HotkeyTooltip 
-                            className='popover-branch-branches-create-button-hotkey'
-                            hotkeys={['Enter']}/>
+                            { branch.name === GithubDefaultBranch && (
+                                <div className='github-tiny-info-container'>
+                                    <p>default</p>
+                                </div>
+                            )} 
                         </Button>
-                    )}
-                </div>
+                    ) 
+                    
+                ))}
+
+                {/* branch not found - propose to create one */}
+                { (found.length === 0 && search.length > 0) && (
+                    <Button 
+                    className='popover-branch-branches-create-button'
+                    onClick={() => {
+                        createBranch(debouncedSearch);
+                    }}>
+                        <img
+                        className='github-img'
+                        src={branchImg}
+                        alt=''/>
+
+                        <mark>Create</mark> branch <b>{debouncedSearch}</b>
+                        <HotkeyTooltip 
+                        className='popover-branch-branches-create-button-hotkey'
+                        hotkeys={['Enter']}/>
+                    </Button>
+                )}
             </div>
-        </>
+        </GithubPopover>
     )
 }
