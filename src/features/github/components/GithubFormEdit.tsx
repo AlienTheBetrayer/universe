@@ -61,9 +61,25 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                 </div>
 
                 <div className='github-form-edit-main'>
-                    <div className='github-form-edit-main-field'>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h4>Author</h4>
+                    <form
+                    id='github-form'
+                    action='mailto:alienthebusinessman@gmail.com'
+                    method='post'
+                    encType='text/plain'>
+                        <div className='github-form-edit-main-field'>
+                            <div className='github-form-edit-main-field-wrapper'>
+                                <label htmlFor='author'>
+                                    Author Name
+                                </label>
+                                <input
+                                id='author'
+                                type='text'
+                                value={author}
+                                onChange={e => setAuthor(e.target.value)}
+                                aria-label='Author Name'
+                                required/>
+                            </div>
+
                             <Button 
                             className='github-cancel-button'
                             onClick={() => setAuthor('')}
@@ -72,31 +88,43 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                             </Button>
                         </div>
 
-                        <textarea 
-                        value={author}
-                        onChange={e => setAuthor(e.target.value)}/>
-                    </div>
 
-                    <div className='github-form-edit-main-field'>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h4>Email</h4>
+                        <div className='github-form-edit-main-field'>
+                            <div className='github-form-edit-main-field-wrapper'>
+                                <label htmlFor='email'>
+                                    E-mail
+                                </label>
+                                <input
+                                id='email'
+                                type='email'
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                aria-label='E-mail'
+                                required/>
+                            </div>
+
                             <Button 
                             className='github-cancel-button'
                             onClick={() => setEmail('')}
-                            ref={el => tooltips.set(1, 'Clear email', el, 'left')}>
+                            ref={el => tooltips.set(1, 'Clear e-mail', el, 'left')}>
                             ✕
                             </Button>
                         </div>
 
-                        <textarea 
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}/>
-                    </div>
 
-                    <div 
-                    className='github-form-edit-main-field github-form-edit-main-message-field'>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <h4>Message</h4>
+                        <div className='github-form-edit-main-field github-form-edit-main-message-field '>
+                            <div className='github-form-edit-main-field-wrapper'>
+                                <label htmlFor='message'>
+                                    Message
+                                </label>
+                                <textarea
+                                id='message'
+                                value={message}
+                                onChange={e => setMessage(e.target.value)}
+                                aria-label='Message'
+                                required/>
+                            </div>
+
                             <Button 
                             className='github-cancel-button'
                             onClick={() => setMessage('')}
@@ -104,11 +132,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                             ✕
                             </Button>
                         </div>
-
-                        <textarea
-                        value={message} 
-                        onChange={e => setMessage(e.target.value)}/>
-                    </div>
+                    </form>
                 </div>
 
                 <div className='github-form-edit-bottom'>
@@ -119,6 +143,8 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     </Button>
 
                     <Button 
+                    type='submit'
+                    form='github-form'
                     ref={el => tooltips.set(4, 'Apply and update changes', el, 'up', 16)}
                     onClick={() => {}}
                     className='github-repository-settings-save-button'>

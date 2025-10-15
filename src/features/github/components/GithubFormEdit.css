@@ -7,16 +7,13 @@
     overflow: hidden;
 }
 
-.github-form-edit > div {
-    padding: 0.5rem 1rem;
-}
-
 /* topline */
 .github-form-edit-topline {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 48px;
+    padding: 0.5rem 1rem;
 
     border-bottom: 1px solid var(--background-7);
     background-color: var(--background-3);
@@ -44,32 +41,45 @@
 
 /* main */
 .github-form-edit-main {
+    padding: 1rem;
+}
+
+.github-form-edit-main form {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     gap: 1rem;
     flex: 1;
 }
 
 .github-form-edit-main-field {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
     padding: 0.5rem;
+
     border-radius: 8px;
     border: 1px solid var(--background-7);
 }
 
-.github-form-edit-main textarea {
+.github-form-edit-main-field-wrapper {
+    width: 100%;
+}
+
+.github-form-edit-main textarea,
+.github-form-edit-main input {
     color: var(--background-12);
     min-height: 24px;
     max-height: 300px;
+    width: 100%;
 }
 
-.github-form-edit-main textarea:focus {
+.github-form-edit-main textarea:focus,
+.github-form-edit-main input:focus {
     border: transparent;
     outline: transparent;
 }
 
+/* message field exclusion */
 .github-form-edit-main-message-field {
     flex: 1;
 }
@@ -79,12 +89,24 @@
     max-height: 600px;
 }
 
+/* input / textarea validation */
+.github-form-edit-main-field:has(input:invalid),
+.github-form-edit-main-field:has(textarea:invalid) {
+    outline: 1px solid #ff4d4f;
+}
+
+.github-form-edit-main-field:has(input:valid),
+.github-form-edit-main-field:has(textarea:valid) {
+    outline: 1px solid hsl(225, 82%, 56%);
+}
+
 /* bottom */
 .github-form-edit-bottom {
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
     min-height: 48px;
+    padding: 0.5rem 1rem;
 
     border-top: 1px solid var(--background-7);
 }
