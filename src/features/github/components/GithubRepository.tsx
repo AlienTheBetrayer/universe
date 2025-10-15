@@ -40,7 +40,7 @@ export const GithubRepository = () => {
                 || debouncedSearch.trim().length === 0))
             .map(form => form.idx)
         );
-    }, [debouncedSearch, context.data.branches]);
+    }, [debouncedSearch, context.data]);
 
     const tooltips = useTooltips();
 
@@ -58,7 +58,7 @@ export const GithubRepository = () => {
 
         return () => clearTimeout(timeout);
 
-    }, [context.data.currentForm]);
+    }, [context.data.currentForm, formEditRef.current]);
 
 
     // cancel form edit if we change the branch
