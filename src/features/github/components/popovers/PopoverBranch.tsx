@@ -10,6 +10,13 @@ import branchImg from '../../assets/branch.svg';
 import { useEffect, useState } from 'react';
 import { useDebounced } from '../../../../hooks/useDebounced';
 
+// helper functions
+const findMax = (branches: Branch[]) => {
+    return branches.reduce((acc, val) => {
+        return val.idx > acc.idx ? val : acc;
+    }).idx;
+}
+
 interface Props {
     onCancel?: () => void;
 }
@@ -31,13 +38,6 @@ export const PopoverBranch = ({ onCancel }: Props) => {
             .map(b => b.idx)
         );
     }, [debouncedSearch]);
-
-    // helper functions
-    const findMax = (branches: Branch[]) => {
-        return branches.reduce((acc, val) => {
-            return val.idx > acc.idx ? val : acc;
-        }).idx;
-    }
     
     const tooltips = useTooltips();
 
@@ -103,8 +103,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
 
                     {/* branch not found - propose to create one */}
                     { found.length === 0 && (
-                        <>
-                            <Button className='popover-branch-branches-create-button'
+                        <Button className='popover-branch-branches-create-button'
                             onClick={() => {
                                 setContext(prev => {
                                     const idx = findMax(prev.data.branches) + 1;
@@ -121,10 +120,12 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                                 setSearch('');
                                 
                             }}>
-                                <img className='github-img' src={branchImg} alt=''/>
+                                <img
+                                className='github-img'
+                                src={branchImg}
+                                alt=''/>
                                 <mark>Create</mark> branch <b>{debouncedSearch}</b>
-                            </Button>
-                        </>
+                        </Button>
                     )}
                 </div>
             </div>
