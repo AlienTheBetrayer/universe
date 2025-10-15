@@ -2,7 +2,7 @@ import './PopoverBranch.css';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 import { Button } from '../../../ui/Button/components/Button';
 import { Search } from '../../../ui/Search/Search';
-import { GithubDefaultBranch, useGithubContext } from '../../context/GithubContext';
+import { GithubDefaultBranch, useGithubContext, type Branch } from '../../context/GithubContext';
 
 import checkmarkImg from '../../assets/checkmark.svg';
 import branchImg from '../../assets/branch.svg';
@@ -15,8 +15,8 @@ interface Props {
 }
 
 export const PopoverBranch = ({ onCancel }: Props) => {
-    const tooltips = useTooltips();
-    const [context, ] = useGithubContext();
+    // context
+    const [context, setContext] = useGithubContext();
     const branches = context.data.branches;
 
     // search / creating functionality
@@ -31,7 +31,16 @@ export const PopoverBranch = ({ onCancel }: Props) => {
             .map(b => b.idx)
         );
     }, [debouncedSearch]);
+
+    // helper functions
+    const findMax = (branches: Branch[]) => {
+        return branches.reduce((acc, val) => {
+            return val.idx > acc.idx ? val : acc;
+        }).idx;
+    }
     
+    const tooltips = useTooltips();
+
     return (
         <>
             { tooltips.render() }
@@ -55,13 +64,30 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                 <h4>Branches:</h4>
 
                 <div className='popover-branch-branches-list'>
+                    {/* list all branches filtered by search */}
                     { branches.map(branch => (
-                        found.indexOf(branch.idx) !== -1 ? (
-                            <Button className='popover-branch-branches-list-button'>
+                        found.indexOf(branch.idx) !== -1 && (
+                            <Button
+                            className='popover-branch-branches-list-button'
+                            onClick={() => {
+                                setContext(prev => ({ ...prev, data: ({ ...prev.data, currentBranch: branch.idx })}))
+                            }}>
                                 <div className='flex gap-2 items-center'>
-                                    { context.data.currentBranch === branch.idx && (
-                                        <img src={checkmarkImg} alt='selected'/>
-                                    )}
+                                    <div style={{ width: '20px', height: '20px', display: 'grid', placeItems: 'center'}}>
+                                        { context.data.currentBranch === branch.idx ? (
+                                            <img 
+                                            src={checkmarkImg}
+                                            alt='selected'
+                                            className='github-img'
+                                            style={{ width: '12px', height: '12px' }}/>
+                                        ) : (
+                                            <img 
+                                            src={branchImg}
+                                            alt='branch'
+                                            className='github-img'/>
+                                        )}
+                                    </div>
+
                                     { branch.name }
                                 </div>
 
@@ -71,13 +97,35 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                                     </div>
                                 )} 
                             </Button>
-                        ) : (
-                            <Button>
-                                <img className='github-img' src={branchImg} alt=''/>
-                                <p><mark>Create</mark> branch <b>{debouncedSearch}</b></p>
-                            </Button>
-                        )
+                        ) 
+                        
                     ))}
+
+                    {/* branch not found - propose to create one */}
+                    { found.length === 0 && (
+                        <>
+                            <Button className='popover-branch-branches-create-button'
+                            onClick={() => {
+                                setContext(prev => {
+                                    const idx = findMax(prev.data.branches) + 1;
+
+                                    return ({ ...prev, data: ({ ...prev.data, 
+                                        branches: [ ...prev.data.branches, {
+                                            idx: idx,
+                                            name: debouncedSearch,
+                                        }],
+                                        currentBranch: idx,
+                                    }) });
+                                })
+
+                                setSearch('');
+                                
+                            }}>
+                                <img className='github-img' src={branchImg} alt=''/>
+                                <mark>Create</mark> branch <b>{debouncedSearch}</b>
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
         </>

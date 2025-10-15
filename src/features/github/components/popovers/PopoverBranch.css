@@ -24,19 +24,21 @@
     gap: 0.3rem;
 }
 
-.popover-branch-branches-list button {
+.popover-branch-branches-create-button {
     display: flex;
-    gap: 0.3rem;
     justify-content: flex-start;
+    gap: 0.2rem;
     background-color: transparent;
 }
 
 .popover-branch-branches-list-button {
+    display: flex;
     justify-content: space-between;
+    background-color: transparent;
 }
-
+/* 
 .popover-branch-branches-list-button img {
     width: 12px;
     height: 12px;
     filter: invert(0.5);
-}
+} */

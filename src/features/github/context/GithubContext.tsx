@@ -20,7 +20,7 @@ interface Commit {
     difference: string,
 }
 
-interface Branch {
+export interface Branch {
     idx: number;
     name: string;
     forms?: Form[];
