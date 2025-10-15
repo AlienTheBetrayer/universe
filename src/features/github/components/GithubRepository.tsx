@@ -40,9 +40,10 @@ export const GithubRepository = () => {
                 || debouncedSearch.trim().length === 0))
             .map(form => form.idx)
         );
-    }, [debouncedSearch, thisBranch?.idx]);
+    }, [debouncedSearch, context.data.branches]);
 
     const tooltips = useTooltips();
+
 
     // scrolling to form edit
     const formEditRef = useRef<HTMLDivElement>(null);
@@ -58,6 +59,7 @@ export const GithubRepository = () => {
         return () => clearTimeout(timeout);
 
     }, [context.data.currentForm]);
+
 
     // cancel form edit if we change the branch
     useEffect(() => {
@@ -160,7 +162,7 @@ export const GithubRepository = () => {
 
                     </div>
 
-                    { thisBranch?.forms?.map(form => (
+                    { thisBranch?.forms.map(form => (
                         found.indexOf(form.idx) !== -1 && (
                             <div
                             className='github-form' 

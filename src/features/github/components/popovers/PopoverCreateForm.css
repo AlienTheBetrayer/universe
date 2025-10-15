@@ -1,3 +1,9 @@
+/* container */
+.popover-create-form {
+    min-height: 150px;
+}
+
+/* buttons */
 .popover-create-button {
     display: flex;
     justify-content: flex-start;

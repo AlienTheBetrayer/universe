@@ -48,10 +48,12 @@ export const PopoverBranch = ({ onCancel }: Props) => {
         setContext(prev => {
             const idx = findMax(prev.data.branches) + 1;
 
-            return ({ ...prev, data: ({ ...prev.data, 
+            return ({ ...prev, 
+                data: ({ ...prev.data, 
                 branches: [ ...prev.data.branches, {
                     idx: idx,
-                    name: name
+                    name: name,
+                    forms: []
                 }],
                 currentBranch: idx,
             })});

@@ -1,20 +1,71 @@
 import './PopoverCreateForm.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../../ui/Input/components/Input";
 import { GithubPopover } from "./GithubPopover"
 import { Button } from "../../../ui/Button/components/Button";
 
 import formImg from '../../assets/file.svg';
+import { useGithubContext, type Form } from '../../context/GithubContext';
+import { useHotkeys } from '../../../../hooks/useHotkeys';
+
+const findMax = (forms: Form[]) => {
+    return forms.reduce((acc, val) => {
+        return val.idx > acc.idx ? val : acc;
+    }).idx;
+}
 
 interface Props {
     onCancel?: () => void;
 }
 
 export const PopoverCreateForm = ({ onCancel }: Props) => {
+    // state + variables
+    const [context, setContext] = useGithubContext();
+    
+    const branch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
+    
+    // input functionality + validity
     const [inputValue, setInputValue] = useState<string>('');
+    const [isValid, setIsValid] = useState<boolean>(false);
+
+    useEffect(() => {
+        const found = branch?.forms?.some(f => f.name === inputValue);
+        setIsValid(!(found ?? true));
+    }, [inputValue]);
+
+    // hotkeys
+    const createForm = (name: string) => {
+        console.log('ran');
+        setContext(prev => {
+            const newForm: Form = {
+                idx: findMax(prev.data.branches.find(b => b.idx === prev.data.currentBranch)!.forms) + 1,
+                name,
+                tags: [],
+            };
+
+            return {
+                ...prev,
+                data: {
+                ...prev.data,
+                branches: prev.data.branches.map(b =>
+                    b.idx === branch.idx
+                    ? {
+                        ...b,
+                        forms: [...b.forms, newForm],
+                        }
+                    : b
+                )}}
+            }
+        );
+    }
+
+    useHotkeys([
+        { hotkey: 'Enter', action: () => createForm(inputValue), ignoreFocus: true }
+    ]);
     
     return (
-        <GithubPopover 
+        <GithubPopover
+        className='popover-create-form'
         title='Create a form'
         onCancel={() => onCancel?.()}>
             <Input 
@@ -24,12 +75,24 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
             onClear={() => setInputValue('')}/>
 
             { inputValue.length > 0 && (
-                <Button className='popover-create-button'>
+                <Button 
+                enabled={isValid}
+                className='popover-create-button'
+                onClick={() => {
+                    if(isValid)
+                        createForm(inputValue);
+                }}>
                     <img
                     src={formImg}
                     alt=''
                     className='github-img'/>
                     <mark>Create</mark> form <b>{inputValue}</b>
+
+                    { !isValid && (
+                        <p style={{ marginLeft: 'auto'}}>
+                            <u>Already exists!</u>
+                        </p>
+                    )}
                 </Button>
             )}
         </GithubPopover>

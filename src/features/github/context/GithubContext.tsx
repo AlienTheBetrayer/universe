@@ -12,7 +12,7 @@ interface FormContent {
 }
 
 
-interface Form {
+export interface Form {
     idx: number;
     name: string;
     tags: string[];
@@ -29,7 +29,7 @@ interface Commit {
 export interface Branch {
     idx: number;
     name: string;
-    forms?: Form[];
+    forms: Form[];
 }
 
 

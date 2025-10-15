@@ -173,26 +173,32 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     enabled={isValid}
                     ref={el => tooltips.set(5, 'Apply and update changes', el, 'up', 16)}
                     className='github-repository-settings-save-button'
-                    onClick={() => { setContext(prev => {
-                        if(!isValid) {
+                    onClick={() => {
+                        setContext(prev => {
+                        if (!isValid) {
                             formRef.current?.reportValidity();
                             return prev;
                         }
 
-                        const newData = {...prev};
-                        newData.data.currentForm = false;
-                        const content = newData.data.branches
-                        .find(b => b.idx === branch?.idx)
-                        ?.forms?.find(f => f.idx === form?.idx)?.content;
+                        const newContent = { author, email, message };
 
-                        if(content) {
-                            content.author = author;
-                            content.email = email;
-                            content.message = message;
-                        }
-
-                        return newData;
-                    })}}>
+                        return {
+                            ...prev,
+                            data: {
+                            ...prev.data,
+                            currentForm: false,
+                            branches: prev.data.branches.map(b =>
+                                b.idx === branch?.idx
+                                ? {
+                                    ...b,
+                                    forms: b.forms.map(f =>
+                                        f.idx === form?.idx
+                                        ? { ...f, content: newContent }
+                                        : f
+                                    ),
+                                    }
+                                : b
+                            )}}})}}>
                         Apply changes
                     </Button>
                 </div>
