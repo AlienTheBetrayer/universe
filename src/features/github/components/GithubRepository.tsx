@@ -10,19 +10,19 @@ import dropdownImg from '../assets/dropdown.svg';
 import tagsImg from '../assets/tags.svg';
 
 import { useGithubContext } from '../context/GithubContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDebounced } from '../../../hooks/useDebounced';
 import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
 import { PopoverBranch } from './popovers/PopoverBranch';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
+import { GithubFormEdit } from './GithubFormEdit';
 
 export const GithubRepository = () => {
     // context
-    const [context, ] = useGithubContext();
+    const [context, setContext] = useGithubContext();
 
     // state variables
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
-
     const tags = thisBranch?.forms?.reduce((acc, form) => acc + form.tags.length, 0) ?? 0;
     
     // search functionality 
@@ -41,6 +41,16 @@ export const GithubRepository = () => {
     }, [debouncedSearch, thisBranch?.idx]);
 
     const tooltips = useTooltips();
+
+    // scrolling to form edit
+    const formEditRef = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        if(context.data.currentForm === false)
+            return;
+
+        formEditRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [context.data.currentForm]);
 
     return (
         <>
@@ -117,7 +127,11 @@ export const GithubRepository = () => {
                         found.indexOf(form.idx) !== -1 && (
                             <div className='github-form' key={form.idx}>
                                 <div className='github-flex'>
-                                    <Button className='github-flex'>
+                                    <Button
+                                    className='github-flex'
+                                    onClick={() => setContext(prev => ({ ...prev, data: 
+                                        ({ ...prev.data, currentForm: form.idx })
+                                    }))}>
                                         <img className='github-img' src={fileImg} alt=''/>
                                         <p className='github-form-p-name'>{ form.name }</p>
                                     </Button>
@@ -136,10 +150,12 @@ export const GithubRepository = () => {
                         )
                     ))}
                 </div>
-
-                <div className='github-form-edit'>
-
-                </div>
+                
+                
+                { context.data.currentForm !== false && (
+                    <GithubFormEdit
+                    ref={el => { formEditRef.current = el; }}/>
+                )}
             </div>
         </>
     )   

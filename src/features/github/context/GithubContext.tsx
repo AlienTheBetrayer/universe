@@ -48,6 +48,7 @@ interface GithubData {
     branches: Branch[];
 
     currentBranch: number;
+    currentForm: number | false;
     repositoryName: string;
 }
 
@@ -81,6 +82,7 @@ export const GithubContextInitialData: GithubData = {
         releases: true,
     },
     currentBranch: 0,
+    currentForm: false,
     repositoryName: 'The Universe',
     branches: [
         {

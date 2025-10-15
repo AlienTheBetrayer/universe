@@ -98,10 +98,3 @@
     color: var(--foreground-last);
 }
 
-.github-form-edit {
-    display: flex;
-    flex-direction: column;
-    min-height: 400px;
-    border: 1px solid var(--background-7);
-    border-radius: 8px;
-}
