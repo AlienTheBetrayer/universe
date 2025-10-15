@@ -30,9 +30,9 @@ export const Input = ({ value, placeholder, onChange, onClear, type='input' }: P
         },
 
         { hotkey: 'Escape', action: () => { 
-            if(isVisible && type === 'search')
+            if(isVisible && document.activeElement === ref.current)
                 ref.current?.blur() } 
-        }
+        , ignoreFocus: true }
     ]);
 
     const ClearButton = () => {
