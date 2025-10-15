@@ -16,6 +16,7 @@ import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
 import { PopoverBranch } from './popovers/PopoverBranch';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { GithubFormEdit } from './GithubFormEdit';
+import { AnimatePresence } from 'motion/react';
 
 export const GithubRepository = () => {
     // context
@@ -49,7 +50,12 @@ export const GithubRepository = () => {
         if(context.data.currentForm === false)
             return;
 
-        formEditRef.current?.scrollIntoView({ behavior: 'smooth' });
+        const timeout = setTimeout(() => {
+            formEditRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+        }, 300);
+
+        return () => clearTimeout(timeout);
+
     }, [context.data.currentForm]);
 
     return (
@@ -153,11 +159,12 @@ export const GithubRepository = () => {
                     ))}
                 </div>
                 
-                
-                { context.data.currentForm !== false && (
-                    <GithubFormEdit
-                    ref={el => { formEditRef.current = el; }}/>
-                )}
+                <AnimatePresence>
+                    { context.data.currentForm !== false && (
+                        <GithubFormEdit
+                        ref={el => { formEditRef.current = el; }}/>
+                    )}
+                </AnimatePresence>
             </div>
         </>
     )   

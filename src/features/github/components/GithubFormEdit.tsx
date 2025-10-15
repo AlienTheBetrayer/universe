@@ -7,6 +7,8 @@ import branchImg from '../assets/branch.svg';
 import { Button } from '../../ui/Button/components/Button';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
+import { motion } from 'motion/react';
+
 interface Props {
 
 }
@@ -29,7 +31,10 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <>
             { tooltips.render() }
 
-            <div 
+            <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
             className='github-form-edit'
             ref={ref}>
                 <div className='github-form-edit-topline'>
@@ -138,7 +143,8 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                 <div className='github-form-edit-bottom'>
                     <Button 
                     ref={el => tooltips.set(3, 'Cancel', el, 'up', 16)}
-                    onClick={() => {}}>
+                    onClick={() => { setContext(prev => ({ ...prev, 
+                        data: ({ ...prev.data, currentForm: false })})) }}>
                         Cancel
                     </Button>
 
@@ -151,7 +157,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                         Save changes
                     </Button>
                 </div>
-            </div>
+            </motion.div>
         </>
     )
 });

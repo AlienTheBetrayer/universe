@@ -1,7 +1,6 @@
 .github-form-edit {
     display: flex;
     flex-direction: column;
-    min-height: 600px;
     border: 1px solid var(--background-7);
     border-radius: 8px;
     overflow: hidden;
@@ -85,7 +84,7 @@
 }
 
 .github-form-edit-main-message-field textarea {
-    min-height: 300px;
+    min-height: 200px;
     max-height: 600px;
 }
 
