@@ -58,6 +58,16 @@ export const GithubRepository = () => {
 
     }, [context.data.currentForm]);
 
+    // cancel form edit if we change the branch
+    useEffect(() => {
+        if(context.data.currentForm === false)
+            return;
+
+        setContext(prev => ({ ...prev, data: 
+            ({ ...prev.data, currentForm: false })
+        }));
+    }, [context.data.currentBranch]);
+
     return (
         <>
             { tooltips.render() }

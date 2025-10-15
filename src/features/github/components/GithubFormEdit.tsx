@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import './GithubFormEdit.css';
 import { useGithubContext } from '../context/GithubContext';
 
@@ -25,9 +25,14 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     const [email, setEmail] = useState<string>(form?.content?.email ?? '');
     const [message, setMessage] = useState<string>(form?.content?.message ?? '');
 
-
+    const formRef = useRef<HTMLFormElement>(null);
 
     const tooltips = useTooltips();
+    const [isValid, setIsValid] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsValid(formRef.current?.checkValidity() ?? false);
+    }, [author, email, message]);
 
     return (
         <>
@@ -69,6 +74,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
                 <div className='github-form-edit-main'>
                     <form
+                    ref={formRef}
                     id='github-form'
                     action='mailto:alienthebusinessman@gmail.com'
                     method='post'
@@ -164,9 +170,15 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     </Button>
                     
                     <Button 
+                    enabled={isValid}
                     ref={el => tooltips.set(5, 'Apply and update changes', el, 'up', 16)}
                     className='github-repository-settings-save-button'
                     onClick={() => { setContext(prev => {
+                        if(!isValid) {
+                            formRef.current?.reportValidity();
+                            return prev;
+                        }
+
                         const newData = {...prev};
                         newData.data.currentForm = false;
                         const content = newData.data.branches
