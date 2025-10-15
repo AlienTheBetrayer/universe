@@ -14,9 +14,10 @@ interface Props {
 export const Text3DCanvas = ({ children }: Props) => {
 
     return (
-        <motion.div className='text3d-canvas'
-        initial={{ opacity: 0, filter: 'blur(0px)' }}
-        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        <motion.div 
+        className='text3d-canvas'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}>
             <Canvas style={{ width: '100%', height: '100%'}}>
                 <Text3DLighting/>
