@@ -70,7 +70,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
     
     return (
         <GithubPopover 
-        title='Switch branches' 
+        title='<mark>Switch</mark> branches' 
         onCancel={() => onCancel?.()}>
             <Input
             type='search'
@@ -107,8 +107,12 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                                         className='github-img'/>
                                     )}
                                 </div>
-
-                                { branch.name }
+                                
+                                { branch.name === GithubDefaultBranch ? (
+                                    <mark>{branch.name}</mark>
+                                ) : (
+                                    branch.name
+                                )}
                             </div>
 
                             { branch.name === GithubDefaultBranch && (

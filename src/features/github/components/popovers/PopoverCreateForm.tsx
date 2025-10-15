@@ -72,7 +72,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
     return (
         <GithubPopover
         className='popover-create-form'
-        title='Create a form'
+        title='<mark>Create</mark> a form'
         onCancel={() => onCancel?.()}>
             <Input 
             placeholder='Form name'

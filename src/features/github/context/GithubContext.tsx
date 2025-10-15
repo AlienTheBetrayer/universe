@@ -78,7 +78,7 @@ interface Props {
 
 export const GithubContextInitialData: GithubData = {
     description: {
-        about: '',
+        about: 'Stars rapidly floating around...',
         forks: 0,
         stars: 0,
         watching: 0,

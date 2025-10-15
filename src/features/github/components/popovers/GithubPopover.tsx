@@ -18,7 +18,7 @@ export const GithubPopover = ({ className, title, children, onCancel, ...rest }:
 
             <div className={`github-popover ${className ?? ''}`} {...rest}>
                 <div className='github-popover-top'>
-                    <h4>{title}</h4>
+                    <h4 dangerouslySetInnerHTML={{ __html: title }}/>
                     <Button
                     className='github-cancel-button'
                     ref={el => tooltips.set(0, 'Cancel', el, 'left')}

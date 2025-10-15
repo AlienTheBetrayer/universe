@@ -29,7 +29,7 @@
 
 .github-heading-avatar {
     border-radius: 1000px;
-    border: 1px solid var(--background-7);
+    background-color: var(--foreground-last);
     height: 30px;
     width: 30px;
 }

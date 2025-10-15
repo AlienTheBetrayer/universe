@@ -165,11 +165,11 @@ export const GithubRepository = () => {
                     { thisBranch?.forms.map(form => (
                         found.indexOf(form.idx) !== -1 && (
                             <div
-                            className='github-form' 
+                            className='github-form-element' 
                             key={form.idx}>
                                 <div className='github-flex'>
                                     <Button
-                                    className='github-flex'
+                                    className='github-form-element-button'
                                     onClick={() => setContext(prev => ({ ...prev, data: 
                                         ({ ...prev.data, currentForm: form.idx })
                                     }))}>

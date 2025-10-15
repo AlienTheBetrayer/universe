@@ -80,12 +80,16 @@
     }
 }
 
-.github-form {
+.github-form-element {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
     height: 36px;
+}
+
+.github-form-element-button {
+    background-color: var(--background);
 }
 
 .github-form-p-name {
