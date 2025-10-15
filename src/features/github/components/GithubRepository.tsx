@@ -32,7 +32,10 @@ export const GithubRepository = () => {
 
     useEffect(() => {
         setFound((thisBranch?.forms ?? [])
-            .filter(form => (form.name.toLowerCase().includes(debouncedSearch.toLowerCase()) || debouncedSearch.trim().length === 0))
+            .filter(form => (
+                form.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+                || form.tags.find(tag => tag.toLowerCase().includes(debouncedSearch.toLowerCase()))
+                || debouncedSearch.trim().length === 0))
             .map(form => form.idx)
         );
     }, [debouncedSearch, thisBranch?.idx]);
