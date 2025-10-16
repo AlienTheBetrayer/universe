@@ -27,3 +27,13 @@
     gap: 0.5rem;
     padding: 0.5rem 1rem;
 }
+
+/* bottom */
+.github-popover-bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem;
+
+    border-top: 1px solid var(--background-7);
+}

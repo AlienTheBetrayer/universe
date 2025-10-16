@@ -3,7 +3,7 @@ import { useLocalStore } from "../../../zustand/localStore";
 import { GithubContextInitialData } from "./initial/githubData";
 
 // interfaces and data types
-interface FormContent {
+export interface FormContent {
     author: string;
     email: string;
     message: string;

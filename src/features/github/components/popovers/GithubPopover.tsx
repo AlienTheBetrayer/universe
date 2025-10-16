@@ -3,13 +3,20 @@ import type React from 'react';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 import { Button } from '../../../ui/Button/components/Button';
 
+interface PopoverSuccess {
+    text: string;
+    action: () => void;
+}
+
 interface Props extends React.HTMLProps<HTMLDivElement> {
     title: string;
     onCancel: () => void;
+    success?: PopoverSuccess;
+
     children?: React.ReactNode;
 }
 
-export const GithubPopover = ({ className, title, children, onCancel, ...rest }: Props) => {
+export const GithubPopover = ({ className, title, children, onCancel, success, ...rest }: Props) => {
     const tooltips = useTooltips();
 
     return (
@@ -30,6 +37,27 @@ export const GithubPopover = ({ className, title, children, onCancel, ...rest }:
                 <div className='github-popover-main'>
                     { children }
                 </div>
+
+                
+                { success && (
+                    <div className='github-popover-bottom'>
+                        <Button 
+                        ref={el => tooltips.set(1, 'Cancel', el, 'down', 16)}
+                        onClick={() => onCancel?.()}>
+                            Cancel
+                        </Button>
+
+                        <Button 
+                        ref={el => tooltips.set(2, 'Apply and update changes', el, 'down', 16)}
+                        onClick={() => { 
+                            success.action();
+                            onCancel?.();
+                        }}
+                        className='github-save-button'>
+                            { success.text } 
+                        </Button>
+                    </div>
+                )}
             </div>
         </>
     )   

@@ -11,6 +11,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(({ className, childre
         <motion.button 
         ref={ref} 
         className={`button ${className ?? ''} ${!enabled ? 'button-disabled' : ''}`} 
+        disabled={!enabled}
         {...rest}>
             { children }
         </motion.button>

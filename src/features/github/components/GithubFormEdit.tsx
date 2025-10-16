@@ -16,6 +16,7 @@ import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
 import { PopoverAddTag } from './popovers/PopoverAddTag';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
+import { PopoverFormEditCommit } from './popovers/PopoverFormEditCommit';
 
 
 interface Props {
@@ -262,43 +263,20 @@ export const GithubFormEdit = ({}: Props) => {
                         Send
                     </Button>
                     
-                    <Button 
+                    <PopoverButton 
+                    element={<PopoverFormEditCommit newContent={{ author, email, message }}/>}
+                    direction='top-left'
                     enabled={isValid}
                     ref={el => tooltips.set(5, 'Apply and update changes', el, 'up', 16)}
                     className='github-save-button'
-                    onClick={() => {
-                        setContext(prev => {
-                        if (!isValid) {
-                            formRef.current?.reportValidity();
-                            return prev;
-                        }
-
-                        const newContent = { author, email, message };
-
-                        return {
-                            ...prev,
-                            data: {
-                            ...prev.data,
-                            currentForm: false,
-                            branches: prev.data.branches.map(b =>
-                                b.idx === branch?.idx
-                                ? {
-                                    ...b,
-                                    forms: b.forms.map(f =>
-                                        f.idx === form?.idx
-                                        ? { ...f, content: newContent }
-                                        : f
-                                    ),
-                                    }
-                                : b
-                            )}}})}}>
+                    >
                         <img 
                         src={checkmarkImg} 
                         alt='' 
                         className='github-img'
                         style={{ filter: 'invert(1)', width: '16px', height: '16px'}}/>
                         Commit
-                    </Button>
+                    </PopoverButton>
                 </div>
             </motion.div>
         </>

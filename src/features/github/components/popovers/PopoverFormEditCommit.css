@@ -1,0 +1,8 @@
+.popover-form-edit-commit {
+    min-height: 200px;
+}
+
+.popover-form-edit-commit-bottom {
+    padding: 0.5rem 1rem;
+    border-top: var(--background-7);
+}

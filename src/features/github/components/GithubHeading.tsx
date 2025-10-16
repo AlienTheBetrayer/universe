@@ -76,8 +76,9 @@ export const GithubHeading = () => {
                 </div>
 
                 <div className='github-heading-buttons'>
-                    { buttons.map(button => (
+                    { buttons.map((button, idx) => (
                         <Button
+                        key={idx}
                         onClick={() => button.action()}>
                             { button.image && (
                                 <img
