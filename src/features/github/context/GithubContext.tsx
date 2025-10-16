@@ -17,13 +17,16 @@ export interface Form {
     content?: FormContent;
 }
 
+type CommitType = 'form-creation' | 'form-content-change';
+
 export interface Commit {
     idx: number;
     name: string;
     description: string;
+    pushedAt: number;
+    type: CommitType;
     data?: FormContent;
     form?: Form;
-    pushedAt: number;
 }
 
 export interface Branch {

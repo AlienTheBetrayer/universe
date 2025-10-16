@@ -48,15 +48,22 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
             return {
                 ...prev,
                 data: {
-                ...prev.data,
-                branches: prev.data.branches.map(b =>
-                    b.idx === prev.data.currentBranch
-                    ? {
-                        ...b,
-                        forms: [...b.forms, newForm],
-                        
-                        }
-                    : b
+                    ...prev.data,
+                    branches: prev.data.branches.map(b =>
+                        b.idx === prev.data.currentBranch
+                        ? {
+                            ...b,
+                            forms: [...b.forms, newForm],
+                            commits: [...b.commits, {
+                                idx: findMax(b.commits) + 1,
+                                name: `${newForm.name} form created`,
+                                description: '',
+                                pushedAt: Date.now(),
+                                type: 'form-creation',
+                                form: newForm
+                            }]
+                            }
+                        : b
                 )}}
             }
         );
