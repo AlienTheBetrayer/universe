@@ -58,3 +58,12 @@
     border: 1px solid var(--background-7);
     border-radius: 8px;
 }
+
+.github-commit-view-diffchar {
+    display: inline;
+    width: fit-content;
+}
+
+.github-commit-view-diffchar-highlighted {
+    color: var(--foreground-last);
+}

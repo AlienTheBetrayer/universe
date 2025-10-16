@@ -6,6 +6,9 @@ import commitImg from '../assets/commit.svg';
 
 import { AnimatePresence, motion } from 'motion/react';
 
+import { diffChars, type ChangeObject } from 'diff';
+import { differenceInCalendarDays } from 'date-fns';
+
 interface Props {
 
 }
@@ -14,8 +17,35 @@ export const GithubCommitView = ({}: Props) => {
     // context
     const [context, ] = useGithubContext();
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
+    
+    // commits + diff
     const thisCommit = thisBranch?.commits.find(c => c.idx === context.data.currentCommit);
     const prevCommit = (thisCommit?.idx ?? 0) > 0 ? thisBranch?.commits.at((thisCommit?.idx ?? 1) - 1) : undefined;
+    const thisContent = thisCommit?.data;
+    const prevContent = prevCommit?.data;
+
+    const difference = {
+        author: diffChars(prevContent?.author ?? '', thisContent?.author ?? ''),
+        email: diffChars(prevContent?.email ?? '', thisContent?.email ?? ''),
+        message: diffChars(prevContent?.message ?? '', thisContent?.message ?? ''),
+    }
+    
+    const differenceComponent = (part: ChangeObject<string>[]) => {
+        return (
+            <p>
+                { part.map(c => (
+                    <span
+                    className={`github-commit-view-diffchar ${(c.removed || c.added ? 'github-commit-view-diffchar-highlighted' : '')}`}
+                    style={{
+                        background: c.removed ? 'hsla(0, 59%, 35%, 0.5)' : (c.added ? 'hsla(132, 59%, 35%, 0.5)' : '#00000000')
+                    }}>
+                        {c.value}
+                    </span>
+                ))}
+            </p>
+        )
+    }
+
 
     // div ref + scrolling to it
     const viewRef = useRef<HTMLDivElement>(null);
@@ -102,17 +132,20 @@ export const GithubCommitView = ({}: Props) => {
 
                             <div className='github-commit-view-main-field'>
                                 <h4>Author</h4>
-                                <p>{ prevCommit?.data.author ?? '' }</p>
+
+                                { differenceComponent(difference.author) }
                             </div>
 
                             <div className='github-commit-view-main-field'>
                                 <h4>E-mail</h4>
-                                <p>{ prevCommit?.data.email ?? '' }</p>
+
+                                { differenceComponent(difference.email) }
                             </div>
 
                             <div className='github-commit-view-main-field'>
                                 <h4>Message</h4>
-                                <p>{ prevCommit?.data.message ?? '' }</p>
+
+                                { differenceComponent(difference.message) }
                             </div>
                         </div>
                     )}
