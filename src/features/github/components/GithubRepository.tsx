@@ -80,6 +80,7 @@ export const GithubRepository = () => {
                     <div className='github-repository-topline-info'>
                         <div>
                             <PopoverButton
+                            direction='bottom-right'
                             element={<PopoverBranch/>}
                             ref={el => tooltips.set(0, 'Switch branch', el, 'up')}>
                                 <img 
@@ -123,7 +124,7 @@ export const GithubRepository = () => {
                         <PopoverButton 
                         ref={el => tooltips.set(1, 'Create a new form', el, 'up')}
                         element={<PopoverCreateForm/>}
-                        direction='right'>
+                        direction='bottom-left'>
                             <img 
                             className='github-img' 
                             src={addImg} 

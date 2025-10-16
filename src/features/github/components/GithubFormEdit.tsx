@@ -10,6 +10,8 @@ import { Button } from '../../ui/Button/components/Button';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 import { motion } from 'motion/react';
+import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
+import { PopoverAddTag } from './popovers/PopoverAddTag';
 
 interface Props {
 
@@ -77,6 +79,12 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                                 </p>
                             </div>
                         ))}
+                        <PopoverButton 
+                        className='github-cancel-button'
+                        element={<PopoverAddTag/>}
+                        direction='top-left'>
+                            +
+                        </PopoverButton>
                     </div>
                 </div>
 

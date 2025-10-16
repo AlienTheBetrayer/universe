@@ -12,10 +12,10 @@ interface Props extends HTMLMotionProps<'button'> {
     element: React.ReactElement<any>;
     onClick?: () => void;
     offset?: number;
-    direction?: 'left' | 'right';
+    direction?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
 }
 
-export const PopoverButton = forwardRef<HTMLButtonElement, Props>(({ children, element, onClick, enabled, offset=4, direction='left', ...rest }, ref) => {
+export const PopoverButton = forwardRef<HTMLButtonElement, Props>(({ children, element, onClick, enabled, offset=4, direction='bottom-left', ...rest }, ref) => {
     const [shown, setShown] = useState<boolean>(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const popoverRef = useRef<HTMLElement>(null);
@@ -29,13 +29,22 @@ export const PopoverButton = forwardRef<HTMLButtonElement, Props>(({ children, e
             el.style.position = 'absolute';
 
             switch(direction) {
-                case 'left':
+                case 'bottom-right':
                     el.style.left = `${buttonRect.left + window.scrollX}px`;
                     el.style.top = `${buttonRect.top + buttonRect.height + offset + window.scrollY}px`;
                 break;
-                case 'right':
+                case 'bottom-left':
                     el.style.left = `${buttonRect.right - elRect.width + window.scrollX}px`;
                     el.style.top = `${buttonRect.top + buttonRect.height + offset + window.scrollY}px`;
+                break;
+
+                case 'top-right':
+                    el.style.left = `${buttonRect.left + window.scrollX}px`;
+                    el.style.top = `${buttonRect.top - elRect.height - offset + window.scrollY}px`;
+                break;
+                case 'top-left':
+                    el.style.left = `${buttonRect.right - elRect.width + window.scrollX}px`;
+                    el.style.top = `${buttonRect.top - elRect.height - offset + window.scrollY}px`;
                 break;
             }
         }
