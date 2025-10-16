@@ -20,8 +20,8 @@ export interface Form {
 export interface Commit {
     name: string;
     description: string;
-    date: string;
-    difference: string,
+    pushedAt: number;
+    data: string;
 }
 
 export interface Branch {
