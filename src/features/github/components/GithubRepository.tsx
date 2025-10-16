@@ -11,7 +11,7 @@ export const GithubRepository = () => {
     // context
     const [context, setContext] = useGithubContext();
 
-    // search (worked in <GithubRepositoryForms/>)
+    // search (handled in <GithubRepositoryTopline/> and used in <GithubRepositoryForms/>)
     const [searchValue, setSearchValue] = useState<string>('');
 
     // cancel form edit if we change the branch
@@ -25,11 +25,8 @@ export const GithubRepository = () => {
 
     return (
         <div className='github-repository'>
-            <GithubRepositoryTopline
-            searchState={[searchValue, setSearchValue]}/>
-            
-            <GithubRepositoryForms
-            searchValue={searchValue}/>
+            <GithubRepositoryTopline searchState={[searchValue, setSearchValue]}/>
+            <GithubRepositoryForms searchValue={searchValue}/>
 
             <AnimatePresence>
                 { context.data.currentForm !== false && (

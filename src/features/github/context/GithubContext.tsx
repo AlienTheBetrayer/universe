@@ -1,10 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocalStore } from "../../../zustand/localStore";
+import { GithubContextInitialData } from "./initial/githubData";
 
-// constant default values
-export const GithubDefaultBranch = 'main';
-
-
+// interfaces and data types
 interface FormContent {
     author: string;
     email: string;
@@ -19,7 +17,7 @@ export interface Form {
     content?: FormContent;
 }
 
-interface Commit {
+export interface Commit {
     name: string;
     description: string;
     date: string;
@@ -49,7 +47,7 @@ interface ElementsVisibility {
 
 
 // main data interface
-interface GithubData {
+export interface GithubData {
     commits: Commit[],
     description: Description;
     visibility: ElementsVisibility;
@@ -74,42 +72,6 @@ export const GithubContext = createContext<GithubContextType | null>(null);
 interface Props {
     children?: React.ReactNode;
 }
-
-
-export const GithubContextInitialData: GithubData = {
-    description: {
-        about: 'Stars rapidly floating around...',
-        forks: 0,
-        stars: 0,
-        watching: 0,
-        topics: [],
-    },
-    commits: [],
-    visibility: {
-        languages: true,
-        packages: true,
-        releases: true,
-    },
-    currentBranch: 0,
-    currentForm: false,
-    repositoryName: 'The Universe',
-    branches: [
-        {
-            idx: 0,
-            name: GithubDefaultBranch,
-            forms: [{
-                idx: 0,
-                name: 'hi',
-                tags: ['bye', 'whatever'],
-                content: {
-                    author: 'Gleb',
-                    email: 'alienthebusinessman@gmail.com',
-                    message: 'hello there?'
-                }
-            }]
-        },
-    ]
-};
 
 // provider + localstorage zustand handling
 export const GithubProvider = ({ children }: Props)  => {

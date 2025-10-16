@@ -10,13 +10,14 @@ import deleteImg from '../assets/delete.svg';
 
 import { motion } from 'motion/react';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { GithubDefaultBranch, useGithubContext } from '../context/GithubContext';
+import { useGithubContext } from '../context/GithubContext';
 import { Input } from '../../ui/Input/components/Input';
 import { PopoverCreateForm } from './popovers/PopoverCreateForm';
 import { Button } from '../../ui/Button/components/Button';
 import type React from 'react';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
+import { GithubDefaultBranch } from '../context/initial/githubStrings';
 
 interface Props {
     searchState: [string, React.Dispatch<React.SetStateAction<string>>];

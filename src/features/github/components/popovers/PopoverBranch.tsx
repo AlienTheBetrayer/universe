@@ -1,6 +1,6 @@
 import './PopoverBranch.css';
 import { Button } from '../../../ui/Button/components/Button';
-import { GithubDefaultBranch, useGithubContext, type Branch } from '../../context/GithubContext';
+import { useGithubContext, type Branch } from '../../context/GithubContext';
 
 import checkmarkImg from '../../assets/checkmark.svg';
 import branchImg from '../../assets/branch.svg';
@@ -10,6 +10,7 @@ import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { GithubPopover } from './GithubPopover';
 import { Input } from '../../../ui/Input/components/Input';
+import { GithubDefaultBranch } from '../../context/initial/githubStrings';
 
 // helper functions
 const findMax = (branches: Branch[]) => {

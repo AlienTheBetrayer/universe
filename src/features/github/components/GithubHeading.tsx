@@ -1,13 +1,14 @@
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
 import { Button } from '../../ui/Button/components/Button';
-import { GithubContextInitialData, useGithubContext } from '../context/GithubContext';
+import { useGithubContext } from '../context/GithubContext';
 import './GithubHeading.css';
 
 import starImg from '../assets/star.svg';
 import watchImg from '../assets/eye.svg';
 import forkImg from '../assets/fork.svg';
 import deleteImg from '../assets/delete.svg';
+import { GithubContextInitialData } from '../context/initial/githubData';
 
 interface GithubHeadingButton {
     content: string;
