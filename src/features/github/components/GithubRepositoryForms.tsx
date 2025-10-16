@@ -7,17 +7,19 @@ import { motion } from 'motion/react';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
 
 import commitImg from '../assets/commit.svg';
-import fileImg from '../assets/file.svg';
+import { GithubRepositoryFormsElement } from './GithubRepositoryFormsElement';
+import { formatDistanceToNow } from 'date-fns';
 
 interface Props {
     searchValue: string;
 }
 
 export const GithubRepositoryForms = ({ searchValue }: Props) => {
-    const [context, setContext] = useGithubContext();
+    const [context, ] = useGithubContext();
 
     // state variables
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
+
 
     // filter functionality
     const [found, setFound] = useState<number[]>([]);
@@ -31,7 +33,28 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
             .map(form => form.idx)
         );
     }, [searchValue, context.data]);
+
+
+    // date updating (latest commit overall) every minute
+    const [commitDate, setCommitDate] = useState<string>('');
+
+    useEffect(() => {
+        if(thisBranch.commits.length > 0) {
+            const update = () => {
+                const date = thisBranch.commits.at(-1)!.pushedAt;
+                setCommitDate(formatDistanceToNow(date, { addSuffix: true }));
+            }
+            
+            update();
+            const interval = setInterval(() => {
+                update();
+            }, 60000);
+
+            return () => clearInterval(interval);
+        }
+    }, [thisBranch.commits]);
     
+
     // tooltips
     const tooltips = useTooltips();
 
@@ -49,14 +72,18 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
                         
                         { thisBranch.commits.length > 0 && (
                             <p>
-                                {thisBranch.commits.at(-1)!.name}
+                                <mark>
+                                    <b>
+                                        {thisBranch.commits.at(-1)!.name}
+                                    </b>
+                                </mark>
                             </p>
                         )}
                     </div>
 
                     <div className='github-flex'>
                         { thisBranch.commits.length > 0 && (
-                            <p>{thisBranch.commits.at(-1)!.pushedAt}</p>
+                            <p>{commitDate}</p>
                         )}
 
                         <Button
@@ -76,37 +103,9 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
 
                 { thisBranch?.forms.map(form => (
                     found.indexOf(form.idx) !== -1 && (
-                        <div
-                        className='github-form-element' 
-                        key={form.idx}>
-                            <div className='github-flex flex-wrap'>
-                                <Button
-                                className='github-form-element-button'
-                                onClick={() => setContext(prev => ({ ...prev, data: 
-                                    ({ ...prev.data, currentForm: form.idx })
-                                }))}>
-                                    <img className='github-img' src={fileImg} alt=''/>
-                                    <p className='github-form-p-name'>{ form.name }</p>
-                                </Button>
-
-                                { form.tags.map((tag, idx) => (
-                                    <div 
-                                    className='github-tiny-info-container' 
-                                    key={`${form.idx}${idx}`}>   
-                                        <motion.p
-                                        key={tag}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}>
-                                            { tag }
-                                        </motion.p>
-                                    </div>
-                                ))}
-                            </div>
-
-                            { thisBranch.commits.length > 0 && (
-                                <p>{ thisBranch.commits.at(-1)!.pushedAt }</p>
-                            )}
-                        </div>
+                        <GithubRepositoryFormsElement 
+                        key={form.idx}
+                        form={form}/>
                     )
                 ))}
             </div>
