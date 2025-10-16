@@ -26,7 +26,9 @@ export const Github = () => {
     useEffect(() => {
         setContext(prev => ({ ...prev, 
             data: ({
-                ...prev.data, currentForm: false
+                ...prev.data, 
+                currentForm: false,
+                currentCommit: false
             })
         }));
     }, [context.page]);

@@ -4,6 +4,7 @@ import { Button } from '../../ui/Button/components/Button';
 
 import commitImg from '../assets/commit.svg';
 import formImg from '../assets/file.svg';
+import deleteImg from '../assets/delete.svg';
 
 import { useEffect, useState } from 'react';
 import { differenceInSeconds, formatDistanceToNow } from 'date-fns';
@@ -15,9 +16,9 @@ interface Props {
 
 export const GithubCommitsElement = ({ commit }: Props) => {
     // context + variables
-    const [context, ] = useGithubContext();
+    const [context, setContext] = useGithubContext();
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
-    const commitedForm = thisBranch.forms.find(f => f.idx === commit.idx)!;
+    const commitedForm = thisBranch.forms.find(f => f.idx === commit.formIdx);
 
     // date updating for that specific commit every second
     const [commitDate, setCommitDate] = useState<string>('');
@@ -48,13 +49,30 @@ export const GithubCommitsElement = ({ commit }: Props) => {
     return (
         <div
         className='github-commits-element'>
-            <img
-            className='github-img'
-            src={formImg}
-            alt=''/>
-            <p>{commitedForm.name}</p>
+            { commitedForm !== undefined ? (
+                <>
+                    <img
+                    className='github-img'
+                    src={formImg}
+                    alt=''/>
+                    <p>{commitedForm.name}</p>
+                </>
+            ) : (
+                <>
+                    <img
+                    className='github-img'
+                    src={deleteImg}
+                    alt=''/>
+                    <p><u>Deleted</u></p>
+                </>
+            )}
+
             <Button
-            className='github-form-element-button'>
+            className='github-form-element-button'
+            onClick={() => setContext(prev => ({ ...prev, 
+            data: ({ ...prev.data,
+                currentCommit: commit.idx
+            })}))}>
                 <img 
                 className='github-img' 
                 src={commitImg} 

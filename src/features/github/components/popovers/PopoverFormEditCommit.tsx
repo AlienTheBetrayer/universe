@@ -2,8 +2,17 @@ import './PopoverFormEditCommit.css';
 
 import { useEffect, useState } from "react";
 import { Input } from "../../../ui/Input/components/Input";
-import { useGithubContext, type FormContent } from "../../context/GithubContext";
+import { useGithubContext, type Commit, type FormContent } from "../../context/GithubContext";
 import { GithubPopover } from "./GithubPopover";
+
+const findMax = (commits: Commit[]) => {
+    if(commits.length === 0)
+        return 0;
+    
+    return commits.reduce((acc, val) => {
+        return val.idx > acc.idx ? val : acc;
+    }).idx;
+}
 
 interface Props {
     newContent: FormContent;
@@ -40,7 +49,8 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
                             ? {
                                 ...b,
                                 commits: [...b.commits, {
-                                    idx: prev.data.currentForm as number,
+                                    idx: findMax(b.commits) + 1,
+                                    formIdx: prev.data.currentForm as number,
                                     name,
                                     description,
                                     pushedAt: Date.now(),

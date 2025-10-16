@@ -16,6 +16,7 @@ export const GithubContextInitialData: GithubData = {
     },
     currentBranch: 0,
     currentForm: false,
+    currentCommit: false,
     repositoryName: 'The Universe',
     branches: [
         {

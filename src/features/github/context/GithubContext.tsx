@@ -19,6 +19,7 @@ export interface Form {
 
 export interface Commit {
     idx: number;
+    formIdx: number;
     name: string;
     description: string;
     pushedAt: number;
@@ -56,6 +57,7 @@ export interface GithubData {
 
     currentBranch: number;
     currentForm: number | false;
+    currentCommit: number | false;
     repositoryName: string;
 }
 

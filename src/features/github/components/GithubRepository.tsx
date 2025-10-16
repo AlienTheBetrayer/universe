@@ -7,6 +7,7 @@ import { AnimatePresence } from 'motion/react';
 import { GithubRepositoryForms } from './GithubRepositoryForms';
 import { GithubRepositoryTopline } from './GithubRepositoryTopline';
 import { GithubCommits } from './GithubCommits';
+import { GithubCommitView } from './GithubCommitView';
 
 export const GithubRepository = () => {
     // context
@@ -32,6 +33,12 @@ export const GithubRepository = () => {
             <AnimatePresence>
                 { context.data.currentForm !== false && (
                     <GithubFormEdit/>
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                { context.data.currentCommit !== false && (
+                    <GithubCommitView/>
                 )}
             </AnimatePresence>
         </div>
