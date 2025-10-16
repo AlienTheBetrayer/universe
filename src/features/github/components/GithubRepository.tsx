@@ -7,8 +7,9 @@ import fileImg from '../assets/file.svg';
 import branchImg from '../assets/branch.svg';
 import dropdownImg from '../assets/dropdown.svg';
 import tagsImg from '../assets/tags.svg';
+import deleteImg from '../assets/delete.svg';
 
-import { useGithubContext } from '../context/GithubContext';
+import { GithubDefaultBranch, useGithubContext } from '../context/GithubContext';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDebounced } from '../../../hooks/useDebounced';
 import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
@@ -20,6 +21,8 @@ import { PopoverCreateForm } from './popovers/PopoverCreateForm';
 import { Input } from '../../ui/Input/components/Input';
 
 import { motion } from 'motion/react';
+import { usePopup } from '../../../hooks/usePopup';
+import { MessageBox } from '../../messagebox/components/MessageBox';
 
 export const GithubRepository = () => {
     // context
@@ -44,7 +47,6 @@ export const GithubRepository = () => {
         );
     }, [debouncedSearch, context.data]);
 
-    const tooltips = useTooltips();
 
 
     // scrolling to form edit
@@ -65,17 +67,36 @@ export const GithubRepository = () => {
 
     // cancel form edit if we change the branch
     useEffect(() => {
-        if(context.data.currentForm === false)
-            return;
-
-        setContext(prev => ({ ...prev, data: 
-            ({ ...prev.data, currentForm: false })
-        }));
+        if(context.data.currentForm !== false) {
+            setContext(prev => ({ ...prev, data: 
+                ({ ...prev.data, currentForm: false })
+            }));
+        }
     }, [context.data.currentBranch]);
+
+
+    const tooltips = useTooltips();
+
+    const branchDeleteMessageBox = usePopup(
+    <MessageBox
+    title='Are you sure?'
+    description={`You are about to <u>permanently delete</u> <mark><b>${thisBranch?.name}</b> branch.</mark>`}
+    onInteract={f => {
+        if(f && thisBranch?.name !== GithubDefaultBranch) {
+            setContext(prev => ({ ...prev, 
+                data: ({ ...prev.data, 
+                    branches: prev.data.branches.filter(b => b.idx !== prev.data.currentBranch),
+                    currentBranch: 0
+                })}))
+        }
+
+        branchDeleteMessageBox.setShown(false);
+    }}/>);
 
     return (
         <>
             { tooltips.render() }
+            { branchDeleteMessageBox.render() }
 
             <div className='github-repository'>
                 <div className='github-repository-topline'>
@@ -153,7 +174,18 @@ export const GithubRepository = () => {
                             style={{ width: '12px', height: '12px'}}/>
                         </PopoverButton>
 
-                        <Button>Code</Button>
+                        <Button
+                        className='github-delete-button'
+                        enabled={thisBranch?.name !== GithubDefaultBranch}
+                        onClick={() => branchDeleteMessageBox.setShown(true)}
+                        ref={el => tooltips.set(3, 'Delete this branch', el, 'down')}>
+                            <img
+                            src={deleteImg}
+                            alt=''
+                            className='github-img'
+                            style={{ filter: 'invert(1)' }}/>
+                            Delete
+                        </Button>
                     </div>
                 </div>
                 
