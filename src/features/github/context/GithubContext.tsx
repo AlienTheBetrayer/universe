@@ -59,10 +59,13 @@ export interface GithubData {
     repositoryName: string;
 }
 
+type GithubPage = 'forms' | 'commits';
 
 // context data
 interface GithubContextData {
     tutorialVisible: boolean;
+    page: GithubPage;
+
     data: GithubData;
 }
 
@@ -79,6 +82,7 @@ export const GithubProvider = ({ children }: Props)  => {
     const [state, setState] = useState<GithubContextData>(
         {
             tutorialVisible: true,
+            page: 'forms',
             data: GithubContextInitialData
         }
     );

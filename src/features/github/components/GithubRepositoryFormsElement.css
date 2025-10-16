@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
-    min-height: 36px;
+    padding: 0.5rem 1rem;
+    min-height: 48px;
 }
 
 .github-form-element-button {

@@ -1,0 +1,9 @@
+.github-commits-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--background-7);
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    min-height: 36px;
+}

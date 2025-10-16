@@ -1,32 +1,33 @@
 import './GithubRepository.css';
 
 import { useGithubContext } from '../context/GithubContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GithubFormEdit } from './GithubFormEdit';
 import { AnimatePresence } from 'motion/react';
 import { GithubRepositoryForms } from './GithubRepositoryForms';
 import { GithubRepositoryTopline } from './GithubRepositoryTopline';
+import { GithubCommits } from './GithubCommits';
 
 export const GithubRepository = () => {
     // context
-    const [context, setContext] = useGithubContext();
+    const [context, ] = useGithubContext();
 
     // search (handled in <GithubRepositoryTopline/> and used in <GithubRepositoryForms/>)
     const [searchValue, setSearchValue] = useState<string>('');
 
-    // cancel form edit if we change the branch
-    useEffect(() => {
-        if(context.data.currentForm !== false) {
-            setContext(prev => ({ ...prev, data: 
-                ({ ...prev.data, currentForm: false })
-            }));
+    const pageSelector = () => {
+        switch(context.page) {
+            case 'forms':
+                return <GithubRepositoryForms searchValue={searchValue}/>;
+            case 'commits':
+                return <GithubCommits searchValue={searchValue}/>
         }
-    }, [context.data.currentBranch]);
+    }
 
     return (
         <div className='github-repository'>
             <GithubRepositoryTopline searchState={[searchValue, setSearchValue]}/>
-            <GithubRepositoryForms searchValue={searchValue}/>
+            { pageSelector() }
 
             <AnimatePresence>
                 { context.data.currentForm !== false && (

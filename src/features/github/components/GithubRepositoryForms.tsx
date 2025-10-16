@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const GithubRepositoryForms = ({ searchValue }: Props) => {
-    const [context, ] = useGithubContext();
+    const [context, setContext] = useGithubContext();
 
     // state variables
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
@@ -87,6 +87,8 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
                         )}
 
                         <Button
+                        enabled={ thisBranch.commits.length > 0 }
+                        onClick={() => setContext(prev => ({ ...prev, page: 'commits' }))}
                         style={{ marginLeft: 'auto' }}
                         ref={el => tooltips.set(0, 'View all commits', el, 'down')}>
                             <img className='github-img' src={commitImg} alt=''/>

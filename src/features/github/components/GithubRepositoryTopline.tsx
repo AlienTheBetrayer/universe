@@ -18,6 +18,7 @@ import type React from 'react';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
 import { GithubDefaultBranch } from '../context/initial/githubStrings';
+import { useEffect } from 'react';
 
 interface Props {
     searchState: [string, React.Dispatch<React.SetStateAction<string>>];
@@ -33,6 +34,10 @@ export const GithubRepositoryTopline = ({ searchState }: Props) => {
 
     // search
     const [searchValue, setSearchValue] = searchState;
+
+    useEffect(() => {
+        setSearchValue('');
+    }, [context.page]);
 
     // tooltips
     const tooltips = useTooltips();
@@ -112,7 +117,7 @@ export const GithubRepositoryTopline = ({ searchState }: Props) => {
                 <div className='github-repository-topline-info-2'>
                     <Input
                     type='search'
-                    placeholder='Filter forms'
+                    placeholder={`Filter ${context.page === 'forms' ? 'forms' : (context.page === 'commits' ? 'commits' : '')}`}
                     value={searchValue}
                     onChange={val => setSearchValue(val)}
                     onClear={() => setSearchValue('')}/>

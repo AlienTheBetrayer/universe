@@ -90,7 +90,10 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                         key={branch.idx}
                         className='popover-branch-branches-list-button'
                         onClick={() => {
-                            setContext(prev => ({ ...prev, data: ({ ...prev.data, currentBranch: branch.idx })}))
+                            setContext(prev => ({ ...prev, 
+                                data: ({ ...prev.data, 
+                                    currentBranch: branch.idx,
+                            })}))
                             onCancel?.();
                         }}>
                             <div className='flex gap-2 items-center'>
