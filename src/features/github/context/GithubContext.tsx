@@ -17,7 +17,7 @@ export interface Form {
     content?: FormContent;
 }
 
-type CommitType = 'form-creation' | 'form-content-change';
+type CommitType = 'form-creation' | 'form-deletion' | 'form-content-change';
 
 export interface Commit {
     idx: number;

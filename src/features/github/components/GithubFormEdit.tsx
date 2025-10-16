@@ -17,6 +17,7 @@ import { PopoverAddTag } from './popovers/PopoverAddTag';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
 import { PopoverFormEditCommit } from './popovers/PopoverFormEditCommit';
+import { findMax } from '../utils/findMax';
 
 
 interface Props {
@@ -79,7 +80,15 @@ export const GithubFormEdit = ({}: Props) => {
                 data: ({ ...prev.data, 
                     branches: prev.data.branches.map(b => b.idx === prev.data.currentBranch 
                         ? { ...b, 
-                            forms: b.forms.filter(f => f.idx !== prev.data.currentForm)}
+                            forms: b.forms.filter(f => f.idx !== prev.data.currentForm),
+                            commits: [...b.commits, {
+                                idx: findMax(b.commits) + 1,
+                                name: `${b.forms.find(f => f.idx === prev.data.currentForm)?.name} form deleted`,
+                                description: '',
+                                pushedAt: Date.now(),
+                                type: 'form-deletion',
+                            }]
+                        }
                         : b
                     ), currentForm: false
                 })}))

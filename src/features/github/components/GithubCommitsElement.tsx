@@ -83,7 +83,18 @@ export const GithubCommitsElement = ({ commit }: Props) => {
                         src={addImg}
                         alt=''/>
                         
-                        <p>{commitedForm?.name ?? ''} form created</p>
+                        <p>{ commit.name }</p>
+                    </>
+                )
+            case 'form-deletion':
+                return (
+                    <>
+                        <img
+                        className='github-img'
+                        src={deleteImg}
+                        alt=''/>
+                        
+                        <p>{ commit.name }</p>
                     </>
                 )
         }
