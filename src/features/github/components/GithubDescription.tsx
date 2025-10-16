@@ -22,7 +22,8 @@ export const GithubDescription = () => {
         <>
             { settingsPopup.render() }
 
-            <div className='github-description'>
+            <div 
+            className='github-description'>
                 <div className='github-description-topline'>
                     <h4>About</h4>
                     <Button onClick={() => settingsPopup.setShown(true)}>

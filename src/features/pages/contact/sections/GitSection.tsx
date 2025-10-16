@@ -8,9 +8,9 @@ export const GitSection = () => {
     return (
         <motion.section
         className='git-section container'
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 200 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 3, duration: 1 }}>
+        transition={{ delay: 2, duration: 1 }}>
             <h2>
                 <mark>Github</mark> emulation w/ forms
             </h2>
