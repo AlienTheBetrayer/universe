@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import './GithubCommitView.css';
-import { useGithubContext } from '../context/GithubContext';
+import { useGithubContext, type Commit } from '../context/GithubContext';
 
 import commitImg from '../assets/commit.svg';
 
@@ -19,7 +19,17 @@ export const GithubCommitView = ({}: Props) => {
     
     // commits + diff
     const thisCommit = thisBranch?.commits.find(c => c.idx === context.data.currentCommit);
-    const prevCommit = (thisCommit?.idx ?? 0) > 0 ? thisBranch?.commits.at((thisCommit?.idx ?? 1) - 1) : undefined;
+    let prevCommit: Commit | undefined = undefined;
+
+    if(thisCommit && thisCommit.idx !== 0) {
+        for(let i = thisCommit?.idx; i > 0; --i) {
+            const previous = thisBranch?.commits.at(i - 1);
+            if(previous?.type === 'form-content-change' && previous.form?.idx === thisCommit.form?.idx) {
+                prevCommit = previous;
+                break; 
+            }
+        }
+    }
     const thisContent = thisCommit?.data;
     const prevContent = prevCommit?.data;
 
@@ -86,7 +96,7 @@ export const GithubCommitView = ({}: Props) => {
                         animate={{ opacity: 1, x: 0 }} 
                         exit={{ opacity: 0, x: 10 }}
                         style={{ marginLeft: 'auto' }}>
-                            { thisCommit?.idx === 0 ? (
+                            { prevCommit === undefined ? (
                                 <mark>Initial commit</mark>
                             ) : (
                                 <u>{prevCommit?.name ?? ''}</u>
@@ -125,7 +135,7 @@ export const GithubCommitView = ({}: Props) => {
                         </div>
                     </div>
                     
-                    { prevCommit && (
+                    { prevCommit !== undefined && (
                         <div className='github-commit-view-main-panel'>
                             <h4><u>Previous</u> <small>({prevCommit.name})</small></h4>
 
