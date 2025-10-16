@@ -7,7 +7,6 @@ import commitImg from '../assets/commit.svg';
 import { AnimatePresence, motion } from 'motion/react';
 
 import { diffChars, type ChangeObject } from 'diff';
-import { differenceInCalendarDays } from 'date-fns';
 
 interface Props {
 

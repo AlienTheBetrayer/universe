@@ -21,6 +21,6 @@
 /* main */
 .github-commits-main {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
