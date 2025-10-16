@@ -10,6 +10,8 @@ import { useGithubContext } from '../context/GithubContext';
 import { usePopup } from '../../../hooks/usePopup';
 import { GithubRepositorySettings } from './GithubRepositorySettings';
 
+import { motion } from 'motion/react';
+
 export const GithubDescription = () => {
     const [context, setContext] = useGithubContext();
 
@@ -44,9 +46,17 @@ export const GithubDescription = () => {
                     <p>Readme</p>
                     <p>Activity</p>
                     <div className='github-description-numbers'>
-                        <div className='github-flex'>
+                        <div 
+                        className='github-flex'
+                        style={{ gap: '0.2rem' }}>
                             <img src={starImg} alt='' className='github-img'/>
-                            <p>{context.data.description.stars} stars</p>
+                            <motion.p
+                            key={context.data.description.stars}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}>
+                                {context.data.description.stars}
+                            </motion.p>
+                            <p>stars</p>
                         </div>
 
                         <div className='github-flex'>
@@ -69,9 +79,17 @@ export const GithubDescription = () => {
                     </div>
 
                     <div className='github-description-numbers'>
-                        <div className='github-flex'>
+                        <div 
+                        className='github-flex'
+                        style={{ gap: '0.2rem' }}>
                             <img src={eyeImg} alt='' className='github-img'/>
-                            <p>{context.data.description.watching} watching</p>
+                            <motion.p
+                            key={context.data.description.watching}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}>
+                                {context.data.description.watching}
+                            </motion.p>
+                            <p>watching</p>
                         </div>
 
                         <div className='github-flex'>
@@ -94,9 +112,17 @@ export const GithubDescription = () => {
                     </div>
 
                     <div className='github-description-numbers'>
-                        <div className='github-flex'>
+                        <div 
+                        className='github-flex'
+                        style={{ gap: '0.2rem' }}>
                             <img src={forkImg} alt='' className='github-img'/>
-                            <p>{context.data.description.forks} forks</p>
+                            <motion.p
+                            key={context.data.description.forks}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}>
+                                {context.data.description.forks}
+                            </motion.p>
+                            <p>forks</p>
                         </div>
 
                         <div className='github-flex'>
