@@ -41,9 +41,12 @@ export const GithubCommitView = ({}: Props) => {
                 src={commitImg}
                 alt='commit'
                 className='github-img'/>
-                <p>
+                <motion.p
+                key={thisCommit?.idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}>
                     <mark>{ thisCommit?.name }</mark>
-                </p>
+                </motion.p>
             </div>
 
             <div className='github-commit-view-main'>
