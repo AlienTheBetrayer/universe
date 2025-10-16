@@ -36,3 +36,25 @@
     border: 1px solid var(--background-7);
     border-radius: 8px;
 }
+
+.github-commit-view-main-panel-grid {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .github-commit-view-main-panel-grid {
+        flex-direction: column;
+    }
+}
+
+.github-commit-view-main-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 0.5rem;
+
+    flex: 1;
+    border: 1px solid var(--background-7);
+    border-radius: 8px;
+}

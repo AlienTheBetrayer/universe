@@ -7,7 +7,7 @@ import { GithubPopover } from "./GithubPopover";
 
 const findMax = (commits: Commit[]) => {
     if(commits.length === 0)
-        return 0;
+        return -1;
     
     return commits.reduce((acc, val) => {
         return val.idx > acc.idx ? val : acc;
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
-    const [context, setContext] = useGithubContext();
+    const [, setContext] = useGithubContext();
 
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');

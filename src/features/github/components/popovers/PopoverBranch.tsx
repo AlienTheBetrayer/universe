@@ -15,7 +15,7 @@ import { GithubDefaultBranch } from '../../context/initial/githubStrings';
 // helper functions
 const findMax = (branches: Branch[]) => {
     if(branches.length === 0)
-        return 0;
+        return -1;
 
     return branches.reduce((acc, val) => {
         return val.idx > acc.idx ? val : acc;

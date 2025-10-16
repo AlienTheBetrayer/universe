@@ -11,7 +11,7 @@ import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 
 const findMax = (forms: Form[]) => {
     if(forms.length === 0)
-        return 0;
+        return -1;
     
     return forms.reduce((acc, val) => {
         return val.idx > acc.idx ? val : acc;
