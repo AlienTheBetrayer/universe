@@ -50,7 +50,7 @@ interface ElementsVisibility {
 
 // main data interface
 interface GithubData {
-    commits?: Commit[],
+    commits: Commit[],
     description: Description;
     visibility: ElementsVisibility;
     branches: Branch[];
@@ -84,6 +84,7 @@ export const GithubContextInitialData: GithubData = {
         watching: 0,
         topics: [],
     },
+    commits: [],
     visibility: {
         languages: true,
         packages: true,

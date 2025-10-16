@@ -47,8 +47,6 @@ export const GithubRepository = () => {
         );
     }, [debouncedSearch, context.data]);
 
-
-
     // scrolling to form edit
     const formEditRef = useRef<HTMLDivElement>(null);
 
@@ -194,13 +192,19 @@ export const GithubRepository = () => {
                         <div className='github-flex'>
                             <div className='github-flex'>
                                 <div className='github-heading-avatar'/>
-                                <p>Your name</p>
+                                <p>Gleb</p>
                             </div>
-                            <p>Last commit description</p>
+                            
+                            { context.data.commits.length > 0 && (
+                                <p>{context.data.commits.at(-1)!.name}</p>
+                            )}
                         </div>
 
                         <div className='github-flex'>
-                            <p>Last commit date</p>
+                            { context.data.commits.length > 0 && (
+                                <p>{context.data.commits.at(-1)!.date}</p>
+                            )}
+
                             <Button
                             ref={el => tooltips.set(2, 'View all commits', el, 'down')}>
                                 <img className='github-img' src={commitImg} alt=''/>
