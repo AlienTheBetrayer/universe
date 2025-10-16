@@ -4,6 +4,17 @@ import { Button } from '../../ui/Button/components/Button';
 import { GithubContextInitialData, useGithubContext } from '../context/GithubContext';
 import './GithubHeading.css';
 
+import starImg from '../assets/star.svg';
+import watchImg from '../assets/eye.svg';
+import forkImg from '../assets/fork.svg';
+import deleteImg from '../assets/delete.svg';
+
+interface GithubHeadingButton {
+    content: string;
+    image?: string;
+    action: () => void;
+}
+
 export const GithubHeading = () => {
     const [context, setContext] = useGithubContext();
 
@@ -15,6 +26,38 @@ export const GithubHeading = () => {
                 setContext(prev => ({ ...prev, data: GithubContextInitialData }));
             wipeMessageBox.setShown(false)
         }}/>)
+
+    const buttons: GithubHeadingButton[] = [
+        {
+            content: 'Star',
+            image: starImg,
+            action: () => setContext(prev => ({ ...prev, 
+                data: ({ ...prev.data, 
+                    description: ({ ...prev.data.description, stars: prev.data.description.stars + 1})
+                })}))
+        },
+        {
+            content: 'Watch',
+            image: watchImg,
+            action: () => setContext(prev => ({ ...prev, 
+                data: ({ ...prev.data, 
+                    description: ({ ...prev.data.description, watching: prev.data.description.watching + 1})
+                })}))
+        },
+        {
+            content: 'Fork',
+            image: forkImg,
+            action: () => setContext(prev => ({ ...prev, 
+                data: ({ ...prev.data, 
+                    description: ({ ...prev.data.description, forks: prev.data.description.forks + 1})
+                })}))
+        },
+        {
+            content: 'Wipe',
+            image: deleteImg,
+            action: () => wipeMessageBox.setShown(true)
+        }
+    ]
 
     return (
         <>
@@ -32,10 +75,19 @@ export const GithubHeading = () => {
                 </div>
 
                 <div className='github-heading-buttons'>
-                    <Button>Pin</Button>
-                    <Button>Watch</Button>
-                    <Button>Fork</Button>
-                    <Button onClick={() => wipeMessageBox.setShown(true)}>Wipe</Button>
+                    { buttons.map(button => (
+                        <Button
+                        onClick={() => button.action()}>
+                            { button.image && (
+                                <img
+                                style={{ width: '16px', height: '16px' }}
+                                src={button.image}
+                                alt=''
+                                className='github-img'/>
+                            )}
+                            { button.content } 
+                        </Button>
+                    ))}
                 </div>
             </div>
         </>

@@ -275,7 +275,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                         alt='' 
                         className='github-img'
                         style={{ filter: 'invert(1)', width: '16px', height: '16px'}}/>
-                        Apply changes
+                        Commit
                     </Button>
                 </div>
             </motion.div>
