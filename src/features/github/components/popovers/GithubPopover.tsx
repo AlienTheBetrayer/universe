@@ -12,11 +12,12 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
     title: string;
     onCancel: () => void;
     success?: PopoverSuccess;
+    enabled?: boolean;
 
     children?: React.ReactNode;
 }
 
-export const GithubPopover = ({ className, title, children, onCancel, success, ...rest }: Props) => {
+export const GithubPopover = ({ className, title, children, enabled, onCancel, success, ...rest }: Props) => {
     const tooltips = useTooltips();
 
     return (
@@ -48,6 +49,7 @@ export const GithubPopover = ({ className, title, children, onCancel, success, .
                         </Button>
 
                         <Button 
+                        enabled={enabled ?? true}
                         ref={el => tooltips.set(2, 'Apply and update changes', el, 'down', 16)}
                         onClick={() => { 
                             success.action();

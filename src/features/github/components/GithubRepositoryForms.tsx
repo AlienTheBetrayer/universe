@@ -17,7 +17,7 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
     const [context, setContext] = useGithubContext();
 
     // state variables
-    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
+    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
 
     // filter functionality
     const [found, setFound] = useState<number[]>([]);
@@ -37,6 +37,8 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
 
     return (
         <>
+            { tooltips.render() }
+
             <div className='github-forms'>
                 <div className='github-forms-info'>
                     <div className='github-flex'>
@@ -45,24 +47,27 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
                             <p>Gleb</p>
                         </div>
                         
-                        { context.data.commits.length > 0 && (
-                            <p>{context.data.commits.at(-1)!.name}</p>
+                        { thisBranch.commits.length > 0 && (
+                            <p>
+                                {thisBranch.commits.at(-1)!.name}
+                            </p>
                         )}
                     </div>
 
                     <div className='github-flex'>
-                        { context.data.commits.length > 0 && (
-                            <p>{context.data.commits.at(-1)!.date}</p>
+                        { thisBranch.commits.length > 0 && (
+                            <p>{thisBranch.commits.at(-1)!.pushedAt}</p>
                         )}
 
                         <Button
+                        style={{ marginLeft: 'auto' }}
                         ref={el => tooltips.set(0, 'View all commits', el, 'down')}>
                             <img className='github-img' src={commitImg} alt=''/>
                             <motion.div
-                            key={context.data.commits?.length}
+                            key={thisBranch.commits.length}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}>
-                                { context.data.commits?.length ?? 0 } commit{ (context.data.commits?.length ?? 0) !== 1 ? 's' : ''}
+                                { thisBranch.commits.length ?? 0 } commit{ (thisBranch.commits.length ?? 0) !== 1 ? 's' : ''}
                             </motion.div>
                         </Button>
                     </div>
@@ -98,7 +103,9 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
                                 ))}
                             </div>
 
-                            <p>{ context.data.commits?.at(-1)?.date ?? 'unknown' }</p>
+                            { thisBranch.commits.length > 0 && (
+                                <p>{ thisBranch.commits.at(-1)!.pushedAt }</p>
+                            )}
                         </div>
                     )
                 ))}

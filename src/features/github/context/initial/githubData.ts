@@ -9,7 +9,6 @@ export const GithubContextInitialData: GithubData = {
         watching: 0,
         topics: [],
     },
-    commits: [],
     visibility: {
         languages: true,
         packages: true,
@@ -21,6 +20,7 @@ export const GithubContextInitialData: GithubData = {
     branches: [
         {
             idx: 0,
+            commits: [],
             name: GithubDefaultBranch,
             forms: [{
                 idx: 0,

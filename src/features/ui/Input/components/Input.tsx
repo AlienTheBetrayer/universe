@@ -8,6 +8,8 @@ import { useHotkeys } from '../../../../hooks/useHotkeys';
 import searchImg from '../assets/search.svg';
 
 interface Props {
+    className?: string;
+    valid?: boolean;
     value?: string;
     placeholder?: string;
     onChange?: (newValue: string) => void;
@@ -16,7 +18,7 @@ interface Props {
     autoFocus?: boolean;
 }
 
-export const Input = ({ value, placeholder, onChange, onClear, type='input', autoFocus }: Props) => {
+export const Input = ({ valid, className, value, placeholder, onChange, onClear, type='input', autoFocus }: Props) => {
     const [internal, setInternal] = useState<string>('');
     const inputValue = value ?? internal;
 
@@ -52,8 +54,12 @@ export const Input = ({ value, placeholder, onChange, onClear, type='input', aut
         )
     }
 
+    let inputClass = `ui-input ${className ?? ''}`;
+    if(valid !== undefined)
+        inputClass += `${valid ? 'ui-input-valid' : 'ui-input-invalid'}`;
+
     return (
-        <div className='ui-input'>
+        <div className={inputClass}>
             <input 
             style={{ paddingLeft: (type === 'search' ? '1.75rem' : '0')}}
             ref={ref}

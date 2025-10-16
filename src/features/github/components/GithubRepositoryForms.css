@@ -26,10 +26,7 @@
 @media (max-width: 640px) {
     .github-forms-info {
         flex-direction: column;
-    }
-
-    .github-forms-info > div {
-        justify-content: space-between;
+        gap: 0.5rem;
     }
 }
 

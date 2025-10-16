@@ -15,7 +15,7 @@
 }
 
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .github-repository-topline {
         flex-direction: column;
         gap: 1rem;

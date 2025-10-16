@@ -18,6 +18,7 @@ export interface Form {
 }
 
 export interface Commit {
+    idx: number;
     name: string;
     description: string;
     pushedAt: number;
@@ -28,6 +29,7 @@ export interface Branch {
     idx: number;
     name: string;
     forms: Form[];
+    commits: Commit[];
 }
 
 
@@ -48,7 +50,6 @@ interface ElementsVisibility {
 
 // main data interface
 export interface GithubData {
-    commits: Commit[],
     description: Description;
     visibility: ElementsVisibility;
     branches: Branch[];

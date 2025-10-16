@@ -1,4 +1,6 @@
-import { useState } from "react";
+import './PopoverFormEditCommit.css';
+
+import { useEffect, useState } from "react";
 import { Input } from "../../../ui/Input/components/Input";
 import { useGithubContext, type FormContent } from "../../context/GithubContext";
 import { GithubPopover } from "./GithubPopover";
@@ -13,11 +15,18 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
 
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+
+    const [isValid, setIsValid] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsValid(name.trim().length > 0);
+    }, [name]);
     
     return (
         <GithubPopover
         title='<mark>Commit</mark> this <b>change</b>'
         className='popover-form-edit-commit'
+        enabled={isValid}
         onCancel={() => onCancel?.()}
         success={{ text: 'Commit', action: () => {
             setContext(prev => {
@@ -26,16 +35,17 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
                     data: {
                         ...prev.data,
                         currentForm: false,
-                        commits: [...prev.data.commits, {
-                            name,
-                            description,
-                            pushedAt: Date.now(),
-                            data: ''
-                        }],
                         branches: prev.data.branches.map(b =>
                             b.idx === prev.data.currentBranch
                             ? {
                                 ...b,
+                                commits: [...b.commits, {
+                                    idx: prev.data.currentForm as number,
+                                    name,
+                                    description,
+                                    pushedAt: Date.now(),
+                                    data: '',
+                                }],
                                 forms: b.forms.map(f =>
                                     f.idx === prev.data.currentForm
                                     ? { ...f, content: newContent }
@@ -48,6 +58,7 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
 
             <h4>Name</h4>
             <Input
+            valid={isValid}
             value={name}
             onChange={val => setName(val)}
             onClear={() => setName('')}/>

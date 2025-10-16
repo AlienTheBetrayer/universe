@@ -55,7 +55,8 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                 branches: [ ...prev.data.branches, {
                     idx: idx,
                     name: name,
-                    forms: []
+                    forms: [],
+                    commits: []
                 }],
                 currentBranch: idx,
             })});
