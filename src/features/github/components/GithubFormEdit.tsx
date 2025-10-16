@@ -17,6 +17,7 @@ import { PopoverAddTag } from './popovers/PopoverAddTag';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
 
+
 interface Props {
 
 }
@@ -99,9 +100,12 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                             <div 
                             className='github-tiny-info-container'
                             key={idx}>
-                                <p>
-                                    { tag }
-                                </p>
+                                <motion.p
+                                key={tag}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}>
+                                    {tag}
+                                </motion.p>
 
                                 <Button 
                                 className='github-tag-remove-button'

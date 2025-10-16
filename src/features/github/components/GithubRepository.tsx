@@ -19,6 +19,8 @@ import { AnimatePresence } from 'motion/react';
 import { PopoverCreateForm } from './popovers/PopoverCreateForm';
 import { Input } from '../../ui/Input/components/Input';
 
+import { motion } from 'motion/react';
+
 export const GithubRepository = () => {
     // context
     const [context, setContext] = useGithubContext();
@@ -88,7 +90,12 @@ export const GithubRepository = () => {
                                 src={branchImg} 
                                 alt='branch'/>
                                 
-                                { thisBranch?.name }
+                                <motion.div
+                                key={thisBranch?.name}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}>
+                                    { thisBranch?.name }
+                                </motion.div>
                                 
                                 <img 
                                 className='github-img' 
@@ -101,14 +108,22 @@ export const GithubRepository = () => {
                         <div className='flex gap-3'>
                             <div className='flex gap-1 items-center'>
                                 <img className='github-img' src={branchImg} alt='branch'/>
-                                <p>
+                                <motion.p
+                                key={context.data.branches.length}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}>
                                     {context.data.branches.length} Branch{context.data.branches.length !== 1 ? 'es' : ''}
-                                </p>
+                                </motion.p>
                             </div>
 
                             <div className='flex gap-1 items-center'>
                                 <img className='github-img' src={tagsImg} alt='tags'/>
-                                <p>{tags} Tag{tags !== 1 ? 's' : ''}</p>
+                                <motion.p
+                                key={tags}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}>
+                                    {tags} Tag{tags !== 1 ? 's' : ''}
+                                </motion.p>
                             </div>
                         </div>
                     </div>
@@ -157,7 +172,12 @@ export const GithubRepository = () => {
                             <Button
                             ref={el => tooltips.set(2, 'View all commits', el, 'down')}>
                                 <img className='github-img' src={commitImg} alt=''/>
-                                { context.data.commits?.length ?? 0 } commit{ (context.data.commits?.length ?? 0) !== 1 ? 's' : ''}
+                                <motion.div
+                                key={context.data.commits?.length}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}>
+                                    { context.data.commits?.length ?? 0 } commit{ (context.data.commits?.length ?? 0) !== 1 ? 's' : ''}
+                                </motion.div>
                             </Button>
                         </div>
 
@@ -179,10 +199,15 @@ export const GithubRepository = () => {
                                     </Button>
 
                                     { form.tags.map((tag, idx) => (
-                                        <div className='github-tiny-info-container' key={`${form.idx}${idx}`}>   
-                                            <p>
+                                        <div 
+                                        className='github-tiny-info-container' 
+                                        key={`${form.idx}${idx}`}>   
+                                            <motion.p
+                                            key={tag}
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}>
                                                 { tag }
-                                            </p>
+                                            </motion.p>
                                         </div>
                                     ))}
                                 </div>
