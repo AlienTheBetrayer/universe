@@ -102,3 +102,32 @@
         gap: 4rem;
     }
 }
+
+/* buttons */
+.github-save-button {
+    background-color: hsl(132, 59%, 33%);
+    border: transparent !important;
+    color: #fff;
+}
+
+.github-save-button:hover {
+    background-color: hsl(132, 59%, 40%)
+}
+
+.github-save-button:active {
+    background-color: hsl(132, 59%, 47%);
+}
+
+.github-delete-button {
+    background-color: hsl(0, 59%, 45%);
+    border: transparent !important;
+    color: #fff;
+}
+
+.github-delete-button:hover {
+    background-color: hsl(0, 59%, 52%);
+}
+
+.github-delete-button:active {
+    background-color: hsl(0, 59%, 59%);
+}

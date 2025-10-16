@@ -129,7 +129,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
                     <Button 
                     ref={el => tooltips.set(2, 'Apply and update changes', el, 'down', 16)}
                     onClick={handleSave}
-                    className='github-repository-settings-save-button'>
+                    className='github-save-button'>
                         Save changes
                         <HotkeyTooltip hotkeys={['Enter']}/>
                     </Button>

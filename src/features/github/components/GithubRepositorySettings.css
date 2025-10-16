@@ -56,16 +56,3 @@
     border-top: 1px solid var(--background-7);
 }
 
-.github-repository-settings-save-button {
-    background-color: hsl(132, 59%, 33%);
-    border: transparent !important;
-    color: #fff;
-}
-
-.github-repository-settings-save-button:hover {
-    background-color: hsl(132, 59%, 40%)
-}
-
-.github-repository-settings-save-button:active {
-    background-color: hsl(132, 59%, 47%);
-}

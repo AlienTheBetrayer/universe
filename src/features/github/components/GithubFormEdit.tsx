@@ -12,6 +12,8 @@ import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { motion } from 'motion/react';
 import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
 import { PopoverAddTag } from './popovers/PopoverAddTag';
+import { usePopup } from '../../../hooks/usePopup';
+import { MessageBox } from '../../messagebox/components/MessageBox';
 
 interface Props {
 
@@ -44,10 +46,30 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     }, [author, email, message]);
 
     const tooltips = useTooltips();
+    const formDeleteMessageBox = usePopup(
+    <MessageBox
+    title='Are you sure?'
+    description='You are about to <u>permanently delete</u> this form.'
+    onInteract={f => {
+        if(f) {
+            setContext(prev => ({ ...prev, 
+                data: ({ ...prev.data, 
+                    branches: prev.data.branches.map(b => b.idx === prev.data.currentBranch 
+                        ? { ...b, 
+                            forms: b.forms.filter(f => f.idx !== prev.data.currentForm)}
+                        : b
+                    ), currentForm: false
+                })}))
+        }
+
+        formDeleteMessageBox.setShown(false);
+    }}/>);
+
 
     return (
         <>
             { tooltips.render() }
+            { formDeleteMessageBox.render() }
 
             <motion.div 
             initial={{ opacity: 0, height: 0 }}
@@ -183,7 +205,15 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                 </div>
 
                 <div className='github-form-edit-bottom'>
+                    <Button
+                    className='github-delete-button'
+                    onClick={() => formDeleteMessageBox.setShown(true)}
+                    ref={el => tooltips.set(7, 'Delete this form', el, 'up', 16)}>
+                        Delete
+                    </Button>
+
                     <Button 
+                    style={{ marginLeft: 'auto' }}
                     ref={el => tooltips.set(3, 'Cancel', el, 'up', 16)}
                     onClick={() => { setContext(prev => ({ ...prev, 
                         data: ({ ...prev.data, currentForm: false })})) }}>
@@ -194,7 +224,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     type='submit'
                     form='github-form'
                     ref={el => tooltips.set(4, 'Send the form via E-mail', el, 'up', 16)}
-                    className='github-repository-settings-save-button'>
+                    className='github-save-button'>
                         <img 
                         src={sendImg} 
                         alt='' 
@@ -206,7 +236,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     <Button 
                     enabled={isValid}
                     ref={el => tooltips.set(5, 'Apply and update changes', el, 'up', 16)}
-                    className='github-repository-settings-save-button'
+                    className='github-save-button'
                     onClick={() => {
                         setContext(prev => {
                         if (!isValid) {
