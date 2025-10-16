@@ -168,7 +168,7 @@ export const GithubRepository = () => {
                             <div
                             className='github-form-element' 
                             key={form.idx}>
-                                <div className='github-flex'>
+                                <div className='github-flex flex-wrap'>
                                     <Button
                                     className='github-form-element-button'
                                     onClick={() => setContext(prev => ({ ...prev, data: 

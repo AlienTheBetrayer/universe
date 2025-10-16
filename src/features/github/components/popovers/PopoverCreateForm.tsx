@@ -25,7 +25,6 @@ interface Props {
 export const PopoverCreateForm = ({ onCancel }: Props) => {
     // state + variables
     const [context, setContext] = useGithubContext();
-    
     const branch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
     
     // input functionality + validity
