@@ -50,6 +50,7 @@ export const GithubRepositoryTopline = ({ searchState }: Props) => {
     onInteract={f => {
         if(f && thisBranch?.name !== GithubDefaultBranch) {
             setContext(prev => ({ ...prev, 
+                page: 'forms',
                 data: ({ ...prev.data, 
                     branches: prev.data.branches.filter(b => b.idx !== prev.data.currentBranch),
                     currentBranch: 0
@@ -123,6 +124,7 @@ export const GithubRepositoryTopline = ({ searchState }: Props) => {
                     onClear={() => setSearchValue('')}/>
 
                     <PopoverButton 
+                    enabled={context.page === 'forms'}
                     ref={el => tooltips.set(1, 'Create a new form', el, 'up')}
                     element={<PopoverCreateForm/>}
                     direction='bottom-left'>
