@@ -37,12 +37,13 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
     const formRef = useRef<HTMLFormElement>(null);
 
-    const tooltips = useTooltips();
     const [isValid, setIsValid] = useState<boolean>(false);
-
+    
     useEffect(() => {
         setIsValid(formRef.current?.checkValidity() ?? false);
     }, [author, email, message]);
+
+    const tooltips = useTooltips();
 
     return (
         <>
@@ -77,9 +78,26 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                                 <p>
                                     { tag }
                                 </p>
+
+                                <Button 
+                                className='github-tag-remove-button'
+                                onClick={() => setContext(prev => ({ ...prev, 
+                                    data: ({ ...prev.data, 
+                                        branches: prev.data.branches.map(b => b.idx === prev.data.currentBranch
+                                            ? { ...b, forms: b.forms.map(f => f.idx === prev.data.currentForm
+                                                ? { ...f, tags: f.tags.filter(t => t !== tag ) }
+                                                : f
+                                            )}
+                                            : b
+                                        )
+                                })}))}>
+                                    ✕
+                                </Button>
                             </div>
                         ))}
+
                         <PopoverButton 
+                        ref={el => tooltips.set(6, 'Create a new tag', el, 'up')}
                         className='github-cancel-button'
                         element={<PopoverAddTag/>}
                         direction='top-left'>

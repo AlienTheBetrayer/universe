@@ -116,7 +116,7 @@ export const GithubRepository = () => {
                     <div className='github-repository-topline-info-2'>
                         <Input 
                         type='search'
-                        placeholder='Open a form'
+                        placeholder='Filter forms'
                         value={searchValue}
                         onChange={val => setSearchValue(val)}
                         onClear={() => setSearchValue('')}/>
@@ -129,7 +129,7 @@ export const GithubRepository = () => {
                             className='github-img' 
                             src={addImg} 
                             alt=''/>
-                            Add form
+                            Create
 
                             <img 
                             className='github-img' 

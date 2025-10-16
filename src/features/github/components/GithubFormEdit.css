@@ -24,6 +24,13 @@
     align-items: center;
 }
 
+.github-form-edit .github-tag-remove-button {
+    min-width: 16px;
+    min-height: 16px;
+    padding: 0;
+    font-size: 0.5rem;
+}
+
 @media (max-width: 640px) {
     .github-form-edit-topline {
         flex-direction: column;

@@ -59,8 +59,10 @@
 }
 
 .github-tiny-info-container {
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
     padding: 0.2rem 0.4rem;
     
     border: 1px solid var(--background-7);
