@@ -19,7 +19,7 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
     // state variables
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
     // all commits on this specific element
-    const thisCommits = thisBranch?.commits.filter(c => c.formIdx === form.idx); 
+    const thisCommits = thisBranch?.commits.filter(c => c.form?.idx === form.idx); 
 
     // date updating for that specific element every second
     const [commitDate, setCommitDate] = useState<string>('');

@@ -19,11 +19,11 @@ export interface Form {
 
 export interface Commit {
     idx: number;
-    formIdx: number;
     name: string;
     description: string;
+    data?: FormContent;
+    form?: Form;
     pushedAt: number;
-    data: FormContent;
 }
 
 export interface Branch {

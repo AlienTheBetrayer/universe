@@ -1,6 +1,6 @@
 import './PopoverBranch.css';
 import { Button } from '../../../ui/Button/components/Button';
-import { useGithubContext, type Branch } from '../../context/GithubContext';
+import { useGithubContext } from '../../context/GithubContext';
 
 import checkmarkImg from '../../assets/checkmark.svg';
 import branchImg from '../../assets/branch.svg';
@@ -11,16 +11,7 @@ import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { GithubPopover } from './GithubPopover';
 import { Input } from '../../../ui/Input/components/Input';
 import { GithubDefaultBranch } from '../../context/initial/githubStrings';
-
-// helper functions
-const findMax = (branches: Branch[]) => {
-    if(branches.length === 0)
-        return -1;
-
-    return branches.reduce((acc, val) => {
-        return val.idx > acc.idx ? val : acc;
-    }).idx;
-}
+import { findMax } from '../../utils/findMax';
 
 interface Props {
     onCancel?: () => void;

@@ -2,17 +2,9 @@ import './PopoverFormEditCommit.css';
 
 import { useEffect, useState } from "react";
 import { Input } from "../../../ui/Input/components/Input";
-import { useGithubContext, type Commit, type FormContent } from "../../context/GithubContext";
+import { useGithubContext, type FormContent } from "../../context/GithubContext";
 import { GithubPopover } from "./GithubPopover";
-
-const findMax = (commits: Commit[]) => {
-    if(commits.length === 0)
-        return -1;
-    
-    return commits.reduce((acc, val) => {
-        return val.idx > acc.idx ? val : acc;
-    }).idx;
-}
+import { findMax } from '../../utils/findMax';
 
 interface Props {
     newContent: FormContent;
@@ -20,7 +12,9 @@ interface Props {
 }
 
 export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
-    const [, setContext] = useGithubContext();
+    const [context, setContext] = useGithubContext();
+    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
+    const thisForm = thisBranch?.forms.find(f => f.idx === context.data.currentForm);
 
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -50,7 +44,7 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
                                 ...b,
                                 commits: [...b.commits, {
                                     idx: findMax(b.commits) + 1,
-                                    formIdx: prev.data.currentForm as number,
+                                    form: thisForm,
                                     name,
                                     description,
                                     pushedAt: Date.now(),

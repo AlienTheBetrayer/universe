@@ -18,7 +18,7 @@ export const GithubCommitsElement = ({ commit }: Props) => {
     // context + variables
     const [context, setContext] = useGithubContext();
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
-    const commitedForm = thisBranch?.forms.find(f => f.idx === commit.formIdx);
+    const commitedForm = commit.form;
 
     // date updating for that specific commit every second
     const [commitDate, setCommitDate] = useState<string>('');
@@ -49,23 +49,11 @@ export const GithubCommitsElement = ({ commit }: Props) => {
     return (
         <div
         className='github-commits-element'>
-            { commitedForm !== undefined ? (
-                <>
-                    <img
-                    className='github-img'
-                    src={formImg}
-                    alt=''/>
-                    <p>{commitedForm.name}</p>
-                </>
-            ) : (
-                <>
-                    <img
-                    className='github-img'
-                    src={deleteImg}
-                    alt=''/>
-                    <p><u>Deleted</u></p>
-                </>
-            )}
+            <img
+            className='github-img'
+            src={formImg}
+            alt=''/>
+            <p>{commitedForm?.name ?? ''}</p>
 
             <Button
             className='github-form-element-button'

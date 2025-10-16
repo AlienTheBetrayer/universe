@@ -111,17 +111,17 @@ export const GithubCommitView = ({}: Props) => {
 
                         <div className='github-commit-view-main-field'>
                             <h4>Author</h4>
-                            <p>{ thisCommit?.data.author ?? '' }</p>
+                            <p>{ thisCommit?.data?.author ?? '' }</p>
                         </div>
 
                         <div className='github-commit-view-main-field'>
                             <h4>E-mail</h4>
-                            <p>{ thisCommit?.data.email ?? '' }</p>
+                            <p>{ thisCommit?.data?.email ?? '' }</p>
                         </div>
 
                         <div className='github-commit-view-main-field'>
                             <h4>Message</h4>
-                            <p>{ thisCommit?.data.message ?? '' }</p>
+                            <p>{ thisCommit?.data?.message ?? '' }</p>
                         </div>
                     </div>
                     
