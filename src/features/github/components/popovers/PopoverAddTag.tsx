@@ -24,7 +24,7 @@ export const PopoverAddTag = ({ onCancel }: Props) => {
     const [isValid, setIsValid] = useState<boolean>(false);
 
     useEffect(() => {
-        const found = form.tags.some(f => f === inputValue);
+        const found = form.tags.some(f => f.toLowerCase() === inputValue.toLowerCase());
         setIsValid(!(found ?? true) && inputValue.trim().length > 0);
     }, [inputValue, branch]);
 

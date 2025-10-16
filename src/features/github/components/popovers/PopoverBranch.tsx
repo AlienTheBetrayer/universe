@@ -33,16 +33,15 @@ export const PopoverBranch = ({ onCancel }: Props) => {
 
     // search / creating functionality
     const [search, setSearch] = useState<string>('');
-    const debouncedSearch = useDebounced(search, '');
 
     const [found, setFound] = useState<number[]>([]);
 
     useEffect(() => {
         setFound(branches
-            .filter(b => (b.name.toLowerCase().includes(debouncedSearch.toLowerCase()) || debouncedSearch.trim().length === 0))
+            .filter(b => (b.name.toLowerCase().includes(search.toLowerCase()) || search.trim().length === 0))
             .map(b => b.idx)
         );
-    }, [debouncedSearch]);
+    }, [search]);
 
     const createBranch = (name: string) => {
         if(found.length !== 0 || name === '')
@@ -65,7 +64,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
     }
 
     useHotkeys([
-        { hotkey: 'Enter', action: () => createBranch(debouncedSearch), ignoreFocus: true }
+        { hotkey: 'Enter', action: () => createBranch(search), ignoreFocus: true }
     ]);
     
     return (
@@ -130,7 +129,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                     <Button 
                     className='popover-branch-branches-create-button'
                     onClick={() => {
-                        createBranch(debouncedSearch);
+                        createBranch(search);
                         onCancel?.();
                     }}>
                         <img
@@ -138,7 +137,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                         src={branchImg}
                         alt=''/>
 
-                        <mark>Create</mark> branch <b>{debouncedSearch}</b>
+                        <mark>Create</mark> branch <b>{search}</b>
                         <HotkeyTooltip 
                         className='popover-create-button-hotkey'
                         hotkeys={['Enter']}/>

@@ -32,7 +32,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
     const [isValid, setIsValid] = useState<boolean>(false);
 
     useEffect(() => {
-        const found = branch?.forms?.some(f => f.name === inputValue);
+        const found = branch?.forms?.some(f => f.name.toLowerCase() === inputValue.toLowerCase());
         setIsValid(!(found ?? true) && inputValue.trim().length > 0);
     }, [inputValue, branch]);
 
