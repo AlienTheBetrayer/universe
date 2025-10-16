@@ -1,5 +1,5 @@
-import { forwardRef, useEffect, useRef, useState } from 'react';
 import './GithubFormEdit.css';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useGithubContext } from '../context/GithubContext';
 
 import formImg from '../assets/file.svg';
@@ -22,14 +22,15 @@ interface Props {
 
 }
 
-export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
+export const GithubFormEdit = ({}: Props) => {
     // state + variables
     const [context, setContext] = useGithubContext();
     
     const branch = context.data.branches.find(b => b.idx === context.data.currentBranch);
     const form = branch?.forms?.find(f => f.idx === context.data.currentForm);
     
-    // 
+
+    // our new states for the description + syncing them
     const [author, setAuthor] = useState<string>(form?.content?.author ?? '');
     const [email, setEmail] = useState<string>(form?.content?.email ?? '');
     const [message, setMessage] = useState<string>(form?.content?.message ?? '');
@@ -38,17 +39,35 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         setAuthor(form?.content?.author ?? '');
         setEmail(form?.content?.email ?? '');
         setMessage(form?.content?.message ?? '');
-    }, [form]);
+    }, [form?.content]);
 
+
+    // form ref + scrolling to it
     const formRef = useRef<HTMLFormElement>(null);
 
+    useLayoutEffect(() => {
+        if(context.data.currentForm !== false) {
+            const timeout = setTimeout(() => {
+                formRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+            }, 300);
+            
+            return () => clearTimeout(timeout);
+        }
+    }, [context.data.currentForm]);
+
+    // form validity
     const [isValid, setIsValid] = useState<boolean>(false);
-    
+
     useEffect(() => {
         setIsValid(formRef.current?.checkValidity() ?? false);
     }, [author, email, message]);
 
+
+    // tooltips
     const tooltips = useTooltips();
+
+
+    // messagebox
     const formDeleteMessageBox = usePopup(
     <MessageBox
     title='Are you sure?'
@@ -78,8 +97,7 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className='github-form-edit'
-            ref={ref}>
+            className='github-form-edit'>
                 <div className='github-form-edit-topline'>
                     <div className='github-flex'>
                         <img
@@ -285,4 +303,4 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
             </motion.div>
         </>
     )
-});
+}
