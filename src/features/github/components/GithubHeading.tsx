@@ -9,7 +9,7 @@ export const GithubHeading = () => {
 
     const wipeMessageBox = usePopup(<MessageBox 
         title='Are you sure?'
-        description='You are about to <u>wipe</u> all your existing forms and their <mark>data</mark>'
+        description='You are about to <mark>factory reset</mark> this repository. (All your data will be <u>gone</u>)'
         onInteract={flag => {
             if(flag)
                 setContext(prev => ({ ...prev, data: GithubContextInitialData }));
