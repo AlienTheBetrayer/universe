@@ -58,9 +58,8 @@ export const PopoverAddTag = ({ onCancel }: Props) => {
         className='popover-add-tag'
         onCancel={() => onCancel?.()}
         title='<mark>Add</mark> a Tag'>
-            hi
             <Input
-            placeholder='Form name'
+            placeholder='Tag name'
             value={inputValue}
             onChange={val => setInputValue(val)}
             onClear={() => setInputValue('')}/>
@@ -77,7 +76,7 @@ export const PopoverAddTag = ({ onCancel }: Props) => {
                     src={tagImg}
                     alt=''
                     className='github-img'/>
-                    <mark>Create</mark> form <b>{inputValue}</b>
+                    <mark>Create</mark> tag <b>{inputValue}</b>
 
                     { !isValid ? (
                         <p style={{ marginLeft: 'auto'}}>
