@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import './Input.css';
 import { Button } from '../../Button/components/Button';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
@@ -13,9 +13,10 @@ interface Props {
     onChange?: (newValue: string) => void;
     onClear?: () => void;
     type?: 'input' | 'search';
+    autoFocus?: boolean;
 }
 
-export const Input = ({ value, placeholder, onChange, onClear, type='input' }: Props) => {
+export const Input = ({ value, placeholder, onChange, onClear, type='input', autoFocus }: Props) => {
     const [internal, setInternal] = useState<string>('');
     const inputValue = value ?? internal;
 
@@ -34,6 +35,14 @@ export const Input = ({ value, placeholder, onChange, onClear, type='input' }: P
                 ref.current?.blur() } 
         , ignoreFocus: true }
     ]);
+
+    useLayoutEffect(() => {
+        if(autoFocus) {
+            requestAnimationFrame(() => {
+                ref.current?.focus();
+            });
+        }
+    }, []);
 
     const ClearButton = () => {
         return (

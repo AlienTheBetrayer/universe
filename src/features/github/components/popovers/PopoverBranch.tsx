@@ -6,7 +6,6 @@ import checkmarkImg from '../../assets/checkmark.svg';
 import branchImg from '../../assets/branch.svg';
 
 import { useEffect, useState } from 'react';
-import { useDebounced } from '../../../../hooks/useDebounced';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { GithubPopover } from './GithubPopover';
@@ -72,6 +71,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
         title='<mark>Switch</mark> branches' 
         onCancel={() => onCancel?.()}>
             <Input
+            autoFocus
             type='search'
             placeholder='Search / Create a branch'
             value={search}

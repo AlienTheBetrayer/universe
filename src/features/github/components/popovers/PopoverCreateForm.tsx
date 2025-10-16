@@ -74,6 +74,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
         title='<mark>Create</mark> a form'
         onCancel={() => onCancel?.()}>
             <Input 
+            autoFocus
             placeholder='Form name'
             value={inputValue}
             onChange={val => setInputValue(val)}

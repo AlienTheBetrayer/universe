@@ -59,6 +59,7 @@ export const PopoverAddTag = ({ onCancel }: Props) => {
         onCancel={() => onCancel?.()}
         title='<mark>Add</mark> a Tag'>
             <Input
+            autoFocus
             placeholder='Tag name'
             value={inputValue}
             onChange={val => setInputValue(val)}

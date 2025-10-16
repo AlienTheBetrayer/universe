@@ -5,6 +5,8 @@ import { useGithubContext } from '../context/GithubContext';
 import formImg from '../assets/file.svg';
 import branchImg from '../assets/branch.svg';
 import sendImg from '../assets/send.svg';
+import deleteImg from '../assets/delete.svg';
+import checkmarkImg from '../assets/checkmark.svg';
 
 import { Button } from '../../ui/Button/components/Button';
 import { useTooltips } from '../../tooltip/hooks/useTooltips';
@@ -209,6 +211,11 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                     className='github-delete-button'
                     onClick={() => formDeleteMessageBox.setShown(true)}
                     ref={el => tooltips.set(7, 'Delete this form', el, 'up', 16)}>
+                        <img
+                        src={deleteImg}
+                        alt=''
+                        className='github-img'
+                        style={{ filter: 'invert(1)'}}/>
                         Delete
                     </Button>
 
@@ -263,6 +270,11 @@ export const GithubFormEdit = forwardRef<HTMLDivElement, Props>(({}, ref) => {
                                     }
                                 : b
                             )}}})}}>
+                        <img 
+                        src={checkmarkImg} 
+                        alt='' 
+                        className='github-img'
+                        style={{ filter: 'invert(1)', width: '16px', height: '16px'}}/>
                         Apply changes
                     </Button>
                 </div>
