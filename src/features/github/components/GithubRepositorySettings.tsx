@@ -41,7 +41,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
     }
 
     useHotkeys([
-        { hotkey: 'Enter', action: () => handleSave() }
+        { hotkey: 'Enter', action: () => handleSave(), ignoreFocus: true }
     ]);
 
     const tooltips = useTooltips();

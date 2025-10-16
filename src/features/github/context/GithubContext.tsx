@@ -23,7 +23,7 @@ export interface Commit {
     name: string;
     description: string;
     pushedAt: number;
-    data: string;
+    data: FormContent;
 }
 
 export interface Branch {

@@ -54,7 +54,7 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
                                     name,
                                     description,
                                     pushedAt: Date.now(),
-                                    data: '',
+                                    data: newContent
                                 }],
                                 forms: b.forms.map(f =>
                                     f.idx === prev.data.currentForm

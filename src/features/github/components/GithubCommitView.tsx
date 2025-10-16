@@ -20,14 +20,14 @@ export const GithubCommitView = ({}: Props) => {
     const viewRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
-        if(context.data.currentForm !== false) {
+        if(context.data.currentCommit !== false) {
             const timeout = setTimeout(() => {
                 viewRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
             }, 300);
             
             return () => clearTimeout(timeout);
         }
-    }, [context.data.currentForm]);
+    }, [context.data.currentCommit]);
 
     return (
         <motion.div 
@@ -50,7 +50,27 @@ export const GithubCommitView = ({}: Props) => {
             </div>
 
             <div className='github-commit-view-main'>
+                { (thisCommit?.description ?? '').trim().length > 0 && (
+                    <div className='github-commit-view-main-field'>
+                        <h4>Description</h4>
+                        <p>{ thisCommit?.description }</p>
+                    </div>
+                )}
 
+                <div className='github-commit-view-main-field'>
+                    <h4>Author</h4>
+                    <p>{ thisCommit?.data.author ?? '' }</p>
+                </div>
+
+                <div className='github-commit-view-main-field'>
+                    <h4>E-mail</h4>
+                    <p>{ thisCommit?.data.email ?? '' }</p>
+                </div>
+
+                <div className='github-commit-view-main-field'>
+                    <h4>Message</h4>
+                    <p>{ thisCommit?.data.message ?? '' }</p>
+                </div>
             </div>
         </motion.div>
     )
