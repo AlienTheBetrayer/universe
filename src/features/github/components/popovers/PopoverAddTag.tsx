@@ -16,15 +16,15 @@ interface Props {
 export const PopoverAddTag = ({ onCancel }: Props) => {
     // context + variables
     const [context, setContext] = useGithubContext();
-    const branch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
-    const form = branch.forms.find(f => f.idx === context.data.currentForm)!;
+    const branch = context.data.branches.find(b => b.idx === context.data.currentBranch);
+    const form = branch?.forms.find(f => f.idx === context.data.currentForm);
     
     // search functionality
     const [inputValue, setInputValue] = useState<string>('');
     const [isValid, setIsValid] = useState<boolean>(false);
 
     useEffect(() => {
-        const found = form.tags.some(f => f.toLowerCase() === inputValue.toLowerCase());
+        const found = form?.tags.some(f => f.toLowerCase() === inputValue.toLowerCase());
         setIsValid(!(found ?? true) && inputValue.trim().length > 0);
     }, [inputValue, branch]);
 

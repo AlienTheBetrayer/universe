@@ -12,7 +12,7 @@ interface Props {
 export const GithubCommits = ({ searchValue }: Props) => {
     // context
     const [context, setContext] = useGithubContext();
-    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
+    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
     
 
     // tooltips
@@ -24,7 +24,7 @@ export const GithubCommits = ({ searchValue }: Props) => {
 
             <div className='github-commits'>
                 <div className='github-commits-topline'>
-                    <h4>This branch's {thisBranch.commits.length} <mark>commit{thisBranch.commits.length === 1 ? '' : 's'}</mark></h4>
+                    <h4>This branch's {thisBranch?.commits.length} <mark>commit{thisBranch?.commits.length === 1 ? '' : 's'}</mark></h4>
 
                     <Button
                     onClick={() => setContext(prev => ({ ...prev, page: 'forms' }))}

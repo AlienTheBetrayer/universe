@@ -17,15 +17,15 @@ interface Props {
 export const GithubCommitsElement = ({ commit }: Props) => {
     // context + variables
     const [context, setContext] = useGithubContext();
-    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
-    const commitedForm = thisBranch.forms.find(f => f.idx === commit.formIdx);
+    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
+    const commitedForm = thisBranch?.forms.find(f => f.idx === commit.formIdx);
 
     // date updating for that specific commit every second
     const [commitDate, setCommitDate] = useState<string>('');
    
 
     useEffect(() => {
-            if(thisBranch.commits.length > 0) {
+            if((thisBranch?.commits.length ?? 0) > 0) {
                 const update = () => {
                     const date = commit.pushedAt;
                     const seconds = differenceInSeconds(new Date(), date);
@@ -44,7 +44,7 @@ export const GithubCommitsElement = ({ commit }: Props) => {
 
                 return () => clearInterval(interval);
             }
-        }, [thisBranch.commits]);
+        }, [thisBranch?.commits]);
 
     return (
         <div

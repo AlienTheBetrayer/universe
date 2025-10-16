@@ -25,7 +25,7 @@ interface Props {
 export const PopoverCreateForm = ({ onCancel }: Props) => {
     // state + variables
     const [context, setContext] = useGithubContext();
-    const branch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
+    const branch = context.data.branches.find(b => b.idx === context.data.currentBranch);
     
     // input functionality + validity
     const [inputValue, setInputValue] = useState<string>('');
@@ -42,8 +42,13 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
             return;
 
         setContext(prev => {
+            const currentBranch = prev.data.branches.find(b => b.idx === prev.data.currentBranch);
+
+            if(!branch || !currentBranch)
+                return prev;
+
             const newForm: Form = {
-                idx: findMax(prev.data.branches.find(b => b.idx === prev.data.currentBranch)!.forms) + 1,
+                idx: findMax(currentBranch.forms) + 1,
                 name,
                 tags: [],
             };
@@ -53,7 +58,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
                 data: {
                 ...prev.data,
                 branches: prev.data.branches.map(b =>
-                    b.idx === branch.idx
+                    b.idx === prev.data.currentBranch
                     ? {
                         ...b,
                         forms: [...b.forms, newForm],

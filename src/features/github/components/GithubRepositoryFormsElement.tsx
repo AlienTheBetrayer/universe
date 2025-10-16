@@ -17,17 +17,19 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
     const [context, setContext] = useGithubContext();
 
     // state variables
-    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
+    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
     // all commits on this specific element
-    const thisCommits = thisBranch.commits.filter(c => c.formIdx === form.idx); 
+    const thisCommits = thisBranch?.commits.filter(c => c.formIdx === form.idx); 
 
     // date updating for that specific element every second
     const [commitDate, setCommitDate] = useState<string>('');
 
     useEffect(() => {
-        if(thisCommits.length > 0) {
+        if((thisCommits?.length ?? 0) > 0) {
             const update = () => {
-                const date = thisCommits.at(-1)!.pushedAt;
+                const date = thisCommits?.at(-1)?.pushedAt;
+                if(!date)
+                    return;
                 const seconds = differenceInSeconds(new Date(), date);
 
                 if(seconds < 60) {
@@ -72,7 +74,7 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
                 ))}
             </div>
 
-            { thisCommits.length > 0 && (
+            { (thisCommits?.length ?? 0) > 0 && (
                 <p>{ commitDate }</p>
             )}
         </div>

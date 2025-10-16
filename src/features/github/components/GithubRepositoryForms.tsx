@@ -18,7 +18,7 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
     const [context, setContext] = useGithubContext();
 
     // state variables
-    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch)!;
+    const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
 
 
     // filter functionality
@@ -39,10 +39,11 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
     const [commitDate, setCommitDate] = useState<string>('');
 
     useEffect(() => {
-        if(thisBranch.commits.length > 0) {
+        if((thisBranch?.commits.length ?? 0) > 0) {
             const update = () => {
-                const date = thisBranch.commits.at(-1)!.pushedAt;
-                setCommitDate(formatDistanceToNow(date, { addSuffix: true }));
+                const date = thisBranch?.commits.at(-1)?.pushedAt;
+                if(date)
+                    setCommitDate(formatDistanceToNow(date, { addSuffix: true }));
             }
             
             update();
@@ -52,7 +53,7 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
 
             return () => clearInterval(interval);
         }
-    }, [thisBranch.commits]);
+    }, [thisBranch?.commits]);
     
 
     // tooltips
@@ -70,11 +71,11 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
                             <p>Gleb</p>
                         </div>
                         
-                        { thisBranch.commits.length > 0 && (
+                        { (thisBranch?.commits.length ?? 0) > 0 && (
                             <p>
                                 <mark>
                                     <b>
-                                        {thisBranch.commits.at(-1)!.name}
+                                        {thisBranch?.commits.at(-1)?.name}
                                     </b>
                                 </mark>
                             </p>
@@ -82,21 +83,21 @@ export const GithubRepositoryForms = ({ searchValue }: Props) => {
                     </div>
 
                     <div className='github-flex'>
-                        { thisBranch.commits.length > 0 && (
+                        { (thisBranch?.commits.length ?? 0) > 0 && (
                             <p>{commitDate}</p>
                         )}
 
                         <Button
-                        enabled={ thisBranch.commits.length > 0 }
+                        enabled={ (thisBranch?.commits.length ?? 0) > 0 }
                         onClick={() => setContext(prev => ({ ...prev, page: 'commits' }))}
                         style={{ marginLeft: 'auto' }}
                         ref={el => tooltips.set(0, 'View all commits', el, 'down')}>
                             <img className='github-img' src={commitImg} alt=''/>
                             <motion.div
-                            key={thisBranch.commits.length}
+                            key={thisBranch?.commits.length ?? 0}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}>
-                                { thisBranch.commits.length ?? 0 } commit{ (thisBranch.commits.length ?? 0) !== 1 ? 's' : ''}
+                                { (thisBranch?.commits.length ?? 0) } commit{ (thisBranch?.commits.length ?? 0) !== 1 ? 's' : ''}
                             </motion.div>
                         </Button>
                     </div>
