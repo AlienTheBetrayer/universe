@@ -111,7 +111,12 @@ header .home-button:hover img {
 }
 
 .header-github-button {
-    background: linear-gradient(105deg, hsl(240, 18%, 21%), hsl(240, 17%, 45%));
+    background: linear-gradient(105deg, var(--background-4), var(--background-9));
+    color: var(--foreground-last) !important;
+}
+
+.header-github-button > img {
+    filter: invert(var(--header-invert));
 }
 
 
