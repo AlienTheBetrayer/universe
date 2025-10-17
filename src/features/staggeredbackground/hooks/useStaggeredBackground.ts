@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useState, type RefObject } from "react";
 
-export const ElementSize = 128;
+export const ElementSize = 64;
 
 export const useStaggeredBackground = (ref: RefObject<HTMLDivElement | null>) => {
     const [columns, setColumns] = useState<number>(0);

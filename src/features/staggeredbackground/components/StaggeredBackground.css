@@ -12,5 +12,5 @@
 }
 
 .staggered-background-element {
-    border: 4px dashed var(--staggered);
+    border: 3px dashed var(--staggered);
 }
