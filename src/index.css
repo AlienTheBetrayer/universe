@@ -60,7 +60,7 @@
     --header-invert: 1;
     --form: hsl(225, 8%, 24%);
     --hr: #3a3d44;
-    --staggered: rgb(92, 101, 121);
+    --staggered: rgb(56, 59, 66);
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;
@@ -110,7 +110,7 @@
     --footer-invert: 0;
     --header-invert: 0;
     --hr: #5c6b7c;
-    --staggered: rgb(4, 5, 6);
+    --staggered: rgb(138, 139, 140);
 
     /* font sizes */
     --font-h1: 2.6rem;

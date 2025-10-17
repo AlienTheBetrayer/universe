@@ -1,13 +1,14 @@
 .staggered-background {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between; 
     gap: 1rem;
     padding: 1rem;
 
     position: absolute;
     inset: 0;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .staggered-background-element {
