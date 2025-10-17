@@ -3,8 +3,8 @@
     flex-direction: column;
     border-radius: 20px;
     min-width: 128px;
-    background-color: var(--background-4-transparent);
     overflow: hidden;
+    background-color: var(--background-4-transparent);
     backdrop-filter: blur(8px);
 }
 

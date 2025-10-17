@@ -18,7 +18,7 @@ export const InteractiveParticlesCanvas = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 3, delay: 1}}>
             <Canvas>
-                { theme === 'dark' && (
+                { (theme === 'dark' && context.bloomStrength > 0 ) && (
                     <EffectComposer>
                         <Bloom intensity={context.bloomStrength} luminanceThreshold={0.5}/>
                     </EffectComposer>

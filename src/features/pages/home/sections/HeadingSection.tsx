@@ -1,13 +1,15 @@
 import './HeadingSection.css';
 
 import { AnimatedText } from '../../../animatedtext/components/AnimatedText';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ListButton } from '../../../ui/ListButton/ListButton';
 import { InteractiveParticlesVectors, useInteractiveParticlesContext } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
+import { useLocalStore } from '../../../../zustand/localStore';
 
 export const HeadingSection = () => {
     const [context, setContext] = useInteractiveParticlesContext();
+    const { theme } = useLocalStore();
 
     const h1: AnimatedText[] = [
         {
@@ -87,18 +89,30 @@ export const HeadingSection = () => {
                 onSelected={idx => setContext(prev => ({ ...prev, vectorType: InteractiveParticlesVectors[idx]}))}>
                     Formula: 
                 </ListButton>
+                
+                <AnimatePresence>
+                    { theme === 'dark' && (
+                        <motion.div
+                        style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}>
+                            <p>Bloom <mark><b>Strength</b></mark></p>
 
-                <input 
-                className='heading-section-bloom-strength'
-                ref={el => tooltips.set(0, 'Set bloom strength', el, 'down')}
-                type='range'
-                aria-label='Bloom Strength'
-                min={0}
-                max={100}
-                value={context.bloomStrength}
-                onChange={e => setContext(prev => 
-                    ({ ...prev, bloomStrength: Number(e.target.value) })
-                )}/>
+                            <input 
+                            className='heading-section-bloom-strength'
+                            ref={el => tooltips.set(0, 'Set bloom strength', el, 'down')}
+                            type='range'
+                            aria-label='Bloom Strength'
+                            min={0}
+                            max={128}
+                            value={context.bloomStrength}
+                            onChange={e => setContext(prev => 
+                                ({ ...prev, bloomStrength: Number(e.target.value) })
+                            )}/>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </motion.div>
         </section>
     )
