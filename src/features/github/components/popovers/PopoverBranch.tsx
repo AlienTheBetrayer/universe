@@ -106,7 +106,6 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                                 ) : (
                                     branch.name
                                 )}
-                                { branch.idx }
                             </div>
 
                             { branch.name === GithubDefaultBranch && (

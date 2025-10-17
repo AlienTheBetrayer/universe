@@ -58,7 +58,6 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
                 }))}>
                     <img className='github-img' src={fileImg} alt=''/>
                     <p className='github-form-p-name'>{ form.name }</p>
-                    { form.idx } 
                 </Button>
 
                 { form.tags.map((tag, idx) => (
