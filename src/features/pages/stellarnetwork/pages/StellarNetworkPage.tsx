@@ -1,4 +1,4 @@
-import './StellarNetwork.css';
+import './StellarNetworkPage.css';
 import { Page } from "../../../layout/components/Page"
 import { StellarCanvas } from '../../../stellars/components/StellarCanvas';
 import { SelectedStellarUI } from '../../../stellars/components/SelectedStellarUI';
@@ -7,7 +7,7 @@ import { motion } from 'motion/react';
 import { StellarProvider } from '../../../stellars/context/StellarContext';
 import { StellarTutorial } from '../../../stellars/components/StellarTutorial';
 
-export const StellarNetwork = () => {
+export const StellarNetworkPage = () => {
     return (
         <Page>
             <StellarProvider>

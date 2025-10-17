@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { HomePage } from "./features/pages/home/pages/HomePage";
-import { Forge } from "./features/pages/forge/pages/Forge";
-import { StellarNetwork } from "./features/pages/stellarnetwork/pages/StellarNetwork";
-import { Contact } from "./features/pages/contact/pages/Contact";
+import { ForgePage } from "./features/pages/forge/pages/ForgePage";
+import { GithubPage } from "./features/pages/github/pages/GithubPage";
+import { StellarNetworkPage } from "./features/pages/stellarnetwork/pages/StellarNetworkPage";
 
 export const router = createBrowserRouter([
     {
@@ -16,14 +16,14 @@ export const router = createBrowserRouter([
     },
     {
         path: '/forge',
-        element: <Forge/>
+        element: <ForgePage/>
     },
     {
-        path: '/contact',
-        element: <Contact/>
+        path: '/github',
+        element: <GithubPage/>
     },
     {
         path: '/stellarnetwork',
-        element: <StellarNetwork/>
+        element: <StellarNetworkPage/>
     }
 ]);

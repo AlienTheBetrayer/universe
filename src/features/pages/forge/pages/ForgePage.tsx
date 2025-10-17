@@ -1,6 +1,7 @@
+import './ForgePage.css';
 import { Page } from "../../../layout/components/Page"
 
-export const Forge = () => {
+export const ForgePage = () => {
     return (
         <Page>
             <section className='container'>
