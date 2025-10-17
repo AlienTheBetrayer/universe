@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Input } from "../../../ui/Input/components/Input";
 import { useGithubContext, type FormContent } from "../../context/GithubContext";
 import { GithubPopover } from "./GithubPopover";
-import { findMax } from '../../utils/findMax';
 
 interface Props {
     newContent: FormContent;
@@ -38,12 +37,13 @@ export const PopoverFormEditCommit = ({ newContent, onCancel }: Props) => {
                     data: {
                         ...prev.data,
                         currentForm: false,
+                        globalIdx: prev.data.globalIdx + 1,
                         branches: prev.data.branches.map(b =>
                             b.idx === prev.data.currentBranch
                             ? {
                                 ...b,
                                 commits: [...b.commits, {
-                                    idx: findMax(b.commits) + 1,
+                                    idx: prev.data.globalIdx + 1,
                                     form: thisForm,
                                     name,
                                     description,

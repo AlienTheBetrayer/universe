@@ -15,6 +15,7 @@ export const GithubContextInitialData: GithubData = {
         releases: true,
     },
     currentBranch: 0,
+    globalIdx: 0,
     currentForm: false,
     currentCommit: false,
     repositoryName: 'The Universe',

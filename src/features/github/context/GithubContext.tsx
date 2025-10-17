@@ -55,13 +55,14 @@ interface ElementsVisibility {
 // main data interface
 export interface GithubData {
     description: Description;
+    repositoryName: string;
     visibility: ElementsVisibility;
+    
     branches: Branch[];
-
     currentBranch: number;
     currentForm: number | false;
     currentCommit: number | false;
-    repositoryName: string;
+    globalIdx: number;
 }
 
 type GithubPage = 'forms' | 'commits';

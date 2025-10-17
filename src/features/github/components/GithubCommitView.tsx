@@ -23,7 +23,7 @@ export const GithubCommitView = ({}: Props) => {
 
     if(thisCommit && thisCommit.idx !== 0) {
         for(let i = thisCommit?.idx; i > 0; --i) {
-            const previous = thisBranch?.commits.at(i - 1);
+            const previous = thisBranch?.commits.find(c => c.idx === i - 1);
             if(previous?.type === 'form-content-change' && previous.form?.idx === thisCommit.form?.idx) {
                 prevCommit = previous;
                 break; 
@@ -42,8 +42,9 @@ export const GithubCommitView = ({}: Props) => {
     const differenceComponent = (part: ChangeObject<string>[]) => {
         return (
             <p>
-                { part.map(c => (
+                { part.map((c, idx) => (
                     <span
+                    key={idx}
                     className={`github-commit-view-diffchar ${(c.removed || c.added ? 'github-commit-view-diffchar-highlighted' : '')}`}
                     style={{
                         background: c.removed ? 'hsla(0, 59%, 35%, 0.5)' : (c.added ? 'hsla(132, 59%, 35%, 0.5)' : '#00000000')

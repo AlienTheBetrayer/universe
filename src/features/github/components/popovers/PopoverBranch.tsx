@@ -11,7 +11,6 @@ import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { GithubPopover } from './GithubPopover';
 import { Input } from '../../../ui/Input/components/Input';
 import { GithubDefaultBranch } from '../../context/initial/githubStrings';
-import { findMax } from '../../utils/findMax';
 
 interface Props {
     onCancel?: () => void;
@@ -39,17 +38,16 @@ export const PopoverBranch = ({ onCancel }: Props) => {
             return;
 
         setContext(prev => {
-            const idx = findMax(prev.data.branches) + 1;
-
             return ({ ...prev, 
-                data: ({ ...prev.data, 
+                data: ({ ...prev.data,
+                globalIdx: prev.data.globalIdx + 1, 
                 branches: [ ...prev.data.branches, {
-                    idx: idx,
+                    idx: prev.data.globalIdx + 1,
                     name: name,
                     forms: [],
                     commits: []
                 }],
-                currentBranch: idx,
+                currentBranch: prev.data.globalIdx + 1,
             })});
         });
         setSearch('');
@@ -108,6 +106,7 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                                 ) : (
                                     branch.name
                                 )}
+                                { branch.idx }
                             </div>
 
                             { branch.name === GithubDefaultBranch && (

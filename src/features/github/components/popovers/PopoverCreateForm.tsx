@@ -5,10 +5,9 @@ import { GithubPopover } from "./GithubPopover"
 import { Button } from "../../../ui/Button/components/Button";
 
 import formImg from '../../assets/file.svg';
-import { useGithubContext, type Form } from '../../context/GithubContext';
+import { useGithubContext } from '../../context/GithubContext';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
-import { findMax } from '../../utils/findMax';
 
 interface Props {
     onCancel?: () => void;
@@ -39,28 +38,32 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
             if(!branch || !currentBranch)
                 return prev;
 
-            const newForm: Form = {
-                idx: findMax(currentBranch.forms) + 1,
-                name,
-                tags: [],
-            };
-
             return {
                 ...prev,
                 data: {
                     ...prev.data,
+                    globalIdx: prev.data.globalIdx + 2,
                     branches: prev.data.branches.map(b =>
                         b.idx === prev.data.currentBranch
                         ? {
                             ...b,
-                            forms: [...b.forms, newForm],
+                            forms: [...b.forms, {
+                                idx: prev.data.globalIdx + 1,
+                                name: name,
+                                tags: [],
+                            }],
+
                             commits: [...b.commits, {
-                                idx: findMax(b.commits) + 1,
-                                name: `${newForm.name} form created`,
+                                idx: prev.data.globalIdx + 2,
+                                name: `${name} form created`,
                                 description: '',
                                 pushedAt: Date.now(),
                                 type: 'form-creation',
-                                form: newForm
+                                form: {
+                                    idx: prev.data.globalIdx + 1,
+                                    name: name,
+                                    tags: [],
+                                }
                             }]
                             }
                         : b
