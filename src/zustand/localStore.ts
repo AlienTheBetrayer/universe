@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import type { GithubData } from "../features/github/context/GithubContext";
+import { GithubContextInitialData } from "../features/github/context/initial/githubData";
 
 type TutorialSeenVariant = 'stellar' | 'contact' | 'forge';
 type ThemeType = 'dark' | 'light';
@@ -11,7 +13,9 @@ interface LocalStore {
         contact: boolean;
         forge: boolean;
     }
+    githubData: GithubData;
 
+    setGithubData: (newData: GithubData) => void;
     toggleTheme: () => void;
     toggleTutorialSeen: (flag: boolean, type: TutorialSeenVariant) => void;
 };  
@@ -19,11 +23,18 @@ interface LocalStore {
 export const useLocalStore = create<LocalStore>()(
     persist(
         set => ({
+            // initial values
             theme: 'dark',
             tutorialSeen: {
                 stellar: false,
                 contact: false,
                 forge: false
+            },
+            githubData: GithubContextInitialData,
+
+            // functions
+            setGithubData: (newData: GithubData) => {
+                set(state => ({ ...state, githubData: newData }));
             },
 
             toggleTheme: () => {

@@ -95,10 +95,29 @@ export const GithubProvider = ({ children }: Props)  => {
 
     const localStore = useLocalStore();
 
-    // if we hadn't seen the tutorial ever before, show it 
+    // loading data
     useEffect(() => {
-        setState(prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen.contact }));
+        setState(prev => ({ ...prev,
+            data: localStore.githubData, 
+            tutorialVisible: !localStore.tutorialSeen.contact
+        }));
     }, []);
+
+    // saving data
+    useEffect(() => {
+        const save = () => localStore.setGithubData(state.data);
+
+        const timeout = setTimeout(save, 3000);
+
+        window.addEventListener('pagehide', save);
+        document.addEventListener('visibilitychange', save);
+
+        return () => {
+            clearTimeout(timeout);
+            window.removeEventListener('pagehide', save);
+            document.removeEventListener('visibilitychange', save);
+        }
+    }, [state.data]);
     
     return (
         <GithubContext.Provider value={[state, setState]}>
