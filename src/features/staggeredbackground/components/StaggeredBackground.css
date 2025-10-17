@@ -11,7 +11,5 @@
 }
 
 .staggered-background-element {
-    border: 2px solid var(--background-11);
-    mix-blend-mode: difference;
-    opacity: 0.1;
+    border: 4px dashed var(--staggered);
 }
