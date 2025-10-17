@@ -48,6 +48,8 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                     commits: []
                 }],
                 currentBranch: prev.data.globalIdx + 1,
+                currentCommit: false,
+                currentForm: false,
             })});
         });
         setSearch('');
@@ -82,6 +84,8 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                             setContext(prev => ({ ...prev, 
                                 data: ({ ...prev.data, 
                                     currentBranch: branch.idx,
+                                    currentForm: false,
+                                    currentCommit: false
                             })}))
                             onCancel?.();
                         }}>
