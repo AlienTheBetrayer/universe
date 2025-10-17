@@ -3,9 +3,9 @@ import { useMemo } from "react";
 import type { Points } from "three";
 import { useLocalStore } from "../../../zustand/localStore";
 import { useSmoothCursor } from "../../../hooks/useSmoothCursor";
-import { VectorTypes } from "../context/InteractiveParticlesContext";
+import type { VectorType } from "../context/InteractiveParticlesContext";
 
-export const useInteractiveParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: string) => {
+export const useInteractiveParticles = (ref: React.RefObject<Points | null>, count: number = 1000, vectorType?: VectorType) => {
     const { size, viewport } = useThree();
     const pointer = useSmoothCursor({ x: 330, y: 120 });
 
@@ -63,43 +63,43 @@ export const useInteractiveParticles = (ref: React.RefObject<Points | null>, cou
 
                 // determining the cursor effect type formula based on our context
                 switch (vectorType) {
-                    case VectorTypes.propulsion:
+                    case 'Propulsion':
                         vectorX = dx / distance;
                         vectorY = dy / distance;
                         if(theme == 'dark')
                             color = [0, 0, 30];
                         break;
-                    case VectorTypes.repulsion:
+                    case 'Repulsion':
                         vectorX = -dx / distance;
                         vectorY = -dy / distance;
                         if(theme == 'dark')
                             color = [30, 0, 0];
                         break;
-                    case VectorTypes.waves:
+                    case 'Waves':
                         vectorX = Math.sin(t);
                         vectorY = Math.sin(t);
                         if(theme == 'dark')
                             color = [12, 50, 59];
                         break;
-                    case VectorTypes.nebula:
+                    case 'Nebula':
                         vectorX = -dy * 2;
                         vectorY = dx * 2;
                         if(theme == 'dark')
                             color = [48, 13, 78];
                         break;
-                    case VectorTypes.living:
+                    case 'Living':
                         vectorX = Math.sin(dx * 7 - dy * 3 + t * 4) * Math.cos(dy * 5 + Math.sqrt(dx * dx + dy * dy) * 3 + Math.sin(t * 2)) + Math.tan(Math.sin(dx * 0.5 + t * 3)) * 0.02;
                         vectorY = Math.cos(dy * 6 + dx * 2 + t * 3.5) * Math.sin(dx * 4 + Math.sqrt(dx * dx + dy * dy) * 5 + Math.cos(t * 1.7)) + Math.tan(Math.cos(dy * 0.7 + t * 2.1)) * 0.02;
                         if(theme == 'dark')
                             color = [0, 20, 10];
                         break;
-                    case VectorTypes.checker:
+                    case 'Checker':
                         vectorX = Math.sin(t % 50 * dx);
                         vectorY = Math.sin(t % 50 * dy);
                         if(theme == 'dark')
                             color = [10, 10, 10];
                         break;
-                    case VectorTypes.astral:
+                    case 'Astral':
                         vectorX = (dx / distance) * Math.sin(t + distance * 5) * Math.exp(-distance * 0.5) - (dy / distance) * Math.cos(t * 2 + Math.log(distance + 1) * 3);
                         vectorY = (dy / distance) * Math.sin(t + distance * 5) * Math.exp(-distance * 0.5) + (dx / distance) * Math.cos(t * 2 + Math.log(distance + 1) * 3);
                         if(theme == 'dark')

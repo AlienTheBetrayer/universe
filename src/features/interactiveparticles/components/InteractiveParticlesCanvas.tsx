@@ -6,9 +6,11 @@ import { Canvas } from "@react-three/fiber"
 import { InteractiveParticles } from './InteractiveParticles';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { useLocalStore } from '../../../zustand/localStore';
+import { useInteractiveParticlesContext } from '../context/InteractiveParticlesContext';
 
 export const InteractiveParticlesCanvas = () => {
     const { theme } = useLocalStore();
+    const [context, ] = useInteractiveParticlesContext();
     
     return (
         <motion.div className='interactive-particles-canvas-container'
@@ -18,7 +20,7 @@ export const InteractiveParticlesCanvas = () => {
             <Canvas>
                 { theme === 'dark' && (
                     <EffectComposer>
-                        <Bloom intensity={30} luminanceThreshold={0.5}/>
+                        <Bloom intensity={context.bloomStrength} luminanceThreshold={0.5}/>
                     </EffectComposer>
                 )}
 

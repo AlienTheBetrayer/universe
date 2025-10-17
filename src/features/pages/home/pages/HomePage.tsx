@@ -9,7 +9,7 @@ import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
 import { QuestionSection } from '../sections/QuestionSection';
 
 import { motion, useInView } from 'motion/react';
-import { InteractiveParticlesContext, VectorTypes, type InteractiveParticlesContextData } from '../../../interactiveparticles/context/InteractiveParticlesContext';
+import { InteractiveParticlesProvider } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import { InteractiveParticlesCanvas } from '../../../interactiveparticles/components/InteractiveParticlesCanvas';
 import { QuestionContext, type QuestionContextData } from '../../../questionparticles/context/QuestionContext';
 import { FAQSection } from '../sections/FAQSection';
@@ -19,7 +19,6 @@ import { PaintSection } from '../sections/PaintSection';
 import { StaggeredBackground } from '../../../staggeredbackground/components/StaggeredBackground';
 
 export const HomePage = () => {
-    const headingContextData = useState<InteractiveParticlesContextData>({ vectorType: VectorTypes.astral});
     const questionContextData = useState<QuestionContextData>({ revealed: false });
     const headingRef = useRef<HTMLDivElement>(null);
     const isHeadingVisible = useInView(headingRef);
@@ -40,7 +39,7 @@ export const HomePage = () => {
                 </h1>
             </motion.div>
             
-            <InteractiveParticlesContext value={headingContextData}>
+            <InteractiveParticlesProvider>
                 <div className='heading-wrapper' ref={headingRef}>
                     { isHeadingVisible && (
                         <InteractiveParticlesCanvas/>
@@ -51,7 +50,7 @@ export const HomePage = () => {
                     <HeadingSection/>
                     <GridSection/>
                 </div>
-            </InteractiveParticlesContext>
+            </InteractiveParticlesProvider>
             <hr/>
             
             <FAQSection/>

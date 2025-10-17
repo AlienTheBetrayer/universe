@@ -3,14 +3,11 @@ import './HeadingSection.css';
 import { AnimatedText } from '../../../animatedtext/components/AnimatedText';
 import { motion } from 'motion/react';
 import { ListButton } from '../../../ui/ListButton/ListButton';
-import { useInteractiveParticlesContext, VectorTypes } from '../../../interactiveparticles/context/InteractiveParticlesContext';
+import { InteractiveParticlesVectors, useInteractiveParticlesContext } from '../../../interactiveparticles/context/InteractiveParticlesContext';
+import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 
 export const HeadingSection = () => {
-    const [, setParticlesData] = useInteractiveParticlesContext();
-
-    const handleSelect =  (idx: number) => {
-        setParticlesData(prev => ({...prev, vectorType: Object.values(VectorTypes)[idx]}))
-    }
+    const [context, setContext] = useInteractiveParticlesContext();
 
     const h1: AnimatedText[] = [
         {
@@ -70,18 +67,38 @@ export const HeadingSection = () => {
         }
     ];
 
+    const tooltips = useTooltips();
+
     return (
         <section className='heading-section container'>
+            { tooltips.render() }
+
             <AnimatedText as='h1' delay={0.3} text={h1}/>
             <AnimatedText as='p' delay={2.8} text={p}/>
 
             <motion.div
+            className='heading-section-menu'
             initial={{ y: 200, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 3.5, duration: 1 }}>
-                <ListButton className='heading-effects' elements={Object.values(VectorTypes)} onSelected={handleSelect}>
+                <ListButton 
+                className='heading-effects' 
+                elements={[...InteractiveParticlesVectors]} 
+                onSelected={idx => setContext(prev => ({ ...prev, vectorType: InteractiveParticlesVectors[idx]}))}>
                     Formula: 
                 </ListButton>
+
+                <input 
+                className='heading-section-bloom-strength'
+                ref={el => tooltips.set(0, 'Set bloom strength', el, 'down')}
+                type='range'
+                aria-label='Bloom Strength'
+                min={0}
+                max={100}
+                value={context.bloomStrength}
+                onChange={e => setContext(prev => 
+                    ({ ...prev, bloomStrength: Number(e.target.value) })
+                )}/>
             </motion.div>
         </section>
     )
