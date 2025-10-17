@@ -16,6 +16,7 @@ import { FAQSection } from '../sections/FAQSection';
 import { ShiftingSection } from '../sections/ShiftingSection';
 import { HorizontalSection } from '../sections/HorizontalSection';
 import { PaintSection } from '../sections/PaintSection';
+import { StaggeredBackground } from '../../../staggeredbackground/components/StaggeredBackground';
 
 export const HomePage = () => {
     const headingContextData = useState<InteractiveParticlesContextData>({ vectorType: VectorTypes.astral});
@@ -44,6 +45,9 @@ export const HomePage = () => {
                     { isHeadingVisible && (
                         <InteractiveParticlesCanvas/>
                     )}
+
+                    <StaggeredBackground/>
+
                     <HeadingSection/>
                     <GridSection/>
                 </div>
