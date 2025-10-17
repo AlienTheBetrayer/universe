@@ -81,45 +81,41 @@ header .home-button:hover img {
     filter: invert(var(--header-invert));
 }
 
-/* launch app fat button */
-.header-forge-button {
+/* big buttons */
+.header-big-button {
     display: flex;
     gap: 4px;
     align-items: center;
-    background: linear-gradient(193deg, rgb(2, 2, 158), rgb(39, 39, 240));
     color: #fff !important;
     text-align: center;
     transition: 0.3s ease-in-out;
 }
 
-.header-forge-button:hover {
-    transform: scale(1.05);
-}
-
-header .header-forge-button img {
+.header-big-button img {
     width: 20px;
     height: 20px;
     filter: invert(1);
+}
+
+.header-big-button:hover {
+    transform: scale(1.05);
+}
+
+
+.header-forge-button {
+    background: linear-gradient(193deg, rgb(2, 2, 158), rgb(39, 39, 240));
 }
 
 .header-stellar-button {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    background: linear-gradient(193deg, rgb(2, 2, 158), rgb(39, 39, 240));
-    color: #fff !important;
-    text-align: center;
+    background: linear-gradient(13deg, rgb(2, 2, 158), rgb(39, 39, 240));
 }
 
-.header-stellar-button:hover {
-    transform: scale(1.05);
+.header-github-button {
+    background: linear-gradient(105deg, hsl(240, 18%, 21%), hsl(240, 17%, 45%));
 }
 
-header .header-stellar-button img {
-    width: 20px;
-    height: 20px;
-    filter: invert(1);
-}
+
+
 
 /* styles */
 header .universal-link:hover, header .universal-link:active {

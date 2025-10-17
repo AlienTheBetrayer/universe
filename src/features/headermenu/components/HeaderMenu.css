@@ -1,35 +1,29 @@
 .header-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     position: fixed;
     inset: 0;
     z-index: 11;
     padding: 1rem;
     gap: 1rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .header-menu * {
     font-size: 1rem;
 }
 
-.header-menu .header-forge-button img, 
-.header-menu .header-stellar-button img {
+/* big buttons */
+.header-menu .header-big-button img {
     width: 32px;
     height: 32px;
-    filter: invert(1);
 }
 
-.header-menu > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.header-menu > div > * {
-    padding: 2rem;
-    width: 100%;
+.header-menu > * {
+    padding: 1rem !important;
+    height: 80px !important;
+    width: 100% !important;
+    border-radius: 24px !important;
     text-align: center;
-    border-radius: 24px;
 }

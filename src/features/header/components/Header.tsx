@@ -12,6 +12,8 @@ import { useHeaderAnimation } from '../hooks/useHeaderAnimation';
 import launchImg from '../assets/launch.svg';
 import starImg from '../assets/star.svg';
 import stellarImg from '../assets/stellar.svg';
+import forkImg from '../assets/fork.svg';
+
 
 import { useLocalStore } from '../../../zustand/localStore';
 import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
@@ -47,19 +49,22 @@ export const Header = () => {
                 initial={{ gap: loaded.header ? '1rem' : '0.1rem' }}
                 animate={{ gap: '1rem', transition: { delay: 6, type: 'spring', duration: 0.6, stiffness: 200, damping: 50 } }}
                 transition={{ type: 'spring', delay: 1, duration: 0.6, stiffness: 200, damping: 50 }}>
-                    <UniversalLink 
-                    to='/contact'>
-                    Contact</UniversalLink>
+                    <LinkButton 
+                    className='header-big-button header-github-button'
+                    to='/github'>
+                        <img src={forkImg} alt=''/>
+                        Github Emulation
+                    </LinkButton>
 
                     <LinkButton
-                    className='header-stellar-button'
+                    className='header-big-button header-stellar-button'
                     to='/stellarnetwork'>
                         <img src={stellarImg} alt=''/>
                         Stellar Network
                     </LinkButton>
 
                     <LinkButton 
-                    className='header-forge-button'
+                    className='header-big-button header-forge-button'
                     to='/forge'>
                         <img src={launchImg} alt=''/>
                         Forge

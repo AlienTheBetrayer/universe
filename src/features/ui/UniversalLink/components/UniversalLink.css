@@ -1,4 +1,6 @@
 .universal-link {
+    display: grid;
+    place-items: center;
     text-decoration: none;
 }
 

@@ -1,15 +1,17 @@
 import './ToggleButton.css';
-import { motion, type HTMLMotionProps } from 'motion/react';
-import { forwardRef, useState } from 'react';
+import { motion} from 'motion/react';
+import { forwardRef, useState, type CSSProperties } from 'react';
 
 import checkmarkImg from './assets/checkmark.svg';
 
-interface Props extends HTMLMotionProps<'div'> {
+interface Props {
     value?: boolean;
+    className?: string;
+    style?: CSSProperties;
     onToggled?: (state: boolean) => void;
 }
 
-export const ToggleButton = forwardRef<HTMLButtonElement, Props>(({ value, onToggled }, ref) => {
+export const ToggleButton = forwardRef<HTMLButtonElement, Props>(({ value, onToggled, className, style, ...rest }, ref) => {
     const [internal, setInternal] = useState<boolean>(false);
     const toggled = value ?? internal;
 
@@ -21,10 +23,12 @@ export const ToggleButton = forwardRef<HTMLButtonElement, Props>(({ value, onTog
     }
 
     return (
-        <button className='toggle-button' 
+        <button 
+        className={`toggle-button ${className ?? ''}`} 
         ref={ref}
         onClick={() => handle()}
-        style={{ justifyContent: toggled ? 'flex-end' : 'flex-start' }}>
+        style={{ justifyContent: toggled ? 'flex-end' : 'flex-start', ...style }}
+        {...rest}>
             <motion.div className='toggle-button-circle'
             layout 
             transition={{ type: 'spring', stiffness: 200, damping: 40 }}>
