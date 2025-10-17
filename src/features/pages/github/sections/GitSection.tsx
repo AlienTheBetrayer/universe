@@ -11,10 +11,6 @@ export const GitSection = () => {
         initial={{ opacity: 0, y: 200 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1 }}>
-            <h2>
-                <mark>Github</mark> emulation w/ forms
-            </h2>
-        
             <GithubTutorial/>
 
             <div className='github-container'>

@@ -5,6 +5,7 @@
 
 .github-container {
     width: 100%;
-    background-color: var(--background-2);
+    background-color: var(--background-semitransparent);
+    backdrop-filter: blur(16px);
     border-radius: 16px;
 }

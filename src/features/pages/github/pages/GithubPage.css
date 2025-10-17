@@ -1,6 +1,5 @@
 .contact-wrapper {
     position: relative;
-    height: 500px;
     width: 100%;
-    mask-image: linear-gradient(to bottom, black 75%, transparent);
+    mask-image: linear-gradient(to bottom, black 95%, transparent);
 }

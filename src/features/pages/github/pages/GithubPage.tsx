@@ -11,11 +11,11 @@ export const GithubPage = () => {
             <Page>
                 <div className='contact-wrapper'>
                     <Text3DCanvas>
-                        CONTACT
+                        GITHUB
                     </Text3DCanvas>
-                </div>
 
-                <GitSection/>
+                    <GitSection/>
+                </div>
             </Page>
         </GithubProvider>
     )
