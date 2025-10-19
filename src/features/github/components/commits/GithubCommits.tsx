@@ -1,7 +1,6 @@
-import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { Button } from '../../ui/Button/components/Button';
-import { useGithubContext } from '../context/GithubContext';
-
+import { useTooltips } from '../../../tooltip/hooks/useTooltips';
+import { Button } from '../../../ui/Button/components/Button';
+import { useGithubContext } from '../../context/GithubContext';
 import './GithubCommits.css';
 import { GithubCommitsElement } from './GithubCommitsElement';
 

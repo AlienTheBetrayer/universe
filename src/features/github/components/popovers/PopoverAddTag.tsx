@@ -1,13 +1,13 @@
-import './PopoverAddTag.css';
-import { GithubPopover } from "./GithubPopover"
-import { Input } from '../../../ui/Input/components/Input';
 import { useEffect, useState } from 'react';
-import { useGithubContext } from '../../context/GithubContext';
-import { Button } from '../../../ui/Button/components/Button';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
+import { Button } from '../../../ui/Button/components/Button';
+import { Input } from '../../../ui/Input/components/Input';
+import { useGithubContext } from '../../context/GithubContext';
+import { GithubPopover } from "./GithubPopover";
+import './PopoverAddTag.css';
 
-import tagImg from '../../assets/tags.svg';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
+import tagImg from '../../assets/tags.svg';
 
 interface Props {
     onCancel?: () => void;

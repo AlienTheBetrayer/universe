@@ -1,17 +1,17 @@
 import './GithubRepository.css';
 
-import { useGithubContext } from '../context/GithubContext';
-import { useState } from 'react';
-import { GithubFormEdit } from './GithubFormEdit';
 import { AnimatePresence } from 'motion/react';
-import { GithubRepositoryForms } from './GithubRepositoryForms';
+import { useState } from 'react';
+import { useGithubContext } from '../context/GithubContext';
+import { GithubCommits } from './commits/GithubCommits';
+import { GithubCommitView } from './commits/GithubCommitView';
+import { GithubFormEdit } from './forms/GithubFormEdit';
+import { GithubRepositoryForms } from './forms/GithubRepositoryForms';
 import { GithubRepositoryTopline } from './GithubRepositoryTopline';
-import { GithubCommits } from './GithubCommits';
-import { GithubCommitView } from './GithubCommitView';
 
 export const GithubRepository = () => {
     // context
-    const [context, ] = useGithubContext();
+    const [context] = useGithubContext();
 
     // search (handled in <GithubRepositoryTopline/> and used in <GithubRepositoryForms/>)
     const [searchValue, setSearchValue] = useState<string>('');
@@ -28,6 +28,7 @@ export const GithubRepository = () => {
     return (
         <div className='github-repository'>
             <GithubRepositoryTopline searchState={[searchValue, setSearchValue]}/>
+            
             { pageSelector() }
 
             <AnimatePresence>

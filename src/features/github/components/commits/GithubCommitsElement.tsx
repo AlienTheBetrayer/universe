@@ -1,14 +1,14 @@
-import './GithubCommitsElement.css'
-import { useGithubContext, type Commit } from "../context/GithubContext"
-import { Button } from '../../ui/Button/components/Button';
+import './GithubCommitsElement.css';
 
-import commitImg from '../assets/commit.svg';
-import formImg from '../assets/file.svg';
-import deleteImg from '../assets/delete.svg';
-import addImg from '../assets/add.svg';
+import addImg from '../../assets/add.svg';
+import commitImg from '../../assets/commit.svg';
+import deleteImg from '../../assets/delete.svg';
+import formImg from '../../assets/file.svg';
 
-import { useEffect, useState } from 'react';
 import { differenceInSeconds, formatDistanceToNow } from 'date-fns';
+import { useEffect, useState } from 'react';
+import { Button } from '../../../ui/Button/components/Button';
+import { type Commit, useGithubContext } from '../../context/GithubContext';
 
 
 interface Props {

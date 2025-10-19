@@ -1,7 +1,7 @@
-import './GithubPopover.css';
 import type React from 'react';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 import { Button } from '../../../ui/Button/components/Button';
+import './GithubPopover.css';
 
 interface PopoverSuccess {
     text: string;

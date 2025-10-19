@@ -1,13 +1,13 @@
-import './PopoverCreateForm.css';
 import { useEffect, useState } from "react";
-import { Input } from "../../../ui/Input/components/Input";
-import { GithubPopover } from "./GithubPopover"
 import { Button } from "../../../ui/Button/components/Button";
-
+import { Input } from "../../../ui/Input/components/Input";
 import formImg from '../../assets/file.svg';
-import { useGithubContext } from '../../context/GithubContext';
+import { GithubPopover } from "./GithubPopover";
+import './PopoverCreateForm.css';
+
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
+import { useGithubContext } from '../../context/GithubContext';
 
 interface Props {
     onCancel?: () => void;

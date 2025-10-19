@@ -1,16 +1,16 @@
-import './PopoverBranch.css';
 import { Button } from '../../../ui/Button/components/Button';
 import { useGithubContext } from '../../context/GithubContext';
+import './PopoverBranch.css';
 
-import checkmarkImg from '../../assets/checkmark.svg';
 import branchImg from '../../assets/branch.svg';
+import checkmarkImg from '../../assets/checkmark.svg';
 
 import { useEffect, useState } from 'react';
-import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
-import { GithubPopover } from './GithubPopover';
+import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 import { Input } from '../../../ui/Input/components/Input';
 import { GithubDefaultBranch } from '../../context/initial/githubStrings';
+import { GithubPopover } from './GithubPopover';
 
 interface Props {
     onCancel?: () => void;

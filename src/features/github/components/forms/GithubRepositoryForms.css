@@ -15,20 +15,3 @@
     width: 24px;
     height: 24px;
 }
-
-.github-forms-info {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
-    min-height: 48px;
-}
-
-@media (max-width: 640px) {
-    .github-forms-info {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-}
-
-
-

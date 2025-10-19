@@ -1,12 +1,12 @@
 import { useLayoutEffect, useRef } from 'react';
 import './GithubCommitView.css';
-import { useGithubContext, type Commit } from '../context/GithubContext';
 
-import commitImg from '../assets/commit.svg';
+import commitImg from '../../assets/commit.svg';
 
 import { AnimatePresence, motion } from 'motion/react';
 
 import { diffChars, type ChangeObject } from 'diff';
+import { useGithubContext, type Commit } from '../../context/GithubContext';
 
 interface Props {
 

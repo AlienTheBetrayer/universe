@@ -1,22 +1,21 @@
-import './GithubFormEdit.css';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useGithubContext } from '../context/GithubContext';
+import './GithubFormEdit.css';
 
-import formImg from '../assets/file.svg';
-import branchImg from '../assets/branch.svg';
-import sendImg from '../assets/send.svg';
-import deleteImg from '../assets/delete.svg';
-import checkmarkImg from '../assets/checkmark.svg';
-
-import { Button } from '../../ui/Button/components/Button';
-import { useTooltips } from '../../tooltip/hooks/useTooltips';
+import branchImg from '../../assets/branch.svg';
+import checkmarkImg from '../../assets/checkmark.svg';
+import deleteImg from '../../assets/delete.svg';
+import formImg from '../../assets/file.svg';
+import sendImg from '../../assets/send.svg';
 
 import { motion } from 'motion/react';
-import { PopoverButton } from '../../ui/PopoverButton/components/PopoverButton';
-import { PopoverAddTag } from './popovers/PopoverAddTag';
-import { usePopup } from '../../../hooks/usePopup';
-import { MessageBox } from '../../messagebox/components/MessageBox';
-import { PopoverFormEditCommit } from './popovers/PopoverFormEditCommit';
+import { usePopup } from '../../../../hooks/usePopup';
+import { MessageBox } from '../../../messagebox/components/MessageBox';
+import { useTooltips } from '../../../tooltip/hooks/useTooltips';
+import { Button } from '../../../ui/Button/components/Button';
+import { PopoverButton } from '../../../ui/PopoverButton/components/PopoverButton';
+import { useGithubContext } from '../../context/GithubContext';
+import { PopoverAddTag } from '../popovers/PopoverAddTag';
+import { PopoverFormEditCommit } from '../popovers/PopoverFormEditCommit';
 
 
 interface Props {

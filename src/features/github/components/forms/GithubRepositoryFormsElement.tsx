@@ -1,12 +1,12 @@
 import './GithubRepositoryFormsElement.css';
-import fileImg from '../assets/file.svg';
 
-import { Button } from '../../ui/Button/components/Button';
-import { useGithubContext, type Form } from '../context/GithubContext';
+import { Button } from '../../../ui/Button/components/Button';
+import fileImg from '../../assets/file.svg';
+import { useGithubContext, type Form } from '../../context/GithubContext';
 
+import { differenceInSeconds, formatDistanceToNow } from 'date-fns';
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { differenceInSeconds, formatDistanceToNow } from 'date-fns';
 
 interface Props {
     form: Form;
@@ -18,7 +18,6 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
 
     // state variables
     const thisBranch = context.data.branches.find(b => b.idx === context.data.currentBranch);
-    // all commits on this specific element
     const thisCommits = thisBranch?.commits.filter(c => c.form?.idx === form.idx); 
 
     // date updating for that specific element every second
@@ -28,10 +27,9 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
         if((thisCommits?.length ?? 0) > 0) {
             const update = () => {
                 const date = thisCommits?.at(-1)?.pushedAt;
-                if(!date)
-                    return;
+                if(!date) return;
+                
                 const seconds = differenceInSeconds(new Date(), date);
-
                 if(seconds < 60) {
                     setCommitDate(`${seconds}s ago`);
                 } else {
