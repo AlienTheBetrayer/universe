@@ -16,7 +16,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
     const [state, dispatch] = useGithubContext();
 
     const about = useState<string>(state.data.description.about);
-    const repoName = useState<string>(state.data.description.repositoryName);
+    const repositoryName = useState<string>(state.data.description.repositoryName);
     const topics = useState<string>(state.data.description.topics.join(' '));
     const languagesChecked = useState<boolean>(state.data.visibility.languages);
     const packagesChecked = useState<boolean>(state.data.visibility.packages);
@@ -26,8 +26,8 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
         dispatch({
             type: 'DESCRIPTION_SET',
             about: about[0],
-            repoName: repoName[0],
-            topics: topics[0].split(' '),
+            repositoryName: repositoryName[0],
+            topics: topics[0].trim().length > 0 ? topics[0].split(' ') : [],
         });
 
         dispatch({
@@ -54,7 +54,7 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
             <GithubRepositorySettingsTopline onInteract={onInteract} />
             <GithubRepositorySettingsContent
                 topics={topics}
-                repoName={repoName}
+                repositoryName={repositoryName}
                 about={about}
                 languagesChecked={languagesChecked}
                 packagesChecked={packagesChecked}
@@ -89,7 +89,7 @@ const GithubRepositorySettingsTopline = ({ onInteract }: ToplineProps) => {
 };
 
 interface ContentProps {
-    repoName: [string, React.Dispatch<React.SetStateAction<string>>];
+    repositoryName: [string, React.Dispatch<React.SetStateAction<string>>];
     about: [string, React.Dispatch<React.SetStateAction<string>>];
     topics: [string, React.Dispatch<React.SetStateAction<string>>];
     languagesChecked: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
@@ -98,7 +98,7 @@ interface ContentProps {
 }
 
 const GithubRepositorySettingsContent = ({
-    repoName,
+    repositoryName,
     about,
     topics,
     languagesChecked,
@@ -111,8 +111,9 @@ const GithubRepositorySettingsContent = ({
                 <h4>Repository name</h4>
                 <Input
                     placeholder='Repository name'
-                    value={repoName[0]}
-                    onChange={(val) => repoName[1](val)}
+                    value={repositoryName[0]}
+                    onChange={(val) => repositoryName[1](val)}
+                    onClear={() => repositoryName[1]('')}
                 />
             </div>
 
@@ -122,6 +123,7 @@ const GithubRepositorySettingsContent = ({
                     placeholder='Description'
                     value={about[0]}
                     onChange={(val) => about[1](val)}
+                    onClear={() => about[1]('')}
                 />
             </div>
 
@@ -133,6 +135,7 @@ const GithubRepositorySettingsContent = ({
                     placeholder='Topics'
                     value={topics[0]}
                     onChange={(val) => topics[1](val)}
+                    onClear={() => topics[1]('')}
                 />
             </div>
 

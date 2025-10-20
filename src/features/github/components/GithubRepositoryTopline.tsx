@@ -60,6 +60,8 @@ const GithubRepositoryToplineInfo1 = ({ state }: Info1Props) => {
 
     return (
         <div className='github-repository-topline-info'>
+            { tooltips.render() }
+            
             <div>
                 <PopoverButton
                     direction='bottom-right'

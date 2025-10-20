@@ -2,7 +2,7 @@
 .stellar-button {
     position: relative;
     padding: 1.5rem;
-    
+
     font-size: 1rem;
 
     border-radius: 2000px;
@@ -32,13 +32,11 @@
     background-color: var(--background-5);
 }
 
-
 .stellar-button-deactivated {
     color: var(--background-8) !important;
     pointer-events: none;
     user-select: none;
 }
-
 
 /* nav buttons */
 .stellar-ui-previous-button {
@@ -110,8 +108,6 @@
 .stellar-ui-bottom-bar-right-container {
     justify-content: flex-end;
 }
-
-
 
 /* button hotkey tooltip */
 .stellar-tooltip {

@@ -1,34 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useLocalStore } from "../../../zustand/localStore";
-
-interface StellarContent {
-    firstTitle: string;
-    firstDescription: string;
-    secondTitle: string;
-    secondDescription: string
-}
-
-export interface Stellar {
-    idx: number;
-    x: number;
-    y: number;
-    content: StellarContent;
-};
-
-export interface StellarState {
-    stellars: Stellar[];
-    selected: number | false;
-    hovered: number | false;
-    moving: number | false;
-    isEditing: boolean;
-    isMoveWaiting: boolean,
-    tutorialVisible: boolean;
-    messageBoxVisible: boolean;
-    viewport: { width: number, height: number };
-};
+import React, { createContext, useContext, useReducer } from 'react';
+import { useStellarLoading } from './hooks/useStellarLoading';
+import { StellarContextInitialData } from './initial/stellarData';
+import { StellarReducer, type StellarAction } from './reducer/StellarReducer';
+import type { StellarState } from './types/stellarData';
 
 // context
-type StellarContextType = [StellarState, React.Dispatch<React.SetStateAction<StellarState>>];
+type StellarContextType = [StellarState, React.Dispatch<StellarAction>];
 
 export const StellarContext = createContext<StellarContextType | null>(null);
 
@@ -37,49 +14,20 @@ interface Props {
 }
 
 export const StellarProvider = ({ children }: Props) => {
-    const [state, setState] = useState<StellarState>({
-        stellars: [
-            {
-                idx: 0,
-                x: 0,
-                y: 0,
-                content: { firstTitle: 'Earth', secondTitle: 'We are here', firstDescription: 'Hello there?', secondDescription: 'Are we gonna succeed?'}
-            },
-            {
-                idx: 1,
-                x: 0,
-                y: 0,
-                content: { firstTitle: 'Mars', secondTitle: 'Eat me', firstDescription: 'Do not eat me please', secondDescription: 'It is scary...'}
-            },
-            {
-                idx: 2,
-                x: 0,
-                y: 0,
-                content: { firstTitle: 'Pluto', secondTitle: 'Dwarf planet', firstDescription: 'I am small!', secondDescription: 'No, I am big!!'}
-            },
-        ],
-        selected: false,
-        hovered: false,
-        moving: false,
-        isMoveWaiting: false,
-        isEditing: false,
-        messageBoxVisible: false,
-        viewport: { width: 0, height: 0 },
-        tutorialVisible: true });
-        
-    const localStore = useLocalStore();
+    const [state, dispatch] = useReducer(
+        StellarReducer,
+        StellarContextInitialData
+    );
 
-    // if we hadn't seen the tutorial ever before, show it 
-    useEffect(() => {
-        setState(prev => ({ ...prev, tutorialVisible: !localStore.tutorialSeen.stellar }));
-    }, []);
+    // tutorial loading
+    useStellarLoading(dispatch);
 
     return (
-        <StellarContext.Provider value={[state, setState]}>
-            { children }
-        </StellarContext.Provider>   
-    )
-}
+        <StellarContext.Provider value={[state, dispatch]}>
+            {children}
+        </StellarContext.Provider>
+    );
+};
 export const useStellarContext = () => {
     return useContext(StellarContext) as StellarContextType;
-}
+};

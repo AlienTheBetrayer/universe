@@ -5,6 +5,7 @@ import fileImg from '../../assets/file.svg';
 import { useGithubContext } from '../../context/GithubContext';
 
 import { motion } from 'motion/react';
+import { forwardRef } from 'react';
 import type { GithubReducerAction } from '../../context/reducer/GithubReducer';
 import type { Form } from '../../context/types/dataTypes';
 import { useUpdatingDate } from '../../hooks/useUpdatingDate';
@@ -13,7 +14,10 @@ interface Props {
     form: Form;
 }
 
-export const GithubRepositoryFormsElement = ({ form }: Props) => {
+export const GithubRepositoryFormsElement = forwardRef<
+    HTMLButtonElement,
+    Props
+>(({ form }, ref) => {
     // context
     const [state, dispatch] = useGithubContext();
     const thisBranch = state.data.branches.find(
@@ -33,25 +37,32 @@ export const GithubRepositoryFormsElement = ({ form }: Props) => {
 
     return (
         <div className='github-form-element'>
-            <GithubRepositoryFormsElementData form={form} dispatch={dispatch} />
+            <GithubRepositoryFormsElementData
+                form={form}
+                dispatch={dispatch}
+                ref={ref}
+            />
+
             {(thisCommits?.length ?? 0) > 0 && <p>{commitDate}</p>}
         </div>
     );
-};
+});
 
 interface DataProps {
     form: Form;
     dispatch: React.Dispatch<GithubReducerAction>;
 }
 
-const GithubRepositoryFormsElementData = ({ form, dispatch }: DataProps) => {
+const GithubRepositoryFormsElementData = forwardRef<
+    HTMLButtonElement,
+    DataProps
+>(({ form, dispatch }, ref) => {
     return (
         <div className='github-flex flex-wrap'>
             <Button
+                ref={ref}
                 className='github-form-element-button'
-                onClick={() =>
-                    dispatch({ type: 'FORM_FOCUS', idx: form.idx })
-                }
+                onClick={() => dispatch({ type: 'FORM_FOCUS', idx: form.idx })}
             >
                 <img className='github-img' src={fileImg} alt='' />
                 <p className='github-form-p-name'>{form.name}</p>
@@ -73,4 +84,4 @@ const GithubRepositoryFormsElementData = ({ form, dispatch }: DataProps) => {
             ))}
         </div>
     );
-};
+});

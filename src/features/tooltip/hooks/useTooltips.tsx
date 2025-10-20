@@ -18,7 +18,7 @@ export const useTooltips = () => {
     const tooltipRef = useRef<HTMLDivElement | null>(null);
     const [selected, setSelected] = useState<number | false>(false);
 
-    const [rerender, forceRerender] = useState<number>(0);
+    const [rerender, forceRerender] = useState<number>(-1);
     
     // filling the array with given elementRefs + event handling
     useEffect(() => {

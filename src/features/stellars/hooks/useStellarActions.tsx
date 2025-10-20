@@ -1,57 +1,74 @@
-import { useRef, useState } from "react";
-import { useStellarContext } from "../context/StellarContext";
-import { useStellarHover } from "./useStellarHover";
-import { useStellarPositions } from "./useStellarPositions";
-import { usePopup } from "../../../hooks/usePopup";
-import { MessageBox } from "../../messagebox/components/MessageBox";
-import { StellarWaitingPopup } from "../components/StellarWaitingPopup";
+import { useRef, useState } from 'react';
+import { usePopup } from '../../../hooks/usePopup';
+import { MessageBox } from '../../messagebox/components/MessageBox';
+import { StellarWaitingPopup } from '../components/StellarWaitingPopup';
+import { useStellarContext } from '../context/StellarContext';
+import { useStellarHover } from './useStellarHover';
+import { useStellarPositions } from './useStellarPositions';
 
-export const useStellarActions = (contextSelected?: number, onAction?: () => void) => {
-    const [state, setState] = useStellarContext();
-    
+export const useStellarActions = (hoveredMenu?: number | false, onAction?: () => void) => {
+    const [state, dispatch] = useStellarContext();
+
     // stellar hover
     const hover = useStellarHover();
 
-    // regenerating 
+    // regenerating
     const positions = useStellarPositions();
     const isGenerating = useRef<boolean>(false);
-    
+
     const regenPositions = () => {
-        if(isGenerating.current)
-            return;
+        if (isGenerating.current) return;
 
         positions.generate();
         isGenerating.current = true;
-        setTimeout(() => { isGenerating.current = false }, 5000);
-    }
+        setTimeout(() => {
+            isGenerating.current = false;
+        }, 3000);
+    };
 
     // clearing
     const clearMessageBox = usePopup(
-    <MessageBox
+        <MessageBox
             title='Are you sure?'
-            description={`You're about to <u>delete ${state.selected === false && contextSelected === undefined ? '<b>all</b> stellars' : '<b>this</b> stellar'}</u>`}
-            onInteract={f => { 
-                if(f) {
-                    if(state.selected === false && contextSelected === undefined) {
-                        setState(prev => ({ ...prev, stellars: [] }));
+            description={`You're about to <u>delete ${
+                state.selectedIdx === false
+                    ? '<b>all</b> stellars'
+                    : '<b>this</b> stellar'
+            }</u>`}
+            onInteract={(f) => {
+                if (f) {
+                    if(hoveredMenu !== false && hoveredMenu !== undefined) {
+                        dispatch({ type: 'STELLAR_DELETE', idx: hoveredMenu });
                     } else {
-                        setState(prev => ({ ...prev, 
-                            stellars: prev.stellars.filter(stellar => stellar.idx !== (contextSelected ?? state.selected)),
-                            selected: false
-                        }))
+                        if (state.selectedIdx === false) {
+                            dispatch({ type: 'STELLARS_WIPE' });
+                        } else {
+                            dispatch({ type: 'STELLAR_DELETE_CURRENT' });
+                            dispatch({ type: 'STELLAR_FOCUS', idx: false });
+                        }
                     }
+
                     onAction?.();
                 }
                 clearMessageBox.setShown(false);
-            }}/>);
+            }}
+        />
+    );
 
-    const [waitingPopupText, setWaitingPopupText] = useState<string[]>(['Click on an orb you want to move.', 'and then <b>click again</b> to move it there (or <u>Esc</u>)']);
-    const waitingPopup = usePopup(<StellarWaitingPopup text={waitingPopupText}/>, false);
-            
+    const [waitingPopupText, setWaitingPopupText] = useState<string[]>([
+        'Click on an orb you want to move.',
+        'and then <b>click again</b> to move it there (or <u>Esc</u>)',
+    ]);
+    const waitingPopup = usePopup(
+        <StellarWaitingPopup text={waitingPopupText} />,
+        false
+    );
+
     return {
         regenPositions,
         hover,
         clearMessageBox,
-        waitingPopup, setWaitingPopupText
+        waitingPopup,
+        setWaitingPopupText,
     };
-}
+};

@@ -15,6 +15,7 @@ import { GithubRepositorySettings } from './GithubRepositorySettings';
 
 import { motion } from 'motion/react';
 import type React from 'react';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import type { GithubReducerAction } from '../context/reducer/GithubReducer';
 
 export const GithubDescription = () => {
@@ -28,14 +29,22 @@ export const GithubDescription = () => {
         />
     );
 
+    const tooltips = useTooltips();
+
     return (
         <>
+            {tooltips.render()}
             {settingsPopup.render()}
 
             <div className='github-description'>
                 <div className='github-description-topline'>
                     <h4>About</h4>
-                    <Button onClick={() => settingsPopup.setShown(true)}>
+                    <Button
+                        onClick={() => settingsPopup.setShown(true)}
+                        ref={(el) =>
+                            tooltips.set(0, 'Global settings', el, 'left')
+                        }
+                    >
                         <img
                             className='github-img'
                             src={gearImg}
@@ -47,6 +56,9 @@ export const GithubDescription = () => {
                 <h4>{state.data.description.about}</h4>
 
                 <GithubDescriptionTopics state={state} />
+                <p>Readme</p>
+                <p>Activity</p>
+                
                 <GithubDescriptionNumbers state={state} dispatch={dispatch} />
 
                 <hr />
@@ -69,8 +81,6 @@ const GithubDescriptionTopics = ({ state }: TopicsProps) => {
                 </div>
             ))}
 
-            <p>Readme</p>
-            <p>Activity</p>
         </div>
     );
 };
@@ -114,8 +124,12 @@ interface NumbersProps {
 }
 
 const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
+    const tooltips = useTooltips();
+
     return (
         <>
+            {tooltips.render()}
+
             <div className='github-description-numbers'>
                 <div className='github-flex' style={{ gap: '0.2rem' }}>
                     <img src={starImg} alt='' className='github-img' />
@@ -131,6 +145,7 @@ const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
 
                 <div className='github-flex'>
                     <Button
+                        ref={(el) => tooltips.set(0, 'Add 1 star', el, 'left')}
                         onClick={() => {
                             dispatch({ type: 'DESCRIPTION_INCREMENT_STARS' });
                         }}
@@ -139,6 +154,7 @@ const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
                     </Button>
 
                     <Button
+                        ref={(el) => tooltips.set(1, 'Remove 1 star', el, 'up')}
                         onClick={() =>
                             dispatch({ type: 'DESCRIPTION_DECREMENT_STARS' })
                         }
@@ -163,6 +179,9 @@ const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
 
                 <div className='github-flex'>
                     <Button
+                        ref={(el) =>
+                            tooltips.set(2, 'Add 1 watching', el, 'left')
+                        }
                         onClick={() =>
                             dispatch({ type: 'DESCRIPTION_INCREMENT_WATCHING' })
                         }
@@ -171,6 +190,9 @@ const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
                     </Button>
 
                     <Button
+                        ref={(el) =>
+                            tooltips.set(3, 'Remove 1 watching', el, 'up')
+                        }
                         onClick={() =>
                             dispatch({ type: 'DESCRIPTION_DECREMENT_WATCHING' })
                         }
@@ -195,6 +217,7 @@ const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
 
                 <div className='github-flex'>
                     <Button
+                        ref={(el) => tooltips.set(4, 'Add 1 fork', el, 'left')}
                         onClick={() =>
                             dispatch({ type: 'DESCRIPTION_INCREMENT_FORKS' })
                         }
@@ -203,6 +226,7 @@ const GithubDescriptionNumbers = ({ state, dispatch }: NumbersProps) => {
                     </Button>
 
                     <Button
+                        ref={(el) => tooltips.set(5, 'Remove 1 fork', el, 'up')}
                         onClick={() =>
                             dispatch({ type: 'DESCRIPTION_DECREMENT_FORKS' })
                         }

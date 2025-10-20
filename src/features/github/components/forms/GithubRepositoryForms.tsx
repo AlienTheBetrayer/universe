@@ -50,6 +50,14 @@ export const GithubRepositoryForms = ({ search }: Props) => {
                 (form) =>
                     found.indexOf(form.idx) !== -1 && (
                         <GithubRepositoryFormsElement
+                            ref={(el) =>
+                                tooltips.set(
+                                    form.idx,
+                                    `Edit ${form.name}`,
+                                    el,
+                                    'right'
+                                )
+                            }
                             key={form.idx}
                             form={form}
                         />

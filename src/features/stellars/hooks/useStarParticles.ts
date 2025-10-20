@@ -1,8 +1,11 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { useMemo } from "react"
-import type { Points } from "three";
+import { useFrame, useThree } from '@react-three/fiber';
+import { useMemo } from 'react';
+import type { Points } from 'three';
 
-export const useStarParticles = (ref: React.RefObject<Points | null>, count: number = 1000) => {
+export const useStarParticles = (
+    ref: React.RefObject<Points | null>,
+    count: number = 1000
+) => {
     const { viewport, pointer } = useThree();
 
     const data = useMemo(() => {
@@ -17,15 +20,15 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
             velocities[i * 2 + 1] = 0;
         }
 
-        return { positions, velocities }
+        return { positions, velocities };
     }, [count]);
 
-    useFrame(state => {
+    useFrame((state) => {
         if (ref.current) {
             const t = state.clock.getElapsedTime();
             const pos = ref.current.geometry.attributes.position.array;
-            const cursorX = pointer.x * viewport.width / 2;
-            const cursorY = pointer.y * viewport.height / 2;
+            const cursorX = (pointer.x * viewport.width) / 2;
+            const cursorY = (pointer.y * viewport.height) / 2;
 
             for (let i = 0; i < count; ++i) {
                 const chance = Math.random() > 0.9995;
@@ -47,11 +50,17 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
                     }
                 }
 
-                if (pos[i * 2] > viewport.width / 2 || pos[i * 2] < -viewport.width / 2) {
+                if (
+                    pos[i * 2] > viewport.width / 2 ||
+                    pos[i * 2] < -viewport.width / 2
+                ) {
                     data.velocities[i * 2] *= -1;
                 }
 
-                if (pos[i * 2 + 1] > viewport.height / 2 || pos[i * 2 + 1] < -viewport.height / 2) {
+                if (
+                    pos[i * 2 + 1] > viewport.height / 2 ||
+                    pos[i * 2 + 1] < -viewport.height / 2
+                ) {
                     data.velocities[i * 2 + 1] *= -1;
                 }
 
@@ -78,4 +87,4 @@ export const useStarParticles = (ref: React.RefObject<Points | null>, count: num
     });
 
     return data;
-}
+};

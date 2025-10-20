@@ -1,8 +1,8 @@
-import { useRef } from "react";
-import { useStarParticles } from "../hooks/useStarParticles";
-import { Points } from "three";
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
-import { useLocalStore } from "../../../zustand/localStore";
+import { useRef } from 'react';
+import { Points } from 'three';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useLocalStore } from '../../../zustand/localStore';
+import { useStarParticles } from '../hooks/useStarParticles';
 
 export const StellarParticles = () => {
     const ref = useRef<Points>(null);
@@ -13,10 +13,16 @@ export const StellarParticles = () => {
     return (
         <points ref={ref}>
             <bufferGeometry>
-                <bufferAttribute attach='attributes-position' args={[particles.positions, 2]}/>
+                <bufferAttribute
+                    attach='attributes-position'
+                    args={[particles.positions, 2]}
+                />
             </bufferGeometry>
 
-            <pointsMaterial size={theme === 'dark' ? 0.01 : 0.03} color={theme === 'dark' ? '#555' : '#000'}/>
+            <pointsMaterial
+                size={theme === 'dark' ? 0.01 : 0.03}
+                color={theme === 'dark' ? '#555' : '#000'}
+            />
         </points>
-    )
-}
+    );
+};

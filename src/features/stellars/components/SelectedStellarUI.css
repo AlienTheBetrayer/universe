@@ -15,7 +15,7 @@
     .selected-stellar-ui-left {
         left: 4%;
     }
-    
+
     .selected-stellar-ui-right {
         right: 4%;
     }
@@ -29,8 +29,8 @@
         width: 70%;
         height: 150px;
         margin: 0 auto;
-    } 
-    
+    }
+
     .selected-stellar-ui-right {
         bottom: 4rem;
         top: unset;
@@ -41,14 +41,15 @@
         margin: 0 auto;
     }
 
-    .selected-stellar-ui-left h3, .selected-stellar-ui-right h3 {
+    .selected-stellar-ui-left h3,
+    .selected-stellar-ui-right h3 {
         font-size: var(--font-h3);
     }
 }
 
 @media (max-width: 640px) {
-    .selected-stellar-ui-left, .selected-stellar-ui-right {
+    .selected-stellar-ui-left,
+    .selected-stellar-ui-right {
         width: 90%;
     }
 }
-

@@ -16,7 +16,7 @@ export type GithubReducerAction =
           type: 'DESCRIPTION_SET';
           about: string;
           topics: string[];
-          repoName: string;
+          repositoryName: string;
       }
     | { type: 'DESCRIPTION_INCREMENT_STARS' }
     | { type: 'DESCRIPTION_DECREMENT_STARS' }
@@ -84,7 +84,7 @@ export const GithubReducer = (
                         ...state.data.description,
                         about: action.about,
                         topics: action.topics,
-                        repositoryName: action.repoName,
+                        repositoryName: action.repositoryName,
                     },
                 },
             };

@@ -14,7 +14,7 @@ export const useUpdatingDate = (
             if (!date) return;
 
             const seconds = differenceInSeconds(new Date(), date);
-            if (secondsEnabled && seconds > 60) {
+            if (secondsEnabled && seconds < 60) {
                 setFormattedDate(
                     `${seconds}s ago`
                 );

@@ -4,16 +4,22 @@ import './SelectedStellarUI.css';
 import { StellarCard } from './StellarCard';
 
 export const SelectedStellarUI = () => {
-    const [state, ] = useStellarContext();
+    const [state] = useStellarContext();
 
     return (
         <AnimatePresence>
-            { state.selected !== false && (
+            {state.selectedIdx !== false && (
                 <>
-                    <StellarCard idx={state.selected} side='second' className='selected-stellar-ui-right'/>
-                    <StellarCard idx={state.selected} side='first' className='selected-stellar-ui-left'/>
+                    <StellarCard
+                        side='second'
+                        className='selected-stellar-ui-right'
+                    />
+                    <StellarCard
+                        side='first'
+                        className='selected-stellar-ui-left'
+                    />
                 </>
             )}
         </AnimatePresence>
-    )
-}
+    );
+};
