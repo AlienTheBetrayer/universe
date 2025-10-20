@@ -7,7 +7,6 @@
     border-radius: 8px;
 }
 
-
 /* topline */
 .github-commits-topline {
     display: flex;
@@ -16,7 +15,6 @@
     min-height: 48px;
     border-bottom: 1px solid var(--background-7);
 }
-
 
 /* main */
 .github-commits-main {

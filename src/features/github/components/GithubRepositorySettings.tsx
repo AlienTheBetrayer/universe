@@ -1,140 +1,208 @@
-import { useState } from 'react';
+import { motion } from 'motion/react';
+import React, { useState } from 'react';
+import { useHotkeys } from '../../../hooks/useHotkeys';
+import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { Button } from '../../ui/Button/components/Button';
 import { Input } from '../../ui/Input/components/Input';
-import { useGithubContext } from '../context/GithubContext'
-import './GithubRepositorySettings.css'
-import { motion } from 'motion/react'
-import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { HotkeyTooltip } from '../../hotkeytooltip/components/HotkeyTooltip';
-import { useHotkeys } from '../../../hooks/useHotkeys';
+import { useGithubContext } from '../context/GithubContext';
+import './GithubRepositorySettings.css';
 
 interface Props {
     onInteract?: () => void;
 }
 
 export const GithubRepositorySettings = ({ onInteract }: Props) => {
-    const [context, setContext] = useGithubContext();
+    const [state, dispatch] = useGithubContext();
 
-    const [description, setDescription] = useState<string>(context.data.description.about);
-    const [repoName, setRepoName] = useState<string>(context.data.repositoryName);
-    const [topics, setTopics] = useState<string>(context.data.description.topics.join(' '));
-    const [languagesChecked, setLanguagesChecked] = useState<boolean>(context.data.visibility.languages);
-    const [packagesChecked, setPackagesChecked] = useState<boolean>(context.data.visibility.packages);
-    const [releasesChecked, setReleasesChecked] = useState<boolean>(context.data.visibility.releases);
+    const about = useState<string>(state.data.description.about);
+    const repoName = useState<string>(state.data.description.repositoryName);
+    const topics = useState<string>(state.data.description.topics.join(' '));
+    const languagesChecked = useState<boolean>(state.data.visibility.languages);
+    const packagesChecked = useState<boolean>(state.data.visibility.packages);
+    const releasesChecked = useState<boolean>(state.data.visibility.releases);
 
     const handleSave = () => {
-        setContext(prev => ({ ...prev,
-            data: { 
-                ...prev.data, 
-                description: { 
-                    ...prev.data.description, 
-                    about: description, 
-                    topics: topics.trim().length === 0 ? [] : topics.split(' ')
-                }, visibility: {
-                    languages: languagesChecked,
-                    packages: packagesChecked,
-                    releases: releasesChecked
-                },
-                repositoryName: repoName
-        }}));
+        dispatch({
+            type: 'DESCRIPTION_SET',
+            about: about[0],
+            repoName: repoName[0],
+            topics: topics[0].split(' '),
+        });
+
+        dispatch({
+            type: 'VISIBILITY_SET',
+            languages: languagesChecked[0],
+            releases: releasesChecked[0],
+            packages: packagesChecked[0],
+        });
+
         onInteract?.();
-    }
+    };
 
     useHotkeys([
-        { hotkey: 'Enter', action: () => handleSave(), ignoreFocus: true }
+        { hotkey: 'Enter', action: () => handleSave(), ignoreFocus: true },
     ]);
 
+    return (
+        <motion.div
+            className='github-repository-settings'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <GithubRepositorySettingsTopline onInteract={onInteract} />
+            <GithubRepositorySettingsContent
+                topics={topics}
+                repoName={repoName}
+                about={about}
+                languagesChecked={languagesChecked}
+                packagesChecked={packagesChecked}
+                releasesChecked={releasesChecked}
+            />
+            <GithubRepositorySettingsBottom handleSave={handleSave} />
+        </motion.div>
+    );
+};
+
+interface ToplineProps {
+    onInteract?: () => void;
+}
+
+const GithubRepositorySettingsTopline = ({ onInteract }: ToplineProps) => {
     const tooltips = useTooltips();
 
     return (
-        <>
-            { tooltips.render() }
-            
-            <motion.div className='github-repository-settings'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}>
-                {/* top */}
-                <div className='github-repository-settings-topline'>
-                    <h4>Edit repository details</h4>
-                    <Button 
-                    className='github-cancel-button'
-                    ref={el => tooltips.set(0, 'Cancel', el, 'up', 16)}
-                    onClick={() => onInteract?.()}>
-                        ✕
-                    </Button>
-                </div>
+        <div className='github-repository-settings-topline'>
+            {tooltips.render()}
 
-                {/* content */}
-                <div className='github-repository-settings-content'>
-                    <div className='github-repository-settings-field'>
-                        <h4>Repository name</h4>
-                        <Input
-                        placeholder='Repository name'
-                        value={repoName}
-                        onChange={val => setRepoName(val)}/>
-                    </div>
+            <h4>Edit repository details</h4>
+            <Button
+                className='github-cancel-button'
+                ref={(el) => tooltips.set(0, 'Cancel', el, 'up', 16)}
+                onClick={() => onInteract?.()}
+            >
+                ✕
+            </Button>
+        </div>
+    );
+};
 
-                    <div className='github-repository-settings-field'>
-                        <h4>Description</h4>
-                        <Input
-                        placeholder='Description'
-                        value={description}
-                        onChange={val => setDescription(val)}/>
-                    </div>
-
-                    <div className='github-repository-settings-field'>
-                        <h4>Topics <small>(separate with spaces)</small></h4>
-                        <Input 
-                        placeholder='Topics'
-                        value={topics}
-                        onChange={val => setTopics(val)}/>
-                    </div>
-
-                    <div className='github-repository-settings-field'>
-                        <h4>Include in the form description </h4>
-
-                        <label>
-                            <input type='checkbox'
-                            checked={languagesChecked}
-                            onChange={e => setLanguagesChecked(e.target.checked)}/>
-                            Languages
-                        </label>
-
-                        <label>
-                            <input type='checkbox'
-                            checked={packagesChecked}
-                            onChange={e => setPackagesChecked(e.target.checked)}/>
-                            Packages
-                        </label>
-
-                        <label>
-                            <input type='checkbox'
-                            checked={releasesChecked}
-                            onChange={e => setReleasesChecked(e.target.checked)}/>
-                            Releases
-                        </label>
-                    </div>
-                </div>
-
-                {/* bottom */}
-                <div className='github-repository-settings-bottom'>
-                    <Button 
-                    ref={el => tooltips.set(1, 'Cancel', el, 'down', 16)}
-                    onClick={() => onInteract?.()}>
-                        Cancel
-                        <HotkeyTooltip hotkeys={['Esc']}/>
-                    </Button>
-
-                    <Button 
-                    ref={el => tooltips.set(2, 'Apply and update changes', el, 'down', 16)}
-                    onClick={handleSave}
-                    className='github-save-button'>
-                        Save changes
-                        <HotkeyTooltip hotkeys={['Enter']}/>
-                    </Button>
-                </div>
-            </motion.div>
-        </>
-    )
+interface ContentProps {
+    repoName: [string, React.Dispatch<React.SetStateAction<string>>];
+    about: [string, React.Dispatch<React.SetStateAction<string>>];
+    topics: [string, React.Dispatch<React.SetStateAction<string>>];
+    languagesChecked: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+    packagesChecked: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+    releasesChecked: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
 }
+
+const GithubRepositorySettingsContent = ({
+    repoName,
+    about,
+    topics,
+    languagesChecked,
+    packagesChecked,
+    releasesChecked,
+}: ContentProps) => {
+    return (
+        <div className='github-repository-settings-content'>
+            <div className='github-repository-settings-field'>
+                <h4>Repository name</h4>
+                <Input
+                    placeholder='Repository name'
+                    value={repoName[0]}
+                    onChange={(val) => repoName[1](val)}
+                />
+            </div>
+
+            <div className='github-repository-settings-field'>
+                <h4>Description</h4>
+                <Input
+                    placeholder='Description'
+                    value={about[0]}
+                    onChange={(val) => about[1](val)}
+                />
+            </div>
+
+            <div className='github-repository-settings-field'>
+                <h4>
+                    Topics <small>(separate with spaces)</small>
+                </h4>
+                <Input
+                    placeholder='Topics'
+                    value={topics[0]}
+                    onChange={(val) => topics[1](val)}
+                />
+            </div>
+
+            <div className='github-repository-settings-field'>
+                <h4>Include in the form description </h4>
+
+                <label>
+                    <input
+                        type='checkbox'
+                        checked={languagesChecked[0]}
+                        onChange={(e) => languagesChecked[1](e.target.checked)}
+                    />
+                    Languages
+                </label>
+
+                <label>
+                    <input
+                        type='checkbox'
+                        checked={packagesChecked[0]}
+                        onChange={(e) => packagesChecked[1](e.target.checked)}
+                    />
+                    Packages
+                </label>
+
+                <label>
+                    <input
+                        type='checkbox'
+                        checked={releasesChecked[0]}
+                        onChange={(e) => releasesChecked[1](e.target.checked)}
+                    />
+                    Releases
+                </label>
+            </div>
+        </div>
+    );
+};
+
+interface BottomProps {
+    onInteract?: () => void;
+    handleSave: () => void;
+}
+
+const GithubRepositorySettingsBottom = ({
+    onInteract,
+    handleSave,
+}: BottomProps) => {
+    const tooltips = useTooltips();
+
+    return (
+        <div className='github-repository-settings-bottom'>
+            {tooltips.render()}
+
+            <Button
+                ref={(el) => tooltips.set(0, 'Cancel', el, 'down', 16)}
+                onClick={() => onInteract?.()}
+            >
+                Cancel
+                <HotkeyTooltip hotkeys={['Esc']} />
+            </Button>
+
+            <Button
+                ref={(el) =>
+                    tooltips.set(1, 'Apply and update changes', el, 'down', 16)
+                }
+                onClick={handleSave}
+                className='github-save-button'
+            >
+                Save changes
+                <HotkeyTooltip hotkeys={['Enter']} />
+            </Button>
+        </div>
+    );
+};

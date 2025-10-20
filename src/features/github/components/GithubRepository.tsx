@@ -14,34 +14,30 @@ export const GithubRepository = () => {
     const [context] = useGithubContext();
 
     // search (handled in <GithubRepositoryTopline/> and used in <GithubRepositoryForms/>)
-    const [searchValue, setSearchValue] = useState<string>('');
+    const [search, setSearch] = useState<string>('');
 
     const pageSelector = () => {
-        switch(context.page) {
+        switch (context.page) {
             case 'forms':
-                return <GithubRepositoryForms searchValue={searchValue}/>;
+                return <GithubRepositoryForms search={search} />;
             case 'commits':
-                return <GithubCommits searchValue={searchValue}/>
+                return <GithubCommits search={search} />;
         }
-    }
+    };
 
     return (
         <div className='github-repository'>
-            <GithubRepositoryTopline searchState={[searchValue, setSearchValue]}/>
-            
-            { pageSelector() }
+            <GithubRepositoryTopline search={[search, setSearch]} />
+
+            {pageSelector()}
 
             <AnimatePresence>
-                { context.data.currentForm !== false && (
-                    <GithubFormEdit/>
-                )}
+                {context.data.currentForm !== false && <GithubFormEdit />}
             </AnimatePresence>
 
             <AnimatePresence>
-                { context.data.currentCommit !== false && (
-                    <GithubCommitView/>
-                )}
+                {context.data.currentCommit !== false && <GithubCommitView />}
             </AnimatePresence>
         </div>
-    )   
-}
+    );
+};

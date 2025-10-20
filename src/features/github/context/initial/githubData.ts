@@ -1,5 +1,5 @@
-import type { GithubData } from "../GithubContext";
-import { GithubDefaultBranch } from "./githubStrings";
+import type { GithubData } from '../types/data';
+import { GithubDefaultBranch } from './githubStrings';
 
 export const GithubContextInitialData: GithubData = {
     description: {
@@ -8,6 +8,7 @@ export const GithubContextInitialData: GithubData = {
         stars: 0,
         watching: 0,
         topics: [],
+        repositoryName: 'The Universe',
     },
     visibility: {
         languages: true,
@@ -18,22 +19,23 @@ export const GithubContextInitialData: GithubData = {
     globalIdx: 0,
     currentForm: false,
     currentCommit: false,
-    repositoryName: 'The Universe',
     branches: [
         {
             idx: 0,
             commits: [],
             name: GithubDefaultBranch,
-            forms: [{
-                idx: 0,
-                name: 'hi',
-                tags: ['bye', 'whatever'],
-                content: {
-                    author: 'Gleb',
-                    email: 'alienthebusinessman@gmail.com',
-                    message: 'hello there?'
-                }
-            }]
+            forms: [
+                {
+                    idx: 0,
+                    name: 'hi',
+                    tags: ['bye', 'whatever'],
+                    content: {
+                        author: 'Gleb',
+                        email: 'alienthebusinessman@gmail.com',
+                        message: 'hello there?',
+                    },
+                },
+            ],
         },
-    ]
+    ],
 };

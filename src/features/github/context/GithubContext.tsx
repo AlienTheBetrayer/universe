@@ -1,81 +1,23 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { useLocalStore } from "../../../zustand/localStore";
-import { GithubContextInitialData } from "./initial/githubData";
+import React, { createContext, useContext, useReducer } from 'react';
+import { useProviderSaveLoad } from './hooks/useProviderSaveLoad';
+import { GithubContextInitialData } from './initial/githubData';
+import {
+    GithubReducer,
+    type GithubReducerAction,
+} from './reducer/GithubReducer';
+import type { GithubData } from './types/data';
+import type { GithubPage } from './types/dataTypes';
 
-// interfaces and data types
-export interface FormContent {
-    author: string;
-    email: string;
-    message: string;
-}
-
-
-export interface Form {
-    idx: number;
-    name: string;
-    tags: string[];
-    content?: FormContent;
-}
-
-type CommitType = 'form-creation' | 'form-deletion' | 'form-content-change';
-
-export interface Commit {
-    idx: number;
-    name: string;
-    description: string;
-    pushedAt: number;
-    type: CommitType;
-    data?: FormContent;
-    form?: Form;
-}
-
-export interface Branch {
-    idx: number;
-    name: string;
-    forms: Form[];
-    commits: Commit[];
-}
-
-
-interface Description {
-    about: string;
-    stars: number;
-    watching: number;
-    forks: number;
-    topics: string[];
-}
-
-interface ElementsVisibility {
-    releases: boolean;
-    packages: boolean;
-    languages: boolean;
-}
-
-
-// main data interface
-export interface GithubData {
-    description: Description;
-    repositoryName: string;
-    visibility: ElementsVisibility;
-    
-    branches: Branch[];
-    currentBranch: number;
-    currentForm: number | false;
-    currentCommit: number | false;
-    globalIdx: number;
-}
-
-type GithubPage = 'forms' | 'commits';
-
-// context data
-interface GithubContextData {
+export interface GithubContextData {
     tutorialVisible: boolean;
     page: GithubPage;
-
     data: GithubData;
 }
 
-type GithubContextType = [GithubContextData, React.Dispatch<React.SetStateAction<GithubContextData>>];
+type GithubContextType = [
+    GithubContextData,
+    React.Dispatch<GithubReducerAction>
+];
 
 export const GithubContext = createContext<GithubContextType | null>(null);
 
@@ -84,51 +26,24 @@ interface Props {
 }
 
 // provider + localstorage zustand handling
-export const GithubProvider = ({ children }: Props)  => {
-    const [state, setState] = useState<GithubContextData>(
-        {
-            tutorialVisible: true,
-            page: 'forms',
-            data: GithubContextInitialData
-        }
-    );
+export const GithubProvider = ({ children }: Props) => {
+    const [state, dispatch] = useReducer(GithubReducer, {
+        tutorialVisible: true,
+        page: 'forms',
+        data: GithubContextInitialData,
+    });
 
-    const localStore = useLocalStore();
+    useProviderSaveLoad(state, dispatch);
 
-    // loading data
-    useEffect(() => {
-        setState(prev => ({ ...prev,
-            data: localStore.githubData, 
-            tutorialVisible: !localStore.tutorialSeen.contact
-        }));
-    }, []);
-
-    // saving data
-    useEffect(() => {
-        const save = () => localStore.setGithubData(state.data);
-
-        const timeout = setTimeout(save, 3000);
-
-        window.addEventListener('pagehide', save);
-        document.addEventListener('visibilitychange', save);
-
-        return () => {
-            clearTimeout(timeout);
-            window.removeEventListener('pagehide', save);
-            document.removeEventListener('visibilitychange', save);
-        }
-    }, [state.data]);
-    
     return (
-        <GithubContext.Provider value={[state, setState]}>
-            { children }
+        <GithubContext.Provider value={[state, dispatch]}>
+            {children}
         </GithubContext.Provider>
-    )
-}
+    );
+};
 
 export const useGithubContext = () => {
     const context = useContext(GithubContext);
-    if(!context)
-        throw new Error('useGithubContext() is used incorrectly.');
+    if (!context) throw new Error('useGithubContext() is used incorrectly.');
     return context;
-}
+};

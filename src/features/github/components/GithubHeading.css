@@ -20,12 +20,10 @@
         justify-content: space-between;
     }
 
-    .github-heading-buttons>button {
+    .github-heading-buttons > button {
         width: 100%;
     }
 }
-
-
 
 .github-heading-avatar {
     border-radius: 1000px;
