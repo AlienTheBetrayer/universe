@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export const useArrayTypewriter = (
     words: string[],
-    scrollProgress: MotionValue<number>,
+    scrollProgress: MotionValue<number>
 ) => {
     const [wordIdx, setWordIdx] = useState<number>(0);
     const [letterIdx, setLetterIdx] = useState<number>(-1);
@@ -19,7 +19,7 @@ export const useArrayTypewriter = (
                 let letterIndex = Math.floor(
                     (progress % segmentSize) *
                         words.length *
-                        words[wordIndex].length,
+                        words[wordIndex].length
                 );
 
                 if (progress == 0) letterIndex = -1;
@@ -30,7 +30,7 @@ export const useArrayTypewriter = (
         };
 
         const unsub = scrollProgress.on('change', (progress) =>
-            handle(progress),
+            handle(progress)
         );
         return () => unsub();
     }, [scrollProgress]);
