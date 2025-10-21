@@ -1,6 +1,6 @@
 import './HorizontalCatalogue.css';
-import { motion, useScroll, useSpring, useTransform } from "motion/react"
-import type React from "react";
+import { motion, useScroll, useSpring, useTransform } from 'motion/react';
+import type React from 'react';
 import { HorizontalCatalogueItem } from './HorizontalCatalogueItem';
 import { useEffect, useState } from 'react';
 import { usePopup } from '../../../hooks/usePopup';
@@ -19,21 +19,29 @@ interface Props {
     containerRef: React.RefObject<HTMLElement | null>;
 }
 
-export const HorizontalCatalogue = ({ className='', items, containerRef }: Props) => {
+export const HorizontalCatalogue = ({
+    className = '',
+    items,
+    containerRef,
+}: Props) => {
     // scroll logic
     const { scrollYProgress } = useScroll({ target: containerRef });
-    const scrollYSpring = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
-    const clampedY = useTransform(scrollYSpring, 
+    const scrollYSpring = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 20,
+    });
+    const clampedY = useTransform(
+        scrollYSpring,
         [0, 0.2, 0.8, 1],
-        [0, 0, 1, 1]);
-    const scrollYPercentage = useTransform(clampedY, val => `${-val * 100}%`);
+        [0, 0, 1, 1],
+    );
+    const scrollYPercentage = useTransform(clampedY, (val) => `${-val * 100}%`);
 
     // items ordering + popup logic
     const [orderedItems, setOrderedItems] = useState<CatalogueItem[]>([]);
-    
+
     useEffect(() => {
-        if(orderedItems.length == 0)
-            return;
+        if (orderedItems.length == 0) return;
 
         orderedPopup.setShown(true);
 
@@ -45,30 +53,48 @@ export const HorizontalCatalogue = ({ className='', items, containerRef }: Props
         return () => clearTimeout(timeout);
     }, [orderedItems]);
 
-    const orderedPopup = usePopup(<HorizontalOrderPopup items={orderedItems}/>, false);
+    const orderedPopup = usePopup(
+        <HorizontalOrderPopup items={orderedItems} />,
+        false,
+    );
 
     return (
         <div className={`horizontal-content-container ${className}`}>
             <div className='horizontal-content'>
-                <h3><mark>Catalogue</mark> items: ({items.length} available)</h3>
+                <h3>
+                    <mark>Catalogue</mark> items: ({items.length} available)
+                </h3>
 
                 <div className='horizontal-scroll-container'>
-                    <motion.div className='horizontal-scroll'
-                    style={{ x: scrollYPercentage }}>
-                        { items.map((item, idx) => (
-                            <HorizontalCatalogueItem key={idx} item={item} onPurchase={item => setOrderedItems(prev => [...prev, item])}/>
+                    <motion.div
+                        className='horizontal-scroll'
+                        style={{ x: scrollYPercentage }}
+                    >
+                        {items.map((item, idx) => (
+                            <HorizontalCatalogueItem
+                                key={idx}
+                                item={item}
+                                onPurchase={(item) =>
+                                    setOrderedItems((prev) => [...prev, item])
+                                }
+                            />
                         ))}
 
                         <p className='horizontal-scroll-and-more'>MORE...</p>
                     </motion.div>
                 </div>
 
-                <motion.div className='horizontal-scroll-progress' style={{ scaleX: clampedY }}/>
+                <motion.div
+                    className='horizontal-scroll-progress'
+                    style={{ scaleX: clampedY }}
+                />
 
-                <p className='catalogue-scroll-tooltip'>Scroll down to see <mark>more</mark></p>
+                <p className='catalogue-scroll-tooltip'>
+                    Scroll down to see <mark>more</mark>
+                </p>
             </div>
 
-            { orderedPopup.render() }
+            {orderedPopup.render()}
         </div>
-    )
-}
+    );
+};

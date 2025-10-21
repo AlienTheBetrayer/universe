@@ -65,7 +65,7 @@ export const GithubPopover = ({
                                     'Apply and update changes',
                                     el,
                                     'down',
-                                    16
+                                    16,
                                 )
                             }
                             onClick={() => {

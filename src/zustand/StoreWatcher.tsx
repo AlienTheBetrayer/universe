@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useLocalStore } from "./localStore";
+import { useEffect } from 'react';
+import { useLocalStore } from './localStore';
 
 export const StoreWatcher = () => {
     const localStore = useLocalStore();
@@ -7,6 +7,6 @@ export const StoreWatcher = () => {
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', localStore.theme);
     }, [localStore.theme]);
-    
+
     return null;
-}
+};

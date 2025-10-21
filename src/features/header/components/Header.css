@@ -39,7 +39,6 @@ header > nav {
     backdrop-filter: blur(8px);
     background: var(--background-fulltransparent);
     pointer-events: all;
-
 }
 
 /* mobile button to show the menu */
@@ -101,7 +100,6 @@ header .home-button:hover img {
     transform: scale(1.05);
 }
 
-
 .header-forge-button {
     background: linear-gradient(193deg, rgb(2, 2, 158), rgb(39, 39, 240));
 }
@@ -111,7 +109,11 @@ header .home-button:hover img {
 }
 
 .header-github-button {
-    background: linear-gradient(105deg, var(--background-4), var(--background-9));
+    background: linear-gradient(
+        105deg,
+        var(--background-4),
+        var(--background-9)
+    );
     color: var(--foreground-last) !important;
 }
 
@@ -119,11 +121,9 @@ header .home-button:hover img {
     filter: invert(var(--header-invert));
 }
 
-
-
-
 /* styles */
-header .universal-link:hover, header .universal-link:active {
+header .universal-link:hover,
+header .universal-link:active {
     color: var(--header-link);
 }
 

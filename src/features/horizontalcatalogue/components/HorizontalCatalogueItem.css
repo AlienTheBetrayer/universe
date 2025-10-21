@@ -7,7 +7,7 @@
     height: 200px;
     width: 200px;
     flex-shrink: 0;
-    
+
     border: 2px dashed var(--background-10);
     border-radius: 32px;
     transition: 0.15s;
@@ -34,7 +34,6 @@
 
 .horizontal-catalogue-item-order-button:hover {
     background-color: var(--background-3);
-
 }
 
 .horizontal-catalogue-item-order-button:active {

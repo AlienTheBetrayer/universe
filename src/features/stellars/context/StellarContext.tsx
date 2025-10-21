@@ -16,7 +16,7 @@ interface Props {
 export const StellarProvider = ({ children }: Props) => {
     const [state, dispatch] = useReducer(
         StellarReducer,
-        StellarContextInitialData
+        StellarContextInitialData,
     );
 
     // tutorial loading

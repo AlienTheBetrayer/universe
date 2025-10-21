@@ -6,7 +6,7 @@
 .horizontal-lock {
     display: flex;
     flex-direction: column;
-    gap: 1rem;  
+    gap: 1rem;
     height: 600px;
 
     position: sticky;

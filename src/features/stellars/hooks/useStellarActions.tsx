@@ -5,7 +5,10 @@ import { StellarWaitingPopup } from '../components/StellarWaitingPopup';
 import { useStellarContext } from '../context/StellarContext';
 import { useStellarHover } from './useStellarHover';
 
-export const useStellarActions = (hoveredMenu?: number | false, onAction?: () => void) => {
+export const useStellarActions = (
+    hoveredMenu?: number | false,
+    onAction?: () => void,
+) => {
     const [state, dispatch] = useStellarContext();
 
     // stellar hover
@@ -22,7 +25,7 @@ export const useStellarActions = (hoveredMenu?: number | false, onAction?: () =>
             }</u>`}
             onInteract={(f) => {
                 if (f) {
-                    if(hoveredMenu !== false && hoveredMenu !== undefined) {
+                    if (hoveredMenu !== false && hoveredMenu !== undefined) {
                         dispatch({ type: 'STELLAR_DELETE', idx: hoveredMenu });
                     } else {
                         if (state.selectedIdx === false) {
@@ -37,7 +40,7 @@ export const useStellarActions = (hoveredMenu?: number | false, onAction?: () =>
                 }
                 clearMessageBox.setShown(false);
             }}
-        />
+        />,
     );
 
     const [waitingPopupText, setWaitingPopupText] = useState<string[]>([
@@ -46,7 +49,7 @@ export const useStellarActions = (hoveredMenu?: number | false, onAction?: () =>
     ]);
     const waitingPopup = usePopup(
         <StellarWaitingPopup text={waitingPopupText} />,
-        false
+        false,
     );
 
     return {

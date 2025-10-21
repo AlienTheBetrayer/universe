@@ -36,9 +36,9 @@ export const PopoverBranch = ({ onCancel }: Props) => {
                 .filter(
                     (b) =>
                         b.name.toLowerCase().includes(search.toLowerCase()) ||
-                        search.trim().length === 0
+                        search.trim().length === 0,
                 )
-                .map((b) => b.idx)
+                .map((b) => b.idx),
         );
     }, [search]);
 
@@ -169,7 +169,7 @@ const BranchList = ({ state, found, dispatch, onCancel }: ListProps) => {
                                 </div>
                             )}
                         </Button>
-                    )
+                    ),
             )}
         </>
     );

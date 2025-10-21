@@ -19,7 +19,7 @@
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    
+
     background-color: var(--background-3-transparent);
     backdrop-filter: blur(2px);
 }
@@ -45,7 +45,7 @@
     padding: 0.5rem 1rem;
     border-radius: 16px;
     height: 48px;
-    
+
     position: absolute;
     bottom: 1rem;
     left: 50%;

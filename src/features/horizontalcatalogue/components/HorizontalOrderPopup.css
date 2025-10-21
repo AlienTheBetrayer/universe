@@ -26,7 +26,7 @@
     pointer-events: auto;
 }
 
-.horizontal-order-popup:hover .horizontal-order-popup-idx, 
+.horizontal-order-popup:hover .horizontal-order-popup-idx,
 .horizontal-order-popup:active .horizontal-order-popup-idx {
     opacity: 0.2;
 }

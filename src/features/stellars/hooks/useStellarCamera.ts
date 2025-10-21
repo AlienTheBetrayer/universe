@@ -5,12 +5,12 @@ import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useStellarContext } from '../context/StellarContext';
 
 export const useStellarCamera = (camera: Camera) => {
-    const [state, ] = useStellarContext();
+    const [state] = useStellarContext();
     const isMobile = useMediaQuery(768);
 
     useEffect(() => {
         const stellar = state.stellars.find(
-            (s) => s.idx === state.selectedIdx
+            (s) => s.idx === state.selectedIdx,
         )!;
         const position =
             state.selectedIdx !== false

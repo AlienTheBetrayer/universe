@@ -16,7 +16,7 @@ export interface GithubContextData {
 
 type GithubContextType = [
     GithubContextData,
-    React.Dispatch<GithubReducerAction>
+    React.Dispatch<GithubReducerAction>,
 ];
 
 export const GithubContext = createContext<GithubContextType | null>(null);

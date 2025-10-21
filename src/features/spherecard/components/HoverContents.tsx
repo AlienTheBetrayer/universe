@@ -6,11 +6,11 @@ interface Props {
     description?: string;
 }
 
-export const HoverContents = ({ title, description }: Props ) => {
+export const HoverContents = ({ title, description }: Props) => {
     return (
         <div className='sphere-card-hover-contents'>
             <h2>{title}</h2>
-            <p dangerouslySetInnerHTML={{ __html: description ?? '' }}/>
+            <p dangerouslySetInnerHTML={{ __html: description ?? '' }} />
         </div>
-    )
-}
+    );
+};

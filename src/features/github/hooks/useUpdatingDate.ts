@@ -5,7 +5,7 @@ export const useUpdatingDate = (
     date: Date,
     secondsEnabled: boolean = true,
     updateIntervalMs: number = 1000,
-    deps: DependencyList = []
+    deps: DependencyList = [],
 ) => {
     const [formattedDate, setFormattedDate] = useState<string>('');
 
@@ -15,12 +15,10 @@ export const useUpdatingDate = (
 
             const seconds = differenceInSeconds(new Date(), date);
             if (secondsEnabled && seconds < 60) {
-                setFormattedDate(
-                    `${seconds}s ago`
-                );
+                setFormattedDate(`${seconds}s ago`);
             } else {
                 setFormattedDate(
-                    formatDistanceToNow(new Date(date), { addSuffix: true })
+                    formatDistanceToNow(new Date(date), { addSuffix: true }),
                 );
             }
         };

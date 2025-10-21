@@ -7,18 +7,20 @@ import { RevealingContainer } from '../../../revealingcontainer/components/Revea
 export const ShiftingSection = () => {
     const ref = useRef<HTMLElement>(null);
     const isVisible = useInView(ref, { once: true });
-    
+
     return (
         <RevealingContainer>
             <section ref={ref} className='shifting-section container'>
-                <h2>Shifting <mark>capabilities</mark></h2>
+                <h2>
+                    Shifting <mark>capabilities</mark>
+                </h2>
 
-                { isVisible && (
+                {isVisible && (
                     <div className='shifting-section-grid'>
-                        <CircleGrid/>
+                        <CircleGrid />
                     </div>
                 )}
             </section>
         </RevealingContainer>
-    )
-}
+    );
+};

@@ -22,12 +22,12 @@ export const StellarCard = ({ side, className = '' }: CardProps) => {
     const [heading, setHeading] = useState<string>(
         (side === 'first'
             ? stellar?.content?.firstTitle
-            : stellar?.content?.secondTitle) ?? ''
+            : stellar?.content?.secondTitle) ?? '',
     );
     const [description, setDescription] = useState<string>(
         (side === 'first'
             ? stellar?.content?.firstDescription
-            : stellar?.content?.secondDescription) ?? ''
+            : stellar?.content?.secondDescription) ?? '',
     );
 
     // syncing it (when we move to the other stellar)
@@ -35,12 +35,12 @@ export const StellarCard = ({ side, className = '' }: CardProps) => {
         setHeading(
             (side === 'first'
                 ? stellar?.content?.firstTitle
-                : stellar?.content.secondTitle) ?? ''
+                : stellar?.content.secondTitle) ?? '',
         );
         setDescription(
             (side === 'first'
                 ? stellar?.content?.firstDescription
-                : stellar?.content.secondDescription) ?? ''
+                : stellar?.content.secondDescription) ?? '',
         );
     }, [state.selectedIdx]);
 

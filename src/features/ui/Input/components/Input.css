@@ -56,12 +56,11 @@
     width: 28px;
     height: 28px;
     pointer-events: none;
-}   
+}
 
 /* validity */
 .ui-input-valid {
     border: 2px solid hsl(225, 82%, 56%);
-
 }
 
 .ui-input-invalid {

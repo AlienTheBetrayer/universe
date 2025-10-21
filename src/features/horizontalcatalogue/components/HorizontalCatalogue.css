@@ -33,7 +33,9 @@
 }
 
 .horizontal-scroll-container {
-    mask-image: linear-gradient(to right, transparent, black 6%), linear-gradient(to left, transparent, black 6%);
+    mask-image:
+        linear-gradient(to right, transparent, black 6%),
+        linear-gradient(to left, transparent, black 6%);
     mask-composite: intersect;
 }
 
@@ -43,11 +45,14 @@
     }
 }
 
-
 .horizontal-scroll-progress {
     width: 100%;
     height: 1px;
-    background: linear-gradient(to right, var(--background-10), rgb(74, 74, 226));
+    background: linear-gradient(
+        to right,
+        var(--background-10),
+        rgb(74, 74, 226)
+    );
     transform-origin: left;
 }
 

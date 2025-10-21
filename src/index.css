@@ -3,24 +3,23 @@
 
 /* animations  */
 @theme inline {
-  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+    --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
 }
 
 @keyframes spotlight {
-  0% {
-    opacity: 0;
-    transform: translate(-72%, -62%) scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -40%) scale(1);
-  }
+    0% {
+        opacity: 0;
+        transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -40%) scale(1);
+    }
 }
-
 
 /* root variables (dark theme) */
 :root {
-    /* background */ 
+    /* background */
     --background: rgb(8, 9, 12);
     --background-2: rgb(11, 12, 14);
     --background-3: rgb(20, 21, 24);
@@ -120,7 +119,6 @@
     --font-p: 0.8rem;
 }
 
-
 /* global tags */
 * {
     font-family: 'Inter', sans-serif;
@@ -157,7 +155,8 @@
     color: var(--selection-color);
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     background-color: var(--background);
@@ -185,18 +184,33 @@ h4 {
     text-align: left;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     text-align: center;
     margin: 0;
 }
 
-p, span, a, button, input, textarea, label {
+p,
+span,
+a,
+button,
+input,
+textarea,
+label {
     font-size: var(--font-p);
     color: var(--foreground);
     font-weight: 550;
 }
 
-p, span, a, button, input, h1, h2, label {
+p,
+span,
+a,
+button,
+input,
+h1,
+h2,
+label {
     letter-spacing: -0.39px;
     line-height: 1em;
 }
@@ -208,7 +222,10 @@ label {
     color-scheme: dark;
 }
 
-b, i, u, mark {
+b,
+i,
+u,
+mark {
     all: unset;
     pointer-events: none;
 }
@@ -250,7 +267,7 @@ hr {
 .container {
     display: flex;
     flex-direction: column;
-    
+
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;

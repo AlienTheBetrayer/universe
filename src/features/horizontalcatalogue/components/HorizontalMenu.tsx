@@ -2,11 +2,14 @@ import { useDebounced } from '../../../hooks/useDebounced';
 import { Input } from '../../ui/Input/components/Input';
 import type { CatalogueItem } from './HorizontalCatalogue';
 import './HorizontalMenu.css';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 interface Props {
     className?: string;
-    items: [CatalogueItem[], React.Dispatch<React.SetStateAction<CatalogueItem[]>>];
+    items: [
+        CatalogueItem[],
+        React.Dispatch<React.SetStateAction<CatalogueItem[]>>,
+    ];
 }
 
 export const HorizontalMenu = ({ className, items }: Props) => {
@@ -15,24 +18,33 @@ export const HorizontalMenu = ({ className, items }: Props) => {
     const debouncedSearch = useDebounced<string>(searchValue, '');
 
     useEffect(() => {
-        items[1](prev => prev.map(c => ({ 
-            ...c,
-            visible: 
-            c.content.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-            c.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-            debouncedSearch.trim().length === 0
-        })));
+        items[1]((prev) =>
+            prev.map((c) => ({
+                ...c,
+                visible:
+                    c.content
+                        .toLowerCase()
+                        .includes(debouncedSearch.toLowerCase()) ||
+                    c.title
+                        .toLowerCase()
+                        .includes(debouncedSearch.toLowerCase()) ||
+                    debouncedSearch.trim().length === 0,
+            })),
+        );
     }, [debouncedSearch]);
-    
+
     return (
         <div className={`horizontal-menu ${className}`}>
             <div className='horizontal-menu-content'>
-                <h3>{ debouncedSearch === '' ? <u>Filter</u> : 'Filter' } items</h3>
+                <h3>
+                    {debouncedSearch === '' ? <u>Filter</u> : 'Filter'} items
+                </h3>
                 <Input
-                type='search' 
-                value={searchValue} 
-                onChange={val => setSearchValue(val)}/>
+                    type='search'
+                    value={searchValue}
+                    onChange={(val) => setSearchValue(val)}
+                />
             </div>
         </div>
-    )
-}
+    );
+};

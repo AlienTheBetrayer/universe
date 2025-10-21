@@ -81,7 +81,7 @@ export const GithubTutorial = () => {
         (page) => {
             if (page > 0 && !localStore.tutorialSeen.contact)
                 localStore.toggleTutorialSeen(true, 'contact');
-        }
+        },
     );
 
     useEffect(() => {

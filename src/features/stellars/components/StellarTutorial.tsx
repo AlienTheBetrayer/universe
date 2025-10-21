@@ -76,7 +76,7 @@ export const StellarTutorial = () => {
         (page) => {
             if (page > 0 && !localStore.tutorialSeen.stellar)
                 localStore.toggleTutorialSeen(true, 'stellar');
-        }
+        },
     );
 
     // sync context and the visibility of tutorial

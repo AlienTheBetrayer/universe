@@ -16,7 +16,9 @@ export const GithubRepositorySettings = ({ onInteract }: Props) => {
     const [state, dispatch] = useGithubContext();
 
     const about = useState<string>(state.data.description.about);
-    const repositoryName = useState<string>(state.data.description.repositoryName);
+    const repositoryName = useState<string>(
+        state.data.description.repositoryName,
+    );
     const topics = useState<string>(state.data.description.topics.join(' '));
     const languagesChecked = useState<boolean>(state.data.visibility.languages);
     const packagesChecked = useState<boolean>(state.data.visibility.packages);

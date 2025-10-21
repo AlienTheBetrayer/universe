@@ -9,10 +9,13 @@ interface Props {
 
 export const BackgroundBlur = ({ onInteract, zIndex = 30 }: Props) => {
     return (
-        <motion.div className='background-blur' style={{ zIndex: zIndex }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={() => onInteract?.()}/>
-    )
-}
+        <motion.div
+            className='background-blur'
+            style={{ zIndex: zIndex }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => onInteract?.()}
+        />
+    );
+};

@@ -10,20 +10,18 @@ export const Paint = () => {
 
     return (
         <div ref={containerRef} className='paint-container'>
-            <canvas ref={canvasRef}
+            <canvas
+                ref={canvasRef}
+                onMouseDown={drawing.start}
+                onMouseMove={drawing.proceed}
+                onMouseUp={drawing.stop}
+                onMouseLeave={drawing.stop}
+                onTouchStart={drawing.start}
+                onTouchMove={drawing.proceed}
+                onTouchEnd={drawing.stop}
+            ></canvas>
 
-            onMouseDown={drawing.start}
-            onMouseMove={drawing.proceed}
-            onMouseUp={drawing.stop}
-            onMouseLeave={drawing.stop}
-
-            onTouchStart={drawing.start}
-            onTouchMove={drawing.proceed}
-            onTouchEnd={drawing.stop}>
-
-            </canvas>
-
-            <PaintUI controller={drawing}/>
+            <PaintUI controller={drawing} />
         </div>
-    )
-}
+    );
+};

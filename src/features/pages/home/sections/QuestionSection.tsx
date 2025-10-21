@@ -16,53 +16,70 @@ export const QuestionSection = () => {
     return (
         <RevealingContainer>
             <section className='question-section' ref={sectionRef}>
-                <h2>Something <mark>unknown</mark> and <mark>mysterious...</mark></h2>
+                <h2>
+                    Something <mark>unknown</mark> and{' '}
+                    <mark>mysterious...</mark>
+                </h2>
                 <AnimatePresence mode='sync'>
-                    { !questionContextData.revealed ? (
-                        <motion.div key='question-canvas'
+                    {!questionContextData.revealed ? (
+                        <motion.div
+                            key='question-canvas'
                             className='question-canvas-wrapper'
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ delay: 1, duration: 1.5, ease: 'easeInOut' }}
-                            onClick={() => setQuestionContextData(prev => ({ ...prev, revealed: true }))}
-                            style={{ cursor: 'pointer' }}>
-                            { isVisible && (
-                                <QuestionCanvas/>
-                            )}
-                            <DefaultContent/>
+                            transition={{
+                                delay: 1,
+                                duration: 1.5,
+                                ease: 'easeInOut',
+                            }}
+                            onClick={() =>
+                                setQuestionContextData((prev) => ({
+                                    ...prev,
+                                    revealed: true,
+                                }))
+                            }
+                            style={{ cursor: 'pointer' }}
+                        >
+                            {isVisible && <QuestionCanvas />}
+                            <DefaultContent />
                         </motion.div>
                     ) : (
-                        <motion.div key='aurora-canvas'
+                        <motion.div
+                            key='aurora-canvas'
                             className='question-canvas-wrapper'
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ delay: 1, duration: 1.5, ease: 'easeInOut' }}>
-                            { isVisible && (
-                                <QuestionAuroraCanvas/>
-                            )}
-                            <RevealedContent/>
+                            transition={{
+                                delay: 1,
+                                duration: 1.5,
+                                ease: 'easeInOut',
+                            }}
+                        >
+                            {isVisible && <QuestionAuroraCanvas />}
+                            <RevealedContent />
                         </motion.div>
                     )}
                 </AnimatePresence>
             </section>
         </RevealingContainer>
-    )
-}
+    );
+};
 
 const DefaultContent = () => {
-    return (
-        <div className='question-default-content'/>
-    )
-}
+    return <div className='question-default-content' />;
+};
 
 const RevealedContent = () => {
     return (
         <div className='question-revealed-content'>
-            <LinkButton className='question-revealed-contact-link' to='/contact'>
+            <LinkButton
+                className='question-revealed-contact-link'
+                to='/contact'
+            >
                 Proceed to contact.
             </LinkButton>
         </div>
-    )
-}
+    );
+};

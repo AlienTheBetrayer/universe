@@ -12,7 +12,7 @@ export const GithubCommits = ({ search }: Props) => {
     // context
     const [state, dispatch] = useGithubContext();
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
 
     // tooltips
@@ -55,7 +55,7 @@ export const GithubCommits = ({ search }: Props) => {
                                     key={idx}
                                     commit={commit}
                                 />
-                            )
+                            ),
                     )}
                 </div>
             </div>

@@ -4,7 +4,7 @@ import type { Points } from 'three';
 
 export const useStarParticles = (
     ref: React.RefObject<Points | null>,
-    count: number = 1000
+    count: number = 1000,
 ) => {
     const { viewport, pointer } = useThree();
 

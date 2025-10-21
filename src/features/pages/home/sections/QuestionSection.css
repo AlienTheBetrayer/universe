@@ -42,11 +42,19 @@
 
 .question-revealed-contact-link:hover {
     backdrop-filter: blur(16px);
-    background: linear-gradient(17deg, var(--background-transparent), var(--background-3));
+    background: linear-gradient(
+        17deg,
+        var(--background-transparent),
+        var(--background-3)
+    );
 }
 
 .question-revealed-contact-link:active {
-    background: linear-gradient(317deg, var(--background-transparent), var(--background-5));
+    background: linear-gradient(
+        317deg,
+        var(--background-transparent),
+        var(--background-5)
+    );
 }
 
 @media (max-width: 640px) {

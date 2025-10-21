@@ -10,7 +10,7 @@ export const useStellarContextMenu = () => {
             onInteract={() => menuPopup.setShown(false)}
             ref={ref}
         />,
-        false
+        false,
     );
     const cursor = useCursorRef();
 

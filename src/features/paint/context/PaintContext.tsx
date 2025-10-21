@@ -1,11 +1,14 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
 
 interface PaintContextData {
     selectedColor: string;
     brushSize: number;
 }
 
-type PaintContextType = [PaintContextData, React.Dispatch<React.SetStateAction<PaintContextData>>];
+type PaintContextType = [
+    PaintContextData,
+    React.Dispatch<React.SetStateAction<PaintContextData>>,
+];
 
 export const PaintContext = createContext<PaintContextType | null>(null);
 
@@ -16,19 +19,18 @@ interface Props {
 export const PaintProvider = ({ children }: Props) => {
     const [data, setData] = useState<PaintContextData>({
         selectedColor: 'theme',
-        brushSize: 1
+        brushSize: 1,
     });
-    
+
     return (
         <PaintContext.Provider value={[data, setData]}>
-            { children }
+            {children}
         </PaintContext.Provider>
-    )
-}
+    );
+};
 
 export const usePaintContext = () => {
     const context = useContext(PaintContext);
-    if(!context)
-        throw new Error('usePaintContext is used incorrectly.');
+    if (!context) throw new Error('usePaintContext is used incorrectly.');
     return context;
-}
+};

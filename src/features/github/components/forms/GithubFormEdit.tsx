@@ -27,7 +27,7 @@ export const GithubFormEdit = ({}: Props) => {
     // state + variables
     const [state, dispatch] = useGithubContext();
     const branch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
     const form = branch?.forms?.find((f) => f.idx === state.data.currentForm);
 
@@ -74,7 +74,7 @@ interface ToplineProps {
 const GithubFormEditTopline = ({ state, dispatch }: ToplineProps) => {
     // state
     const branch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
     const form = branch?.forms?.find((f) => f.idx === state.data.currentForm);
 
@@ -152,7 +152,7 @@ const GithubFormEditMain = ({
 }: MainProps) => {
     // state
     const branch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
     const form = branch?.forms?.find((f) => f.idx === state.data.currentForm);
 
@@ -298,7 +298,7 @@ const GithubFormEditBottom = ({
 
                 formDeleteMessageBox.setShown(false);
             }}
-        />
+        />,
     );
 
     // tooltips

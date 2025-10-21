@@ -15,12 +15,12 @@ export const GithubCommitView = ({}: Props) => {
     // state
     const [state] = useGithubContext();
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
 
     // previous commit find
     const thisCommit = thisBranch?.commits.find(
-        (c) => c.idx === state.data.currentCommit
+        (c) => c.idx === state.data.currentCommit,
     );
     let prevCommit: Commit | undefined = undefined;
 
@@ -121,7 +121,7 @@ const CommitViewMain = ({ thisCommit, prevCommit }: MainProps) => {
         email: diffChars(prevContent?.email ?? '', thisContent?.email ?? ''),
         message: diffChars(
             prevContent?.message ?? '',
-            thisContent?.message ?? ''
+            thisContent?.message ?? '',
         ),
     };
 
@@ -140,8 +140,8 @@ const CommitViewMain = ({ thisCommit, prevCommit }: MainProps) => {
                             background: c.removed
                                 ? 'hsla(0, 59%, 35%, 0.5)'
                                 : c.added
-                                ? 'hsla(132, 59%, 35%, 0.5)'
-                                : '#00000000',
+                                  ? 'hsla(132, 59%, 35%, 0.5)'
+                                  : '#00000000',
                         }}
                     >
                         {c.value}

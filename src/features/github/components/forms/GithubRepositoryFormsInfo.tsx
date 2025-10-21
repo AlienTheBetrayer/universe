@@ -12,7 +12,7 @@ import { useUpdatingDate } from '../../hooks/useUpdatingDate';
 export const GithubRepositoryFormsInfo = () => {
     const [state, dispatch] = useGithubContext();
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
 
     return (
@@ -59,7 +59,7 @@ const GithubRepositoryFormsInfoMain = ({ thisBranch, dispatch }: MainProps) => {
         new Date(thisBranch?.commits.at(-1)?.pushedAt ?? 0),
         false,
         60000,
-        [thisBranch?.commits]
+        [thisBranch?.commits],
     );
 
     const tooltips = useTooltips();

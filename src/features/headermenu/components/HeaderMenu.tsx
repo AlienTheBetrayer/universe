@@ -19,37 +19,52 @@ export const HeaderMenu = ({ onInteract, className }: Props) => {
     const { theme, toggleTheme } = useLocalStore();
 
     return (
-        <motion.nav 
-        className={`header-menu ${className}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}>
-            <UniversalLink 
-            to='/' 
-            className='home-button'
-            >Home</UniversalLink>
-            
-            <ToggleButton
-            style={{ marginBottom: 'auto' }}
-            value={theme == 'light'} onToggled={() => toggleTheme()} />
+        <motion.nav
+            className={`header-menu ${className}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <UniversalLink to='/' className='home-button'>
+                Home
+            </UniversalLink>
 
-            <LinkButton className='header-big-button header-github-button' to='/github'
+            <ToggleButton
+                style={{ marginBottom: 'auto' }}
+                value={theme == 'light'}
+                onToggled={() => toggleTheme()}
+            />
+
+            <LinkButton
+                className='header-big-button header-github-button'
+                to='/github'
             >
-                <img src={forkImg} alt=''/>
+                <img src={forkImg} alt='' />
                 Github Emulation
             </LinkButton>
-            
-            <LinkButton className='header-big-button header-stellar-button' to='/stellarnetwork'>
-                <img src={stellarImg} alt=''/>
+
+            <LinkButton
+                className='header-big-button header-stellar-button'
+                to='/stellarnetwork'
+            >
+                <img src={stellarImg} alt='' />
                 Stellar Network
             </LinkButton>
 
-            <LinkButton className='header-big-button header-forge-button' to='/forge'>
-                <img src={launchImg} alt=''/>
+            <LinkButton
+                className='header-big-button header-forge-button'
+                to='/forge'
+            >
+                <img src={launchImg} alt='' />
                 Forge
             </LinkButton>
 
-            <Button className='header-close-menu' onClick={() => onInteract?.()} >Close Menu</Button>
+            <Button
+                className='header-close-menu'
+                onClick={() => onInteract?.()}
+            >
+                Close Menu
+            </Button>
         </motion.nav>
-    )
-}
+    );
+};

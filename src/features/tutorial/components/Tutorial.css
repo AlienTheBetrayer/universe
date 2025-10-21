@@ -101,14 +101,13 @@
 
 @media (max-width: 640px) {
     .tutorial-pc-button {
-        display: none;   
+        display: none;
     }
 
     .tutorial-container .tutorial-mobile-button {
         display: flex;
     }
 }
-
 
 /* hotkey tooltips */
 .tutorial-tooltip {

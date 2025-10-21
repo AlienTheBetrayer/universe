@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from 'react';
 
 interface HotkeyAction {
     hotkey: string;
@@ -10,16 +10,24 @@ interface HotkeyAction {
 export const useHotkeys = (hotkeys: HotkeyAction[]) => {
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
-            const match = hotkeys.find(h => h.hotkey.toLowerCase() === e.key.toLowerCase());
-            
+            const match = hotkeys.find(
+                (h) => h.hotkey.toLowerCase() === e.key.toLowerCase(),
+            );
+
             const active = document.activeElement as HTMLElement | null;
-            if ((match?.ignoreFocus ?? false) === false && active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA" || active.isContentEditable)) {
+            if (
+                (match?.ignoreFocus ?? false) === false &&
+                active &&
+                (active.tagName === 'INPUT' ||
+                    active.tagName === 'TEXTAREA' ||
+                    active.isContentEditable)
+            ) {
                 return;
             }
 
-            if(match) {
-                if(match.ctrl === true) {
-                    if(e.ctrlKey || e.metaKey) {
+            if (match) {
+                if (match.ctrl === true) {
+                    if (e.ctrlKey || e.metaKey) {
                         e.preventDefault();
                         match.action();
                     }
@@ -28,9 +36,9 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
                     match.action();
                 }
             }
-        }
+        };
 
         window.addEventListener('keydown', handle);
         return () => window.removeEventListener('keydown', handle);
     }, [hotkeys]);
-}
+};

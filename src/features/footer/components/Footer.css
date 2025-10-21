@@ -16,7 +16,11 @@ footer nav {
     margin: 0 auto;
     padding: 1rem;
 
-    background: linear-gradient(35deg, var(--background-2-transparent), var(--background-transparent));
+    background: linear-gradient(
+        35deg,
+        var(--background-2-transparent),
+        var(--background-transparent)
+    );
     border-radius: 20px;
     backdrop-filter: blur(4px);
 }

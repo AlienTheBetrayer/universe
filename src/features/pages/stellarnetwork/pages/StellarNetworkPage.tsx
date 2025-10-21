@@ -1,5 +1,5 @@
 import './StellarNetworkPage.css';
-import { Page } from "../../../layout/components/Page"
+import { Page } from '../../../layout/components/Page';
 import { StellarCanvas } from '../../../stellars/components/StellarCanvas';
 import { SelectedStellarUI } from '../../../stellars/components/SelectedStellarUI';
 import { StellarUI } from '../../../stellars/components/StellarUI';
@@ -11,18 +11,20 @@ export const StellarNetworkPage = () => {
     return (
         <Page>
             <StellarProvider>
-                <motion.div className='stellar-wrapper'
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.5, ease: 'backInOut'}}>
-                    <StellarCanvas/>
+                <motion.div
+                    className='stellar-wrapper'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.5, ease: 'backInOut' }}
+                >
+                    <StellarCanvas />
 
-                    <SelectedStellarUI/>
+                    <SelectedStellarUI />
 
-                    <StellarUI/>
-                    <StellarTutorial/>
+                    <StellarUI />
+                    <StellarTutorial />
                 </motion.div>
             </StellarProvider>
         </Page>
-    )
-}
+    );
+};

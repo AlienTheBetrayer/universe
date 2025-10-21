@@ -7,10 +7,12 @@ interface Props {
 
 export const PopoverBackground = ({ onInteract }: Props) => {
     return (
-        <motion.div className='popover-background'
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={() => onInteract?.()}/>
-    )
-}
+        <motion.div
+            className='popover-background'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => onInteract?.()}
+        />
+    );
+};

@@ -153,7 +153,7 @@ const StellarUIBottomBar = ({ state, dispatch, actions }: BottomProps) => {
                             2,
                             isSelected ? 'Wipe this orb' : 'Wipe all orbs',
                             el,
-                            'right'
+                            'right',
                         );
                     }}
                     onClick={() => actions.clearMessageBox.setShown(true)}
@@ -240,7 +240,7 @@ const StellarUIBottomBar = ({ state, dispatch, actions }: BottomProps) => {
                                     6,
                                     'Regenerate positions',
                                     el,
-                                    'left'
+                                    'left',
                                 );
                             }}
                             onClick={() => {

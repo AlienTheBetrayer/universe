@@ -28,7 +28,7 @@ export const GithubHeading = () => {
                 if (flag) dispatch({ type: 'DATA_SET_INITIAL' });
                 wipeMessageBox.setShown(false);
             }}
-        />
+        />,
     );
 
     const buttons: GithubHeadingButton[] = [
@@ -48,13 +48,13 @@ export const GithubHeading = () => {
             content: 'Fork',
             image: forkImg,
             action: () => dispatch({ type: 'DESCRIPTION_INCREMENT_FORKS' }),
-            tooltip: '🍴 Fork'
+            tooltip: '🍴 Fork',
         },
         {
             content: 'Wipe',
             image: deleteImg,
             action: () => wipeMessageBox.setShown(true),
-            tooltip: '☠️ Wipe Everything'
+            tooltip: '☠️ Wipe Everything',
         },
     ];
 
@@ -84,12 +84,7 @@ export const GithubHeading = () => {
                             key={idx}
                             onClick={() => button.action()}
                             ref={(el) =>
-                                tooltips.set(
-                                    idx,
-                                    button.tooltip,
-                                    el,
-                                    'up'
-                                )
+                                tooltips.set(idx, button.tooltip, el, 'up')
                             }
                         >
                             {button.image && (

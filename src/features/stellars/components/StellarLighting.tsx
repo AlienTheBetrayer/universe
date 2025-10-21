@@ -16,7 +16,7 @@ export const StellarLighting = () => {
             lightRef.current.position.set(
                 (pointer.x * three.viewport.width) / 2,
                 (pointer.y * three.viewport.height) / 2,
-                1 + Math.sin(t) / 3
+                1 + Math.sin(t) / 3,
             );
         }
     });

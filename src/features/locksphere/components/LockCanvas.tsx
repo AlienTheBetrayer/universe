@@ -15,19 +15,18 @@ export const LockCanvas = ({ ref }: Props) => {
     const scrolledWithin = useScrollYWithin(0, 1, scrollYProgress);
 
     return (
-        <Canvas style={{ pointerEvents: 'none'}}>
-            <pointLight position={[10, 10, 10]} intensity={100}/>
-            <pointLight position={[-10, -10, -10]} intensity={100}/>
+        <Canvas style={{ pointerEvents: 'none' }}>
+            <pointLight position={[10, 10, 10]} intensity={100} />
+            <pointLight position={[-10, -10, -10]} intensity={100} />
 
-            <LockFigure progress={scrollYProgress}/>
-            <ForceField progress={scrollYProgress}/>
+            <LockFigure progress={scrollYProgress} />
+            <ForceField progress={scrollYProgress} />
 
-            { scrolledWithin && (
+            {scrolledWithin && (
                 <EffectComposer>
-                    <Bloom intensity={5} luminanceThreshold={0}/>
+                    <Bloom intensity={5} luminanceThreshold={0} />
                 </EffectComposer>
             )}
-
         </Canvas>
-    )
-}
+    );
+};

@@ -18,7 +18,16 @@ interface Props {
     autoFocus?: boolean;
 }
 
-export const Input = ({ valid, className, value, placeholder, onChange, onClear, type='input', autoFocus }: Props) => {
+export const Input = ({
+    valid,
+    className,
+    value,
+    placeholder,
+    onChange,
+    onClear,
+    type = 'input',
+    autoFocus,
+}: Props) => {
     const [internal, setInternal] = useState<string>('');
     const inputValue = value ?? internal;
 
@@ -27,19 +36,25 @@ export const Input = ({ valid, className, value, placeholder, onChange, onClear,
     const isVisible = useInView(ref);
 
     useHotkeys([
-        { hotkey: 'T', action: () => { 
-            if(isVisible && type === 'search') 
-                ref.current?.focus() } 
+        {
+            hotkey: 'T',
+            action: () => {
+                if (isVisible && type === 'search') ref.current?.focus();
+            },
         },
 
-        { hotkey: 'Escape', action: () => { 
-            if(isVisible && document.activeElement === ref.current)
-                ref.current?.blur() } 
-        , ignoreFocus: true }
+        {
+            hotkey: 'Escape',
+            action: () => {
+                if (isVisible && document.activeElement === ref.current)
+                    ref.current?.blur();
+            },
+            ignoreFocus: true,
+        },
     ]);
 
     useLayoutEffect(() => {
-        if(autoFocus) {
+        if (autoFocus) {
             requestAnimationFrame(() => {
                 ref.current?.focus();
             });
@@ -49,43 +64,46 @@ export const Input = ({ valid, className, value, placeholder, onChange, onClear,
     const ClearButton = () => {
         return (
             <Button
-            className='ui-input-clear-button' 
-            onClick={() => value === undefined ? setInternal('') : onClear?.() }>✕</Button>
-        )
-    }
+                className='ui-input-clear-button'
+                onClick={() =>
+                    value === undefined ? setInternal('') : onClear?.()
+                }
+            >
+                ✕
+            </Button>
+        );
+    };
 
     let inputClass = `ui-input ${className ?? ''}`;
-    if(valid !== undefined)
+    if (valid !== undefined)
         inputClass += `${valid ? 'ui-input-valid' : 'ui-input-invalid'}`;
 
     return (
         <div className={inputClass}>
-            <input 
-            style={{ paddingLeft: (type === 'search' ? '1.75rem' : '0')}}
-            ref={ref}
-            type='text'
-            placeholder={placeholder}
-            value={inputValue}
-            onChange={ e => value === undefined ? setInternal(e.target.value) : onChange?.(e.target.value) }/>
+            <input
+                style={{ paddingLeft: type === 'search' ? '1.75rem' : '0' }}
+                ref={ref}
+                type='text'
+                placeholder={placeholder}
+                value={inputValue}
+                onChange={(e) =>
+                    value === undefined
+                        ? setInternal(e.target.value)
+                        : onChange?.(e.target.value)
+                }
+            />
 
-            { type === 'search' && (
-                <img
-                src={searchImg} 
-                alt=''
-                className='ui-input-search-image'/>
+            {type === 'search' && (
+                <img src={searchImg} alt='' className='ui-input-search-image' />
             )}
 
-            { type === 'input' ? (
-                inputValue.length > 0 && <ClearButton/>
+            {type === 'input' ? (
+                inputValue.length > 0 && <ClearButton />
+            ) : inputValue.length > 0 ? (
+                <ClearButton />
             ) : (
-                inputValue.length > 0 ? (
-                    <ClearButton/>
-                ) : (
-                    <HotkeyTooltip
-                    className='search-hotkey' 
-                    hotkeys={['t']}/>
-                )
+                <HotkeyTooltip className='search-hotkey' hotkeys={['t']} />
             )}
         </div>
-    )
-}
+    );
+};

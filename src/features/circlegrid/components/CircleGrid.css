@@ -14,7 +14,7 @@
 }
 
 /* grid element */
-.circle-grid>div {
+.circle-grid > div {
     border-radius: 32px;
     border: 2px dashed var(--background-6);
     aspect-ratio: 1/1;
@@ -48,7 +48,6 @@
 .circle-grid .circle-grid-dots-selected {
     background-image: radial-gradient(#fff 1px, transparent 0);
 }
-
 
 /* tooltips / controller */
 .circle-grid-controller {

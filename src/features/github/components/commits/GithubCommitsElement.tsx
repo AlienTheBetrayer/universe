@@ -18,7 +18,7 @@ export const GithubCommitsElement = ({ commit }: Props) => {
     // state
     const [state, dispatch] = useGithubContext();
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
 
     // updating date
@@ -26,7 +26,7 @@ export const GithubCommitsElement = ({ commit }: Props) => {
         new Date(commit.pushedAt),
         true,
         1000,
-        thisBranch?.commits
+        thisBranch?.commits,
     );
 
     // function to choose between commit types

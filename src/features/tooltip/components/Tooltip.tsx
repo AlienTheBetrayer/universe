@@ -8,12 +8,14 @@ interface Props {
 
 export const Tooltip = ({ children, ref }: Props) => {
     return (
-        <motion.div className='tooltip'
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}>
-            <p dangerouslySetInnerHTML={{ __html: children }}/>
+        <motion.div
+            className='tooltip'
+            ref={ref}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <p dangerouslySetInnerHTML={{ __html: children }} />
         </motion.div>
-    )
-}
+    );
+};

@@ -14,7 +14,7 @@ export const GithubRepositoryForms = ({ search }: Props) => {
     // context + state variables
     const [context] = useGithubContext();
     const thisBranch = context.data.branches.find(
-        (b) => b.idx === context.data.currentBranch
+        (b) => b.idx === context.data.currentBranch,
     );
 
     // filter functionality
@@ -29,11 +29,11 @@ export const GithubRepositoryForms = ({ search }: Props) => {
                             .toLowerCase()
                             .includes(search.toLowerCase()) ||
                         form.tags.find((tag) =>
-                            tag.toLowerCase().includes(search.toLowerCase())
+                            tag.toLowerCase().includes(search.toLowerCase()),
                         ) ||
-                        search.trim().length === 0
+                        search.trim().length === 0,
                 )
-                .map((form) => form.idx)
+                .map((form) => form.idx),
         );
     }, [search, context.data]);
 
@@ -55,13 +55,13 @@ export const GithubRepositoryForms = ({ search }: Props) => {
                                     form.idx,
                                     `Edit ${form.name}`,
                                     el,
-                                    'right'
+                                    'right',
                                 )
                             }
                             key={form.idx}
                             form={form}
                         />
-                    )
+                    ),
             )}
         </div>
     );

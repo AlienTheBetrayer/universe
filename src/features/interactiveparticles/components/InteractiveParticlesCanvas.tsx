@@ -2,7 +2,7 @@ import './InteractiveParticlesCanvas.css';
 
 import { motion } from 'motion/react';
 
-import { Canvas } from "@react-three/fiber"
+import { Canvas } from '@react-three/fiber';
 import { InteractiveParticles } from './InteractiveParticles';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { useLocalStore } from '../../../zustand/localStore';
@@ -10,22 +10,27 @@ import { useInteractiveParticlesContext } from '../context/InteractiveParticlesC
 
 export const InteractiveParticlesCanvas = () => {
     const { theme } = useLocalStore();
-    const [context, ] = useInteractiveParticlesContext();
-    
+    const [context] = useInteractiveParticlesContext();
+
     return (
-        <motion.div className='interactive-particles-canvas-container'
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 3, delay: 1}}>
+        <motion.div
+            className='interactive-particles-canvas-container'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 3, delay: 1 }}
+        >
             <Canvas>
-                { (theme === 'dark' && context.bloomStrength > 0 ) && (
+                {theme === 'dark' && context.bloomStrength > 0 && (
                     <EffectComposer>
-                        <Bloom intensity={context.bloomStrength} luminanceThreshold={0.5}/>
+                        <Bloom
+                            intensity={context.bloomStrength}
+                            luminanceThreshold={0.5}
+                        />
                     </EffectComposer>
                 )}
 
-                <InteractiveParticles/>
+                <InteractiveParticles />
             </Canvas>
         </motion.div>
-    )
-}
+    );
+};

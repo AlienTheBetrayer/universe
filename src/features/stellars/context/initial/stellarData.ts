@@ -1,4 +1,4 @@
-import type { StellarState } from "../types/stellarData";
+import type { StellarState } from '../types/stellarData';
 
 export const StellarContextInitialData: StellarState = {
     stellars: [

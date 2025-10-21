@@ -49,7 +49,7 @@ interface Info1Props {
 
 const GithubRepositoryToplineInfo1 = ({ state }: Info1Props) => {
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
     const tags =
         thisBranch?.forms?.reduce((acc, form) => acc + form.tags.length, 0) ??
@@ -60,8 +60,8 @@ const GithubRepositoryToplineInfo1 = ({ state }: Info1Props) => {
 
     return (
         <div className='github-repository-topline-info'>
-            { tooltips.render() }
-            
+            {tooltips.render()}
+
             <div>
                 <PopoverButton
                     direction='bottom-right'
@@ -127,7 +127,7 @@ const GithubRepositoryToplineInfo2 = ({
     dispatch,
 }: Info2Props) => {
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
 
     useEffect(() => {
@@ -150,7 +150,7 @@ const GithubRepositoryToplineInfo2 = ({
 
                 branchDeleteMessageBox.setShown(false);
             }}
-        />
+        />,
     );
 
     return (
@@ -164,8 +164,8 @@ const GithubRepositoryToplineInfo2 = ({
                     state.page === 'forms'
                         ? 'forms'
                         : state.page === 'commits'
-                        ? 'commits'
-                        : ''
+                          ? 'commits'
+                          : ''
                 }`}
                 value={search[0]}
                 onChange={(val) => search[1](val)}

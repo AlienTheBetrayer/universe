@@ -68,7 +68,7 @@ export const Stellars = () => {
             const ux = dx / m;
             const uy = dy / m;
             const force = m / 8;
-            
+
             actualPos.x += ux * force;
             actualPos.y += uy * force;
 
@@ -136,9 +136,7 @@ export const Stellars = () => {
             >
                 <sphereGeometry args={[0.06]} />
                 <meshPhysicalMaterial
-                    color={`${
-                        state.selectedIdx === stellar.idx ? '#66a' : '#fff'
-                    }`}
+                    color={`${state.selectedIdx === stellar.idx ? '#66a' : '#fff'}`}
                     wireframe
                 />
             </mesh>
@@ -155,7 +153,7 @@ export const Stellars = () => {
                             dispatch({
                                 type: 'STELLAR_SET_MOVING',
                                 idx: stellar.idx,
-                            })
+                            }),
                         );
                     }
                 }}

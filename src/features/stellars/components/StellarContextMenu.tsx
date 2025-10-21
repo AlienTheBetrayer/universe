@@ -46,7 +46,7 @@ export const StellarContextMenu = ({ ref, onInteract }: Props) => {
                 Create
             </button>
 
-            { isHovering.current !== false && (
+            {isHovering.current !== false && (
                 <button
                     className='stellar-context-button'
                     onClick={() => actions.clearMessageBox.setShown(true)}

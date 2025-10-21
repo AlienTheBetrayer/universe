@@ -1,4 +1,4 @@
-import type { StellarState } from "../types/stellarData";
+import type { StellarState } from '../types/stellarData';
 
 export const findMax = (state: StellarState) => {
     if (state.stellars.length === 0) return -1;

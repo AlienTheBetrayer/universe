@@ -63,7 +63,7 @@ export type GithubReducerAction =
 
 export const GithubReducer = (
     state: GithubContextData,
-    action: GithubReducerAction
+    action: GithubReducerAction,
 ): GithubContextData => {
     switch (action.type) {
         // data
@@ -259,7 +259,7 @@ export const GithubReducer = (
                 data: {
                     ...state.data,
                     branches: state.data.branches.filter(
-                        (b) => b.idx !== state.data.currentBranch
+                        (b) => b.idx !== state.data.currentBranch,
                     ),
                 },
             };
@@ -309,13 +309,13 @@ export const GithubReducer = (
                                           ? {
                                                 ...f,
                                                 tags: f.tags.filter(
-                                                    (t) => t !== action.tag
+                                                    (t) => t !== action.tag,
                                                 ),
                                             }
-                                          : f
+                                          : f,
                                   ),
                               }
-                            : b
+                            : b,
                     ),
                 },
             };
@@ -334,10 +334,10 @@ export const GithubReducer = (
                                                 ...f,
                                                 tags: [...f.tags, action.tag],
                                             }
-                                          : f
+                                          : f,
                                   ),
                               }
-                            : b
+                            : b,
                     ),
                 },
             };
@@ -352,7 +352,7 @@ export const GithubReducer = (
                             ? {
                                   ...b,
                                   forms: b.forms.filter(
-                                      (f) => f.idx !== state.data.currentForm
+                                      (f) => f.idx !== state.data.currentForm,
                                   ),
                                   commits: [
                                       ...b.commits,
@@ -362,7 +362,7 @@ export const GithubReducer = (
                                               b.forms.find(
                                                   (f) =>
                                                       f.idx ===
-                                                      state.data.currentForm
+                                                      state.data.currentForm,
                                               )?.name
                                           } form deleted`,
                                           description: '',
@@ -371,7 +371,7 @@ export const GithubReducer = (
                                       },
                                   ],
                               }
-                            : b
+                            : b,
                     ),
                 },
             };
@@ -405,7 +405,7 @@ export const GithubReducer = (
                                       },
                                   ],
                               }
-                            : b
+                            : b,
                     ),
                 },
             };
@@ -427,7 +427,7 @@ export const GithubReducer = (
                                           form: b.forms.find(
                                               (f) =>
                                                   f.idx ===
-                                                  state.data.currentForm
+                                                  state.data.currentForm,
                                           ),
                                           name: action.commitName,
                                           description: action.commitDescription,
@@ -442,10 +442,10 @@ export const GithubReducer = (
                                                 ...f,
                                                 content: action.formContent,
                                             }
-                                          : f
+                                          : f,
                                   ),
                               }
-                            : b
+                            : b,
                     ),
                 },
             };

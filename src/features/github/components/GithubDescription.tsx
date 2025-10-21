@@ -26,7 +26,7 @@ export const GithubDescription = () => {
     const settingsPopup = usePopup(
         <GithubRepositorySettings
             onInteract={() => settingsPopup.setShown(false)}
-        />
+        />,
     );
 
     const tooltips = useTooltips();
@@ -58,7 +58,7 @@ export const GithubDescription = () => {
                 <GithubDescriptionTopics state={state} />
                 <p>Readme</p>
                 <p>Activity</p>
-                
+
                 <GithubDescriptionNumbers state={state} dispatch={dispatch} />
 
                 <hr />
@@ -80,7 +80,6 @@ const GithubDescriptionTopics = ({ state }: TopicsProps) => {
                     <p>{topic}</p>
                 </div>
             ))}
-
         </div>
     );
 };

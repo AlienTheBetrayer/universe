@@ -4,15 +4,16 @@ import './ProgressBar.css';
 
 export const ProgressBar = () => {
     const { scrollYProgress } = useScroll();
-    const spring = useSpring(scrollYProgress, 
-        {
-            stiffness: 40,
-            damping: 40
+    const spring = useSpring(scrollYProgress, {
+        stiffness: 40,
+        damping: 40,
     });
 
     return (
-        <motion.div className='progress-bar'
-        key='progressbar'
-        style={{ scaleX: spring }}/>
-    )
-}
+        <motion.div
+            className='progress-bar'
+            key='progressbar'
+            style={{ scaleX: spring }}
+        />
+    );
+};

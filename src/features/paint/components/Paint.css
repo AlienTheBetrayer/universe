@@ -5,7 +5,7 @@
     position: relative;
     width: 100%;
     min-height: 600px;
-    
+
     border-radius: 64px;
     overflow: hidden;
     background-color: var(--background-2);

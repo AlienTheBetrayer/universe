@@ -5,7 +5,7 @@ import type { GithubReducerAction } from '../reducer/GithubReducer';
 
 export const useProviderSaveLoad = (
     state: GithubContextData,
-    dispatch: React.Dispatch<GithubReducerAction>
+    dispatch: React.Dispatch<GithubReducerAction>,
 ) => {
     const localStore = useLocalStore();
 

@@ -13,7 +13,7 @@ export const useStellarHover = () => {
             stellar={state.stellars.find((s) => s.idx === state.hoveredIdx)!}
             ref={ref}
         />,
-        false
+        false,
     );
 
     useEffect(() => {

@@ -15,15 +15,18 @@ export const LockSection = () => {
         'Developing...',
         'Refactoring...',
         'Deploying...',
-        'Done!'
+        'Done!',
     ];
 
-    const { scrollYProgress } = useScroll({ target: scrollRef }); 
-    const scrollSpringed = useSpring(scrollYProgress, { stiffness: 100, damping: 10 });
+    const { scrollYProgress } = useScroll({ target: scrollRef });
+    const scrollSpringed = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 10,
+    });
     const progressValue = useValueMotion(scrollSpringed);
-    
-    const color = new Color(progressValue, 0, (1 - progressValue));
-    const hsl: HSL = { h: 0, s: 0, l: 0};
+
+    const color = new Color(progressValue, 0, 1 - progressValue);
+    const hsl: HSL = { h: 0, s: 0, l: 0 };
     color.getHSL(hsl);
     hsl.s *= 0.7;
     color.setHSL(hsl.h, hsl.s, hsl.l);
@@ -34,17 +37,24 @@ export const LockSection = () => {
         <RevealingContainer>
             <section ref={scrollRef} className='sphere-canvas-container'>
                 <div className='sphere-canvas-lock'>
-                    <LockCanvas ref={scrollRef}/>
+                    <LockCanvas ref={scrollRef} />
 
                     <div className='sphere-canvas-typewriter'>
-                        <ArrayTypewriter as='h2' scrollProgress={scrollSpringed} words={leftWords} style={letterStyle}/>
+                        <ArrayTypewriter
+                            as='h2'
+                            scrollProgress={scrollSpringed}
+                            words={leftWords}
+                            style={letterStyle}
+                        />
                     </div>
 
                     <div className='sphere-canvas-heading'>
-                        <h2>Moving in <mark>space</mark></h2>
+                        <h2>
+                            Moving in <mark>space</mark>
+                        </h2>
                     </div>
                 </div>
             </section>
         </RevealingContainer>
-    )
-}
+    );
+};

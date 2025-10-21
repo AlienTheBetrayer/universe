@@ -1,15 +1,18 @@
-import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
-import { type Points } from "three";
+import { useFrame } from '@react-three/fiber';
+import { useMemo, useRef } from 'react';
+import { type Points } from 'three';
 
-export const useLockParticles = (ref: React.RefObject<Points | null>, count: number) => { 
+export const useLockParticles = (
+    ref: React.RefObject<Points | null>,
+    count: number,
+) => {
     const data = useMemo(() => {
         const scale = 6;
         const positions = new Float32Array(count * 3);
         const endPoints = new Float32Array(count * 3);
 
         // space stars particles
-        for(let i = 0; i < count; ++i) {
+        for (let i = 0; i < count; ++i) {
             positions[i * 3] = 0;
             positions[i * 3 + 1] = 0;
             positions[i * 3 + 2] = 0;
@@ -40,14 +43,13 @@ export const useLockParticles = (ref: React.RefObject<Points | null>, count: num
     const reached = useRef<boolean>(false);
 
     useFrame(() => {
-        if(reached.current == true)
-            return;
-        
-        if(ref.current) {
+        if (reached.current == true) return;
+
+        if (ref.current) {
             const pos = ref.current.geometry.attributes.position.array;
-            
+
             // space particles
-            for(let i = 0; i < count; ++i) {
+            for (let i = 0; i < count; ++i) {
                 // vector to move our point toward the edge
                 const dx = data.endPoints[i * 3] - pos[i * 3];
                 const dy = data.endPoints[i * 3 + 1] - pos[i * 3 + 1];
@@ -58,11 +60,11 @@ export const useLockParticles = (ref: React.RefObject<Points | null>, count: num
                 const speed = 0.03;
 
                 // moving it
-                pos[i * 3] += dx / distance * speed;
-                pos[i * 3 + 1] += dy / distance * speed;
-                pos[i * 3 + 2] += dz / distance * speed;
+                pos[i * 3] += (dx / distance) * speed;
+                pos[i * 3 + 1] += (dy / distance) * speed;
+                pos[i * 3 + 2] += (dz / distance) * speed;
 
-                if(distance < 0.01) {
+                if (distance < 0.01) {
                     reached.current = true;
                 }
             }
@@ -72,4 +74,4 @@ export const useLockParticles = (ref: React.RefObject<Points | null>, count: num
     });
 
     return data;
-}
+};

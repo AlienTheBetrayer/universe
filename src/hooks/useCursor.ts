@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 export interface Position {
     x: number;
     y: number;
-};
+}
 
 export const useCursor = (defaultPosition?: Position) => {
     const [pos, setPos] = useState<Position>(defaultPosition ?? { x: 0, y: 0 });
@@ -11,11 +11,11 @@ export const useCursor = (defaultPosition?: Position) => {
     useEffect(() => {
         const handle = (e: MouseEvent) => {
             setPos({ x: e.clientX, y: e.clientY });
-        }
+        };
 
         window.addEventListener('mousemove', handle);
         return () => window.removeEventListener('mousemove', handle);
-    }, []);   
+    }, []);
 
     return pos;
-}
+};

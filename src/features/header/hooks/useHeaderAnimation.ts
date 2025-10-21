@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { useTimeout } from "../../../hooks/useTimeout";
-import { useSessionStore } from "../../../zustand/sessionStore";
+import { useEffect, useState } from 'react';
+import { useTimeout } from '../../../hooks/useTimeout';
+import { useSessionStore } from '../../../zustand/sessionStore';
 
 export const useHeaderAnimation = () => {
     const { loaded, updateLoaded } = useSessionStore();
-    const [justified, setJustified] = useState<boolean>(false);   
-    
+    const [justified, setJustified] = useState<boolean>(false);
+
     useTimeout(() => {
-        if (!loaded.header)
-            updateLoaded({ header: true });
+        if (!loaded.header) updateLoaded({ header: true });
     }, 4100);
 
     useEffect(() => {
@@ -19,4 +18,4 @@ export const useHeaderAnimation = () => {
     }, [loaded.header]);
 
     return { loaded, justified };
-}
+};

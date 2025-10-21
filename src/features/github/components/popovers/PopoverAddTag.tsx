@@ -17,7 +17,7 @@ export const PopoverAddTag = ({ onCancel }: Props) => {
     // state
     const [state, dispatch] = useGithubContext();
     const branch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
     const form = branch?.forms.find((f) => f.idx === state.data.currentForm);
 
@@ -27,7 +27,7 @@ export const PopoverAddTag = ({ onCancel }: Props) => {
 
     useEffect(() => {
         const found = form?.tags.some(
-            (f) => f.toLowerCase() === inputValue.toLowerCase()
+            (f) => f.toLowerCase() === inputValue.toLowerCase(),
         );
         setIsValid(!(found ?? true) && inputValue.trim().length > 0);
     }, [inputValue, branch]);

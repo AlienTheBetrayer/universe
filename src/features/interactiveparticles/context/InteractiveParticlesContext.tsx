@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
 
 export const InteractiveParticlesVectors = [
-  'Astral',
-  'Propulsion',
-  'Repulsion',
-  'Waves',
-  'Nebula',
-  'Living',
-  'Checker',
+    'Astral',
+    'Propulsion',
+    'Repulsion',
+    'Waves',
+    'Nebula',
+    'Living',
+    'Checker',
 ];
 
 export type VectorType = (typeof InteractiveParticlesVectors)[number];
@@ -17,9 +17,13 @@ export interface InteractiveParticlesContextData {
     bloomStrength: number;
 }
 
-type HeadingContextType = [InteractiveParticlesContextData, React.Dispatch<React.SetStateAction<InteractiveParticlesContextData>>];
+type HeadingContextType = [
+    InteractiveParticlesContextData,
+    React.Dispatch<React.SetStateAction<InteractiveParticlesContextData>>,
+];
 
-export const InteractiveParticlesContext = createContext<HeadingContextType | null>(null);
+export const InteractiveParticlesContext =
+    createContext<HeadingContextType | null>(null);
 
 interface Props {
     children?: React.ReactNode;
@@ -30,14 +34,14 @@ export const InteractiveParticlesProvider = ({ children }: Props) => {
         vectorType: 'Astral',
         bloomStrength: 32,
     });
-    
+
     return (
         <InteractiveParticlesContext.Provider value={data}>
-            { children }
+            {children}
         </InteractiveParticlesContext.Provider>
-    )
-}
+    );
+};
 
 export const useInteractiveParticlesContext = () => {
     return useContext(InteractiveParticlesContext) as HeadingContextType;
-}
+};

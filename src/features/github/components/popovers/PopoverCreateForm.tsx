@@ -17,7 +17,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
     // state + variables
     const [state, dispatch] = useGithubContext();
     const branch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
 
     // input functionality + validity
@@ -26,7 +26,7 @@ export const PopoverCreateForm = ({ onCancel }: Props) => {
 
     useEffect(() => {
         const found = branch?.forms?.some(
-            (f) => f.name.toLowerCase() === inputValue.toLowerCase()
+            (f) => f.name.toLowerCase() === inputValue.toLowerCase(),
         );
         setIsValid(!(found ?? true) && inputValue.trim().length > 0);
     }, [inputValue, branch]);

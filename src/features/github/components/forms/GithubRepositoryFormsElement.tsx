@@ -21,10 +21,10 @@ export const GithubRepositoryFormsElement = forwardRef<
     // context
     const [state, dispatch] = useGithubContext();
     const thisBranch = state.data.branches.find(
-        (b) => b.idx === state.data.currentBranch
+        (b) => b.idx === state.data.currentBranch,
     );
     const thisCommits = thisBranch?.commits.filter(
-        (c) => c.form?.idx === form.idx
+        (c) => c.form?.idx === form.idx,
     );
 
     // date updating for that specific element every second
@@ -32,7 +32,7 @@ export const GithubRepositoryFormsElement = forwardRef<
         new Date(thisCommits?.at(-1)?.pushedAt ?? 0),
         true,
         1000,
-        [thisCommits]
+        [thisCommits],
     );
 
     return (
