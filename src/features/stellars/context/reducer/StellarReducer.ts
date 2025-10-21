@@ -16,6 +16,7 @@ export type StellarAction =
     | { type: 'STELLAR_TOGGLE_MOVING'; idx: number }
     | { type: 'STELLAR_MOVE_CURRENT'; x: number; y: number }
     | { type: 'STELLAR_MOVE'; idx: number; x: number; y: number }
+    | { type: 'STELLAR_MOVE_RANDOM'; idx: number }
     | { type: 'STELLAR_HOVER'; idx: number | false }
     | { type: 'STELLAR_SELECT_TOGGLE'; idx: number }
     | { type: 'STELLAR_CREATE_AT_CURSOR'; cursorX: number; cursorY: number }
@@ -192,6 +193,26 @@ export const StellarReducer = (
                         : stellar
                 ),
             };
+        case 'STELLAR_MOVE_RANDOM': {
+            return {
+                ...state,
+                stellars: state.stellars.map((s) =>
+                    s.idx === action.idx
+                        ? {
+                              ...s,
+                              x:
+                                  (Math.random() - 0.5) *
+                                  state.viewport.width *
+                                  0.9,
+                              y:
+                                  (Math.random() - 0.5) *
+                                  state.viewport.height *
+                                  0.7,
+                          }
+                        : s
+                ),
+            };
+        }
 
         // misc
         case 'VIEWPORT_SET':

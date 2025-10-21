@@ -243,7 +243,14 @@ const StellarUIBottomBar = ({ state, dispatch, actions }: BottomProps) => {
                                     'left'
                                 );
                             }}
-                            onClick={() => actions.regenPositions()}
+                            onClick={() => {
+                                state.stellars.forEach((stellar) => {
+                                    dispatch({
+                                        type: 'STELLAR_MOVE_RANDOM',
+                                        idx: stellar.idx,
+                                    });
+                                });
+                            }}
                         >
                             <img src={regenerateImg} alt='regen' />
                         </Button>

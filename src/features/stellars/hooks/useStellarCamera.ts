@@ -5,7 +5,7 @@ import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useStellarContext } from '../context/StellarContext';
 
 export const useStellarCamera = (camera: Camera) => {
-    const [state] = useStellarContext();
+    const [state, ] = useStellarContext();
     const isMobile = useMediaQuery(768);
 
     useEffect(() => {

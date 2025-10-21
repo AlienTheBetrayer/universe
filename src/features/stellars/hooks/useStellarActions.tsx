@@ -1,30 +1,15 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
 import { StellarWaitingPopup } from '../components/StellarWaitingPopup';
 import { useStellarContext } from '../context/StellarContext';
 import { useStellarHover } from './useStellarHover';
-import { useStellarPositions } from './useStellarPositions';
 
 export const useStellarActions = (hoveredMenu?: number | false, onAction?: () => void) => {
     const [state, dispatch] = useStellarContext();
 
     // stellar hover
     const hover = useStellarHover();
-
-    // regenerating
-    const positions = useStellarPositions();
-    const isGenerating = useRef<boolean>(false);
-
-    const regenPositions = () => {
-        if (isGenerating.current) return;
-
-        positions.generate();
-        isGenerating.current = true;
-        setTimeout(() => {
-            isGenerating.current = false;
-        }, 3000);
-    };
 
     // clearing
     const clearMessageBox = usePopup(
@@ -65,7 +50,6 @@ export const useStellarActions = (hoveredMenu?: number | false, onAction?: () =>
     );
 
     return {
-        regenPositions,
         hover,
         clearMessageBox,
         waitingPopup,
