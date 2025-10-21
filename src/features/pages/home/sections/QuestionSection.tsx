@@ -76,7 +76,7 @@ const RevealedContent = () => {
         <div className='question-revealed-content'>
             <LinkButton
                 className='question-revealed-contact-link'
-                to='/contact'
+                to='/github'
             >
                 Proceed to contact.
             </LinkButton>

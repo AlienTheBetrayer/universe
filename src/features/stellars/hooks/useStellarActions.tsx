@@ -45,7 +45,7 @@ export const useStellarActions = (
 
     const [waitingPopupText, setWaitingPopupText] = useState<string[]>([
         'Click on an orb you want to move.',
-        'and then <b>click again</b> to move it there (or <u>Esc</u>)',
+        'then <b>move it</b> (cursor / mobile slide), and click again / <u>Esc</u> to <mark>confirm</mark> the action. ',
     ]);
     const waitingPopup = usePopup(
         <StellarWaitingPopup text={waitingPopupText} />,

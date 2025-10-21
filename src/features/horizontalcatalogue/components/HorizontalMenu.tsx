@@ -40,6 +40,7 @@ export const HorizontalMenu = ({ className, items }: Props) => {
                     {debouncedSearch === '' ? <u>Filter</u> : 'Filter'} items
                 </h3>
                 <Input
+                    placeholder='Search...'
                     type='search'
                     value={searchValue}
                     onChange={(val) => setSearchValue(val)}
