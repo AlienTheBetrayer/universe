@@ -1,7 +1,7 @@
 .forge {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .forge-image {
@@ -13,5 +13,12 @@
 
 .forge-main-container {
     display: flex;
-    height: 500px;
+    align-items: center;
+    gap: 4rem;
+}
+
+@media (max-width: 1024px) {
+    .forge-main-container {
+        gap: 2rem;
+    }
 }

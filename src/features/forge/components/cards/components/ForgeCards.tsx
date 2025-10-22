@@ -6,8 +6,8 @@ interface Props {}
 export const ForgeCards = () => {
     return (
         <div className='forge-cards'>
-            {Array.from({ length: 10 }).map((_, idx) => (
-                <ForgeCard />
+            {Array.from({ length: 9 }).map((_, idx) => (
+                <ForgeCard key={idx}/>
             ))}
         </div>
     );
