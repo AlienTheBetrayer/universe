@@ -58,7 +58,7 @@
     --footer-invert: 0.7;
     --header-invert: 1;
     --form: hsl(225, 8%, 24%);
-    --hr: #3a3d44;
+    --hr: var(--background-5);
     --staggered: rgb(56, 59, 66);
 
     --font-h1: 2.6rem;
@@ -108,7 +108,7 @@
     --b: 0.7;
     --footer-invert: 0;
     --header-invert: 0;
-    --hr: #5c6b7c;
+    --hr: var(--background-10);
     --staggered: rgb(138, 139, 140);
 
     /* font sizes */
