@@ -1,0 +1,53 @@
+.forge-select-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: relative;
+    width: 100%;
+    padding: 0 0.5rem;
+}
+
+/* menu expand / collapse button */
+.forge-select-menu-button {
+    min-width: 100px;
+}
+
+.forge-select-menu-button:active span {
+    transition: 0.3s;
+    color: var(--foreground-last);
+}
+
+/* menu items */
+.forge-select-menu-items {
+    display: flex;
+    flex-direction: column;
+    
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 2.5rem;
+
+    border-radius: 16px;
+    border: 1px solid var(--background-7);
+    overflow: hidden;
+}
+
+/* menu item */
+.forge-select-menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    transition: 0.15s;  
+}
+
+.forge-select-menu-item > button {
+    background-color: var(--background-2);
+
+    padding: 1.25rem 1rem;
+    border-radius: 0;
+    width: 100%;
+    justify-content: flex-start;
+}

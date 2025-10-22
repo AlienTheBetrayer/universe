@@ -1,0 +1,9 @@
+.forge-select-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    height: 80px;
+
+    border: 1px solid var(--background-5);
+    border-radius: 16px;
+}

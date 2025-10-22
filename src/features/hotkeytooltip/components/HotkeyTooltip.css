@@ -17,3 +17,9 @@
     font-size: 0.7rem;
     opacity: 0.4;
 }
+
+@media (max-width: 768px) {
+    .hotkey-tooltip {
+        display: none;
+    }
+}
