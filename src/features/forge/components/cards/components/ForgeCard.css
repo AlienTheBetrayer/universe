@@ -1,12 +1,5 @@
 .forge-card {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    aspect-ratio: 1/1;
     border: 2px dashed var(--background-6);
-}
-
-@media (max-width: 1024px) {
-    .forge-card {
-        width: 75px;
-        height: 75px;
-    }
 }

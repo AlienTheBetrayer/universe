@@ -10,8 +10,10 @@ export const Forge = () => {
             <hr />
             <div className='forge-main-container'>
                 <ForgeCards />
+                <hr/>
                 <ForgeWorld />
             </div>
+            <hr/>
         </div>
     );
 };

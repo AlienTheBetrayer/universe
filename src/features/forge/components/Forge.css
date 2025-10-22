@@ -13,11 +13,27 @@
 
 .forge-main-container {
     display: flex;
-    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 @media (max-width: 1024px) {
     .forge-main-container {
-        gap: 2rem;
+        height: auto;
+        flex-direction: column-reverse;
+    }
+}
+
+.forge-main-container hr {
+    width: 1px;
+    height: 500px;
+    background-color: var(--hr);
+}
+
+@media (max-width: 1024px) {
+    .forge-main-container hr {
+        width: 100%;
+        height: 1px;
     }
 }

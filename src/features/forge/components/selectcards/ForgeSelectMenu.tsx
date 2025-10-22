@@ -27,7 +27,7 @@ export const ForgeSelectMenu = ({ selectCards }: Props) => {
     return (
         <div className='forge-select-menu'>
             <div>
-                <h4>Available cards</h4>
+                <h4><mark>Available</mark> cards</h4>
                 <ForgeSelectMenuItems
                     menuShown={menuShown}
                     selectCards={selectCards}
