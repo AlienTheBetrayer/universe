@@ -1,13 +1,12 @@
-import './ForgePage.css';
+import { Forge } from '../../../forge/components/Forge';
 import { Page } from '../../../layout/components/Page';
+import './ForgePage.css';
 
 export const ForgePage = () => {
     return (
         <Page>
-            <section className='container'>
-                <h1 className='text-center'>
-                    Complex forge logic is going to be here
-                </h1>
+            <section className='forge-section container'>
+                <Forge />
             </section>
         </Page>
     );
