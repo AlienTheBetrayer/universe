@@ -17,6 +17,7 @@ export const useTooltips = () => {
     const elementRefs = useRef<TooltipElement[]>([]);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
     const [selected, setSelected] = useState<number | false>(false);
+    const [version, setVersion] = useState<number>(0);
 
     // filling the array with given elementRefs + event handling
     useEffect(() => {
@@ -27,28 +28,29 @@ export const useTooltips = () => {
         const handlers: { enter: () => void; leave: () => void }[] = [];
 
         elementRefs.current.forEach((el, idx) => {
+            if (!el.element) return;
+
             const handleEnter = () => setSelected(idx);
 
-            el.element?.addEventListener('pointerenter', handleEnter);
-            el.element?.addEventListener('focus', handleEnter);
-            el.element?.addEventListener('pointerleave', handleLeave);
-            el.element?.addEventListener('blur', handleLeave);
-            console.log('effecting: ', el.tooltip);
+            el.element.addEventListener('pointerenter', handleEnter);
+            el.element.addEventListener('focus', handleEnter);
+            el.element.addEventListener('pointerleave', handleLeave);
+            el.element.addEventListener('blur', handleLeave);
             handlers[idx] = { enter: handleEnter, leave: handleLeave };
         });
 
         return () => {
             elementRefs.current.forEach((ref, idx) => {
-                if (handlers.length > 0) {
-                    const h = handlers[idx];
-                    ref.element?.removeEventListener('pointerenter', h.enter);
-                    ref.element?.removeEventListener('focus', h.enter);
-                    ref.element?.removeEventListener('pointerleave', h.leave);
-                    ref.element?.removeEventListener('blur', h.leave);
-                }
+                if (!ref.element || !handlers[idx]) return;
+
+                const h = handlers[idx];
+                ref.element?.removeEventListener('pointerenter', h.enter);
+                ref.element?.removeEventListener('focus', h.enter);
+                ref.element?.removeEventListener('pointerleave', h.leave);
+                ref.element?.removeEventListener('blur', h.leave);
             });
         };
-    }, []);
+    }, [version]);
 
     // upon tooltip appearance change its position based on the current selected index
     useEffect(() => {
@@ -116,7 +118,9 @@ export const useTooltips = () => {
                 if (tooltipBounds.left < 0) {
                     left = 0;
                     translateX = '0';
-                } else if (tooltipBounds.right > window.innerWidth) {
+                } else if (
+                    tooltipBounds.right >= document.documentElement.clientWidth
+                ) {
                     left =
                         document.documentElement.clientWidth -
                         tooltipBounds.width;
@@ -138,6 +142,13 @@ export const useTooltips = () => {
         direction: TooltipDirection = 'up',
         offset: number = 8
     ) => {
+        const existing = elementRefs.current[idx];
+        if (existing?.element !== element) {
+            requestAnimationFrame(() => {
+                setVersion((prev) => prev + 1);
+            });
+        }
+
         elementRefs.current[idx] = {
             idx,
             element,
