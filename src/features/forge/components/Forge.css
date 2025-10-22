@@ -1,10 +1,17 @@
-/* .forge {
-
-} */
+.forge {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
 .forge-image {
     width: 24px;
     height: 24px;
     filter: invert(0.5);
     transition: 1s;
+}
+
+.forge-main-container {
+    display: flex;
+    height: 500px;
 }

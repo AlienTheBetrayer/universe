@@ -7,7 +7,6 @@ export const ForgePage = () => {
         <Page>
             <section className='forge-section container'>
                 <Forge />
-                <hr/>
             </section>
         </Page>
     );
