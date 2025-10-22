@@ -52,41 +52,73 @@ export const useTooltips = () => {
                 elementRefs.current[selected].element?.getBoundingClientRect();
 
             if (bounds) {
-                let left = '';
-                let top = '';
+                let left = 0;
+                let top = 0;
+                let translateX = '0';
+                let translateY = '0';
 
                 switch (elementRefs.current[selected].direction) {
                     case 'up':
-                        left = `${bounds.left + bounds.width / 2 + window.scrollX}px`;
-                        top = `${bounds.top - elementRefs.current[selected].offset + window.scrollY}px`;
-                        tooltipRef.current.style.transform =
-                            'translate(-50%, -100%)';
+                        left = bounds.left + bounds.width / 2 + window.scrollX;
+                        top =
+                            bounds.top -
+                            elementRefs.current[selected].offset +
+                            window.scrollY;
+                        translateX = '-50%';
+                        translateY = '-100%';
                         break;
 
                     case 'down':
-                        left = `${bounds.left + bounds.width / 2 + window.scrollX}px`;
-                        top = `${bounds.top + bounds.height + elementRefs.current[selected].offset + window.scrollY}px`;
-                        tooltipRef.current.style.transform = 'translate(-50%)';
+                        left = bounds.left + bounds.width / 2 + window.scrollX;
+
+                        top =
+                            bounds.top +
+                            bounds.height +
+                            elementRefs.current[selected].offset +
+                            window.scrollY;
+                        translateX = '-50%';
                         break;
 
                     case 'left':
-                        left = `${bounds.left - elementRefs.current[selected].offset + window.scrollX}px`;
-                        top = `${bounds.top + bounds.height / 2 + window.scrollY}px`;
-                        tooltipRef.current.style.transform =
-                            'translate(-100%, -50%)';
+                        left =
+                            bounds.left -
+                            elementRefs.current[selected].offset +
+                            window.scrollX;
+                        top = bounds.top + bounds.height / 2 + window.scrollY;
+                        translateX = '-100%';
+                        translateY = '-50%';
                         break;
 
                     case 'right':
-                        left = `${bounds.left + bounds.width + elementRefs.current[selected].offset + window.scrollX}px`;
-                        top = `${bounds.top + bounds.height / 2 + window.scrollY}px`;
-                        tooltipRef.current.style.transform =
-                            'translate(0, -50%)';
+                        left =
+                            bounds.left +
+                            bounds.width +
+                            elementRefs.current[selected].offset +
+                            window.scrollX;
+                        top = bounds.top + bounds.height / 2 + window.scrollY;
+                        translateY = '-50%';
                         break;
                 }
 
-                tooltipRef.current.style.left = left;
-                tooltipRef.current.style.top = top;
+                tooltipRef.current.style.left = `${left}px`;
+                tooltipRef.current.style.top = `${top}px`;
+                tooltipRef.current.style.translate = `${translateX} ${translateY}`;
                 tooltipRef.current.style.display = 'flex';
+
+                const tooltipBounds =
+                    tooltipRef.current.getBoundingClientRect();
+                    
+                if (tooltipBounds.left < 0) {
+                    left = bounds.left;
+                    translateX = '0';
+                } else if (tooltipBounds.right > window.innerWidth) {
+                    left = bounds.right - tooltipBounds.width;
+                    translateX = '0';
+                }
+
+                tooltipRef.current.style.left = `${left}px`;
+                tooltipRef.current.style.top = `${top}px`;
+                tooltipRef.current.style.translate = `${translateX} ${translateY}`;
             }
         }
     }, [selected]);
@@ -97,7 +129,7 @@ export const useTooltips = () => {
         tooltip: string,
         element: HTMLElement | null,
         direction: TooltipDirection = 'up',
-        offset: number = 8,
+        offset: number = 8
     ) => {
         forceRerender(idx);
         elementRefs.current[idx] = {
@@ -118,7 +150,7 @@ export const useTooltips = () => {
                     </Tooltip>
                 )}
             </AnimatePresence>,
-            document.body,
+            document.body
         );
     };
 
