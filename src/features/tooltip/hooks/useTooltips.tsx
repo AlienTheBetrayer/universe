@@ -36,16 +36,18 @@ export const useTooltips = () => {
             el.element?.addEventListener('pointerleave', handleLeave);
             el.element?.addEventListener('blur', handleLeave);
 
-            handlers.push({ enter: handleEnter, leave: handleLeave });
+            handlers[idx] = { enter: handleEnter, leave: handleLeave };
         });
 
         return () => {
             elementRefs.current.forEach((ref, idx) => {
-                const h = handlers[idx];
-                ref.element?.removeEventListener('pointerenter', h.enter);
-                ref.element?.removeEventListener('focus', h.enter);
-                ref.element?.removeEventListener('pointerleave', h.leave);
-                ref.element?.removeEventListener('blur', h.leave);
+                if(handlers.length > 0) {
+                    const h = handlers[idx];
+                    ref.element?.removeEventListener('pointerenter', h.enter);
+                    ref.element?.removeEventListener('focus', h.enter);
+                    ref.element?.removeEventListener('pointerleave', h.leave);
+                    ref.element?.removeEventListener('blur', h.leave);
+                }
             });
         };
     }, [rerender]);
