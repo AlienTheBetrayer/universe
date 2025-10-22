@@ -62,6 +62,7 @@ export const FAQSection = () => {
     return (
         <RevealingContainer>
             <section ref={sectionRef} className='faq-section container'>
+                <hr />
                 <div className='faq-grid'>
                     <h2>
                         <mark>Vital</mark> aspects

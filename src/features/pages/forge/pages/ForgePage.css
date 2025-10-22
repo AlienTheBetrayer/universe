@@ -1,3 +1,7 @@
 .forge-section {
     max-width: 1600px;
 }
+
+.forge-section hr {
+    margin: 0;
+}

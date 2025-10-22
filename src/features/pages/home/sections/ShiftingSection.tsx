@@ -11,6 +11,8 @@ export const ShiftingSection = () => {
     return (
         <RevealingContainer>
             <section ref={ref} className='shifting-section container'>
+                <hr />
+
                 <h2>
                     Shifting <mark>capabilities</mark>
                 </h2>
