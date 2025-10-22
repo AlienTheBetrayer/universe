@@ -26,21 +26,26 @@ export const useTooltips = () => {
             setSelected(false);
         };
 
-        const handlers: (() => void)[] = [];
+        const handlers: { enter: () => void; leave: () => void }[] = [];
 
         elementRefs.current.forEach((el, idx) => {
             const handleEnter = () => setSelected(idx);
 
             el.element?.addEventListener('pointerenter', handleEnter);
+            el.element?.addEventListener('focus', handleEnter);
             el.element?.addEventListener('pointerleave', handleLeave);
+            el.element?.addEventListener('blur', handleLeave);
 
-            handlers.push(handleEnter);
+            handlers.push({ enter: handleEnter, leave: handleLeave });
         });
 
         return () => {
             elementRefs.current.forEach((ref, idx) => {
-                ref.element?.removeEventListener('pointerenter', handlers[idx]);
-                ref.element?.removeEventListener('pointerleave', handleLeave);
+                const h = handlers[idx];
+                ref.element?.removeEventListener('pointerenter', h.enter);
+                ref.element?.removeEventListener('focus', h.enter);
+                ref.element?.removeEventListener('pointerleave', h.leave);
+                ref.element?.removeEventListener('blur', h.leave);
             });
         };
     }, [rerender]);
@@ -107,7 +112,7 @@ export const useTooltips = () => {
 
                 const tooltipBounds =
                     tooltipRef.current.getBoundingClientRect();
-                    
+
                 if (tooltipBounds.left < 0) {
                     left = bounds.left;
                     translateX = '0';
