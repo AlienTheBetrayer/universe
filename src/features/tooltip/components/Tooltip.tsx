@@ -1,5 +1,5 @@
-import './Tooltip.css';
 import { motion } from 'motion/react';
+import './Tooltip.css';
 
 interface Props {
     children: string;

@@ -41,7 +41,7 @@ export const useTooltips = () => {
 
         return () => {
             elementRefs.current.forEach((ref, idx) => {
-                if(handlers.length > 0) {
+                if (handlers.length > 0) {
                     const h = handlers[idx];
                     ref.element?.removeEventListener('pointerenter', h.enter);
                     ref.element?.removeEventListener('focus', h.enter);
@@ -152,7 +152,7 @@ export const useTooltips = () => {
         return createPortal(
             <AnimatePresence>
                 {selected !== false && (
-                    <Tooltip ref={tooltipRef}>
+                    <Tooltip ref={tooltipRef} key={selected}>
                         {elementRefs.current[selected].tooltip}
                     </Tooltip>
                 )}
