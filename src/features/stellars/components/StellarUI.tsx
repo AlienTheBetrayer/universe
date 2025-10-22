@@ -143,6 +143,8 @@ const StellarUIBottomBar = ({ state, dispatch, actions }: BottomProps) => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1, duration: 1.5, ease: 'backInOut' }}
         >
+            { tooltips.render() }
+            
             <div className='stellar-ui-bottom-bar-buttons-container'>
                 {/* wipe an orb button */}
                 <Button
