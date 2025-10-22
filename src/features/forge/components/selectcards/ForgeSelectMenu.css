@@ -22,7 +22,7 @@
 .forge-select-menu-items {
     display: flex;
     flex-direction: column;
-    
+
     position: absolute;
     left: 0;
     right: 0;
@@ -40,14 +40,25 @@
     align-items: center;
     width: 100%;
 
-    transition: 0.15s;  
+    transition: 0.15s;
+}
+
+.forge-select-menu-item:not(:last-child) {
+    border-bottom: 1px solid var(--background-7);
 }
 
 .forge-select-menu-item > button {
     background-color: var(--background-2);
 
     padding: 1.25rem 1rem;
+    gap: 0;
     border-radius: 0;
     width: 100%;
     justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+    .forge-select-menu-item > button {
+        padding: 0.75rem 1rem;
+    }
 }

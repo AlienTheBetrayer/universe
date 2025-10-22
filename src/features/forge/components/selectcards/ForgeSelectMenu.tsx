@@ -60,7 +60,10 @@ const ForgeSelectMenuItems = ({ selectCards, menuShown }: ItemsProps) => {
                 >
                     {selectCards.map((card, idx) => (
                         <li key={idx} className='forge-select-menu-item'>
-                            <Button>{card.title}</Button>
+                            <Button>
+                                <h4 style={{ width: '6rem'}}>{card.title}</h4>
+                                <p style={{ flex: 1, textAlign: 'right'}} dangerouslySetInnerHTML={{ __html: card.description }}/>
+                            </Button>
                         </li>
                     ))}
                 </motion.ul>

@@ -1,8 +1,17 @@
 import { forwardRef } from 'react';
-import './ForgeSelectCard.css';
 import { Button } from '../../../ui/Button/components/Button';
+import './ForgeSelectCard.css';
 
-export type ForgeCardType = 'typescript' | 'react';
+export type ForgeCardType =
+    | 'typescript'
+    | 'react'
+    | 'css'
+    | 'html'
+    | 'zustand'
+    | 'redux'
+    | 'javascript'
+    | 'nextjs'
+    | 'tailwind';
 
 interface Props {
     title: string;
@@ -14,7 +23,7 @@ export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
     ({ title, description, type }, ref) => {
         return (
             <Button className='forge-select-card' ref={ref}>
-                { title }
+                {title}
             </Button>
         );
     }
