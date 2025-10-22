@@ -1,4 +1,5 @@
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
+import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 import { ForgeSelectCard, type ForgeCardType } from './ForgeSelectCard';
 import './ForgeSelectCards.css';
 import { ForgeSelectMenu } from './ForgeSelectMenu';
@@ -60,11 +61,17 @@ export const ForgeSelectCards = () => {
     // media query
     const isLarge = !useMediaQuery(1024);
 
+    // tooltips
+    const tooltips = useTooltips();
+
     return (
         <div className='forge-select-cards'>
+            { tooltips.render() }
+            
             { isLarge ? (
                 selectCards.map((card, idx) => (
                     <ForgeSelectCard
+                        ref={el => tooltips.set(idx, card.description, el, 'down')}
                         key={idx}
                         type={card.type}
                         title={card.title}

@@ -1,11 +1,5 @@
 .forge-select-cards {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
-}
-
-@media(max-width: 768px) {
-    .forge-select-cards {
-        gap: 0.5rem;
-    }
+    gap: 0.5rem;
 }

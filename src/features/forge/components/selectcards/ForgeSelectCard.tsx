@@ -1,4 +1,6 @@
+import { forwardRef } from 'react';
 import './ForgeSelectCard.css';
+import { Button } from '../../../ui/Button/components/Button';
 
 export type ForgeCardType = 'typescript' | 'react';
 
@@ -8,11 +10,12 @@ interface Props {
     type: ForgeCardType;
 }
 
-export const ForgeSelectCard = ({ title, description, type }: Props) => {
-    return (
-        <div className='forge-select-card'>
-            <h4 dangerouslySetInnerHTML={{ __html: title }} />
-            <p dangerouslySetInnerHTML={{ __html: description }} />
-        </div>
-    );
-};
+export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
+    ({ title, description, type }, ref) => {
+        return (
+            <Button className='forge-select-card' ref={ref}>
+                { title }
+            </Button>
+        );
+    }
+);
