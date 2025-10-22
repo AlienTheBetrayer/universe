@@ -1,0 +1,11 @@
+.forge-block {
+    width: 16vw;
+    aspect-ratio: 1/1;   
+    border: 2px dashed var(--background-5);
+}
+
+@media (max-width: 640px) {
+    .forge-block {
+        width: 22vw;
+    }
+}

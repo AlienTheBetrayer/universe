@@ -1,0 +1,11 @@
+.forge-blocks {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .forge-blocks {
+        justify-content: space-between;
+    }
+}
