@@ -18,8 +18,6 @@ export const useTooltips = () => {
     const tooltipRef = useRef<HTMLDivElement | null>(null);
     const [selected, setSelected] = useState<number | false>(false);
 
-    const [rerender, forceRerender] = useState<number>(-1);
-
     // filling the array with given elementRefs + event handling
     useEffect(() => {
         const handleLeave = () => {
@@ -35,7 +33,7 @@ export const useTooltips = () => {
             el.element?.addEventListener('focus', handleEnter);
             el.element?.addEventListener('pointerleave', handleLeave);
             el.element?.addEventListener('blur', handleLeave);
-
+            console.log('effecting: ', el.tooltip);
             handlers[idx] = { enter: handleEnter, leave: handleLeave };
         });
 
@@ -50,7 +48,7 @@ export const useTooltips = () => {
                 }
             });
         };
-    }, [rerender]);
+    }, []);
 
     // upon tooltip appearance change its position based on the current selected index
     useEffect(() => {
@@ -116,10 +114,12 @@ export const useTooltips = () => {
                     tooltipRef.current.getBoundingClientRect();
 
                 if (tooltipBounds.left < 0) {
-                    left = bounds.left;
+                    left = 0;
                     translateX = '0';
                 } else if (tooltipBounds.right > window.innerWidth) {
-                    left = bounds.right - tooltipBounds.width;
+                    left =
+                        document.documentElement.clientWidth -
+                        tooltipBounds.width;
                     translateX = '0';
                 }
 
@@ -138,7 +138,6 @@ export const useTooltips = () => {
         direction: TooltipDirection = 'up',
         offset: number = 8
     ) => {
-        forceRerender(idx);
         elementRefs.current[idx] = {
             idx,
             element,
