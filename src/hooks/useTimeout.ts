@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, type DependencyList } from 'react';
 
-export const useTimeout = (callback: () => void, ms: number) => {
+export const useTimeout = (
+    callback: () => void,
+    ms: number,
+    deps: DependencyList = []
+) => {
     useEffect(() => {
-        const timeout = setTimeout(() => callback(), ms);
+        const timeout = setTimeout(callback, ms);
         return () => clearTimeout(timeout);
-    }, [callback, ms]);
+    }, [callback, ms, ...deps]);
 };

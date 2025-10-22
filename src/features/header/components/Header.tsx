@@ -26,7 +26,9 @@ export const Header = () => {
     const headerMenuPopup = usePopup(
         <HeaderMenu onInteract={() => headerMenuPopup.setShown(false)} />
     );
+
     const tooltips = useTooltips();
+    console.log('HEADER RERENDER');
 
     return (
         <motion.header
@@ -65,7 +67,6 @@ export const Header = () => {
                         className='flex align-center h-full'
                         style={{ display: !isMobile ? 'flex' : 'none' }}
                         layout
-                        initial={{ gap: loaded.header ? '1rem' : '0.1rem' }}
                         animate={{
                             gap: '1rem',
                             transition: {
@@ -109,19 +110,19 @@ export const Header = () => {
                         </LinkButton>
 
                         <ToggleButton
-                            ref={(el) =>
-                                tooltips.set(
-                                    0,
-                                    `${
-                                        theme === 'dark'
-                                            ? '<mark>Dark</mark> / Light'
-                                            : 'Dark / <mark>Light</mark>'
-                                    } theme`,
-                                    el,
-                                    'down',
-                                    24
-                                )
-                            }
+                            // ref={(el) =>
+                            //     tooltips.set(
+                            //         0,
+                            //         `${
+                            //             theme === 'dark'
+                            //                 ? '<mark>Dark</mark> / Light'
+                            //                 : 'Dark / <mark>Light</mark>'
+                            //         } theme`,
+                            //         el,
+                            //         'down',
+                            //         24
+                            //     )
+                            // }
                             value={theme === 'light'}
                             onToggled={() => toggleTheme()}
                         />

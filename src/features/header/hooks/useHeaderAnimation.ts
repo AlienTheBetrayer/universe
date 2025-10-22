@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTimeout } from '../../../hooks/useTimeout';
 import { useSessionStore } from '../../../zustand/sessionStore';
 
@@ -10,12 +10,13 @@ export const useHeaderAnimation = () => {
         if (!loaded.header) updateLoaded({ header: true });
     }, 4100);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
+    useTimeout(
+        () => {
             setJustified(loaded.header);
-        }, 1500);
-        return () => clearTimeout(timeout);
-    }, [loaded.header]);
+        },
+        1500,
+        [loaded.header]
+    );
 
     return { loaded, justified };
 };

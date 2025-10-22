@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import type { GithubData } from '../features/github/context/GithubContext';
 import { GithubContextInitialData } from '../features/github/context/initial/githubData';
+import type { GithubData } from '../features/github/context/types/data';
 
 type TutorialSeenVariant = 'stellar' | 'contact' | 'forge';
 type ThemeType = 'dark' | 'light';
@@ -79,6 +79,6 @@ export const useLocalStore = create<LocalStore>()(
         {
             name: 'app-storage',
             storage: createJSONStorage(() => localStorage),
-        },
-    ),
+        }
+    )
 );

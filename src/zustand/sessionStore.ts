@@ -19,12 +19,15 @@ export const useSessionStore = create<SessionStore>()(
             },
 
             updateLoaded: (newLoaded: Partial<LoadedInterface>) => {
-                set((state) => ({ loaded: { ...state.loaded, ...newLoaded } }));
+                set((state) => ({
+                    ...state,
+                    loaded: { ...state.loaded, ...newLoaded },
+                }));
             },
         }),
         {
             name: 'app-storage',
             storage: createJSONStorage(() => sessionStorage),
-        },
-    ),
+        }
+    )
 );
