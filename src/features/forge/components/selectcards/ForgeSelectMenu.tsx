@@ -8,6 +8,7 @@ import arrowDownImg from '../../assets/down-arrow.svg';
 import { AnimatePresence, motion } from 'motion/react';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
+import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 
 interface Props {
     selectCards: ForgeSelectCardContent[];
@@ -77,11 +78,16 @@ const ForgeSelectMenuOpenButton = ({
     menuShown,
     setMenuShown,
 }: ButtonProps) => {
+    const tooltips = useTooltips();
+
     return (
         <Button
+            ref={el => tooltips.set(0, 'Show / Hide the menu', el, 'down')}
             className='forge-select-menu-button'
             onClick={() => setMenuShown((prev) => !prev)}
         >
+            { tooltips.render() }
+
             <motion.img
                 src={arrowDownImg}
                 alt=''
