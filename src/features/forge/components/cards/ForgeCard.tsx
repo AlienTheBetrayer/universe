@@ -15,6 +15,12 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ idx, content }, ref) => {
         // context state
         const [state, dispatch] = useForgeContext();
+        let isEffected = false;
+        state.effectSlots.forEach((val, key) => {
+            if(val === content.type) {
+                isEffected = true;
+            }
+        });
 
         // animating progress on hold
         const progressRef = useRef<HTMLDivElement>(null);
@@ -74,6 +80,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
 
         return (
             <Button
+                enabled={!isEffected}
                 animate={controls}
                 dragControls={dragControls}
                 drag={state.dragging.idx === idx}
