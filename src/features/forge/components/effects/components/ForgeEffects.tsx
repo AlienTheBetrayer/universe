@@ -10,7 +10,7 @@ export const ForgeEffects = () => {
             <h3>
                 <mark>Effects</mark>
             </h3>
-            <div className='forge-effects'>
+            <div className={`forge-effects ${state.dragging.idx !== false ? 'forge-effects-awaiting' : ''}`}>
                 {Array.from({ length: 9 }).map((_, idx) => (
                     <ForgeEffect
                         state={state}
