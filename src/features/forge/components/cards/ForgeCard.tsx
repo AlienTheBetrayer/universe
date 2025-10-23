@@ -56,8 +56,10 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
         }, [state.dragging]);
 
         useEffect(() => {
-            if (state.awaitingCancel === idx) {
-                dispatch({ type: 'CANCEL', idx: false });
+            if (state.awaitingCancel !== idx) return;
+
+            const timeout = setTimeout(() => {
+                dispatch({ type: 'RESTORE_CANCEL' });
 
                 dragControls.stop();
                 controls.start({
@@ -65,7 +67,9 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                     y: 0,
                     transition: { type: 'spring', stiffness: 200, damping: 20 },
                 });
-            }
+            }, 300);
+
+            return () => clearTimeout(timeout);
         }, [state.awaitingCancel]);
 
         return (

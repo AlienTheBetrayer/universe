@@ -3,7 +3,7 @@ import { ForgeEffect } from './ForgeEffect';
 import './ForgeEffects.css';
 
 export const ForgeEffects = () => {
-    const [state, ] = useForgeContext();
+    const [state, dispatch] = useForgeContext();
 
     return (
         <div className='forge-effects-container'>
@@ -13,6 +13,7 @@ export const ForgeEffects = () => {
             <div className='forge-effects'>
                 {Array.from({ length: 9 }).map((_, idx) => (
                     <ForgeEffect
+                        dispatch={dispatch}
                         key={idx}
                         type={state.effectSlots.get(idx)}
                     />

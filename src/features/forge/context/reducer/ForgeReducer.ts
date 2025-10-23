@@ -5,7 +5,8 @@ export type ForgeReducerAction =
     | { type: 'SET_DRAGGING'; idx: number | false; card?: ForgeCardContent }
     | { type: 'SET_EFFECT_SLOT'; idx: number; cardType: ForgeCardType }
     | { type: 'REMOVE_EFFECT_SLOT'; cardType: ForgeCardType }
-    | { type: 'CANCEL'; idx: number | false };
+    | { type: 'CANCEL_CURRENT' }
+    | { type: 'RESTORE_CANCEL' };
 
 export const ForgeReducer = (
     state: ForgeData,
@@ -37,7 +38,9 @@ export const ForgeReducer = (
             });
             return { ...state, effectSlots: copy };
         }
-        case 'CANCEL':
-            return { ...state, awaitingCancel: action.idx };
+        case 'CANCEL_CURRENT':
+            return { ...state, awaitingCancel: state.dragging.idx };
+        case 'RESTORE_CANCEL':
+            return { ...state, awaitingCancel: false }
     }
 };

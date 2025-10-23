@@ -39,7 +39,7 @@ export const useForgeDrag = (
                             type: 'REMOVE_EFFECT_SLOT',
                             cardType: state.dragging.card.type,
                         });
-                        dispatch({ type: 'CANCEL', idx: state.dragging.idx });
+                        dispatch({ type: 'CANCEL_CURRENT' });
                     } else {
                         dispatch({
                             type: 'SET_EFFECT_SLOT',
@@ -56,9 +56,10 @@ export const useForgeDrag = (
                     type: 'REMOVE_EFFECT_SLOT',
                     cardType: state.dragging.card.type,
                 });
-                dispatch({ type: 'CANCEL', idx: state.dragging.idx });
+                dispatch({ type: 'CANCEL_CURRENT' });
             }
 
+            dispatch({ type: 'CANCEL_CURRENT' });
             dispatch({ type: 'SET_DRAGGING', idx: false });
         };
 
