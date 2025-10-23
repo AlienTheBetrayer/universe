@@ -1,18 +1,18 @@
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
-import { ForgeSelectCard } from './ForgeSelectCard';
-import './ForgeSelectCards.css';
-import { ForgeSelectMenu } from './ForgeSelectMenu';
+import './ForgeCards.css';
 
-import typescriptImg from '../../assets/cards/typescript.svg';
-import reactImg from '../../assets/cards/react.svg';
-import htmlImg from '../../assets/cards/html.svg';
 import cssImg from '../../assets/cards/css.svg';
-import tailwindImg from '../../assets/cards/tailwind.svg';
-import nextjsImg from '../../assets/cards/nextjs.svg';
-import zustandImg from '../../assets/cards/zustand.svg';
-import reduxImg from '../../assets/cards/redux.svg';
+import htmlImg from '../../assets/cards/html.svg';
 import javascriptImg from '../../assets/cards/javascript.svg';
+import nextjsImg from '../../assets/cards/nextjs.svg';
+import reactImg from '../../assets/cards/react.svg';
+import reduxImg from '../../assets/cards/redux.svg';
+import tailwindImg from '../../assets/cards/tailwind.svg';
+import typescriptImg from '../../assets/cards/typescript.svg';
+import zustandImg from '../../assets/cards/zustand.svg';
+import { ForgeCard } from './ForgeCard';
+import { ForgeMenu } from './ForgeMenu';
 
 export type ForgeCardType =
     | 'typescript'
@@ -25,9 +25,8 @@ export type ForgeCardType =
     | 'nextjs'
     | 'tailwind';
 
-
 // interface for card content array
-export interface ForgeSelectCardContent {
+export interface ForgeCardContent {
     title: string;
     description: string;
     image: string;
@@ -35,9 +34,9 @@ export interface ForgeSelectCardContent {
     type: ForgeCardType;
 }
 
-export const ForgeSelectCards = () => {
+export const ForgeCards = () => {
     // all the card contents
-    const selectCards: ForgeSelectCardContent[] = [
+    const cards: ForgeCardContent[] = [
         {
             title: 'TypeScript',
             description:
@@ -112,12 +111,12 @@ export const ForgeSelectCards = () => {
     const tooltips = useTooltips();
 
     return (
-        <div className='forge-select-cards'>
+        <div className='forge-cards'>
             {tooltips.render()}
 
             {isLarge ? (
-                selectCards.map((card, idx) => (
-                    <ForgeSelectCard
+                cards.map((card, idx) => (
+                    <ForgeCard
                         ref={(el) =>
                             tooltips.set(idx, card.description, el, 'down')
                         }
@@ -126,7 +125,7 @@ export const ForgeSelectCards = () => {
                     />
                 ))
             ) : (
-                <ForgeSelectMenu selectCards={selectCards} />
+                <ForgeMenu cards={cards} />
             )}
         </div>
     );

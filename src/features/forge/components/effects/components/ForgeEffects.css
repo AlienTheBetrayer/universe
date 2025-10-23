@@ -1,4 +1,4 @@
-.forge-cards-container {
+.forge-effects-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +8,7 @@
     height: 100%;
 }
 
-.forge-cards {
+.forge-effects {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;

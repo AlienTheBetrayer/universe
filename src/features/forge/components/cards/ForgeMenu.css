@@ -1,4 +1,4 @@
-.forge-select-menu {
+.forge-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,17 +9,17 @@
 }
 
 /* menu expand / collapse button */
-.forge-select-menu-button {
+.forge-menu-button {
     min-width: 100px;
 }
 
-.forge-select-menu-button:active span {
+.forge-menu-button:active span {
     transition: 0.3s;
     color: var(--foreground-last);
 }
 
 /* menu items */
-.forge-select-menu-items {
+.forge-menu-items {
     display: flex;
     flex-direction: column;
 
@@ -34,7 +34,7 @@
 }
 
 /* menu item */
-.forge-select-menu-item {
+.forge-menu-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,11 +43,11 @@
     transition: 0.15s;
 }
 
-.forge-select-menu-item:not(:last-child) {
+.forge-menu-item:not(:last-child) {
     border-bottom: 1px solid var(--background-7);
 }
 
-.forge-select-menu-item > button {
+.forge-menu-item > button {
     background-color: var(--background-2);
 
     padding: 1.25rem 1rem;
@@ -58,7 +58,7 @@
 }
 
 @media (max-width: 768px) {
-    .forge-select-menu-item > button {
+    .forge-menu-item > button {
         padding: 0.75rem 1rem;
     }
 }

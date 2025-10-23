@@ -1,8 +1,8 @@
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { ForgeBlocks } from './blocks/components/ForgeBlocks';
-import { ForgeCards } from './cards/components/ForgeCards';
+import { ForgeCards } from './cards/ForgeCards';
+import { ForgeEffects } from './effects/components/ForgeEffects';
 import './Forge.css';
-import { ForgeSelectCards } from './selectcards/ForgeSelectCards';
 import { ForgeWorld } from './world/components/ForgeWorld';
 
 export const Forge = () => {
@@ -10,10 +10,10 @@ export const Forge = () => {
 
     return (
         <div className='forge'>
-            <ForgeSelectCards />
+            <ForgeCards />
             <hr />
             <div className='forge-main-container'>
-                <ForgeCards />
+                <ForgeEffects />
                 <hr />
                 {!isLarge && (
                     <>

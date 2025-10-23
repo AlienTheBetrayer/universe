@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../../../ui/Button/components/Button';
-import type { ForgeSelectCardContent } from './ForgeSelectCards';
-import './ForgeSelectMenu.css';
+import type { ForgeCardContent } from './ForgeCards';
+import './ForgeMenu.css';
 
 import arrowDownImg from '../../assets/down-arrow.svg';
 
@@ -11,10 +11,10 @@ import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 
 interface Props {
-    selectCards: ForgeSelectCardContent[];
+    cards: ForgeCardContent[];
 }
 
-export const ForgeSelectMenu = ({ selectCards }: Props) => {
+export const ForgeMenu = ({ cards }: Props) => {
     // state for the menu visibility
     const [menuShown, setMenuShown] = useState<boolean>(false);
 
@@ -25,18 +25,15 @@ export const ForgeSelectMenu = ({ selectCards }: Props) => {
     ]);
 
     return (
-        <div className='forge-select-menu'>
+        <div className='forge-menu'>
             <div>
                 <h4>
                     <mark>Available</mark> cards
                 </h4>
-                <ForgeSelectMenuItems
-                    menuShown={menuShown}
-                    selectCards={selectCards}
-                />
+                <ForgeMenuItems menuShown={menuShown} cards={cards} />
             </div>
 
-            <ForgeSelectMenuOpenButton
+            <ForgeMenuOpenButton
                 menuShown={menuShown}
                 setMenuShown={setMenuShown}
             />
@@ -45,29 +42,33 @@ export const ForgeSelectMenu = ({ selectCards }: Props) => {
 };
 
 interface ItemsProps {
-    selectCards: ForgeSelectCardContent[];
+    cards: ForgeCardContent[];
     menuShown: boolean;
 }
 
-const ForgeSelectMenuItems = ({ selectCards, menuShown }: ItemsProps) => {
+const ForgeMenuItems = ({ cards, menuShown }: ItemsProps) => {
     return (
         <AnimatePresence>
             {menuShown && (
                 <motion.ul
-                    className='forge-select-menu-items'
+                    className='forge-menu-items'
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
                     exit={{ height: 0 }}
                     transition={{ ease: 'easeInOut' }}
                 >
-                    {selectCards.map((card, idx) => (
-                        <li key={idx} className='forge-select-menu-item'>
+                    {cards.map((card, idx) => (
+                        <li key={idx} className='forge-menu-item'>
                             <Button>
                                 <img
                                     src={card.image}
                                     alt=''
                                     style={{ width: '20px', height: '20px' }}
-                                    className={`${card.inverted === true ? 'forge-image-inverted' : ''}`}
+                                    className={`${
+                                        card.inverted === true
+                                            ? 'forge-image-inverted'
+                                            : ''
+                                    }`}
                                 />
 
                                 <h4 style={{ width: '6rem' }}>{card.title}</h4>
@@ -92,16 +93,13 @@ interface ButtonProps {
     setMenuShown: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ForgeSelectMenuOpenButton = ({
-    menuShown,
-    setMenuShown,
-}: ButtonProps) => {
+const ForgeMenuOpenButton = ({ menuShown, setMenuShown }: ButtonProps) => {
     const tooltips = useTooltips();
 
     return (
         <Button
             ref={(el) => tooltips.set(0, 'Show / Hide the menu', el, 'down')}
-            className='forge-select-menu-button'
+            className='forge-menu-button'
             onClick={() => setMenuShown((prev) => !prev)}
         >
             {tooltips.render()}

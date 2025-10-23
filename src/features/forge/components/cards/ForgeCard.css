@@ -1,4 +1,4 @@
-.forge-select-card {
+.forge-card {
     position: relative;
     display: grid;
     place-items: center;
@@ -13,7 +13,7 @@
 }
 
 /* progress */
-.forge-select-card-progress {
+.forge-card-progress {
     position: absolute;
     inset: 0;
     transform-origin: left;

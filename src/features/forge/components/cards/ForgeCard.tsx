@@ -1,14 +1,14 @@
 import gsap from 'gsap';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Button } from '../../../ui/Button/components/Button';
-import './ForgeSelectCard.css';
-import type { ForgeSelectCardContent } from './ForgeSelectCards';
+import './ForgeCard.css';
+import type { ForgeCardContent } from './ForgeCards';
 
 interface Props {
-    content: ForgeSelectCardContent;
+    content: ForgeCardContent;
 }
 
-export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
+export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ content }, ref) => {
         const [selected, setSelected] = useState<boolean>(false);
         const progressRef = useRef<HTMLDivElement>(null);
@@ -33,7 +33,7 @@ export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
             <Button
                 drag={isDraggable}
                 transition={{ duration: 0 }}
-                className='forge-select-card'
+                className='forge-card'
                 ref={ref}
                 onPointerDown={() => setSelected(true)}
                 onPointerUp={() => setSelected(false)}
@@ -41,15 +41,18 @@ export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
                 <img
                     src={content.image}
                     alt=''
-                    className={`${content.inverted === true ? 'forge-image-inverted' : ''}`}
+                    className={`${
+                        content.inverted === true ? 'forge-image-inverted' : ''
+                    }`}
                     style={{ zIndex: 1, width: '24px', height: '24px' }}
                 />
+
                 <span style={{ zIndex: 1 }}>{content.title}</span>
 
                 <div
                     style={{ zIndex: 0 }}
                     ref={progressRef}
-                    className='forge-select-card-progress'
+                    className='forge-card-progress'
                 ></div>
             </Button>
         );
