@@ -14,7 +14,7 @@ interface Props {
 export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ content }, ref) => {
         // context state
-        const [, dispatch] = useForgeContext();
+        const [state, dispatch] = useForgeContext();
 
         // animating progress on hold
         const progressRef = useRef<HTMLDivElement>(null);
@@ -57,6 +57,20 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
         }, [isDraggable]);
 
         const cancelDragging = () => {
+            const elements = document.querySelectorAll<HTMLDivElement>('.forge-effect');
+            
+
+            elements.forEach((e, idx) => {
+                const bounds = e.getBoundingClientRect();
+                const x = state.draggingPos.x;
+                const y = state.draggingPos.y;
+
+                if(x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom) {
+                    console.log(idx);
+                }
+            });
+
+            setIsDraggable(false);
             dragControls.stop();
             controls.start({
                 x: 0,
@@ -78,6 +92,13 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                     bounceStiffness: 600,
                     bounceDamping: 10,
                 }}
+                onDragEnd={(e: PointerEvent) =>
+                    dispatch({
+                        type: 'SET_DRAGGING_POS',
+                        x: e.clientX,
+                        y: e.clientY,
+                    })
+                }
                 className='forge-card'
                 ref={ref}
                 onPointerDown={(e) => {
