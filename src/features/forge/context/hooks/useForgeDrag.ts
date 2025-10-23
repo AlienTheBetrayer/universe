@@ -17,13 +17,13 @@ export const useForgeDrag = (
             const effectElements =
                 document.querySelectorAll<HTMLDivElement>('.forge-effect');
 
-            let found = false;
             for (
                 let elementIdx = 0;
                 elementIdx < effectElements.length;
                 ++elementIdx
             ) {
-                const bounds = effectElements[elementIdx].getBoundingClientRect();
+                const bounds =
+                    effectElements[elementIdx].getBoundingClientRect();
                 const x = cursorRef.current.x;
                 const y = cursorRef.current.y;
 
@@ -33,28 +33,13 @@ export const useForgeDrag = (
                     y >= bounds.top &&
                     y <= bounds.bottom
                 ) {
-                    found = true;
-                    if (state.effectSlots.has(elementIdx) && state.effectSlots.get(elementIdx) !== state.dragging.card.type) {
-                        dispatch({
-                            type: 'REMOVE_EFFECT_SLOT',
-                            cardType: state.dragging.card.type,
-                        });
-                    } else {
-                        dispatch({
-                            type: 'SET_EFFECT_SLOT',
-                            idx: elementIdx,
-                            cardType: state.dragging.card.type,
-                        });
-                    }
+                    dispatch({
+                        type: 'SET_EFFECT_SLOT',
+                        idx: elementIdx,
+                        cardType: state.dragging.card.type,
+                    });
                     break;
                 }
-            }
-
-            if (!found) {
-                dispatch({
-                    type: 'REMOVE_EFFECT_SLOT',
-                    cardType: state.dragging.card.type,
-                });
             }
 
             dispatch({ type: 'CANCEL_CURRENT' });
