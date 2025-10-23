@@ -21,13 +21,15 @@ export const ForgeSelectMenu = ({ selectCards }: Props) => {
     // hotkeys
     useHotkeys([
         { hotkey: 'Escape', action: () => setMenuShown(false) },
-        { hotkey: 'M', action: () => setMenuShown(true) }
+        { hotkey: 'M', action: () => setMenuShown(true) },
     ]);
 
     return (
         <div className='forge-select-menu'>
             <div>
-                <h4><mark>Available</mark> cards</h4>
+                <h4>
+                    <mark>Available</mark> cards
+                </h4>
                 <ForgeSelectMenuItems
                     menuShown={menuShown}
                     selectCards={selectCards}
@@ -61,8 +63,21 @@ const ForgeSelectMenuItems = ({ selectCards, menuShown }: ItemsProps) => {
                     {selectCards.map((card, idx) => (
                         <li key={idx} className='forge-select-menu-item'>
                             <Button>
-                                <h4 style={{ width: '6rem'}}>{card.title}</h4>
-                                <p style={{ flex: 1, textAlign: 'right'}} dangerouslySetInnerHTML={{ __html: card.description }}/>
+                                <img
+                                    src={card.image}
+                                    alt=''
+                                    style={{ width: '20px', height: '20px' }}
+                                    className={`${card.inverted === true ? 'forge-image-inverted' : ''}`}
+                                />
+
+                                <h4 style={{ width: '6rem' }}>{card.title}</h4>
+
+                                <p
+                                    style={{ flex: 1, textAlign: 'right' }}
+                                    dangerouslySetInnerHTML={{
+                                        __html: card.description,
+                                    }}
+                                />
                             </Button>
                         </li>
                     ))}
@@ -85,11 +100,11 @@ const ForgeSelectMenuOpenButton = ({
 
     return (
         <Button
-            ref={el => tooltips.set(0, 'Show / Hide the menu', el, 'down')}
+            ref={(el) => tooltips.set(0, 'Show / Hide the menu', el, 'down')}
             className='forge-select-menu-button'
             onClick={() => setMenuShown((prev) => !prev)}
         >
-            { tooltips.render() }
+            {tooltips.render()}
 
             <motion.img
                 src={arrowDownImg}

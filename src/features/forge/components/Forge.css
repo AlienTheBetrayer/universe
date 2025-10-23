@@ -4,13 +4,18 @@
     gap: 2rem;
 }
 
+/* utility classes */
 .forge-image {
     width: 24px;
     height: 24px;
     filter: invert(0.5);
-    transition: 1s;
 }
 
+.forge-image-inverted {
+    filter: invert(var(--header-invert));
+}
+
+/*  */
 .forge-main-container {
     display: flex;
     justify-content: center;

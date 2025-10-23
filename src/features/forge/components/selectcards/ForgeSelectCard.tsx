@@ -2,26 +2,14 @@ import gsap from 'gsap';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Button } from '../../../ui/Button/components/Button';
 import './ForgeSelectCard.css';
-
-export type ForgeCardType =
-    | 'typescript'
-    | 'react'
-    | 'css'
-    | 'html'
-    | 'zustand'
-    | 'redux'
-    | 'javascript'
-    | 'nextjs'
-    | 'tailwind';
+import type { ForgeSelectCardContent } from './ForgeSelectCards';
 
 interface Props {
-    title: string;
-    description: string;
-    type: ForgeCardType;
+    content: ForgeSelectCardContent;
 }
 
 export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
-    ({ title, description, type }, ref) => {
+    ({ content }, ref) => {
         const [selected, setSelected] = useState<boolean>(false);
         const progressRef = useRef<HTMLDivElement>(null);
         const tweenRef = useRef<gsap.core.Tween>(null);
@@ -50,7 +38,13 @@ export const ForgeSelectCard = forwardRef<HTMLButtonElement, Props>(
                 onPointerDown={() => setSelected(true)}
                 onPointerUp={() => setSelected(false)}
             >
-                <span style={{ zIndex: 1 }}>{title}</span>
+                <img
+                    src={content.image}
+                    alt=''
+                    className={`${content.inverted === true ? 'forge-image-inverted' : ''}`}
+                    style={{ zIndex: 1, width: '24px', height: '24px' }}
+                />
+                <span style={{ zIndex: 1 }}>{content.title}</span>
 
                 <div
                     style={{ zIndex: 0 }}
