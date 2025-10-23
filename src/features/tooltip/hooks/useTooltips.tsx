@@ -14,43 +14,13 @@ interface TooltipElement {
 }
 
 export const useTooltips = () => {
+    // refs + variables
     const elementRefs = useRef<TooltipElement[]>([]);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
+    const handlers = useRef<{ enter: () => void; leave: () => void }[]>([]);
+
+    // states
     const [selected, setSelected] = useState<number | false>(false);
-    const [version, setVersion] = useState<number>(0);
-
-    // filling the array with given elementRefs + event handling
-    useEffect(() => {
-        const handleLeave = () => {
-            setSelected(false);
-        };
-
-        const handlers: { enter: () => void; leave: () => void }[] = [];
-
-        elementRefs.current.forEach((el, idx) => {
-            if (!el.element) return;
-
-            const handleEnter = () => setSelected(idx);
-
-            el.element.addEventListener('pointerenter', handleEnter);
-            el.element.addEventListener('focus', handleEnter);
-            el.element.addEventListener('pointerleave', handleLeave);
-            el.element.addEventListener('blur', handleLeave);
-            handlers[idx] = { enter: handleEnter, leave: handleLeave };
-        });
-
-        return () => {
-            elementRefs.current.forEach((ref, idx) => {
-                if (!ref.element || !handlers[idx]) return;
-
-                const h = handlers[idx];
-                ref.element?.removeEventListener('pointerenter', h.enter);
-                ref.element?.removeEventListener('focus', h.enter);
-                ref.element?.removeEventListener('pointerleave', h.leave);
-                ref.element?.removeEventListener('blur', h.leave);
-            });
-        };
-    }, [version]);
 
     // upon tooltip appearance change its position based on the current selected index
     useEffect(() => {
@@ -134,7 +104,7 @@ export const useTooltips = () => {
         }
     }, [selected]);
 
-    // user functions
+    // user API
     const set = (
         idx: number,
         tooltip: string,
@@ -142,20 +112,44 @@ export const useTooltips = () => {
         direction: TooltipDirection = 'up',
         offset: number = 8
     ) => {
-        const existing = elementRefs.current[idx];
-        if (existing?.element !== element) {
-            requestAnimationFrame(() => {
-                setVersion((prev) => prev + 1);
-            });
-        }
-
-        elementRefs.current[idx] = {
-            idx,
-            element,
-            tooltip,
-            direction,
-            offset,
+        const handleLeave = () => {
+            setSelected(false);
         };
+
+        if (element === null) {
+            const h = handlers.current[idx];
+            const unmountedElement = elementRefs.current[idx];
+            if (h && unmountedElement.element) {
+                unmountedElement.element.removeEventListener(
+                    'pointerenter',
+                    h.enter
+                );
+                unmountedElement.element.removeEventListener('focus', h.enter);
+                unmountedElement.element.removeEventListener(
+                    'pointerleave',
+                    h.leave
+                );
+                unmountedElement.element.removeEventListener('blur', h.leave);
+                elementRefs.current[idx] = undefined!;
+                handlers.current[idx] = undefined!;
+            }
+        } else {
+            const handleEnter = () => setSelected(idx);
+
+            element.addEventListener('pointerenter', handleEnter);
+            element.addEventListener('focus', handleEnter);
+            element.addEventListener('pointerleave', handleLeave);
+            element.addEventListener('blur', handleLeave);
+            handlers.current[idx] = { enter: handleEnter, leave: handleLeave };
+
+            elementRefs.current[idx] = {
+                direction,
+                element,
+                idx,
+                offset,
+                tooltip,
+            };
+        }
     };
 
     const render = () => {

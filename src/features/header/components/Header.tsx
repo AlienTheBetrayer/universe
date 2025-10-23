@@ -1,11 +1,15 @@
 import './Header.css';
 
-import { motion } from 'motion/react';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { usePopup } from '../../../hooks/usePopup';
 import { HeaderMenu } from '../../headermenu/components/HeaderMenu';
+
+import { motion } from 'motion/react';
+import { useLocalStore } from '../../../zustand/localStore';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { Button } from '../../ui/Button/components/Button';
 import { LinkButton } from '../../ui/LinkButton/components/LinkButton';
+import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 import { useHeaderAnimation } from '../hooks/useHeaderAnimation';
 
@@ -13,10 +17,6 @@ import forkImg from '../assets/fork.svg';
 import launchImg from '../assets/launch.svg';
 import starImg from '../assets/star.svg';
 import stellarImg from '../assets/stellar.svg';
-
-import { useLocalStore } from '../../../zustand/localStore';
-import { useTooltips } from '../../tooltip/hooks/useTooltips';
-import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 
 export const Header = () => {
     const isMobile = useMediaQuery(768);
@@ -28,7 +28,6 @@ export const Header = () => {
     );
 
     const tooltips = useTooltips();
-    console.log('HEADER RERENDER');
 
     return (
         <motion.header
@@ -67,6 +66,9 @@ export const Header = () => {
                         className='flex align-center h-full'
                         style={{ display: !isMobile ? 'flex' : 'none' }}
                         layout
+                        initial={{
+                            gap: loaded && justified ? '1rem' : '0.1rem',
+                        }}
                         animate={{
                             gap: '1rem',
                             transition: {
@@ -110,19 +112,19 @@ export const Header = () => {
                         </LinkButton>
 
                         <ToggleButton
-                            // ref={(el) =>
-                            //     tooltips.set(
-                            //         0,
-                            //         `${
-                            //             theme === 'dark'
-                            //                 ? '<mark>Dark</mark> / Light'
-                            //                 : 'Dark / <mark>Light</mark>'
-                            //         } theme`,
-                            //         el,
-                            //         'down',
-                            //         24
-                            //     )
-                            // }
+                            ref={(el) =>
+                                tooltips.set(
+                                    0,
+                                    `${
+                                        theme === 'dark'
+                                            ? '<mark>Dark</mark> / Light'
+                                            : 'Dark / <mark>Light</mark>'
+                                    } theme`,
+                                    el,
+                                    'down',
+                                    24
+                                )
+                            }
                             value={theme === 'light'}
                             onToggled={() => toggleTheme()}
                         />
