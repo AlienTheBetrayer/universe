@@ -25,10 +25,6 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                 drag={state.dragging.idx === idx}
                 dragMomentum={false}
                 dragListener={false}
-                dragTransition={{
-                    bounceStiffness: 600,
-                    bounceDamping: 10,
-                }}
                 className='forge-card'
                 ref={ref}
                 onPointerDown={(e) => {

@@ -1,7 +1,4 @@
 .forge-effect {
-    display: flex;
-    flex-direction: column;
-
     width: 100%;
     aspect-ratio: 1/1;
     border: 2px dashed var(--background-6);
@@ -10,7 +7,7 @@
 }
 
 /* special hover (while dragging) */
-@keyframes borderPulse {
+@keyframes hoverPulse {
     0% {
         border-color: var(--background-6);
     }
@@ -19,8 +16,22 @@
     }
 }
 
+@keyframes hoverBlockedPulse {
+    0% {
+        border-color: var(--background-6);
+    }
+    100% {
+        border-color: #f00;
+    }
+}
+
 .forge-effect-hover:hover {
-    animation: borderPulse 0.4s infinite alternate ease-in-out;
+    animation: hoverPulse 0.5s infinite alternate ease-in-out;
+}
+
+.forge-effect-hover-blocked:hover {
+    cursor: not-allowed;
+    animation: hoverBlockedPulse 0.25s infinite alternate ease-in-out;
 }
 
 
