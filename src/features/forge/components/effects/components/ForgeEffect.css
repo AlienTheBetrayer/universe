@@ -2,4 +2,5 @@
     width: 100%;
     aspect-ratio: 1/1;
     border: 2px dashed var(--background-6);
+    border-radius: 16px;
 }
