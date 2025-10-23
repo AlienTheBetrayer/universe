@@ -5,6 +5,7 @@ import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { Button } from '../../../ui/Button/components/Button';
 import './ForgeCard.css';
 import type { ForgeCardContent } from './ForgeCards';
+import { useForgeContext } from '../../context/ForgeContext';
 
 interface Props {
     content: ForgeCardContent;
@@ -12,6 +13,9 @@ interface Props {
 
 export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ content }, ref) => {
+        // context state
+        const [state, dispatch] = useForgeContext();
+
         // animating progress on hold
         const progressRef = useRef<HTMLDivElement>(null);
         const tweenRef = useRef<gsap.core.Tween>(null);
@@ -49,6 +53,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
             if (isDraggable && lastEvent.current) {
                 dragControls.start(lastEvent.current);
             }
+            dispatch({ type: 'SET_IS_DRAGGING', flag: isDraggable });
         }, [isDraggable]);
 
         const cancelDragging = () => {

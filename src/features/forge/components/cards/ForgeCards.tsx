@@ -13,6 +13,7 @@ import typescriptImg from '../../assets/cards/typescript.svg';
 import zustandImg from '../../assets/cards/zustand.svg';
 import { ForgeCard } from './ForgeCard';
 import { ForgeMenu } from './ForgeMenu';
+import { useForgeContext } from '../../context/ForgeContext';
 
 export type ForgeCardType =
     | 'typescript'
@@ -104,6 +105,9 @@ export const ForgeCards = () => {
         },
     ];
 
+    // state
+    const [state, dispatch] = useForgeContext();
+
     // media query
     const isLarge = !useMediaQuery(1024);
 
@@ -112,7 +116,8 @@ export const ForgeCards = () => {
 
     return (
         <div className='forge-cards'>
-            {tooltips.render()}
+            
+            { !state.isDragging && tooltips.render()}
 
             {isLarge ? (
                 cards.map((card, idx) => (
