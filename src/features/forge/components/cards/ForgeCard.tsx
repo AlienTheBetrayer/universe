@@ -1,9 +1,8 @@
-import gsap from 'gsap';
-import { useAnimationControls, useDragControls } from 'motion/react';
-import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import { forwardRef } from 'react';
 import { Button } from '../../../ui/Button/components/Button';
 import { useForgeContext } from '../../context/ForgeContext';
 import type { ForgeCardContent } from '../../context/types/data';
+import { useForgeCard } from '../../hooks/useForgeCard';
 import './ForgeCard.css';
 
 interface Props {
@@ -13,76 +12,15 @@ interface Props {
 
 export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ idx, content }, ref) => {
-        // context state
-        const [state, dispatch] = useForgeContext();
-        const isEffected = useMemo(() => {
-            for (const val of state.effectSlots.values()) {
-                if (val === content.type) return true;
-            }
-            return false;
-        }, [state.effectSlots, content.type]);
+        const [state, ] = useForgeContext();
 
-        // animating progress on hold
-        const progressRef = useRef<HTMLDivElement>(null);
-        const tweenRef = useRef<gsap.core.Tween>(null);
-
-        // dragging functionality
-        const [selected, setSelected] = useState<boolean>(false);
-        const lastEvent = useRef<React.PointerEvent<HTMLButtonElement>>(null);
-        const dragControls = useDragControls();
-
-        const controls = useAnimationControls();
-
-        // drag manual controls
-        useEffect(() => {
-            const duration = 0.75;
-
-            tweenRef.current = gsap.to(progressRef.current, {
-                scaleX: selected ? 1 : 0,
-                duration,
-            });
-
-            // twice as fast as the animation
-            const timeout = setTimeout(() => {
-                if (selected)
-                    dispatch({ type: 'SET_DRAGGING', idx: idx, card: content });
-            }, duration * 500);
-
-            return () => {
-                tweenRef.current?.kill();
-                clearTimeout(timeout);
-            };
-        }, [selected]);
-
-        useEffect(() => {
-            if (state.dragging.idx === idx && lastEvent.current)
-                dragControls.start(lastEvent.current);
-
-            if (state.dragging.idx === false) setSelected(false);
-        }, [state.dragging]);
-
-        useEffect(() => {
-            if (state.awaitingCancel !== idx) return;
-
-            const timeout = setTimeout(() => {
-                dispatch({ type: 'RESTORE_CANCEL' });
-
-                dragControls.stop();
-                controls.start({
-                    x: 0,
-                    y: 0,
-                    transition: { type: 'spring', stiffness: 200, damping: 20 },
-                });
-            }, 300);
-
-            return () => clearTimeout(timeout);
-        }, [state.awaitingCancel]);
+        const cardController = useForgeCard(idx, content);
 
         return (
             <Button
-                enabled={!isEffected}
-                animate={controls}
-                dragControls={dragControls}
+                enabled={!cardController.isEffected}
+                animate={cardController.controls}
+                dragControls={cardController.dragControls}
                 drag={state.dragging.idx === idx}
                 dragMomentum={false}
                 dragListener={false}
@@ -93,15 +31,14 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                 className='forge-card'
                 ref={ref}
                 onPointerDown={(e) => {
-                    setSelected(true);
-                    lastEvent.current = e;
+                    cardController.setSelected(true);
+                    cardController.lastEvent.current = e;
                 }}
                 onPointerLeave={() => {
-                    if (state.dragging.idx !== idx && selected) {
-                        setSelected(false);
-                    }
+                    if (state.dragging.idx !== idx && cardController.selected)
+                        cardController.setSelected(false);
                 }}
-                onPointerUp={() => setSelected(false)}
+                onPointerUp={() => cardController.setSelected(false)}
             >
                 <img
                     draggable={false}
@@ -117,7 +54,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
 
                 <div
                     style={{ zIndex: 0 }}
-                    ref={progressRef}
+                    ref={cardController.progressRef}
                     className='forge-card-progress'
                 ></div>
             </Button>
