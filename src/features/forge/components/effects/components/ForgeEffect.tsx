@@ -1,9 +1,13 @@
+import { forwardRef } from 'react';
 import './ForgeEffect.css';
 
-export const ForgeEffect = () => {
-    return (
-        <div className='forge-effect'>
+interface Props {
 
+}
+
+export const ForgeEffect = forwardRef<HTMLDivElement, Props>(({}, ref) => {
+    return (
+        <div className='forge-effect' ref={ref}>
         </div>
     )
-}
+});

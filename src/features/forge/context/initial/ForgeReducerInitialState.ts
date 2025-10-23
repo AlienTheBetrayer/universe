@@ -13,6 +13,7 @@ import zustandImg from '../../assets/cards/zustand.svg';
 export const ForgeReducerInitialState: ForgeData = {
     draggingPos: { x: 0, y: 0 },
     isDragging: false,
+    effectRefs: [],
     cardContents: [
         {
             title: 'TypeScript',

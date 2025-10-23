@@ -17,8 +17,14 @@ export interface ForgeCardContent {
     type: ForgeCardType;
 }
 
+export interface EffectObject {
+    idx: number;
+    element: HTMLDivElement | null;
+}
+
 export interface ForgeData {
     isDragging: boolean;
     draggingPos: { x: number; y: number };
     cardContents: ForgeCardContent[];
+    effectRefs: EffectObject[];
 }
