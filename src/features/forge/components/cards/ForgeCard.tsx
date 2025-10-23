@@ -32,7 +32,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                     cardController.lastEvent.current = e;
                 }}
                 onPointerLeave={() => {
-                    if (state.dragging.idx !== idx && cardController.selected)
+                    if (state.dragging.idx === false && cardController.selected)
                         cardController.setSelected(false);
                 }}
                 onPointerUp={() => cardController.setSelected(false)}
