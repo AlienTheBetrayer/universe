@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../../ui/Button/components/Button';
 import { useForgeContext } from '../../context/ForgeContext';
 import type { ForgeCardContent } from '../../context/types/data';
@@ -15,12 +15,12 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ idx, content }, ref) => {
         // context state
         const [state, dispatch] = useForgeContext();
-        let isEffected = false;
-        state.effectSlots.forEach((val, key) => {
-            if(val === content.type) {
-                isEffected = true;
+        const isEffected = useMemo(() => {
+            for (const val of state.effectSlots.values()) {
+                if (val === content.type) return true;
             }
-        });
+            return false;
+        }, [state.effectSlots, content.type]);
 
         // animating progress on hold
         const progressRef = useRef<HTMLDivElement>(null);
