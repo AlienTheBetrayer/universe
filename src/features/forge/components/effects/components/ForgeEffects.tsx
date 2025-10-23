@@ -13,6 +13,7 @@ export const ForgeEffects = () => {
             <div className='forge-effects'>
                 {Array.from({ length: 9 }).map((_, idx) => (
                     <ForgeEffect
+                        state={state}
                         dispatch={dispatch}
                         key={idx}
                         type={state.effectSlots.get(idx)}

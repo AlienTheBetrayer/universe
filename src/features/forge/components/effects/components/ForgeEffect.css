@@ -9,6 +9,21 @@
     overflow: hidden;
 }
 
+/* special hover (while dragging) */
+@keyframes borderPulse {
+    0% {
+        border-color: var(--background-6);
+    }
+    100% {
+        border-color: #00f;
+    }
+}
+
+.forge-effect-hover:hover {
+    animation: borderPulse 0.4s infinite alternate ease-in-out;
+}
+
+
 /* sections */
 .forge-effect-topline {
     display: flex;
