@@ -13,8 +13,8 @@ export const useCursor = (defaultPosition?: Position) => {
             setPos({ x: e.clientX, y: e.clientY });
         };
 
-        window.addEventListener('mousemove', handle);
-        return () => window.removeEventListener('mousemove', handle);
+        window.addEventListener('pointermove', handle);
+        return () => window.removeEventListener('pointermove', handle);
     }, []);
 
     return pos;

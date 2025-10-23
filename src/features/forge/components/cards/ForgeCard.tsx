@@ -1,18 +1,18 @@
 import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { Button } from '../../../ui/Button/components/Button';
 import { useForgeContext } from '../../context/ForgeContext';
 import type { ForgeCardContent } from '../../context/types/data';
 import './ForgeCard.css';
 
 interface Props {
+    idx: number;
     content: ForgeCardContent;
 }
 
 export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
-    ({ content }, ref) => {
+    ({ idx, content }, ref) => {
         // context state
         const [state, dispatch] = useForgeContext();
 
@@ -22,7 +22,6 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
 
         // dragging functionality
         const [selected, setSelected] = useState<boolean>(false);
-        const [isDraggable, setIsDraggable] = useState<boolean>(false);
         const lastEvent = useRef<React.PointerEvent<HTMLButtonElement>>(null);
         const dragControls = useDragControls();
 
@@ -30,7 +29,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
 
         // drag manual controls
         useEffect(() => {
-            const duration = 1;
+            const duration = 0.75;
 
             tweenRef.current = gsap.to(progressRef.current, {
                 scaleX: selected ? 1 : 0,
@@ -38,10 +37,10 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
             });
 
             // twice as fast as the animation
-            const timeout = setTimeout(
-                () => setIsDraggable(selected),
-                duration * 500
-            );
+            const timeout = setTimeout(() => {
+                if (selected)
+                    dispatch({ type: 'SET_DRAGGING', idx: idx, card: content });
+            }, duration * 500);
 
             return () => {
                 tweenRef.current?.kill();
@@ -50,60 +49,42 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
         }, [selected]);
 
         useEffect(() => {
-            if (isDraggable && lastEvent.current) {
+            if (state.dragging.idx === idx && lastEvent.current)
                 dragControls.start(lastEvent.current);
-            }
-            dispatch({ type: 'SET_IS_DRAGGING', flag: isDraggable });
-        }, [isDraggable]);
 
-        const cancelDragging = () => {
-            const elements = document.querySelectorAll<HTMLDivElement>('.forge-effect');
-            
+            if (state.dragging.idx === false) setSelected(false);
+        }, [state.dragging]);
 
-            elements.forEach((e, idx) => {
-                const bounds = e.getBoundingClientRect();
-                const x = state.draggingPos.x;
-                const y = state.draggingPos.y;
-
-                if(x >= bounds.left && x <= bounds.right && y >= bounds.top && y <= bounds.bottom) {
-                    console.log(idx);
-                }
-            });
-
-            setIsDraggable(false);
-            dragControls.stop();
-            controls.start({
-                x: 0,
-                y: 0,
-                transition: { type: 'spring', stiffness: 200, damping: 20 },
-            });
-        };
-
-        useHotkeys([{ hotkey: 'Escape', action: () => cancelDragging() }]);
-
+        // const cancelDragging = () => {
+        //     setIsDraggable(false);
+        //     dragControls.stop();
+        //     controls.start({
+        //         x: 0,
+        //         y: 0,
+        //         transition: { type: 'spring', stiffness: 200, damping: 20 },
+        //     });
+        // };
         return (
             <Button
                 animate={controls}
                 dragControls={dragControls}
-                drag={isDraggable}
+                drag={state.dragging.idx === idx}
                 dragMomentum={false}
                 dragListener={false}
                 dragTransition={{
                     bounceStiffness: 600,
                     bounceDamping: 10,
                 }}
-                onDragEnd={(e: PointerEvent) =>
-                    dispatch({
-                        type: 'SET_DRAGGING_POS',
-                        x: e.clientX,
-                        y: e.clientY,
-                    })
-                }
                 className='forge-card'
                 ref={ref}
                 onPointerDown={(e) => {
                     setSelected(true);
                     lastEvent.current = e;
+                }}
+                onPointerLeave={() => {
+                    if (state.dragging.idx !== idx && selected) {
+                        setSelected(false);
+                    }
                 }}
                 onPointerUp={() => setSelected(false)}
             >

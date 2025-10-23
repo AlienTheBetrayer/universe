@@ -17,8 +17,13 @@ export interface ForgeCardContent {
     type: ForgeCardType;
 }
 
+export interface ForgeDragging {
+    idx: number | false;
+    card?: ForgeCardContent;
+}
+
 export interface ForgeData {
-    isDragging: boolean;
-    draggingPos: { x: number; y: number };
+    dragging: ForgeDragging;
     cardContents: ForgeCardContent[];
+    effectSlots: Map<number, ForgeCardType>;
 }

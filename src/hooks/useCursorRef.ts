@@ -9,8 +9,8 @@ export const useCursorRef = () => {
             ref.current = { x: e.clientX, y: e.clientY };
         };
 
-        window.addEventListener('mousemove', handle);
-        return () => window.removeEventListener('mousemove', handle);
+        window.addEventListener('pointermove', handle);
+        return () => window.removeEventListener('pointermove', handle);
     }, []);
 
     return ref;

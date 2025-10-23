@@ -1,5 +1,14 @@
+import type { ForgeCardContent, ForgeCardType } from '../../../context/types/data';
 import './ForgeEffect.css';
 
-export const ForgeEffect = ({}) => {
-    return <div className='forge-effect'></div>;
+interface Props {
+    type: ForgeCardType | undefined;
+}
+
+export const ForgeEffect = ({ type }: Props) => {
+    return (
+        <div className='forge-effect'>
+            { type && type }
+        </div>
+    );
 };

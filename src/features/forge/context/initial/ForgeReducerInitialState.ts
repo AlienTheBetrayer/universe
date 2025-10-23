@@ -11,8 +11,10 @@ import typescriptImg from '../../assets/cards/typescript.svg';
 import zustandImg from '../../assets/cards/zustand.svg';
 
 export const ForgeReducerInitialState: ForgeData = {
-    draggingPos: { x: 0, y: 0 },
-    isDragging: false,
+    dragging: {
+        idx: false
+    },
+    effectSlots: new Map(),
     cardContents: [
         {
             title: 'TypeScript',

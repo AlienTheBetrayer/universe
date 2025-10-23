@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+import { useForgeDrag } from './hooks/useForgeDrag';
 import { ForgeReducerInitialState } from './initial/ForgeReducerInitialState';
 import { ForgeReducer, type ForgeReducerAction } from './reducer/ForgeReducer';
 import type { ForgeData } from './types/data';
@@ -17,6 +18,8 @@ export const ForgeProvider = ({ children }: Props) => {
         ForgeReducerInitialState
     );
 
+    useForgeDrag(state, dispatch);
+
     return (
         <ForgeContext.Provider value={[state, dispatch]}>
             {children}
@@ -26,7 +29,6 @@ export const ForgeProvider = ({ children }: Props) => {
 
 export const useForgeContext = () => {
     const ctx = useContext(ForgeContext);
-    if(!ctx)
-        throw new Error('useForgeContext() is used incorrectly.');
+    if (!ctx) throw new Error('useForgeContext() is used incorrectly.');
     return ctx;
-}
+};
