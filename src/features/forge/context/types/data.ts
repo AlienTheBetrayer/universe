@@ -26,4 +26,5 @@ export interface ForgeData {
     dragging: ForgeDragging;
     cardContents: ForgeCardContent[];
     effectSlots: Map<number, ForgeCardType>;
+    awaitingCancel: number | false;
 }

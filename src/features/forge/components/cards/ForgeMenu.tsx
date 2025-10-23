@@ -15,7 +15,7 @@ interface Props {}
 
 export const ForgeMenu = ({}: Props) => {
     // state
-    const [state, ] = useForgeContext();
+    const [state] = useForgeContext();
 
     // state for the menu visibility
     const [menuShown, setMenuShown] = useState<boolean>(false);

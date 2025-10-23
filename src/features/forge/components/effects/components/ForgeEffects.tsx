@@ -3,7 +3,7 @@ import { ForgeEffect } from './ForgeEffect';
 import './ForgeEffects.css';
 
 export const ForgeEffects = () => {
-    const [state, dispatch] = useForgeContext();
+    const [state, ] = useForgeContext();
 
     return (
         <div className='forge-effects-container'>

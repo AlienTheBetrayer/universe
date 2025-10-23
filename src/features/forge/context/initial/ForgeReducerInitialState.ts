@@ -15,6 +15,7 @@ export const ForgeReducerInitialState: ForgeData = {
         idx: false
     },
     effectSlots: new Map(),
+    awaitingCancel: false,
     cardContents: [
         {
             title: 'TypeScript',

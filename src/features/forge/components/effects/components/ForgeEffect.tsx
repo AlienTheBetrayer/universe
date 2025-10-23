@@ -1,4 +1,4 @@
-import type { ForgeCardContent, ForgeCardType } from '../../../context/types/data';
+import type { ForgeCardType } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 interface Props {
@@ -8,7 +8,11 @@ interface Props {
 export const ForgeEffect = ({ type }: Props) => {
     return (
         <div className='forge-effect'>
-            { type && type }
+            { type && (
+                <h3>
+                    {type}
+                </h3>
+            )}
         </div>
     );
 };

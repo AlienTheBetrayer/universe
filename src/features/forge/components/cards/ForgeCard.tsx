@@ -55,15 +55,19 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
             if (state.dragging.idx === false) setSelected(false);
         }, [state.dragging]);
 
-        // const cancelDragging = () => {
-        //     setIsDraggable(false);
-        //     dragControls.stop();
-        //     controls.start({
-        //         x: 0,
-        //         y: 0,
-        //         transition: { type: 'spring', stiffness: 200, damping: 20 },
-        //     });
-        // };
+        useEffect(() => {
+            if (state.awaitingCancel === idx) {
+                dispatch({ type: 'CANCEL', idx: false });
+
+                dragControls.stop();
+                controls.start({
+                    x: 0,
+                    y: 0,
+                    transition: { type: 'spring', stiffness: 200, damping: 20 },
+                });
+            }
+        }, [state.awaitingCancel]);
+
         return (
             <Button
                 animate={controls}

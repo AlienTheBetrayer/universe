@@ -18,8 +18,12 @@ export const useForgeDrag = (
                 document.querySelectorAll<HTMLDivElement>('.forge-effect');
 
             let found = false;
-            for (let i = 0; i < elements.length; ++i) {
-                const bounds = elements[i].getBoundingClientRect();
+            for (
+                let elementIdx = 0;
+                elementIdx < elements.length;
+                ++elementIdx
+            ) {
+                const bounds = elements[elementIdx].getBoundingClientRect();
                 const x = cursorRef.current.x;
                 const y = cursorRef.current.y;
 
@@ -30,17 +34,29 @@ export const useForgeDrag = (
                     y <= bounds.bottom
                 ) {
                     found = true;
-                    dispatch({
-                        type: 'SET_EFFECT_SLOT',
-                        cardType: state.dragging.card.type,
-                        idx: i,
-                    });
+                    if (state.effectSlots.has(elementIdx) && state.effectSlots.get(elementIdx) !== state.dragging.card.type) {
+                        dispatch({
+                            type: 'REMOVE_EFFECT_SLOT',
+                            cardType: state.dragging.card.type,
+                        });
+                        dispatch({ type: 'CANCEL', idx: state.dragging.idx });
+                    } else {
+                        dispatch({
+                            type: 'SET_EFFECT_SLOT',
+                            idx: elementIdx,
+                            cardType: state.dragging.card.type,
+                        });
+                    }
                     break;
                 }
             }
 
             if (!found) {
-                dispatch({ type: 'REMOVE_EFFECT_SLOT', cardType: state.dragging.card.type})
+                dispatch({
+                    type: 'REMOVE_EFFECT_SLOT',
+                    cardType: state.dragging.card.type,
+                });
+                dispatch({ type: 'CANCEL', idx: state.dragging.idx });
             }
 
             dispatch({ type: 'SET_DRAGGING', idx: false });
@@ -54,14 +70,4 @@ export const useForgeDrag = (
             window.removeEventListener('touchend', handle);
         };
     }, [state]);
-
-    useEffect(() => {
-        // if (!found) {
-        //     cancelDragging();
-        // }
-    }, [state.dragging]);
-
-    // useHotkeys([
-    //     { hotkey: 'Escape', action: () => dispatch({ type: 'SET_IS_DRAGGING', flag: false })}
-    // ])
 };
