@@ -3,9 +3,9 @@ import { useAnimationControls, useDragControls } from 'motion/react';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 import { Button } from '../../../ui/Button/components/Button';
-import './ForgeCard.css';
-import type { ForgeCardContent } from './ForgeCards';
 import { useForgeContext } from '../../context/ForgeContext';
+import type { ForgeCardContent } from '../../context/types/data';
+import './ForgeCard.css';
 
 interface Props {
     content: ForgeCardContent;
@@ -14,7 +14,7 @@ interface Props {
 export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ content }, ref) => {
         // context state
-        const [state, dispatch] = useForgeContext();
+        const [, dispatch] = useForgeContext();
 
         // animating progress on hold
         const progressRef = useRef<HTMLDivElement>(null);
