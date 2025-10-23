@@ -22,7 +22,7 @@ export const ForgeEffect = ({ type, state, dispatch }: Props) => {
             <AnimatePresence>
                 {type && (
                     <motion.div
-                        style={{ display: 'flex', flexDirection: 'column' }}
+                        style={{ display: 'flex', flexDirection: 'column', height: '100%'}}
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.5 }}
