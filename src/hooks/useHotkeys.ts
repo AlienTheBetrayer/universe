@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type DependencyList } from 'react';
 
 interface HotkeyAction {
     hotkey: string;
@@ -7,7 +7,7 @@ interface HotkeyAction {
     ignoreFocus?: boolean;
 }
 
-export const useHotkeys = (hotkeys: HotkeyAction[]) => {
+export const useHotkeys = (hotkeys: HotkeyAction[], deps: DependencyList = []) => {
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
             const match = hotkeys.find(
@@ -40,5 +40,5 @@ export const useHotkeys = (hotkeys: HotkeyAction[]) => {
 
         window.addEventListener('keydown', handle);
         return () => window.removeEventListener('keydown', handle);
-    }, [hotkeys]);
+    }, [hotkeys, ...deps]);
 };
