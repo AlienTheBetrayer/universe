@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button } from '../../../../ui/Button/components/Button';
 import './ForgeMenu.css';
 
@@ -28,14 +28,16 @@ export const ForgeMenu = ({}: Props) => {
 
     return (
         <div className='forge-menu'>
-            <div>
-                <h4>
-                    <mark>Available</mark> cards
-                </h4>
-                <AnimatePresence>
-                    {menuShown && <ForgeMenuItems state={state} />}
-                </AnimatePresence>
-            </div>
+            <AnimatePresence>
+                {menuShown && (
+                    <ForgeMenuItems
+                        state={state}
+                        onSelect={() => {
+                            setMenuShown(false);
+                        }}
+                    />
+                )}
+            </AnimatePresence>
 
             <ForgeMenuOpenButton
                 menuShown={menuShown}
@@ -47,9 +49,14 @@ export const ForgeMenu = ({}: Props) => {
 
 interface ItemsProps {
     state: ForgeData;
+    onSelect?: (idx: number) => void;
 }
 
-const ForgeMenuItems = ({ state }: ItemsProps) => {
+const ForgeMenuItems = ({ state, onSelect }: ItemsProps) => {
+    const effectedIndexes = useMemo(() => {
+        return state.effectSlots.map((e) => e.card.idx);
+    }, [state.effectSlots]);
+
     return (
         <motion.ul
             className='forge-menu-items'
@@ -60,7 +67,10 @@ const ForgeMenuItems = ({ state }: ItemsProps) => {
         >
             {state.cards.map((card) => (
                 <li key={card.idx} className='forge-menu-item'>
-                    <Button>
+                    <Button
+                        enabled={!effectedIndexes.includes(card.idx)}
+                        onClick={() => onSelect?.(card.idx)}
+                    >
                         <img
                             src={card.image}
                             alt=''

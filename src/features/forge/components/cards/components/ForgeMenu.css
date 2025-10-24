@@ -6,11 +6,20 @@
     position: relative;
     width: 100%;
     padding: 0 0.5rem;
+    z-index: 1;
 }
 
 /* menu expand / collapse button */
 .forge-menu-button {
-    min-width: 100px;
+    min-width: 150px;
+    margin-left: auto;
+}
+
+@media (max-width: 640px) {
+    .forge-menu-button {
+        width: 100%;
+        padding: 0.7rem;
+    }
 }
 
 .forge-menu-button:active span {
@@ -26,11 +35,18 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 2.5rem;
+    top: 3rem;
 
     border-radius: 16px;
     border: 1px solid var(--background-7);
+    background-color: var(--background-2);
     overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    .forge-menu-items {
+        top: 4rem;
+    }
 }
 
 /* menu item */
@@ -48,13 +64,12 @@
 }
 
 .forge-menu-item > button {
-    background-color: var(--background-2);
-
     padding: 1.25rem 1rem;
-    gap: 1;
+    gap: 0.3rem;
     border-radius: 0;
     width: 100%;
     justify-content: flex-start;
+    background-color: var(--background-3);
 }
 
 @media (max-width: 768px) {
