@@ -8,18 +8,8 @@
     position: relative;
 }
 
-/* special hover (while dragging) */
-@keyframes hoverPulse {
-    0% {
-        border-color: var(--background-6);
-    }
-    100% {
-        border-color: #00f;
-    }
-}
-
 .forge-effect-hover:hover {
-    animation: hoverPulse 0.5s infinite alternate ease-in-out;
+    border-color: #00f;
 }
 
 /* filled state */

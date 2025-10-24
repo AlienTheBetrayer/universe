@@ -42,7 +42,7 @@ export const ForgeEffectAwaiting = ({
         <motion.div
             initial={{ opacity: 0, display: 'none' }}
             animate={
-                state.awaitingActionIdx === false
+                state.awaitingActionIdx === false && state.cardDraggingIdx === false
                     ? { opacity: 0, transition: { duration: 0.3 } }
                     : {
                           opacity: [0, 1, 0],

@@ -20,16 +20,3 @@
     border-radius: 16px;
     overflow: hidden;
 }
-
-@keyframes awaiting {
-    0% {
-        background-color: var(--transparent);
-    }
-    100% {
-        background-color: var(--background-3);
-    }
-}
-
-.forge-effects-awaiting:not(:hover) {
-    animation: awaiting 0.5s infinite alternate ease-in-out;
-}
