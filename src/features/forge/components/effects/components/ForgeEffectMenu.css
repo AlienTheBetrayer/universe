@@ -1,0 +1,31 @@
+.forge-effect-menu {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    border-radius: 16px;
+    border: 1px solid var(--background-7);
+    background-color: var(--background-2);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.forge-effect-menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 0.3rem;
+}
+
+.forge-effect-menu-item {
+    width: 100%;
+}
+
+.forge-effect-menu-item > button {
+    width: 100%;
+}

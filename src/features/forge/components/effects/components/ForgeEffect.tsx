@@ -5,7 +5,10 @@ import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import type { ForgeEffectData } from '../../../context/types/effects';
+import { ForgeEffectMenu } from './ForgeEffectMenu';
+import { useEffectMenuContext } from '../../../context/EffectMenuContext';
 
 interface Props {
     idx: number;
@@ -27,7 +30,7 @@ export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
                 {effectData === undefined &&
                     state.cardDraggingIdx === false &&
                     state.awaitingActionIdx === false && (
-                        <ForgeEffectEmpty state={state} dispatch={dispatch} />
+                        <ForgeEffectEmpty state={state} dispatch={dispatch} idx={idx}/>
                     )}
             </AnimatePresence>
         </div>
@@ -133,17 +136,29 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
 interface EmptyProps {
     state: ForgeData;
     dispatch: React.Dispatch<ForgeReducerAction>;
+    idx: number;
 }
 
-export const ForgeEffectEmpty = ({ dispatch }: EmptyProps) => {
+export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
+    const [menuState, setMenuState] = useEffectMenuContext();
+
     return (
-        <motion.div className='forge-effect-empty'
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0 }}>
-            <Button className='forge-effect-empty-button'>
+        <motion.div
+            className='forge-effect-empty'
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            <Button
+                className='forge-effect-empty-button'
+                onClick={() => setMenuState(prev => ({ ...prev, menuIdx: idx }))}
+            >
                 Add an <mark>effect</mark>
             </Button>
+
+            <AnimatePresence>
+                {menuState.menuIdx === idx && <ForgeEffectMenu state={state} dispatch={dispatch} idx={idx}/>}
+            </AnimatePresence>
         </motion.div>
     );
 };
