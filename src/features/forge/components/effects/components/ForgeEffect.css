@@ -5,6 +5,7 @@
     border-radius: 16px;
     overflow: hidden;
     transition: 0.7s;
+    position: relative;
 }
 
 /* special hover (while dragging) */
@@ -39,4 +40,14 @@
     flex: 1;
     display: grid;
     place-items: center;
+}
+
+.forge-effect-await {
+    position: absolute;
+    inset: 0;
+
+    display: grid;
+    place-items: center;
+    font-size: 6rem;
+    color: var(--background-9);
 }

@@ -16,6 +16,7 @@ export const ForgeEffects = () => {
                         state={state}
                         dispatch={dispatch}
                         key={idx}
+                        idx={idx}
                         effectData={state.effectSlots.find(e => e.effectIdx === idx)}
                     />
                 ))}
