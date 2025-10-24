@@ -9,14 +9,14 @@ export const useForgeDrag = (
 ) => {
     useEffect(() => {
         const handle = () => {
-            if (!state.cardDraggingIdx || !state.currentEffectHoveredIdx)
+            if (!state.cardDraggingIdx)
                 return;
 
             const card = state.cards.find(
                 (c) => c.idx === state.cardDraggingIdx
             );
 
-            if (card) {
+            if (card && state.currentEffectHoveredIdx) {
                 dispatch({
                     type: 'SET_EFFECT_SLOT',
                     effectIdx: state.currentEffectHoveredIdx,
