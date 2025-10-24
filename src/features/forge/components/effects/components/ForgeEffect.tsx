@@ -5,10 +5,9 @@ import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
-import { useState } from 'react';
+import { useEffectMenuContext } from '../../../context/EffectMenuContext';
 import type { ForgeEffectData } from '../../../context/types/effects';
 import { ForgeEffectMenu } from './ForgeEffectMenu';
-import { useEffectMenuContext } from '../../../context/EffectMenuContext';
 
 interface Props {
     idx: number;
@@ -30,7 +29,11 @@ export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
                 {effectData === undefined &&
                     state.cardDraggingIdx === false &&
                     state.awaitingActionIdx === false && (
-                        <ForgeEffectEmpty state={state} dispatch={dispatch} idx={idx}/>
+                        <ForgeEffectEmpty
+                            state={state}
+                            dispatch={dispatch}
+                            idx={idx}
+                        />
                     )}
             </AnimatePresence>
         </div>
@@ -112,7 +115,21 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                     }}
                 >
                     <div className='forge-effect-topline'>
-                        <p>{effectData.card.type}</p>
+                        <img
+                            src={effectData.card.image}
+                            className={`${
+                                effectData.card.inverted
+                                    ? 'forge-image-inverted'
+                                    : ''
+                            }`}
+                            style={{
+                                width: '1rem',
+                                height: '1rem',
+                            }}
+                        />
+                        <p>
+                            {effectData.card.title}
+                        </p>
                         <Button
                             onClick={() => {
                                 dispatch({
@@ -151,13 +168,21 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
         >
             <Button
                 className='forge-effect-empty-button'
-                onClick={() => setMenuState(prev => ({ ...prev, menuIdx: idx }))}
+                onClick={() =>
+                    setMenuState((prev) => ({ ...prev, menuIdx: idx }))
+                }
             >
                 Add an <mark>effect</mark>
             </Button>
 
             <AnimatePresence>
-                {menuState.menuIdx === idx && <ForgeEffectMenu state={state} dispatch={dispatch} idx={idx}/>}
+                {menuState.menuIdx === idx && (
+                    <ForgeEffectMenu
+                        state={state}
+                        dispatch={dispatch}
+                        idx={idx}
+                    />
+                )}
             </AnimatePresence>
         </motion.div>
     );

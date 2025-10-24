@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { EffectMenuProvider } from '../../../context/EffectMenuContext';
 import { useForgeContext } from '../../../context/ForgeContext';
 import { ForgeEffect } from './ForgeEffect';

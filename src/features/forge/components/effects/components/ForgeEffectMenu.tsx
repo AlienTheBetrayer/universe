@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const ForgeEffectMenu = ({ state, dispatch, idx }: Props) => {
-    const [menuState, setMenuState] = useEffectMenuContext();
+    const [, setMenuState] = useEffectMenuContext();
     const menuRef = useRef<HTMLUListElement>(null);
 
     useHotkeys([
@@ -57,7 +57,7 @@ export const ForgeEffectMenu = ({ state, dispatch, idx }: Props) => {
 
     return (
         <motion.ul
-            style={idx > 2 ? { top: 0, y: '-105%' } : { top: '110%' }}
+            style={idx > 2 ? { top: 0, y: '-100%' } : { top: '50%' }}
             ref={menuRef}
             className='forge-effect-menu'
             initial={{ height: 0 }}
@@ -73,10 +73,16 @@ export const ForgeEffectMenu = ({ state, dispatch, idx }: Props) => {
                 {state.cards.map(
                     (card) =>
                         !indexes.includes(card.idx) && (
-                            <li key={card.idx} className='forge-effect-menu-item'>
+                            <li
+                                key={card.idx}
+                                className='forge-effect-menu-item'
+                            >
                                 <Button
                                     onClick={() => {
-                                        setMenuState(prev => ({ ...prev, menuIdx: false }));
+                                        setMenuState((prev) => ({
+                                            ...prev,
+                                            menuIdx: false,
+                                        }));
                                         dispatch({
                                             type: 'SET_EFFECT_SLOT',
                                             effectIdx: idx,
@@ -86,7 +92,19 @@ export const ForgeEffectMenu = ({ state, dispatch, idx }: Props) => {
                                         });
                                     }}
                                 >
-                                    {card.type}
+                                    <img
+                                        src={card.image}
+                                        className={`${
+                                            card.inverted
+                                                ? 'forge-image-inverted'
+                                                : ''
+                                        }`}
+                                        style={{
+                                            width: '1rem',
+                                            height: '1rem',
+                                        }}
+                                    />
+                                    {card.title}
                                 </Button>
                             </li>
                         )
