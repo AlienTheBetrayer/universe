@@ -127,9 +127,7 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                                 height: '1rem',
                             }}
                         />
-                        <p>
-                            {effectData.card.title}
-                        </p>
+                        <p>{effectData.card.title}</p>
                         <Button
                             onClick={() => {
                                 dispatch({
@@ -169,7 +167,10 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
             <Button
                 className='forge-effect-empty-button'
                 onClick={() =>
-                    setMenuState((prev) => ({ ...prev, menuIdx: idx }))
+                    setMenuState((prev) => ({
+                        ...prev,
+                        menuIdx: prev.menuIdx !== idx ? idx : prev.menuIdx,
+                    }))
                 }
             >
                 Add an <mark>effect</mark>
@@ -178,6 +179,12 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
             <AnimatePresence>
                 {menuState.menuIdx === idx && (
                     <ForgeEffectMenu
+                        onSelect={() => {
+                            setMenuState((prev) => ({
+                                ...prev,
+                                menuIdx: false,
+                            }));
+                        }}
                         state={state}
                         dispatch={dispatch}
                         idx={idx}
