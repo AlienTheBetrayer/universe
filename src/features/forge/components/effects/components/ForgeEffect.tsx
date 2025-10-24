@@ -97,6 +97,7 @@ interface FilledProps {
 }
 
 export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
+    
     return (
         <AnimatePresence>
             {effectData && (
@@ -176,6 +177,7 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
                     }))
                 }
             >
+                
                 Add an <mark>effect</mark>
             </Button>
 

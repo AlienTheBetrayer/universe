@@ -25,6 +25,17 @@
 
 .forge-effect-empty-button {
     width: 100%;
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+    .forge-effect-empty {
+        padding: 0.3rem;
+    }
+
+    .forge-effect-empty-button {
+        font-size: 0.7rem;
+    }
 }
 
 /* sections */
