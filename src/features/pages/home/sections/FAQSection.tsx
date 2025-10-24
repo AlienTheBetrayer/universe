@@ -1,17 +1,16 @@
+import { motion, useInView, useScroll, useSpring } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
+import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 import { MovingRectangleCanvas } from '../../../movingrectangle/components/MovingRectangleCanvas';
 import './FAQSection.css';
-import { useScroll, useSpring } from 'motion/react';
-import { motion } from 'motion/react';
-import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 
+import { AnimatePresence } from 'motion/react';
 import hoverImg from '../../../../assets/cursor.svg';
+import { cssVariable } from '../../../../utils/cssVariable';
 import {
     Accordion,
     type AccordionItem,
 } from '../../../accordion/components/Accordion';
-import { AnimatePresence } from 'motion/react';
-import { cssVariable } from '../../../../utils/cssVariable';
 import { RevealingContainer } from '../../../revealingcontainer/components/RevealingContainer';
 
 export const FAQSection = () => {
@@ -23,6 +22,7 @@ export const FAQSection = () => {
         stiffness: 100,
         damping: 40,
     });
+    const isVisible = useInView(sectionRef);
 
     const questions: AccordionItem[] = [
         {
@@ -53,7 +53,7 @@ export const FAQSection = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveIdx(
-                (prev) => (prev + 1) % ((selected === -1 ? 0 : selected) + 1),
+                (prev) => (prev + 1) % ((selected === -1 ? 0 : selected) + 1)
             );
         }, 1500);
 
@@ -120,9 +120,23 @@ export const FAQSection = () => {
                                                         idx === activeIdx
                                                             ? 'brightness(1.3)'
                                                             : 'brightness(1)',
-                                                    background: `linear-gradient(${Math.floor(Math.random() * 360)}deg, 
-                                                ${idx === activeIdx ? '#0b0b41ff' : cssVariable('--background-2')}, 
-                                                ${idx === activeIdx ? '#4141c9ff' : cssVariable('--background-2')}`,
+                                                    background: `linear-gradient(${Math.floor(
+                                                        Math.random() * 360
+                                                    )}deg, 
+                                                ${
+                                                    idx === activeIdx
+                                                        ? '#0b0b41ff'
+                                                        : cssVariable(
+                                                              '--background-2'
+                                                          )
+                                                }, 
+                                                ${
+                                                    idx === activeIdx
+                                                        ? '#4141c9ff'
+                                                        : cssVariable(
+                                                              '--background-2'
+                                                          )
+                                                }`,
                                                 }}
                                                 transition={{
                                                     type: 'spring',
@@ -146,7 +160,11 @@ export const FAQSection = () => {
                         />
 
                         <div className='faq-lock-rectangle'>
-                            <MovingRectangleCanvas progress={smoothProgress} />
+                            {isVisible && (
+                                <MovingRectangleCanvas
+                                    progress={smoothProgress}
+                                />
+                            )}
                             <img
                                 className='faq-lock-hover-img'
                                 src={hoverImg}
