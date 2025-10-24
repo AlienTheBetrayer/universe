@@ -15,7 +15,7 @@ interface Props {}
 
 export const ForgeMenu = ({}: Props) => {
     // state
-    const [state] = useForgeContext();
+    const [state, dispatch] = useForgeContext();
 
     // state for the menu visibility
     const [menuShown, setMenuShown] = useState<boolean>(false);
@@ -32,8 +32,9 @@ export const ForgeMenu = ({}: Props) => {
                 {menuShown && (
                     <ForgeMenuItems
                         state={state}
-                        onSelect={() => {
+                        onSelect={(idx) => {
                             setMenuShown(false);
+                            dispatch({ type: 'AWAIT_ACTION', cardIdx: idx });
                         }}
                     />
                 )}
