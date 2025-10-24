@@ -2,24 +2,27 @@ import type { ForgeCardData } from '../types/cards';
 import type { ForgeData } from '../types/data';
 
 export type ForgeReducerAction =
-    // dragging
-    | { type: 'SET_DRAGGING'; cardIdx: number | false }
+    // cards
+    | { type: 'SET_DRAGGING_CARD'; cardIdx: number | false }
 
     // effect
     | { type: 'SET_EFFECT_SLOT'; effectIdx: number; card: ForgeCardData }
     | { type: 'REMOVE_EFFECT_SLOT'; cardIdx: number }
 
+    // blocks
+    | { type: 'SELECT_BLOCK'; blockIdx: number | false }
+
     // cancel
-    | { type: 'CANCEL_CURRENT' }
-    | { type: 'RESTORE_CANCEL' };
+    | { type: 'CANCEL_CURRENT_CARD' }
+    | { type: 'RESTORE_CANCEL_CARD' };
 
 export const ForgeReducer = (
     state: ForgeData,
     action: ForgeReducerAction
 ): ForgeData => {
     switch (action.type) {
-        // dragging
-        case 'SET_DRAGGING':
+        // cards
+        case 'SET_DRAGGING_CARD':
             return {
                 ...state,
                 cardDraggingIdx: action.cardIdx,
@@ -61,12 +64,16 @@ export const ForgeReducer = (
             };
         }
 
+        // blocks
+        case 'SELECT_BLOCK':
+            return { ...state, selectedBlockIdx: action.blockIdx };
+
         // cancel
-        case 'CANCEL_CURRENT':
+        case 'CANCEL_CURRENT_CARD':
             return state.cardDraggingIdx
                 ? { ...state, awaitingCancelCardIdx: state.cardDraggingIdx }
                 : state;
-        case 'RESTORE_CANCEL':
+        case 'RESTORE_CANCEL_CARD':
             return { ...state, awaitingCancelCardIdx: false };
     }
 };

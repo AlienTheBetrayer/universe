@@ -16,8 +16,20 @@ export const ForgeBlocks = ({ style }: Props) => {
                 Building <mark>blocks</mark>
             </h3>
             <div className='forge-blocks' style={{ ...style }}>
-                {Array.from({ length: 4 }).map((_, idx) => (
-                    <ForgeBlock key={idx} />
+                {state.blocks.map((block) => (
+                    <ForgeBlock
+                        key={block.idx}
+                        block={block}
+                        isSelected={state.selectedBlockIdx === block.idx}
+                        onSelect={(idx) => {
+                            if (idx !== state.selectedBlockIdx) {
+                                dispatch({
+                                    type: 'SELECT_BLOCK',
+                                    blockIdx: idx,
+                                });
+                            }
+                        }}
+                    />
                 ))}
             </div>
         </div>

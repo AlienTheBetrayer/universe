@@ -47,8 +47,8 @@ export const useForgeDrag = (
                 }
             }
 
-            dispatch({ type: 'CANCEL_CURRENT' });
-            dispatch({ type: 'SET_DRAGGING', cardIdx: false });
+            dispatch({ type: 'CANCEL_CURRENT_CARD' });
+            dispatch({ type: 'SET_DRAGGING_CARD', cardIdx: false });
         };
 
         window.addEventListener('pointerup', handle);

@@ -1,6 +1,10 @@
 .forge-block {
+    display: grid;
+    place-items: center;
+
     width: 16vw;
     aspect-ratio: 1/1;   
+    
     border: 2px dashed var(--background-5);
     border-radius: 16px;
     background-color: var(--background-transparent);
@@ -18,4 +22,9 @@
 
 .forge-block:active {
     background-color: var(--background-3-transparent);
+}
+
+/* states */
+.forge-block-selected {
+    border-color: #00f;
 }

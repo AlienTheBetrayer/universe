@@ -42,7 +42,7 @@ export const useForgeCard = (card: ForgeCardData) => {
 
         // twice as fast as the animation
         const timeout = setTimeout(() => {
-            if (selected) dispatch({ type: 'SET_DRAGGING', cardIdx: card.idx });
+            if (selected) dispatch({ type: 'SET_DRAGGING_CARD', cardIdx: card.idx });
         }, duration * 500);
 
         return () => {
@@ -62,7 +62,7 @@ export const useForgeCard = (card: ForgeCardData) => {
         if (state.awaitingCancelCardIdx !== card.idx) return;
 
         const timeout = setTimeout(() => {
-            dispatch({ type: 'RESTORE_CANCEL' });
+            dispatch({ type: 'RESTORE_CANCEL_CARD' });
 
             dragControls.stop();
             controls.start({
