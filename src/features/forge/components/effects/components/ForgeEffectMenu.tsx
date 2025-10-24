@@ -66,12 +66,27 @@ export const ForgeEffectMenu = ({ state, dispatch, idx }: Props) => {
             transition={{ ease: 'easeInOut' }}
         >
             <div className='forge-effect-menu-items'>
-                <h4>Available <mark>effects</mark></h4>
+                <h4>
+                    Available <mark>effects</mark>
+                </h4>
+
                 {state.cards.map(
                     (card) =>
                         !indexes.includes(card.idx) && (
                             <li className='forge-effect-menu-item'>
-                                <Button>{card.type}</Button>
+                                <Button
+                                    onClick={() => {
+                                        dispatch({
+                                            type: 'SET_EFFECT_SLOT',
+                                            effectIdx: idx,
+                                            card: state.cards.find(
+                                                (c) => c.idx === card.idx
+                                            )!,
+                                        });
+                                    }}
+                                >
+                                    {card.type}
+                                </Button>
                             </li>
                         )
                 )}
