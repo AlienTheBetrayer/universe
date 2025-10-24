@@ -7,14 +7,14 @@ import { useMemo } from 'react';
 import { Button } from '../../../../ui/Button/components/Button';
 
 export const ForgeAwaiting = () => {
-    const [state] = useForgeContext();
+    const [state, dispatch] = useForgeContext();
 
     const card = useMemo(() => {
         return state.awaitingActionIdx !== false
             ? state.cards[state.awaitingActionIdx]
             : undefined;
     }, [state.awaitingActionIdx]);
-    console.log();
+
     return (
         <AnimatePresence>
             {state.awaitingActionIdx !== false && card && (
@@ -28,16 +28,26 @@ export const ForgeAwaiting = () => {
 
                     <motion.div
                         className='forge-awaiting-title'
-                        initial={{ opacity: 0, y: -200, x: '-50%' }}
-                        animate={{ opacity: 1, y: 0, x: '-50%' }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{
-                            delay: 0.5,
+                            delay: 0.3,
                             type: 'spring',
                             stiffness: 200,
                             damping: 40,
                         }}
                     >
-                        <Button style={{ marginBottom: '2rem' }}>Cancel</Button>
+                        <Button
+                            style={{ marginBottom: '2rem' }}
+                            onClick={() =>
+                                dispatch({
+                                    type: 'AWAIT_ACTION',
+                                    cardIdx: false,
+                                })
+                            }
+                        >
+                            Cancel
+                        </Button>
                         <h3>
                             Waiting for the <mark>action...</mark>
                         </h3>
