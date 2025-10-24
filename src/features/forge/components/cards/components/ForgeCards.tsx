@@ -1,14 +1,14 @@
-import { useMediaQuery } from '../../../../hooks/useMediaQuery';
-import { useTooltips } from '../../../tooltip/hooks/useTooltips';
+import { useMediaQuery } from '../../../../../hooks/useMediaQuery';
+import { useTooltips } from '../../../../tooltip/hooks/useTooltips';
 import './ForgeCards.css';
 
-import { useForgeContext } from '../../context/ForgeContext';
+import { useForgeContext } from '../../../context/ForgeContext';
 import { ForgeCard } from './ForgeCard';
 import { ForgeMenu } from './ForgeMenu';
 
 export const ForgeCards = () => {
     // state
-    const [state, ] = useForgeContext();
+    const [state] = useForgeContext();
 
     // media query
     const isLarge = !useMediaQuery(1024);
@@ -32,7 +32,7 @@ export const ForgeCards = () => {
                     />
                 ))
             ) : (
-                <ForgeMenu/>
+                <ForgeMenu />
             )}
         </div>
     );

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Button } from '../../../ui/Button/components/Button';
+import { Button } from '../../../../ui/Button/components/Button';
 import './ForgeMenu.css';
 
-import arrowDownImg from '../../assets/down-arrow.svg';
+import arrowDownImg from '../../../assets/down-arrow.svg';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useHotkeys } from '../../../../hooks/useHotkeys';
-import { HotkeyTooltip } from '../../../hotkeytooltip/components/HotkeyTooltip';
-import { useTooltips } from '../../../tooltip/hooks/useTooltips';
-import { useForgeContext } from '../../context/ForgeContext';
-import type { ForgeData } from '../../context/types/data';
+import { useHotkeys } from '../../../../../hooks/useHotkeys';
+import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
+import { useTooltips } from '../../../../tooltip/hooks/useTooltips';
+import { useForgeContext } from '../../../context/ForgeContext';
+import type { ForgeData } from '../../../context/types/data';
 
 interface Props {}
 

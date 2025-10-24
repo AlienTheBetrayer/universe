@@ -1,6 +1,6 @@
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { ForgeBlocks } from './blocks/components/ForgeBlocks';
-import { ForgeCards } from './cards/ForgeCards';
+import { ForgeCards } from './cards/components/ForgeCards';
 import { ForgeEffects } from './effects/components/ForgeEffects';
 import './Forge.css';
 import { ForgeWorld } from './world/components/ForgeWorld';

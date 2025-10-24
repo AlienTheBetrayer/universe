@@ -1,10 +1,10 @@
+import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForgeContext } from '../context/ForgeContext';
 import type { ForgeCardContent } from '../context/types/data';
-import gsap from 'gsap';
 
-export const useForgeCard = (    idx: number, content: ForgeCardContent) => {
+export const useForgeCard = (idx: number, content: ForgeCardContent) => {
     // context state
     const [state, dispatch] = useForgeContext();
     const isEffected = useMemo(() => {
@@ -22,7 +22,6 @@ export const useForgeCard = (    idx: number, content: ForgeCardContent) => {
     const [selected, setSelected] = useState<boolean>(false);
     const lastEvent = useRef<React.PointerEvent<HTMLButtonElement>>(null);
     const dragControls = useDragControls();
-
     const controls = useAnimationControls();
 
     // drag manual controls
@@ -55,6 +54,7 @@ export const useForgeCard = (    idx: number, content: ForgeCardContent) => {
 
     useEffect(() => {
         if (state.awaitingCancel !== idx) return;
+        console.log();
 
         const timeout = setTimeout(() => {
             dispatch({ type: 'RESTORE_CANCEL' });
@@ -72,8 +72,11 @@ export const useForgeCard = (    idx: number, content: ForgeCardContent) => {
 
     return {
         isEffected,
-        controls, dragControls,
-        selected, setSelected,
-        lastEvent, progressRef
-    }
+        controls,
+        dragControls,
+        selected,
+        setSelected,
+        lastEvent,
+        progressRef,
+    };
 };

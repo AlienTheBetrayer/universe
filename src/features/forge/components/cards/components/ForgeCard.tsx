@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
-import { Button } from '../../../ui/Button/components/Button';
-import { useForgeContext } from '../../context/ForgeContext';
-import type { ForgeCardContent } from '../../context/types/data';
-import { useForgeCard } from '../../hooks/useForgeCard';
+import { Button } from '../../../../ui/Button/components/Button';
+import { useForgeContext } from '../../../context/ForgeContext';
+import type { ForgeCardContent } from '../../../context/types/data';
+import { useForgeCard } from '../../../hooks/useForgeCard';
 import './ForgeCard.css';
 
 interface Props {
