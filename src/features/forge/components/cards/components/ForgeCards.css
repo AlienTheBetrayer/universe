@@ -20,12 +20,6 @@
     padding: 0 0.5rem;
 }
 
-@media (max-width: 640px) {
-    .forge-cards-topline {
-        height: 72px;
-    }
-}
-
 .forge-card-topline-heading {
     position: absolute;
     left: 50%;
@@ -43,4 +37,5 @@
 
 .forge-cards-topline-buttons > button {
     min-width: 64px;
+    white-space: nowrap;
 }

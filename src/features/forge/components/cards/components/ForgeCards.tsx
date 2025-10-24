@@ -15,6 +15,7 @@ export const ForgeCards = () => {
 
     // media query
     const isLarge = !useMediaQuery(1024);
+    const isMobile = useMediaQuery(640);
 
     // tooltips
     const tooltips = useTooltips();
@@ -44,7 +45,7 @@ export const ForgeCards = () => {
                         enabled={state.effectSlots.length !== 0}
                         onClick={() => wipeMessageBox.setShown(true)}
                     >
-                        <u>Wipe</u> effects
+                        <u>Wipe</u>{!isMobile ? 'effects' : ''}
                     </Button>
 
                     <Button
@@ -78,7 +79,7 @@ export const ForgeCards = () => {
                             }
                         }}
                     >
-                        <mark>Random fill</mark> remaining effects
+                        <mark>Random fill</mark>{!isMobile ? 'remaining effects' : ''}
                     </Button>
                 </div>
             </div>
