@@ -5,6 +5,8 @@ import './ForgeAwaiting.css';
 import { motion } from 'motion/react';
 import { useMemo } from 'react';
 import { Button } from '../../../../ui/Button/components/Button';
+import { useHotkeys } from '../../../../../hooks/useHotkeys';
+import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 
 export const ForgeAwaiting = () => {
     const [state, dispatch] = useForgeContext();
@@ -14,6 +16,10 @@ export const ForgeAwaiting = () => {
             ? state.cards[state.awaitingActionIdx]
             : undefined;
     }, [state.awaitingActionIdx]);
+
+    useHotkeys([
+        { hotkey: 'Escape', action: () => dispatch({ type: 'AWAIT_ACTION', cardIdx: false })}
+    ])
 
     return (
         <AnimatePresence>
@@ -47,6 +53,7 @@ export const ForgeAwaiting = () => {
                             }
                         >
                             Cancel
+                            <HotkeyTooltip hotkeys={['Esc']}/>
                         </Button>
                         <h3>
                             Waiting for the <mark>action...</mark>
