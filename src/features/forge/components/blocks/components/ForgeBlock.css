@@ -8,6 +8,7 @@
     border: 2px dashed var(--background-5);
     border-radius: 16px;
     background-color: var(--background-transparent);
+    transition: border-color 0.7s ease-in-out, border-radius 0.7s ease-in-out;
 }
 
 @media (max-width: 640px) {
@@ -27,4 +28,5 @@
 /* states */
 .forge-block-selected {
     border-color: #00f;
+    border-radius: 64px;
 }

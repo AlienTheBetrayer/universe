@@ -18,7 +18,7 @@ export const ForgeEffect = ({ effectData, state, dispatch }: Props) => {
         <div
             className={`forge-effect ${
                 state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''
-            }`}
+            } ${effectData !== undefined ? 'forge-effect-filled' : ''}`}
         >
             <AnimatePresence>
                 {effectData && (
@@ -38,6 +38,7 @@ export const ForgeEffect = ({ effectData, state, dispatch }: Props) => {
                         }}
                     >
                         <div className='forge-effect-topline'>
+                            <p>{effectData.card.type}</p>
                             <Button
                                 onClick={() => {
                                     dispatch({
@@ -52,7 +53,6 @@ export const ForgeEffect = ({ effectData, state, dispatch }: Props) => {
                             </Button>
                         </div>
                         <div className='forge-effect-main'>
-                            <h3>{effectData.card.type}</h3>
                         </div>
                     </motion.div>
                 )}
