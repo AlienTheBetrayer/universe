@@ -16,7 +16,7 @@ export const ForgeEffects = () => {
                         state={state}
                         dispatch={dispatch}
                         key={idx}
-                        card={state.effectSlots.get(idx)}
+                        cardIdx={state.effectSlots.get(idx)}
                     />
                 ))}
             </div>

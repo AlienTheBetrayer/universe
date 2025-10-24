@@ -36,14 +36,14 @@ export const useForgeDrag = (
                     dispatch({
                         type: 'SET_EFFECT_SLOT',
                         effectIdx: elementIdx,
-                        card: state.dragging,
+                        cardIdx: state.dragging,
                     });
                     break;
                 }
             }
 
             dispatch({ type: 'CANCEL_CURRENT' });
-            dispatch({ type: 'SET_DRAGGING', card: undefined });
+            dispatch({ type: 'SET_DRAGGING', cardIdx: false });
         };
 
         window.addEventListener('pointerup', handle);

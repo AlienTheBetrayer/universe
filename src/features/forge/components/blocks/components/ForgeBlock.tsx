@@ -1,9 +1,10 @@
+import { Button } from '../../../../ui/Button/components/Button'
 import './ForgeBlock.css'
 
 export const ForgeBlock = () => {
     return (
-        <div className='forge-block'>
-            
-        </div>
+        <Button className='forge-block'>
+
+        </Button>
     )
 }

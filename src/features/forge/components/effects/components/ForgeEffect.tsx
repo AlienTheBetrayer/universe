@@ -1,18 +1,18 @@
 import { AnimatePresence } from 'motion/react';
 import { Button } from '../../../../ui/Button/components/Button';
 import type { ForgeReducerAction } from '../../../context/reducer/ForgeReducer';
-import type { ForgeCardData, ForgeData } from '../../../context/types/data';
+import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
 
 interface Props {
-    card: ForgeCardData | undefined;
+    cardIdx: number | undefined;
     state: ForgeData;
     dispatch: React.Dispatch<ForgeReducerAction>;
 }
 
-export const ForgeEffect = ({ card, state, dispatch }: Props) => {
+export const ForgeEffect = ({ cardIdx, state, dispatch }: Props) => {
     return (
         <div
             className={`forge-effect ${
@@ -20,7 +20,7 @@ export const ForgeEffect = ({ card, state, dispatch }: Props) => {
             }`}
         >
             <AnimatePresence>
-                {card && (
+                {cardIdx !== undefined && (
                     <motion.div
                         style={{
                             display: 'flex',
@@ -41,7 +41,7 @@ export const ForgeEffect = ({ card, state, dispatch }: Props) => {
                                 onClick={() => {
                                     dispatch({
                                         type: 'REMOVE_EFFECT_SLOT',
-                                        card: card,
+                                        cardIdx: cardIdx,
                                     });
                                 }}
                                 className='forge-cancel-button'
@@ -51,7 +51,7 @@ export const ForgeEffect = ({ card, state, dispatch }: Props) => {
                             </Button>
                         </div>
                         <div className='forge-effect-main'>
-                            <h3>{card.type}</h3>
+                            <h3>{state.cards[cardIdx].type}</h3>
                         </div>
                     </motion.div>
                 )}

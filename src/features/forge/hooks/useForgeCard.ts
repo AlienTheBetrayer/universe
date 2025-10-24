@@ -9,10 +9,10 @@ export const useForgeCard = (card: ForgeCardData) => {
     const [state, dispatch] = useForgeContext();
     const isEffected = useMemo(() => {
         for (const val of state.effectSlots.values()) {
-            if (val === card) return true;
+            if (val === card.idx) return true;
         }
         return false;
-    }, [state.effectSlots, card.type]);
+    }, [state.effectSlots, card]);
 
     // animating progress on hold
     const progressRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export const useForgeCard = (card: ForgeCardData) => {
 
         // twice as fast as the animation
         const timeout = setTimeout(() => {
-            if (selected) dispatch({ type: 'SET_DRAGGING', card: card });
+            if (selected) dispatch({ type: 'SET_DRAGGING', cardIdx: card.idx });
         }, duration * 500);
 
         return () => {
@@ -50,10 +50,10 @@ export const useForgeCard = (card: ForgeCardData) => {
     }, [selected]);
 
     useEffect(() => {
-        if (state.dragging?.idx === card.idx && lastEvent.current)
+        if (state.dragging === card.idx && lastEvent.current)
             dragControls.start(lastEvent.current);
 
-        if (state.dragging === undefined) setSelected(false);
+        if (state.dragging === false) setSelected(false);
     }, [state.dragging]);
 
     useEffect(() => {

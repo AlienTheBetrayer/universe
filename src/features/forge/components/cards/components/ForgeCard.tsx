@@ -18,7 +18,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
         return (
             <Button
                 style={
-                    state.dragging?.idx === card.idx ||
+                    state.dragging === card.idx ||
                     cardController.isEffected
                         ? { pointerEvents: 'none' }
                         : { pointerEvents: 'all' }
@@ -26,7 +26,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                 enabled={!cardController.isEffected}
                 animate={cardController.controls}
                 dragControls={cardController.dragControls}
-                drag={state.dragging?.idx === card.idx}
+                drag={state.dragging === card.idx}
                 dragMomentum={false}
                 dragListener={false}
                 className='forge-card'

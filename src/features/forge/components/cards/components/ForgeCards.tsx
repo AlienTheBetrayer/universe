@@ -18,7 +18,7 @@ export const ForgeCards = () => {
 
     return (
         <div className='forge-cards'>
-            {!state.dragging?.idx && tooltips.render()}
+            {state.dragging === false && tooltips.render()}
 
             {isLarge ? (
                 state.cards.map((card) => (

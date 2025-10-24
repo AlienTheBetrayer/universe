@@ -19,8 +19,14 @@ export interface ForgeCardData {
 }
 
 export interface ForgeData {
-    dragging?: ForgeCardData;
+    // cards
     cards: ForgeCardData[];
-    effectSlots: Map<number, ForgeCardData>;
+    dragging: number | false;
     awaitingCancel: number | false;
+    
+    // effects
+    effectSlots: Map<number, number>;
+
+    // blocks
+
 }

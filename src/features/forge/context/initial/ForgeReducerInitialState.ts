@@ -13,6 +13,7 @@ import zustandImg from '../../assets/cards/zustand.svg';
 export const ForgeReducerInitialState: ForgeData = {
     effectSlots: new Map(),
     awaitingCancel: false,
+    dragging: false,
     cards: [
         {   
             idx: 0,
