@@ -56,7 +56,9 @@ export const Header = () => {
                     <img
                         src={starImg}
                         alt=''
-                        ref={(el) => tooltips.set(1, 'Stellar', el, 'down', 24)}
+                        ref={(el) =>
+                            tooltips.set(1, '✨ Stellar', el, 'down', 24)
+                        }
                     />
                 </UniversalLink>
 
