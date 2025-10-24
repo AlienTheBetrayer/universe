@@ -40,8 +40,39 @@ export const ForgeCards = () => {
                     <mark>Available</mark> effects <small>(click / drag)</small>
                 </h3>
                 <div className='forge-cards-topline-buttons'>
-                    <Button onClick={() => wipeMessageBox.setShown(true)}>
-                        <mark>Restore</mark> effects
+                    <Button
+                    enabled={state.effectSlots.length !== 0} 
+                    onClick={() => wipeMessageBox.setShown(true)}>
+                        <u>Wipe</u> effects
+                    </Button>
+
+                    <Button
+                        enabled={state.effectSlots.length < 9}
+                        onClick={() => {
+                            const remainingCards = state.cards.filter(
+                                (card) =>
+                                    state.effectSlots.find(
+                                        (slot) => slot.card.idx === card.idx
+                                    ) === undefined
+                            );
+                            const remainingSlots = state.effectSlots.map(
+                                (slot) => slot.effectIdx
+                            );
+                            const allSlots: number[] = Array.from(
+                                { length: 9 },
+                                (_v, k) => k
+                            ).filter((v) => !remainingSlots.includes(v));
+                            allSlots.sort(() => Math.random() - 0.5);
+                            for(const idx of allSlots) {
+                                if(remainingCards.length === 0) 
+                                    break;
+
+                                dispatch({ type: 'SET_EFFECT_SLOT', effectIdx: idx, card: remainingCards.at(-1)!});
+                                remainingCards.pop();
+                            }
+                        }}
+                    >
+                        <mark>Random fill</mark> remaining effects
                     </Button>
                 </div>
             </div>

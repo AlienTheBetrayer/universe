@@ -16,7 +16,7 @@
     flex-direction: column;
     position: relative;
     width: 100%;
-    min-height: 32px;
+    min-height: 72px;
     padding: 0 0.5rem;
 }
 
@@ -38,6 +38,7 @@
     display: flex;
     margin-top: auto;
     width: 100%;
+    gap: 0.5rem;
 }
 
 .forge-cards-topline-buttons > button {
