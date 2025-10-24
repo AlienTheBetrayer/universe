@@ -1,3 +1,4 @@
+import { ForgeAwaiting } from '../../../forge/components/cards/components/ForgeAwaiting';
 import { Forge } from '../../../forge/components/Forge';
 import { ForgeProvider } from '../../../forge/context/ForgeContext';
 import { Page } from '../../../layout/components/Page';
@@ -17,6 +18,8 @@ export const ForgePage = () => {
                 >
                     <Forge />
                 </motion.section>
+
+                <ForgeAwaiting/>
             </Page>
         </ForgeProvider>
     );

@@ -11,7 +11,7 @@ interface Props {
 
 export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
     ({ card }, ref) => {
-        const [state] = useForgeContext();
+        const [state, dispatch] = useForgeContext();
 
         const cardController = useForgeCard(card);
 
@@ -31,12 +31,16 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                 dragListener={false}
                 className='forge-card'
                 ref={ref}
+                onClick={() => {
+                    if(state.cardDraggingIdx === false)
+                        dispatch({ type: 'AWAIT_ACTION', cardIdx: card.idx });
+                }}
                 onPointerDown={(e) => {
                     cardController.setSelected(true);
                     cardController.lastEvent.current = e;
                 }}
                 onPointerLeave={() => {
-                    if (!state.cardDraggingIdx && cardController.selected)
+                    if (state.cardDraggingIdx === false && cardController.selected)
                         cardController.setSelected(false);
                 }}
                 onPointerUp={() => cardController.setSelected(false)}

@@ -1,0 +1,42 @@
+@keyframes waiting {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.forge-awaiting {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: 2;
+}
+
+.forge-awaiting-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 6rem;
+    padding: 2rem;
+    border-radius: 32px;
+    backdrop-filter: blur(12px);
+    pointer-events: all;
+}
+
+.forge-awaiting-border {
+    position: absolute;
+    inset: 0;
+
+    border: 3px solid var(--background-10);
+    animation: 1s ease-in-out waiting infinite; 
+}

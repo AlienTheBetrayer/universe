@@ -11,7 +11,7 @@ export const StellarWaitingPopup = ({ text }: Props) => {
             <div className='stellar-waiting-border' />
 
             <motion.div
-                className='stellar-waiting-container'
+                className='stellar-waiting-title'
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

@@ -13,7 +13,8 @@ export type ForgeReducerAction =
     // blocks
     | { type: 'SELECT_BLOCK'; blockIdx: number | false }
 
-    // cancel
+    // awaiting
+    | { type: 'AWAIT_ACTION', cardIdx: number | false }
     | { type: 'CANCEL_CURRENT_CARD' }
     | { type: 'RESTORE_CANCEL_CARD' };
 
@@ -71,12 +72,14 @@ export const ForgeReducer = (
         case 'SELECT_BLOCK':
             return { ...state, selectedBlockIdx: action.blockIdx };
 
-        // cancel
+        // awaiting
         case 'CANCEL_CURRENT_CARD':
             return state.cardDraggingIdx
                 ? { ...state, awaitingCancelCardIdx: state.cardDraggingIdx }
                 : state;
         case 'RESTORE_CANCEL_CARD':
             return { ...state, awaitingCancelCardIdx: false };
+        case 'AWAIT_ACTION':
+            return { ...state, awaitingActionIdx: action.cardIdx };
     }
 };

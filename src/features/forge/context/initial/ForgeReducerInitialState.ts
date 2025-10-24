@@ -89,6 +89,7 @@ export const ForgeReducerInitialState: ForgeData = {
         },
     ],
     awaitingCancelCardIdx: false,
+    awaitingActionIdx: false,
     cardDraggingIdx: false,
 
     // effects

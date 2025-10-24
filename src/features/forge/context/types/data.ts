@@ -6,6 +6,7 @@ export interface ForgeData {
     // cards
     cards: ForgeCardData[];
     cardDraggingIdx: number | false;
+    awaitingActionIdx: number | false;
     awaitingCancelCardIdx: number | false;
 
     // effects
