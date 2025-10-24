@@ -73,9 +73,10 @@ export const ForgeEffectMenu = ({ state, dispatch, idx }: Props) => {
                 {state.cards.map(
                     (card) =>
                         !indexes.includes(card.idx) && (
-                            <li className='forge-effect-menu-item'>
+                            <li key={card.idx} className='forge-effect-menu-item'>
                                 <Button
                                     onClick={() => {
+                                        setMenuState(prev => ({ ...prev, menuIdx: false }));
                                         dispatch({
                                             type: 'SET_EFFECT_SLOT',
                                             effectIdx: idx,
