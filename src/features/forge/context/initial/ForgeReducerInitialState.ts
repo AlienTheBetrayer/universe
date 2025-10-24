@@ -11,11 +11,9 @@ import typescriptImg from '../../assets/cards/typescript.svg';
 import zustandImg from '../../assets/cards/zustand.svg';
 
 export const ForgeReducerInitialState: ForgeData = {
-    effectSlots: new Map(),
-    awaitingCancel: false,
-    dragging: false,
+    // cards
     cards: [
-        {   
+        {
             idx: 0,
             title: 'TypeScript',
             description:
@@ -90,4 +88,30 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'tailwind',
         },
     ],
+    awaitingCancelCardIdx: false,
+    cardDraggingIdx: false,
+
+    // effects
+    effectSlots: [],
+
+    // blocks
+    blocks: [
+        {
+            idx: 0,
+            type: 'Brick',
+        },
+        {
+            idx: 1,
+            type: 'Stone',
+        },
+        {
+            idx: 2,
+            type: 'Glass',
+        },
+        {
+            idx: 3,
+            type: 'Dirt',
+        },
+    ],
+    selectedBlockIdx: false,
 };

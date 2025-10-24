@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Button } from '../../../../ui/Button/components/Button';
 import { useForgeContext } from '../../../context/ForgeContext';
-import type { ForgeCardData } from '../../../context/types/data';
+import type { ForgeCardData } from '../../../context/types/cards';
 import { useForgeCard } from '../../../hooks/useForgeCard';
 import './ForgeCard.css';
 
@@ -18,7 +18,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
         return (
             <Button
                 style={
-                    state.dragging === card.idx ||
+                    state.cardDraggingIdx === card.idx ||
                     cardController.isEffected
                         ? { pointerEvents: 'none' }
                         : { pointerEvents: 'all' }
@@ -26,7 +26,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                 enabled={!cardController.isEffected}
                 animate={cardController.controls}
                 dragControls={cardController.dragControls}
-                drag={state.dragging === card.idx}
+                drag={state.cardDraggingIdx === card.idx}
                 dragMomentum={false}
                 dragListener={false}
                 className='forge-card'
@@ -36,7 +36,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                     cardController.lastEvent.current = e;
                 }}
                 onPointerLeave={() => {
-                    if (!state.dragging && cardController.selected)
+                    if (!state.cardDraggingIdx && cardController.selected)
                         cardController.setSelected(false);
                 }}
                 onPointerUp={() => cardController.setSelected(false)}

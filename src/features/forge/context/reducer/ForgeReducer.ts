@@ -1,3 +1,4 @@
+import type { ForgeCardData } from '../types/cards';
 import type { ForgeData } from '../types/data';
 
 export type ForgeReducerAction =
@@ -5,8 +6,8 @@ export type ForgeReducerAction =
     | { type: 'SET_DRAGGING'; cardIdx: number | false }
 
     // effect
-    | { type: 'SET_EFFECT_SLOT'; effectIdx: number; cardIdx: number }
-    | { type: 'REMOVE_EFFECT_SLOT'; cardIdx: number | false }
+    | { type: 'SET_EFFECT_SLOT'; effectIdx: number; card: ForgeCardData }
+    | { type: 'REMOVE_EFFECT_SLOT'; cardIdx: number }
 
     // cancel
     | { type: 'CANCEL_CURRENT' }
@@ -21,40 +22,51 @@ export const ForgeReducer = (
         case 'SET_DRAGGING':
             return {
                 ...state,
-                dragging: action.cardIdx,
+                cardDraggingIdx: action.cardIdx,
             };
 
         // effects
         case 'SET_EFFECT_SLOT': {
-            const copy = new Map<number, number>(state.effectSlots);
-            for (const [key, val] of copy) {
-                if (val === action.cardIdx) {
-                    copy.delete(key);
-                    break;
+            let found = false;
+            const newEffectSlots = state.effectSlots.map((e) => {
+                if (e.effectIdx === action.effectIdx) {
+                    found = true;
+                    return { ...e, card: action.card };
+                } else {
+                    return e;
                 }
-            }
-            copy.set(action.effectIdx, action.cardIdx);
+            });
 
-            return { ...state, effectSlots: copy };
+            if (!found) {
+                return {
+                    ...state,
+                    effectSlots: [
+                        ...state.effectSlots,
+                        {
+                            effectIdx: action.effectIdx,
+                            card: action.card,
+                        },
+                    ],
+                };
+            } else {
+                return { ...state, effectSlots: newEffectSlots };
+            }
         }
         case 'REMOVE_EFFECT_SLOT': {
-            const copy = new Map<number, number>(state.effectSlots);
-            for (const [key, val] of copy) {
-                if (val === action.cardIdx) {
-                    copy.delete(key);
-                    break;
-                }
-            }
-
-            return { ...state, effectSlots: copy };
+            return {
+                ...state,
+                effectSlots: state.effectSlots.filter(
+                    (e) => e.card.idx !== action.cardIdx
+                ),
+            };
         }
 
         // cancel
         case 'CANCEL_CURRENT':
-            return state.dragging
-                ? { ...state, awaitingCancel: state.dragging }
+            return state.cardDraggingIdx
+                ? { ...state, awaitingCancelCardIdx: state.cardDraggingIdx }
                 : state;
         case 'RESTORE_CANCEL':
-            return { ...state, awaitingCancel: false };
+            return { ...state, awaitingCancelCardIdx: false };
     }
 };

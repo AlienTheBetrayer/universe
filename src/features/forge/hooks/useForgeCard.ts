@@ -2,14 +2,14 @@ import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForgeContext } from '../context/ForgeContext';
-import type { ForgeCardData } from '../context/types/data';
+import type { ForgeCardData } from '../context/types/cards';
 
 export const useForgeCard = (card: ForgeCardData) => {
     // context state
     const [state, dispatch] = useForgeContext();
     const isEffected = useMemo(() => {
         for (const val of state.effectSlots.values()) {
-            if (val === card.idx) return true;
+            if (val.card.idx === card.idx) return true;
         }
         return false;
     }, [state.effectSlots, card]);
@@ -26,8 +26,10 @@ export const useForgeCard = (card: ForgeCardData) => {
 
     // cursor
     useEffect(() => {
-        document.body.style.cursor = state.dragging ? 'grabbing' : 'auto';
-    }, [state.dragging]);
+        document.body.style.cursor = state.cardDraggingIdx
+            ? 'grabbing'
+            : 'auto';
+    }, [state.cardDraggingIdx]);
 
     // drag manual controls
     useEffect(() => {
@@ -50,14 +52,14 @@ export const useForgeCard = (card: ForgeCardData) => {
     }, [selected]);
 
     useEffect(() => {
-        if (state.dragging === card.idx && lastEvent.current)
+        if (state.cardDraggingIdx === card.idx && lastEvent.current)
             dragControls.start(lastEvent.current);
 
-        if (state.dragging === false) setSelected(false);
-    }, [state.dragging]);
+        if (state.cardDraggingIdx === false) setSelected(false);
+    }, [state.cardDraggingIdx]);
 
     useEffect(() => {
-        if (state.awaitingCancel !== card.idx) return;
+        if (state.awaitingCancelCardIdx !== card.idx) return;
 
         const timeout = setTimeout(() => {
             dispatch({ type: 'RESTORE_CANCEL' });
@@ -71,7 +73,7 @@ export const useForgeCard = (card: ForgeCardData) => {
         }, 300);
 
         return () => clearTimeout(timeout);
-    }, [state.awaitingCancel]);
+    }, [state.awaitingCancelCardIdx]);
 
     return {
         isEffected,

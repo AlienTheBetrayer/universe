@@ -12,7 +12,7 @@ export const useForgeDrag = (
 
     useEffect(() => {
         const handle = () => {
-            if (!state.dragging) return;
+            if (!state.cardDraggingIdx) return;
 
             const effectElements =
                 document.querySelectorAll<HTMLDivElement>('.forge-effect');
@@ -33,11 +33,16 @@ export const useForgeDrag = (
                     y >= bounds.top &&
                     y <= bounds.bottom
                 ) {
-                    dispatch({
-                        type: 'SET_EFFECT_SLOT',
-                        effectIdx: elementIdx,
-                        cardIdx: state.dragging,
-                    });
+                    const card = state.cards.find(
+                        (c) => c.idx === state.cardDraggingIdx
+                    );
+                    if (card) {
+                        dispatch({
+                            type: 'SET_EFFECT_SLOT',
+                            effectIdx: elementIdx,
+                            card,
+                        });
+                    }
                     break;
                 }
             }
@@ -53,5 +58,5 @@ export const useForgeDrag = (
             window.removeEventListener('pointerup', handle);
             window.removeEventListener('touchend', handle);
         };
-    }, [state.dragging, state.effectSlots]);
+    }, [state.cardDraggingIdx, state.effectSlots]);
 };

@@ -10,13 +10,13 @@ export const ForgeEffects = () => {
             <h3>
                 <mark>Effects</mark>
             </h3>
-            <div className={`forge-effects ${state.dragging ? 'forge-effects-awaiting' : ''}`}>
+            <div className={`forge-effects ${state.cardDraggingIdx !== false ? 'forge-effects-awaiting' : ''}`}>
                 {Array.from({ length: 9 }).map((_, idx) => (
                     <ForgeEffect
                         state={state}
                         dispatch={dispatch}
                         key={idx}
-                        cardIdx={state.effectSlots.get(idx)}
+                        effectData={state.effectSlots.find(e => e.effectIdx === idx)}
                     />
                 ))}
             </div>

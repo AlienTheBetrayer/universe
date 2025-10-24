@@ -5,22 +5,23 @@ import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
+import type { ForgeEffectData } from '../../../context/types/effects';
 
 interface Props {
-    cardIdx: number | undefined;
+    effectData: ForgeEffectData | undefined;
     state: ForgeData;
     dispatch: React.Dispatch<ForgeReducerAction>;
 }
 
-export const ForgeEffect = ({ cardIdx, state, dispatch }: Props) => {
+export const ForgeEffect = ({ effectData, state, dispatch }: Props) => {
     return (
         <div
             className={`forge-effect ${
-                state.dragging ? 'forge-effect-hover' : ''
+                state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''
             }`}
         >
             <AnimatePresence>
-                {cardIdx !== undefined && (
+                {effectData && (
                     <motion.div
                         style={{
                             display: 'flex',
@@ -41,7 +42,7 @@ export const ForgeEffect = ({ cardIdx, state, dispatch }: Props) => {
                                 onClick={() => {
                                     dispatch({
                                         type: 'REMOVE_EFFECT_SLOT',
-                                        cardIdx: cardIdx,
+                                        cardIdx: effectData.card.idx,
                                     });
                                 }}
                                 className='forge-cancel-button'
@@ -51,7 +52,7 @@ export const ForgeEffect = ({ cardIdx, state, dispatch }: Props) => {
                             </Button>
                         </div>
                         <div className='forge-effect-main'>
-                            <h3>{state.cards[cardIdx].type}</h3>
+                            <h3>{effectData.card.type}</h3>
                         </div>
                     </motion.div>
                 )}
