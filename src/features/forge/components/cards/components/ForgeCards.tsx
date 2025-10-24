@@ -41,8 +41,9 @@ export const ForgeCards = () => {
                 </h3>
                 <div className='forge-cards-topline-buttons'>
                     <Button
-                    enabled={state.effectSlots.length !== 0} 
-                    onClick={() => wipeMessageBox.setShown(true)}>
+                        enabled={state.effectSlots.length !== 0}
+                        onClick={() => wipeMessageBox.setShown(true)}
+                    >
                         <u>Wipe</u> effects
                     </Button>
 
@@ -55,20 +56,25 @@ export const ForgeCards = () => {
                                         (slot) => slot.card.idx === card.idx
                                     ) === undefined
                             );
-                            const remainingSlots = state.effectSlots.map(
+
+                            const occupiedSlots = state.effectSlots.map(
                                 (slot) => slot.effectIdx
                             );
-                            const allSlots: number[] = Array.from(
-                                { length: 9 },
-                                (_v, k) => k
-                            ).filter((v) => !remainingSlots.includes(v));
-                            allSlots.sort(() => Math.random() - 0.5);
-                            for(const idx of allSlots) {
-                                if(remainingCards.length === 0) 
-                                    break;
 
-                                dispatch({ type: 'SET_EFFECT_SLOT', effectIdx: idx, card: remainingCards.at(-1)!});
-                                remainingCards.pop();
+                            const allSlots = [...Array(9).keys()].filter(
+                                (v) => !occupiedSlots.includes(v)
+                            );
+                            allSlots.sort(() => Math.random() - 0.5);
+
+                            for (const idx of allSlots) {
+                                const card = remainingCards.pop();
+                                if (!card) return;
+
+                                dispatch({
+                                    type: 'SET_EFFECT_SLOT',
+                                    effectIdx: idx,
+                                    card,
+                                });
                             }
                         }}
                     >
