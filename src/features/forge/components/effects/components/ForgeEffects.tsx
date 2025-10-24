@@ -1,3 +1,4 @@
+import { useClickOutside } from '../../../../../hooks/useClickOutside';
 import { EffectMenuProvider } from '../../../context/EffectMenuContext';
 import { useForgeContext } from '../../../context/ForgeContext';
 import { ForgeEffect } from './ForgeEffect';
@@ -6,15 +7,19 @@ import './ForgeEffects.css';
 export const ForgeEffects = () => {
     const [state, dispatch] = useForgeContext();
 
+    const containerRef = useClickOutside<HTMLDivElement>(() => {
+        if (state.currentEffectHoveredIdx)
+            state.currentEffectHoveredIdx.current = false;
+    });
+
     return (
         <EffectMenuProvider>
             <div
+                ref={containerRef}
                 className='forge-effects-container'
-                onPointerLeave={() =>
-                    dispatch({ type: 'SELECT_EFFECT', effectIdx: false })
-                }
-                onPointerDown={() => {
-                    dispatch({ type: 'SELECT_EFFECT', effectIdx: false })
+                onPointerLeave={() => {
+                    if (state.currentEffectHoveredIdx)
+                        state.currentEffectHoveredIdx.current = false;
                 }}
             >
                 <h3>

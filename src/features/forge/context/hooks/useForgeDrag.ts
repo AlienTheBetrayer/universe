@@ -16,10 +16,10 @@ export const useForgeDrag = (
                 (c) => c.idx === state.cardDraggingIdx
             );
 
-            if (card && state.currentEffectHoveredIdx) {
+            if (card && state.currentEffectHoveredIdx?.current) {
                 dispatch({
                     type: 'SET_EFFECT_SLOT',
-                    effectIdx: state.currentEffectHoveredIdx,
+                    effectIdx: state.currentEffectHoveredIdx.current,
                     card,
                 });
             }

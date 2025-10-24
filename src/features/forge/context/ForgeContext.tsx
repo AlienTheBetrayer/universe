@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer, useRef } from 'react';
 import { useForgeDrag } from './hooks/useForgeDrag';
 import { ForgeReducerInitialState } from './initial/ForgeReducerInitialState';
 import { ForgeReducer, type ForgeReducerAction } from './reducer/ForgeReducer';
@@ -19,7 +19,10 @@ export const ForgeProvider = ({ children }: Props) => {
     );
 
     useForgeDrag(state, dispatch);
-    
+
+    const currentEffectHoveredIdxRef = useRef<number | false>(false);
+    state.currentEffectHoveredIdx = currentEffectHoveredIdxRef;
+
     return (
         <ForgeContext.Provider value={[state, dispatch]}>
             {children}

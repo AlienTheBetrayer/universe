@@ -11,7 +11,7 @@ export interface ForgeData {
 
     // effects
     effectSlots: ForgeEffectData[];
-    currentEffectHoveredIdx: number | false;
+    currentEffectHoveredIdx?: React.RefObject<number | false>;
 
     // blocks
     blocks: ForgeBlockData[];

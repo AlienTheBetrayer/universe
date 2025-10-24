@@ -91,6 +91,7 @@ export const ForgeReducerInitialState: ForgeData = {
     awaitingCancelCardIdx: false,
     awaitingActionIdx: false,
     cardDraggingIdx: false,
+    currentEffectHoveredIdx: false,
 
     // effects
     effectSlots: [],
