@@ -1,3 +1,11 @@
+/* page */
+.forge-page {
+    background-image: radial-gradient(var(--dotted) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-repeat: space;
+}
+
+/* section */
 .forge-section {
     max-width: 1600px;
     margin-top: 5rem;

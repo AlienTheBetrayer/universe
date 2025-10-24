@@ -8,7 +8,7 @@ import { motion } from 'motion/react';
 export const ForgePage = () => {
     return (
         <ForgeProvider>
-            <Page>
+            <Page className='forge-page'>
                 <motion.section
                     className='forge-section container'
                     initial={{ opacity: 0 }}

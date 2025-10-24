@@ -60,6 +60,7 @@
     --form: hsl(225, 8%, 24%);
     --hr: var(--background-5);
     --staggered: rgb(56, 59, 66);
+    --dotted: var(--background-4);
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;
@@ -110,6 +111,7 @@
     --header-invert: 0;
     --hr: var(--background-10);
     --staggered: rgb(138, 139, 140);
+    --dotted: var(--background-10);
 
     /* font sizes */
     --font-h1: 2.6rem;
