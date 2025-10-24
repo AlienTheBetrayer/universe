@@ -58,5 +58,5 @@ export const useForgeDrag = (
             window.removeEventListener('pointerup', handle);
             window.removeEventListener('touchend', handle);
         };
-    }, [state.cardDraggingIdx, state.effectSlots]);
+    }, [state.cardDraggingIdx]);
 };

@@ -43,7 +43,7 @@ export const useForgeCard = (card: ForgeCardData) => {
         // twice as fast as the animation
         const timeout = setTimeout(() => {
             if (selected) dispatch({ type: 'SET_DRAGGING_CARD', cardIdx: card.idx });
-        }, duration * 1000);
+        }, duration * 500);
 
         return () => {
             tweenRef.current?.kill();
