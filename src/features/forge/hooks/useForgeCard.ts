@@ -2,17 +2,17 @@ import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForgeContext } from '../context/ForgeContext';
-import type { ForgeCardContent } from '../context/types/data';
+import type { ForgeCardData } from '../context/types/data';
 
-export const useForgeCard = (idx: number, content: ForgeCardContent) => {
+export const useForgeCard = (card: ForgeCardData) => {
     // context state
     const [state, dispatch] = useForgeContext();
     const isEffected = useMemo(() => {
         for (const val of state.effectSlots.values()) {
-            if (val === content.type) return true;
+            if (val === card) return true;
         }
         return false;
-    }, [state.effectSlots, content.type]);
+    }, [state.effectSlots, card.type]);
 
     // animating progress on hold
     const progressRef = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ export const useForgeCard = (idx: number, content: ForgeCardContent) => {
 
     // cursor
     useEffect(() => {
-        document.body.style.cursor = (state.dragging.idx !== false) ? 'grabbing' : 'auto';
+        document.body.style.cursor = state.dragging ? 'grabbing' : 'auto';
     }, [state.dragging]);
 
     // drag manual controls
@@ -40,8 +40,7 @@ export const useForgeCard = (idx: number, content: ForgeCardContent) => {
 
         // twice as fast as the animation
         const timeout = setTimeout(() => {
-            if (selected)
-                dispatch({ type: 'SET_DRAGGING', idx: idx, card: content });
+            if (selected) dispatch({ type: 'SET_DRAGGING', card: card });
         }, duration * 500);
 
         return () => {
@@ -51,15 +50,14 @@ export const useForgeCard = (idx: number, content: ForgeCardContent) => {
     }, [selected]);
 
     useEffect(() => {
-        if (state.dragging.idx === idx && lastEvent.current)
+        if (state.dragging?.idx === card.idx && lastEvent.current)
             dragControls.start(lastEvent.current);
 
-        if (state.dragging.idx === false) setSelected(false);
+        if (state.dragging === undefined) setSelected(false);
     }, [state.dragging]);
 
     useEffect(() => {
-        if (state.awaitingCancel !== idx) return;
-        console.log();
+        if (state.awaitingCancel !== card.idx) return;
 
         const timeout = setTimeout(() => {
             dispatch({ type: 'RESTORE_CANCEL' });

@@ -12,7 +12,7 @@ export const useForgeDrag = (
 
     useEffect(() => {
         const handle = () => {
-            if (state.dragging.idx === false || !state.dragging.card) return;
+            if (!state.dragging) return;
 
             const effectElements =
                 document.querySelectorAll<HTMLDivElement>('.forge-effect');
@@ -35,15 +35,15 @@ export const useForgeDrag = (
                 ) {
                     dispatch({
                         type: 'SET_EFFECT_SLOT',
-                        idx: elementIdx,
-                        cardType: state.dragging.card.type,
+                        effectIdx: elementIdx,
+                        card: state.dragging,
                     });
                     break;
                 }
             }
 
             dispatch({ type: 'CANCEL_CURRENT' });
-            dispatch({ type: 'SET_DRAGGING', idx: false });
+            dispatch({ type: 'SET_DRAGGING', card: undefined });
         };
 
         window.addEventListener('pointerup', handle);

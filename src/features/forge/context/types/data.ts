@@ -9,7 +9,8 @@ export type ForgeCardType =
     | 'nextjs'
     | 'tailwind';
 
-export interface ForgeCardContent {
+export interface ForgeCardData {
+    idx: number;
     title: string;
     description: string;
     image: string;
@@ -17,14 +18,9 @@ export interface ForgeCardContent {
     type: ForgeCardType;
 }
 
-export interface ForgeDragging {
-    idx: number | false;
-    card?: ForgeCardContent;
-}
-
 export interface ForgeData {
-    dragging: ForgeDragging;
-    cardContents: ForgeCardContent[];
-    effectSlots: Map<number, ForgeCardType>;
+    dragging?: ForgeCardData;
+    cards: ForgeCardData[];
+    effectSlots: Map<number, ForgeCardData>;
     awaitingCancel: number | false;
 }

@@ -1,12 +1,12 @@
-import type { ForgeCardContent, ForgeCardType, ForgeData } from '../types/data';
+import type { ForgeCardData, ForgeData } from '../types/data';
 
 export type ForgeReducerAction =
     // dragging
-    | { type: 'SET_DRAGGING'; idx: number | false; card?: ForgeCardContent }
+    | { type: 'SET_DRAGGING'; card: ForgeCardData | undefined }
 
     // effect
-    | { type: 'SET_EFFECT_SLOT'; idx: number; cardType: ForgeCardType }
-    | { type: 'REMOVE_EFFECT_SLOT'; cardType: ForgeCardType }
+    | { type: 'SET_EFFECT_SLOT'; effectIdx: number; card: ForgeCardData }
+    | { type: 'REMOVE_EFFECT_SLOT'; card: ForgeCardData }
 
     // cancel
     | { type: 'CANCEL_CURRENT' }
@@ -21,26 +21,26 @@ export const ForgeReducer = (
         case 'SET_DRAGGING':
             return {
                 ...state,
-                dragging: { idx: action.idx, card: action.card },
+                dragging: action.card,
             };
 
         // effects
         case 'SET_EFFECT_SLOT': {
-            const copy = new Map<number, ForgeCardType>(state.effectSlots);
+            const copy = new Map<number, ForgeCardData>(state.effectSlots);
             for (const [key, val] of copy) {
-                if (val === action.cardType) {
+                if (val === action.card) {
                     copy.delete(key);
                     break;
                 }
             }
-            copy.set(action.idx, action.cardType);
+            copy.set(action.effectIdx, action.card);
 
             return { ...state, effectSlots: copy };
         }
         case 'REMOVE_EFFECT_SLOT': {
-            const copy = new Map<number, ForgeCardType>(state.effectSlots);
+            const copy = new Map<number, ForgeCardData>(state.effectSlots);
             for (const [key, val] of copy) {
-                if (val === action.cardType) {
+                if (val === action.card) {
                     copy.delete(key);
                     break;
                 }
@@ -51,7 +51,9 @@ export const ForgeReducer = (
 
         // cancel
         case 'CANCEL_CURRENT':
-            return { ...state, awaitingCancel: state.dragging.idx };
+            return state.dragging
+                ? { ...state, awaitingCancel: state.dragging.idx }
+                : state;
         case 'RESTORE_CANCEL':
             return { ...state, awaitingCancel: false };
     }

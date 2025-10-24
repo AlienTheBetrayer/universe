@@ -11,13 +11,11 @@ import typescriptImg from '../../assets/cards/typescript.svg';
 import zustandImg from '../../assets/cards/zustand.svg';
 
 export const ForgeReducerInitialState: ForgeData = {
-    dragging: {
-        idx: false
-    },
     effectSlots: new Map(),
     awaitingCancel: false,
-    cardContents: [
-        {
+    cards: [
+        {   
+            idx: 0,
             title: 'TypeScript',
             description:
                 'Defines structure and precision — every entity follows strict, editable rules.',
@@ -25,6 +23,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'typescript',
         },
         {
+            idx: 1,
             title: 'React',
             description:
                 'Brings reactivity — each part of the world responds instantly to state changes.',
@@ -32,6 +31,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'react',
         },
         {
+            idx: 2,
             title: 'CSS',
             description:
                 'Shapes the aesthetic — textures, gradients, and dynamic visual identity.',
@@ -39,6 +39,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'css',
         },
         {
+            idx: 3,
             title: 'HTML',
             description:
                 'Builds the foundation — the skeletal layout of every construct in your world.',
@@ -46,6 +47,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'html',
         },
         {
+            idx: 4,
             title: 'Zustand',
             description:
                 'Links entities through shared consciousness — lightweight global state control.',
@@ -54,6 +56,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'zustand',
         },
         {
+            idx: 5,
             title: 'Redux',
             description:
                 'Harnesses action and flow — predictable orchestration of complex systems.',
@@ -61,6 +64,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'redux',
         },
         {
+            idx: 6,
             title: 'JavaScript',
             description:
                 'The raw creative current — animates, calculates, and drives every interaction.',
@@ -68,6 +72,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'javascript',
         },
         {
+            idx: 7,
             title: 'Next.js',
             description:
                 'Structures the multiverse — pages, routing, and server-side portals in harmony.',
@@ -76,6 +81,7 @@ export const ForgeReducerInitialState: ForgeData = {
             type: 'nextjs',
         },
         {
+            idx: 8,
             title: 'Tailwind',
             description:
                 'Pure design energy — composes elegant form and function with atomic precision.',

@@ -58,8 +58,8 @@ const ForgeMenuItems = ({ state }: ItemsProps) => {
             exit={{ height: 0 }}
             transition={{ ease: 'easeInOut' }}
         >
-            {state.cardContents.map((card, idx) => (
-                <li key={idx} className='forge-menu-item'>
+            {state.cards.map((card) => (
+                <li key={card.idx} className='forge-menu-item'>
                     <Button>
                         <img
                             src={card.image}

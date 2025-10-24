@@ -21,14 +21,13 @@ export const ForgeCards = () => {
             {!state.dragging?.idx && tooltips.render()}
 
             {isLarge ? (
-                state.cardContents.map((card, idx) => (
+                state.cards.map((card) => (
                     <ForgeCard
                         ref={(el) =>
-                            tooltips.set(idx, card.description, el, 'down')
+                            tooltips.set(card.idx, card.description, el, 'down')
                         }
-                        key={idx}
-                        idx={idx}
-                        content={card}
+                        key={card.idx}
+                        card={card}
                     />
                 ))
             ) : (
