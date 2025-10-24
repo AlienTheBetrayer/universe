@@ -8,7 +8,12 @@ export const ForgeEffects = () => {
 
     return (
         <EffectMenuProvider>
-            <div className='forge-effects-container'>
+            <div
+                className='forge-effects-container'
+                onPointerLeave={() =>
+                    dispatch({ type: 'SELECT_EFFECT', effectIdx: false })
+                }
+            >
                 <h3>
                     <mark>Effects</mark>
                 </h3>

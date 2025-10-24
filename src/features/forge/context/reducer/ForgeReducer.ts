@@ -9,6 +9,7 @@ export type ForgeReducerAction =
     | { type: 'SET_EFFECT_SLOT'; effectIdx: number; card: ForgeCardData }
     | { type: 'REMOVE_EFFECT_SLOT'; cardIdx: number }
     | { type: 'WIPE_EFFECT_SLOTS' }
+    | { type: 'SELECT_EFFECT', effectIdx: number | false }
 
     // blocks
     | { type: 'SELECT_BLOCK'; blockIdx: number | false }
@@ -67,6 +68,8 @@ export const ForgeReducer = (
         }
         case 'WIPE_EFFECT_SLOTS':
             return { ...state, effectSlots: [] };
+        case 'SELECT_EFFECT':
+            return { ...state, currentEffectHoveredIdx: action.effectIdx };
 
         // blocks
         case 'SELECT_BLOCK':

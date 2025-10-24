@@ -11,6 +11,7 @@ export interface ForgeData {
 
     // effects
     effectSlots: ForgeEffectData[];
+    currentEffectHoveredIdx: number | false;
 
     // blocks
     blocks: ForgeBlockData[];

@@ -13,13 +13,16 @@ import { ForgeEffectMenu } from './ForgeEffectMenu';
 interface Props {
     idx: number;
     state: ForgeData;
-    effectData: ForgeEffectData | undefined;
     dispatch: React.Dispatch<ForgeReducerAction>;
+    effectData: ForgeEffectData | undefined;
 }
 
 export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
     return (
         <div
+            onPointerEnter={() =>
+                dispatch({ type: 'SELECT_EFFECT', effectIdx: idx })
+            }
             className={`forge-effect ${
                 state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''
             } ${effectData !== undefined ? 'forge-effect-filled' : ''}`}
@@ -97,7 +100,6 @@ interface FilledProps {
 }
 
 export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
-    
     return (
         <AnimatePresence>
             {effectData && (
@@ -173,11 +175,10 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
                 onClick={() =>
                     setMenuState((prev) => ({
                         ...prev,
-                        menuIdx: prev.menuIdx === idx ? false : idx
+                        menuIdx: prev.menuIdx === idx ? false : idx,
                     }))
                 }
             >
-                
                 Add an <mark>effect</mark>
             </Button>
 
