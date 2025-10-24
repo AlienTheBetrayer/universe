@@ -5,6 +5,7 @@ import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
+import { useRef } from 'react';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
 import type { ForgeEffectData } from '../../../context/types/effects';
 import { ForgeEffectMenu } from './ForgeEffectMenu';
@@ -156,6 +157,7 @@ interface EmptyProps {
 
 export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
     const [menuState, setMenuState] = useEffectMenuContext();
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
     return (
         <motion.div
@@ -165,11 +167,12 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
             exit={{ opacity: 0 }}
         >
             <Button
+                ref={buttonRef}
                 className='forge-effect-empty-button'
                 onClick={() =>
                     setMenuState((prev) => ({
                         ...prev,
-                        menuIdx: prev.menuIdx !== idx ? idx : prev.menuIdx,
+                        menuIdx: prev.menuIdx === idx ? false : idx
                     }))
                 }
             >
@@ -179,6 +182,7 @@ export const ForgeEffectEmpty = ({ state, dispatch, idx }: EmptyProps) => {
             <AnimatePresence>
                 {menuState.menuIdx === idx && (
                     <ForgeEffectMenu
+                        buttonRef={buttonRef}
                         onSelect={() => {
                             setMenuState((prev) => ({
                                 ...prev,

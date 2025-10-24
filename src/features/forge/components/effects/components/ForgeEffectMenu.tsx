@@ -13,9 +13,10 @@ interface Props {
     dispatch: React.Dispatch<ForgeReducerAction>;
     idx: number;
     onSelect?: (idx: number) => void;
+    buttonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export const ForgeEffectMenu = ({ state, dispatch, onSelect, idx }: Props) => {
+export const ForgeEffectMenu = ({ state, buttonRef, dispatch, onSelect, idx }: Props) => {
     const [, setMenuState] = useEffectMenuContext();
     const menuRef = useRef<HTMLUListElement>(null);
 
@@ -28,7 +29,7 @@ export const ForgeEffectMenu = ({ state, dispatch, onSelect, idx }: Props) => {
 
     useEffect(() => {
         const handle = (e: PointerEvent) => {
-            if (menuRef.current) {
+            if (menuRef.current && e.target !== buttonRef.current) {
                 const x = e.clientX;
                 const y = e.clientY;
 

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 export interface EffectMenuData {
     menuIdx: number | false;
@@ -19,10 +19,6 @@ export const EffectMenuProvider = ({ children }: Props) => {
     const [data, setData] = useState<EffectMenuData>({
         menuIdx: false,
     });
-
-    useEffect(() => {
-        console.log(data.menuIdx);
-    }, [data.menuIdx]);
 
     return (
         <EffectMenuContext.Provider value={[data, setData]}>
