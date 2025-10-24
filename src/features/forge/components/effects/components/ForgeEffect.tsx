@@ -23,6 +23,9 @@ export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
             onPointerEnter={() =>
                 dispatch({ type: 'SELECT_EFFECT', effectIdx: idx })
             }
+            onPointerDown={() =>
+                dispatch({ type: 'SELECT_EFFECT', effectIdx: idx })
+            }
             className={`forge-effect ${
                 state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''
             } ${effectData !== undefined ? 'forge-effect-filled' : ''}`}

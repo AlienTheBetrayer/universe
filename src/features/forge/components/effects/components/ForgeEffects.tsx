@@ -13,6 +13,9 @@ export const ForgeEffects = () => {
                 onPointerLeave={() =>
                     dispatch({ type: 'SELECT_EFFECT', effectIdx: false })
                 }
+                onPointerDown={() => {
+                    dispatch({ type: 'SELECT_EFFECT', effectIdx: false })
+                }}
             >
                 <h3>
                     <mark>Effects</mark>
