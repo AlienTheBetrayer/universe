@@ -24,6 +24,11 @@ export const useForgeCard = (idx: number, content: ForgeCardContent) => {
     const dragControls = useDragControls();
     const controls = useAnimationControls();
 
+    // cursor
+    useEffect(() => {
+        document.body.style.cursor = (state.dragging.idx !== false) ? 'grabbing' : 'auto';
+    }, [state.dragging]);
+
     // drag manual controls
     useEffect(() => {
         const duration = 0.75;
