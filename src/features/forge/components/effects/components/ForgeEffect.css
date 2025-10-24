@@ -3,7 +3,6 @@
     aspect-ratio: 1/1;
     border: 2px dashed var(--background-6);
     border-radius: 16px;
-    overflow: hidden;
     transition: 0.7s;
     position: relative;
 }
@@ -15,6 +14,17 @@
 /* filled state */
 .forge-effect-filled {
     border-color: #00f;
+}
+
+/* empty container */
+.forge-effect-empty {
+    position: absolute;
+    inset: 0;
+    padding: 1rem;
+}
+
+.forge-effect-empty-button {
+    width: 100%;
 }
 
 /* sections */

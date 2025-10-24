@@ -23,6 +23,13 @@ export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
         >
             <ForgeEffectAwaiting state={state} dispatch={dispatch} idx={idx} />
             <ForgeEffectFilled effectData={effectData} dispatch={dispatch} />
+            <AnimatePresence>
+                {effectData === undefined &&
+                    state.cardDraggingIdx === false &&
+                    state.awaitingActionIdx === false && (
+                        <ForgeEffectEmpty state={state} dispatch={dispatch} />
+                    )}
+            </AnimatePresence>
         </div>
     );
 };
@@ -77,12 +84,12 @@ export const ForgeEffectAwaiting = ({
     );
 };
 
-interface DataProps {
+interface FilledProps {
     effectData: ForgeEffectData | undefined;
     dispatch: React.Dispatch<ForgeReducerAction>;
 }
 
-export const ForgeEffectFilled = ({ effectData, dispatch }: DataProps) => {
+export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
     return (
         <AnimatePresence>
             {effectData && (
@@ -120,5 +127,23 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: DataProps) => {
                 </motion.div>
             )}
         </AnimatePresence>
+    );
+};
+
+interface EmptyProps {
+    state: ForgeData;
+    dispatch: React.Dispatch<ForgeReducerAction>;
+}
+
+export const ForgeEffectEmpty = ({ dispatch }: EmptyProps) => {
+    return (
+        <motion.div className='forge-effect-empty'
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0 }}>
+            <Button className='forge-effect-empty-button'>
+                Add an <mark>effect</mark>
+            </Button>
+        </motion.div>
     );
 };
