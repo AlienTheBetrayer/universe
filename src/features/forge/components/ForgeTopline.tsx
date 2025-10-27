@@ -17,8 +17,8 @@ export const ForgeTopline = () => {
         <MessageBox
             title='Are you sure?'
             description='You are about to <u>wipe</u> all your <mark>effects</mark> and their <mark>settings</mark>'
-            onInteract={(f) => {
-                if (f) dispatch({ type: 'WIPE_EFFECT_SLOTS' });
+            onInteract={(flag) => {
+                if (flag) dispatch({ type: 'WIPE_EFFECT_SLOTS' });
                 wipeMessageBox.setShown(false);
             }}
         />
