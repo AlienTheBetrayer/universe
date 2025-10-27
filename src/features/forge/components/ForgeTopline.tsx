@@ -60,6 +60,22 @@ export const ForgeTopline = () => {
                     <mark>Random fill</mark>
                     {!isMobile ? 'remaining effects' : ''}
                 </Button>
+
+                <Button
+                    ref={(el) =>
+                        tooltips.set(
+                            2,
+                            'Show the tutorial',
+                            el,
+                            'down'
+                        )
+                    }
+                    style={{ marginLeft: 'auto' }}
+ 
+                >
+                    {!isMobile ? 'Show' : ''}
+                    <mark>Tutorial</mark>
+                </Button>
             </div>
         </div>
     );
