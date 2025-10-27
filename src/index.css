@@ -61,8 +61,8 @@
     --hr: var(--background-5);
     --staggered: rgb(56, 59, 66);
     --dotted: var(--background-4);
-    --forge-background: hsl(226, 35%, 45%);
-    --forge-background-transparent: hsla(226, 35%, 45%, 0.9);
+    --forge-background: hsl(226, 40%, 60%);
+    --forge-background-transparent: hsla(226, 40%, 60%, 0.9);
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;
@@ -114,8 +114,8 @@
     --hr: var(--background-10);
     --staggered: rgb(138, 139, 140);
     --dotted: var(--background-7);
-    --forge-background: hsl(226, 35%, 35%);
-    --forge-background-transparent: hsla(226, 35%, 35%, 0.9);
+    --forge-background: hsl(226, 50%, 80%);
+    --forge-background-transparent: hsla(226, 50%, 80%, 0.9);
 
     /* font sizes */
     --font-h1: 2.6rem;
