@@ -7,7 +7,7 @@ interface Props {
     zIndex?: number;
 }
 
-export const BackgroundBlur = ({ onInteract, zIndex = 30 }: Props) => {
+export const BackgroundBlur = ({ onInteract, zIndex = 999 }: Props) => {
     return (
         <motion.div
             className='background-blur'

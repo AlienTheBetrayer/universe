@@ -1,0 +1,7 @@
+.forge-world-fullscreen {
+    position: fixed;
+    inset: 0;
+    background-color: var(--forge-background-transparent);
+    z-index: 100;
+    backdrop-filter: blur(16px);
+}

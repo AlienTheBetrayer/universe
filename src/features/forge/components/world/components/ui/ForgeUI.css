@@ -8,7 +8,18 @@
     pointer-events: all;
 }
 
-/* botom */
+/* top */
+.forge-ui-top {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+/* bottom */
 .forge-ui-bottom {
     display: flex;
     gap: 0.5rem;

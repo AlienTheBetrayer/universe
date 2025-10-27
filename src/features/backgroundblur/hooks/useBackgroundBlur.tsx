@@ -7,7 +7,7 @@ import { AnimatePresence } from 'motion/react';
 export const useBackgroundBlur = (
     onInteract?: () => void,
     hideScroll: boolean = true,
-    zIndex: number = 10,
+    zIndex: number = 999,
 ) => {
     const [shown, setShown] = useState<boolean>(false);
 

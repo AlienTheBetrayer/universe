@@ -20,3 +20,9 @@
     overflow: hidden;
     background-color: var(--forge-background);
 }
+
+@media (max-width: 1024px) {
+    .forge-world {
+        max-width: 100%;
+    }
+}

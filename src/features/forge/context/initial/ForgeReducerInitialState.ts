@@ -114,4 +114,7 @@ export const ForgeReducerInitialState: ForgeData = {
         },
     ],
     selectedBlockIdx: false,
+
+    // world
+    isWorldFullscreen: false,
 };

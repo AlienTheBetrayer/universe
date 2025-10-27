@@ -121,6 +121,7 @@ const ForgeMenuOpenButton = ({ menuShown, setMenuShown }: ButtonProps) => {
                 src={arrowDownImg}
                 alt=''
                 className='forge-image'
+                style={{ width: '1.5rem', height: '1.5rem'}}
                 animate={{
                     transform: menuShown ? 'rotate(180deg)' : 'rotate(0deg)',
                 }}

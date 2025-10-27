@@ -7,11 +7,55 @@ import { useTooltips } from '../../../../../tooltip/hooks/useTooltips';
 import deleteImg from '../../../../assets/delete.svg';
 import rotateImg from '../../../../assets/reverse.svg';
 import { useWorldContext } from '../../../../context/WorldContext';
+import type { WorldReducerAction } from '../../../../context/reducer/WorldReducer';
+import type { WorldData } from '../../../../context/types/world/data';
+
+import fullscreenImg from '../../../../assets/fullscreen.svg';
+import { useForgeContext } from '../../../../context/ForgeContext';
 
 export const ForgeUI = () => {
-    const tooltips = useTooltips();
     const [state, dispatch] = useWorldContext();
 
+    return (
+        <div className='forge-ui'>
+            <ForgeUITop />
+            <ForgeUIBottom state={state} dispatch={dispatch} />
+        </div>
+    );
+};
+
+export const ForgeUITop = () => {
+    const [, dispatch] = useForgeContext();
+
+    const tooltips = useTooltips();
+
+    return (
+        <div className='forge-ui-top'>
+            {tooltips.render()}
+
+            <Button
+                style={{ marginLeft: 'auto' }}
+                ref={(el) =>
+                    tooltips.set(0, 'Enter / exit fullscreen', el, 'down')
+                }
+                onClick={() => dispatch({ type: 'WORLD_FULLSCREEN_TOGGLE' })}
+            >
+                <img
+                    src={fullscreenImg}
+                    alt='fullscreen'
+                    className='forge-image'
+                />
+            </Button>
+        </div>
+    );
+};
+
+interface BottomProps {
+    state: WorldData;
+    dispatch: React.Dispatch<WorldReducerAction>;
+}
+
+export const ForgeUIBottom = ({ state, dispatch }: BottomProps) => {
     const wipeMessageBox = usePopup(
         <MessageBox
             title='Are you sure?'
@@ -23,37 +67,33 @@ export const ForgeUI = () => {
         />
     );
 
+    const tooltips = useTooltips();
+
     return (
-        <div className='forge-ui'>
+        <div className='forge-ui-bottom'>
             {tooltips.render()}
             {wipeMessageBox.render()}
 
-            <div className='forge-ui-bottom'>
-                <Button
-                    onClick={() => wipeMessageBox.setShown(true)}
-                    ref={(el) =>
-                        tooltips.set(1, 'Delete all blocks', el, 'down')
-                    }
-                >
-                    <img src={deleteImg} alt='' className='forge-image' />
-                    <u>Clear</u>
-                </Button>
-                <Button
-                    ref={(el) =>
-                        tooltips.set(0, 'Toggle auto-rotation', el, 'down')
-                    }
-                    style={{ marginLeft: 'auto' }}
-                    onClick={() => dispatch({ type: 'TOGGLE_AUTO_ROTATE' })}
-                >
-                    <img src={rotateImg} alt='' className='forge-image' />
-                    {state.autoRotationEnabled ? (
-                        <u>Disable</u>
-                    ) : (
-                        <mark>Enable</mark>
-                    )}
-                    auto-rotate
-                </Button>
-            </div>
+            <Button
+                onClick={() => wipeMessageBox.setShown(true)}
+                ref={(el) => tooltips.set(0, 'Delete all blocks', el, 'up')}
+            >
+                <img src={deleteImg} alt='' className='forge-image' />
+                <u>Clear</u>
+            </Button>
+            <Button
+                ref={(el) => tooltips.set(1, 'Toggle auto-rotation', el, 'up')}
+                style={{ marginLeft: 'auto' }}
+                onClick={() => dispatch({ type: 'TOGGLE_AUTO_ROTATE' })}
+            >
+                <img src={rotateImg} alt='' className='forge-image' />
+                {state.autoRotationEnabled ? (
+                    <u>Disable</u>
+                ) : (
+                    <mark>Enable</mark>
+                )}
+                auto-rotate
+            </Button>
         </div>
     );
 };

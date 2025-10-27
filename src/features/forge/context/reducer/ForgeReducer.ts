@@ -16,6 +16,9 @@ export type ForgeReducerAction =
     // blocks
     | { type: 'SELECT_BLOCK'; blockIdx: number | false }
 
+    // world
+    | { type: 'WORLD_FULLSCREEN_TOGGLE' }
+
     // awaiting
     | { type: 'AWAIT_ACTION'; cardIdx: number | false }
     | { type: 'CANCEL_CURRENT_CARD' }
@@ -107,6 +110,10 @@ export const ForgeReducer = (
         // blocks
         case 'SELECT_BLOCK':
             return { ...state, selectedBlockIdx: action.blockIdx };
+
+        // world
+        case 'WORLD_FULLSCREEN_TOGGLE':
+            return { ...state, isWorldFullscreen: !state.isWorldFullscreen };
 
         // awaiting
         case 'CANCEL_CURRENT_CARD':

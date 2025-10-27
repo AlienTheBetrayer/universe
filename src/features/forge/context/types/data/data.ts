@@ -16,4 +16,7 @@ export interface ForgeData {
     // blocks
     blocks: ForgeBlockData[];
     selectedBlockIdx: number | false;
+
+    // world
+    isWorldFullscreen: boolean;
 }
