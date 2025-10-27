@@ -1,6 +1,7 @@
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { usePopup } from '../../../hooks/usePopup';
 import { MessageBox } from '../../messagebox/components/MessageBox';
+import { useTooltips } from '../../tooltip/hooks/useTooltips';
 import { Button } from '../../ui/Button/components/Button';
 import { useForgeContext } from '../context/ForgeContext';
 import './ForgeTopline.css';
@@ -20,15 +21,21 @@ export const ForgeTopline = () => {
         />
     );
 
+    const tooltips = useTooltips(state.cardDraggingIdx === false);
+
     return (
         <div className='forge-topline'>
             {wipeMessageBox.render()}
+            {tooltips.render()}
 
             <h3 className='forge-topline-heading'>
                 <mark>Available</mark> effects <small>(click / drag)</small>
             </h3>
             <div className='forge-topline-buttons'>
                 <Button
+                    ref={(el) =>
+                        tooltips.set(0, 'Empty all effect slots', el, 'down')
+                    }
                     enabled={state.effectSlots.length !== 0}
                     onClick={() => wipeMessageBox.setShown(true)}
                 >
@@ -37,6 +44,14 @@ export const ForgeTopline = () => {
                 </Button>
 
                 <Button
+                    ref={(el) =>
+                        tooltips.set(
+                            1,
+                            'Randomly fill all remaining effect slots',
+                            el,
+                            'down'
+                        )
+                    }
                     enabled={state.effectSlots.length < 9}
                     onClick={() => {
                         dispatch({ type: 'FILL_REMAINING_EFFECTS' });

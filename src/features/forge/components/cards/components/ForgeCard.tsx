@@ -32,7 +32,7 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                 className='forge-card'
                 ref={ref}
                 onClick={() => {
-                    if(state.cardDraggingIdx === false)
+                    if (state.cardDraggingIdx === false)
                         dispatch({ type: 'AWAIT_ACTION', cardIdx: card.idx });
                 }}
                 onPointerDown={(e) => {
@@ -40,7 +40,10 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                     cardController.lastEvent.current = e;
                 }}
                 onPointerLeave={() => {
-                    if (state.cardDraggingIdx === false && cardController.selected)
+                    if (
+                        state.cardDraggingIdx === false &&
+                        cardController.selected
+                    )
                         cardController.setSelected(false);
                 }}
                 onPointerUp={() => cardController.setSelected(false)}

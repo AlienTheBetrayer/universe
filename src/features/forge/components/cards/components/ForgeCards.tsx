@@ -9,17 +9,17 @@ import { ForgeMenu } from './ForgeMenu';
 
 export const ForgeCards = () => {
     // state
-    const [state, ] = useForgeContext();
+    const [state] = useForgeContext();
 
     // media query
     const isLarge = !useMediaQuery(1024);
 
     // tooltips
-    const tooltips = useTooltips();
+    const tooltips = useTooltips(state.cardDraggingIdx === false);
 
     return (
         <div className='forge-cards-container'>
-            {state.cardDraggingIdx === false && tooltips.render()}
+            {tooltips.render()}
 
             <ForgeTopline />
 

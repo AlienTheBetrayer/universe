@@ -101,7 +101,6 @@ export const ForgeReducer = (
                 newEffects.push({ effectIdx: idx, card });
             }
 
-            console.log(newEffects);
             return { ...state, effectSlots: newEffects };
         }
 

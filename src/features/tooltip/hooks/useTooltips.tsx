@@ -13,7 +13,7 @@ interface TooltipElement {
     offset: number;
 }
 
-export const useTooltips = () => {
+export const useTooltips = (enabledFlag: boolean = true) => {
     // refs + variables
     const elementRefs = useRef<TooltipElement[]>([]);
     const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -21,6 +21,10 @@ export const useTooltips = () => {
 
     // states
     const [selected, setSelected] = useState<number | false>(false);
+    const enabledRef = useRef(enabledFlag);
+    useEffect(() => {
+        enabledRef.current = enabledFlag;
+    }, [enabledFlag]);
 
     // upon tooltip appearance change its position based on the current selected index
     useEffect(() => {
@@ -113,7 +117,7 @@ export const useTooltips = () => {
         offset: number = 8
     ) => {
         const handleLeave = () => {
-            setSelected(false);
+            if (enabledRef.current) setSelected(false);
         };
 
         if (element === null) {
@@ -134,13 +138,18 @@ export const useTooltips = () => {
                 handlers.current[idx] = undefined!;
             }
         } else {
-            const handleEnter = () => setSelected(idx);
+            const handleEnter = () => {
+                if (enabledRef.current) setSelected(idx);
+            };
 
             element.addEventListener('pointerenter', handleEnter);
             element.addEventListener('focus', handleEnter);
             element.addEventListener('pointerleave', handleLeave);
             element.addEventListener('blur', handleLeave);
-            handlers.current[idx] = { enter: handleEnter, leave: handleLeave };
+            handlers.current[idx] = {
+                enter: handleEnter,
+                leave: handleLeave,
+            };
 
             elementRefs.current[idx] = {
                 direction,
@@ -153,6 +162,8 @@ export const useTooltips = () => {
     };
 
     const render = () => {
+        if (enabledRef.current === false) return null;
+
         return createPortal(
             <AnimatePresence>
                 {selected !== false && (
