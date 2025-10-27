@@ -1,4 +1,5 @@
-import { Instances } from '@react-three/drei';
+import { Edges, Instances } from '@react-three/drei';
+import React from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { Block } from './Block';
 
@@ -16,15 +17,17 @@ export const WorldField = () => {
                 depthWrite={false}
             />
             {state.fieldBlocks.map((fBlock, idx) => (
-                <Block
-                    blockSize={state.blockSize}
-                    key={idx}
-                    data={fBlock}
-                    onInteract={(type, block) => {
-                        if (type === 'create')
-                            dispatch({ type: 'CREATE_BLOCK', data: block });
-                    }}
-                />
+                <React.Fragment key={idx}>
+                    <Edges position={fBlock.position} color='#111522' />
+                    <Block
+                        blockSize={state.blockSize}
+                        data={fBlock}
+                        onInteract={(type, block) => {
+                            if (type === 'create')
+                                dispatch({ type: 'CREATE_BLOCK', data: block });
+                        }}
+                    />
+                </React.Fragment>
             ))}
         </Instances>
     );

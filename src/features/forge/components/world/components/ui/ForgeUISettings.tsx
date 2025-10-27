@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { Button } from '../../../../../ui/Button/components/Button';
 import { useWorldContext } from '../../../../context/WorldContext';
 import './ForgeUISettings.css';
+import { useThree } from '@react-three/fiber';
+import { Vector3 } from 'three';
 
 interface Props {
     onCancel?: () => void;
@@ -15,7 +17,7 @@ export const ForgeUISettings = ({ onCancel }: Props) => {
             className='forge-ui-settings'
             initial={{ y: '10px', opacity: 0 }}
             animate={{ y: '-105%', opacity: 1 }}
-            exit={{ y: '10px', opacity: 0 }}
+            exit={{ y: '10px', opacity: 0, transition: { duration: 0.3 } }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
             <div className='forge-ui-settings-topline'>
@@ -41,7 +43,13 @@ export const ForgeUISettings = ({ onCancel }: Props) => {
                         min={0.5}
                         max={3}
                         step={0.1}
-                        onChange={e => dispatch({ type: 'PROPERTY_SET_BLOCK_SIZE', size: Number(e.target.value)})}
+                        onChange={(e) => {
+                            dispatch({
+                                type: 'PROPERTY_SET_BLOCK_SIZE',
+                                size: Number(e.target.value),
+                            });
+                            dispatch({ type: 'GENERATE_FIELD' });
+                        }}
                     />
                 </li>
             </ul>

@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 300px;
     min-height: 200px;
-    
+
     position: absolute;
     left: 0;
     top: 0;
@@ -13,6 +13,7 @@
     backdrop-filter: blur(8px);
 }
 
+/* topline */
 .forge-ui-settings-topline {
     display: flex;
     justify-content: space-between;
@@ -24,15 +25,29 @@
     height: 32px;
 }
 
+/* items */
 .forge-ui-settings-items {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
+    flex: 1;
 }
 
 .forge-ui-settings-item {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+}
+
+/* bottom */
+.forge-ui-settings-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-top: 1px solid var(--background-3-transparent);
+
+    width: 100%;
+    height: 32px;
 }

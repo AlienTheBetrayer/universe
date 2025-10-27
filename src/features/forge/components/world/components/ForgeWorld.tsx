@@ -13,7 +13,6 @@ export const ForgeWorld = () => {
                 className='forge-world'
                 initial={{ borderRadius: '2rem' }}
                 whileHover={{ borderRadius: '4rem' }}
-                whileTap={{ borderRadius: '6rem' }}
             >
                 <WorldCanvas />
                 <ForgeUI />

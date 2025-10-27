@@ -1,25 +1,8 @@
 import { Instance } from '@react-three/drei';
 import { type ThreeEvent } from '@react-three/fiber';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Matrix3, Vector3 } from 'three';
 import type { BlockData } from '../../../../context/types/world/block';
-
-const getNextBlockPosition = (
-    e: ThreeEvent<MouseEvent>,
-    blockSize: number,
-    pos: [number, number, number]
-) => {
-    const faceNormal = e.face?.normal.clone();
-    if (!faceNormal) return;
-
-    const worldNormal = faceNormal
-        .applyNormalMatrix(new Matrix3().getNormalMatrix(e.object.matrixWorld))
-        .multiplyScalar(blockSize);
-
-    const newPos = new Vector3(...pos).add(worldNormal);
-
-    return newPos;
-};
 
 interface BlockProps {
     data: BlockData;
@@ -40,7 +23,27 @@ export const Block = ({
     onHoverStart,
     onHoverEnd,
 }: BlockProps) => {
+    // state
     const [hovered, setHovered] = useState<boolean>(false);
+
+    // helper functions
+    const getNextBlockPosition = useCallback(
+        (e: ThreeEvent<MouseEvent>, pos: [number, number, number]) => {
+            const faceNormal = e.face?.normal.clone();
+            if (!faceNormal) return;
+
+            const worldNormal = faceNormal
+                .applyNormalMatrix(
+                    new Matrix3().getNormalMatrix(e.object.matrixWorld)
+                )
+                .multiplyScalar(blockSize);
+
+            const newPos = new Vector3(...pos).add(worldNormal);
+
+            return newPos;
+        },
+        [blockSize]
+    );
 
     return (
         <Instance
@@ -52,11 +55,7 @@ export const Block = ({
             onClick={(e) => {
                 e.stopPropagation();
                 if (onInteract) {
-                    const newPos = getNextBlockPosition(
-                        e,
-                        blockSize,
-                        data.position
-                    );
+                    const newPos = getNextBlockPosition(e, data.position);
 
                     if (newPos) {
                         onInteract?.('create', {
