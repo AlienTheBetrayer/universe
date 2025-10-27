@@ -3,9 +3,11 @@ import './ForgeUI.css';
 
 import { useTooltips } from '../../../../../tooltip/hooks/useTooltips';
 import rotateImg from '../../../../assets/reverse.svg';
+import { useWorldContext } from '../../../../context/WorldContext';
 
 export const ForgeUI = () => {
     const tooltips = useTooltips();
+    const [state, setState] = useWorldContext();
 
     return (
         <div className='forge-ui'>
@@ -16,6 +18,12 @@ export const ForgeUI = () => {
                         tooltips.set(0, 'Toggle auto-rotation', el, 'down')
                     }
                     style={{ marginLeft: 'auto' }}
+                    onClick={() =>
+                        setState((prev) => ({
+                            ...prev,
+                            autoRotationEnabled: !prev.autoRotationEnabled,
+                        }))
+                    }
                 >
                     <img
                         src={rotateImg}
@@ -26,7 +34,12 @@ export const ForgeUI = () => {
                             filter: 'invert(0.5)',
                         }}
                     />
-                    Enable auto-rotate
+                    {state.autoRotationEnabled ? (
+                        <u>Disable</u>
+                    ) : (
+                        <mark>Enable</mark>
+                    )}
+                    auto-rotate
                 </Button>
             </div>
         </div>
