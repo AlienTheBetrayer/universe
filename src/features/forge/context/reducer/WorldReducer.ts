@@ -22,10 +22,14 @@ export const WorldReducer = (
 ): WorldData => {
     switch (action.type) {
         // blocks
-        case 'CREATE_BLOCK':
-            return { ...state, blocks: [...state.blocks, action.data] };
+        case 'CREATE_BLOCK': {
+            const newBlocks = state.blocks;
+            newBlocks.set(action.data.position.join(','), action.data);
+
+            return { ...state, blocks: newBlocks };
+        }
         case 'WIPE_BLOCKS':
-            return { ...state, blocks: [] };
+            return { ...state, blocks: new Map() };
 
         // field
         case 'GENERATE_FIELD': {

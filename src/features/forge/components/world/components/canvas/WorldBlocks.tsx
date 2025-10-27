@@ -13,14 +13,14 @@ export const WorldBlocks = () => {
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
             <meshPhysicalMaterial metalness={0.5} roughness={0.5} />
-            {state.blocks.map((block, idx) => (
+            {[...state.blocks.entries()].map(([_key, value], idx) => (
                 <React.Fragment key={idx}>
                     {hoveredIdx === idx && (
-                        <Edges position={block.position} color='#68749a' />
+                        <Edges position={value.position} color='#68749a' />
                     )}
 
                     <Block
-                        data={block}
+                        data={value}
                         blockSize={state.blockSize}
                         onHoverStart={() => setHoveredIdx(idx)}
                         onHoverEnd={() => setHoveredIdx(false)}

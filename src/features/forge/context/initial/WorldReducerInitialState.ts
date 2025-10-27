@@ -5,7 +5,7 @@ export const WorldReducerInitialState: WorldData = {
     autoRotationEnabled: false,
 
     // blocks
-    blocks: [],
+    blocks: new Map(),
     fieldBlocks: new Map(),
 
     // properties

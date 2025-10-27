@@ -6,7 +6,7 @@ export interface WorldData {
 
     // blocks
     fieldBlocks: Map<string, BlockData>;
-    blocks: BlockData[];
+    blocks: Map<string, BlockData>;
 
     // properties
     blockSize: number;

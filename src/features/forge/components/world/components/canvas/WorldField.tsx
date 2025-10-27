@@ -18,7 +18,7 @@ export const WorldField = () => {
                 opacity={0.1}
                 depthWrite={false}
             />
-            {[...state.fieldBlocks.entries()].map(([key, value], idx) => (
+            {[...state.fieldBlocks.entries()].map(([_key, value], idx) => (
                 <React.Fragment key={idx}>
                     {hoveredIdx === idx && (
                         <Edges
