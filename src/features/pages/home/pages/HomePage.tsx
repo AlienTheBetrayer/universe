@@ -1,25 +1,24 @@
 import './HomePage.css';
 
+import { useRef, useState } from 'react';
 import { Page } from '../../../layout/components/Page';
+import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
+import { GridSection } from '../sections/GridSection';
 import { HeadingSection } from '../sections/HeadingSection';
 import { LockSection } from '../sections/LockSection';
-import { useRef, useState } from 'react';
-import { GridSection } from '../sections/GridSection';
-import { Spotlight } from '../../../ui/Spotlight/components/Spotlight';
 import { QuestionSection } from '../sections/QuestionSection';
 
 import { motion, useInView } from 'motion/react';
-import { InteractiveParticlesProvider } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import { InteractiveParticlesCanvas } from '../../../interactiveparticles/components/InteractiveParticlesCanvas';
+import { InteractiveParticlesProvider } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import {
     QuestionContext,
     type QuestionContextData,
 } from '../../../questionparticles/context/QuestionContext';
 import { FAQSection } from '../sections/FAQSection';
-import { ShiftingSection } from '../sections/ShiftingSection';
 import { HorizontalSection } from '../sections/HorizontalSection';
 import { PaintSection } from '../sections/PaintSection';
-import { StaggeredBackground } from '../../../staggeredbackground/components/StaggeredBackground';
+import { ShiftingSection } from '../sections/ShiftingSection';
 
 export const HomePage = () => {
     const questionContextData = useState<QuestionContextData>({
@@ -53,9 +52,6 @@ export const HomePage = () => {
             <InteractiveParticlesProvider>
                 <div className='heading-wrapper' ref={headingRef}>
                     {isHeadingVisible && <InteractiveParticlesCanvas />}
-
-                    <StaggeredBackground />
-
                     <HeadingSection />
                     <GridSection />
                 </div>
