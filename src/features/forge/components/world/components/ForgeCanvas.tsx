@@ -1,4 +1,4 @@
-import { CameraControls, OrbitControls } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { ForgeGround } from './ForgeGround';
 
@@ -14,11 +14,11 @@ export const ForgeCanvas = () => {
 
             <ForgeGround />
             <mesh position={[0, 1.5, 0]}>
-                <icosahedronGeometry args={[2, 0]}/>
+                <icosahedronGeometry args={[2, 0]} />
                 <meshPhysicalMaterial />
             </mesh>
 
-            <OrbitControls autoRotateSpeed={0.25} autoRotate/>
+            <OrbitControls autoRotateSpeed={0.25} autoRotate />
         </Canvas>
     );
 };

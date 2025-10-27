@@ -5,6 +5,8 @@ import type { ForgeCardData } from '../../../context/types/cards';
 import { useForgeCard } from '../../../hooks/useForgeCard';
 import './ForgeCard.css';
 
+import cursorImg from '../../../../../assets/cursor.svg';
+
 interface Props {
     card: ForgeCardData;
 }
@@ -65,6 +67,14 @@ export const ForgeCard = forwardRef<HTMLButtonElement, Props>(
                     ref={cardController.progressRef}
                     className='forge-card-progress'
                 ></div>
+
+                {!cardController.isEffected && (
+                    <img
+                        src={cursorImg}
+                        alt=''
+                        className='forge-card-cursor-img'
+                    />
+                )}
             </Button>
         );
     }

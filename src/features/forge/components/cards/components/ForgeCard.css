@@ -20,3 +20,17 @@
     background-color: var(--background-10);
     transform: scaleX(0);
 }
+
+/* images */
+.forge-card-cursor-img {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    filter: invert(0.5);
+    width: 16px;
+    height: 16px;
+}
+
+.forge-card:active .forge-card-cursor-img {
+    filter: invert(var(--header-invert));
+}
