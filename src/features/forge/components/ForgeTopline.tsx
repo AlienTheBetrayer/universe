@@ -6,6 +6,9 @@ import { Button } from '../../ui/Button/components/Button';
 import { useForgeContext } from '../context/ForgeContext';
 import './ForgeTopline.css';
 
+import deleteImg from '../assets/delete.svg';
+import randomImg from '../assets/random.svg';
+
 export const ForgeTopline = () => {
     const [state, dispatch] = useForgeContext();
     const isMobile = useMediaQuery(640);
@@ -39,6 +42,15 @@ export const ForgeTopline = () => {
                     enabled={state.effectSlots.length !== 0}
                     onClick={() => wipeMessageBox.setShown(true)}
                 >
+                    <img
+                        src={deleteImg}
+                        alt=''
+                        style={{
+                            width: '1rem',
+                            height: '1rem',
+                            filter: 'invert(0.5)',
+                        }}
+                    />
                     <u>Wipe</u>
                     {!isMobile ? 'effects' : ''}
                 </Button>
@@ -57,21 +69,24 @@ export const ForgeTopline = () => {
                         dispatch({ type: 'FILL_REMAINING_EFFECTS' });
                     }}
                 >
+                    <img
+                        src={randomImg}
+                        alt=''
+                        style={{
+                            width: '1rem',
+                            height: '1rem',
+                            filter: 'invert(0.5)',
+                        }}
+                    />
                     <mark>Random fill</mark>
                     {!isMobile ? 'remaining effects' : ''}
                 </Button>
 
                 <Button
                     ref={(el) =>
-                        tooltips.set(
-                            2,
-                            'Show the tutorial',
-                            el,
-                            'down'
-                        )
+                        tooltips.set(2, 'Show the tutorial', el, 'down')
                     }
                     style={{ marginLeft: 'auto' }}
- 
                 >
                     {!isMobile ? 'Show' : ''}
                     <mark>Tutorial</mark>
