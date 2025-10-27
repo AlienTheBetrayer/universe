@@ -1,11 +1,11 @@
 import { forwardRef } from 'react';
 import { Button } from '../../../../ui/Button/components/Button';
 import { useForgeContext } from '../../../context/ForgeContext';
-import type { ForgeCardData } from '../../../context/types/cards';
 import { useForgeCard } from '../../../hooks/useForgeCard';
 import './ForgeCard.css';
 
 import cursorImg from '../../../../../assets/cursor.svg';
+import type { ForgeCardData } from '../../../context/types/data/cards';
 
 interface Props {
     card: ForgeCardData;

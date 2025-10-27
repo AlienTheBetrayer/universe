@@ -1,5 +1,5 @@
 import { Button } from '../../../../ui/Button/components/Button';
-import type { ForgeBlockData } from '../../../context/types/blocks';
+import type { ForgeBlockData } from '../../../context/types/data/blocks';
 import './ForgeBlock.css';
 
 interface Props {

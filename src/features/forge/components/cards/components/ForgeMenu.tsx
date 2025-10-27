@@ -9,7 +9,7 @@ import { useHotkeys } from '../../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 import { useTooltips } from '../../../../tooltip/hooks/useTooltips';
 import { useForgeContext } from '../../../context/ForgeContext';
-import type { ForgeData } from '../../../context/types/data';
+import type { ForgeData } from '../../../context/types/data/data';
 
 interface Props {
     onSelect?: (idx: number) => void;

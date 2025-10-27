@@ -1,13 +1,13 @@
 import { AnimatePresence } from 'motion/react';
 import { Button } from '../../../../ui/Button/components/Button';
 import type { ForgeReducerAction } from '../../../context/reducer/ForgeReducer';
-import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
 import { useRef } from 'react';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
-import type { ForgeEffectData } from '../../../context/types/effects';
+import type { ForgeData } from '../../../context/types/data/data';
+import type { ForgeEffectData } from '../../../context/types/data/effects';
 import { ForgeEffectMenu } from './ForgeEffectMenu';
 
 interface Props {

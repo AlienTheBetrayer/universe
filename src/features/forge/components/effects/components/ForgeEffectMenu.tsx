@@ -1,12 +1,12 @@
 import { useHotkeys } from '../../../../../hooks/useHotkeys';
 import { Button } from '../../../../ui/Button/components/Button';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
-import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffectMenu.css';
 
 import { motion } from 'motion/react';
 import { useClickOutside } from '../../../../../hooks/useClickOutside';
 import type { ForgeReducerAction } from '../../../context/reducer/ForgeReducer';
+import type { ForgeData } from '../../../context/types/data/data';
 
 interface Props {
     state: ForgeData;

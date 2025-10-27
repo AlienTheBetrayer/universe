@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForgeContext } from '../context/ForgeContext';
-import type { ForgeCardData } from '../context/types/cards';
+import type { ForgeCardData } from '../context/types/data/cards';
 
 export const useForgeCard = (card: ForgeCardData) => {
     // context state
@@ -42,7 +42,8 @@ export const useForgeCard = (card: ForgeCardData) => {
 
         // twice as fast as the animation
         const timeout = setTimeout(() => {
-            if (selected) dispatch({ type: 'SET_DRAGGING_CARD', cardIdx: card.idx });
+            if (selected)
+                dispatch({ type: 'SET_DRAGGING_CARD', cardIdx: card.idx });
         }, duration * 500);
 
         return () => {

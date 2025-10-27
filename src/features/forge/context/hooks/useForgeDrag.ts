@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useEffect } from 'react';
 import type { ForgeReducerAction } from '../reducer/ForgeReducer';
-import type { ForgeData } from '../types/data';
+import type { ForgeData } from '../types/data/data';
 
 export const useForgeDrag = (
     state: ForgeData,
@@ -9,8 +9,7 @@ export const useForgeDrag = (
 ) => {
     useEffect(() => {
         const handle = () => {
-            if (!state.cardDraggingIdx)
-                return;
+            if (!state.cardDraggingIdx) return;
 
             const card = state.cards.find(
                 (c) => c.idx === state.cardDraggingIdx
