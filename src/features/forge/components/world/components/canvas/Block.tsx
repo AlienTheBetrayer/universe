@@ -1,5 +1,5 @@
 import { Instance } from '@react-three/drei';
-import type { ThreeEvent } from '@react-three/fiber';
+import { type ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import { Matrix3, Vector3 } from 'three';
 import type { BlockData } from '../../../../context/types/world/block';
@@ -47,7 +47,7 @@ export const Block = ({
             position={data.position}
             castShadow
             receiveShadow
-            color={`${hovered ? '#00f' : '#000'}`}
+            color={data.color}
             // events
             onClick={(e) => {
                 e.stopPropagation();

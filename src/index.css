@@ -61,6 +61,7 @@
     --hr: var(--background-5);
     --staggered: rgb(56, 59, 66);
     --dotted: var(--background-4);
+    --forge-background: hsl(226, 35%, 45%);
 
     --font-h1: 2.6rem;
     --font-h2: 2rem;
@@ -112,6 +113,7 @@
     --hr: var(--background-10);
     --staggered: rgb(138, 139, 140);
     --dotted: var(--background-7);
+    --forge-background: hsl(226, 35%, 35%);
 
     /* font sizes */
     --font-h1: 2.6rem;

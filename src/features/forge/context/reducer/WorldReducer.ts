@@ -1,3 +1,4 @@
+import { cssVariable } from '../../../../utils/cssVariable';
 import type { BlockData } from '../types/world/block';
 import type { WorldData } from '../types/world/data';
 
@@ -31,6 +32,7 @@ export const WorldReducer = (
                 for (let x = 0; x < 32; ++x) {
                     field.push({
                         position: [x * state.blockSize, state.blockSize, z * state.blockSize],
+                        color: cssVariable('--forge-background'),
                     });
                 }
             }

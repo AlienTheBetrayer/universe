@@ -12,7 +12,7 @@ export const WorldField = () => {
             />
             <meshPhysicalMaterial
                 transparent
-                opacity={0.5}
+                opacity={0.1}
                 depthWrite={false}
             />
             {state.fieldBlocks.map((fBlock, idx) => (

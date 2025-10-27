@@ -14,9 +14,19 @@ export const WorldCanvas = () => {
             shadows
             camera={{ position: [5, 5, 10], fov: 60 }}
         >
-            <spotLight position={[0, 10, 0]} intensity={1280} />
+            <directionalLight
+                position={[5, 10, 5]}
+                intensity={1}
+                castShadow
+                shadow-mapSize={[2048, 2048]}
+                shadow-bias={-0.0001}
+            />
+            <hemisphereLight
+                color='#fff'
+                intensity={0.6}
+            />
 
-            <WorldGroundGrid />
+            <WorldGroundGrid gridSize={state.blockSize} />
             <Center>
                 <WorldField />
                 <WorldBlocks />

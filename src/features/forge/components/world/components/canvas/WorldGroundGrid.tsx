@@ -1,15 +1,19 @@
 import { Grid } from '@react-three/drei';
 
-export const WorldGroundGrid = () => {
+interface Props {
+    gridSize: number;
+}
+
+export const WorldGroundGrid = ({ gridSize }: Props) => {
     return (
         <Grid
-            cellSize={0.5}
+            cellSize={gridSize}
             cellThickness={0.5}
-            cellColor={'#6f6f6f'}
-            sectionSize={3}
+            cellColor={'#eef0ff'}
+            sectionSize={gridSize * 6}
             sectionThickness={1}
-            sectionColor={'#4b5e9d'}
-            fadeDistance={30}
+            sectionColor={'#eef0ff'}
+            fadeDistance={48}
             fadeStrength={1}
             followCamera={false}
             infiniteGrid={true}

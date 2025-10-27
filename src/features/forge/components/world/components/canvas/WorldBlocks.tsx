@@ -10,7 +10,7 @@ export const WorldBlocks = () => {
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
-            <meshPhysicalMaterial />
+            <meshPhysicalMaterial metalness={0.5} roughness={0.5}/>
             {state.blocks.map((block, idx) => (
                 <Block
                     key={idx}
@@ -18,7 +18,7 @@ export const WorldBlocks = () => {
                     blockSize={state.blockSize}
                     onInteract={(type, block) => {
                         if (type === 'create')
-                            dispatch({ type: 'CREATE_BLOCK', data: block });
+                            dispatch({ type: 'CREATE_BLOCK', data: { ...block, color: '#00f' } });
                     }}
                 />
             ))}
