@@ -1,6 +1,6 @@
 import { Grid } from '@react-three/drei';
 
-export const ForgeGroundGrid = () => {
+export const WorldGroundGrid = () => {
     return (
         <Grid
             cellSize={0.5}

@@ -7,4 +7,7 @@ export interface WorldData {
     // blocks
     fieldBlocks: BlockData[];
     blocks: BlockData[];
+
+    // properties
+    blockSize: number;
 }

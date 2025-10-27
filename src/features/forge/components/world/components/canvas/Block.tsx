@@ -1,19 +1,39 @@
+import type { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import { Matrix3, Vector3 } from 'three';
 import type { BlockData } from '../../../../context/types/world/block';
 
+const getNextBlockPosition = (
+    e: ThreeEvent<MouseEvent>,
+    blockSize: number,
+    pos: [number, number, number]
+) => {
+    const faceNormal = e.face?.normal.clone();
+    if (!faceNormal) return;
+
+    const worldNormal = faceNormal
+        .applyNormalMatrix(new Matrix3().getNormalMatrix(e.object.matrixWorld))
+        .multiplyScalar(blockSize);
+
+    const newPos = new Vector3(...pos).add(worldNormal);
+
+    return newPos;
+};
+
 interface BlockProps {
     data: BlockData;
+    blockSize: number;
 
     // events
     onClick?: (block: BlockData) => void;
-    onInteract?: (block: BlockData) => void;
+    onInteract?: (type: 'create' | 'delete', block: BlockData) => void;
     onHoverStart?: (block: BlockData) => void;
     onHoverEnd?: (block: BlockData) => void;
 }
 
 export const Block = ({
     data,
+    blockSize,
     onInteract,
     onClick,
     onHoverStart,
@@ -30,24 +50,27 @@ export const Block = ({
             onClick={(e) => {
                 e.stopPropagation();
                 if (onInteract) {
-                    const faceNormal = e.face?.normal.clone();
-                    if (!faceNormal) return;
-
-                    const worldNormal = faceNormal.applyNormalMatrix(
-                        new Matrix3().getNormalMatrix(e.object.matrixWorld)
+                    const newPos = getNextBlockPosition(
+                        e,
+                        blockSize,
+                        data.position
                     );
 
-                    const newPos = new Vector3(...data.position).add(
-                        worldNormal
-                    );
-
-                    onInteract?.({
-                        ...data,
-                        position: [newPos.x, newPos.y, newPos.z],
-                    });
+                    if (newPos) {
+                        onInteract?.('create', {
+                            ...data,
+                            position: [newPos.x, newPos.y, newPos.z],
+                        });
+                    }
                 }
 
                 onClick?.(data);
+            }}
+            onContextMenu={(e) => {
+                e.stopPropagation();
+                if (onInteract) {
+                    onInteract?.('delete', data);
+                }
             }}
             onPointerEnter={(e) => {
                 e.stopPropagation();
@@ -60,10 +83,10 @@ export const Block = ({
                 onHoverEnd?.(data);
             }}
         >
-            <boxGeometry args={[0.5, 0.5, 0.5]} />
+            <boxGeometry args={[blockSize, blockSize, blockSize]} />
             <meshPhysicalMaterial
                 color={'#fff'}
-                opacity={hovered ? 1 : 0}
+                opacity={hovered ? 1 : 0.5}
                 transparent
                 depthWrite={false}
             />

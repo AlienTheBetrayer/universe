@@ -19,7 +19,7 @@ export const WorldReducer = (
     switch (action.type) {
         // blocks
         case 'CREATE_BLOCK':
-            return state;
+            return { ...state, blocks: [...state.blocks, action.data] };
         case 'WIPE_BLOCKS':
             return { ...state, blocks: [] };
 
@@ -30,7 +30,7 @@ export const WorldReducer = (
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
                     field.push({
-                        position: [x * 0.5, 1, z * 0.5],
+                        position: [x * state.blockSize, state.blockSize, z * state.blockSize],
                     });
                 }
             }

@@ -1,10 +1,11 @@
-import { OrbitControls } from '@react-three/drei';
+import { Center, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useWorldContext } from '../../../../context/WorldContext';
-import { ForgeField } from './ForgeField';
-import { ForgeGroundGrid } from './ForgeGroundGrid';
+import { WorldBlocks } from './WorldBlocks';
+import { WorldField } from './WorldField';
+import { WorldGroundGrid } from './WorldGroundGrid';
 
-export const ForgeCanvas = () => {
+export const WorldCanvas = () => {
     const [state] = useWorldContext();
 
     return (
@@ -15,8 +16,11 @@ export const ForgeCanvas = () => {
         >
             <spotLight position={[0, 10, 0]} intensity={1280} />
 
-            <ForgeGroundGrid />
-            <ForgeField/>
+            <WorldGroundGrid />
+            <Center>
+                <WorldField />
+                <WorldBlocks />
+            </Center>
 
             <OrbitControls
                 autoRotateSpeed={state.autoRotationEnabled ? 0.25 : 0}
