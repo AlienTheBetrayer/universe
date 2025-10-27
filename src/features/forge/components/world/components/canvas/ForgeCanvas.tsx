@@ -1,10 +1,10 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { ForgeGround } from './ForgeGround';
 import { useWorldContext } from '../../../../context/WorldContext';
+import { ForgeGround } from './ForgeGround';
 
 export const ForgeCanvas = () => {
-    const [state, setState] = useWorldContext();
+    const [state, ] = useWorldContext();
 
     return (
         <Canvas
@@ -21,7 +21,10 @@ export const ForgeCanvas = () => {
                 <meshPhysicalMaterial />
             </mesh>
 
-            <OrbitControls autoRotateSpeed={state.autoRotationEnabled ? 0.25 : 0} autoRotate />
+            <OrbitControls
+                autoRotateSpeed={state.autoRotationEnabled ? 0.25 : 0}
+                autoRotate
+            />
         </Canvas>
     );
 };
