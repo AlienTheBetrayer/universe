@@ -1,0 +1,20 @@
+.forge-ui {
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+}
+
+.forge-ui * {
+    pointer-events: all;
+}
+
+/* botom */
+.forge-ui-bottom {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

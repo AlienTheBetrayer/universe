@@ -1,8 +1,7 @@
 import { motion } from 'motion/react';
 import './ForgeWorld.css';
-import { ForgeCanvas } from './ForgeCanvas';
-
-
+import { ForgeCanvas } from './canvas/ForgeCanvas';
+import { ForgeUI } from './ui/ForgeUI';
 
 export const ForgeWorld = () => {
     return (
@@ -16,7 +15,8 @@ export const ForgeWorld = () => {
                 whileHover={{ borderRadius: '4rem' }}
                 whileTap={{ borderRadius: '5rem' }}
             >
-                <ForgeCanvas/>
+                <ForgeCanvas />
+                <ForgeUI/>
             </motion.div>
         </div>
     );
