@@ -1,5 +1,6 @@
 import { Center, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { useRef, useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
 import { WorldField } from './WorldField';
@@ -7,11 +8,28 @@ import { WorldField } from './WorldField';
 export const WorldCanvas = () => {
     const [state] = useWorldContext();
 
+    const selectedTimeoutRef = useRef<number>(null);
+    const [selected, setSelected] = useState<boolean>(false);
+
     return (
         <Canvas
             style={{ width: '100%', height: '100%' }}
             shadows
             camera={{ position: [5, 5, 10], fov: 60 }}
+            onPointerDown={() => {
+                setSelected(true);
+                selectedTimeoutRef.current = setTimeout(
+                    () => setSelected(false),
+                    500
+                );
+            }}
+            onPointerUp={() => {
+                setSelected(false);
+                if (selectedTimeoutRef.current !== null) {
+                    clearTimeout(selectedTimeoutRef.current);
+                    selectedTimeoutRef.current = null;
+                }
+            }}
         >
             <directionalLight
                 position={[5, 10, 5]}
@@ -23,8 +41,8 @@ export const WorldCanvas = () => {
             <hemisphereLight color='#fff' intensity={0.6} />
 
             <Center key={`${state.blockSize}`}>
-                <WorldField />
-                <WorldBlocks />
+                <WorldField  buildingEnabled={selected}/>
+                <WorldBlocks buildingEnabled={selected}/>
             </Center>
 
             <OrbitControls

@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { Block } from './Block';
 
-export const WorldField = () => {
+interface Props {
+    buildingEnabled: boolean;
+}
+
+export const WorldField = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
 
     const [hoveredIdx, setHoveredIdx] = useState<number | false>(false);
@@ -18,7 +22,7 @@ export const WorldField = () => {
                 opacity={0.1}
                 depthWrite={false}
             />
-            {[...state.fieldBlocks.entries()].map(([key, value], idx) => (
+            {[...state.fieldBlocks.entries()].map(([_key, value], idx) => (
                 <React.Fragment key={idx}>
                     {hoveredIdx === idx && (
                         <Edges
@@ -34,6 +38,9 @@ export const WorldField = () => {
                         blockSize={state.blockSize}
                         data={value}
                         onInteract={(type, block) => {
+                            if(!buildingEnabled)
+                                return;
+                            
                             if (type === 'create')
                                 dispatch({ type: 'CREATE_BLOCK', data: block });
                         }}

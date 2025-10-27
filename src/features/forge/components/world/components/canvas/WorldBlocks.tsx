@@ -1,13 +1,15 @@
 import { Edges, Instances } from '@react-three/drei';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { Block } from './Block';
 
-export const WorldBlocks = () => {
+interface Props {
+    buildingEnabled: boolean;
+}
+
+export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
     const [hoveredIdx, setHoveredIdx] = useState<number | false>(false);
-    const selectedTimeoutRef = useRef<number>(null);
-    const [selected, setSelected] = useState<boolean>(false);
 
     return (
         <Instances limit={1000} frustumCulled={false}>
@@ -30,22 +32,8 @@ export const WorldBlocks = () => {
                         blockSize={state.blockSize}
                         onHoverStart={() => setHoveredIdx(idx)}
                         onHoverEnd={() => setHoveredIdx(false)}
-                        onPointerDown={() => {
-                            setSelected(true);
-                            selectedTimeoutRef.current = setTimeout(
-                                () => setSelected(true),
-                                500
-                            );
-                        }}
-                        onPointerUp={() => {
-                            setSelected(false);
-                            if (selectedTimeoutRef.current !== null) {
-                                clearTimeout(selectedTimeoutRef.current);
-                                selectedTimeoutRef.current = null;
-                            }
-                        }}
                         onInteract={(type, block) => {
-                            if (!selected) return;
+                            if (!buildingEnabled) return;
 
                             switch (type) {
                                 case 'create':
