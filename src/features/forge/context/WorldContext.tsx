@@ -20,7 +20,7 @@ interface Props {
 
 export const WorldProvider = ({ children }: Props) => {
     const [state, setState] = useState<WorldData>({
-        autoRotationEnabled: true,
+        autoRotationEnabled: false,
     });
 
     return (
