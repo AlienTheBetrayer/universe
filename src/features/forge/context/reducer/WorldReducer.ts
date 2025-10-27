@@ -29,18 +29,23 @@ export const WorldReducer = (
 
         // field
         case 'GENERATE_FIELD': {
-            const field: BlockData[] = [];
+            const field = new Map<string, BlockData>();
 
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
-                    field.push({
-                        position: [
-                            x * state.blockSize,
-                            state.blockSize,
-                            z * state.blockSize,
-                        ],
-                        color: cssVariable('--forge-background'),
-                    });
+                    field.set(
+                        `${x * state.blockSize},${state.blockSize},${
+                            z * state.blockSize
+                        }`,
+                        {
+                            position: [
+                                x * state.blockSize,
+                                state.blockSize,
+                                z * state.blockSize,
+                            ],
+                            color: cssVariable('--forge-background'),
+                        }
+                    );
                 }
             }
 

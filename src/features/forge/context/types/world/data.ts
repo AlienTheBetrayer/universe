@@ -5,7 +5,7 @@ export interface WorldData {
     autoRotationEnabled: boolean;
 
     // blocks
-    fieldBlocks: BlockData[];
+    fieldBlocks: Map<string, BlockData>;
     blocks: BlockData[];
 
     // properties

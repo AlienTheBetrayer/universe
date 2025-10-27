@@ -18,11 +18,11 @@ export const WorldField = () => {
                 opacity={0.1}
                 depthWrite={false}
             />
-            {state.fieldBlocks.map((fBlock, idx) => (
+            {[...state.fieldBlocks.entries()].map(([key, value], idx) => (
                 <React.Fragment key={idx}>
                     {hoveredIdx === idx && (
                         <Edges
-                            position={fBlock.position}
+                            position={value.position}
                             color={`${
                                 hoveredIdx === idx ? '#68749a' : '#3f4a6e'
                             }`}
@@ -32,7 +32,7 @@ export const WorldField = () => {
                         onHoverStart={() => setHoveredIdx(idx)}
                         onHoverEnd={() => setHoveredIdx(false)}
                         blockSize={state.blockSize}
-                        data={fBlock}
+                        data={value}
                         onInteract={(type, block) => {
                             if (type === 'create')
                                 dispatch({ type: 'CREATE_BLOCK', data: block });

@@ -6,7 +6,7 @@ export const WorldReducerInitialState: WorldData = {
 
     // blocks
     blocks: [],
-    fieldBlocks: [],
+    fieldBlocks: new Map(),
 
     // properties
     blockSize: 1,
