@@ -1,3 +1,4 @@
+import { Instance } from '@react-three/drei';
 import type { ThreeEvent } from '@react-three/fiber';
 import { useState } from 'react';
 import { Matrix3, Vector3 } from 'three';
@@ -42,10 +43,11 @@ export const Block = ({
     const [hovered, setHovered] = useState<boolean>(false);
 
     return (
-        <mesh
+        <Instance
             position={data.position}
             castShadow
             receiveShadow
+            color={`${hovered ? '#00f' : '#000'}`}
             // events
             onClick={(e) => {
                 e.stopPropagation();
@@ -82,14 +84,6 @@ export const Block = ({
                 setHovered(false);
                 onHoverEnd?.(data);
             }}
-        >
-            <boxGeometry args={[blockSize, blockSize, blockSize]} />
-            <meshPhysicalMaterial
-                color={'#fff'}
-                opacity={hovered ? 1 : 0.5}
-                transparent
-                depthWrite={false}
-            />
-        </mesh>
+        />
     );
 };

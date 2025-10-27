@@ -9,5 +9,5 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <StoreWatcher />
         <RouterProvider router={router} />
-    </StrictMode>,
+    </StrictMode>
 );
