@@ -55,7 +55,7 @@ export const Forge = () => {
                         </>
                     )}
 
-                    <ForgeWorld />
+                    { !state.isWorldFullscreen && <ForgeWorld/>}
                 </div>
 
                 {isLarge && (

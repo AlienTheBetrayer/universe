@@ -18,7 +18,7 @@ export const WorldField = () => {
             />
             {state.fieldBlocks.map((fBlock, idx) => (
                 <React.Fragment key={idx}>
-                    <Edges position={fBlock.position} color='#111522' />
+                    <Edges position={fBlock.position} color='#3f4a6e' />
                     <Block
                         blockSize={state.blockSize}
                         data={fBlock}
