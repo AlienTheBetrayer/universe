@@ -11,9 +11,11 @@ import { useTooltips } from '../../../../tooltip/hooks/useTooltips';
 import { useForgeContext } from '../../../context/ForgeContext';
 import type { ForgeData } from '../../../context/types/data';
 
-interface Props {}
+interface Props {
+    onSelect?: (idx: number) => void;
+}
 
-export const ForgeMenu = ({}: Props) => {
+export const ForgeMenu = ({ onSelect }: Props) => {
     // state
     const [state, dispatch] = useForgeContext();
 
@@ -34,6 +36,7 @@ export const ForgeMenu = ({}: Props) => {
                         state={state}
                         onSelect={(idx) => {
                             setMenuShown(false);
+                            onSelect?.(idx);
                             dispatch({ type: 'AWAIT_ACTION', cardIdx: idx });
                         }}
                     />

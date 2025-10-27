@@ -7,7 +7,11 @@ import { ForgeTopline } from '../../ForgeTopline';
 import { ForgeCard } from './ForgeCard';
 import { ForgeMenu } from './ForgeMenu';
 
-export const ForgeCards = () => {
+interface Props {
+    onSelect?: (idx: number) => void;
+}
+
+export const ForgeCards = ({ onSelect }: Props) => {
     // state
     const [state] = useForgeContext();
 
@@ -40,7 +44,7 @@ export const ForgeCards = () => {
                         />
                     ))
                 ) : (
-                    <ForgeMenu />
+                    <ForgeMenu onSelect={idx => onSelect?.(idx)}/>
                 )}
             </div>
         </div>

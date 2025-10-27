@@ -1,10 +1,15 @@
+import type { RefObject } from 'react';
 import { useClickOutside } from '../../../../../hooks/useClickOutside';
 import { EffectMenuProvider } from '../../../context/EffectMenuContext';
 import { useForgeContext } from '../../../context/ForgeContext';
 import { ForgeEffect } from './ForgeEffect';
 import './ForgeEffects.css';
 
-export const ForgeEffects = () => {
+interface Props {
+    wrapperRef?: RefObject<HTMLDivElement | null>;
+}
+
+export const ForgeEffects = ({ wrapperRef }: Props) => {
     const [state, dispatch] = useForgeContext();
 
     const containerRef = useClickOutside<HTMLDivElement>(() => {
@@ -15,7 +20,10 @@ export const ForgeEffects = () => {
     return (
         <EffectMenuProvider>
             <div
-                ref={containerRef}
+                ref={(el) => {
+                    containerRef.current = el;
+                    if (wrapperRef) wrapperRef.current = el;
+                }}
                 className='forge-effects-container'
                 onPointerLeave={() => {
                     if (state.currentEffectHoveredIdx)
