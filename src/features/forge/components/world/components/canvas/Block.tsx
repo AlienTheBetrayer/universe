@@ -11,6 +11,8 @@ interface BlockProps {
     // events
     onClick?: (block: BlockData) => void;
     onInteract?: (type: 'create' | 'delete', block: BlockData) => void;
+    onPointerDown?: (block: BlockData) => void;
+    onPointerUp?: (block: BlockData) => void;
     onHoverStart?: (block: BlockData) => void;
     onHoverEnd?: (block: BlockData) => void;
 }
@@ -21,6 +23,8 @@ export const Block = React.memo(
         blockSize,
         onInteract,
         onClick,
+        onPointerDown,
+        onPointerUp,
         onHoverStart,
         onHoverEnd,
     }: BlockProps) => {
@@ -78,6 +82,14 @@ export const Block = React.memo(
                 onPointerLeave={(e) => {
                     e.stopPropagation();
                     onHoverEnd?.(data);
+                }}
+                onPointerDown={(e) => {
+                    e.stopPropagation();
+                    onPointerDown?.(data);
+                }}
+                onPointerUp={(e) => {
+                    e.stopPropagation();
+                    onPointerUp?.(data);
                 }}
             />
         );
