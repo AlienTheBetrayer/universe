@@ -1,11 +1,18 @@
 import { useEffect, useRef } from 'react';
 
-export const useClickOutside = <T extends HTMLElement>(callback: () => void) => {
+export const useClickOutside = <T extends HTMLElement>(
+    callback: () => void,
+    exclusions?: (HTMLElement | null)[]
+) => {
     const ref = useRef<T | null>(null);
 
     useEffect(() => {
         const handlePointerDown = (event: PointerEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node))
+            if (
+                ref.current &&
+                !ref.current.contains(event.target as Node) &&
+                exclusions?.every((e) => e !== event.target)
+            )
                 callback();
         };
 
@@ -13,7 +20,7 @@ export const useClickOutside = <T extends HTMLElement>(callback: () => void) => 
         return () => {
             document.removeEventListener('pointerdown', handlePointerDown);
         };
-    }, [callback]);
+    }, [callback, exclusions]);
 
     return ref;
 };

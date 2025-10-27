@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import { useHotkeys } from '../../../../../hooks/useHotkeys';
 import { Button } from '../../../../ui/Button/components/Button';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
@@ -6,6 +5,7 @@ import type { ForgeData } from '../../../context/types/data';
 import './ForgeEffectMenu.css';
 
 import { motion } from 'motion/react';
+import { useClickOutside } from '../../../../../hooks/useClickOutside';
 import type { ForgeReducerAction } from '../../../context/reducer/ForgeReducer';
 
 interface Props {
@@ -16,9 +16,14 @@ interface Props {
     buttonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export const ForgeEffectMenu = ({ state, buttonRef, dispatch, onSelect, idx }: Props) => {
+export const ForgeEffectMenu = ({
+    state,
+    buttonRef,
+    dispatch,
+    onSelect,
+    idx,
+}: Props) => {
     const [, setMenuState] = useEffectMenuContext();
-    const menuRef = useRef<HTMLUListElement>(null);
 
     useHotkeys([
         {
@@ -27,29 +32,10 @@ export const ForgeEffectMenu = ({ state, buttonRef, dispatch, onSelect, idx }: P
         },
     ]);
 
-    useEffect(() => {
-        const handle = (e: PointerEvent) => {
-            if (menuRef.current && e.target !== buttonRef.current) {
-                const x = e.clientX;
-                const y = e.clientY;
-
-                const bounds = menuRef.current.getBoundingClientRect();
-                if (
-                    !(
-                        x >= bounds.left &&
-                        x <= bounds.right &&
-                        y >= bounds.top &&
-                        y <= bounds.bottom
-                    )
-                ) {
-                    onSelect?.(idx);
-                }
-            }
-        };
-
-        window.addEventListener('pointerdown', handle);
-        return () => window.removeEventListener('pointerdown', handle);
-    }, []);
+    const menuRef = useClickOutside<HTMLUListElement>(
+        () => onSelect?.(idx),
+        [buttonRef.current]
+    );
 
     const indexes = state.cards
         .filter((card) =>
