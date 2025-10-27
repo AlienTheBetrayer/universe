@@ -1,16 +1,14 @@
 import { Center } from '@react-three/drei';
-import { type BlockType } from '../../../../context/types/world/block';
+import { useWorldContext } from '../../../../context/WorldContext';
 import { Block } from './Block';
 
-interface Props {
-    fieldBlocks: BlockType[];
-}
+export const ForgeField = () => {
+    const [state, dispatch] = useWorldContext();
 
-export const ForgeField = ({ fieldBlocks }: Props) => {
     return (
         <Center>
-            {fieldBlocks.map((fBlock) => (
-                <Block data={fBlock} />
+            {state.fieldBlocks.map((fBlock, idx) => (
+                <Block key={idx} data={fBlock} />
             ))}
         </Center>
     );

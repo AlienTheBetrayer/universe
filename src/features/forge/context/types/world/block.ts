@@ -1,3 +1,3 @@
-export interface BlockType {
+export interface BlockData {
     position: [number, number, number];
 }

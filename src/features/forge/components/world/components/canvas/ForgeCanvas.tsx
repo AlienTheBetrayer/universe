@@ -16,7 +16,7 @@ export const ForgeCanvas = () => {
             <spotLight position={[0, 10, 0]} intensity={1280} />
 
             <ForgeGroundGrid />
-            <ForgeField fieldBlocks={state.fieldBlocks} />
+            <ForgeField/>
 
             <OrbitControls
                 autoRotateSpeed={state.autoRotationEnabled ? 0.25 : 0}

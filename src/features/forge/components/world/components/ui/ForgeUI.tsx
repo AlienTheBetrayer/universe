@@ -7,7 +7,7 @@ import { useWorldContext } from '../../../../context/WorldContext';
 
 export const ForgeUI = () => {
     const tooltips = useTooltips();
-    const [state, setState] = useWorldContext();
+    const [state, dispatch] = useWorldContext();
 
     return (
         <div className='forge-ui'>
@@ -18,12 +18,7 @@ export const ForgeUI = () => {
                         tooltips.set(0, 'Toggle auto-rotation', el, 'down')
                     }
                     style={{ marginLeft: 'auto' }}
-                    onClick={() =>
-                        setState((prev) => ({
-                            ...prev,
-                            autoRotationEnabled: !prev.autoRotationEnabled,
-                        }))
-                    }
+                    onClick={() => dispatch({ type: 'TOGGLE_AUTO_ROTATE' })}
                 >
                     <img
                         src={rotateImg}

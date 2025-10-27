@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
-import { useWorldField } from './hooks/useWorldField';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { WorldReducerInitialState } from './initial/WorldReducerInitialState';
+import { WorldReducer, type WorldReducerAction } from './reducer/WorldReducer';
 import type { WorldData } from './types/world/data';
 
 // types
-export type WorldContextType = [
-    WorldData,
-    React.Dispatch<React.SetStateAction<WorldData>>
-];
+export type WorldContextType = [WorldData, React.Dispatch<WorldReducerAction>];
 
 // context
 export const WorldContext = createContext<WorldContextType | null>(null);
@@ -17,16 +15,17 @@ interface Props {
 }
 
 export const WorldProvider = ({ children }: Props) => {
-    const [state, setState] = useState<WorldData>({
-        autoRotationEnabled: false,
-        fieldBlocks: [],
-        blocks: [],
-    });
+    const [state, dispatch] = useReducer(
+        WorldReducer,
+        WorldReducerInitialState
+    );
 
-    useWorldField(setState, 40, 40);
+    useEffect(() => {
+        dispatch({ type: 'GENERATE_FIELD' });
+    }, []);
 
     return (
-        <WorldContext.Provider value={[state, setState]}>
+        <WorldContext.Provider value={[state, dispatch]}>
             {children}
         </WorldContext.Provider>
     );
