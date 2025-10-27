@@ -99,7 +99,11 @@ export const ForgeUIBottom = ({ state, dispatch }: BottomProps) => {
                     {settingsShown && <HotkeyTooltip hotkeys={['Esc']} />}
                 </Button>
                 <AnimatePresence>
-                    {settingsShown && <ForgeUISettings />}
+                    {settingsShown && (
+                        <ForgeUISettings
+                            onCancel={() => setSettingsShown(false)}
+                        />
+                    )}
                 </AnimatePresence>
             </div>
 

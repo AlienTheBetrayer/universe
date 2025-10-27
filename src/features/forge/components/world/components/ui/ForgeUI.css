@@ -29,8 +29,3 @@
     bottom: 0;
     width: 100%;
 }
-
-.forge-ui button {
-    background-color: var(--background-3-transparent);
-    backdrop-filter: blur(4px);
-}

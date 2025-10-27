@@ -10,6 +10,9 @@ export type WorldReducerAction =
     // field
     | { type: 'GENERATE_FIELD' }
 
+    // world properties
+    | { type: 'PROPERTY_SET_BLOCK_SIZE'; size: number }
+
     // misc
     | { type: 'TOGGLE_AUTO_ROTATE' };
 
@@ -31,7 +34,11 @@ export const WorldReducer = (
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
                     field.push({
-                        position: [x * state.blockSize, state.blockSize, z * state.blockSize],
+                        position: [
+                            x * state.blockSize,
+                            state.blockSize,
+                            z * state.blockSize,
+                        ],
                         color: cssVariable('--forge-background'),
                     });
                 }
@@ -46,5 +53,9 @@ export const WorldReducer = (
                 ...state,
                 autoRotationEnabled: !state.autoRotationEnabled,
             };
+
+        // properties
+        case 'PROPERTY_SET_BLOCK_SIZE':
+            return { ...state, blockSize: action.size };
     }
 };
