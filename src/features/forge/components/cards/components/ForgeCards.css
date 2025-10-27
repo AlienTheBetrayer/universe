@@ -10,32 +10,3 @@
     gap: 0.5rem;
 }
 
-/* topline */
-.forge-cards-topline {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    min-height: 72px;
-    padding: 0 0.5rem;
-}
-
-.forge-card-topline-heading {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 100%;
-}
-
-.forge-cards-topline-buttons {
-    display: flex;
-    margin-top: auto;
-    width: 100%;
-    gap: 0.5rem;
-}
-
-.forge-cards-topline-buttons > button {
-    min-width: 64px;
-    white-space: nowrap;
-}

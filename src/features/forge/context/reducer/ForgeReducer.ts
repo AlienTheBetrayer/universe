@@ -1,5 +1,6 @@
 import type { ForgeCardData } from '../types/cards';
 import type { ForgeData } from '../types/data';
+import type { ForgeEffectData } from '../types/effects';
 
 export type ForgeReducerAction =
     // cards
@@ -9,13 +10,14 @@ export type ForgeReducerAction =
     | { type: 'SET_EFFECT_SLOT'; effectIdx: number; card: ForgeCardData }
     | { type: 'REMOVE_EFFECT_SLOT'; cardIdx: number }
     | { type: 'WIPE_EFFECT_SLOTS' }
-    | { type: 'SELECT_EFFECT', effectIdx: number | false }
+    | { type: 'SELECT_EFFECT'; effectIdx: number | false }
+    | { type: 'FILL_REMAINING_EFFECTS' }
 
     // blocks
     | { type: 'SELECT_BLOCK'; blockIdx: number | false }
 
     // awaiting
-    | { type: 'AWAIT_ACTION', cardIdx: number | false }
+    | { type: 'AWAIT_ACTION'; cardIdx: number | false }
     | { type: 'CANCEL_CURRENT_CARD' }
     | { type: 'RESTORE_CANCEL_CARD' };
 
@@ -69,7 +71,39 @@ export const ForgeReducer = (
         case 'WIPE_EFFECT_SLOTS':
             return { ...state, effectSlots: [] };
         case 'SELECT_EFFECT':
-            return { ...state, currentEffectHoveredIdx: action.effectIdx };
+            return {
+                ...state,
+                currentEffectHoveredIdx: { current: action.effectIdx },
+            };
+        case 'FILL_REMAINING_EFFECTS': {
+            const remainingCards = state.cards.filter(
+                (card) =>
+                    state.effectSlots.find(
+                        (slot) => slot.card.idx === card.idx
+                    ) === undefined
+            );
+
+            const occupiedSlots = state.effectSlots.map(
+                (slot) => slot.effectIdx
+            );
+
+            const allSlots = [...Array(9).keys()].filter(
+                (v) => !occupiedSlots.includes(v)
+            );
+            allSlots.sort(() => Math.random() - 0.5);
+
+            const newEffects: ForgeEffectData[] = state.effectSlots;
+
+            for (const idx of allSlots) {
+                const card = remainingCards.pop();
+                if (!card) break;
+
+                newEffects.push({ effectIdx: idx, card });
+            }
+
+            console.log(newEffects);
+            return { ...state, effectSlots: newEffects };
+        }
 
         // blocks
         case 'SELECT_BLOCK':

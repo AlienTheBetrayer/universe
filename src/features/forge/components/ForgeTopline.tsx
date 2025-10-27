@@ -1,0 +1,51 @@
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { usePopup } from '../../../hooks/usePopup';
+import { MessageBox } from '../../messagebox/components/MessageBox';
+import { Button } from '../../ui/Button/components/Button';
+import { useForgeContext } from '../context/ForgeContext';
+import './ForgeTopline.css';
+
+export const ForgeTopline = () => {
+    const [state, dispatch] = useForgeContext();
+    const isMobile = useMediaQuery(640);
+
+    const wipeMessageBox = usePopup(
+        <MessageBox
+            title='Are you sure?'
+            description='You are about to <u>wipe</u> all your <mark>effects</mark> and their <mark>settings</mark>'
+            onInteract={(f) => {
+                if (f) dispatch({ type: 'WIPE_EFFECT_SLOTS' });
+                wipeMessageBox.setShown(false);
+            }}
+        />
+    );
+
+    return (
+        <div className='forge-topline'>
+            {wipeMessageBox.render()}
+
+            <h3 className='forge-topline-heading'>
+                <mark>Available</mark> effects <small>(click / drag)</small>
+            </h3>
+            <div className='forge-topline-buttons'>
+                <Button
+                    enabled={state.effectSlots.length !== 0}
+                    onClick={() => wipeMessageBox.setShown(true)}
+                >
+                    <u>Wipe</u>
+                    {!isMobile ? 'effects' : ''}
+                </Button>
+
+                <Button
+                    enabled={state.effectSlots.length < 9}
+                    onClick={() => {
+                        dispatch({ type: 'FILL_REMAINING_EFFECTS' });
+                    }}
+                >
+                    <mark>Random fill</mark>
+                    {!isMobile ? 'remaining effects' : ''}
+                </Button>
+            </div>
+        </div>
+    );
+};
