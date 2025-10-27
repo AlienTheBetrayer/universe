@@ -1,10 +1,12 @@
 import { Edges, Instances } from '@react-three/drei';
-import React from 'react';
+import React, { useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { Block } from './Block';
 
 export const WorldField = () => {
     const [state, dispatch] = useWorldContext();
+
+    const [hoveredIdx, setHoveredIdx] = useState<number | false>(false);
 
     return (
         <Instances frustumCulled={false}>
@@ -18,8 +20,17 @@ export const WorldField = () => {
             />
             {state.fieldBlocks.map((fBlock, idx) => (
                 <React.Fragment key={idx}>
-                    <Edges position={fBlock.position} color='#3f4a6e' />
+                    {hoveredIdx === idx && (
+                        <Edges
+                            position={fBlock.position}
+                            color={`${
+                                hoveredIdx === idx ? '#68749a' : '#3f4a6e'
+                            }`}
+                        />
+                    )}
                     <Block
+                        onHoverStart={() => setHoveredIdx(idx)}
+                        onHoverEnd={() => setHoveredIdx(false)}
                         blockSize={state.blockSize}
                         data={fBlock}
                         onInteract={(type, block) => {

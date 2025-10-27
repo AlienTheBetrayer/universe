@@ -1,6 +1,6 @@
 import { Instance } from '@react-three/drei';
 import { type ThreeEvent } from '@react-three/fiber';
-import { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Matrix3, Vector3 } from 'three';
 import type { BlockData } from '../../../../context/types/world/block';
 
@@ -15,74 +15,71 @@ interface BlockProps {
     onHoverEnd?: (block: BlockData) => void;
 }
 
-export const Block = ({
-    data,
-    blockSize,
-    onInteract,
-    onClick,
-    onHoverStart,
-    onHoverEnd,
-}: BlockProps) => {
-    // state
-    const [hovered, setHovered] = useState<boolean>(false);
+export const Block = React.memo(
+    ({
+        data,
+        blockSize,
+        onInteract,
+        onClick,
+        onHoverStart,
+        onHoverEnd,
+    }: BlockProps) => {
+        // helper functions
+        const getNextBlockPosition = useCallback(
+            (e: ThreeEvent<MouseEvent>, pos: [number, number, number]) => {
+                const faceNormal = e.face?.normal.clone();
+                if (!faceNormal) return;
 
-    // helper functions
-    const getNextBlockPosition = useCallback(
-        (e: ThreeEvent<MouseEvent>, pos: [number, number, number]) => {
-            const faceNormal = e.face?.normal.clone();
-            if (!faceNormal) return;
+                const worldNormal = faceNormal
+                    .applyNormalMatrix(
+                        new Matrix3().getNormalMatrix(e.object.matrixWorld)
+                    )
+                    .multiplyScalar(blockSize);
 
-            const worldNormal = faceNormal
-                .applyNormalMatrix(
-                    new Matrix3().getNormalMatrix(e.object.matrixWorld)
-                )
-                .multiplyScalar(blockSize);
+                const newPos = new Vector3(...pos).add(worldNormal);
 
-            const newPos = new Vector3(...pos).add(worldNormal);
+                return newPos;
+            },
+            [blockSize]
+        );
 
-            return newPos;
-        },
-        [blockSize]
-    );
+        return (
+            <Instance
+                position={data.position}
+                castShadow
+                receiveShadow
+                color={data.color}
+                // events
+                onClick={(e) => {
+                    e.stopPropagation();
+                    if (onInteract) {
+                        const newPos = getNextBlockPosition(e, data.position);
 
-    return (
-        <Instance
-            position={data.position}
-            castShadow
-            receiveShadow
-            color={data.color}
-            // events
-            onClick={(e) => {
-                e.stopPropagation();
-                if (onInteract) {
-                    const newPos = getNextBlockPosition(e, data.position);
-
-                    if (newPos) {
-                        onInteract?.('create', {
-                            ...data,
-                            position: [newPos.x, newPos.y, newPos.z],
-                        });
+                        if (newPos) {
+                            onInteract?.('create', {
+                                ...data,
+                                position: [newPos.x, newPos.y, newPos.z],
+                            });
+                        }
                     }
-                }
 
-                onClick?.(data);
-            }}
-            onContextMenu={(e) => {
-                e.stopPropagation();
-                if (onInteract) {
-                    onInteract?.('delete', data);
-                }
-            }}
-            onPointerEnter={(e) => {
-                e.stopPropagation();
-                setHovered(true);
-                onHoverStart?.(data);
-            }}
-            onPointerLeave={(e) => {
-                e.stopPropagation();
-                setHovered(false);
-                onHoverEnd?.(data);
-            }}
-        />
-    );
-};
+                    onClick?.(data);
+                }}
+                onContextMenu={(e) => {
+                    e.stopPropagation();
+                    if (onInteract) {
+                        onInteract?.('delete', data);
+                    }
+                }}
+                onPointerEnter={(e) => {
+                    e.stopPropagation();
+                    onHoverStart?.(data);
+                }}
+                onPointerLeave={(e) => {
+                    e.stopPropagation();
+                    onHoverEnd?.(data);
+                }}
+            />
+        );
+    }
+);
