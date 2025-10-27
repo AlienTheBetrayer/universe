@@ -25,11 +25,20 @@ export const WorldBlocks = () => {
                         onHoverStart={() => setHoveredIdx(idx)}
                         onHoverEnd={() => setHoveredIdx(false)}
                         onInteract={(type, block) => {
-                            if (type === 'create')
-                                dispatch({
-                                    type: 'CREATE_BLOCK',
-                                    data: { ...block, color: '#00f' },
-                                });
+                            switch (type) {
+                                case 'create':
+                                    dispatch({
+                                        type: 'CREATE_BLOCK',
+                                        data: { ...block, color: '#00f' },
+                                    });
+                                    break;
+                                case 'delete':
+                                    dispatch({
+                                        type: 'DELETE_BLOCK',
+                                        position: value.position,
+                                    });
+                                    break;
+                            }
                         }}
                     />
                 </React.Fragment>

@@ -5,6 +5,7 @@ import type { WorldData } from '../types/world/data';
 export type WorldReducerAction =
     // blocks
     | { type: 'CREATE_BLOCK'; data: BlockData }
+    | { type: 'DELETE_BLOCK'; position: [number, number, number] }
     | { type: 'WIPE_BLOCKS' }
 
     // field
@@ -25,6 +26,12 @@ export const WorldReducer = (
         case 'CREATE_BLOCK': {
             const newBlocks = state.blocks;
             newBlocks.set(action.data.position.join(','), action.data);
+
+            return { ...state, blocks: newBlocks };
+        }
+        case 'DELETE_BLOCK': {
+            const newBlocks = state.blocks;
+            newBlocks.delete(action.position.join(','));
 
             return { ...state, blocks: newBlocks };
         }
