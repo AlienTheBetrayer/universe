@@ -22,7 +22,7 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     });
 
     return Array.from(state.blocks.entries()).map(([material, blockData]) => (
-        <Instances frustumCulled={false} limit={100000} key={material.type}>
+        <Instances frustumCulled={false} limit={100000} key={material.visibleName}>
             {material.jsx}
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
@@ -55,7 +55,7 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                                     break;
                                 case 'delete':
                                     if (
-                                        !['Field'].includes(block.material.type)
+                                        block.material.visibleName !== 'Field'
                                     ) {
                                         dispatch({
                                             type: 'DELETE_BLOCK',

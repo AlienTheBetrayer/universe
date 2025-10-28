@@ -9,7 +9,7 @@ export interface BlockDataMaterial {
 export const BlockDataMaterials = {
     Field: {
         isBuildable: false,
-        visibleName: '',
+        visibleName: 'Field',
         jsx: (
             <meshPhysicalMaterial
                 metalness={0.75}
