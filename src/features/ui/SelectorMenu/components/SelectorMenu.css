@@ -1,0 +1,35 @@
+.selector-menu {
+    display: flex;
+    border: 1px solid var(--background-8);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.selector-menu-item {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.selector-menu-item > button {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 0px;
+    background-color: var(--background-2);
+}
+
+.selector-menu-item-underline {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        var(--background-10),
+        var(--foreground)
+    );
+}
