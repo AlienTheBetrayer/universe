@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../../../../../ui/Button/components/Button';
 import type { BlockDataMaterial } from '../../../../context/types/world/block';
 import { ForgeBlockCanvas } from '../../../blocks/components/canvas/ForgeBlockCanvas';
@@ -29,6 +29,17 @@ export const ForgeUIOverlayBlock = ({
     onSelect,
 }: Props) => {
     const [hovered, setHovered] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!isSelected) {
+            setHovered(false);
+            return;
+        }
+
+        setHovered(true);
+        const timeout = setTimeout(() => setHovered(false), 1500);
+        return () => clearTimeout(timeout);
+    }, [isSelected]);
 
     return (
         <Button
@@ -66,7 +77,10 @@ export const ForgeUIOverlayBlock = ({
             </AnimatePresence>
 
             <ForgeBlockCanvas block={block} idx={idx} hoveredIdx={hoveredIdx} />
-            <HotkeyTooltip className='forge-ui-overlay-number-tooltip' hotkeys={[`${idx}`]}/>
+            <HotkeyTooltip
+                className='forge-ui-overlay-number-tooltip'
+                hotkeys={[`${idx}`]}
+            />
         </Button>
     );
 };
