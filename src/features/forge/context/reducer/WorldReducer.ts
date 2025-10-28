@@ -40,7 +40,7 @@ export const WorldReducer = (
 
         // field
         case 'GENERATE_FIELD': {
-            const field = new Map<string, BlockData>();
+            const field = state.blocks;
 
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
@@ -54,13 +54,14 @@ export const WorldReducer = (
                                 state.blockSize,
                                 z * state.blockSize,
                             ],
+                            material: 'field',
                             color: cssVariable('--forge-background'),
                         }
                     );
                 }
             }
 
-            return { ...state, fieldBlocks: field };
+            return { ...state, blocks: field };
         }
 
         // misc

@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import { useRef, useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
-import { WorldField } from './WorldField';
 
 export const WorldCanvas = () => {
     const [state] = useWorldContext();
@@ -41,8 +40,7 @@ export const WorldCanvas = () => {
             <hemisphereLight color='#fff' intensity={0.6} />
 
             <Center key={`${state.blockSize}`}>
-                <WorldField  buildingEnabled={selected}/>
-                <WorldBlocks buildingEnabled={selected}/>
+                <WorldBlocks buildingEnabled={selected} />
             </Center>
 
             <OrbitControls

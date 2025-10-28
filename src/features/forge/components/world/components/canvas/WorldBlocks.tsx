@@ -12,13 +12,13 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const selection = useBlockSelection();
 
     return (
-        <Instances limit={1000} frustumCulled={false}>
+        <Instances frustumCulled={false} limit={100000}>
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
             <meshPhysicalMaterial metalness={0.5} roughness={0.5} />
 
-            <Edges color='#94a1cc' ref={selection.ref} scale={1.1} />
+            <Edges color='#ccd5f3' ref={selection.ref} scale={1.1} />
 
             {[...state.blocks.entries()].map(([_key, value], idx) => (
                 <Block
@@ -34,7 +34,11 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                             case 'create':
                                 dispatch({
                                     type: 'CREATE_BLOCK',
-                                    data: { ...block, color: '#00f' },
+                                    data: {
+                                        ...block,
+                                        color: '#00f',
+                                        material: state.currentBlockMaterial,
+                                    },
                                 });
                                 break;
                             case 'delete':
@@ -44,7 +48,6 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                                 });
                                 break;
                         }
-                        
                         selection.start(block);
                     }}
                 />
