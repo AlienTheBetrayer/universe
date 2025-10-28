@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from '../../../ui/Button/components/Button';
 import { Input } from '../../../ui/Input/components/Input';
 import { SelectorMenu } from '../../../ui/SelectorMenu/components/SelectorMenu';
 import { ForgePageTemplate } from './ForgePageTemplate';
@@ -12,6 +13,7 @@ interface Props {
 
 export const ForgeSaveLoad = ({ onInteract }: Props) => {
     const [page, setPage] = useState<SaveLoadPage>('load');
+    const [saveInputValue, setSaveInputValue] = useState<string>('');
 
     return (
         <ForgePageTemplate
@@ -24,15 +26,43 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                     {
                         name: 'Save',
                         jsx: (
-                            <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '1rem',
+                                }}
+                            >
                                 <h4>
                                     World's <mark>name</mark>
+                                    <small> (5 characters minimum) </small>
                                 </h4>
-                                <Input placeholder='Enter...' />
-                            </>
+                                <Input
+                                    placeholder='Enter...'
+                                    value={saveInputValue}
+                                    onChange={(val) => setSaveInputValue(val)}
+                                    onClear={() => setSaveInputValue('')}
+                                />
+                                <Button enabled={saveInputValue.length > 5}>
+                                    Save <small>(to your computer)</small>
+                                </Button>
+                            </div>
                         ),
                     },
-                    { name: 'Load', jsx: <></> },
+                    {
+                        name: 'Load',
+                        jsx: (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '1rem',
+                                }}
+                            >
+                                <Button>Load <small>(open a file)</small></Button>
+                            </div>
+                        ),
+                    },
                 ]}
                 onSelect={(item) => {
                     setPage(item.name === 'Save' ? 'save' : 'load');
