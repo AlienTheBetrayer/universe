@@ -17,21 +17,26 @@ export const ForgeBlocks = ({ style }: Props) => {
                 Building <mark>blocks</mark>
             </h3>
             <div className='forge-blocks' style={{ ...style }}>
-                {Object.values(BlockDataMaterials).map((block, idx) => (
-                    <ForgeBlock
-                        key={idx}
-                        block={block}
-                        isSelected={state.currentBlockMaterial === block}
-                        onSelect={() => {
-                            if (state.currentBlockMaterial !== block) {
-                                dispatch({
-                                    type: 'SELECT_BUILDING_BLOCK',
-                                    block: block,
-                                });
-                            }
-                        }}
-                    />
-                ))}
+                {Object.values(BlockDataMaterials).map(
+                    (block, idx) =>
+                        block.isBuildable && (
+                            <ForgeBlock
+                                key={idx}
+                                block={block}
+                                isSelected={
+                                    state.currentBlockMaterial === block
+                                }
+                                onSelect={() => {
+                                    if (state.currentBlockMaterial !== block) {
+                                        dispatch({
+                                            type: 'SELECT_BUILDING_BLOCK',
+                                            block: block,
+                                        });
+                                    }
+                                }}
+                            />
+                        )
+                )}
             </div>
         </div>
     );

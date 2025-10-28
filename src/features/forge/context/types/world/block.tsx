@@ -1,27 +1,18 @@
 import type { JSX } from 'react';
 
-export type BlockDataMaterialType =
-    | 'Field'
-    | 'Metal'
-    | 'Rainbow'
-    | 'Regular'
-    | 'Bedrock';
-
 export interface BlockDataMaterial {
-    type: BlockDataMaterialType;
+    visibleName: string;
     isBuildable: boolean;
     jsx: JSX.Element;
 }
 
-export const BlockDataMaterials: {
-    [K in BlockDataMaterialType]: BlockDataMaterial;
-} = {
+export const BlockDataMaterials = {
     Field: {
-        type: 'Field',
         isBuildable: false,
+        visibleName: '',
         jsx: (
             <meshPhysicalMaterial
-                metalness={0.5}
+                metalness={0.75}
                 roughness={0}
                 clearcoat={1}
                 opacity={0.75}
@@ -30,25 +21,34 @@ export const BlockDataMaterials: {
             />
         ),
     },
-    Bedrock: {
-        type: 'Bedrock',
+    Technical: {
+        visibleName: '🌀 Technical',
         isBuildable: true,
-        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
+        jsx: <meshNormalMaterial/>,
     },
     Metal: {
-        type: 'Metal',
+        visibleName: '⚙️ Metal',
         isBuildable: true,
-        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
+        jsx: <meshPhysicalMaterial metalness={1} roughness={0.5} />,
     },
-    Rainbow: {
-        type: 'Rainbow',
+    Glass: {
         isBuildable: true,
-        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
+        visibleName: '🪩 Glass',
+        jsx: (
+            <meshPhysicalMaterial
+                metalness={0.5}
+                roughness={0}
+                clearcoat={1}
+                opacity={0.5}
+                transparent
+                depthWrite={false}
+            />
+        ),
     },
-    Regular: {
-        type: 'Regular',
+    Crystal: {
+        visibleName: '💎 Crystal',
         isBuildable: true,
-        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
+        jsx: <meshPhongMaterial shininess={120} specular='#fff' />,
     },
 };
 

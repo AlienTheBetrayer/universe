@@ -16,7 +16,7 @@ export const ForgeBlock = ({ block, isSelected, onSelect }: Props) => {
             }`}
             onClick={() => onSelect?.(block)}
         >
-            {block.type}
+            {block.visibleName}
         </Button>
     );
 };
