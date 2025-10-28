@@ -1,4 +1,5 @@
 import React from 'react';
+import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 import { Button } from '../../../../ui/Button/components/Button';
 import type { BlockDataMaterial } from '../../../context/types/world/block';
 import './ForgeBlock.css';
@@ -37,6 +38,10 @@ export const ForgeBlock = ({
             <div className='forge-block-title'>{block.visibleName}</div>
 
             <ForgeBlockCanvas block={block} idx={idx} hoveredIdx={hoveredIdx} />
+            <HotkeyTooltip
+                className='forge-block-number-tooltip'
+                hotkeys={[`${idx}`]}
+            />
         </Button>
     );
 };
