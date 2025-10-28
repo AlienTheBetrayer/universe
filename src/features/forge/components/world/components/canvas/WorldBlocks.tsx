@@ -11,8 +11,8 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
     const selection = useBlockSelection();
 
-    return (
-        <Instances frustumCulled={false} limit={100000}>
+    return Array.from(state.blocks.entries()).map(([material, blockData]) => (
+        <Instances frustumCulled={false} limit={100000} key={material}>
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
@@ -20,38 +20,43 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
 
             <Edges color='#ccd5f3' ref={selection.ref} scale={1.1} />
 
-            {[...state.blocks.entries()].map(([_key, value], idx) => (
-                <Block
-                    key={idx}
-                    data={value}
-                    blockSize={state.blockSize}
-                    onHoverStart={(e) => selection.start(e)}
-                    onHoverEnd={() => selection.end()}
-                    onInteract={(type, block) => {
-                        if (!buildingEnabled) return;
+            {Array.from(blockData.entries()).map(
+                ([_positionStr, block], idx) => (
+                    <Block
+                        key={idx}
+                        data={block}
+                        blockSize={state.blockSize}
+                        onHoverStart={(e) => selection.start(e)}
+                        onHoverEnd={() => selection.end()}
+                        onInteract={(interactionType, block) => {
+                            if (!buildingEnabled) return;
 
-                        switch (type) {
-                            case 'create':
-                                dispatch({
-                                    type: 'CREATE_BLOCK',
-                                    data: {
-                                        ...block,
-                                        color: '#00f',
-                                        material: state.currentBlockMaterial,
-                                    },
-                                });
-                                break;
-                            case 'delete':
-                                dispatch({
-                                    type: 'DELETE_BLOCK',
-                                    position: value.position,
-                                });
-                                break;
-                        }
-                        selection.start(block);
-                    }}
-                />
-            ))}
+                            switch (interactionType) {
+                                case 'create':
+                                    dispatch({
+                                        type: 'CREATE_BLOCK',
+                                        data: {
+                                            ...block,
+                                            color: '#00f',
+                                            material:
+                                                state.currentBlockMaterial,
+                                        },
+                                    });
+                                    break;
+                                case 'delete':
+                                    if (!['Field'].includes(block.material)) {
+                                        dispatch({
+                                            type: 'DELETE_BLOCK',
+                                            data: block,
+                                        });
+                                    }
+                                    break;
+                            }
+                            selection.start(block);
+                        }}
+                    />
+                )
+            )}
         </Instances>
-    );
+    ));
 };

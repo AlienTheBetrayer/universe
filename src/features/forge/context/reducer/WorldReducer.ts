@@ -1,11 +1,15 @@
 import { cssVariable } from '../../../../utils/cssVariable';
-import type { BlockData, BlockDataMaterial } from '../types/world/block';
+import {
+    BlockDataMaterials,
+    type BlockData,
+    type BlockDataMaterial,
+} from '../types/world/block';
 import type { WorldData } from '../types/world/data';
 
 export type WorldReducerAction =
     // blocks
     | { type: 'CREATE_BLOCK'; data: BlockData }
-    | { type: 'DELETE_BLOCK'; position: [number, number, number] }
+    | { type: 'DELETE_BLOCK'; data: BlockData }
     | { type: 'WIPE_BLOCKS' }
 
     // building blocks
@@ -18,7 +22,8 @@ export type WorldReducerAction =
     | { type: 'PROPERTY_SET_BLOCK_SIZE'; size: number }
 
     // misc
-    | { type: 'TOGGLE_AUTO_ROTATE' };
+    | { type: 'TOGGLE_AUTO_ROTATE' }
+    | { type: 'GENERATE_MAPS' };
 
 export const WorldReducer = (
     state: WorldData,
@@ -28,18 +33,28 @@ export const WorldReducer = (
         // blocks
         case 'CREATE_BLOCK': {
             const newBlocks = state.blocks;
-            newBlocks.set(action.data.position.join(','), action.data);
+            newBlocks
+                .get(action.data.material)
+                ?.set(action.data.position.join(','), action.data);
 
             return { ...state, blocks: newBlocks };
         }
         case 'DELETE_BLOCK': {
             const newBlocks = state.blocks;
-            newBlocks.delete(action.position.join(','));
+            newBlocks
+                .get(action.data.material)
+                ?.delete(action.data.position.join(','));
 
             return { ...state, blocks: newBlocks };
         }
-        case 'WIPE_BLOCKS':
-            return { ...state, blocks: new Map() };
+        case 'WIPE_BLOCKS': {
+            const newBlocks = state.blocks;
+
+            for (const material of newBlocks.keys()) {
+                if (material !== 'Field') newBlocks.get(material)?.clear();
+            }
+            return { ...state, blocks: newBlocks };
+        }
 
         // building blocks
         case 'SELECT_BUILDING_BLOCK':
@@ -51,20 +66,22 @@ export const WorldReducer = (
 
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
-                    field.set(
-                        `${x * state.blockSize},${state.blockSize},${
-                            z * state.blockSize
-                        }`,
-                        {
-                            position: [
-                                x * state.blockSize,
-                                state.blockSize,
-                                z * state.blockSize,
-                            ],
-                            material: 'Field',
-                            color: cssVariable('--forge-background'),
-                        }
-                    );
+                    field
+                        .get('Field')
+                        ?.set(
+                            `${x * state.blockSize},${state.blockSize},${
+                                z * state.blockSize
+                            }`,
+                            {
+                                position: [
+                                    x * state.blockSize,
+                                    state.blockSize,
+                                    z * state.blockSize,
+                                ],
+                                material: 'Field',
+                                color: cssVariable('--forge-background'),
+                            }
+                        );
                 }
             }
 
@@ -77,6 +94,18 @@ export const WorldReducer = (
                 ...state,
                 autoRotationEnabled: !state.autoRotationEnabled,
             };
+        case 'GENERATE_MAPS': {
+            const maps = state.blocks;
+
+            for (const type of BlockDataMaterials) {
+                if (!maps.get(type)) {
+                    maps.set(type, new Map());
+                    console.log('set: ', type);
+                }
+            }
+
+            return { ...state, blocks: maps };
+        }
 
         // properties
         case 'PROPERTY_SET_BLOCK_SIZE':

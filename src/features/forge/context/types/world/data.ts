@@ -5,7 +5,7 @@ export interface WorldData {
     autoRotationEnabled: boolean;
 
     // blocks
-    blocks: Map<string, BlockData>;
+    blocks: Map<BlockDataMaterial, Map<string, BlockData>>;
     currentBlockMaterial: BlockDataMaterial;
 
     // properties

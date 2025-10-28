@@ -19,7 +19,7 @@ export const WorldCanvas = () => {
                 setSelected(true);
                 selectedTimeoutRef.current = setTimeout(
                     () => setSelected(false),
-                    500
+                    300
                 );
             }}
             onPointerUp={() => {

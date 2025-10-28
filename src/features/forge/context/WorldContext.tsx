@@ -21,6 +21,7 @@ export const WorldProvider = ({ children }: Props) => {
     );
 
     useEffect(() => {
+        dispatch({ type: 'GENERATE_MAPS' });
         dispatch({ type: 'GENERATE_FIELD' });
     }, []);
 
