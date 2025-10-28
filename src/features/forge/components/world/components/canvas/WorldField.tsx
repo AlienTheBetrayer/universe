@@ -1,6 +1,6 @@
 import { Edges, Instances } from '@react-three/drei';
-import React, { useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
+import { useBlockSelection } from '../../hooks/useBlockSelection';
 import { Block } from './Block';
 
 interface Props {
@@ -9,8 +9,7 @@ interface Props {
 
 export const WorldField = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
-
-    const [hoveredIdx, setHoveredIdx] = useState<number | false>(false);
+    const selection = useBlockSelection();
 
     return (
         <Instances frustumCulled={false}>
@@ -22,30 +21,25 @@ export const WorldField = ({ buildingEnabled }: Props) => {
                 opacity={0.1}
                 depthWrite={false}
             />
-            {[...state.fieldBlocks.entries()].map(([_key, value], idx) => (
-                <React.Fragment key={idx}>
-                    {hoveredIdx === idx && (
-                        <Edges
-                            color='#94a1cc'
-                            position={value.position}
-                            scale={1.1}
-                        />
-                    )}
 
-                    <Block
-                        onHoverStart={() => setHoveredIdx(idx)}
-                        onHoverEnd={() => setHoveredIdx(false)}
-                        blockSize={state.blockSize}
-                        data={value}
-                        onInteract={(type, block) => {
-                            if(!buildingEnabled)
-                                return;
-                            
-                            if (type === 'create')
-                                dispatch({ type: 'CREATE_BLOCK', data: block });
-                        }}
-                    />
-                </React.Fragment>
+            <Edges color='#94a1cc' scale={1.1} ref={selection.ref} />
+
+            {[...state.fieldBlocks.entries()].map(([_key, value], idx) => (
+                <Block
+                    key={idx}
+                    onHoverStart={(e) => selection.start(e)}
+                    onHoverEnd={() => selection.end()}
+                    blockSize={state.blockSize}
+                    data={value}
+                    onInteract={(type, block) => {
+                        if (!buildingEnabled) return;
+
+                        if (type === 'create')
+                            dispatch({ type: 'CREATE_BLOCK', data: block });
+
+                        selection.start(block);
+                    }}
+                />
             ))}
         </Instances>
     );

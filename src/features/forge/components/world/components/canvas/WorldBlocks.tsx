@@ -1,6 +1,6 @@
 import { Edges, Instances } from '@react-three/drei';
-import React, { useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
+import { useBlockSelection } from '../../hooks/useBlockSelection';
 import { Block } from './Block';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
-    const [hoveredIdx, setHoveredIdx] = useState<number | false>(false);
+    const selection = useBlockSelection();
 
     return (
         <Instances limit={1000} frustumCulled={false}>
@@ -17,41 +17,37 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
             <meshPhysicalMaterial metalness={0.5} roughness={0.5} />
+
+            <Edges color='#94a1cc' ref={selection.ref} scale={1.1} />
+
             {[...state.blocks.entries()].map(([_key, value], idx) => (
-                <React.Fragment key={idx}>
-                    {hoveredIdx === idx && (
-                        <Edges
-                            color='#94a1cc'
-                            position={value.position}
-                            scale={1.1}
-                        />
-                    )}
+                <Block
+                    key={idx}
+                    data={value}
+                    blockSize={state.blockSize}
+                    onHoverStart={(e) => selection.start(e)}
+                    onHoverEnd={() => selection.end()}
+                    onInteract={(type, block) => {
+                        if (!buildingEnabled) return;
 
-                    <Block
-                        data={value}
-                        blockSize={state.blockSize}
-                        onHoverStart={() => setHoveredIdx(idx)}
-                        onHoverEnd={() => setHoveredIdx(false)}
-                        onInteract={(type, block) => {
-                            if (!buildingEnabled) return;
-
-                            switch (type) {
-                                case 'create':
-                                    dispatch({
-                                        type: 'CREATE_BLOCK',
-                                        data: { ...block, color: '#00f' },
-                                    });
-                                    break;
-                                case 'delete':
-                                    dispatch({
-                                        type: 'DELETE_BLOCK',
-                                        position: value.position,
-                                    });
-                                    break;
-                            }
-                        }}
-                    />
-                </React.Fragment>
+                        switch (type) {
+                            case 'create':
+                                dispatch({
+                                    type: 'CREATE_BLOCK',
+                                    data: { ...block, color: '#00f' },
+                                });
+                                break;
+                            case 'delete':
+                                dispatch({
+                                    type: 'DELETE_BLOCK',
+                                    position: value.position,
+                                });
+                                break;
+                        }
+                        
+                        selection.start(block);
+                    }}
+                />
             ))}
         </Instances>
     );
