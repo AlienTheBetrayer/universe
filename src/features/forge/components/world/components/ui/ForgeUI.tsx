@@ -10,7 +10,8 @@ import settingsImg from '../../../../assets/settings.svg';
 import { useWorldContext } from '../../../../context/WorldContext';
 
 import { AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useClickOutside } from '../../../../../../hooks/useClickOutside';
 import { useHotkeys } from '../../../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../../../hotkeytooltip/components/HotkeyTooltip';
 import { ForgeUISettings } from './ForgeUISettings';
@@ -18,8 +19,18 @@ import { ForgeUISettings } from './ForgeUISettings';
 export const ForgeUI = () => {
     const [state, dispatch] = useWorldContext();
 
+    // menu visibility
     const [settingsShown, setSettingsShown] = useState<boolean>(false);
+    const settingsOpenButtonRef = useRef<HTMLButtonElement>(null);
+    const settingsMenuRef = useClickOutside<HTMLDivElement>(
+        () => setSettingsShown(false),
+        [settingsOpenButtonRef.current]
+    );
 
+    // hotkeys
+    useHotkeys([{ hotkey: 'Escape', action: () => setSettingsShown(false) }]);
+
+    // popups
     const wipeMessageBox = usePopup(
         <MessageBox
             title='Are you sure?'
@@ -31,9 +42,8 @@ export const ForgeUI = () => {
         />
     );
 
+    // tooltips
     const tooltips = useTooltips();
-
-    useHotkeys([{ hotkey: 'Escape', action: () => setSettingsShown(false) }]);
 
     return (
         <div className='forge-ui'>
@@ -49,14 +59,22 @@ export const ForgeUI = () => {
             </Button>
 
             <div style={{ position: 'relative' }}>
-                <Button onClick={() => setSettingsShown((prev) => !prev)}>
+                <Button
+                    ref={(el) => {
+                        settingsOpenButtonRef.current = el;
+                        tooltips.set(1, "Show world's properties", el, 'up');
+                    }}
+                    onClick={() => setSettingsShown((prev) => !prev)}
+                >
                     <img src={settingsImg} alt='' className='forge-image' />
                     Settings
                     {settingsShown && <HotkeyTooltip hotkeys={['Esc']} />}
                 </Button>
+
                 <AnimatePresence>
                     {settingsShown && (
                         <ForgeUISettings
+                            ref={settingsMenuRef}
                             onCancel={() => setSettingsShown(false)}
                         />
                     )}
@@ -64,7 +82,7 @@ export const ForgeUI = () => {
             </div>
 
             <Button
-                ref={(el) => tooltips.set(1, 'Toggle auto-rotation', el, 'up')}
+                ref={(el) => tooltips.set(2, 'Toggle auto-rotation', el, 'up')}
                 style={{ marginLeft: 'auto' }}
                 onClick={() => dispatch({ type: 'TOGGLE_AUTO_ROTATE' })}
             >
