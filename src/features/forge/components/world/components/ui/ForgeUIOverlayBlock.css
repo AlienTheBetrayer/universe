@@ -5,6 +5,8 @@
     aspect-ratio: 1/1;   
     
     border-radius: 16px;
+    border: 2px dashed;
+    border-color: transparent;
     background-color: var(--background-transparent);
     transition: all 0.3s, border-color 0.7s ease-in-out, border-radius 0.7s ease-in-out;
 }
@@ -26,7 +28,7 @@
 /* states */
 .forge-ui-overlay-block-selected {
     background-color: var(--background-3-transparent) !important;
-    border: 1px solid #00f !important;
+    border-color: #00f !important;
     border-radius: 32px;
 }
 
