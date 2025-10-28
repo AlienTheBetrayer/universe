@@ -32,7 +32,8 @@ export const WorldReducer = (
     switch (action.type) {
         // blocks
         case 'CREATE_BLOCK': {
-            const newBlocks = state.blocks;
+            const newBlocks = new Map(state.blocks);
+
             newBlocks
                 .get(action.data.material)
                 ?.set(action.data.position.join(','), action.data);
@@ -40,7 +41,8 @@ export const WorldReducer = (
             return { ...state, blocks: newBlocks };
         }
         case 'DELETE_BLOCK': {
-            const newBlocks = state.blocks;
+            const newBlocks = new Map(state.blocks);
+
             newBlocks
                 .get(action.data.material)
                 ?.delete(action.data.position.join(','));
@@ -48,10 +50,11 @@ export const WorldReducer = (
             return { ...state, blocks: newBlocks };
         }
         case 'WIPE_BLOCKS': {
-            const newBlocks = state.blocks;
+            const newBlocks = new Map(state.blocks);
 
             for (const material of newBlocks.keys()) {
-                if (material !== 'Field') newBlocks.get(material)?.clear();
+                if (material !== BlockDataMaterials.Field)
+                    newBlocks.get(material)?.clear();
             }
             return { ...state, blocks: newBlocks };
         }
@@ -62,12 +65,12 @@ export const WorldReducer = (
 
         // field
         case 'GENERATE_FIELD': {
-            const field = state.blocks;
+            const field = new Map(state.blocks);
 
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
                     field
-                        .get('Field')
+                        .get(BlockDataMaterials.Field)
                         ?.set(
                             `${x * state.blockSize},${state.blockSize},${
                                 z * state.blockSize
@@ -78,7 +81,7 @@ export const WorldReducer = (
                                     state.blockSize,
                                     z * state.blockSize,
                                 ],
-                                material: 'Field',
+                                material: BlockDataMaterials.Field,
                                 color: cssVariable('--forge-background'),
                             }
                         );
@@ -95,12 +98,11 @@ export const WorldReducer = (
                 autoRotationEnabled: !state.autoRotationEnabled,
             };
         case 'GENERATE_MAPS': {
-            const maps = state.blocks;
+            const maps = new Map(state.blocks);
 
-            for (const type of BlockDataMaterials) {
-                if (!maps.get(type)) {
-                    maps.set(type, new Map());
-                    console.log('set: ', type);
+            for (const material of Object.values(BlockDataMaterials)) {
+                if (!maps.has(material)) {
+                    maps.set(material, new Map());
                 }
             }
 

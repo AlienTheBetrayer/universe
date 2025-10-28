@@ -12,7 +12,7 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const selection = useBlockSelection();
 
     return Array.from(state.blocks.entries()).map(([material, blockData]) => (
-        <Instances frustumCulled={false} limit={100000} key={material}>
+        <Instances frustumCulled={false} limit={100000} key={material.type}>
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
@@ -44,7 +44,7 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                                     });
                                     break;
                                 case 'delete':
-                                    if (!['Field'].includes(block.material)) {
+                                    if (!['Field'].includes(block.material.type)) {
                                         dispatch({
                                             type: 'DELETE_BLOCK',
                                             data: block,

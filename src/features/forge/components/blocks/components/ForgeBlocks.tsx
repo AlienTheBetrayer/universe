@@ -17,7 +17,7 @@ export const ForgeBlocks = ({ style }: Props) => {
                 Building <mark>blocks</mark>
             </h3>
             <div className='forge-blocks' style={{ ...style }}>
-                {BlockDataMaterials.map((block, idx) => (
+                {Object.values(BlockDataMaterials).map((block, idx) => (
                     <ForgeBlock
                         key={idx}
                         block={block}

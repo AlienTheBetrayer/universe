@@ -1,3 +1,4 @@
+import { BlockDataMaterials } from '../types/world/block';
 import type { WorldData } from '../types/world/data';
 
 export const WorldReducerInitialState: WorldData = {
@@ -6,7 +7,7 @@ export const WorldReducerInitialState: WorldData = {
 
     // blocks
     blocks: new Map(),
-    currentBlockMaterial: 'Regular',
+    currentBlockMaterial: BlockDataMaterials.Regular,
 
     // properties
     blockSize: 1,
