@@ -5,7 +5,7 @@ import { useForgeCard } from '../../../hooks/useForgeCard';
 import './ForgeCard.css';
 
 import cursorImg from '../../../../../assets/cursor.svg';
-import type { ForgeCardData } from '../../../context/types/data/cards';
+import type { ForgeCardData } from '../../../context/types/forge/cards';
 
 interface Props {
     card: ForgeCardData;

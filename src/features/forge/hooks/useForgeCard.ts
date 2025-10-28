@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { useAnimationControls, useDragControls } from 'motion/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useForgeContext } from '../context/ForgeContext';
-import type { ForgeCardData } from '../context/types/data/cards';
+import type { ForgeCardData } from '../context/types/forge/cards';
 
 export const useForgeCard = (card: ForgeCardData) => {
     // context state

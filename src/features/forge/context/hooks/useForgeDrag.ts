@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useEffect } from 'react';
 import type { ForgeReducerAction } from '../reducer/ForgeReducer';
-import type { ForgeData } from '../types/data/data';
+import type { ForgeData } from '../types/forge/data';
 
 export const useForgeDrag = (
     state: ForgeData,

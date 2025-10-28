@@ -6,7 +6,7 @@ import './ForgeEffectMenu.css';
 import { motion } from 'motion/react';
 import { useClickOutside } from '../../../../../hooks/useClickOutside';
 import type { ForgeReducerAction } from '../../../context/reducer/ForgeReducer';
-import type { ForgeData } from '../../../context/types/data/data';
+import type { ForgeData } from '../../../context/types/forge/data';
 
 interface Props {
     state: ForgeData;

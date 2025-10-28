@@ -6,8 +6,8 @@ import './ForgeEffect.css';
 import { motion } from 'motion/react';
 import { useRef } from 'react';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
-import type { ForgeData } from '../../../context/types/data/data';
-import type { ForgeEffectData } from '../../../context/types/data/effects';
+import type { ForgeData } from '../../../context/types/forge/data';
+import type { ForgeEffectData } from '../../../context/types/forge/effects';
 import { ForgeEffectMenu } from './ForgeEffectMenu';
 
 interface Props {

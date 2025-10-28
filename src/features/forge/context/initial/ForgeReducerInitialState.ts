@@ -7,7 +7,7 @@ import reduxImg from '../../assets/cards/redux.svg';
 import tailwindImg from '../../assets/cards/tailwind.svg';
 import typescriptImg from '../../assets/cards/typescript.svg';
 import zustandImg from '../../assets/cards/zustand.svg';
-import type { ForgeData } from '../types/data/data';
+import type { ForgeData } from '../types/forge/data';
 
 export const ForgeReducerInitialState: ForgeData = {
     // cards

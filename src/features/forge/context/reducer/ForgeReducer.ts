@@ -1,6 +1,6 @@
-import type { ForgeCardData } from '../types/data/cards';
-import type { ForgeData } from '../types/data/data';
-import type { ForgeEffectData } from '../types/data/effects';
+import type { ForgeCardData } from '../types/forge/cards';
+import type { ForgeData } from '../types/forge/data';
+import type { ForgeEffectData } from '../types/forge/effects';
 
 export type ForgeReducerAction =
     // cards

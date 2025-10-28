@@ -2,7 +2,7 @@ import { createContext, useContext, useReducer, useRef } from 'react';
 import { useForgeDrag } from './hooks/useForgeDrag';
 import { ForgeReducerInitialState } from './initial/ForgeReducerInitialState';
 import { ForgeReducer, type ForgeReducerAction } from './reducer/ForgeReducer';
-import type { ForgeData } from './types/data/data';
+import type { ForgeData } from './types/forge/data';
 
 type ForgeContextType = [ForgeData, React.Dispatch<ForgeReducerAction>];
 

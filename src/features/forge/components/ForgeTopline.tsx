@@ -82,14 +82,23 @@ export const ForgeTopline = () => {
                     {!isMobile ? 'remaining effects' : ''}
                 </Button>
 
+                {/* right side */}
                 <Button
                     ref={(el) =>
                         tooltips.set(2, 'Show the tutorial', el, 'down')
                     }
                     style={{ marginLeft: 'auto' }}
                 >
-                    {!isMobile ? 'Show' : ''}
-                    <mark>Tutorial</mark>
+                    {!isMobile ? 'Show ' : ' '}
+                    Tutorial
+                </Button>
+
+                <Button
+                    ref={(el) =>
+                        tooltips.set(3, 'Save / Load a world', el, 'down')
+                    }
+                >
+                    <mark>Save / Load</mark>
                 </Button>
             </div>
         </div>

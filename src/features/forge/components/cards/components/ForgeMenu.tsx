@@ -9,7 +9,7 @@ import { useHotkeys } from '../../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 import { useTooltips } from '../../../../tooltip/hooks/useTooltips';
 import { useForgeContext } from '../../../context/ForgeContext';
-import type { ForgeData } from '../../../context/types/data/data';
+import type { ForgeData } from '../../../context/types/forge/data';
 
 interface Props {
     onSelect?: (idx: number) => void;
@@ -121,7 +121,7 @@ const ForgeMenuOpenButton = ({ menuShown, setMenuShown }: ButtonProps) => {
                 src={arrowDownImg}
                 alt=''
                 className='forge-image'
-                style={{ width: '1.5rem', height: '1.5rem'}}
+                style={{ width: '1.5rem', height: '1.5rem' }}
                 animate={{
                     transform: menuShown ? 'rotate(180deg)' : 'rotate(0deg)',
                 }}
