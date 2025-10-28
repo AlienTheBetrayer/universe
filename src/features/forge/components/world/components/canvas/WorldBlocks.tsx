@@ -1,8 +1,8 @@
 import { Edges, Instances } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { useBlockSelection } from '../../hooks/useBlockSelection';
 import { Block } from './Block';
-import { useFrame } from '@react-three/fiber';
 
 interface Props {
     buildingEnabled: boolean;
@@ -12,8 +12,8 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
     const selection = useBlockSelection();
 
-    useFrame(state => {
-        if(selection.ref.current) {
+    useFrame((state) => {
+        if (selection.ref.current) {
             const t = state.clock.getElapsedTime();
 
             const scale = 1 + Math.abs(Math.sin(t * 2)) / 3;
@@ -23,10 +23,10 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
 
     return Array.from(state.blocks.entries()).map(([material, blockData]) => (
         <Instances frustumCulled={false} limit={100000} key={material.type}>
+            {material.jsx}
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
-            <meshPhysicalMaterial metalness={0.5} roughness={0.5} />
 
             <Edges color='#ccd5f3' ref={selection.ref} scale={1.1} />
 
@@ -54,7 +54,9 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                                     });
                                     break;
                                 case 'delete':
-                                    if (!['Field'].includes(block.material.type)) {
+                                    if (
+                                        !['Field'].includes(block.material.type)
+                                    ) {
                                         dispatch({
                                             type: 'DELETE_BLOCK',
                                             data: block,

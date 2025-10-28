@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 export type BlockDataMaterialType =
     | 'Field'
     | 'Metal'
@@ -8,6 +10,7 @@ export type BlockDataMaterialType =
 export interface BlockDataMaterial {
     type: BlockDataMaterialType;
     isBuildable: boolean;
+    jsx: JSX.Element;
 }
 
 export const BlockDataMaterials: {
@@ -16,22 +19,36 @@ export const BlockDataMaterials: {
     Field: {
         type: 'Field',
         isBuildable: false,
+        jsx: (
+            <meshPhysicalMaterial
+                metalness={0.5}
+                roughness={0}
+                clearcoat={1}
+                opacity={0.75}
+                transparent
+                depthWrite={false}
+            />
+        ),
     },
     Bedrock: {
         type: 'Bedrock',
         isBuildable: true,
+        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
     },
     Metal: {
         type: 'Metal',
         isBuildable: true,
+        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
     },
     Rainbow: {
         type: 'Rainbow',
         isBuildable: true,
+        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
     },
     Regular: {
         type: 'Regular',
         isBuildable: true,
+        jsx: <meshPhysicalMaterial metalness={0.5} roughness={0.5} />,
     },
 };
 
