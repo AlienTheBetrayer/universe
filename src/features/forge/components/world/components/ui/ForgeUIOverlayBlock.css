@@ -2,13 +2,14 @@
     position: relative;
 
     width: 5rem;
-    aspect-ratio: 1/1;   
-    
+    aspect-ratio: 1/1;
+
     border-radius: 16px;
     border: 2px dashed;
     border-color: transparent;
     background-color: var(--background-transparent);
-    transition: all 0.3s, border-color 0.7s ease-in-out, border-radius 0.7s ease-in-out;
+    transition: all 0.3s, border-color 0.7s ease-in-out,
+        border-radius 0.7s ease-in-out;
 }
 
 @media (max-width: 640px) {
@@ -33,6 +34,9 @@
 }
 
 .forge-ui-overlay-block-title {
+    padding: 0.5rem;
+    border-radius: 12px;
+    background-color: var(--background-2);
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

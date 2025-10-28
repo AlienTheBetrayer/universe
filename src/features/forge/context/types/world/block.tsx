@@ -10,26 +10,17 @@ export const BlockDataMaterials = {
     Field: {
         isBuildable: false,
         visibleName: 'Field',
-        jsx: (
-            <meshPhysicalMaterial
-                metalness={0.75}
-                roughness={0}
-                clearcoat={1}
-                opacity={0.75}
-                transparent
-                depthWrite={false}
-            />
-        ),
+        jsx: <meshPhongMaterial shininess={1000} />,
     },
     Technical: {
         visibleName: '🌀 Technical',
         isBuildable: true,
-        jsx: <meshNormalMaterial/>,
+        jsx: <meshNormalMaterial />,
     },
     Metal: {
         visibleName: '⚙️ Metal',
         isBuildable: true,
-        jsx: <meshPhysicalMaterial metalness={1} roughness={0.5} />,
+        jsx: <meshPhysicalMaterial metalness={0.9} roughness={0.5} />,
     },
     Glass: {
         isBuildable: true,
@@ -45,10 +36,32 @@ export const BlockDataMaterials = {
             />
         ),
     },
-    Crystal: {
-        visibleName: '💎 Crystal',
+    Glitchy: {
+        visibleName: '🔮 Glitchy',
         isBuildable: true,
-        jsx: <meshPhongMaterial shininess={120} specular='#fff' />,
+        jsx: (
+            <meshPhongMaterial
+                depthTest={false}
+                specular='#fff'
+                reflectivity={1}
+            />
+        ),
+    },
+    Iridiscent: {
+        visibleName: '🔮 Glitchy',
+        isBuildable: true,
+        jsx: (
+            <meshPhysicalMaterial
+                metalness={1}
+                iridescence={1000}
+                clearcoat={1}
+            />
+        ),
+    },
+    Deep: {
+        visibleName: '🕳️ Deep',
+        isBuildable: true,
+        jsx: <meshDepthMaterial />,
     },
 };
 

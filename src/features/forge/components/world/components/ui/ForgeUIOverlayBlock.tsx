@@ -49,11 +49,15 @@ export const ForgeUIOverlayBlock = ({
                 {hovered && (
                     <motion.div
                         className='forge-ui-overlay-block-title'
-                        style={{ x: '-50%'}}
-                        initial={{ y: '100%', opacity :0 }}
-                        animate={{ y: '-200%', opacity: 1 }}
+                        style={{ x: '-50%' }}
+                        initial={{ y: '100%', opacity: 0 }}
+                        animate={{ y: '-150%', opacity: 1 }}
                         exit={{ y: '100%', opacity: 0 }}
-                        transition={{ type: 'spring', stiffness: 200, damping: 16 }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 200,
+                            damping: 16,
+                        }}
                     >
                         {block.visibleName}
                     </motion.div>

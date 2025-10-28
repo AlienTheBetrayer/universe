@@ -12,7 +12,9 @@ interface Props {
 export const ForgeBlockCanvas = React.memo(({ idx, hoveredIdx, block }: Props) => {
     return (
         <Canvas style={{ width: '100%', height: '100%' }}>
-            <pointLight position={[0, 0, 3]} />
+            {/* <hemisphereLight color='#fff' intensity={8} /> */}
+            <pointLight position={[0, 1, 3]} color='#fff' intensity={8}/>
+
             <ForgeBlockMesh block={block} idx={idx} hoveredIdx={hoveredIdx} />
         </Canvas>
     );

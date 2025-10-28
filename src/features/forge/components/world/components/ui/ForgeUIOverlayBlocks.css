@@ -1,6 +1,7 @@
 .forge-ui-overlay-blocks {
     display: flex;
-    justify-content: space-evenly;
+    gap: 0.5rem;
+    justify-content: center;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
