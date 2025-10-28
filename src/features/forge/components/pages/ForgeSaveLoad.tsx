@@ -4,16 +4,16 @@ import { Input } from '../../../ui/Input/components/Input';
 import { SelectorMenu } from '../../../ui/SelectorMenu/components/SelectorMenu';
 import { ForgePageTemplate } from './ForgePageTemplate';
 import './ForgeSaveLoad.css';
-
-type SaveLoadPage = 'save' | 'load';
+import { useForgeSaveLoad } from './hooks/useForgeSaveLoad';
 
 interface Props {
     onInteract?: () => void;
 }
 
 export const ForgeSaveLoad = ({ onInteract }: Props) => {
-    const [page, setPage] = useState<SaveLoadPage>('load');
     const [saveInputValue, setSaveInputValue] = useState<string>('');
+
+    const controller = useForgeSaveLoad();
 
     return (
         <ForgePageTemplate
@@ -43,7 +43,10 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                     onChange={(val) => setSaveInputValue(val)}
                                     onClear={() => setSaveInputValue('')}
                                 />
-                                <Button enabled={saveInputValue.length > 5}>
+                                <Button
+                                    enabled={saveInputValue.length > 5}
+                                    onClick={() => controller.save()}
+                                >
                                     Save <small>(to your computer)</small>
                                 </Button>
                             </div>
@@ -59,14 +62,17 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                     gap: '1rem',
                                 }}
                             >
-                                <Button>Load <small>(open a file)</small></Button>
+                                <Button
+                                    onClick={() =>
+                                        console.log(controller.load(''))
+                                    }
+                                >
+                                    Load <small>(open a file)</small>
+                                </Button>
                             </div>
                         ),
                     },
                 ]}
-                onSelect={(item) => {
-                    setPage(item.name === 'Save' ? 'save' : 'load');
-                }}
             />
         </ForgePageTemplate>
     );
