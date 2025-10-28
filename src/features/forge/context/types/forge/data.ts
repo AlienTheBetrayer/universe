@@ -1,6 +1,8 @@
 import type { ForgeCardData } from './cards';
 import type { ForgeEffectData } from './effects';
 
+export type ForgePage = 'default' | 'save_load';
+
 export interface ForgeData {
     // cards
     cards: ForgeCardData[];
@@ -14,4 +16,7 @@ export interface ForgeData {
 
     // world
     isWorldFullscreen: boolean;
+
+    // page
+    currentPage: ForgePage;
 }

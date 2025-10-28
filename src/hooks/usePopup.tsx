@@ -1,11 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useBackgroundBlur } from '../features/backgroundblur/hooks/useBackgroundBlur';
-import { createPortal } from 'react-dom';
 import { AnimatePresence } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useBackgroundBlur } from '../features/backgroundblur/hooks/useBackgroundBlur';
 
-export const usePopup = (element: React.ReactNode, bg: boolean = true) => {
+export const usePopup = (
+    element: React.ReactNode,
+    bg: boolean = true,
+    onClose?: () => void
+) => {
     const [shown, setShown] = useState<boolean>(false);
-    const blur = useBackgroundBlur(() => setShown(false));
+    const blur = useBackgroundBlur(() => {
+        setShown(false);
+        onClose?.();
+    });
 
     useEffect(() => {
         if (bg) {
@@ -19,6 +26,7 @@ export const usePopup = (element: React.ReactNode, bg: boolean = true) => {
             switch (e.key) {
                 case 'Escape':
                     setShown(false);
+                    onClose?.();
                     break;
             }
         };
@@ -32,7 +40,7 @@ export const usePopup = (element: React.ReactNode, bg: boolean = true) => {
             <>
                 {createPortal(
                     <AnimatePresence>{shown && element}</AnimatePresence>,
-                    document.body,
+                    document.body
                 )}
                 {bg && blur.render()}
             </>

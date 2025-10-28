@@ -1,5 +1,5 @@
 import type { ForgeCardData } from '../types/forge/cards';
-import type { ForgeData } from '../types/forge/data';
+import type { ForgeData, ForgePage } from '../types/forge/data';
 import type { ForgeEffectData } from '../types/forge/effects';
 
 export type ForgeReducerAction =
@@ -19,7 +19,10 @@ export type ForgeReducerAction =
     // awaiting
     | { type: 'AWAIT_ACTION'; cardIdx: number | false }
     | { type: 'CANCEL_CURRENT_CARD' }
-    | { type: 'RESTORE_CANCEL_CARD' };
+    | { type: 'RESTORE_CANCEL_CARD' }
+
+    // page
+    | { type: 'SWITCH_PAGE'; page: ForgePage };
 
 export const ForgeReducer = (
     state: ForgeData,
@@ -117,5 +120,9 @@ export const ForgeReducer = (
             return { ...state, awaitingCancelCardIdx: false };
         case 'AWAIT_ACTION':
             return { ...state, awaitingActionIdx: action.cardIdx };
+
+        // pages
+        case 'SWITCH_PAGE':
+            return { ...state, currentPage: action.page };
     }
 };

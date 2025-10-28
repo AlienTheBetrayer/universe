@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useForgeContext } from '../context/ForgeContext';
 import { WorldProvider } from '../context/WorldContext';
+import { useForgePages } from '../hooks/useForgePages';
 import { ForgeBlocks } from './blocks/components/ForgeBlocks';
 import { ForgeCards } from './cards/components/ForgeCards';
 import { ForgeEffects } from './effects/components/ForgeEffects';
@@ -15,7 +16,9 @@ export const Forge = () => {
     const isLarge = !useMediaQuery(1024);
     const effectContainerRef = useRef<HTMLDivElement>(null);
 
-    const [state, ] = useForgeContext();
+    const [state, dispatch] = useForgeContext();
+
+    const pages = useForgePages(state.currentPage, dispatch);
 
     return (
         <WorldProvider>
@@ -26,6 +29,9 @@ export const Forge = () => {
                     </AnimatePresence>,
                     document.body
                 )}
+
+                {pages.render()}
+
                 <ForgeCards
                     onSelect={() => {
                         if (isLarge) return;
@@ -55,7 +61,7 @@ export const Forge = () => {
                         </>
                     )}
 
-                    { !state.isWorldFullscreen && <ForgeWorld/>}
+                    {!state.isWorldFullscreen && <ForgeWorld />}
                 </div>
 
                 {isLarge && (

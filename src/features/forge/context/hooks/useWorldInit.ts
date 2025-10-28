@@ -1,6 +1,6 @@
 import type React from 'react';
 import { useEffect, useMemo } from 'react';
-import { type HotkeyAction, useHotkeys } from '../../../../hooks/useHotkeys';
+import { useHotkeys, type HotkeyAction } from '../../../../hooks/useHotkeys';
 import type { WorldReducerAction } from '../reducer/WorldReducer';
 
 export const useWorldInit = (dispatch: React.Dispatch<WorldReducerAction>) => {
