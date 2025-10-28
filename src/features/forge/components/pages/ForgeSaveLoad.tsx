@@ -19,11 +19,25 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
             onInteract={() => onInteract?.()}
             title='Save or load a <mark>world</mark>!'
         >
-            <h4>
-                World's <mark>name</mark>
-            </h4>
-            <Input placeholder='Enter...' />
-            <SelectorMenu items={['Save', 'Load']} />
+            <SelectorMenu
+                items={[
+                    {
+                        name: 'Save',
+                        jsx: (
+                            <>
+                                <h4>
+                                    World's <mark>name</mark>
+                                </h4>
+                                <Input placeholder='Enter...' />
+                            </>
+                        ),
+                    },
+                    { name: 'Load', jsx: <></> },
+                ]}
+                onSelect={(item) => {
+                    setPage(item.name === 'Save' ? 'save' : 'load');
+                }}
+            />
         </ForgePageTemplate>
     );
 };

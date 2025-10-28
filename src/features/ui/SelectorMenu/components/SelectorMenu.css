@@ -1,9 +1,19 @@
+.selector-menu-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--background-8);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.selector-menu-jsx {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
 .selector-menu {
     display: flex;
-    border: 1px solid var(--background-8);
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    overflow: hidden;
     justify-content: space-between;
 }
 
