@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useRef, type CSSProperties } from 'react';
 import { useWorldContext } from '../../../context/WorldContext';
 import { BlockDataMaterials } from '../../../context/types/world/block';
 import { ForgeBlock } from './ForgeBlock';
@@ -10,6 +10,7 @@ interface Props {
 
 export const ForgeBlocks = ({ style }: Props) => {
     const [state, dispatch] = useWorldContext();
+    const hoveredIdx = useRef<number | false>(false);
 
     return (
         <div className='forge-blocks-container'>
@@ -22,7 +23,11 @@ export const ForgeBlocks = ({ style }: Props) => {
                         block.isBuildable && (
                             <ForgeBlock
                                 key={idx}
+                                idx={idx}
                                 block={block}
+                                hoveredIdx={hoveredIdx}
+                                onHoverStart={() => hoveredIdx.current = idx}
+                                onHoverEnd={() => hoveredIdx.current = false}
                                 isSelected={
                                     state.currentBlockMaterial === block
                                 }
