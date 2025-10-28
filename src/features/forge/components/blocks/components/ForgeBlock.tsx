@@ -1,6 +1,8 @@
+import { Canvas } from '@react-three/fiber';
 import { Button } from '../../../../ui/Button/components/Button';
 import type { BlockDataMaterial } from '../../../context/types/world/block';
 import './ForgeBlock.css';
+import { ForgeBlockCanvas } from './canvas/ForgeBlockCanvas';
 
 interface Props {
     block: BlockDataMaterial;
@@ -16,7 +18,11 @@ export const ForgeBlock = ({ block, isSelected, onSelect }: Props) => {
             }`}
             onClick={() => onSelect?.(block)}
         >
-            {block.visibleName}
+            <div className='forge-block-title'>
+                { block.visibleName}
+            </div>
+
+            <ForgeBlockCanvas block={block}/>
         </Button>
     );
 };

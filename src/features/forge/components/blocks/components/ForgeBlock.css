@@ -1,6 +1,5 @@
 .forge-block {
-    display: grid;
-    place-items: center;
+    position: relative;
 
     width: 16vw;
     aspect-ratio: 1/1;   
@@ -29,4 +28,11 @@
 .forge-block-selected {
     border-color: #00f;
     border-radius: 64px;
+}
+
+.forge-block-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1rem;
 }
