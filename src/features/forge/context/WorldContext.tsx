@@ -1,15 +1,8 @@
-import React, {
-    createContext,
-    useContext,
-    useEffect,
-    useMemo,
-    useReducer,
-} from 'react';
-import { useHotkeys, type HotkeyAction } from '../../../hooks/useHotkeys';
+import React, { createContext, useContext, useReducer } from 'react';
+import { useWorldInit } from './hooks/useWorldInit';
 import { WorldReducerInitialState } from './initial/WorldReducerInitialState';
 import { WorldReducer, type WorldReducerAction } from './reducer/WorldReducer';
 import type { WorldData } from './types/world/data';
-import { useWorldInit } from './hooks/useWorldInit';
 
 // types
 export type WorldContextType = [WorldData, React.Dispatch<WorldReducerAction>];
