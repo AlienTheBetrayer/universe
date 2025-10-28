@@ -10,12 +10,8 @@
 
 .forge-blocks {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 4px;
     width: 100%;
-}
-
-@media (max-width: 640px) {
-    .forge-blocks {
-        justify-content: space-between;
-    }
 }

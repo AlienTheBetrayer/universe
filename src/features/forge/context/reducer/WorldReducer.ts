@@ -1,5 +1,5 @@
 import { cssVariable } from '../../../../utils/cssVariable';
-import type { BlockData } from '../types/world/block';
+import type { BlockData, BlockDataMaterial } from '../types/world/block';
 import type { WorldData } from '../types/world/data';
 
 export type WorldReducerAction =
@@ -7,6 +7,9 @@ export type WorldReducerAction =
     | { type: 'CREATE_BLOCK'; data: BlockData }
     | { type: 'DELETE_BLOCK'; position: [number, number, number] }
     | { type: 'WIPE_BLOCKS' }
+
+    // building blocks
+    | { type: 'SELECT_BUILDING_BLOCK'; block: BlockDataMaterial }
 
     // field
     | { type: 'GENERATE_FIELD' }
@@ -38,6 +41,10 @@ export const WorldReducer = (
         case 'WIPE_BLOCKS':
             return { ...state, blocks: new Map() };
 
+        // building blocks
+        case 'SELECT_BUILDING_BLOCK':
+            return { ...state, currentBlockMaterial: action.block };
+
         // field
         case 'GENERATE_FIELD': {
             const field = state.blocks;
@@ -54,7 +61,7 @@ export const WorldReducer = (
                                 state.blockSize,
                                 z * state.blockSize,
                             ],
-                            material: 'field',
+                            material: 'Field',
                             color: cssVariable('--forge-background'),
                         }
                     );

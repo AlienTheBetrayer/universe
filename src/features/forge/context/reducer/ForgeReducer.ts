@@ -13,9 +13,6 @@ export type ForgeReducerAction =
     | { type: 'SELECT_EFFECT'; effectIdx: number | false }
     | { type: 'FILL_REMAINING_EFFECTS' }
 
-    // blocks
-    | { type: 'SELECT_BLOCK'; blockIdx: number | false }
-
     // world
     | { type: 'WORLD_FULLSCREEN_TOGGLE' }
 
@@ -106,10 +103,6 @@ export const ForgeReducer = (
 
             return { ...state, effectSlots: newEffects };
         }
-
-        // blocks
-        case 'SELECT_BLOCK':
-            return { ...state, selectedBlockIdx: action.blockIdx };
 
         // world
         case 'WORLD_FULLSCREEN_TOGGLE':

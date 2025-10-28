@@ -94,27 +94,6 @@ export const ForgeReducerInitialState: ForgeData = {
     // effects
     effectSlots: [],
 
-    // blocks
-    blocks: [
-        {
-            idx: 0,
-            type: 'Brick',
-        },
-        {
-            idx: 1,
-            type: 'Stone',
-        },
-        {
-            idx: 2,
-            type: 'Glass',
-        },
-        {
-            idx: 3,
-            type: 'Dirt',
-        },
-    ],
-    selectedBlockIdx: false,
-
     // world
     isWorldFullscreen: false,
 };

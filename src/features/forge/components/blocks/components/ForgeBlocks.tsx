@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
-import { useForgeContext } from '../../../context/ForgeContext';
+import { useWorldContext } from '../../../context/WorldContext';
+import { BlockDataMaterials } from '../../../context/types/world/block';
 import { ForgeBlock } from './ForgeBlock';
 import './ForgeBlocks.css';
 
@@ -8,7 +9,7 @@ interface Props {
 }
 
 export const ForgeBlocks = ({ style }: Props) => {
-    const [state, dispatch] = useForgeContext();
+    const [state, dispatch] = useWorldContext();
 
     return (
         <div className='forge-blocks-container'>
@@ -16,16 +17,16 @@ export const ForgeBlocks = ({ style }: Props) => {
                 Building <mark>blocks</mark>
             </h3>
             <div className='forge-blocks' style={{ ...style }}>
-                {state.blocks.map((block) => (
+                {BlockDataMaterials.map((block, idx) => (
                     <ForgeBlock
-                        key={block.idx}
+                        key={idx}
                         block={block}
-                        isSelected={state.selectedBlockIdx === block.idx}
-                        onSelect={(idx) => {
-                            if (idx !== state.selectedBlockIdx) {
+                        isSelected={state.currentBlockMaterial === block}
+                        onSelect={() => {
+                            if (state.currentBlockMaterial !== block) {
                                 dispatch({
-                                    type: 'SELECT_BLOCK',
-                                    blockIdx: idx,
+                                    type: 'SELECT_BUILDING_BLOCK',
+                                    block: block,
                                 });
                             }
                         }}

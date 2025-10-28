@@ -1,11 +1,11 @@
 import { Button } from '../../../../ui/Button/components/Button';
-import type { ForgeBlockData } from '../../../context/types/data/blocks';
+import type { BlockDataMaterial } from '../../../context/types/world/block';
 import './ForgeBlock.css';
 
 interface Props {
-    block: ForgeBlockData;
+    block: BlockDataMaterial;
     isSelected: boolean;
-    onSelect?: (idx: number) => void;
+    onSelect?: (block: BlockDataMaterial) => void;
 }
 
 export const ForgeBlock = ({ block, isSelected, onSelect }: Props) => {
@@ -14,9 +14,9 @@ export const ForgeBlock = ({ block, isSelected, onSelect }: Props) => {
             className={`forge-block ${
                 isSelected ? 'forge-block-selected' : ''
             }`}
-            onClick={() => onSelect?.(block.idx)}
+            onClick={() => onSelect?.(block)}
         >
-            {block.type}
+            {block}
         </Button>
     );
 };
