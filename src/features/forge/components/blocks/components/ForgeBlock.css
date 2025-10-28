@@ -36,11 +36,11 @@
     left: 50%;
     transform: translateX(-50%);
     top: 0.5rem;
+    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
     .forge-block-title {
         top: 110%;
-        white-space: nowrap;
     }
 }

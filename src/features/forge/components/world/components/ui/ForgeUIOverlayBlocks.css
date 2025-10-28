@@ -1,0 +1,9 @@
+.forge-ui-overlay-blocks {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0.5rem;
+    width: 80%;
+}

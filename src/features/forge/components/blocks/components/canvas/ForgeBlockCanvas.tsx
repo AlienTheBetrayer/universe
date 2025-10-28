@@ -9,11 +9,11 @@ interface Props {
     block: BlockDataMaterial;
 }
 
-export const ForgeBlockCanvas = ({ idx, hoveredIdx, block }: Props) => {
+export const ForgeBlockCanvas = React.memo(({ idx, hoveredIdx, block }: Props) => {
     return (
         <Canvas style={{ width: '100%', height: '100%' }}>
             <pointLight position={[0, 0, 3]} />
             <ForgeBlockMesh block={block} idx={idx} hoveredIdx={hoveredIdx} />
         </Canvas>
     );
-};
+});

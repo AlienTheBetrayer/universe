@@ -46,6 +46,7 @@ export const WorldCanvas = () => {
             <OrbitControls
                 autoRotateSpeed={state.autoRotationEnabled ? 0.25 : 0}
                 autoRotate
+                dampingFactor={0.05}
             />
         </Canvas>
     );

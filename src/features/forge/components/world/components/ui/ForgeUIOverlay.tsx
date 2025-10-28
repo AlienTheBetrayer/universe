@@ -1,7 +1,10 @@
+import './ForgeUIOverlay.css';
+
 import { useTooltips } from '../../../../../tooltip/hooks/useTooltips';
 import { Button } from '../../../../../ui/Button/components/Button';
 import fullscreenImg from '../../../../assets/fullscreen.svg';
 import { useForgeContext } from '../../../../context/ForgeContext';
+import { ForgeUIOverlayBlocks } from './ForgeUIOverlayBlocks';
 
 export const ForgeUIOverlay = () => {
     const tooltips = useTooltips();
@@ -24,6 +27,8 @@ export const ForgeUIOverlay = () => {
                     className='forge-image'
                 />
             </Button>
+
+            <ForgeUIOverlayBlocks/>
         </div>
     );
 };

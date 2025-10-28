@@ -1,4 +1,9 @@
 .forge-ui-overlay {
     position: absolute;
     inset: 0;
+    pointer-events: none;
+}
+
+.forge-ui-overlay * {
+    pointer-events: all;
 }

@@ -5,15 +5,16 @@ import { ForgeBlock } from './ForgeBlock';
 import './ForgeBlocks.css';
 
 interface Props {
+    containerStyle?: CSSProperties;
     style?: CSSProperties;
 }
 
-export const ForgeBlocks = ({ style }: Props) => {
+export const ForgeBlocks = ({ containerStyle, style }: Props) => {
     const [state, dispatch] = useWorldContext();
     const hoveredIdx = useRef<number | false>(false);
 
     return (
-        <div className='forge-blocks-container'>
+        <div className='forge-blocks-container' style={{ ...containerStyle }}>
             <h3>
                 Building <mark>blocks</mark>
             </h3>

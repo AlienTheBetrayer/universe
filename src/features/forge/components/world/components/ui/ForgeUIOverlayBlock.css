@@ -1,0 +1,39 @@
+.forge-ui-overlay-block {
+    position: relative;
+
+    width: 5rem;
+    aspect-ratio: 1/1;   
+    
+    border-radius: 16px;
+    background-color: var(--background-transparent);
+    transition: all 0.3s, border-color 0.7s ease-in-out, border-radius 0.7s ease-in-out;
+}
+
+@media (max-width: 640px) {
+    .forge-ui-overlay-block {
+        width: 14vw;
+    }
+}
+
+.forge-ui-overlay-block:hover {
+    background-color: var(--background-2-transparent);
+}
+
+.forge-ui-overlay-block:active {
+    background-color: var(--background-3-transparent);
+}
+
+/* states */
+.forge-ui-overlay-block-selected {
+    background-color: var(--background-3-transparent) !important;
+    border: 1px solid #00f !important;
+    border-radius: 32px;
+}
+
+.forge-ui-overlay-block-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0.5rem;
+    white-space: nowrap;
+}
