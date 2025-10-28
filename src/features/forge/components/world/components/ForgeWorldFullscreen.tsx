@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { WorldCanvas } from './canvas/WorldCanvas';
 import './ForgeWorldFullscreen.css';
-import { ForgeUI } from './ui/ForgeUI';
+import { ForgeUIOverlay } from './ui/ForgeUIOverlay';
 
 export const ForgeWorldFullscreen = () => {
     return (
@@ -12,7 +12,7 @@ export const ForgeWorldFullscreen = () => {
             exit={{ opacity: 0 }}
         >
             <WorldCanvas />
-            <ForgeUI />
+            <ForgeUIOverlay />
         </motion.div>
     );
 };
