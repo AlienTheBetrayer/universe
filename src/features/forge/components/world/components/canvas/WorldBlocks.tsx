@@ -2,6 +2,7 @@ import { Edges, Instances } from '@react-three/drei';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { useBlockSelection } from '../../hooks/useBlockSelection';
 import { Block } from './Block';
+import { useFrame } from '@react-three/fiber';
 
 interface Props {
     buildingEnabled: boolean;
@@ -10,6 +11,15 @@ interface Props {
 export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
     const selection = useBlockSelection();
+
+    useFrame(state => {
+        if(selection.ref.current) {
+            const t = state.clock.getElapsedTime();
+
+            const scale = 1 + Math.abs(Math.sin(t * 2)) / 3;
+            selection.ref.current.scale.set(scale, scale, scale);
+        }
+    });
 
     return Array.from(state.blocks.entries()).map(([material, blockData]) => (
         <Instances frustumCulled={false} limit={100000} key={material.type}>

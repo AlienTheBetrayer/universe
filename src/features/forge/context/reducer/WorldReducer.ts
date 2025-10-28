@@ -66,6 +66,7 @@ export const WorldReducer = (
         // field
         case 'GENERATE_FIELD': {
             const field = new Map(state.blocks);
+            field.get(BlockDataMaterials.Field)?.clear();
 
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
