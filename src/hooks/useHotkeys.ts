@@ -1,6 +1,6 @@
 import { useEffect, type DependencyList } from 'react';
 
-interface HotkeyAction {
+export interface HotkeyAction {
     hotkey: string;
     action: () => void;
     ctrl?: boolean;

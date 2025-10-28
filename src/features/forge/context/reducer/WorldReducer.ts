@@ -14,6 +14,7 @@ export type WorldReducerAction =
 
     // building blocks
     | { type: 'SELECT_BUILDING_BLOCK'; block: BlockDataMaterial }
+    | { type: 'SELECT_BUILDING_BLOCK_IDX'; idx: number }
 
     // field
     | { type: 'GENERATE_FIELD' }
@@ -62,6 +63,13 @@ export const WorldReducer = (
         // building blocks
         case 'SELECT_BUILDING_BLOCK':
             return { ...state, currentBlockMaterial: action.block };
+        case 'SELECT_BUILDING_BLOCK_IDX': {
+            const blocks = Object.values(BlockDataMaterials);
+            if (action.idx >= blocks.length) return state;
+
+            const block = blocks[action.idx];
+            return { ...state, currentBlockMaterial: block };
+        }
 
         // field
         case 'GENERATE_FIELD': {

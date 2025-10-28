@@ -47,17 +47,6 @@ export const BlockDataMaterials = {
             />
         ),
     },
-    Iridiscent: {
-        visibleName: '🔮 Glitchy',
-        isBuildable: true,
-        jsx: (
-            <meshPhysicalMaterial
-                metalness={1}
-                iridescence={1000}
-                clearcoat={1}
-            />
-        ),
-    },
     Deep: {
         visibleName: '🕳️ Deep',
         isBuildable: true,

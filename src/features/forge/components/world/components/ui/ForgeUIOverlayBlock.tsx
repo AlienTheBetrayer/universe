@@ -5,6 +5,7 @@ import { ForgeBlockCanvas } from '../../../blocks/components/canvas/ForgeBlockCa
 import './ForgeUIOverlayBlock.css';
 
 import { AnimatePresence, motion } from 'motion/react';
+import { HotkeyTooltip } from '../../../../../hotkeytooltip/components/HotkeyTooltip';
 
 interface Props {
     idx: number;
@@ -65,6 +66,7 @@ export const ForgeUIOverlayBlock = ({
             </AnimatePresence>
 
             <ForgeBlockCanvas block={block} idx={idx} hoveredIdx={hoveredIdx} />
+            <HotkeyTooltip className='forge-ui-overlay-number-tooltip' hotkeys={[`${idx}`]}/>
         </Button>
     );
 };

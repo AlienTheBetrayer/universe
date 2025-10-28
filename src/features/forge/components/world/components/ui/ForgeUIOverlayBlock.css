@@ -43,3 +43,10 @@
     top: 0.5rem;
     white-space: nowrap;
 }
+
+.forge-ui-overlay-number-tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0.2rem;
+}
