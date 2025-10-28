@@ -10,6 +10,10 @@
     display: flex;
     flex-direction: column;
     padding: 1rem;
+
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .selector-menu {
@@ -27,19 +31,19 @@
     width: 100%;
     padding: 0.7rem;
     border-radius: 0px;
-    background-color: var(--background-2);
+    background-color: transparent;
 }
 
 .selector-menu-item-underline {
     position: absolute;
     z-index: 1;
-    left: 0;
+    left: 15%;
     bottom: 0;
-    right: 0;
+    right: 15%;
     height: 2px;
     background: linear-gradient(
         to right,
-        var(--background-10),
+        var(--background-8),
         var(--foreground)
     );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './SelectorMenu.css';
 
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { Button } from '../../Button/components/Button';
 
 interface SelectorItem {
@@ -40,7 +40,18 @@ export const SelectorMenu = ({ items, onSelect }: Props) => {
                 ))}
             </ul>
 
-            <div className='selector-menu-jsx'>{items[selectedIdx].jsx}</div>
+            <AnimatePresence mode='wait'>
+                <motion.div
+                    key={selectedIdx}
+                    initial={{ height: '0' }}
+                    animate={{ height: 'auto' }}
+                    exit={{ height: 0 }}
+                >
+                    <div className='selector-menu-jsx'>
+                        {items[selectedIdx].jsx}
+                    </div>
+                </motion.div>
+            </AnimatePresence>
         </div>
     );
 };
