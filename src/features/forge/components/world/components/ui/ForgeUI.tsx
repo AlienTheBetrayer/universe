@@ -6,62 +6,18 @@ import { MessageBox } from '../../../../../messagebox/components/MessageBox';
 import { useTooltips } from '../../../../../tooltip/hooks/useTooltips';
 import deleteImg from '../../../../assets/delete.svg';
 import rotateImg from '../../../../assets/reverse.svg';
+import settingsImg from '../../../../assets/settings.svg';
 import { useWorldContext } from '../../../../context/WorldContext';
-import type { WorldReducerAction } from '../../../../context/reducer/WorldReducer';
-import type { WorldData } from '../../../../context/types/world/data';
 
 import { AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import { useHotkeys } from '../../../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../../../hotkeytooltip/components/HotkeyTooltip';
-import fullscreenImg from '../../../../assets/fullscreen.svg';
-import settingsImg from '../../../../assets/settings.svg';
-import { useForgeContext } from '../../../../context/ForgeContext';
 import { ForgeUISettings } from './ForgeUISettings';
 
 export const ForgeUI = () => {
     const [state, dispatch] = useWorldContext();
 
-    return (
-        <div className='forge-ui'>
-            <ForgeUITop />
-            <ForgeUIBottom state={state} dispatch={dispatch} />
-        </div>
-    );
-};
-
-export const ForgeUITop = () => {
-    const [, dispatch] = useForgeContext();
-
-    const tooltips = useTooltips();
-
-    return (
-        <div className='forge-ui-top'>
-            {tooltips.render()}
-
-            <Button
-                style={{ marginLeft: 'auto' }}
-                ref={(el) =>
-                    tooltips.set(0, 'Enter / exit fullscreen', el, 'down')
-                }
-                onClick={() => dispatch({ type: 'WORLD_FULLSCREEN_TOGGLE' })}
-            >
-                <img
-                    src={fullscreenImg}
-                    alt='fullscreen'
-                    className='forge-image'
-                />
-            </Button>
-        </div>
-    );
-};
-
-interface BottomProps {
-    state: WorldData;
-    dispatch: React.Dispatch<WorldReducerAction>;
-}
-
-export const ForgeUIBottom = ({ state, dispatch }: BottomProps) => {
     const [settingsShown, setSettingsShown] = useState<boolean>(false);
 
     const wipeMessageBox = usePopup(
@@ -80,7 +36,7 @@ export const ForgeUIBottom = ({ state, dispatch }: BottomProps) => {
     useHotkeys([{ hotkey: 'Escape', action: () => setSettingsShown(false) }]);
 
     return (
-        <div className='forge-ui-bottom'>
+        <div className='forge-ui'>
             {tooltips.render()}
             {wipeMessageBox.render()}
 

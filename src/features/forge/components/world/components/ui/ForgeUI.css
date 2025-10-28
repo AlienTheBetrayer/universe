@@ -1,31 +1,11 @@
 .forge-ui {
-    position: absolute;
+    display: flex;
+    position: relative;
+    gap: 0.5rem;
+    width: 100%;
     pointer-events: none;
-    inset: 0;
 }
 
 .forge-ui * {
     pointer-events: all;
-}
-
-/* top */
-.forge-ui-top {
-    display: flex;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-/* bottom */
-.forge-ui-bottom {
-    display: flex;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }

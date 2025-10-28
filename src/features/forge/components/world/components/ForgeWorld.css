@@ -26,3 +26,9 @@
         max-width: 100%;
     }
 }
+
+.forge-world-heading {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
