@@ -1,6 +1,7 @@
 .forge-ui {
     display: flex;
     position: relative;
+    flex-wrap: wrap;
     gap: 0.5rem;
     width: 100%;
     pointer-events: none;

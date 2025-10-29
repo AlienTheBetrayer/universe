@@ -92,17 +92,6 @@ export const ForgeTopline = () => {
                     {!isMobile ? 'Show ' : ' '}
                     Tutorial
                 </Button>
-
-                <Button
-                    ref={(el) =>
-                        tooltips.set(3, 'Save / Load a world', el, 'down')
-                    }
-                    onClick={() =>
-                        dispatch({ type: 'SWITCH_PAGE', page: 'save_load' })
-                    }
-                >
-                    <mark>Save / Load</mark>
-                </Button>
             </div>
         </div>
     );

@@ -14,10 +14,12 @@ import { useRef, useState } from 'react';
 import { useClickOutside } from '../../../../../../hooks/useClickOutside';
 import { useHotkeys } from '../../../../../../hooks/useHotkeys';
 import { HotkeyTooltip } from '../../../../../hotkeytooltip/components/HotkeyTooltip';
+import { useForgeContext } from '../../../../context/ForgeContext';
 import { ForgeUISettings } from './ForgeUISettings';
 
 export const ForgeUI = () => {
     const [state, dispatch] = useWorldContext();
+    const [, forgeDispatch] = useForgeContext();
 
     // menu visibility
     const [settingsShown, setSettingsShown] = useState<boolean>(false);
@@ -80,6 +82,15 @@ export const ForgeUI = () => {
                     )}
                 </AnimatePresence>
             </div>
+
+            <Button
+                ref={(el) => tooltips.set(3, 'Save / Load a world', el, 'up')}
+                onClick={() =>
+                    forgeDispatch({ type: 'SWITCH_PAGE', page: 'save_load' })
+                }
+            >
+                <mark>Save / Load</mark>
+            </Button>
 
             <Button
                 ref={(el) => tooltips.set(2, 'Toggle auto-rotation', el, 'up')}
