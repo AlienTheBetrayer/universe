@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '../../../../ui/Button/components/Button';
 import { Input } from '../../../../ui/Input/components/Input';
 import { SelectorMenu } from '../../../../ui/SelectorMenu/components/SelectorMenu';
+import { useWorldContext } from '../../../context/WorldContext';
 import { ForgePageTemplate } from '../ForgePageTemplate';
 import { useForgeSaveLoad } from '../hooks/useForgeSaveLoad';
 import './ForgeSaveLoad.css';
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export const ForgeSaveLoad = ({ onInteract }: Props) => {
+    const [, dispatch] = useWorldContext();
+
     const [saveInputValue, setSaveInputValue] = useState<string>('');
 
     const controller = useForgeSaveLoad();
@@ -45,7 +48,11 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                 />
                                 <Button
                                     enabled={saveInputValue.length >= 5}
-                                    onClick={() => controller.save(saveInputValue)}
+                                    onClick={() =>
+                                        controller.save(
+                                            saveInputValue.replaceAll(' ', '_')
+                                        )
+                                    }
                                 >
                                     Save <small>(to your computer)</small>
                                 </Button>
@@ -63,13 +70,18 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                 }}
                             >
                                 <Button
-                                    onClick={() =>
-                                        controller
-                                            .load()
-                                            .then((val) =>
-                                                console.log(val)
-                                            )
-                                    }
+                                    onClick={() => {
+                                        controller.load().then((val) => {
+                                            onInteract?.();
+                                            dispatch({
+                                                type: 'LOAD_WORLD',
+                                                world: val,
+                                            });
+                                            dispatch({
+                                                type: 'GENERATE_FIELD',
+                                            });
+                                        });
+                                    }}
                                 >
                                     Load <small>(open a file)</small>
                                 </Button>

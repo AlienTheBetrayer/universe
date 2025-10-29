@@ -1,15 +1,8 @@
 import { loadFromFile } from '../../../../../utils/loadFromFile';
 import { saveToFile } from '../../../../../utils/saveToFile';
-import {
-    type BlockData,
-    type BlockDataMaterial,
-} from '../../../context/types/world/block';
+import { type BlockData } from '../../../context/types/world/block';
+import type { WorldSave } from '../../../context/types/world/save';
 import { useWorldContext } from '../../../context/WorldContext';
-
-interface WorldSave {
-    blocks: Map<BlockDataMaterial, Map<string, BlockData>>;
-    blockSize: number;
-}
 
 export const useForgeSaveLoad = () => {
     const [state] = useWorldContext();
@@ -19,14 +12,16 @@ export const useForgeSaveLoad = () => {
         for (const [material, blockData] of state.blocks) {
             if (material !== 'Field') {
                 onlyBlocks.set(material, Array.from(blockData.entries()));
+            } else {
+                onlyBlocks.set(material, []);
             }
         }
 
         const data = {
             blocks: Array.from(onlyBlocks.entries()),
             blockSize: state.blockSize,
+            currentBlockMaterial: state.currentBlockMaterial,
         };
-
         saveToFile(data, `${name}.forge`);
     };
 
@@ -48,8 +43,9 @@ export const useForgeSaveLoad = () => {
                 parsed.blocks = blocksMap;
 
                 resolve({
-                    blocks: blocksMap,
+                    blocks: parsed.blocks,
                     blockSize: parsed.blockSize,
+                    currentBlockMaterial: parsed.currentBlockMaterial,
                 });
             });
         });

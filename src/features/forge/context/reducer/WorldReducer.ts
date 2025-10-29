@@ -5,12 +5,16 @@ import {
     type BlockDataMaterial,
 } from '../types/world/block';
 import type { WorldData } from '../types/world/data';
+import type { WorldSave } from '../types/world/save';
 
 export type WorldReducerAction =
     // blocks
     | { type: 'CREATE_BLOCK'; data: BlockData }
     | { type: 'DELETE_BLOCK'; data: BlockData }
     | { type: 'WIPE_BLOCKS' }
+
+    // world
+    | { type: 'LOAD_WORLD'; world: WorldSave }
 
     // building blocks
     | { type: 'SELECT_BUILDING_BLOCK'; block: BlockDataMaterial }
@@ -57,6 +61,11 @@ export const WorldReducer = (
                 if (material !== 'Field') newBlocks.get(material)?.clear();
             }
             return { ...state, blocks: newBlocks };
+        }
+
+        // world
+        case 'LOAD_WORLD': {
+            return { ...state, ...action.world };
         }
 
         // building blocks
