@@ -23,6 +23,7 @@ export const SelectorMenu = ({ items, onSelect }: Props) => {
                 {items.map((item, idx) => (
                     <li className='selector-menu-item' key={idx}>
                         <Button
+                            className={`${selectedIdx === idx ? 'selector-menu-button-selected' : ''}`}
                             onClick={() => {
                                 setSelectedIdx(idx);
                                 onSelect?.(item);

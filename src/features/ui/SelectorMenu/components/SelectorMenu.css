@@ -19,6 +19,7 @@
 .selector-menu {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid var(--background-8);
 }
 
 .selector-menu-item {
@@ -34,6 +35,7 @@
     background-color: transparent;
 }
 
+/* selection / underline */
 .selector-menu-item-underline {
     position: absolute;
     z-index: 1;
@@ -41,9 +43,9 @@
     bottom: 0;
     right: 15%;
     height: 2px;
-    background: linear-gradient(
-        to right,
-        var(--background-8),
-        var(--foreground)
-    );
+    background: rgb(56, 66, 255);
+}
+
+.selector-menu .selector-menu-button-selected {
+    background-color: var(--background-4);
 }
