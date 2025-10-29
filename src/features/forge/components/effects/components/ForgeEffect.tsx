@@ -136,7 +136,7 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                                 height: '1rem',
                             }}
                         />
-                        <p>{effectData.card.title}</p>
+                        <p className='forge-effect-topline-title'>{effectData.card.title}</p>
                         <Button
                             onClick={() => {
                                 dispatch({
