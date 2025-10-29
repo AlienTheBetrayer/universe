@@ -1,11 +1,8 @@
 .forge-world-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 1rem;
     width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 
@@ -13,17 +10,14 @@
     display: flex;
     position: relative;
     width: 100%;
-    height: 100%;
-    max-height: 500px;
-    max-width: 500px;
-    aspect-ratio: 1/1;
+    height: 500px;
     overflow: hidden;
     background-color: var(--forge-background);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
     .forge-world {
-        max-width: 100%;
+        aspect-ratio: 1/1;
     }
 }
 

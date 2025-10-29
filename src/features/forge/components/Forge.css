@@ -31,7 +31,6 @@
 
 @media (max-width: 1024px) {
     .forge-main-container {
-        height: auto;
         flex-direction: column-reverse;
     }
 }
