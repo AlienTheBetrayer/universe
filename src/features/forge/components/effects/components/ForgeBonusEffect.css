@@ -1,17 +1,11 @@
 .forge-bonus-effect {
-    width: 20vw;
+    width: 100%;
     max-width: 175px;
     aspect-ratio: 1/1;
     border: 2px dashed var(--background-6);
     border-radius: 16px;
     transition: border-color 0.7s;
     position: relative;
-}
-
-@media (max-width: 640px) {
-    .forge-bonus-effect {
-        width: 100%;
-    }
 }
 
 /* states */
