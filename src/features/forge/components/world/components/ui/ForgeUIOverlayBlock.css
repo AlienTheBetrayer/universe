@@ -35,7 +35,7 @@
 
 .forge-ui-overlay-block-title {
     padding: 0.5rem;
-    border-radius: 12px;
+    border-radius: 6px;
     background-color: var(--background-2);
     position: absolute;
     left: 50%;
