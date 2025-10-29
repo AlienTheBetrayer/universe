@@ -6,11 +6,6 @@ import {
 } from '../../../context/types/world/block';
 import { useWorldContext } from '../../../context/WorldContext';
 
-interface ParsedSaveLoad {
-    blocks: [keyof typeof BlockDataMaterials, [string, BlockData][]][];
-    blockSize: number;
-}
-
 export const useForgeSaveLoad = () => {
     const [state] = useWorldContext();
     const jsonRef = useRef<string>('');
@@ -30,16 +25,19 @@ export const useForgeSaveLoad = () => {
 
         const dataJSON = JSON.stringify(data, null, 2);
         jsonRef.current = dataJSON;
+        console.log(dataJSON);
     };
 
     const load = (json: string) => {
-        const parsed: ParsedSaveLoad = JSON.parse(jsonRef.current);
+        const parsed = JSON.parse(jsonRef.current);
         const blocksMap = new Map<BlockDataMaterial, Map<string, BlockData>>();
 
         for (const [materialType, entries] of parsed.blocks) {
-            const innerMap = new Map(entries);
+            const innerMap = new Map<string, BlockData>(entries);
             blocksMap.set(materialType, innerMap);
         }
+
+        console.log(blocksMap);
 
         return {
             blocks: blocksMap,

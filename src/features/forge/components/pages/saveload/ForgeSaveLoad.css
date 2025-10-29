@@ -5,6 +5,7 @@
     transform: translate(-50%, -50%);
 
     display: flex;
-    width: 500px;
+    width: 95%;
+    max-width: 500px;
     height: 300px;
 }
