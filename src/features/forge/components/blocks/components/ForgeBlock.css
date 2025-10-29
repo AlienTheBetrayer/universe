@@ -43,8 +43,8 @@
 .forge-block-emoji {
     position: absolute;
 
-    font-size: 12vw;
-    opacity: 0.1;
+    font-size: clamp(0px, 12vw, 175px);
+    opacity: 0.2;
 }
 
 @media (max-width: 768px) {

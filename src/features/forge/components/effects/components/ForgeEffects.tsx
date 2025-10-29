@@ -4,6 +4,7 @@ import { EffectMenuProvider } from '../../../context/EffectMenuContext';
 import { useForgeContext } from '../../../context/ForgeContext';
 import { ForgeEffect } from './ForgeEffect';
 import './ForgeEffects.css';
+import { ForgeBonusEffect } from './ForgeBonusEffect';
 
 interface Props {
     wrapperRef?: RefObject<HTMLDivElement | null>;
@@ -33,6 +34,7 @@ export const ForgeEffects = ({ wrapperRef }: Props) => {
                 <h3>
                     <mark>Effects</mark>
                 </h3>
+
                 <div className='forge-effects'>
                     {Array.from({ length: 9 }).map((_, idx) => (
                         <ForgeEffect
@@ -46,6 +48,8 @@ export const ForgeEffects = ({ wrapperRef }: Props) => {
                         />
                     ))}
                 </div>
+
+                <ForgeBonusEffect/>
             </div>
         </EffectMenuProvider>
     );

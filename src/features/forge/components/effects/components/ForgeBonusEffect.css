@@ -1,0 +1,9 @@
+.forge-bonus-effect {
+    width: 20vw;
+    max-width: 150px;
+    aspect-ratio: 1/1;
+    border: 2px dashed var(--background-6);
+    border-radius: 16px;
+    transition: border-color 0.7s;
+    position: relative;
+}
