@@ -43,9 +43,9 @@ export const SelectorMenu = ({ items, onSelect }: Props) => {
             <AnimatePresence mode='wait'>
                 <motion.div
                     key={selectedIdx}
-                    initial={{ height: '0' }}
+                    initial={{ height: '0px' }}
                     animate={{ height: 'auto' }}
-                    exit={{ height: 0 }}
+                    exit={{ height: '0px' }}
                 >
                     <div className='selector-menu-jsx'>
                         {items[selectedIdx].jsx}

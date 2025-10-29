@@ -54,8 +54,7 @@ export const WorldReducer = (
             const newBlocks = new Map(state.blocks);
 
             for (const material of newBlocks.keys()) {
-                if (material !== BlockDataMaterials.Field)
-                    newBlocks.get(material)?.clear();
+                if (material !== 'Field') newBlocks.get(material)?.clear();
             }
             return { ...state, blocks: newBlocks };
         }
@@ -64,22 +63,25 @@ export const WorldReducer = (
         case 'SELECT_BUILDING_BLOCK':
             return { ...state, currentBlockMaterial: action.block };
         case 'SELECT_BUILDING_BLOCK_IDX': {
-            const blocks = Object.values(BlockDataMaterials);
+            const blocks = Object.keys(BlockDataMaterials);
             if (action.idx >= blocks.length) return state;
 
             const block = blocks[action.idx];
-            return { ...state, currentBlockMaterial: block };
+            return {
+                ...state,
+                currentBlockMaterial: block as BlockDataMaterial,
+            };
         }
 
         // field
         case 'GENERATE_FIELD': {
             const field = new Map(state.blocks);
-            field.get(BlockDataMaterials.Field)?.clear();
+            field.get('Field')?.clear();
 
             for (let z = 0; z < 32; ++z) {
                 for (let x = 0; x < 32; ++x) {
                     field
-                        .get(BlockDataMaterials.Field)
+                        .get('Field')
                         ?.set(
                             `${x * state.blockSize},${state.blockSize},${
                                 z * state.blockSize
@@ -90,7 +92,7 @@ export const WorldReducer = (
                                     state.blockSize,
                                     z * state.blockSize,
                                 ],
-                                material: BlockDataMaterials.Field,
+                                material: 'Field',
                                 color: cssVariable('--forge-background'),
                             }
                         );
@@ -109,9 +111,9 @@ export const WorldReducer = (
         case 'GENERATE_MAPS': {
             const maps = new Map(state.blocks);
 
-            for (const material of Object.values(BlockDataMaterials)) {
-                if (!maps.has(material)) {
-                    maps.set(material, new Map());
+            for (const material of Object.keys(BlockDataMaterials)) {
+                if (!maps.has(material as BlockDataMaterial)) {
+                    maps.set(material as BlockDataMaterial, new Map());
                 }
             }
 

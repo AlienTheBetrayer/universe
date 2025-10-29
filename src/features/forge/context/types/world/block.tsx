@@ -1,11 +1,3 @@
-import type { JSX } from 'react';
-
-export interface BlockDataMaterial {
-    visibleName: string;
-    isBuildable: boolean;
-    jsx: JSX.Element;
-}
-
 export const BlockDataMaterials = {
     Field: {
         isBuildable: false,
@@ -53,6 +45,8 @@ export const BlockDataMaterials = {
         jsx: <meshDepthMaterial />,
     },
 };
+
+export type BlockDataMaterial = keyof typeof BlockDataMaterials;
 
 export interface BlockData {
     position: [number, number, number];

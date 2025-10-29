@@ -4,11 +4,14 @@ import { useHotkeys, type HotkeyAction } from '../../../../hooks/useHotkeys';
 import type { WorldReducerAction } from '../reducer/WorldReducer';
 
 export const useWorldInit = (dispatch: React.Dispatch<WorldReducerAction>) => {
+    // generating internal map storage
+    // generating the actual field
     useEffect(() => {
         dispatch({ type: 'GENERATE_MAPS' });
         dispatch({ type: 'GENERATE_FIELD' });
     }, []);
 
+    // 1-9 hotkeys for inventory
     const hotkeys: HotkeyAction[] = useMemo(() => {
         const ret: HotkeyAction[] = [];
 

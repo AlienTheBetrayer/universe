@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { BlockDataMaterials } from '../../../../context/types/world/block';
+import { BlockDataMaterials, type BlockDataMaterial } from '../../../../context/types/world/block';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { ForgeUIOverlayBlock } from './ForgeUIOverlayBlock';
 import './ForgeUIOverlayBlocks.css';
@@ -10,14 +10,14 @@ export const ForgeUIOverlayBlocks = () => {
 
     return (
         <div className='forge-ui-overlay-blocks'>
-            {Object.values(BlockDataMaterials).map(
-                (block, idx) =>
+            {Object.entries(BlockDataMaterials).map(
+                ([key, block], idx) =>
                     block.isBuildable && (
                         <ForgeUIOverlayBlock
                             idx={idx}
-                            isSelected={state.currentBlockMaterial === block}
+                            isSelected={state.currentBlockMaterial === key}
                             key={idx}
-                            block={block}
+                            material={key as BlockDataMaterial}
                             onSelect={(block) =>
                                 dispatch({
                                     type: 'SELECT_BUILDING_BLOCK',

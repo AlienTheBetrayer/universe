@@ -1,5 +1,6 @@
 import { Edges, Instances } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { BlockDataMaterials } from '../../../../context/types/world/block';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { useBlockSelection } from '../../hooks/useBlockSelection';
 import { Block } from './Block';
@@ -22,12 +23,8 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     });
 
     return Array.from(state.blocks.entries()).map(([material, blockData]) => (
-        <Instances
-            frustumCulled={false}
-            limit={100000}
-            key={material.visibleName}
-        >
-            {material.jsx}
+        <Instances frustumCulled={false} limit={100000} key={material}>
+            {BlockDataMaterials[material].jsx}
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
@@ -57,9 +54,7 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                                     });
                                     break;
                                 case 'delete':
-                                    if (
-                                        block.material.visibleName !== 'Field'
-                                    ) {
+                                    if (block.material !== 'Field') {
                                         dispatch({
                                             type: 'DELETE_BLOCK',
                                             data: block,

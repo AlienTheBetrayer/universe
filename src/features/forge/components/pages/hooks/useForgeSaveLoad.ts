@@ -18,7 +18,7 @@ export const useForgeSaveLoad = () => {
     const save = () => {
         const onlyBlocks = new Map();
         for (const [material, blockData] of state.blocks) {
-            if (material !== BlockDataMaterials.Field) {
+            if (material !== 'Field') {
                 onlyBlocks.set(material, Array.from(blockData.entries()));
             }
         }
@@ -37,11 +37,8 @@ export const useForgeSaveLoad = () => {
         const blocksMap = new Map<BlockDataMaterial, Map<string, BlockData>>();
 
         for (const [materialType, entries] of parsed.blocks) {
-            if (materialType) {
-                const material = BlockDataMaterials[materialType];
-                const innerMap = new Map(entries);
-                blocksMap.set(material, innerMap);
-            }
+            const innerMap = new Map(entries);
+            blocksMap.set(materialType, innerMap);
         }
 
         return {

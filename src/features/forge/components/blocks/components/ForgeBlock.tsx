@@ -1,13 +1,16 @@
 import React from 'react';
 import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 import { Button } from '../../../../ui/Button/components/Button';
-import type { BlockDataMaterial } from '../../../context/types/world/block';
+import {
+    BlockDataMaterials,
+    type BlockDataMaterial,
+} from '../../../context/types/world/block';
 import './ForgeBlock.css';
 import { ForgeBlockCanvas } from './canvas/ForgeBlockCanvas';
 
 interface Props {
     idx: number;
-    block: BlockDataMaterial;
+    material: BlockDataMaterial;
     isSelected: boolean;
     hoveredIdx: React.RefObject<number | false>;
 
@@ -22,7 +25,7 @@ export const ForgeBlock = ({
     onHoverStart,
     onHoverEnd,
     idx,
-    block,
+    material,
     isSelected,
     onSelect,
 }: Props) => {
@@ -31,13 +34,13 @@ export const ForgeBlock = ({
             className={`forge-block ${
                 isSelected ? 'forge-block-selected' : ''
             }`}
-            onClick={() => onSelect?.(block)}
+            onClick={() => onSelect?.(material)}
             onPointerEnter={() => onHoverStart?.()}
             onPointerLeave={() => onHoverEnd?.()}
         >
-            <div className='forge-block-title'>{block.visibleName}</div>
+            <div className='forge-block-title'>{BlockDataMaterials[material].visibleName}</div>
 
-            <ForgeBlockCanvas block={block} idx={idx} hoveredIdx={hoveredIdx} />
+            <ForgeBlockCanvas material={material} idx={idx} hoveredIdx={hoveredIdx} />
             <HotkeyTooltip
                 className='forge-block-number-tooltip'
                 hotkeys={[`${idx}`]}

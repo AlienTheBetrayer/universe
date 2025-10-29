@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Button } from '../../../ui/Button/components/Button';
-import { Input } from '../../../ui/Input/components/Input';
-import { SelectorMenu } from '../../../ui/SelectorMenu/components/SelectorMenu';
-import { ForgePageTemplate } from './ForgePageTemplate';
+import { Button } from '../../../../ui/Button/components/Button';
+import { Input } from '../../../../ui/Input/components/Input';
+import { SelectorMenu } from '../../../../ui/SelectorMenu/components/SelectorMenu';
+import { ForgePageTemplate } from '../ForgePageTemplate';
+import { useForgeSaveLoad } from '../hooks/useForgeSaveLoad';
 import './ForgeSaveLoad.css';
-import { useForgeSaveLoad } from './hooks/useForgeSaveLoad';
 
 interface Props {
     onInteract?: () => void;

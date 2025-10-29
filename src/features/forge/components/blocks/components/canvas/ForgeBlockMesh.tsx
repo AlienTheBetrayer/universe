@@ -1,15 +1,18 @@
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import { Mesh } from 'three';
-import type { BlockDataMaterial } from '../../../../context/types/world/block';
+import {
+    BlockDataMaterials,
+    type BlockDataMaterial,
+} from '../../../../context/types/world/block';
 
 interface Props {
     idx: number;
     hoveredIdx: React.RefObject<number | false>;
-    block: BlockDataMaterial;
+    material: BlockDataMaterial;
 }
 
-export const ForgeBlockMesh = ({ idx, block, hoveredIdx }: Props) => {
+export const ForgeBlockMesh = ({ idx, material, hoveredIdx }: Props) => {
     const meshRef = useRef<Mesh>(null);
 
     // initial random rotation
@@ -48,7 +51,7 @@ export const ForgeBlockMesh = ({ idx, block, hoveredIdx }: Props) => {
     return (
         <mesh ref={meshRef}>
             <boxGeometry args={[3, 3, 3]} />
-            {block.jsx}
+            {BlockDataMaterials[material].jsx}
         </mesh>
     );
 };

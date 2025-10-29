@@ -1,6 +1,9 @@
 import { useRef, type CSSProperties } from 'react';
 import { useWorldContext } from '../../../context/WorldContext';
-import { BlockDataMaterials } from '../../../context/types/world/block';
+import {
+    BlockDataMaterials,
+    type BlockDataMaterial,
+} from '../../../context/types/world/block';
 import { ForgeBlock } from './ForgeBlock';
 import './ForgeBlocks.css';
 
@@ -19,24 +22,22 @@ export const ForgeBlocks = ({ containerStyle, style }: Props) => {
                 Building <mark>blocks</mark>
             </h3>
             <div className='forge-blocks' style={{ ...style }}>
-                {Object.values(BlockDataMaterials).map(
-                    (block, idx) =>
+                {Object.entries(BlockDataMaterials).map(
+                    ([key, block], idx) =>
                         block.isBuildable && (
                             <ForgeBlock
                                 key={idx}
                                 idx={idx}
-                                block={block}
+                                material={key as BlockDataMaterial}
                                 hoveredIdx={hoveredIdx}
-                                onHoverStart={() => hoveredIdx.current = idx}
-                                onHoverEnd={() => hoveredIdx.current = false}
-                                isSelected={
-                                    state.currentBlockMaterial === block
-                                }
+                                onHoverStart={() => (hoveredIdx.current = idx)}
+                                onHoverEnd={() => (hoveredIdx.current = false)}
+                                isSelected={state.currentBlockMaterial === key}
                                 onSelect={() => {
-                                    if (state.currentBlockMaterial !== block) {
+                                    if (state.currentBlockMaterial !== key) {
                                         dispatch({
                                             type: 'SELECT_BUILDING_BLOCK',
-                                            block: block,
+                                            block: key as BlockDataMaterial,
                                         });
                                     }
                                 }}

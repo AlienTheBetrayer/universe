@@ -96,4 +96,7 @@ export const ForgeReducerInitialState: ForgeData = {
 
     // world
     isWorldFullscreen: false,
+
+    // pages
+    currentPage: 'default',
 };

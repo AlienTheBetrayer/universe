@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../../../../ui/Button/components/Button';
-import type { BlockDataMaterial } from '../../../../context/types/world/block';
+import { BlockDataMaterials, type BlockDataMaterial } from '../../../../context/types/world/block';
 import { ForgeBlockCanvas } from '../../../blocks/components/canvas/ForgeBlockCanvas';
 import './ForgeUIOverlayBlock.css';
 
@@ -9,12 +9,12 @@ import { HotkeyTooltip } from '../../../../../hotkeytooltip/components/HotkeyToo
 
 interface Props {
     idx: number;
-    block: BlockDataMaterial;
+    material: BlockDataMaterial;
     isSelected: boolean;
     hoveredIdx: React.RefObject<number | false>;
 
     // events
-    onSelect?: (block: BlockDataMaterial) => void;
+    onSelect?: (material: BlockDataMaterial) => void;
     onHoverStart?: () => void;
     onHoverEnd?: () => void;
 }
@@ -24,7 +24,7 @@ export const ForgeUIOverlayBlock = ({
     onHoverStart,
     onHoverEnd,
     idx,
-    block,
+    material,
     isSelected,
     onSelect,
 }: Props) => {
@@ -46,7 +46,7 @@ export const ForgeUIOverlayBlock = ({
             className={`forge-ui-overlay-block ${
                 isSelected ? 'forge-ui-overlay-block-selected' : ''
             }`}
-            onClick={() => onSelect?.(block)}
+            onClick={() => onSelect?.(material)}
             onPointerEnter={() => {
                 onHoverStart?.();
                 setHovered(true);
@@ -71,12 +71,12 @@ export const ForgeUIOverlayBlock = ({
                             damping: 16,
                         }}
                     >
-                        {block.visibleName}
+                        {BlockDataMaterials[material].visibleName}
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <ForgeBlockCanvas block={block} idx={idx} hoveredIdx={hoveredIdx} />
+            <ForgeBlockCanvas material={material} idx={idx} hoveredIdx={hoveredIdx} />
             <HotkeyTooltip
                 className='forge-ui-overlay-number-tooltip'
                 hotkeys={[`${idx}`]}

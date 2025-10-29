@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { usePopup } from '../../../hooks/usePopup';
-import { ForgeSaveLoad } from '../components/pages/ForgeSaveLoad';
+import { ForgeSaveLoad } from '../components/pages/saveload/ForgeSaveLoad';
 import type { ForgeReducerAction } from '../context/reducer/ForgeReducer';
 import type { ForgePage } from '../context/types/forge/data';
 
