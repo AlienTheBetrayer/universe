@@ -54,7 +54,7 @@ export const ForgeEffectMenu = ({
             transition={{ ease: 'easeInOut' }}
         >
             <div className='forge-effect-menu-items'>
-                <h4>
+                <h4 style={{ whiteSpace: 'nowrap'}}>
                     Available <mark>effects</mark>
                 </h4>
 
