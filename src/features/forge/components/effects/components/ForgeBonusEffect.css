@@ -7,3 +7,19 @@
     transition: border-color 0.7s;
     position: relative;
 }
+
+@media (max-width: 640px) {
+    .forge-bonus-effect {
+        width: 100%;
+    }
+}
+
+/* states */
+.forge-bonus-effect-not-ready {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: clamp(0px, 12vw, 2rem);
+    white-space: nowrap;
+}
