@@ -7,10 +7,11 @@ interface Props {
     idx: number;
     hoveredIdx: React.RefObject<number | false>;
     material: BlockDataMaterial;
+    speed?: number;
 }
 
 export const ForgeBlockCanvas = React.memo(
-    ({ idx, hoveredIdx, material }: Props) => {
+    ({ idx, hoveredIdx, material, speed = 1 }: Props) => {
         return (
             <Canvas style={{ width: '100%', height: '100%' }}>
                 {/* <hemisphereLight color='#fff' intensity={8} /> */}
@@ -20,6 +21,7 @@ export const ForgeBlockCanvas = React.memo(
                     material={material}
                     idx={idx}
                     hoveredIdx={hoveredIdx}
+                    speed={speed}
                 />
             </Canvas>
         );

@@ -12,6 +12,7 @@ export type ForgeReducerAction =
     | { type: 'WIPE_EFFECT_SLOTS' }
     | { type: 'SELECT_EFFECT'; effectIdx: number | false }
     | { type: 'FILL_REMAINING_EFFECTS' }
+    | { type: 'ADJUST_EFFECT_STRENGTH'; effectIdx: number; strength: number }
 
     // world
     | { type: 'WORLD_FULLSCREEN_TOGGLE' }
@@ -56,6 +57,11 @@ export const ForgeReducer = (
                         {
                             effectIdx: action.effectIdx,
                             card: action.card,
+                            strength: {
+                                current: 1,
+                                max: 3,
+                                min: 0,
+                            },
                         },
                     ],
                 };
@@ -101,10 +107,34 @@ export const ForgeReducer = (
                 const card = remainingCards.pop();
                 if (!card) break;
 
-                newEffects.push({ effectIdx: idx, card });
+                newEffects.push({
+                    effectIdx: idx,
+                    card,
+                    strength: {
+                        current: 1,
+                        max: 3,
+                        min: 0,
+                    },
+                });
             }
 
             return { ...state, effectSlots: newEffects };
+        }
+        case 'ADJUST_EFFECT_STRENGTH': {
+            return {
+                ...state,
+                effectSlots: state.effectSlots.map((slot) =>
+                    slot.effectIdx === action.effectIdx
+                        ? {
+                              ...slot,
+                              strength: {
+                                  ...slot.strength,
+                                  current: action.strength,
+                              },
+                          }
+                        : slot
+                ),
+            };
         }
 
         // world

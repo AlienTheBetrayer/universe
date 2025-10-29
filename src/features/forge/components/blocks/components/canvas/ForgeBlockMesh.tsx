@@ -10,9 +10,10 @@ interface Props {
     idx: number;
     hoveredIdx: React.RefObject<number | false>;
     material: BlockDataMaterial;
+    speed?: number;
 }
 
-export const ForgeBlockMesh = ({ idx, material, hoveredIdx }: Props) => {
+export const ForgeBlockMesh = ({ idx, material, hoveredIdx, speed = 1 }: Props) => {
     const meshRef = useRef<Mesh>(null);
 
     // initial random rotation
@@ -31,19 +32,19 @@ export const ForgeBlockMesh = ({ idx, material, hoveredIdx }: Props) => {
         if (meshRef.current) {
             if (hoveredIdx.current === false) {
                 // none is selected (regular moving)
-                meshRef.current.rotation.x += 0.0075;
-                meshRef.current.rotation.y += 0.0075;
-                meshRef.current.rotation.z += 0.0075;
+                meshRef.current.rotation.x += 0.0075 * speed;
+                meshRef.current.rotation.y += 0.0075 * speed;
+                meshRef.current.rotation.z += 0.0075 * speed;
             } else if (hoveredIdx.current === idx) {
                 // current one is selected (fast moving)
-                meshRef.current.rotation.x += 0.02;
-                meshRef.current.rotation.y += 0.02;
-                meshRef.current.rotation.z += 0.02;
+                meshRef.current.rotation.x += 0.02 * speed;
+                meshRef.current.rotation.y += 0.02 * speed;
+                meshRef.current.rotation.z += 0.02 * speed;
             } else {
                 // something is selected but not this (slow moving)
-                meshRef.current.rotation.x += 0.002;
-                meshRef.current.rotation.y += 0.002;
-                meshRef.current.rotation.z += 0.002;
+                meshRef.current.rotation.x += 0.002 * speed;
+                meshRef.current.rotation.y += 0.002 * speed;
+                meshRef.current.rotation.z += 0.002 * speed;
             }
         }
     });

@@ -7,6 +7,7 @@ import { useTooltips } from '../../../../../tooltip/hooks/useTooltips';
 import deleteImg from '../../../../assets/delete.svg';
 import rotateImg from '../../../../assets/reverse.svg';
 import settingsImg from '../../../../assets/settings.svg';
+import worldImg from '../../../../assets/world.svg';
 import { useWorldContext } from '../../../../context/WorldContext';
 
 import { AnimatePresence } from 'motion/react';
@@ -89,6 +90,7 @@ export const ForgeUI = () => {
                     forgeDispatch({ type: 'SWITCH_PAGE', page: 'save_load' })
                 }
             >
+                <img src={worldImg} alt='' className='forge-image' />
                 <mark>Save / Load</mark>
             </Button>
 

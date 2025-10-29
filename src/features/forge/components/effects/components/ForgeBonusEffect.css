@@ -1,3 +1,12 @@
+@keyframes pulsing {
+    0% {
+        transform: scale(1.0);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
 .forge-bonus-effect {
     width: 100%;
     max-width: 175px;
@@ -6,6 +15,7 @@
     border-radius: 16px;
     transition: border-color 0.7s;
     position: relative;
+    animation: 2s pulsing alternate infinite ease-in-out; 
 }
 
 /* states */

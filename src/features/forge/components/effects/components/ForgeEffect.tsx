@@ -105,6 +105,10 @@ interface FilledProps {
 }
 
 export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
+    const effectNameSelector = () => {
+        
+    }
+    
     return (
         <AnimatePresence>
             {effectData && (
@@ -132,11 +136,13 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                                     : ''
                             }`}
                             style={{
-                                width: '1rem',
-                                height: '1rem',
+                                width: '1.2rem',
+                                height: '1.2rem',
                             }}
                         />
-                        <p className='forge-effect-topline-title'>{effectData.card.title}</p>
+                        <p className='forge-effect-topline-title'>
+                            {effectData.card.title}
+                        </p>
                         <Button
                             onClick={() => {
                                 dispatch({
@@ -150,7 +156,26 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                             ✕
                         </Button>
                     </div>
-                    <div className='forge-effect-main'></div>
+                    <div className='forge-effect-main'>
+                        <p>
+
+                        </p>
+                        <input
+                            style={{ width: '100%' }}
+                            type='range'
+                            value={effectData.strength.current}
+                            step={0.01}
+                            max={effectData.strength.max}
+                            min={effectData.strength.min}
+                            onChange={(e) =>
+                                dispatch({
+                                    type: 'ADJUST_EFFECT_STRENGTH',
+                                    effectIdx: effectData.effectIdx,
+                                    strength: Number(e.target.value),
+                                })
+                            }
+                        />
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>

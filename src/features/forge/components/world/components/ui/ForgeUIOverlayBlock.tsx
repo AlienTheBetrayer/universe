@@ -84,6 +84,7 @@ export const ForgeUIOverlayBlock = ({
                 material={material}
                 idx={idx}
                 hoveredIdx={hoveredIdx}
+                speed={0.3}
             />
             <HotkeyTooltip
                 className='forge-ui-overlay-number-tooltip'
