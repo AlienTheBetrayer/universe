@@ -38,9 +38,18 @@ export const ForgeBlock = ({
             onPointerEnter={() => onHoverStart?.()}
             onPointerLeave={() => onHoverEnd?.()}
         >
-            <div className='forge-block-title'>{BlockDataMaterials[material].visibleName}</div>
+            <div className='forge-block-title'>
+                {BlockDataMaterials[material].emoji} {BlockDataMaterials[material].visibleName}
+            </div>
+            <div className='forge-block-emoji'>
+                {BlockDataMaterials[material].emoji}
+            </div>
 
-            <ForgeBlockCanvas material={material} idx={idx} hoveredIdx={hoveredIdx} />
+            <ForgeBlockCanvas
+                material={material}
+                idx={idx}
+                hoveredIdx={hoveredIdx}
+            />
             <HotkeyTooltip
                 className='forge-block-number-tooltip'
                 hotkeys={[`${idx}`]}

@@ -3,20 +3,24 @@ export const BlockDataMaterials = {
         isBuildable: false,
         visibleName: 'Field',
         jsx: <meshPhongMaterial shininess={1000} />,
+        emoji: '',
     },
     Technical: {
-        visibleName: '🌀 Technical',
+        emoji: '🌀',
+        visibleName: 'Technical',
         isBuildable: true,
         jsx: <meshNormalMaterial />,
     },
     Metal: {
-        visibleName: '⚙️ Metal',
+        emoji: '⚙️',
+        visibleName: 'Metal',
         isBuildable: true,
         jsx: <meshPhysicalMaterial metalness={0.9} roughness={0.5} />,
     },
     Glass: {
         isBuildable: true,
-        visibleName: '🪩 Glass',
+        emoji: '🪩',
+        visibleName: 'Glass',
         jsx: (
             <meshPhysicalMaterial
                 metalness={0.5}
@@ -29,7 +33,8 @@ export const BlockDataMaterials = {
         ),
     },
     Glitchy: {
-        visibleName: '🔮 Glitchy',
+        emoji: '🔮',
+        visibleName: 'Glitchy',
         isBuildable: true,
         jsx: (
             <meshPhongMaterial
@@ -40,7 +45,8 @@ export const BlockDataMaterials = {
         ),
     },
     Deep: {
-        visibleName: '🕳️ Deep',
+        emoji: '🕳️',
+        visibleName: 'Deep',
         isBuildable: true,
         jsx: <meshDepthMaterial />,
     },
@@ -53,4 +59,3 @@ export interface BlockData {
     color: string;
     material: BlockDataMaterial;
 }
-

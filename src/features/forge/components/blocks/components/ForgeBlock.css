@@ -2,7 +2,7 @@
     position: relative;
 
     width: 15%;
-    aspect-ratio: 1/1;   
+    aspect-ratio: 1/1;
     
     border: 2px dashed var(--background-5);
     border-radius: 16px;
@@ -31,12 +31,20 @@
     border-radius: 64px;
 }
 
+/* decorative */
 .forge-block-title {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 0.5rem;
     white-space: nowrap;
+}
+
+.forge-block-emoji {
+    position: absolute;
+
+    font-size: 12vw;
+    opacity: 0.1;
 }
 
 @media (max-width: 768px) {

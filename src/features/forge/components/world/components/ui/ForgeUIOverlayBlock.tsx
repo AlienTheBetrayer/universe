@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../../../../ui/Button/components/Button';
-import { BlockDataMaterials, type BlockDataMaterial } from '../../../../context/types/world/block';
+import {
+    BlockDataMaterials,
+    type BlockDataMaterial,
+} from '../../../../context/types/world/block';
 import { ForgeBlockCanvas } from '../../../blocks/components/canvas/ForgeBlockCanvas';
 import './ForgeUIOverlayBlock.css';
 
@@ -71,12 +74,17 @@ export const ForgeUIOverlayBlock = ({
                             damping: 16,
                         }}
                     >
+                        {BlockDataMaterials[material].emoji}{' '}
                         {BlockDataMaterials[material].visibleName}
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <ForgeBlockCanvas material={material} idx={idx} hoveredIdx={hoveredIdx} />
+            <ForgeBlockCanvas
+                material={material}
+                idx={idx}
+                hoveredIdx={hoveredIdx}
+            />
             <HotkeyTooltip
                 className='forge-ui-overlay-number-tooltip'
                 hotkeys={[`${idx}`]}
