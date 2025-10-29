@@ -21,6 +21,7 @@ export const useForgeSaveLoad = () => {
             blocks: Array.from(onlyBlocks.entries()),
             blockSize: state.blockSize,
             currentBlockMaterial: state.currentBlockMaterial,
+            worldName: name,
         };
         saveToFile(data, `${name}.forge`);
     };
@@ -46,6 +47,7 @@ export const useForgeSaveLoad = () => {
                     blocks: parsed.blocks,
                     blockSize: parsed.blockSize,
                     currentBlockMaterial: parsed.currentBlockMaterial,
+                    worldName: parsed.worldName
                 });
             });
         });

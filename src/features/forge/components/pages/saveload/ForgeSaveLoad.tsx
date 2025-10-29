@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useHotkeys } from '../../../../../hooks/useHotkeys';
+import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 import { Button } from '../../../../ui/Button/components/Button';
 import { Input } from '../../../../ui/Input/components/Input';
 import { SelectorMenu } from '../../../../ui/SelectorMenu/components/SelectorMenu';
@@ -6,6 +8,8 @@ import { useWorldContext } from '../../../context/WorldContext';
 import { ForgePageTemplate } from '../ForgePageTemplate';
 import { useForgeSaveLoad } from '../hooks/useForgeSaveLoad';
 import './ForgeSaveLoad.css';
+
+type SaveLoadPage = 'Save' | 'Load';
 
 interface Props {
     onInteract?: () => void;
@@ -18,6 +22,43 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
 
     const controller = useForgeSaveLoad();
 
+    // functions to interact with the controller
+    const save = () => {
+        console.log(saveInputValue.length);
+        if (saveInputValue.length < 5) return;
+
+        controller.save(saveInputValue.replaceAll(' ', '_'));
+    };
+
+    const load = () => {
+        controller.load().then((val) => {
+            onInteract?.();
+            dispatch({
+                type: 'LOAD_WORLD',
+                world: val,
+            });
+            dispatch({
+                type: 'GENERATE_FIELD',
+            });
+        });
+    };
+
+    // hotkeys logic
+    const [currentPage, setCurrentPage] = useState<SaveLoadPage>('Save');
+
+    const hotkeys: Record<SaveLoadPage, () => void> = {
+        Save: () => save(),
+        Load: () => load(),
+    };
+
+    useHotkeys([
+        {
+            hotkey: 'Enter',
+            action: () => hotkeys[currentPage](),
+            ignoreFocus: true,
+        },
+    ]);
+
     return (
         <ForgePageTemplate
             className='forge-save-load'
@@ -25,6 +66,7 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
             title='Save or load a <mark>world</mark>!'
         >
             <SelectorMenu
+                onSelect={(page) => setCurrentPage(page.name as SaveLoadPage)}
                 items={[
                     {
                         name: 'Save',
@@ -48,13 +90,10 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                 />
                                 <Button
                                     enabled={saveInputValue.length >= 5}
-                                    onClick={() =>
-                                        controller.save(
-                                            saveInputValue.replaceAll(' ', '_')
-                                        )
-                                    }
+                                    onClick={() => save()}
                                 >
                                     Save <small>(to your computer)</small>
+                                    <HotkeyTooltip hotkeys={['Enter']} />
                                 </Button>
                             </div>
                         ),
@@ -69,21 +108,9 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                     gap: '1rem',
                                 }}
                             >
-                                <Button
-                                    onClick={() => {
-                                        controller.load().then((val) => {
-                                            onInteract?.();
-                                            dispatch({
-                                                type: 'LOAD_WORLD',
-                                                world: val,
-                                            });
-                                            dispatch({
-                                                type: 'GENERATE_FIELD',
-                                            });
-                                        });
-                                    }}
-                                >
+                                <Button onClick={() => {}}>
                                     Load <small>(open a file)</small>
+                                    <HotkeyTooltip hotkeys={['Enter']} />
                                 </Button>
                             </div>
                         ),

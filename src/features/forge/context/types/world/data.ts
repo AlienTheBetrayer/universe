@@ -10,4 +10,7 @@ export interface WorldData {
 
     // properties
     blockSize: number;
+
+    // world
+    worldName?: string;
 }
