@@ -1,4 +1,5 @@
 import { loadFromFile } from '../../../../../utils/loadFromFile';
+import { saveToFile } from '../../../../../utils/saveToFile';
 import {
     type BlockData,
     type BlockDataMaterial,
@@ -13,7 +14,7 @@ interface WorldSave {
 export const useForgeSaveLoad = () => {
     const [state] = useWorldContext();
 
-    const save = () => {
+    const save = (name: string) => {
         const onlyBlocks = new Map();
         for (const [material, blockData] of state.blocks) {
             if (material !== 'Field') {
@@ -26,12 +27,12 @@ export const useForgeSaveLoad = () => {
             blockSize: state.blockSize,
         };
 
-        const dataJSON = JSON.stringify(data, null, 2);
+        saveToFile(data, `${name}.forge`);
     };
 
     const load = async () => {
         return new Promise<WorldSave>((resolve, reject) => {
-            loadFromFile('.world').then((text) => {
+            loadFromFile('.forge').then((text) => {
                 if (!text) {
                     reject(new Error('No file content.'));
                     return;

@@ -44,8 +44,8 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                     onClear={() => setSaveInputValue('')}
                                 />
                                 <Button
-                                    enabled={saveInputValue.length > 5}
-                                    onClick={() => controller.save()}
+                                    enabled={saveInputValue.length >= 5}
+                                    onClick={() => controller.save(saveInputValue)}
                                 >
                                     Save <small>(to your computer)</small>
                                 </Button>
@@ -67,7 +67,7 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                         controller
                                             .load()
                                             .then((val) =>
-                                                console.log(val?.blockSize)
+                                                console.log(val)
                                             )
                                     }
                                 >
