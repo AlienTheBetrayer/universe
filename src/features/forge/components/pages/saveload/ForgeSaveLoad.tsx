@@ -64,7 +64,11 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                             >
                                 <Button
                                     onClick={() =>
-                                        console.log(controller.load(''))
+                                        controller
+                                            .load()
+                                            .then((val) =>
+                                                console.log(val?.blockSize)
+                                            )
                                     }
                                 >
                                     Load <small>(open a file)</small>

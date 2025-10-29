@@ -1,14 +1,17 @@
-import { useRef } from 'react';
+import { loadFromFile } from '../../../../../utils/loadFromFile';
 import {
-    BlockDataMaterials,
     type BlockData,
     type BlockDataMaterial,
 } from '../../../context/types/world/block';
 import { useWorldContext } from '../../../context/WorldContext';
 
+interface WorldSave {
+    blocks: Map<BlockDataMaterial, Map<string, BlockData>>;
+    blockSize: number;
+}
+
 export const useForgeSaveLoad = () => {
     const [state] = useWorldContext();
-    const jsonRef = useRef<string>('');
 
     const save = () => {
         const onlyBlocks = new Map();
@@ -24,25 +27,31 @@ export const useForgeSaveLoad = () => {
         };
 
         const dataJSON = JSON.stringify(data, null, 2);
-        jsonRef.current = dataJSON;
-        console.log(dataJSON);
     };
 
-    const load = (json: string) => {
-        const parsed = JSON.parse(jsonRef.current);
-        const blocksMap = new Map<BlockDataMaterial, Map<string, BlockData>>();
+    const load = async () => {
+        return new Promise<WorldSave>((resolve, reject) => {
+            loadFromFile('.world').then((text) => {
+                if (!text) {
+                    reject(new Error('No file content.'));
+                    return;
+                }
 
-        for (const [materialType, entries] of parsed.blocks) {
-            const innerMap = new Map<string, BlockData>(entries);
-            blocksMap.set(materialType, innerMap);
-        }
+                const parsed: WorldSave = JSON.parse(text);
+                const blocksMap: WorldSave['blocks'] = new Map();
 
-        console.log(blocksMap);
+                for (const [materialType, entries] of parsed.blocks) {
+                    const innerMap = new Map<string, BlockData>(entries);
+                    blocksMap.set(materialType, innerMap);
+                }
+                parsed.blocks = blocksMap;
 
-        return {
-            blocks: blocksMap,
-            blockSize: parsed.blockSize,
-        };
+                resolve({
+                    blocks: blocksMap,
+                    blockSize: parsed.blockSize,
+                });
+            });
+        });
     };
 
     return {
