@@ -10,12 +10,12 @@ export const useForgeDrag = (
     useEffect(() => {
         const handle = () => {
             if (!state.cardDraggingIdx) return;
-
+            
             const card = state.cards.find(
                 (c) => c.idx === state.cardDraggingIdx
             );
-
-            if (card && state.currentEffectHoveredIdx?.current) {
+            
+            if (card && typeof state.currentEffectHoveredIdx?.current === 'number') {
                 dispatch({
                     type: 'SET_EFFECT_SLOT',
                     effectIdx: state.currentEffectHoveredIdx.current,
@@ -34,5 +34,5 @@ export const useForgeDrag = (
             window.removeEventListener('pointerup', handle);
             window.removeEventListener('touchend', handle);
         };
-    }, [state.cardDraggingIdx, state.currentEffectHoveredIdx]);
+    }, [state.cardDraggingIdx]);
 };
