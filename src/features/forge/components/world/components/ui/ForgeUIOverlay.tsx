@@ -13,9 +13,8 @@ export const ForgeUIOverlay = () => {
     return (
         <div className='forge-ui-overlay'>
             {tooltips.render()}
-
             <Button
-                style={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+                className='forge-ui-overlay-fullscreen'
                 ref={(el) =>
                     tooltips.set(0, 'Enter / exit fullscreen', el, 'down')
                 }

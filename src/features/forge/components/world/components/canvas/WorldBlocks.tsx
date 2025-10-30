@@ -47,7 +47,7 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     });
 
     return Array.from(state.blocks.entries()).map(([material, blockData]) => (
-        <Instances frustumCulled={false} limit={100000} key={material}>
+        <Instances frustumCulled={false} limit={100000} key={material} castShadow receiveShadow>
             {BlockDataMaterials[material].jsx}
             <boxGeometry
                 args={[state.blockSize, state.blockSize, state.blockSize]}

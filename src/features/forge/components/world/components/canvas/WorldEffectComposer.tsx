@@ -46,17 +46,17 @@ export const WorldEffectComposer = () => {
     }
 
     const slot = occupiedSlots.get('html');
-    if (slot?.enabled === true) {
-        elements.push(
-            <Bloom
-                luminanceThreshold={0}
-                luminanceSmoothing={0.9}
-                intensity={
-                    slot?.current ?? ForgeWorldEffects['html'].strength.min
-                }
-            />
-        );
-    }
+    elements.push(
+        <Bloom
+            luminanceThreshold={0}
+            luminanceSmoothing={0.9}
+            intensity={
+                slot?.enabled === true
+                    ? slot?.current ?? ForgeWorldEffects['html'].strength.min
+                    : ForgeWorldEffects['html'].strength.min
+            }
+        />
+    );
 
     if (occupiedSlots.has('javascript')) {
         const slot = occupiedSlots.get('javascript');
