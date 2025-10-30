@@ -2,6 +2,7 @@ import { AnimatePresence } from 'motion/react';
 import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { Spotlight } from '../../ui/Spotlight/components/Spotlight';
 import { useForgeContext } from '../context/ForgeContext';
 import { WorldProvider } from '../context/WorldContext';
 import { useForgePages } from '../hooks/useForgePages';
@@ -11,6 +12,7 @@ import { ForgeEffects } from './effects/components/ForgeEffects';
 import './Forge.css';
 import { ForgeWorld } from './world/components/ForgeWorld';
 import { ForgeWorldFullscreen } from './world/components/ForgeWorldFullscreen';
+import { ForgeConfetti } from './effects/components/ForgeConfetti';
 
 export const Forge = () => {
     const isLarge = !useMediaQuery(1024);
@@ -23,6 +25,42 @@ export const Forge = () => {
     return (
         <WorldProvider>
             <div className='forge'>
+                {state.effectSlots.length >= 9 && (
+                    <>
+                        <ForgeConfetti/>
+                        <div
+                            style={{
+                                position: 'absolute',
+                                inset: '0',
+                                overflow: 'hidden',
+                            }}
+                        >
+                            <Spotlight
+                                className='-left-30 top-0 h-600 w-300 lg:h-300'
+                                fill='#9393ffff'
+                            />
+                            <Spotlight
+                                className='right-0 top-0 lg:-right-60 h-300 w-300 rotate-90'
+                                fill='#8888f5ff'
+                            />
+
+                            <Spotlight
+                                className='-left-30 top-200 h-600 w-300 lg:h-300'
+                                fill='#9393ffff'
+                            />
+                            <Spotlight
+                                className='right-0 top-200 lg:-right-60 h-300 w-300 rotate-90'
+                                fill='#8888f5ff'
+                            />
+
+                            <Spotlight
+                                className='right-0 top-400 lg:-right-60 h-300 w-300 rotate-90'
+                                fill='#8888f5ff'
+                            />
+                        </div>
+                    </>
+                )}
+
                 {createPortal(
                     <AnimatePresence>
                         {state.isWorldFullscreen && <ForgeWorldFullscreen />}
