@@ -14,6 +14,7 @@ interface Props {
     idx: number;
     material: BlockDataMaterial;
     isSelected: boolean;
+    isEnabled: boolean;
     hoveredIdx: React.RefObject<number | false>;
 
     // events
@@ -29,6 +30,7 @@ export const ForgeUIOverlayBlock = ({
     idx,
     material,
     isSelected,
+    isEnabled,
     onSelect,
 }: Props) => {
     const [hovered, setHovered] = useState<boolean>(false);
@@ -58,10 +60,11 @@ export const ForgeUIOverlayBlock = ({
                 onHoverEnd?.();
                 setHovered(false);
             }}
+            enabled={isEnabled}
         >
             {/* tooltip frm this element */}
             <AnimatePresence>
-                {hovered && (
+                {hovered && isEnabled && (
                     <motion.div
                         className='forge-ui-overlay-block-title'
                         style={{ x: '-50%' }}

@@ -8,3 +8,9 @@
     bottom: 0.5rem;
     width: 80%;
 }
+
+@media (max-width: 640px) {
+    .forge-ui-overlay-blocks {
+        width: 90%;
+    }
+}

@@ -13,11 +13,12 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
     const selection = useBlockSelection();
 
-    useFrame((state) => {
+    useFrame((s) => {
         if (selection.ref.current) {
-            const t = state.clock.getElapsedTime();
+            const t = s.clock.getElapsedTime();
 
-            const scale = 1 + Math.abs(Math.sin(t * 2)) / 3;
+            const force = state.currentInteractionMode === 'building' ? 1 : 1.5;
+            const scale = 1 + Math.abs(Math.sin(t * 2 * force)) / 3;
             selection.ref.current.scale.set(scale, scale, scale);
         }
     });
@@ -29,7 +30,15 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                 args={[state.blockSize, state.blockSize, state.blockSize]}
             />
 
-            <Edges color='#ccd5f3' ref={selection.ref} scale={1.1} />
+            <Edges
+                color={`${
+                    state.currentInteractionMode === 'building'
+                        ? 'hsla(226, 90%, 75%, 1.00)'
+                        : 'hsla(0, 90%, 75%, 1.00)'
+                }`}
+                ref={selection.ref}
+                scale={1.1}
+            />
 
             {Array.from(blockData.entries()).map(
                 ([_positionStr, block], idx) => (
@@ -39,30 +48,43 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
                         blockSize={state.blockSize}
                         onHoverStart={(e) => selection.start(e)}
                         onHoverEnd={() => selection.end()}
-                        onInteract={(interactionType, block) => {
-                            if (!buildingEnabled) return;
+                        onClick={(b) => {
+                            if (state.currentInteractionMode === 'deleting') {
+                                dispatch({
+                                    type: 'DELETE_BLOCK',
+                                    data: b,
+                                });
+                            }
+                        }}
+                        onInteract={(interactionType, b) => {
+                            if (
+                                !buildingEnabled ||
+                                state.currentInteractionMode !== 'building'
+                            )
+                                return;
 
                             switch (interactionType) {
                                 case 'create':
                                     dispatch({
                                         type: 'CREATE_BLOCK',
                                         data: {
-                                            ...block,
+                                            ...b,
                                             material:
                                                 state.currentBlockMaterial,
                                         },
                                     });
+
                                     break;
                                 case 'delete':
-                                    if (block.material !== 'Field') {
+                                    if (b.material !== 'Field') {
                                         dispatch({
                                             type: 'DELETE_BLOCK',
-                                            data: block,
+                                            data: b,
                                         });
                                     }
                                     break;
                             }
-                            selection.start(block);
+                            selection.start(b);
                         }}
                     />
                 )

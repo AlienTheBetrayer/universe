@@ -12,6 +12,7 @@ export const useWorldInit = (dispatch: React.Dispatch<WorldReducerAction>) => {
     }, []);
 
     // 1-9 hotkeys for inventory
+    // 0 for deletion
     const hotkeys: HotkeyAction[] = useMemo(() => {
         const ret: HotkeyAction[] = [];
 
@@ -22,6 +23,10 @@ export const useWorldInit = (dispatch: React.Dispatch<WorldReducerAction>) => {
                     dispatch({ type: 'SELECT_BUILDING_BLOCK_IDX', idx: i }),
             });
         }
+        ret.push({
+            hotkey: '0',
+            action: () => dispatch({ type: 'TOGGLE_INTERACTION_MODE' }),
+        });
 
         return ret;
     }, []);

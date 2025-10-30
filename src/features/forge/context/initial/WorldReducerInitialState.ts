@@ -7,6 +7,7 @@ export const WorldReducerInitialState: WorldData = {
     // blocks
     blocks: new Map(),
     currentBlockMaterial: 'Metal',
+    currentInteractionMode: 'building',
 
     // properties
     blockSize: 1,

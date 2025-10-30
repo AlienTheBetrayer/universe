@@ -19,6 +19,7 @@ export type WorldReducerAction =
     // building blocks
     | { type: 'SELECT_BUILDING_BLOCK'; block: BlockDataMaterial }
     | { type: 'SELECT_BUILDING_BLOCK_IDX'; idx: number }
+    | { type: 'TOGGLE_INTERACTION_MODE' }
 
     // field
     | { type: 'GENERATE_FIELD' }
@@ -81,6 +82,14 @@ export const WorldReducer = (
                 currentBlockMaterial: block as BlockDataMaterial,
             };
         }
+        case 'TOGGLE_INTERACTION_MODE':
+            return {
+                ...state,
+                currentInteractionMode:
+                    state.currentInteractionMode === 'building'
+                        ? 'deleting'
+                        : 'building',
+            };
 
         // field
         case 'GENERATE_FIELD': {

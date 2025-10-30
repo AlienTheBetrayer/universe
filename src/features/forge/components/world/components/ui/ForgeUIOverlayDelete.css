@@ -1,0 +1,14 @@
+.forge-ui-overlay-delete-selected {
+    border-color: #f00 !important;
+    border-radius: 24px;
+}
+
+.forge-ui-delete-img {
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+}

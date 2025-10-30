@@ -1,58 +1,16 @@
 import { Center, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import {
-    Bloom,
-    ChromaticAberration,
-    EffectComposer,
-    Glitch,
-} from '@react-three/postprocessing';
-import { useRef, useState, type JSX } from 'react';
-import { Vector2 } from 'three';
-import { useForgeContext } from '../../../../context/ForgeContext';
-import { type ForgeCardType } from '../../../../context/types/forge/cards';
-import { ForgeWorldEffects } from '../../../../context/types/forge/effects';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { useRef, useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
+import { WorldEffectComposer } from './WorldEffectComposer';
 
 export const WorldCanvas = () => {
     const [state] = useWorldContext();
-    const [forgeState] = useForgeContext();
 
     const selectedTimeoutRef = useRef<number>(null);
     const [selected, setSelected] = useState<boolean>(false);
-
-    const effectComposer = () => {
-        const elements: JSX.Element[] = [];
-        const occupiedSlots = new Map<
-            ForgeCardType,
-            { current: number | undefined; min: number }
-        >();
-
-        forgeState.effectSlots.forEach((slot) => {
-            occupiedSlots.set(slot.card.type, {
-                current: slot.strength,
-                min: ForgeWorldEffects[slot.card.type].strength.min,
-            });
-        });
-
-        if (occupiedSlots.has('css')) {
-            const slot = occupiedSlots.get('css')!;
-            elements.push(
-                <ChromaticAberration
-                    offset={[
-                        (slot?.current ?? slot?.min) / 30,
-                        (slot?.current ?? slot?.min) / 30,
-                    ]}
-                />
-            );
-        }
-
-        if (occupiedSlots.has('html')) {
-            elements.push(<Glitch duration={new Vector2(1, 1)} />);
-        }
-
-        return <>{...elements}</>;
-    };
 
     return (
         <Canvas
@@ -74,16 +32,17 @@ export const WorldCanvas = () => {
                 }
             }}
         >
+            {/* effects */}
             <EffectComposer>
                 <Bloom
-                    intensity={2}
-                    luminanceThreshold={0.1}
+                    intensity={6}
+                    luminanceThreshold={0}
                     luminanceSmoothing={0.9}
                 />
-
-                {effectComposer()}
+                {WorldEffectComposer()}
             </EffectComposer>
 
+            {/* light */}
             <directionalLight
                 position={[5, 10, 5]}
                 intensity={1}
@@ -93,10 +52,12 @@ export const WorldCanvas = () => {
             />
             <hemisphereLight color='#fff' intensity={0.6} />
 
+            {/* blocks / data */}
             <Center key={`${state.blockSize}`}>
                 <WorldBlocks buildingEnabled={selected} />
             </Center>
 
+            {/* camera / controls */}
             <OrbitControls
                 autoRotateSpeed={state.autoRotationEnabled ? 0.25 : 0}
                 autoRotate

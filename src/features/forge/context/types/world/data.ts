@@ -7,6 +7,7 @@ export interface WorldData {
     // blocks
     blocks: Map<BlockDataMaterial, Map<string, BlockData>>;
     currentBlockMaterial: BlockDataMaterial;
+    currentInteractionMode: 'building' | 'deleting';
 
     // properties
     blockSize: number;

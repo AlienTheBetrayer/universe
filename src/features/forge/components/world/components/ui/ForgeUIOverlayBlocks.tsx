@@ -3,6 +3,7 @@ import { BlockDataMaterials, type BlockDataMaterial } from '../../../../context/
 import { useWorldContext } from '../../../../context/WorldContext';
 import { ForgeUIOverlayBlock } from './ForgeUIOverlayBlock';
 import './ForgeUIOverlayBlocks.css';
+import { ForgeUIOverlayDelete } from './ForgeUIOverlayDelete';
 
 export const ForgeUIOverlayBlocks = () => {
     const [state, dispatch] = useWorldContext();
@@ -14,6 +15,7 @@ export const ForgeUIOverlayBlocks = () => {
                 ([key, block], idx) =>
                     block.isBuildable && (
                         <ForgeUIOverlayBlock
+                            isEnabled={state.currentInteractionMode === 'building'}
                             idx={idx}
                             isSelected={state.currentBlockMaterial === key}
                             key={idx}
@@ -30,6 +32,8 @@ export const ForgeUIOverlayBlocks = () => {
                         />
                     )
             )}
+
+            <ForgeUIOverlayDelete/>
         </div>
     );
 };

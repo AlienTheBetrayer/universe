@@ -19,16 +19,15 @@
 }
 
 .forge-ui-overlay-block:hover {
-    background-color: var(--background-2-transparent);
+    background-color: var(--background-5);
 }
 
 .forge-ui-overlay-block:active {
-    background-color: var(--background-3-transparent);
+    background-color: var(--background-3);
 }
 
 /* states */
 .forge-ui-overlay-block-selected {
-    background-color: var(--background-3-transparent) !important;
     border-color: #00f !important;
     border-radius: 24px;
 }
