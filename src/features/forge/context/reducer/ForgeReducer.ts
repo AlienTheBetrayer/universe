@@ -28,7 +28,8 @@ export type ForgeReducerAction =
     | { type: 'RESTORE_CANCEL_CARD' }
 
     // page
-    | { type: 'SWITCH_PAGE'; page: ForgePage };
+    | { type: 'SWITCH_PAGE'; page: ForgePage }
+    | { type: 'SET_TUTORIAL_VISIBILITY'; flag: boolean };
 
 export const ForgeReducer = (
     state: ForgeData,
@@ -168,5 +169,7 @@ export const ForgeReducer = (
         // pages
         case 'SWITCH_PAGE':
             return { ...state, currentPage: action.page };
+        case 'SET_TUTORIAL_VISIBILITY':
+            return { ...state, tutorialVisible: action.flag };
     }
 };

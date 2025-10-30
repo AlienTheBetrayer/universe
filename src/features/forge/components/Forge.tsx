@@ -15,6 +15,7 @@ import { ForgeWorld } from './world/components/ForgeWorld';
 import { ForgeWorldFullscreen } from './world/components/ForgeWorldFullscreen';
 
 import { motion } from 'motion/react';
+import { ForgeTutorial } from './ForgeTutorial';
 
 export const Forge = () => {
     const isLarge = !useMediaQuery(1024);
@@ -27,6 +28,8 @@ export const Forge = () => {
     return (
         <WorldProvider>
             <div className='forge'>
+                <ForgeTutorial />
+
                 <AnimatePresence>
                     {state.effectSlots.length >= 9 && (
                         <motion.div

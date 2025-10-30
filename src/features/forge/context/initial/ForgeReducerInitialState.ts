@@ -99,4 +99,5 @@ export const ForgeReducerInitialState: ForgeData = {
 
     // pages
     currentPage: 'default',
+    tutorialVisible: false
 };

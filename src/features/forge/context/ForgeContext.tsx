@@ -1,4 +1,11 @@
-import { createContext, useContext, useReducer, useRef } from 'react';
+import {
+    createContext,
+    useContext,
+    useEffect,
+    useReducer,
+    useRef,
+} from 'react';
+import { useLocalStore } from '../../../zustand/localStore';
 import { useForgeDrag } from './hooks/useForgeDrag';
 import { ForgeReducerInitialState } from './initial/ForgeReducerInitialState';
 import { ForgeReducer, type ForgeReducerAction } from './reducer/ForgeReducer';
@@ -22,6 +29,15 @@ export const ForgeProvider = ({ children }: Props) => {
 
     const currentEffectHoveredIdxRef = useRef<number | false>(false);
     state.currentEffectHoveredIdx = currentEffectHoveredIdxRef;
+
+    const localStore = useLocalStore();
+
+    useEffect(() => {
+        dispatch({
+            type: 'SET_TUTORIAL_VISIBILITY',
+            flag: !localStore.tutorialSeen.forge,
+        });
+    }, []);
 
     return (
         <ForgeContext.Provider value={[state, dispatch]}>

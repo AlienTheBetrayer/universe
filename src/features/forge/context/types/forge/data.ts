@@ -19,4 +19,5 @@ export interface ForgeData {
 
     // page
     currentPage: ForgePage;
+    tutorialVisible: boolean;
 }
