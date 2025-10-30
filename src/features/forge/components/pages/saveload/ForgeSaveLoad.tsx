@@ -4,6 +4,7 @@ import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyToolti
 import { Button } from '../../../../ui/Button/components/Button';
 import { Input } from '../../../../ui/Input/components/Input';
 import { SelectorMenu } from '../../../../ui/SelectorMenu/components/SelectorMenu';
+import { useForgeContext } from '../../../context/ForgeContext';
 import { useWorldContext } from '../../../context/WorldContext';
 import { ForgePageTemplate } from '../ForgePageTemplate';
 import { useForgeSaveLoad } from '../hooks/useForgeSaveLoad';
@@ -17,6 +18,7 @@ interface Props {
 
 export const ForgeSaveLoad = ({ onInteract }: Props) => {
     const [, dispatch] = useWorldContext();
+    const [, forgeDispatch] = useForgeContext();
 
     const [saveInputValue, setSaveInputValue] = useState<string>('');
 
@@ -24,7 +26,6 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
 
     // functions to interact with the controller
     const save = () => {
-        console.log(saveInputValue.length);
         if (saveInputValue.length < 5) return;
 
         controller.save(saveInputValue.replaceAll(' ', '_'));
@@ -35,11 +36,12 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
             onInteract?.();
             dispatch({
                 type: 'LOAD_WORLD',
-                world: val,
+                world: val.world,
             });
             dispatch({
                 type: 'GENERATE_FIELD',
             });
+            forgeDispatch({ type: 'LOAD_SAVE', save: val.forge });
         });
     };
 
@@ -108,7 +110,7 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                     gap: '1rem',
                                 }}
                             >
-                                <Button onClick={() => {}}>
+                                <Button onClick={() => load()}>
                                     Load <small>(open a file)</small>
                                     <HotkeyTooltip hotkeys={['Enter']} />
                                 </Button>

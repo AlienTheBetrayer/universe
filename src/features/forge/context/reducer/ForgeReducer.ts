@@ -1,6 +1,7 @@
 import type { ForgeCardData } from '../types/forge/cards';
 import type { ForgeData, ForgePage } from '../types/forge/data';
 import type { ForgeEffectData } from '../types/forge/effects';
+import type { ForgeSave } from '../types/world/save';
 
 export type ForgeReducerAction =
     // cards
@@ -14,6 +15,9 @@ export type ForgeReducerAction =
     | { type: 'FILL_REMAINING_EFFECTS' }
     | { type: 'ADJUST_EFFECT_STRENGTH'; effectIdx: number; strength: number }
     | { type: 'TOGGLE_EFFECT'; effectIdx: number }
+
+    // save
+    | { type: 'LOAD_SAVE'; save: ForgeSave }
 
     // world
     | { type: 'WORLD_FULLSCREEN_TOGGLE' }
@@ -137,6 +141,14 @@ export const ForgeReducer = (
                           }
                         : slot
                 ),
+            };
+
+        // save
+        case 'LOAD_SAVE':
+            return {
+                ...state,
+                cards: action.save.cards,
+                effectSlots: action.save.effectSlots,
             };
 
         // world
