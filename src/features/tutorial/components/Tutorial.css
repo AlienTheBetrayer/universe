@@ -4,7 +4,7 @@
     inset: 0;
     display: grid;
     place-items: center;
-    z-index: 30;
+    z-index: 1000;
 }
 
 /* main centered sub-container */
@@ -28,7 +28,8 @@
     display: grid;
     grid-template-rows: 7fr 3fr;
 
-    width: 300px;
+    width: 90%;
+    max-width: 600px;
     min-height: 300px;
     border-radius: 32px;
     background-color: var(--background-4-transparent);
