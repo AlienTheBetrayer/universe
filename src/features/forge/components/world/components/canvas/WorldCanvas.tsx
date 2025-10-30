@@ -1,13 +1,24 @@
 import { Center, OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
 import { useRef, useState } from 'react';
+import { type DirectionalLight } from 'three';
+import { useForgeContext } from '../../../../context/ForgeContext';
+import {
+    ForgeWorldEffects,
+    type ForgeEffectData,
+} from '../../../../context/types/forge/effects';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
 import { WorldEffectComposer } from './WorldEffectComposer';
 
 export const WorldCanvas = () => {
     const [state] = useWorldContext();
+    const [forgeState] = useForgeContext();
+
+    const zustandEffect = forgeState.effectSlots.find(
+        (slot) => slot.card.type === 'zustand'
+    );
 
     const selectedTimeoutRef = useRef<number>(null);
     const [selected, setSelected] = useState<boolean>(false);
@@ -37,15 +48,10 @@ export const WorldCanvas = () => {
                 {WorldEffectComposer()}
             </EffectComposer>
 
-            {/* light */}
-            <directionalLight
-                position={[5, 10, 5]}
-                intensity={1}
-                castShadow
-                shadow-mapSize={[2048, 2048]}
-                shadow-bias={-0.0001}
-            />
-            <hemisphereLight color='#fff' intensity={0.6} />
+            <WorldDirectionalLight zustandEffect={zustandEffect} />
+            {!zustandEffect?.enabled && (
+                <hemisphereLight color='#fff' intensity={0.6} />
+            )}
 
             {/* blocks / data */}
             <Center key={`${state.blockSize}`}>
@@ -59,5 +65,44 @@ export const WorldCanvas = () => {
                 dampingFactor={0.05}
             />
         </Canvas>
+    );
+};
+
+interface LightProps {
+    zustandEffect: ForgeEffectData | undefined;
+}
+
+const WorldDirectionalLight = ({ zustandEffect }: LightProps) => {
+    const directionalLightRef = useRef<DirectionalLight>(null);
+
+    useFrame((state) => {
+        if (directionalLightRef.current) {
+            const t = state.clock.getElapsedTime();
+
+            if (zustandEffect?.enabled) {
+                const strength =
+                    zustandEffect.strength ??
+                    ForgeWorldEffects.zustand.strength.min;
+
+                directionalLightRef.current.position.set(
+                    5 * Math.sin(t * strength),
+                    10 * Math.cos(t * strength),
+                    5
+                );
+            } else {
+                directionalLightRef.current.position.set(5, 10, 5);
+            }
+        }
+    });
+
+    return (
+        <directionalLight
+            ref={directionalLightRef}
+            position={[5, 10, 5]}
+            intensity={1}
+            castShadow
+            shadow-mapSize={[2048, 2048]}
+            shadow-bias={-0.0001}
+        />
     );
 };

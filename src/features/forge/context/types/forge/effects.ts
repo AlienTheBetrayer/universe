@@ -60,9 +60,9 @@ export const ForgeWorldEffects: Record<ForgeCardType, ForgeEffectType> = {
         strength: { min: 0.5, max: 2 },
     },
     zustand: {
-        name: 'Noise Grain',
-        emoji: '🐻',
-        strength: { min: 0.05, max: 0.8 },
+        name: 'Day / Night cycle',
+        emoji: '🌌',
+        strength: { min: 0.1, max: 3 },
     },
 };
 
