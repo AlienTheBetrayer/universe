@@ -13,6 +13,7 @@ export type ForgeReducerAction =
     | { type: 'SELECT_EFFECT'; effectIdx: number | false }
     | { type: 'FILL_REMAINING_EFFECTS' }
     | { type: 'ADJUST_EFFECT_STRENGTH'; effectIdx: number; strength: number }
+    | { type: 'TOGGLE_EFFECT'; effectIdx: number }
 
     // world
     | { type: 'WORLD_FULLSCREEN_TOGGLE' }
@@ -57,6 +58,7 @@ export const ForgeReducer = (
                         {
                             effectIdx: action.effectIdx,
                             card: action.card,
+                            enabled: true,
                         },
                     ],
                 };
@@ -105,6 +107,7 @@ export const ForgeReducer = (
                 newEffects.push({
                     effectIdx: idx,
                     card,
+                    enabled: true,
                 });
             }
 
@@ -123,6 +126,18 @@ export const ForgeReducer = (
                 ),
             };
         }
+        case 'TOGGLE_EFFECT':
+            return {
+                ...state,
+                effectSlots: state.effectSlots.map((slot) =>
+                    slot.effectIdx === action.effectIdx
+                        ? {
+                              ...slot,
+                              enabled: !slot.enabled,
+                          }
+                        : slot
+                ),
+            };
 
         // world
         case 'WORLD_FULLSCREEN_TOGGLE':

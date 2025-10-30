@@ -22,42 +22,42 @@ export const ForgeWorldEffects: Record<ForgeCardType, ForgeEffectType> = {
     css: {
         name: 'Chromatic Aberration',
         emoji: '🎨',
-        strength: { min: 0.1, max: 5 },
+        strength: { min: 0.001, max: 0.3 },
     },
     html: {
         name: 'Bloom Glow',
         emoji: '💡',
-        strength: { min: 0.5, max: 2.0 },
+        strength: { min: 6, max: 64 },
     },
     javascript: {
         name: 'Glitch Distortion',
         emoji: '🌩️',
-        strength: { min: 0.2, max: 1.2 },
+        strength: { min: 0.01, max: 1 },
     },
     nextjs: {
-        name: 'SSR Reflection',
-        emoji: '🪞',
+        name: 'Noise Grain',
+        emoji: '😵‍💫',
         strength: { min: 0.3, max: 1.0 },
     },
     react: {
         name: 'Depth of Field',
         emoji: '🎯',
-        strength: { min: 0.4, max: 1.8 },
+        strength: { min: 8, max: 64 },
     },
     redux: {
-        name: 'Motion Blur',
+        name: 'Contrast',
         emoji: '💫',
-        strength: { min: 0.1, max: 0.9 },
+        strength: { min: 0.1, max: 1 },
     },
     tailwind: {
-        name: 'Color Shift',
+        name: 'Colors',
         emoji: '🌈',
-        strength: { min: 0.2, max: 1.4 },
+        strength: { min: 0.1, max: 4 },
     },
     typescript: {
-        name: 'Sharpen Pass',
+        name: 'Dynamic selection',
         emoji: '🔷',
-        strength: { min: 0.3, max: 1.3 },
+        strength: { min: 0.5, max: 2 },
     },
     zustand: {
         name: 'Noise Grain',
@@ -70,4 +70,5 @@ export interface ForgeEffectData {
     effectIdx: number;
     card: ForgeCardData;
     strength?: number;
+    enabled: boolean;
 }

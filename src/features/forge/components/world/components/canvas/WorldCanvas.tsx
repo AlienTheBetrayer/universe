@@ -1,6 +1,6 @@
 import { Center, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { EffectComposer } from '@react-three/postprocessing';
 import { useRef, useState } from 'react';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
@@ -33,12 +33,7 @@ export const WorldCanvas = () => {
             }}
         >
             {/* effects */}
-            <EffectComposer>
-                <Bloom
-                    intensity={6}
-                    luminanceThreshold={0}
-                    luminanceSmoothing={0.9}
-                />
+            <EffectComposer multisampling={0}>
                 {WorldEffectComposer()}
             </EffectComposer>
 

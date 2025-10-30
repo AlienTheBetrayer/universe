@@ -45,7 +45,7 @@ export const ForgeEffectMenu = ({
 
     return (
         <motion.ul
-            style={idx > 2 ? { top: 0, y: '-100%' } : { top: '50%' }}
+            style={idx > 5 ? { top: 0, y: '-100%' } : { top: '50%' }}
             ref={menuRef}
             className='forge-effect-menu'
             initial={{ height: 0 }}

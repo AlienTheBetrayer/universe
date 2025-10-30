@@ -88,3 +88,8 @@
     font-size: 6rem;
     color: var(--background-9);
 }
+
+.forge-effect-disabled {
+    pointer-events: none;
+    border-color: hsl(240, 30%, 50%) !important;
+}

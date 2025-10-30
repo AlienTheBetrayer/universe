@@ -31,9 +31,11 @@ export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
                 if (state.currentEffectHoveredIdx)
                     state.currentEffectHoveredIdx.current = idx;
             }}
-            className={`forge-effect ${
-                state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''
-            } ${effectData !== undefined ? 'forge-effect-filled' : ''}`}
+            className={`forge-effect 
+            ${state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''} 
+            ${effectData !== undefined ? 'forge-effect-filled' : ''}
+            ${effectData?.enabled === false ? 'forge-effect-disabled' : ''}`}
+            
         >
             <ForgeEffectAwaiting state={state} dispatch={dispatch} idx={idx} />
             <ForgeEffectFilled effectData={effectData} dispatch={dispatch} />
@@ -118,7 +120,10 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                         height: '100%',
                     }}
                     initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    animate={{
+                        opacity: effectData.enabled ? 1 : 0.3,
+                        scale: 1,
+                    }}
                     exit={{ opacity: 0, scale: 0.5 }}
                     transition={{
                         type: 'spring',
@@ -127,18 +132,33 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                     }}
                 >
                     <div className='forge-effect-topline'>
-                        <img
-                            src={effectData.card.image}
-                            className={`${
-                                effectData.card.inverted
-                                    ? 'forge-image-inverted'
-                                    : ''
-                            }`}
+                        <Button
                             style={{
-                                width: '1.2rem',
-                                height: '1.2rem',
+                                padding: '0.3rem',
+                                minWidth: 'fit-content',
+                                minHeight: 'fit-content',
+                                pointerEvents: 'all',
                             }}
-                        />
+                            onClick={() =>
+                                dispatch({
+                                    type: 'TOGGLE_EFFECT',
+                                    effectIdx: effectData.effectIdx,
+                                })
+                            }
+                        >
+                            <img
+                                src={effectData.card.image}
+                                className={`${
+                                    effectData.card.inverted
+                                        ? 'forge-image-inverted'
+                                        : ''
+                                }`}
+                                style={{
+                                    width: '1.2rem',
+                                    height: '1.2rem',
+                                }}
+                            />
+                        </Button>
                         <p className='forge-effect-topline-title'>
                             {effectData.card.title}
                         </p>

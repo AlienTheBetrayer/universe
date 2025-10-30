@@ -1,5 +1,7 @@
 import { Edges, Instances } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { useForgeContext } from '../../../../context/ForgeContext';
+import { ForgeWorldEffects } from '../../../../context/types/forge/effects';
 import { BlockDataMaterials } from '../../../../context/types/world/block';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { useBlockSelection } from '../../hooks/useBlockSelection';
@@ -11,7 +13,12 @@ interface Props {
 
 export const WorldBlocks = ({ buildingEnabled }: Props) => {
     const [state, dispatch] = useWorldContext();
+    const [forgeState] = useForgeContext();
     const selection = useBlockSelection();
+
+    const typescriptEffect = forgeState.effectSlots.find(
+        (e) => e.card.type === 'typescript'
+    );
 
     useFrame((s) => {
         if (selection.ref.current) {
@@ -20,6 +27,22 @@ export const WorldBlocks = ({ buildingEnabled }: Props) => {
             const force = state.currentInteractionMode === 'building' ? 1 : 1.5;
             const scale = 1 + Math.abs(Math.sin(t * 2 * force)) / 3;
             selection.ref.current.scale.set(scale, scale, scale);
+
+            if (typescriptEffect && typescriptEffect.enabled === true) {
+                selection.ref.current.rotation.set(
+                    t *
+                        (typescriptEffect.strength ??
+                            ForgeWorldEffects.typescript.strength.min),
+                    t *
+                        (typescriptEffect.strength ??
+                            ForgeWorldEffects.typescript.strength.min),
+                    t *
+                        (typescriptEffect.strength ??
+                            ForgeWorldEffects.typescript.strength.min)
+                );
+            } else {
+                selection.ref.current.rotation.set(0, 0, 0);
+            }
         }
     });
 
