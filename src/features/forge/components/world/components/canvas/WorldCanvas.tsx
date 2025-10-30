@@ -4,14 +4,15 @@ import {
     Bloom,
     ChromaticAberration,
     EffectComposer,
-    Glitch
+    Glitch,
 } from '@react-three/postprocessing';
 import { useRef, useState, type JSX } from 'react';
+import { Vector2 } from 'three';
 import { useForgeContext } from '../../../../context/ForgeContext';
 import { type ForgeCardType } from '../../../../context/types/forge/cards';
+import { ForgeWorldEffects } from '../../../../context/types/forge/effects';
 import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
-import { Vector2 } from 'three';
 
 export const WorldCanvas = () => {
     const [state] = useWorldContext();
@@ -22,28 +23,32 @@ export const WorldCanvas = () => {
 
     const effectComposer = () => {
         const elements: JSX.Element[] = [];
-        const occupiedSlots = new Map<ForgeCardType, number>();
+        const occupiedSlots = new Map<
+            ForgeCardType,
+            { current: number | undefined; min: number }
+        >();
 
         forgeState.effectSlots.forEach((slot) => {
-            occupiedSlots.set(slot.card.type, slot.strength.current);
+            occupiedSlots.set(slot.card.type, {
+                current: slot.strength,
+                min: ForgeWorldEffects[slot.card.type].strength.min,
+            });
         });
 
         if (occupiedSlots.has('css')) {
+            const slot = occupiedSlots.get('css')!;
             elements.push(
                 <ChromaticAberration
                     offset={[
-                        (occupiedSlots.get('css') ?? 0) / 30,
-                        (occupiedSlots.get('css') ?? 0) / 30,
+                        (slot?.current ?? slot?.min) / 30,
+                        (slot?.current ?? slot?.min) / 30,
                     ]}
                 />
             );
         }
 
         if (occupiedSlots.has('html')) {
-            elements.push(
-                <Glitch duration={new Vector2(1, 1)}
-                />
-            );
+            elements.push(<Glitch duration={new Vector2(1, 1)} />);
         }
 
         return <>{...elements}</>;

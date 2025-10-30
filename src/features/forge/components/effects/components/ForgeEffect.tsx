@@ -7,7 +7,10 @@ import { motion } from 'motion/react';
 import { useRef } from 'react';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
 import type { ForgeData } from '../../../context/types/forge/data';
-import type { ForgeEffectData } from '../../../context/types/forge/effects';
+import {
+    ForgeWorldEffects,
+    type ForgeEffectData,
+} from '../../../context/types/forge/effects';
 import { ForgeEffectMenu } from './ForgeEffectMenu';
 
 interface Props {
@@ -105,10 +108,6 @@ interface FilledProps {
 }
 
 export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
-    const effectNameSelector = () => {
-        
-    }
-    
     return (
         <AnimatePresence>
             {effectData && (
@@ -157,16 +156,27 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                         </Button>
                     </div>
                     <div className='forge-effect-main'>
-                        <p>
-
-                        </p>
+                        <p>{ForgeWorldEffects[effectData.card.type].name}</p>
+                        <div className='forge-effect-main-emoji'>
+                            {ForgeWorldEffects[effectData.card.type].emoji}
+                        </div>
                         <input
                             style={{ width: '100%' }}
                             type='range'
-                            value={effectData.strength.current}
+                            value={
+                                effectData.strength ??
+                                ForgeWorldEffects[effectData.card.type].strength
+                                    .min
+                            }
                             step={0.01}
-                            max={effectData.strength.max}
-                            min={effectData.strength.min}
+                            max={
+                                ForgeWorldEffects[effectData.card.type].strength
+                                    .max
+                            }
+                            min={
+                                ForgeWorldEffects[effectData.card.type].strength
+                                    .min
+                            }
                             onChange={(e) =>
                                 dispatch({
                                     type: 'ADJUST_EFFECT_STRENGTH',

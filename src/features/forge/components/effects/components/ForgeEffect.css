@@ -68,6 +68,17 @@
     padding: 0.5rem;
 }
 
+.forge-effect-main-emoji {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+
+    font-size: clamp(0px, 12vw, 96px);
+    opacity: 0.125;
+    pointer-events: none;
+}
+
 .forge-effect-await {
     position: absolute;
     inset: 0;

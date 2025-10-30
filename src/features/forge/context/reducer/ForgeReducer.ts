@@ -57,11 +57,6 @@ export const ForgeReducer = (
                         {
                             effectIdx: action.effectIdx,
                             card: action.card,
-                            strength: {
-                                current: 1,
-                                max: 3,
-                                min: 0,
-                            },
                         },
                     ],
                 };
@@ -110,11 +105,6 @@ export const ForgeReducer = (
                 newEffects.push({
                     effectIdx: idx,
                     card,
-                    strength: {
-                        current: 1,
-                        max: 3,
-                        min: 0,
-                    },
                 });
             }
 
@@ -127,10 +117,7 @@ export const ForgeReducer = (
                     slot.effectIdx === action.effectIdx
                         ? {
                               ...slot,
-                              strength: {
-                                  ...slot.strength,
-                                  current: action.strength,
-                              },
+                              strength: action.strength,
                           }
                         : slot
                 ),
