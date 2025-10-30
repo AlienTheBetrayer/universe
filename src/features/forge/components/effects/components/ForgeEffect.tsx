@@ -5,6 +5,7 @@ import './ForgeEffect.css';
 
 import { motion } from 'motion/react';
 import { useRef } from 'react';
+import { useTooltips } from '../../../../tooltip/hooks/useTooltips';
 import { useEffectMenuContext } from '../../../context/EffectMenuContext';
 import type { ForgeData } from '../../../context/types/forge/data';
 import {
@@ -35,7 +36,6 @@ export const ForgeEffect = ({ effectData, idx, state, dispatch }: Props) => {
             ${state.cardDraggingIdx !== false ? 'forge-effect-hover' : ''} 
             ${effectData !== undefined ? 'forge-effect-filled' : ''}
             ${effectData?.enabled === false ? 'forge-effect-disabled' : ''}`}
-            
         >
             <ForgeEffectAwaiting state={state} dispatch={dispatch} idx={idx} />
             <ForgeEffectFilled effectData={effectData} dispatch={dispatch} />
@@ -110,6 +110,8 @@ interface FilledProps {
 }
 
 export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
+    const tooltips = useTooltips();
+
     return (
         <AnimatePresence>
             {effectData && (
@@ -131,8 +133,18 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                         damping: 25,
                     }}
                 >
+                    {tooltips.render()}
+
                     <div className='forge-effect-topline'>
                         <Button
+                            ref={(el) =>
+                                tooltips.set(
+                                    0,
+                                    '<mark>Toggle</mark> effect',
+                                    el,
+                                    'up'
+                                )
+                            }
                             style={{
                                 padding: '0.3rem',
                                 minWidth: 'fit-content',
@@ -163,6 +175,14 @@ export const ForgeEffectFilled = ({ effectData, dispatch }: FilledProps) => {
                             {effectData.card.title}
                         </p>
                         <Button
+                            ref={(el) =>
+                                tooltips.set(
+                                    1,
+                                    '<u>Delete</u> effect',
+                                    el,
+                                    'up'
+                                )
+                            }
                             onClick={() => {
                                 dispatch({
                                     type: 'REMOVE_EFFECT_SLOT',
