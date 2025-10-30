@@ -10,6 +10,9 @@
     background-color: var(--background-transparent);
     transition: all 0.3s, border-color 0.7s ease-in-out,
         border-radius 0.7s ease-in-out;
+
+    padding: 0;
+    overflow: hidden;
 }
 
 @media (max-width: 640px) {
@@ -41,6 +44,7 @@
     transform: translateX(-50%);
     top: 0.5rem;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 .forge-ui-overlay-number-tooltip {

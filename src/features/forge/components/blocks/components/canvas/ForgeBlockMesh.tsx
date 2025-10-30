@@ -13,7 +13,12 @@ interface Props {
     speed?: number;
 }
 
-export const ForgeBlockMesh = ({ idx, material, hoveredIdx, speed = 1 }: Props) => {
+export const ForgeBlockMesh = ({
+    idx,
+    material,
+    hoveredIdx,
+    speed = 1,
+}: Props) => {
     const meshRef = useRef<Mesh>(null);
 
     // initial random rotation
@@ -28,8 +33,13 @@ export const ForgeBlockMesh = ({ idx, material, hoveredIdx, speed = 1 }: Props) 
     }, []);
 
     // rotation animation
-    useFrame(() => {
+    useFrame((state) => {
         if (meshRef.current) {
+            const t = state.clock.getElapsedTime();
+
+            const scale = 1 - Math.sin(t) / 10;
+            meshRef.current.scale.set(scale, scale, scale);
+
             if (hoveredIdx.current === false) {
                 // none is selected (regular moving)
                 meshRef.current.rotation.x += 0.0075 * speed;

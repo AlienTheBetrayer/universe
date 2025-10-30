@@ -8,6 +8,8 @@
     border-radius: 16px;
     background-color: var(--background-transparent);
     transition: border-color 0.7s ease-in-out, border-radius 0.7s ease-in-out;
+    overflow: hidden;
+    padding: 0;
 }
 
 @media (max-width: 640px) {
@@ -45,12 +47,6 @@
 
     font-size: clamp(0px, 12vw, 175px);
     opacity: 0.1;
-}
-
-@media (max-width: 768px) {
-    .forge-block-title {
-        top: 110%;
-    }
 }
 
 .forge-block-number-tooltip {

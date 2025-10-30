@@ -47,22 +47,34 @@ export const ForgeUIOverlayBlock = ({
     }, [isSelected]);
 
     return (
-        <Button
-            className={`forge-ui-overlay-block ${
-                isSelected ? 'forge-ui-overlay-block-selected' : ''
-            }`}
-            onClick={() => onSelect?.(material)}
-            onPointerEnter={() => {
-                onHoverStart?.();
-                setHovered(true);
-            }}
-            onPointerLeave={() => {
-                onHoverEnd?.();
-                setHovered(false);
-            }}
-            enabled={isEnabled}
-        >
-            {/* tooltip frm this element */}
+        <div style={{ position: 'relative' }}>
+            <Button
+                className={`forge-ui-overlay-block ${
+                    isSelected ? 'forge-ui-overlay-block-selected' : ''
+                }`}
+                onClick={() => onSelect?.(material)}
+                onPointerEnter={() => {
+                    onHoverStart?.();
+                    setHovered(true);
+                }}
+                onPointerLeave={() => {
+                    onHoverEnd?.();
+                    setHovered(false);
+                }}
+                enabled={isEnabled}
+            >
+                <ForgeBlockCanvas
+                    material={material}
+                    idx={idx}
+                    hoveredIdx={hoveredIdx}
+                    speed={0.3}
+                />
+                <HotkeyTooltip
+                    className='forge-ui-overlay-number-tooltip'
+                    hotkeys={[`${idx}`]}
+                />
+            </Button>
+
             <AnimatePresence>
                 {hovered && isEnabled && (
                     <motion.div
@@ -82,17 +94,6 @@ export const ForgeUIOverlayBlock = ({
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            <ForgeBlockCanvas
-                material={material}
-                idx={idx}
-                hoveredIdx={hoveredIdx}
-                speed={0.3}
-            />
-            <HotkeyTooltip
-                className='forge-ui-overlay-number-tooltip'
-                hotkeys={[`${idx}`]}
-            />
-        </Button>
+        </div>
     );
 };
