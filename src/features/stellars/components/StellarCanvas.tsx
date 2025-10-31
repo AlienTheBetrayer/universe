@@ -1,12 +1,13 @@
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import React from 'react';
 import { useStellarContext } from '../context/StellarContext';
 import { useStellarContextMenu } from '../hooks/useStellarContextMenu';
 import { StellarLighting } from './StellarLighting';
 import { StellarParticles } from './StellarParticles';
 import { Stellars } from './Stellars';
 
-export const StellarCanvas = () => {
+export const StellarCanvas = React.memo(() => {
     const [state, dispatch] = useStellarContext();
     const contextMenu = useStellarContextMenu();
 
@@ -48,4 +49,4 @@ export const StellarCanvas = () => {
             {contextMenu.popup.render()}
         </>
     );
-};
+});

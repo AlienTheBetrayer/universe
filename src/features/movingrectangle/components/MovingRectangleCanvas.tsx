@@ -1,15 +1,15 @@
 import { Canvas } from '@react-three/fiber';
-import { MovingRectangle } from './MovingRectangle';
-import type { MotionValue } from 'motion';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import type { MotionValue } from 'motion';
+import React, { useRef } from 'react';
+import { MovingRectangle } from './MovingRectangle';
 import { MovingRectangleAberation } from './MovingRectangleAberation';
-import { useRef } from 'react';
 
 interface Props {
     progress: MotionValue<number>;
 }
 
-export const MovingRectangleCanvas = ({ progress }: Props) => {
+export const MovingRectangleCanvas = React.memo(({ progress }: Props) => {
     const hovered = useRef<boolean>(false);
 
     return (
@@ -28,4 +28,4 @@ export const MovingRectangleCanvas = ({ progress }: Props) => {
             <MovingRectangle progress={progress} />
         </Canvas>
     );
-};
+});

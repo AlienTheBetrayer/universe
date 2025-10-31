@@ -7,8 +7,9 @@ import { InteractiveParticles } from './InteractiveParticles';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { useLocalStore } from '../../../zustand/localStore';
 import { useInteractiveParticlesContext } from '../context/InteractiveParticlesContext';
+import React from 'react';
 
-export const InteractiveParticlesCanvas = () => {
+export const InteractiveParticlesCanvas = React.memo(() => {
     const { theme } = useLocalStore();
     const [context] = useInteractiveParticlesContext();
 
@@ -33,4 +34,4 @@ export const InteractiveParticlesCanvas = () => {
             </Canvas>
         </motion.div>
     );
-};
+});

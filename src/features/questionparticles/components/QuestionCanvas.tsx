@@ -1,10 +1,9 @@
 import { Canvas } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import React from 'react';
 import { QuestionParticles } from './QuestionParticles';
 
-interface Props {}
-
-export const QuestionCanvas = ({}: Props) => {
+export const QuestionCanvas = React.memo(() => {
     return (
         <Canvas>
             <QuestionParticles />
@@ -14,4 +13,4 @@ export const QuestionCanvas = ({}: Props) => {
             </EffectComposer>
         </Canvas>
     );
-};
+});

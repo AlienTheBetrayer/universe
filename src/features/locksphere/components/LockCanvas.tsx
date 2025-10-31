@@ -1,16 +1,16 @@
 import { Canvas } from '@react-three/fiber';
-import { type RefObject } from 'react';
-import { useScroll } from 'motion/react';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { useScroll } from 'motion/react';
+import React, { type RefObject } from 'react';
 import { useScrollYWithin } from '../../../hooks/useScrollYWithin';
-import { LockFigure } from './LockFigure';
 import { ForceField } from './ForceField';
+import { LockFigure } from './LockFigure';
 
 interface Props {
     ref: RefObject<HTMLElement | null>;
 }
 
-export const LockCanvas = ({ ref }: Props) => {
+export const LockCanvas = React.memo(({ ref }: Props) => {
     const { scrollYProgress } = useScroll({ target: ref });
     const scrolledWithin = useScrollYWithin(0, 1, scrollYProgress);
 
@@ -29,4 +29,4 @@ export const LockCanvas = ({ ref }: Props) => {
             )}
         </Canvas>
     );
-};
+});

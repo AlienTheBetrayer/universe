@@ -1,7 +1,7 @@
 import { Center, OrbitControls } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { EffectComposer } from '@react-three/postprocessing';
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { type DirectionalLight } from 'three';
 import { useForgeContext } from '../../../../context/ForgeContext';
 import {
@@ -12,7 +12,7 @@ import { useWorldContext } from '../../../../context/WorldContext';
 import { WorldBlocks } from './WorldBlocks';
 import { WorldEffectComposer } from './WorldEffectComposer';
 
-export const WorldCanvas = () => {
+export const WorldCanvas = React.memo(() => {
     const [state] = useWorldContext();
     const [forgeState] = useForgeContext();
 
@@ -66,7 +66,7 @@ export const WorldCanvas = () => {
             />
         </Canvas>
     );
-};
+});
 
 interface LightProps {
     zustandEffect: ForgeEffectData | undefined;

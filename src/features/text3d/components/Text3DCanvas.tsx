@@ -6,12 +6,13 @@ import { OrbitControls } from '@react-three/drei';
 import { Text3DContent } from './Text3DContent';
 import { Text3DParticles } from './Text3DParticles';
 import { Text3DLighting } from './Text3DLighting';
+import React from 'react';
 
 interface Props {
     children?: string;
 }
 
-export const Text3DCanvas = ({ children }: Props) => {
+export const Text3DCanvas = React.memo(({ children }: Props) => {
     return (
         <motion.div
             className='text3d-canvas'
@@ -36,4 +37,4 @@ export const Text3DCanvas = ({ children }: Props) => {
             </Canvas>
         </motion.div>
     );
-};
+});
