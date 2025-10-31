@@ -25,7 +25,6 @@ header {
 header > nav {
     position: relative;
     left: 50%;
-    transform: translateX(-50%);
     max-width: 750px;
     width: 100%;
 
@@ -39,6 +38,12 @@ header > nav {
     backdrop-filter: blur(8px);
     background: var(--background-fulltransparent);
     pointer-events: all;
+}
+
+.header-items {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 /* mobile button to show the menu */

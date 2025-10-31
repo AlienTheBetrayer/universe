@@ -13,12 +13,13 @@ import { ToggleButton } from '../../ui/ToggleButton/ToggleButton';
 import { UniversalLink } from '../../ui/UniversalLink/components/UniversalLink';
 import { useHeaderAnimation } from '../hooks/useHeaderAnimation';
 
+import React from 'react';
 import forkImg from '../assets/fork.svg';
 import launchImg from '../assets/launch.svg';
 import starImg from '../assets/star.svg';
 import stellarImg from '../assets/stellar.svg';
 
-export const Header = () => {
+export const Header = React.memo(() => {
     const isMobile = useMediaQuery(768);
     const { loaded, justified } = useHeaderAnimation();
     const { theme, toggleTheme } = useLocalStore();
@@ -42,9 +43,11 @@ export const Header = () => {
             }}
         >
             {tooltips.render()}
+            {headerMenuPopup.render()}
 
             <motion.nav
                 style={{
+                    x: '-50%',
                     justifyContent:
                         justified || loaded.header
                             ? 'space-between'
@@ -65,8 +68,7 @@ export const Header = () => {
                 {/* display none on mobile */}
                 {!isMobile ? (
                     <motion.div
-                        className='flex align-center h-full'
-                        style={{ display: !isMobile ? 'flex' : 'none' }}
+                        className='header-items'
                         layout
                         initial={{
                             gap: loaded && justified ? '1rem' : '0.1rem',
@@ -149,8 +151,6 @@ export const Header = () => {
                     </Button>
                 )}
             </motion.nav>
-
-            {headerMenuPopup.render()}
         </motion.header>
     );
-};
+});

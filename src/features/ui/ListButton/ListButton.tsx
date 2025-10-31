@@ -28,8 +28,6 @@ export const ListButton = ({
         <motion.div
             ref={containerRef}
             className={`list-button ${className}`}
-            layout
-            tabIndex={0}
         >
             <div className='list-button-top'>
                 <button

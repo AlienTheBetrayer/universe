@@ -18,18 +18,19 @@ import {
 } from '../../../questionparticles/context/QuestionContext';
 import { FAQSection } from '../sections/FAQSection';
 import { HorizontalSection } from '../sections/HorizontalSection';
+import { IntroSection } from '../sections/IntroSection';
 import { PaintSection } from '../sections/PaintSection';
 import { ShiftingSection } from '../sections/ShiftingSection';
-import { IntroSection } from '../sections/IntroSection';
 
 export const HomePage = () => {
     const questionContextData = useState<QuestionContextData>({
         revealed: false,
     });
-    const headingRef = useRef<HTMLDivElement>(null);
     const meshesRef = useRef<HTMLDivElement>(null);
-    const isHeadingVisible = useInView(headingRef);
     const isMeshesVisible = useInView(meshesRef);
+
+    const headingRef = useRef<HTMLDivElement>(null);
+    const isHeadingVisible = useInView(headingRef);
 
     return (
         <Page>
@@ -55,7 +56,7 @@ export const HomePage = () => {
 
             <div style={{ position: 'relative' }} ref={meshesRef}>
                 {isMeshesVisible && <HeadingMeshesCanvas />}
-                <IntroSection/>
+                <IntroSection />
             </div>
 
             <InteractiveParticlesProvider>

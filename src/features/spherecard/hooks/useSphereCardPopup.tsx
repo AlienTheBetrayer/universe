@@ -57,6 +57,7 @@ export const useSphereCardPopup = (
                             <motion.article
                                 ref={copyRef}
                                 className='sphere-card popup'
+                                style={{ zIndex: 1000 }}
                                 key='hover-popup'
                                 initial={{ scale: 1 }}
                                 animate={{ scale: 1.05 }}
