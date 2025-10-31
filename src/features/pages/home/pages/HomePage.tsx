@@ -9,6 +9,7 @@ import { LockSection } from '../sections/LockSection';
 import { QuestionSection } from '../sections/QuestionSection';
 
 import { motion, useInView } from 'motion/react';
+import { HeadingMeshesCanvas } from '../../../headingmeshes/components/HeadingMeshesCanvas';
 import { InteractiveParticlesCanvas } from '../../../interactiveparticles/components/InteractiveParticlesCanvas';
 import { InteractiveParticlesProvider } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import {
@@ -19,13 +20,16 @@ import { FAQSection } from '../sections/FAQSection';
 import { HorizontalSection } from '../sections/HorizontalSection';
 import { PaintSection } from '../sections/PaintSection';
 import { ShiftingSection } from '../sections/ShiftingSection';
+import { IntroSection } from '../sections/IntroSection';
 
 export const HomePage = () => {
     const questionContextData = useState<QuestionContextData>({
         revealed: false,
     });
     const headingRef = useRef<HTMLDivElement>(null);
+    const meshesRef = useRef<HTMLDivElement>(null);
     const isHeadingVisible = useInView(headingRef);
+    const isMeshesVisible = useInView(meshesRef);
 
     return (
         <Page>
@@ -48,6 +52,11 @@ export const HomePage = () => {
             >
                 <h1>FUTURE</h1>
             </motion.div>
+
+            <div style={{ position: 'relative' }} ref={meshesRef}>
+                {isMeshesVisible && <HeadingMeshesCanvas />}
+                <IntroSection/>
+            </div>
 
             <InteractiveParticlesProvider>
                 <div className='heading-wrapper' ref={headingRef}>

@@ -1,17 +1,17 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import { useMemo } from 'react';
 import type { Points } from 'three';
+import { useCursorRef } from '../../../hooks/useCursorRef';
 import { useLocalStore } from '../../../zustand/localStore';
-import { useSmoothCursor } from '../../../hooks/useSmoothCursor';
 import type { VectorType } from '../context/InteractiveParticlesContext';
 
 export const useInteractiveParticles = (
     ref: React.RefObject<Points | null>,
     count: number = 1000,
-    vectorType?: VectorType,
+    vectorType?: VectorType
 ) => {
     const { size, viewport } = useThree();
-    const pointer = useSmoothCursor({ x: 330, y: 120 });
+    const pointer = useCursorRef({ x: 330, y: 120 });
 
     const { theme } = useLocalStore();
     const dotColor = theme === 'dark' ? 0.3 : 0;
@@ -48,10 +48,11 @@ export const useInteractiveParticles = (
             const pos = ref.current.geometry.attributes.position.array;
             const colors = ref.current.geometry.attributes.color.array;
             const cursorX =
-                (pointer.x / size.width) * viewport.width - viewport.width / 2;
+                (pointer.current.x / size.width) * viewport.width -
+                viewport.width / 2;
             const cursorY =
                 -(
-                    ((pointer.y + window.scrollY) / size.height) *
+                    ((pointer.current.y - size.top) / size.height) *
                     viewport.height
                 ) +
                 viewport.height / 2;
@@ -97,7 +98,7 @@ export const useInteractiveParticles = (
                                 Math.cos(
                                     dy * 5 +
                                         Math.sqrt(dx * dx + dy * dy) * 3 +
-                                        Math.sin(t * 2),
+                                        Math.sin(t * 2)
                                 ) +
                             Math.tan(Math.sin(dx * 0.5 + t * 3)) * 0.02;
                         vectorY =
@@ -105,7 +106,7 @@ export const useInteractiveParticles = (
                                 Math.sin(
                                     dx * 4 +
                                         Math.sqrt(dx * dx + dy * dy) * 5 +
-                                        Math.cos(t * 1.7),
+                                        Math.cos(t * 1.7)
                                 ) +
                             Math.tan(Math.cos(dy * 0.7 + t * 2.1)) * 0.02;
                         if (theme == 'dark') color = [0, 20, 10];
