@@ -2,11 +2,9 @@ import { useFrame } from '@react-three/fiber';
 import type { MotionValue } from 'motion';
 import { useSpring } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
-import { Color, Mesh, MeshPhysicalMaterial, type HSL } from 'three';
-import { LockParticles } from './LockParticles';
-import { Group } from 'three';
+import { Color, Group, Mesh, MeshPhysicalMaterial, type HSL } from 'three';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { mx_bilerp_0 } from 'three/src/nodes/materialx/lib/mx_noise.js';
+import { LockParticles } from './LockParticles';
 
 interface Props {
     progress: MotionValue<number>;
@@ -29,7 +27,7 @@ export const LockFigure = ({ progress }: Props) => {
     useEffect(() => {
         const unsubscribe = progress.on(
             'change',
-            (val) => val > 0 && setScrolled(true),
+            (val) => val > 0 && setScrolled(true)
         );
         return () => unsubscribe();
     }, [progress]);
@@ -52,7 +50,7 @@ export const LockFigure = ({ progress }: Props) => {
             groupRef.current.scale.set(
                 1 + rotation,
                 1 + rotation,
-                1 + rotation,
+                1 + rotation
             );
 
             const color = new Color(progressValue, 0, 1 - progressValue);
@@ -69,7 +67,7 @@ export const LockFigure = ({ progress }: Props) => {
             orbitRef.current.position.set(
                 Math.sin(t) * 1.25,
                 Math.cos(t) * 1.25,
-                Math.sin(t) * 1.25,
+                Math.sin(t) * 1.25
             );
             orbitMaterial.color.copy(color);
         }

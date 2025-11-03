@@ -2,9 +2,9 @@ import type { RefObject } from 'react';
 import { useClickOutside } from '../../../../../hooks/useClickOutside';
 import { EffectMenuProvider } from '../../../context/EffectMenuContext';
 import { useForgeContext } from '../../../context/ForgeContext';
+import { ForgeBonusEffect } from './ForgeBonusEffect';
 import { ForgeEffect } from './ForgeEffect';
 import './ForgeEffects.css';
-import { ForgeBonusEffect } from './ForgeBonusEffect';
 
 interface Props {
     wrapperRef?: RefObject<HTMLDivElement | null>;
@@ -49,7 +49,7 @@ export const ForgeEffects = ({ wrapperRef }: Props) => {
                     ))}
                 </div>
 
-                <ForgeBonusEffect/>
+                <ForgeBonusEffect />
             </div>
         </EffectMenuProvider>
     );

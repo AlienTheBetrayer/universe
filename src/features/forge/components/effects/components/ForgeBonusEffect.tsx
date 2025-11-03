@@ -4,7 +4,7 @@ import './ForgeBonusEffect.css';
 import { motion } from 'motion/react';
 
 export const ForgeBonusEffect = () => {
-    const [state, dispatch] = useForgeContext();
+    const [state] = useForgeContext();
 
     return (
         <div
@@ -27,7 +27,11 @@ export const ForgeBonusEffect = () => {
             </motion.span>
             <span
                 className='forge-bonus-effect-question'
-                style={{ color: `hsla(224, ${state.effectSlots.length * 10}%, 30%, 0.2)` }}
+                style={{
+                    color: `hsla(224, ${
+                        state.effectSlots.length * 10
+                    }%, 30%, 0.2)`,
+                }}
             >
                 ?
             </span>
