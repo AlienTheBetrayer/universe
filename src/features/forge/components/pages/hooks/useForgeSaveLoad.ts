@@ -9,6 +9,32 @@ export const useForgeSaveLoad = () => {
     const [state] = useWorldContext();
     const [forgeState] = useForgeContext();
 
+    const parseSave = (value: string) => {
+        const parsed: { world: WorldSave; forge: ForgeSave } =
+            JSON.parse(value);
+        const blocksMap: WorldSave['blocks'] = new Map();
+
+        for (const [materialType, entries] of parsed.world.blocks) {
+            const innerMap = new Map<string, BlockData>(entries);
+            blocksMap.set(materialType, innerMap);
+        }
+        parsed.world.blocks = blocksMap;
+
+        return {
+            world: {
+                blocks: parsed.world.blocks,
+                blockSize: parsed.world.blockSize,
+                currentBlockMaterial: parsed.world.currentBlockMaterial,
+                worldName: parsed.world.worldName,
+            },
+            forge: {
+                cards: parsed.forge.cards,
+                effectSlots: parsed.forge.effectSlots,
+            },
+        };
+    };
+
+    // USER API
     const save = (name: string) => {
         const onlyBlocks = new Map();
         for (const [material, blockData] of state.blocks) {
@@ -29,12 +55,12 @@ export const useForgeSaveLoad = () => {
             forge: {
                 cards: forgeState.cards,
                 effectSlots: forgeState.effectSlots,
-            }
+            },
         };
         saveToFile(data, `${name}.forge`);
     };
 
-    const load = async () => {
+    const loadPrompt = async () => {
         return new Promise<{ world: WorldSave; forge: ForgeSave }>(
             (resolve, reject) => {
                 loadFromFile('.forge').then((text) => {
@@ -43,34 +69,17 @@ export const useForgeSaveLoad = () => {
                         return;
                     }
 
-                    const parsed: { world: WorldSave, forge: ForgeSave} = JSON.parse(text);
-                    const blocksMap: WorldSave['blocks'] = new Map();
+                    const parsed = parseSave(text);
 
-                    for (const [materialType, entries] of parsed.world.blocks) {
-                        const innerMap = new Map<string, BlockData>(entries);
-                        blocksMap.set(materialType, innerMap);
-                    }
-                    parsed.world.blocks = blocksMap;
-
-                    resolve({
-                        world: {
-                            blocks: parsed.world.blocks,
-                            blockSize: parsed.world.blockSize,
-                            currentBlockMaterial: parsed.world.currentBlockMaterial,
-                            worldName: parsed.world.worldName,
-                        },
-                        forge: {
-                            cards: parsed.forge.cards,
-                            effectSlots: parsed.forge.effectSlots
-                        }
-                    });
+                    resolve(parsed);
                 });
             }
         );
     };
 
     return {
-        load,
+        loadPrompt,
+        parseSave,
         save,
     };
 };

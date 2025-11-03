@@ -1,17 +1,14 @@
-import type React from 'react';
-import type { CSSProperties } from 'react';
 import { Button } from '../../../ui/Button/components/Button';
 import './ForgePageTemplate.css';
 
-import { motion } from 'motion/react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
+import type React from 'react';
 
-interface Props {
+interface Props extends HTMLMotionProps<'div'> {
     title?: string;
-    className?: string;
-    style?: CSSProperties;
-    onInteract?: () => void;
     children?: React.ReactNode;
+    onInteract?: () => void;
 }
 
 export const ForgePageTemplate = ({
@@ -20,6 +17,7 @@ export const ForgePageTemplate = ({
     title,
     onInteract,
     children,
+    ...rest
 }: Props) => {
     const tooltips = useTooltips();
 
@@ -30,6 +28,7 @@ export const ForgePageTemplate = ({
             exit={{ opacity: 0 }}
             className={`forge-page-template ${className ?? ''}`}
             style={{ ...style }}
+            {...rest}
         >
             {tooltips.render()}
 

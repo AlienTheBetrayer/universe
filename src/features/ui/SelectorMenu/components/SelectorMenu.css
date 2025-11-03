@@ -4,6 +4,7 @@
     border: 1px solid var(--background-8);
     border-radius: 16px;
     overflow: hidden;
+    transition: border-color 0.15s;
 }
 
 .selector-menu-jsx {

@@ -7,5 +7,35 @@
     display: flex;
     width: 95%;
     max-width: 500px;
-    height: 300px;
+    min-height: 300px;
+}
+
+.forge-save-load-error {
+    border-radius: 16px;
+    border: 1px solid var(--background-8);
+    overflow: hidden;
+}
+
+.forge-save-load-error-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.forge-save-load-error-content > * {
+    text-align: center;
+}
+
+.forge-save-load-error-content-topline {
+    display: flex;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--background-8);
+    position: relative;
+}
+
+.forge-save-load-error-content-main {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
 }

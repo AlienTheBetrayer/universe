@@ -1,74 +1,45 @@
-import { useState } from 'react';
-import { useHotkeys } from '../../../../../hooks/useHotkeys';
+import { AnimatePresence, motion } from 'motion/react';
 import { HotkeyTooltip } from '../../../../hotkeytooltip/components/HotkeyTooltip';
 import { Button } from '../../../../ui/Button/components/Button';
 import { Input } from '../../../../ui/Input/components/Input';
 import { SelectorMenu } from '../../../../ui/SelectorMenu/components/SelectorMenu';
-import { useForgeContext } from '../../../context/ForgeContext';
-import { useWorldContext } from '../../../context/WorldContext';
 import { ForgePageTemplate } from '../ForgePageTemplate';
-import { useForgeSaveLoad } from '../hooks/useForgeSaveLoad';
 import './ForgeSaveLoad.css';
 
-type SaveLoadPage = 'Save' | 'Load';
+import dragDropImg from '../../../assets/dragdrop.svg';
+
+import {
+    useInternalForgeSaveLoad,
+    type SaveLoadPage,
+} from '../hooks/useInternalForgeSaveLoad';
 
 interface Props {
     onInteract?: () => void;
 }
 
 export const ForgeSaveLoad = ({ onInteract }: Props) => {
-    const [, dispatch] = useWorldContext();
-    const [, forgeDispatch] = useForgeContext();
-
-    const [saveInputValue, setSaveInputValue] = useState<string>('');
-
-    const controller = useForgeSaveLoad();
-
-    // functions to interact with the controller
-    const save = () => {
-        if (saveInputValue.length < 5) return;
-
-        controller.save(saveInputValue.replaceAll(' ', '_'));
-    };
-
-    const load = () => {
-        controller.load().then((val) => {
-            onInteract?.();
-            dispatch({
-                type: 'LOAD_WORLD',
-                world: val.world,
-            });
-            dispatch({
-                type: 'GENERATE_FIELD',
-            });
-            forgeDispatch({ type: 'LOAD_SAVE', save: val.forge });
-        });
-    };
-
-    // hotkeys logic
-    const [currentPage, setCurrentPage] = useState<SaveLoadPage>('Save');
-
-    const hotkeys: Record<SaveLoadPage, () => void> = {
-        Save: () => save(),
-        Load: () => load(),
-    };
-
-    useHotkeys([
-        {
-            hotkey: 'Enter',
-            action: () => hotkeys[currentPage](),
-            ignoreFocus: true,
-        },
-    ]);
+    const controller = useInternalForgeSaveLoad(onInteract);
 
     return (
         <ForgePageTemplate
             className='forge-save-load'
             onInteract={() => onInteract?.()}
             title='Save or load a <mark>world</mark>!'
+            onDrop={controller.handleDrop}
+            onDragOver={(e) => {
+                e.preventDefault();
+
+                controller.setIsDragging(true);
+            }}
+            onDragLeave={() => {
+                controller.setIsDragging(false);
+            }}
+            style={controller.isDragging ? { borderColor: '#00f' } : {}}
         >
             <SelectorMenu
-                onSelect={(page) => setCurrentPage(page.name as SaveLoadPage)}
+                onSelect={(page) =>
+                    controller.setCurrentPage(page.name as SaveLoadPage)
+                }
                 items={[
                     {
                         name: 'Save',
@@ -86,13 +57,19 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                 </h4>
                                 <Input
                                     placeholder='Enter...'
-                                    value={saveInputValue}
-                                    onChange={(val) => setSaveInputValue(val)}
-                                    onClear={() => setSaveInputValue('')}
+                                    value={controller.saveInputValue}
+                                    onChange={(val) =>
+                                        controller.setSaveInputValue(val)
+                                    }
+                                    onClear={() =>
+                                        controller.setSaveInputValue('')
+                                    }
                                 />
                                 <Button
-                                    enabled={saveInputValue.length >= 5}
-                                    onClick={() => save()}
+                                    enabled={
+                                        controller.saveInputValue.length >= 5
+                                    }
+                                    onClick={() => controller.save()}
                                 >
                                     Save <small>(to your computer)</small>
                                     <HotkeyTooltip hotkeys={['Enter']} />
@@ -110,15 +87,65 @@ export const ForgeSaveLoad = ({ onInteract }: Props) => {
                                     gap: '1rem',
                                 }}
                             >
-                                <Button onClick={() => load()}>
-                                    Load <small>(open a file)</small>
+                                <Button onClick={() => controller.loadPrompt()}>
+                                    Load{' '}
+                                    <small>(open a file / drag & drop)</small>
                                     <HotkeyTooltip hotkeys={['Enter']} />
                                 </Button>
+                                <img
+                                    src={dragDropImg}
+                                    style={{
+                                        filter: 'invert(0.5)',
+                                        width: '20%',
+                                        height: '20%',
+                                        margin: '0 auto',
+                                    }}
+                                    alt='drag and drop'
+                                />
                             </div>
                         ),
                     },
                 ]}
             />
+
+            <AnimatePresence>
+                {controller.visibleError !== false && (
+                    <motion.div
+                        className='forge-save-load-error'
+                        initial={{ height: '0' }}
+                        animate={{ height: 'auto' }}
+                        exit={{ height: '0' }}
+                    >
+                        <div className='forge-save-load-error-content'>
+                            <div className='forge-save-load-error-content-topline'>
+                                <h4>
+                                    File format <u>error</u>
+                                </h4>
+                                <Button
+                                    style={{ marginLeft: 'auto' }}
+                                    className='forge-cancel-button'
+                                    onClick={() =>
+                                        controller.setErrorVisible(false)
+                                    }
+                                >
+                                    ✕
+                                </Button>
+                            </div>
+
+                            <div className='forge-save-load-error-content-main'>
+                                <p>
+                                    <b>{controller.visibleError}</b> is{' '}
+                                    <u>not</u> a world save!
+                                </p>
+                                <p>
+                                    Drag a proper <mark>.forge</mark> world
+                                    save.
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </ForgePageTemplate>
     );
 };

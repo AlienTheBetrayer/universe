@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import './SelectorMenu.css';
 
 import { AnimatePresence, motion } from 'motion/react';
@@ -12,18 +12,23 @@ interface SelectorItem {
 interface Props {
     items: SelectorItem[];
     onSelect?: (item: SelectorItem) => void;
+    style?: CSSProperties;
 }
 
-export const SelectorMenu = ({ items, onSelect }: Props) => {
+export const SelectorMenu = ({ items, onSelect, style }: Props) => {
     const [selectedIdx, setSelectedIdx] = useState<number>(0);
 
     return (
-        <div className='selector-menu-container'>
+        <div className='selector-menu-container' style={{ ...style }}>
             <ul className='selector-menu'>
                 {items.map((item, idx) => (
                     <li className='selector-menu-item' key={idx}>
                         <Button
-                            className={`${selectedIdx === idx ? 'selector-menu-button-selected' : ''}`}
+                            className={`${
+                                selectedIdx === idx
+                                    ? 'selector-menu-button-selected'
+                                    : ''
+                            }`}
                             onClick={() => {
                                 setSelectedIdx(idx);
                                 onSelect?.(item);
