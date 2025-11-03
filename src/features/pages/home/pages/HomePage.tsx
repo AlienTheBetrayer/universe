@@ -52,20 +52,20 @@ export const HomePage = () => {
                 />
             </div>
 
-            <motion.div
-                className='heading-section-bgtext'
-                initial={{ opacity: 0, filter: 'blur(40px)' }}
-                animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ delay: 5, duration: 5 }}
-            >
-                <h1>FUTURE</h1>
-            </motion.div>
-
             <InteractiveParticlesProvider>
                 <div className='heading-wrapper' ref={headingRef}>
                     {isHeadingVisible && <InteractiveParticlesCanvas />}
                     <HeadingSection />
                     <GridSection />
+
+                    <motion.div
+                        className='heading-section-bgtext'
+                        initial={{ opacity: 0, filter: 'blur(40px)' }}
+                        animate={{ opacity: 1, filter: 'blur(0px)' }}
+                        transition={{ delay: 5, duration: 5 }}
+                    >
+                        <h1>FUTURE</h1>
+                    </motion.div>
                 </div>
             </InteractiveParticlesProvider>
 
