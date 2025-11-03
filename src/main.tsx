@@ -6,10 +6,10 @@ import { router } from './router';
 import { StoreWatcher } from './zustand/StoreWatcher';
 
 createRoot(document.getElementById('root')!).render(
-    // <StrictMode>
+    <StrictMode>
         <>
         <StoreWatcher />
         <RouterProvider router={router} />
         </>
-    // </StrictMode>
+    </StrictMode>
 );
