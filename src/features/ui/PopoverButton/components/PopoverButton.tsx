@@ -1,10 +1,9 @@
-import { Button } from '../../Button/components/Button';
 import React, { forwardRef, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Button } from '../../Button/components/Button';
 import { PopoverBackground } from './PopoverBackground';
 
-import { AnimatePresence, type HTMLMotionProps } from 'motion/react';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion, type HTMLMotionProps } from 'motion/react';
 import { useHotkeys } from '../../../../hooks/useHotkeys';
 
 interface Props extends HTMLMotionProps<'button'> {
@@ -26,37 +25,63 @@ export const PopoverButton = forwardRef<HTMLButtonElement, Props>(
             direction = 'bottom-left',
             ...rest
         },
-        ref,
+        ref
     ) => {
         const [shown, setShown] = useState<boolean>(false);
         const buttonRef = useRef<HTMLButtonElement>(null);
-        const popoverRef = useRef<HTMLElement>(null);
+        const popoverRef = useRef<HTMLDivElement>(null);
 
-        const handlePopoverRef = (el: HTMLElement | null) => {
+        const handlePopoverRef = (el: HTMLDivElement | null) => {
             popoverRef.current = el;
 
             if (el && buttonRef.current) {
                 const buttonRect = buttonRef.current.getBoundingClientRect();
-                const elRect = el.getBoundingClientRect();
                 el.style.position = 'absolute';
+                const elRect = el.getBoundingClientRect();
 
                 switch (direction) {
                     case 'bottom-right':
                         el.style.left = `${buttonRect.left + window.scrollX}px`;
-                        el.style.top = `${buttonRect.top + buttonRect.height + offset + window.scrollY}px`;
+                        el.style.top = `${
+                            buttonRect.top +
+                            buttonRect.height +
+                            offset +
+                            window.scrollY
+                        }px`;
                         break;
+
                     case 'bottom-left':
-                        el.style.left = `${buttonRect.right - elRect.width + window.scrollX}px`;
-                        el.style.top = `${buttonRect.top + buttonRect.height + offset + window.scrollY}px`;
+                        el.style.left = `${
+                            buttonRect.right - elRect.width + window.scrollX
+                        }px`;
+                        el.style.top = `${
+                            buttonRect.top +
+                            buttonRect.height +
+                            offset +
+                            window.scrollY
+                        }px`;
                         break;
 
                     case 'top-right':
                         el.style.left = `${buttonRect.left + window.scrollX}px`;
-                        el.style.top = `${buttonRect.top - elRect.height - offset + window.scrollY}px`;
+                        el.style.top = `${
+                            buttonRect.top -
+                            elRect.height -
+                            offset +
+                            window.scrollY
+                        }px`;
                         break;
+
                     case 'top-left':
-                        el.style.left = `${buttonRect.right - elRect.width + window.scrollX}px`;
-                        el.style.top = `${buttonRect.top - elRect.height - offset + window.scrollY}px`;
+                        el.style.left = `${
+                            buttonRect.right - elRect.width + window.scrollX
+                        }px`;
+                        el.style.top = `${
+                            buttonRect.top -
+                            elRect.height -
+                            offset +
+                            window.scrollY
+                        }px`;
                         break;
                 }
             }
@@ -92,7 +117,7 @@ export const PopoverButton = forwardRef<HTMLButtonElement, Props>(
                             </>
                         )}
                     </AnimatePresence>,
-                    document.body,
+                    document.body
                 )}
 
                 <Button
@@ -107,7 +132,9 @@ export const PopoverButton = forwardRef<HTMLButtonElement, Props>(
                     }}
                     enabled={enabled}
                     onClick={() => {
-                        setShown((prev) => !prev);
+                        setShown((prev) => {
+                            return !prev;
+                        });
                         onClick?.();
                     }}
                     {...rest}
@@ -116,5 +143,5 @@ export const PopoverButton = forwardRef<HTMLButtonElement, Props>(
                 </Button>
             </>
         );
-    },
+    }
 );
