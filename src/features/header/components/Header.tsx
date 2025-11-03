@@ -69,7 +69,7 @@ export const Header = React.memo(() => {
                 {!isMobile ? (
                     <motion.div
                         className='header-items'
-                        layout
+                        layout={!(loaded && justified)}
                         initial={{
                             gap: loaded && justified ? '1rem' : '0.1rem',
                         }}
