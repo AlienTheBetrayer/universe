@@ -26,7 +26,7 @@ export const Footer = () => {
         {
             src: prevPortfolioImg,
             alt: 'Prev. Proj.',
-            to: 'https://glebpichkurov.vercel.app/',
+            to: 'https://portfolio-rho-tan-35.vercel.app/',
             text: 'My previous portfolio',
         },
     ];
