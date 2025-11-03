@@ -18,6 +18,7 @@
     top: 15rem;
     width: 100%;
     transform: translateX(-50%);
+    pointer-events: none;
 }
 
 .heading-section-bgtext * {
