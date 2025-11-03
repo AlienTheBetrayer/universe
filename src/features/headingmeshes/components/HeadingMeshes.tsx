@@ -34,7 +34,11 @@ export const HeadingMeshes = ({ progress }: Props) => {
 
                 dummy.position.set(x, y, z);
                 dummy.position.multiplyScalar(3);
-                dummy.scale.set(0.1 + scaleNoise, 0.1 + scaleNoise, 0.1 + scaleNoise);
+                dummy.scale.set(
+                    0.1 + scaleNoise,
+                    0.1 + scaleNoise,
+                    0.1 + scaleNoise
+                );
                 dummy.updateMatrix();
                 instancesRef.current.setMatrixAt(i, dummy.matrix);
             }

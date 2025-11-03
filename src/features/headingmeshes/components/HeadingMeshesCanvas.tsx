@@ -22,6 +22,14 @@ export const HeadingMeshesCanvas = React.memo(({ progress }: Props) => {
             animate={{ opacity: 1 }}
             transition={{ duration: 3, delay: 1 }}
         >
+            <motion.div
+                className='meshes-bgtext'
+                initial={{ opacity: 0, filter: 'blur(40px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{ duration: 3 }}
+            >
+                <span>DESTINY</span>
+            </motion.div>
             <Canvas style={{ width: '100%', height: '100%' }}>
                 <pointLight position={[0, 0, 0]} intensity={24} />
 

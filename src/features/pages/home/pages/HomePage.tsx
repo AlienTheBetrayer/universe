@@ -64,7 +64,7 @@ export const HomePage = () => {
                         animate={{ opacity: 1, filter: 'blur(0px)' }}
                         transition={{ delay: 5, duration: 5 }}
                     >
-                        <h1>FUTURE</h1>
+                        <span>FUTURE</span>
                     </motion.div>
                 </div>
             </InteractiveParticlesProvider>
