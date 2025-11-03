@@ -1,0 +1,7 @@
+.heading-meshes-canvas {
+    position: sticky;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    overflow: hidden;
+}

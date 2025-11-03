@@ -1,22 +1,23 @@
 import { Canvas } from '@react-three/fiber';
-import React, { useRef } from 'react';
+import React from 'react';
+import './HeadingMeshesCanvas.css';
 
 import { Center } from '@react-three/drei';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
-import { motion, useScroll, useSpring } from 'motion/react';
+import { motion, MotionValue } from 'motion/react';
 import { useLocalStore } from '../../../zustand/localStore';
 import { HeadingMeshes } from './HeadingMeshes';
 
-export const HeadingMeshesCanvas = React.memo(() => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({ target: containerRef });
-    const progress = useSpring(scrollYProgress, { stiffness: 40, damping: 40 });
+interface Props {
+    progress: MotionValue<number>;
+}
+
+export const HeadingMeshesCanvas = React.memo(({ progress }: Props) => {
     const localStore = useLocalStore();
 
     return (
         <motion.div
-            ref={containerRef}
-            style={{ position: 'absolute', inset: '0', overflow: 'hidden' }}
+            className='heading-meshes-canvas'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 3, delay: 1 }}

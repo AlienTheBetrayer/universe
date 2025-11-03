@@ -8,7 +8,7 @@ import { HeadingSection } from '../sections/HeadingSection';
 import { LockSection } from '../sections/LockSection';
 import { QuestionSection } from '../sections/QuestionSection';
 
-import { motion, useInView } from 'motion/react';
+import { motion, useInView, useScroll, useSpring } from 'motion/react';
 import { HeadingMeshesCanvas } from '../../../headingmeshes/components/HeadingMeshesCanvas';
 import { InteractiveParticlesCanvas } from '../../../interactiveparticles/components/InteractiveParticlesCanvas';
 import { InteractiveParticlesProvider } from '../../../interactiveparticles/context/InteractiveParticlesContext';
@@ -26,11 +26,18 @@ export const HomePage = () => {
     const questionContextData = useState<QuestionContextData>({
         revealed: false,
     });
-    const meshesRef = useRef<HTMLDivElement>(null);
-    const isMeshesVisible = useInView(meshesRef);
 
     const headingRef = useRef<HTMLDivElement>(null);
     const isHeadingVisible = useInView(headingRef);
+
+    const meshesRef = useRef<HTMLDivElement>(null);
+    const isMeshesVisible = useInView(meshesRef);
+
+    const containerRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+    });
+    const progress = useSpring(scrollYProgress, { stiffness: 40, damping: 40 });
 
     return (
         <Page>
@@ -63,8 +70,8 @@ export const HomePage = () => {
             </InteractiveParticlesProvider>
 
             <div style={{ position: 'relative' }} ref={meshesRef}>
-                {isMeshesVisible && <HeadingMeshesCanvas />}
-                <IntroSection />
+                {isMeshesVisible && <HeadingMeshesCanvas progress={progress} />}
+                <IntroSection ref={containerRef} />
             </div>
 
             <FAQSection />

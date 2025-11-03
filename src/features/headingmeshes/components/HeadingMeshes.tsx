@@ -22,11 +22,11 @@ export const HeadingMeshes = ({ progress }: Props) => {
             const t = state.clock.getElapsedTime();
 
             for (let i = 0; i < quantity; ++i) {
-                const n = noise.noise(i * 0.1, progress.get() * 2, 0);
+                const n = noise.noise(i * 0.1, progress.get() * 1.7, 0);
                 const scaleNoise = noise.noise(i * 0.1, t * 0.5, 0);
 
                 const r = progress.get() * 2 + n * 1.5;
-                const angle = i * 0.3 + progress.get() * 2;
+                const angle = i * 0.3 + progress.get() * 1.7;
 
                 const x = Math.cos(angle) * r;
                 const y = 0.5 * Math.sin(angle * 0.5) * r * 0.5 + n;
