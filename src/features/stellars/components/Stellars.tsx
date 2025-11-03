@@ -92,6 +92,9 @@ export const Stellars = () => {
 
             // moving positions if they change (regenerate / start-up animation)
             for (let i = 0; i < groupRefs.current.length; ++i) {
+                if(!groupRefs.current[i])
+                    continue;
+                
                 const actualPos = groupRefs.current[i].position;
                 const statePos = {
                     x: state.stellars[i].x,

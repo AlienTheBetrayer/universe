@@ -14,7 +14,7 @@
     border: 1px solid var(--background-7);
     border-radius: 16px;
 
-    z-index: 100;
+    z-index: 1000;
     overflow: hidden;
 }
 

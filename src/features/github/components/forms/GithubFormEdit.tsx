@@ -294,7 +294,10 @@ const GithubFormEditBottom = ({
             title='Are you sure?'
             description='You are about to <u>permanently delete</u> this form.'
             onInteract={(f) => {
-                if (f) dispatch({ type: 'FORM_DELETE_CURRENT' });
+                if (f) {
+                    dispatch({ type: 'FORM_DELETE_CURRENT' });
+                    dispatch({ type: 'FORM_FOCUS', idx: false });
+                }
 
                 formDeleteMessageBox.setShown(false);
             }}
