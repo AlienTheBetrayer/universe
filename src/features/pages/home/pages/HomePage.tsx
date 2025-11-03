@@ -54,11 +54,6 @@ export const HomePage = () => {
                 <h1>FUTURE</h1>
             </motion.div>
 
-            <div style={{ position: 'relative' }} ref={meshesRef}>
-                {isMeshesVisible && <HeadingMeshesCanvas />}
-                <IntroSection />
-            </div>
-
             <InteractiveParticlesProvider>
                 <div className='heading-wrapper' ref={headingRef}>
                     {isHeadingVisible && <InteractiveParticlesCanvas />}
@@ -66,6 +61,11 @@ export const HomePage = () => {
                     <GridSection />
                 </div>
             </InteractiveParticlesProvider>
+
+            <div style={{ position: 'relative' }} ref={meshesRef}>
+                {isMeshesVisible && <HeadingMeshesCanvas />}
+                <IntroSection />
+            </div>
 
             <FAQSection />
             <ShiftingSection />

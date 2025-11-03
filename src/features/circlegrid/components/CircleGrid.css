@@ -3,9 +3,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     will-change: transform;
 }
+
+@media (max-width: 1280px) {
+    .circle-grid {
+        width: 100%;
+    }
+}
+
 
 @media (max-width: 640px) {
     .circle-grid {
