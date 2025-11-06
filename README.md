@@ -1,5 +1,6 @@
 
 # The Universe
+![Home Page](https://raw.githubusercontent.com/AlienTheBetrayer/universe/refs/heads/main/readme/preview0.png)
 
 ## 🚀 Tech Stack
 - TypeScript  
