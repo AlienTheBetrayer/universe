@@ -1,5 +1,6 @@
 
 # The Universe
+A one-of-a-kind technical world: part simulator, part engine, part experience — showcasing advanced engineering, custom architecture, and a level of depth rarely seen in personal projects.
 ![Home Page](https://raw.githubusercontent.com/AlienTheBetrayer/universe/refs/heads/main/readme/preview0.png)
 
 ## 🚀 Tech Stack
