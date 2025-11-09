@@ -174,6 +174,7 @@ export const StellarReducer = (
                 stellars: state.stellars.filter((s) => s.idx !== action.idx),
             };
         case 'STELLAR_DELETE_CURRENT':
+            console.log(state.selectedIdx);
             return {
                 ...state,
                 stellars: state.stellars.filter(

@@ -92,9 +92,8 @@ export const Stellars = () => {
 
             // moving positions if they change (regenerate / start-up animation)
             for (let i = 0; i < groupRefs.current.length; ++i) {
-                if(!groupRefs.current[i])
-                    continue;
-                
+                if (!groupRefs.current[i] || !state.stellars[i]) continue;
+
                 const actualPos = groupRefs.current[i].position;
                 const statePos = {
                     x: state.stellars[i].x,
@@ -139,7 +138,9 @@ export const Stellars = () => {
             >
                 <sphereGeometry args={[0.06]} />
                 <meshPhysicalMaterial
-                    color={`${state.selectedIdx === stellar.idx ? '#66a' : '#fff'}`}
+                    color={`${
+                        state.selectedIdx === stellar.idx ? '#66a' : '#fff'
+                    }`}
                     wireframe
                 />
             </mesh>
@@ -156,7 +157,7 @@ export const Stellars = () => {
                             dispatch({
                                 type: 'STELLAR_SET_MOVING',
                                 idx: stellar.idx,
-                            }),
+                            })
                         );
                     }
                 }}

@@ -29,8 +29,11 @@ export const useStellarActions = (
                         dispatch({ type: 'STELLAR_DELETE', idx: hoveredMenu });
                     } else {
                         if (state.selectedIdx === false) {
+                            console.log('herea');
+
                             dispatch({ type: 'STELLARS_WIPE' });
                         } else {
+                            console.log('here');
                             dispatch({ type: 'STELLAR_DELETE_CURRENT' });
                             dispatch({ type: 'STELLAR_FOCUS', idx: false });
                         }
