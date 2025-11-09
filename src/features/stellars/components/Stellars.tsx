@@ -1,11 +1,11 @@
 import { useFrame, useThree } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Group, Mesh } from 'three';
 import { useStellarContext } from '../context/StellarContext';
 import { useStellarCamera } from '../hooks/useStellarCamera';
 import { useStellarHotkeys } from '../hooks/useStellarHotkeys';
 
-export const Stellars = () => {
+export const Stellars = React.memo(() => {
     const [state, dispatch] = useStellarContext();
     const three = useThree();
 
@@ -92,12 +92,13 @@ export const Stellars = () => {
 
             // moving positions if they change (regenerate / start-up animation)
             for (let i = 0; i < groupRefs.current.length; ++i) {
-                if (!groupRefs.current[i] || !state.stellars[i]) continue;
+                const stellar = state.stellars.find((s) => s.idx === i);
+                if (!groupRefs.current[i] || !stellar) continue;
 
                 const actualPos = groupRefs.current[i].position;
                 const statePos = {
-                    x: state.stellars[i].x,
-                    y: state.stellars[i].y,
+                    x: stellar.x,
+                    y: stellar.y,
                 };
 
                 const dx = statePos.x - actualPos.x;
@@ -180,4 +181,4 @@ export const Stellars = () => {
             </mesh>
         </group>
     ));
-};
+});

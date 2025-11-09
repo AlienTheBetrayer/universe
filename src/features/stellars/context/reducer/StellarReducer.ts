@@ -41,7 +41,7 @@ export type StellarAction =
 
 export const StellarReducer = (
     state: StellarState,
-    action: StellarAction,
+    action: StellarAction
 ): StellarState => {
     switch (action.type) {
         // flags
@@ -65,8 +65,8 @@ export const StellarReducer = (
                     state.selectedIdx === false
                         ? indexes[0]
                         : state.selectedIdx === indexes[0]
-                          ? indexes.at(-1)!
-                          : indexes[indexes.indexOf(state.selectedIdx) - 1],
+                        ? indexes.at(-1)!
+                        : indexes[indexes.indexOf(state.selectedIdx) - 1],
             };
         }
         case 'STELLAR_NEXT':
@@ -79,8 +79,8 @@ export const StellarReducer = (
                     state.selectedIdx === false
                         ? indexes.at(-1)!
                         : state.selectedIdx === indexes.at(-1)!
-                          ? indexes[0]
-                          : indexes[indexes.indexOf(state.selectedIdx) + 1],
+                        ? indexes[0]
+                        : indexes[indexes.indexOf(state.selectedIdx) + 1],
             };
         case 'STELLAR_FOCUS':
             return { ...state, selectedIdx: action.idx };
@@ -94,7 +94,7 @@ export const StellarReducer = (
                               x: action.x,
                               y: action.y,
                           }
-                        : s,
+                        : s
                 ),
             };
         case 'STELLAR_HOVER':
@@ -145,7 +145,7 @@ export const StellarReducer = (
                                   firstDescription: action.description,
                               },
                           }
-                        : stellar,
+                        : stellar
                 ),
             };
         case 'STELLAR_SET_SECOND_CONTENT':
@@ -161,7 +161,7 @@ export const StellarReducer = (
                                   secondDescription: action.description,
                               },
                           }
-                        : stellar,
+                        : stellar
                 ),
             };
         case 'STELLAR_SET_EDITING':
@@ -174,11 +174,10 @@ export const StellarReducer = (
                 stellars: state.stellars.filter((s) => s.idx !== action.idx),
             };
         case 'STELLAR_DELETE_CURRENT':
-            console.log(state.selectedIdx);
             return {
                 ...state,
                 stellars: state.stellars.filter(
-                    (s) => s.idx !== state.selectedIdx,
+                    (s) => s.idx !== state.selectedIdx
                 ),
             };
         case 'STELLAR_MOVE':
@@ -191,7 +190,7 @@ export const StellarReducer = (
                               x: action.x,
                               y: action.y,
                           }
-                        : stellar,
+                        : stellar
                 ),
             };
         case 'STELLAR_MOVE_RANDOM': {
@@ -210,7 +209,7 @@ export const StellarReducer = (
                                   state.viewport.height *
                                   0.7,
                           }
-                        : s,
+                        : s
                 ),
             };
         }
