@@ -44,8 +44,8 @@ export const useSphereCardPopup = (
             }
         };
 
-        window.addEventListener('mousemove', handle);
-        return () => window.removeEventListener('mousemove', handle);
+        window.addEventListener('pointermove', handle);
+        return () => window.removeEventListener('pointermove', handle);
     }, []);
 
     const render = () => {

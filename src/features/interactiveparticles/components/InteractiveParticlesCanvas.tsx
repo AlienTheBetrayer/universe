@@ -8,10 +8,14 @@ import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { useLocalStore } from '../../../zustand/localStore';
 import { useInteractiveParticlesContext } from '../context/InteractiveParticlesContext';
 import React from 'react';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
 
 export const InteractiveParticlesCanvas = React.memo(() => {
     const { theme } = useLocalStore();
     const [context] = useInteractiveParticlesContext();
+
+    // fps optimization
+    const isMobile = useMediaQuery(640);
 
     return (
         <motion.div
@@ -21,7 +25,7 @@ export const InteractiveParticlesCanvas = React.memo(() => {
             transition={{ duration: 3, delay: 1 }}
         >
             <Canvas>
-                {theme === 'dark' && context.bloomStrength > 0 && (
+                {theme === 'dark' && context.bloomStrength > 0 && !isMobile && (
                     <EffectComposer>
                         <Bloom
                             intensity={context.bloomStrength}

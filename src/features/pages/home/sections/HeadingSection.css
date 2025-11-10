@@ -10,6 +10,12 @@
     margin-bottom: 4rem;
 }
 
+@media (max-width: 640px) {
+    .heading-section {
+        margin-top: 8rem;
+    }
+}
+
 .heading-effects {
     width: 256px;
     margin: 0 auto;

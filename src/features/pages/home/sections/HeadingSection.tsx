@@ -9,10 +9,12 @@ import {
 } from '../../../interactiveparticles/context/InteractiveParticlesContext';
 import { useTooltips } from '../../../tooltip/hooks/useTooltips';
 import { useLocalStore } from '../../../../zustand/localStore';
+import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 
 export const HeadingSection = () => {
     const [context, setContext] = useInteractiveParticlesContext();
     const { theme } = useLocalStore();
+    const isMobile = useMediaQuery(640);
 
     const h1: AnimatedText[] = [
         {
@@ -101,7 +103,7 @@ export const HeadingSection = () => {
                 </ListButton>
 
                 <AnimatePresence>
-                    {theme === 'dark' && (
+                    {theme === 'dark' && !isMobile && (
                         <motion.div
                             style={{
                                 display: 'flex',
