@@ -35,9 +35,9 @@ export const useContactParticles = (
                 pos[i * 3 + 2] = Math.sin(t / 2 + ((i / count) * t) / 2) * 15;
 
                 const progress = Math.abs(Math.sin(t / 4));
-                colors[i * 3] = 1 - progress;
+                colors[i * 3] = 0;
                 colors[i * 3 + 1] = 0;
-                colors[i * 3 + 2] = progress;
+                colors[i * 3 + 2] = progress / 3;
             }
 
             ref.current.geometry.attributes.position.needsUpdate = true;

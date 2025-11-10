@@ -67,7 +67,7 @@ export const HeadingMeshesCanvas = React.memo(({ progress }: Props) => {
                             if (fps < 20) {
                                 performanceTimeout.current = setTimeout(
                                     () => setIsLagging(true),
-                                    1000
+                                    3000
                                 );
                             } else if (performanceTimeout.current !== false) {
                                 clearTimeout(performanceTimeout.current);

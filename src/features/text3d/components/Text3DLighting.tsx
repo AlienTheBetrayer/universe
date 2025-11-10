@@ -14,7 +14,7 @@ export const Text3DLighting = () => {
             ref.current.position.y =
                 0 + Math.cos(t * 0.7) * 0.8 + Math.sin(t * 1.5) * 0.3;
             ref.current.position.z =
-                0 + Math.sin(t * 0.9) * 1.5 + Math.cos(t * 1.1) * 0.5;
+                -2 + Math.sin(t * 0.9) * 1.5 + Math.cos(t * 1.1) * 0.5;
         }
     });
 

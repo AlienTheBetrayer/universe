@@ -19,9 +19,9 @@ export const Text3DContent = ({ text }: Props) => {
             const material = ref.current.material as MeshPhongMaterial;
             const progress = Math.abs(Math.sin(t / 4));
 
-            material.color.r = 1 - progress;
+            material.color.r = 0;
             material.color.g = 0;
-            material.color.b = progress;
+            material.color.b = progress / 3;
 
             // rotation
             ref.current.rotation.x =
