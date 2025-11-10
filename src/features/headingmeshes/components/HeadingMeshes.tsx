@@ -4,6 +4,7 @@ import type { MotionValue } from 'motion';
 import { useRef } from 'react';
 import { Object3D, type InstancedMesh } from 'three';
 import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise.js';
+import { useFPS } from '../../../hooks/useFPS';
 import { cssVariable } from '../../../utils/cssVariable';
 
 const noise = new ImprovedNoise();
@@ -11,13 +12,18 @@ const quantity = 256;
 
 interface Props {
     progress: MotionValue<number>;
+    onFPSUpdate: (fps: number) => void;
 }
 
-export const HeadingMeshes = ({ progress }: Props) => {
+export const HeadingMeshes = ({ progress, onFPSUpdate }: Props) => {
     const instancesRef = useRef<InstancedMesh>(null);
     const dummy = new Object3D();
 
+    const fps = useFPS(onFPSUpdate);
+
     useFrame((state) => {
+        fps.update();
+        
         if (instancesRef.current) {
             const t = state.clock.getElapsedTime();
 

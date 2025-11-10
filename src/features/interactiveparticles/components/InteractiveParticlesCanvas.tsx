@@ -3,12 +3,12 @@ import './InteractiveParticlesCanvas.css';
 import { motion } from 'motion/react';
 
 import { Canvas } from '@react-three/fiber';
-import { InteractiveParticles } from './InteractiveParticles';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import React, { useRef, useState } from 'react';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useLocalStore } from '../../../zustand/localStore';
 import { useInteractiveParticlesContext } from '../context/InteractiveParticlesContext';
-import React from 'react';
-import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { InteractiveParticles } from './InteractiveParticles';
 
 export const InteractiveParticlesCanvas = React.memo(() => {
     const { theme } = useLocalStore();
@@ -16,6 +16,8 @@ export const InteractiveParticlesCanvas = React.memo(() => {
 
     // fps optimization
     const isMobile = useMediaQuery(640);
+    const performanceTimeout = useRef<number | false>(false);
+    const [isLagging, setIsLagging] = useState<boolean>(false);
 
     return (
         <motion.div
@@ -25,16 +27,31 @@ export const InteractiveParticlesCanvas = React.memo(() => {
             transition={{ duration: 3, delay: 1 }}
         >
             <Canvas>
-                {theme === 'dark' && context.bloomStrength > 0 && !isMobile && (
-                    <EffectComposer>
-                        <Bloom
-                            intensity={context.bloomStrength}
-                            luminanceThreshold={0.5}
-                        />
-                    </EffectComposer>
-                )}
+                {theme === 'dark' &&
+                    context.bloomStrength > 0 &&
+                    !isMobile &&
+                    !isLagging && (
+                        <EffectComposer>
+                            <Bloom
+                                intensity={context.bloomStrength}
+                                luminanceThreshold={0.5}
+                            />
+                        </EffectComposer>
+                    )}
 
-                <InteractiveParticles />
+                <InteractiveParticles
+                    onFPSUpdate={(fps) => {
+                        if (fps < 20) {
+                            performanceTimeout.current = setTimeout(
+                                () => setIsLagging(true),
+                                1000
+                            );
+                        } else if (performanceTimeout.current !== false) {
+                            clearTimeout(performanceTimeout.current);
+                            performanceTimeout.current = false;
+                        }
+                    }}
+                />
             </Canvas>
         </motion.div>
     );

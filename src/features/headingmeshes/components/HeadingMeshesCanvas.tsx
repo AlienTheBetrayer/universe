@@ -1,10 +1,11 @@
 import { Canvas } from '@react-three/fiber';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import './HeadingMeshesCanvas.css';
 
 import { Center } from '@react-three/drei';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { motion, MotionValue } from 'motion/react';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useLocalStore } from '../../../zustand/localStore';
 import { HeadingMeshes } from './HeadingMeshes';
 
@@ -14,6 +15,11 @@ interface Props {
 
 export const HeadingMeshesCanvas = React.memo(({ progress }: Props) => {
     const localStore = useLocalStore();
+
+    // fps optimization
+    const isMobile = useMediaQuery(640);
+    const performanceTimeout = useRef<number | false>(false);
+    const [isLagging, setIsLagging] = useState<boolean>(false);
 
     return (
         <motion.div
@@ -33,14 +39,27 @@ export const HeadingMeshesCanvas = React.memo(({ progress }: Props) => {
             <Canvas style={{ width: '100%', height: '100%' }}>
                 <pointLight position={[0, 0, 0]} intensity={24} />
 
-                {localStore.theme === 'dark' && (
+                {localStore.theme === 'dark' && !isMobile && !isLagging && (
                     <EffectComposer>
                         <Bloom emissiveThreshold={0} />
                     </EffectComposer>
                 )}
 
                 <Center>
-                    <HeadingMeshes progress={progress} />
+                    <HeadingMeshes
+                        progress={progress}
+                        onFPSUpdate={(fps) => {
+                            if (fps < 20) {
+                                performanceTimeout.current = setTimeout(
+                                    () => setIsLagging(true),
+                                    1000
+                                );
+                            } else if (performanceTimeout.current !== false) {
+                                clearTimeout(performanceTimeout.current);
+                                performanceTimeout.current = false;
+                            }
+                        }}
+                    />
                 </Center>
             </Canvas>
         </motion.div>
