@@ -26,6 +26,19 @@ export const InteractiveParticlesCanvas = React.memo(() => {
             animate={{ opacity: 1 }}
             transition={{ duration: 3, delay: 1 }}
         >
+            {theme === 'dark' && isLagging && (
+                <motion.div
+                    className='interactive-particles-fps-warning'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                >
+                    <p>
+                        <small>
+                            Effects <u>reduced!</u>
+                        </small>
+                    </p>
+                </motion.div>
+            )}
             <Canvas>
                 {theme === 'dark' &&
                     context.bloomStrength > 0 &&
@@ -44,7 +57,7 @@ export const InteractiveParticlesCanvas = React.memo(() => {
                         if (fps < 20) {
                             performanceTimeout.current = setTimeout(
                                 () => setIsLagging(true),
-                                1000
+                                3000
                             );
                         } else if (performanceTimeout.current !== false) {
                             clearTimeout(performanceTimeout.current);
