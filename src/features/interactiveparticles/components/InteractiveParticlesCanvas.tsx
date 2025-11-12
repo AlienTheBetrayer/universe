@@ -18,6 +18,7 @@ export const InteractiveParticlesCanvas = React.memo(() => {
     const isMobile = useMediaQuery(640);
     const performanceTimeout = useRef<number | false>(false);
     const [isLagging, setIsLagging] = useState<boolean>(false);
+    const [isLaggingDisabled, setIsLaggingDisabled] = useState<boolean>(false);
 
     return (
         <motion.div
@@ -26,24 +27,28 @@ export const InteractiveParticlesCanvas = React.memo(() => {
             animate={{ opacity: 1 }}
             transition={{ duration: 3, delay: 1 }}
         >
-            {theme === 'dark' && isLagging && (
-                <motion.div
-                    className='interactive-particles-fps-warning'
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                >
-                    <p>
-                        <small>
-                            Effects <u>reduced!</u>
-                        </small>
-                    </p>
-                </motion.div>
-            )}
+            {theme === 'dark' &&
+                isLagging &&
+                !isMobile &&
+                !isLaggingDisabled && (
+                    <motion.button
+                        className='interactive-particles-fps-warning'
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        onClick={() => setIsLaggingDisabled(true)}
+                    >
+                        <p>
+                            <small>
+                                Effects <u>reduced!</u>
+                            </small>
+                        </p>
+                    </motion.button>
+                )}
             <Canvas>
                 {theme === 'dark' &&
                     context.bloomStrength > 0 &&
                     !isMobile &&
-                    !isLagging && (
+                    (!isLagging || isLaggingDisabled) && (
                         <EffectComposer>
                             <Bloom
                                 intensity={context.bloomStrength}

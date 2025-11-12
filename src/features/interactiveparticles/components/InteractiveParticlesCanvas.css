@@ -11,6 +11,17 @@
 
 .interactive-particles-fps-warning {
     position: absolute;
-    left: 1rem;
-    top: 1rem;
+    padding: 1rem;
+    z-index: 1;
+    transition: 0.5s;
+    border: transparent;
+    cursor: pointer;
+}
+
+.interactive-particles-fps-warning:hover {
+    background-color: var(--background-5);
+}
+
+.interactive-particles-fps-warning:active {
+    background-color: var(--background-8);
 }
