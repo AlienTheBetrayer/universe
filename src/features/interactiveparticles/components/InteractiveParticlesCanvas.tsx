@@ -22,7 +22,7 @@ export const InteractiveParticlesCanvas = React.memo(({ isVisible }: Props) => {
     const isMobile = useMediaQuery(640);
     const performanceTimeout = useRef<number | false>(false);
     const dprTimeout = useRef<number | false>(false);
-    const [dpr, setDPR] = useState<number>(1);
+    const [dpr, setDPR] = useState<number>(window.devicePixelRatio);
     const [isLagging, setIsLagging] = useState<boolean>(false);
     const [isLaggingDisabled, setIsLaggingDisabled] = useState<boolean>(false);
 const isMac = /Mac|MacIntel|MacPPC|Mac68K/i.test(navigator.userAgent);
