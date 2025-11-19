@@ -25,6 +25,7 @@ export const InteractiveParticlesCanvas = React.memo(({ isVisible }: Props) => {
     const [dpr, setDPR] = useState<number>(1);
     const [isLagging, setIsLagging] = useState<boolean>(false);
     const [isLaggingDisabled, setIsLaggingDisabled] = useState<boolean>(false);
+const isMac = /Mac|MacIntel|MacPPC|Mac68K/i.test(navigator.userAgent);
 
     return (
         <motion.div
@@ -38,7 +39,7 @@ export const InteractiveParticlesCanvas = React.memo(({ isVisible }: Props) => {
                     {theme === 'dark' &&
                         isLagging &&
                         !isMobile &&
-                        !isLaggingDisabled && (
+                        !isLaggingDisabled && !isMac && (
                             <motion.button
                                 className='interactive-particles-fps-warning'
                                 initial={{ opacity: 0 }}
@@ -56,7 +57,7 @@ export const InteractiveParticlesCanvas = React.memo(({ isVisible }: Props) => {
                         {theme === 'dark' &&
                             context.bloomStrength > 0 &&
                             !isMobile &&
-                            (!isLagging || isLaggingDisabled) && (
+                            (!isLagging || isLaggingDisabled) && !isMac && (
                                 <EffectComposer>
                                     <Bloom
                                         intensity={context.bloomStrength}

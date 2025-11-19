@@ -26,6 +26,7 @@ export const HeadingMeshesCanvas = React.memo(
         const [isLagging, setIsLagging] = useState<boolean>(false);
         const [isLaggingDisabled, setIsLaggingDisabled] =
             useState<boolean>(false);
+        const isMac = /Mac|MacIntel|MacPPC|Mac68K/i.test(navigator.userAgent);
 
         return (
             <motion.div
@@ -48,7 +49,8 @@ export const HeadingMeshesCanvas = React.memo(
                         {theme === 'dark' &&
                             isLagging &&
                             !isMobile &&
-                            !isLaggingDisabled && (
+                            !isLaggingDisabled &&
+                            !isMac && (
                                 <motion.button
                                     className='interactive-particles-fps-warning'
                                     initial={{ opacity: 0 }}
@@ -71,7 +73,8 @@ export const HeadingMeshesCanvas = React.memo(
 
                             {theme === 'dark' &&
                                 !isMobile &&
-                                (!isLagging || isLaggingDisabled) && (
+                                (!isLagging || isLaggingDisabled) &&
+                                !isMac && (
                                     <EffectComposer>
                                         <Bloom emissiveThreshold={0} />
                                     </EffectComposer>
@@ -94,7 +97,11 @@ export const HeadingMeshesCanvas = React.memo(
                                                     );
                                             }
 
-                                            if (isLagging && !isLaggingDisabled && dprTimeout.current === false) {
+                                            if (
+                                                isLagging &&
+                                                !isLaggingDisabled &&
+                                                dprTimeout.current === false
+                                            ) {
                                                 dprTimeout.current = setTimeout(
                                                     () => {
                                                         setDPR(
