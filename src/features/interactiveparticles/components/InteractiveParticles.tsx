@@ -6,6 +6,7 @@ import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { useLocalStore } from '../../../zustand/localStore';
 import { useInteractiveParticlesContext } from '../context/InteractiveParticlesContext';
 import { useInteractiveParticles } from '../hooks/useInteractiveParticles';
+import { useViewport } from '../../../hooks/useViewport';
 
 interface Props {
     onFPSUpdate: (fps: number) => void;
@@ -23,10 +24,11 @@ export const InteractiveParticles = ({ onFPSUpdate }: Props) => {
     const { theme } = useLocalStore();
 
     const fps = useFPS(onFPSUpdate);
-
     useFrame(() => {
         fps.update();
     });
+
+    const viewport = useViewport();
 
     return (
         <points ref={ref}>
@@ -42,7 +44,7 @@ export const InteractiveParticles = ({ onFPSUpdate }: Props) => {
             </bufferGeometry>
 
             <pointsMaterial
-                size={theme == 'dark' ? 0.005 : 0.02}
+                size={theme == 'dark' ? viewport.innerWidth / 200000 : viewport.innerWidth / 100000}
                 vertexColors={true}
             />
         </points>

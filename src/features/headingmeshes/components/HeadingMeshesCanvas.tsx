@@ -11,79 +11,123 @@ import { HeadingMeshes } from './HeadingMeshes';
 
 interface Props {
     progress: MotionValue<number>;
+    isVisible: boolean;
 }
 
-export const HeadingMeshesCanvas = React.memo(({ progress }: Props) => {
-    const { theme } = useLocalStore();
+export const HeadingMeshesCanvas = React.memo(
+    ({ progress, isVisible }: Props) => {
+        const { theme } = useLocalStore();
 
-    // fps optimization
-    const isMobile = useMediaQuery(640);
-    const performanceTimeout = useRef<number | false>(false);
-    const [isLagging, setIsLagging] = useState<boolean>(false);
-    const [isLaggingDisabled, setIsLaggingDisabled] = useState<boolean>(false);
+        // fps optimization
+        const isMobile = useMediaQuery(640);
+        const performanceTimeout = useRef<number | false>(false);
+        const dprTimeout = useRef<number | false>(false);
+        const [dpr, setDPR] = useState<number>(1);
+        const [isLagging, setIsLagging] = useState<boolean>(false);
+        const [isLaggingDisabled, setIsLaggingDisabled] =
+            useState<boolean>(false);
 
-    return (
-        <motion.div
-            className='heading-meshes-canvas'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 3, delay: 1 }}
-        >
+        return (
             <motion.div
-                className='meshes-bgtext'
-                initial={{ opacity: 0, filter: 'blur(40px)' }}
-                animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 3 }}
+                className='heading-meshes-canvas'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 3, delay: 1 }}
             >
-                <span>DESTINY</span>
-            </motion.div>
+                {isVisible && (
+                    <>
+                        <motion.div
+                            className='meshes-bgtext'
+                            initial={{ opacity: 0, filter: 'blur(40px)' }}
+                            animate={{ opacity: 1, filter: 'blur(0px)' }}
+                            transition={{ duration: 3 }}
+                        >
+                            <span>DESTINY</span>
+                        </motion.div>
 
-            {theme === 'dark' &&
-                isLagging &&
-                !isMobile &&
-                !isLaggingDisabled && (
-                    <motion.button
-                        className='interactive-particles-fps-warning'
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        onClick={() => setIsLaggingDisabled(true)}
-                    >
-                        <p>
-                            <small>
-                                Effects <u>reduced!</u>
-                            </small>
-                        </p>
-                    </motion.button>
+                        {theme === 'dark' &&
+                            isLagging &&
+                            !isMobile &&
+                            !isLaggingDisabled && (
+                                <motion.button
+                                    className='interactive-particles-fps-warning'
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    onClick={() => setIsLaggingDisabled(true)}
+                                >
+                                    <p>
+                                        <small>
+                                            Effects <u>reduced!</u>
+                                        </small>
+                                    </p>
+                                </motion.button>
+                            )}
+
+                        <Canvas
+                            style={{ width: '100%', height: '100%' }}
+                            dpr={dpr}
+                        >
+                            <pointLight position={[0, 0, 0]} intensity={24} />
+
+                            {theme === 'dark' &&
+                                !isMobile &&
+                                (!isLagging || isLaggingDisabled) && (
+                                    <EffectComposer>
+                                        <Bloom emissiveThreshold={0} />
+                                    </EffectComposer>
+                                )}
+
+                            <Center>
+                                <HeadingMeshes
+                                    progress={progress}
+                                    onFPSUpdate={(fps) => {
+                                        if (fps < 30) {
+                                            if (
+                                                performanceTimeout.current ===
+                                                false
+                                            ) {
+                                                performanceTimeout.current =
+                                                    setTimeout(
+                                                        () =>
+                                                            setIsLagging(true),
+                                                        3000
+                                                    );
+                                            }
+
+                                            if (isLagging && !isLaggingDisabled && dprTimeout.current === false) {
+                                                dprTimeout.current = setTimeout(
+                                                    () => {
+                                                        setDPR(
+                                                            (prev) => prev / 2
+                                                        );
+                                                        if (dprTimeout.current)
+                                                            clearTimeout(
+                                                                dprTimeout.current
+                                                            );
+                                                    },
+                                                    3000
+                                                );
+                                            }
+                                        } else {
+                                            if (
+                                                performanceTimeout.current &&
+                                                dprTimeout.current
+                                            ) {
+                                                clearTimeout(
+                                                    performanceTimeout.current
+                                                );
+                                                clearTimeout(
+                                                    dprTimeout.current
+                                                );
+                                            }
+                                        }
+                                    }}
+                                />
+                            </Center>
+                        </Canvas>
+                    </>
                 )}
-
-            <Canvas style={{ width: '100%', height: '100%' }}>
-                <pointLight position={[0, 0, 0]} intensity={24} />
-
-                {theme === 'dark' &&
-                    !isMobile &&
-                    (!isLagging || isLaggingDisabled) && (
-                        <EffectComposer>
-                            <Bloom emissiveThreshold={0} />
-                        </EffectComposer>
-                    )}
-
-                <Center>
-                    <HeadingMeshes
-                        progress={progress}
-                        onFPSUpdate={(fps) => {
-                            if (fps < 20) {
-                                performanceTimeout.current = setTimeout(
-                                    () => setIsLagging(true),
-                                    3000
-                                );
-                            } else if (performanceTimeout.current !== false) {
-                                clearTimeout(performanceTimeout.current);
-                                performanceTimeout.current = false;
-                            }
-                        }}
-                    />
-                </Center>
-            </Canvas>
-        </motion.div>
-    );
-});
+            </motion.div>
+        );
+    }
+);

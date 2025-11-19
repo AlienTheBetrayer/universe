@@ -54,7 +54,7 @@ export const HomePage = () => {
 
             <InteractiveParticlesProvider>
                 <div className='heading-wrapper' ref={headingRef}>
-                    {isHeadingVisible && <InteractiveParticlesCanvas />}
+                    <InteractiveParticlesCanvas isVisible={isHeadingVisible} />
                     <HeadingSection />
                     <GridSection />
 
@@ -70,7 +70,10 @@ export const HomePage = () => {
             </InteractiveParticlesProvider>
 
             <div style={{ position: 'relative' }} ref={meshesRef}>
-                {isMeshesVisible && <HeadingMeshesCanvas progress={progress} />}
+                <HeadingMeshesCanvas
+                    progress={progress}
+                    isVisible={isMeshesVisible}
+                />
                 <IntroSection ref={containerRef} />
             </div>
 

@@ -57,7 +57,7 @@ export const useInteractiveParticles = (
                 ) +
                 viewport.height / 2;
 
-            const radius = viewport.width < 3 ? 0.4 : 1.25;
+            const radius = 1 + viewport.width / 30;
 
             for (let i = 0; i < count; ++i) {
                 const dx = pos[i * 2] - cursorX;
