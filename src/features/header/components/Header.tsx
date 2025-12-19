@@ -18,6 +18,7 @@ import forkImg from '../assets/fork.svg';
 import launchImg from '../assets/launch.svg';
 import starImg from '../assets/star.svg';
 import stellarImg from '../assets/stellar.svg';
+import { useAnalytics } from '@alienthebetrayer/analytics-sdk-react';
 
 export const Header = React.memo(() => {
     const isMobile = useMediaQuery(768);
@@ -29,6 +30,9 @@ export const Header = React.memo(() => {
     );
 
     const tooltips = useTooltips();
+
+    // analytics
+    const analytics = useAnalytics();
 
     return (
         <motion.header
@@ -130,7 +134,13 @@ export const Header = React.memo(() => {
                                 )
                             }
                             value={theme === 'light'}
-                            onToggled={() => toggleTheme()}
+                            onToggled={() => {
+                                if(theme === 'light') {
+                                    analytics.current.send('theme_toggle');
+                                }
+
+                                toggleTheme();
+                            }}
                         />
                     </motion.div>
                 ) : (
